@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from './sign-up.styles.scss';
+import classes from './sign-up.module.scss';
 
 const SignupPage = () => {
   return (

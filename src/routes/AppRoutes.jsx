@@ -1,5 +1,4 @@
 import React, { lazy } from 'react';
-import { Navigate } from 'react-router-dom';
 
 import ROUTES from '../constants/routes';
 
@@ -27,7 +26,7 @@ const appRoutes = [
   },
   {
     path: ROUTES.MAIN,
-    element: <Navigate to={ROUTES.SIGN_UP} />,
+    element: <HomePage />,
   },
   {
     path: ROUTES.HOME,
