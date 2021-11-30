@@ -1,12 +1,12 @@
 /*eslint-disable */
 import React from 'react';
-import classes from './sign-in.module.scss';
+import classes from './sign-in-second.module.scss';
 
 //Images
 import mainImage from '../../assets/img1.png';
 import logo from '../../assets/logo.png';
 
-const SigninPage = () => {
+const SecondSigninPage = () => {
   return (
     <div className={classes.base_div}>
       <div className={classes.left_container}>
@@ -46,4 +46,4 @@ const SigninPage = () => {
   );
 };
 
-export default SigninPage;
+export default SecondSigninPage;

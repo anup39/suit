@@ -9,7 +9,14 @@ const ErrorBoundryPage = lazy(() =>
 const UnavailablePage = lazy(() =>
   import('../views/Error_boundries/unavailable.view')
 );
+
 const SignupPage = lazy(() => import('../views/Signup/sign-up.view'));
+
+const SigninPage = lazy(() => import('../views/Signin/sign-in.view'));
+
+const SigninSecond = lazy(() =>
+  import('../views/SigninSecond/sign-in-second.view')
+);
 
 const appRoutes = [
   {
@@ -31,6 +38,15 @@ const appRoutes = [
   {
     path: ROUTES.HOME,
     element: <HomePage />,
+  },
+  {
+    path: ROUTES.SIGN_IN,
+    element: <SigninPage />,
+  },
+
+  {
+    path: ROUTES.SIGN_IN_2,
+    element: <SigninSecond />,
   },
 ];
 
