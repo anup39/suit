@@ -46,6 +46,8 @@
     "prettier": "^2.4.1"
   },
   "dependencies": {
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
     "@hookform/resolvers": "^2.8.4",
     "@mui/icons-material": "^5.2.0",
     "@mui/material": "^5.2.0",

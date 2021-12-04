@@ -6,9 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import logo from '../../assets/logoPicture.png';
 import image from '../../assets/signupPicture.png';
-import Alert from '../../components/shared/Alerts/Alert';
+import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import { userSignupStart } from '../../redux/user-redux/user.actions';
-import { getSignedupError } from '../../redux/user-redux/user.selectors';
+import {
+  getLoadingStatus,
+  getSignedupError,
+} from '../../redux/user-redux/user.selectors';
 import schema from './sign-up.schema';
 import classes from './styles/sign-up.module.scss';
 import { ASuit, FormButton, FormInput } from './styles/sign-up.styles';
@@ -16,7 +19,9 @@ import { ASuit, FormButton, FormInput } from './styles/sign-up.styles';
 const SignupPage = ({ isRedTheme }) => {
   const dispatch = useDispatch();
   const getError = useSelector(getSignedupError);
+  const onLoading = useSelector(getLoadingStatus);
   const [alerts, setAlerts] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -34,20 +39,13 @@ const SignupPage = ({ isRedTheme }) => {
 
   useEffect(() => {
     setAlerts(getError);
-  }, [getError]);
-
-
+    setIsLoading(onLoading);
+  }, [getError, onLoading]);
 
   return (
     <div className={classes.signup_container}>
+      <GlobalSpinner isOpen={isLoading} />
       <div className={classes.signup_left}>
-        {alerts ? (
-          <Alert
-            message={alerts.response.data.message}
-            title="Error"
-            type="danger"
-          />
-        ) : undefined}
         <h1 className={classes.left_header_blue}>
           Welcome to
           <ASuit className={classes.left_header_orange} red={isRedTheme}>
@@ -105,12 +103,16 @@ const SignupPage = ({ isRedTheme }) => {
               className={classes.form_input}
               id="email"
               {...register('username')}
-              error={errors.username?.message}
+              error={
+                errors.username ? errors.username?.message : alerts?.message
+              }
+              onChange={() => setAlerts(null)}
               placeholder="Email"
               type="text"
             />
             <span className={classes.signup_error}>
               {errors.username?.message}
+              {alerts?.message}
             </span>
           </div>
           <div className={classes.form_input_container}>

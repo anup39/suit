@@ -1,11 +1,11 @@
 import USER_ACTION_TYPES from './user.action-types';
 
 const USER_INITIAL_STATE = {
-  loading: false,
-  status: null,
+  isLoading: false,
+  signupStatus: null,
   error: null,
   userType: null,
-  userData: null,
+  userData: undefined,
 };
 
 // eslint-disable-next-line default-param-last
@@ -14,19 +14,21 @@ const userReducer = (state = USER_INITIAL_STATE, action) => {
     case USER_ACTION_TYPES.USER_SIGNUP_START:
       return {
         ...state,
-        loading: true,
+        isLoading: true,
         userData: action.payload,
       };
     case USER_ACTION_TYPES.USER_SIGNUP_SUCCESS:
       return {
         ...state,
-        loading: false,
-        status: action.payload,
+        isLoading: false,
+        error: null,
+        signupStatus: action.payload,
       };
     case USER_ACTION_TYPES.USER_SIGNUP_FAILURE:
       return {
         ...state,
-        loading: false,
+        isLoading: false,
+        signupStatus: null,
         error: action.payload,
       };
     case USER_ACTION_TYPES.USER_GROUP_TYPE:
