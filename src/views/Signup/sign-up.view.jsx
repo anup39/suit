@@ -36,7 +36,7 @@ const SignupPage = ({ isRedTheme }) => {
     setAlerts(getError);
   }, [getError]);
 
-  console.log(alerts);
+
 
   return (
     <div className={classes.signup_container}>
