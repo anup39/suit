@@ -46,6 +46,7 @@
     "prettier": "^2.4.1"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.8.4",
     "@mui/icons-material": "^5.2.0",
     "@mui/material": "^5.2.0",
     "@mui/styled-engine-sc": "^5.1.0",

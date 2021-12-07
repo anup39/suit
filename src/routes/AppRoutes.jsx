@@ -14,8 +14,8 @@ const SignupPage = lazy(() => import('../views/Signup/sign-up.view'));
 
 const SigninPage = lazy(() => import('../views/Signin/sign-in.view'));
 
-const SigninSecond = lazy(() =>
-  import('../views/SigninSecond/sign-in-second.view')
+const UserRoles = lazy(() =>
+  import('../components/shared/UserRoles/UserRolesForms')
 );
 
 const appRoutes = [
@@ -45,8 +45,8 @@ const appRoutes = [
   },
 
   {
-    path: ROUTES.SIGN_IN_2,
-    element: <SigninSecond />,
+    path: ROUTES.FORM,
+    element: <UserRoles />,
   },
 ];
 
