@@ -1,10 +1,13 @@
 /*eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './styles/sign-in.module.scss';
 
 //Images
 import mainImage from '../../assets/signin-image.png';
 import logo from '../../assets/logo.png';
+
+//Spinner
+import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 
 //Styled Components
 import { FormButton, FormInput } from './styles/sign-in.syles';
@@ -16,8 +19,19 @@ import schema from './sign-in.schems';
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
+import { userSigninStart } from '../../redux/user-redux/user.actions';
+import {
+  getLoadingStatus,
+  getSigninError,
+} from '../../redux/user-redux/user.selectors';
 
 const SigninPage = () => {
+  const dispatch = useDispatch();
+  const getError = useSelector(getSigninError);
+  const onLoading = useSelector(getLoadingStatus);
+  const [alerts, setAlerts] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -26,10 +40,18 @@ const SigninPage = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data) => {};
+  const onSubmit = async (data) => {
+    dispatch(userSigninStart(data));
+  };
+
+  useEffect(() => {
+    setAlerts(getError);
+    setIsLoading(onLoading);
+  }, [getError, onLoading]);
 
   return (
     <div className={classes.base_div}>
+      <GlobalSpinner isOpen={isLoading} />
       <div className={classes.left_container}>
         <img src={logo} className={classes.logo} />
         <img src={mainImage} className={classes.main_image} />

@@ -29,7 +29,7 @@ const appRoutes = [
   },
   {
     path: ROUTES.SIGN_UP,
-    element: <SignupPage />,
+    element: <SignupPage isRedTheme={false} />,
   },
   {
     path: ROUTES.MAIN,
