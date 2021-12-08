@@ -8,12 +8,14 @@ import logo from '../../assets/logo.png';
 
 //Styled Components
 import { FormButton, FormInput } from './styles/sign-in.syles';
-import UserRolesForms from '../../components/shared/UserRoles/UserRolesForms';
 
 //React Hook Form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from './sign-in.schems';
+
+//Redux
+import { useDispatch, useSelector } from 'react-redux';
 
 const SigninPage = () => {
   const {
@@ -24,13 +26,10 @@ const SigninPage = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data) => {
-    console.log(data);
-  };
+  const onSubmit = async (data) => {};
 
   return (
     <div className={classes.base_div}>
-      <UserRolesForms />
       <div className={classes.left_container}>
         <img src={logo} className={classes.logo} />
         <img src={mainImage} className={classes.main_image} />

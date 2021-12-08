@@ -14,8 +14,8 @@ const SignupPage = lazy(() => import('../views/Signup/sign-up.view'));
 
 const SigninPage = lazy(() => import('../views/Signin/sign-in.view'));
 
-const UserRoles = lazy(() =>
-  import('../components/shared/UserRoles/UserRolesForms')
+const CreateCompanyForm = lazy(() =>
+  import('../components/shared/CompanyManagementForms/AddUser/Add-User-Form')
 );
 
 const appRoutes = [
@@ -46,7 +46,7 @@ const appRoutes = [
 
   {
     path: ROUTES.FORM,
-    element: <UserRoles />,
+    element: <CreateCompanyForm />,
   },
 ];
 
