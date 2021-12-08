@@ -7,9 +7,9 @@ import { userSignupFailure, userSignupSuccess } from './user.actions';
 export function* registerNewUser({ payload }) {
   try {
     const registerUser = yield call(SIGNUP, payload);
-    yield put(userSignupSuccess(registerUser));
+    yield put(userSignupSuccess(registerUser.status));
   } catch (error) {
-    yield put(userSignupFailure(error));
+    yield put(userSignupFailure(error.response.data));
   }
 }
 
