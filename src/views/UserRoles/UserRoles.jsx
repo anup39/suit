@@ -1,11 +1,13 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
+import AdminHeaderComponent from '../../components/shared/Headers/AdminHeader/admin-header';
 import MenuOptions from './menu-ooptions';
 import { LinkWrapper } from './styles/user-roles.styles';
-import classes from './styles/user-roles.styles.scss';
+import classes from './styles/user-roles.styles.module.scss';
 
 const UserRoles = () => {
+  console.log(classes);
   return (
     <div className={classes.roles_container}>
       <div className={classes.roles_menu}>
@@ -19,7 +21,7 @@ const UserRoles = () => {
         </ul>
       </div>
       <div className={classes.roles_components}>
-        ssss
+        <AdminHeaderComponent />
         <Outlet />
       </div>
     </div>
