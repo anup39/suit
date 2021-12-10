@@ -1,4 +1,4 @@
-/*eslint-disable*/
+/* eslint-disable*/
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 import USER_ACTION_TYPES from './user.action-types';
 import { SIGNUP, SIGNIN } from '../../services/api';
@@ -6,7 +6,6 @@ import {
   userSignupFailure,
   userSignupSuccess,
   userSigninFailure,
-  userSigninStart,
   userSigninSuccess,
 } from './user.actions';
 
@@ -30,9 +29,10 @@ export function* userSagas() {
 export function* signInUser({ payload }) {
   try {
     const signin = yield call(SIGNIN, payload);
-    yield put(userSigninSuccess(signin.status));
+    console.log(signin);
+    yield put(userSigninSuccess(signin));
   } catch (error) {
-    yield put(userSigninFailure, error.response.data);
+    yield put(userSigninFailure(error.response.data));
   }
 }
 
@@ -41,5 +41,5 @@ export function* onUserSignInStart() {
 }
 
 export function* signinSagas() {
-  yield all([call(onUSerSignInStart)]);
+  yield all([call(onUserSignInStart)]);
 }

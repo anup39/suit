@@ -10,7 +10,7 @@ import appRoutes from '../../routes/AppRoutes';
 const App = () => {
   const content = useRoutes(appRoutes);
   return (
-    <Suspense fallback={<div>loading...</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
       <ReactNotifications />
       {content}
     </Suspense>

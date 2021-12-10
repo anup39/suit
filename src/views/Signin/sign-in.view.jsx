@@ -69,9 +69,9 @@ const SigninPage = () => {
               <FormInput
                 className={classes.form_inputs}
                 placeholder="Email"
-                id="email"
+                id="username"
                 type="text"
-                {...register('email')}
+                {...register('username')}
                 error={errors.email?.message}
               />
 

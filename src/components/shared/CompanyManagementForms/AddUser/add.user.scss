@@ -99,3 +99,15 @@ input {
   cursor: pointer;
   color: rgba(0, 0, 0, 0.767);
 }
+
+.select-users {
+  margin-top: 30px;
+}
+
+.search-user-input {
+  height: 30px;
+  width: 98%;
+  border: 1px soild rgba(0, 0, 0, 0.329);
+  word-wrap: break-word;
+  margin: 3px;
+}

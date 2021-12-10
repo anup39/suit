@@ -25,12 +25,12 @@ export const userSigninStart = (data) => ({
   payload: data,
 });
 
-export const userSigninSuccess = (status) => ({
+export const userSigninSuccess = (data) => ({
   type: USER_ACTION_TYPES.USER_SIGNIN_SUCCESS,
-  payload: status,
+  payload: data,
 });
 
-export const userSigninFailure = (status) => ({
+export const userSigninFailure = (data) => ({
   type: USER_ACTION_TYPES.USER_SIGNIN_FAILURE,
-  payload: status,
+  payload: data,
 });
