@@ -18,6 +18,12 @@ const CreateCompanyForm = lazy(() =>
   import('../components/shared/CompanyManagementForms/AddUser/Add-User-Form')
 );
 
+const UserRolesForms = lazy(() =>
+  import('../components/shared/UserRolesForms/UserRolesForms')
+);
+
+const Test = lazy(() => import('../views/Test/Test'));
+
 const appRoutes = [
   {
     path: ROUTES.ERROR,
@@ -47,6 +53,14 @@ const appRoutes = [
   {
     path: ROUTES.FORM,
     element: <CreateCompanyForm />,
+  },
+  {
+    path: ROUTES.USER,
+    element: <UserRolesForms />,
+  },
+  {
+    path: ROUTES.TEST,
+    element: <Test />,
   },
 ];
 

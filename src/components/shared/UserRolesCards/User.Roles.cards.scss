@@ -1,0 +1,58 @@
+.user-role-base {
+  border: 0.5px solid rgba(0, 0, 0, 0.247);
+  margin: -0.5px 5px;
+  padding: 6px 15px;
+  width: 100%;
+}
+
+div.table {
+  display: table;
+  width: 95%;
+}
+div.table span {
+  display: table-cell;
+  table-layout: fixed;
+}
+
+.check-input {
+  width: 3%;
+}
+
+.username {
+  width: 30%;
+}
+
+.date {
+  width: 21px;
+  color: rgba(54, 54, 54, 0.61);
+}
+
+.role {
+  width: 20%;
+}
+
+.status {
+  width: 16%;
+}
+
+.non-selectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.action {
+  width: 7%;
+}
+
+.menu-icon {
+  color: #000;
+  margin-left: 20px;
+}
+
+.header {
+  color: rgba(34, 34, 34, 0.658);
+}

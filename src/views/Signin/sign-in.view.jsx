@@ -74,7 +74,9 @@ const SigninPage = () => {
                 {...register('username')}
                 error={errors.email?.message}
               />
-
+              <span className={classes.error_text}>
+                {errors.username?.message}
+              </span>
               <label className={classes.form_labels}>Password</label>
               <FormInput
                 className={classes.form_inputs}
@@ -83,7 +85,10 @@ const SigninPage = () => {
                 id="password"
                 {...register('password')}
                 error={errors.password?.message}
-              />
+              />{' '}
+              <span className={classes.error_text}>
+                {errors.password?.message}
+              </span>
               <div className={classes.remember_me_text}>
                 <div>
                   <input
@@ -95,7 +100,6 @@ const SigninPage = () => {
                 </div>
                 <p className={classes.fotgot_text}>Forgot Code? </p>
               </div>
-
               <FormButton>Login</FormButton>
             </form>
 

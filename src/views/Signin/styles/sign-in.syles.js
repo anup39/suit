@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const FormButton = styled.button`
-  background: blue;
+  background: rgba(1, 96, 224, 255);
   margin: auto;
   display: block;
   margin-top: 20px;

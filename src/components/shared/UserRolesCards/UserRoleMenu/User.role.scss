@@ -1,0 +1,20 @@
+.user-role-menu-base {
+  display: inline-block;
+  margin-top: 24px;
+  position: absolute;
+  background-color: #fff;
+  width: 140px;
+  margin-left: calc(2vw - 100px);
+  padding: 20px;
+  box-shadow: 0px 1px 5px #3030309d;
+  cursor: pointer;
+}
+
+.user-role-menu-base p {
+  color: rgba(73, 73, 73, 0.788);
+  width: 100%;
+}
+
+.user-role-menu-base p:hover {
+  color: rgba(0, 0, 0, 0.788);
+}
