@@ -30,64 +30,52 @@ const appRoutes = [
     element: <UserRoles />,
     children: [
       {
-        path: 'child',
-        element: <HomePage />,
+        element: <UserRoles />,
+        path: ROUTES.USER_ROLES,
+      },
+      {
+        element: 'company-management',
+        path: ROUTES.COMPANY_MANAGEMENT,
       },
       {
         element: <HomePage />,
-        path: '/user-roles',
+        path: ROUTES.PROJECT_MANAGEMENT,
       },
       {
         element: <HomePage />,
-        path: 'company-management',
-      },
-      {
-        element: <HomePage />,
-        path: 'project-management',
-      },
-      {
-        element: <HomePage />,
-        path: 'project-import',
+        path: ROUTES.IMPORT_PROJECT_DATA,
       },
       {
         element: 'Company Management',
-        path: 'company-management',
+        path: ROUTES.WORKLIST_MANAGEMENT,
       },
       {
         element: 'Worklist Management',
-        path: 'worklist-management',
+        path: ROUTES.ASSIGN_WORK_ACTIVITIES,
       },
       {
         element: 'Assign Work Activities',
-        path: 'assign-activities',
-      },
-      {
-        element: 'Management of Field Activities',
-        path: 'field-activities-management',
-      },
-      {
-        element: 'Company Management',
-        path: 'company-management',
+        path: ROUTES.ACTIVITIES_MANAGEMENT,
       },
       {
         element: 'Milestone Approvl',
-        path: 'milestone-approval',
+        path: ROUTES.MILESTONE_APPROVAl,
       },
       {
         element: 'ECM services',
-        path: 'ecm-services',
+        path: ROUTES.ECM_SERVICES,
       },
       {
         element: 'Web GIS services',
-        path: 'gis-services',
+        path: ROUTES.WEB_GIS_SERVICES,
       },
       {
         element: 'Webex',
-        path: 'webex',
+        path: ROUTES.WEBEX,
       },
       {
         element: 'Feedback',
-        path: 'feedback',
+        path: ROUTES.FEEDBACK_SERVICES,
       },
     ],
   },

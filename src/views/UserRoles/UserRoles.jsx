@@ -1,11 +1,16 @@
+// import { Typography } from '@mui/material';
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
+import AdminHeaderComponent from '../../components/shared/Headers/AdminHeader/admin-header';
+import UserRolesDataGrid from '../../components/shared/UserRolesComponent/UserRoles';
 import MenuOptions from './menu-ooptions';
 import { LinkWrapper } from './styles/user-roles.styles';
-import classes from './styles/user-roles.styles.scss';
+import classes from './styles/user-roles.styles.module.scss';
 
 const UserRoles = () => {
+  const location = useLocation();
+  console.log(location);
   return (
     <div className={classes.roles_container}>
       <div className={classes.roles_menu}>
@@ -19,7 +24,10 @@ const UserRoles = () => {
         </ul>
       </div>
       <div className={classes.roles_components}>
-        ssss
+        <AdminHeaderComponent />
+        {location.pathname === '/user-roles' ? (
+          <UserRolesDataGrid />
+        ) : undefined}
         <Outlet />
       </div>
     </div>

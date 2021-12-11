@@ -1,59 +1,53 @@
+import ROUTES from '../../constants/routes';
+
 const MenuOptions = [
   {
     name: 'User Roles',
-    path: '/user-roles',
+    path: ROUTES.USER_ROLES,
   },
   {
     name: 'Company Management',
-    path: 'company-management',
+    path: ROUTES.COMPANY_MANAGEMENT,
   },
   {
-    name: 'Project-management',
-    path: 'project-management',
+    name: 'Project Management',
+    path: ROUTES.PROJECT_MANAGEMENT,
   },
   {
     name: 'Import Project Data',
-    path: 'project-import',
-  },
-  {
-    name: 'Company Management',
-    path: 'company-management',
+    path: ROUTES.IMPORT_PROJECT_DATA,
   },
   {
     name: 'Worklist Management',
-    path: 'worklist-management',
+    path: ROUTES.WORKLIST_MANAGEMENT,
   },
   {
     name: 'Assign Work Activities',
-    path: 'assign-activities',
+    path: ROUTES.ASSIGN_WORK_ACTIVITIES,
   },
   {
     name: 'Management of Field Activities',
-    path: 'field-activities-management',
+    path: ROUTES.ACTIVITIES_MANAGEMENT,
   },
   {
-    name: 'Company Management',
-    path: 'company-management',
-  },
-  {
-    name: 'Milestone Approvl',
-    path: 'milestone-approval',
+    name: 'Milestone Approval',
+    path: ROUTES.MILESTONE_APPROVAl,
   },
   {
     name: 'ECM services',
-    path: 'ecm-services',
+    path: ROUTES.ECM_SERVICES,
   },
   {
     name: 'Web GIS services',
-    path: 'gis-services',
+    path: ROUTES.WEB_GIS_SERVICES,
   },
   {
     name: 'Webex',
-    path: 'webex',
+    path: ROUTES.WEBEX,
   },
   {
     name: 'Feedback',
-    path: 'feedback',
+    path: ROUTES.FEEDBACK_SERVICES,
   },
 ];
 
