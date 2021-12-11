@@ -47,7 +47,6 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/control-has-associated-label": "off",
-    "jsx-a11y/label-has-associated-control": "off",
     "no-console": ["warn"],
     "react/boolean-prop-naming": "error",
     "react/destructuring-assignment": ["off"],
@@ -64,7 +63,7 @@
     "react/jsx-no-literals": "off",
     "react/jsx-no-useless-fragment": "error",
     "react/jsx-props-no-spreading": [
-      "off",
+      "error",
       {
         "html": "enforce",
         "custom": "ignore"
