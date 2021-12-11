@@ -4,7 +4,6 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import AppBar from '@mui/material/AppBar';
-import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -13,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import * as React from 'react';
 
+import classes from './styles/admin.header.module.scss';
 import {
   AdminAccountIcon,
   AdminArrowDown,
@@ -27,14 +27,9 @@ export const AppBarComponent = styled(AppBar)(() => ({
   boxShadow: 'none',
   borderBottom: '1px solid #ddd',
 }));
-export const AppBadge = styled(Badge)(() => ({
-  width: '1px',
-  height: '1px',
-  backgroundColor: '#05964b',
-}));
 export const NotificationsIconOutlined = styled(NotificationsNoneOutlinedIcon)(
   () => ({
-    color: '#000000',
+    color: '#0000009e',
   })
 );
 
@@ -103,9 +98,7 @@ const AdminHeaderComponent = () => {
     >
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit" size="large">
-          <AppBadge badgeContent={4}>
-            <MailIcon />
-          </AppBadge>
+          <MailIcon />
         </IconButton>
         <p>Messages</p>
       </MenuItem>
@@ -115,9 +108,7 @@ const AdminHeaderComponent = () => {
           color="inherit"
           size="large"
         >
-          <AppBadge badgeContent={17} color="error">
-            <NotificationsIconOutlined />
-          </AppBadge>
+          <NotificationsIconOutlined />
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
@@ -150,7 +141,9 @@ const AdminHeaderComponent = () => {
             sx={{ mr: 2 }}
           />
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box
+            sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}
+          >
             <AdminInfoContainer onClick={handleProfileMenuOpen}>
               <IconButton
                 aria-controls={menuId}
@@ -177,9 +170,8 @@ const AdminHeaderComponent = () => {
               color="inherit"
               size="large"
             >
-              <AppBadge badgeContent="">
-                <NotificationsIconOutlined />
-              </AppBadge>
+              <span className={classes.notify_dot} />
+              <NotificationsIconOutlined />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

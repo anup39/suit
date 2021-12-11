@@ -6,8 +6,8 @@ export const LinkWrapper = styled(Link)`
   text-decoration: none;
   display: block;
   width: 100%;
-  padding: 9px 40px;
-  font-family: $prime-font;
+  padding: 10px 40px;
+  font-family: 'Roboto';
   box-sizing: border-box;
 `;
 export const LinkWrapperfordelete = styled(Link)``;
