@@ -5,7 +5,8 @@ const USER_INITIAL_STATE = {
   signupStatus: null,
   error: null,
   userType: null,
-  userData: undefined,
+  userData: '',
+  isAuthenticated: false,
 };
 
 // eslint-disable-next-line default-param-last
@@ -35,6 +36,29 @@ const userReducer = (state = USER_INITIAL_STATE, action) => {
       return {
         ...state,
         userType: action.payload,
+      };
+
+    case USER_ACTION_TYPES.USER_SIGNIN_START:
+      return {
+        ...state,
+        isLoading: true,
+        userData: action.payload,
+      };
+
+    case USER_ACTION_TYPES.USER_SIGNIN_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        isAuthenticated: true,
+        userData: action.payload,
+      };
+    case USER_ACTION_TYPES.USER_SIGNIN_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isAuthenticated: false,
+        error: action.payload,
       };
 
     default:

@@ -19,3 +19,18 @@ export const getUserType = (type) => ({
   type: USER_ACTION_TYPES.USER_GROUP_TYPE,
   payload: type,
 });
+
+export const userSigninStart = (data) => ({
+  type: USER_ACTION_TYPES.USER_SIGNIN_START,
+  payload: data,
+});
+
+export const userSigninSuccess = (data) => ({
+  type: USER_ACTION_TYPES.USER_SIGNIN_SUCCESS,
+  payload: data,
+});
+
+export const userSigninFailure = (data) => ({
+  type: USER_ACTION_TYPES.USER_SIGNIN_FAILURE,
+  payload: data,
+});

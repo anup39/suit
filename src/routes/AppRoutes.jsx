@@ -9,8 +9,21 @@ const ErrorBoundryPage = lazy(() =>
 const UnavailablePage = lazy(() =>
   import('../views/Error_boundries/unavailable.view')
 );
+
 const SignupPage = lazy(() => import('../views/Signup/sign-up.view'));
 const UserRoles = lazy(() => import('../views/UserRoles/UserRoles'));
+
+const SigninPage = lazy(() => import('../views/Signin/sign-in.view'));
+
+const CreateCompanyForm = lazy(() =>
+  import('../components/shared/CompanyManagementForms/AddUser/Add-User-Form')
+);
+
+const UserRolesForms = lazy(() =>
+  import('../components/shared/UserRolesForms/UserRolesForms')
+);
+
+const Test = lazy(() => import('../views/Test/Test'));
 
 const appRoutes = [
   {
@@ -86,6 +99,23 @@ const appRoutes = [
   {
     path: ROUTES.HOME,
     element: <HomePage />,
+  },
+  {
+    path: ROUTES.SIGN_IN,
+    element: <SigninPage />,
+  },
+
+  {
+    path: ROUTES.FORM,
+    element: <CreateCompanyForm />,
+  },
+  {
+    path: ROUTES.USER,
+    element: <UserRolesForms />,
+  },
+  {
+    path: ROUTES.TEST,
+    element: <Test />,
   },
 ];
 
