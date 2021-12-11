@@ -6,11 +6,12 @@ import ReactNotifications from 'react-notifications-component';
 import { useRoutes } from 'react-router-dom';
 
 import appRoutes from '../../routes/AppRoutes';
+import GlobalSpinner from '../shared/Spinners/GlobalSpinner';
 
 const App = () => {
   const content = useRoutes(appRoutes);
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<GlobalSpinner />}>
       <ReactNotifications />
       {content}
     </Suspense>
