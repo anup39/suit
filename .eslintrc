@@ -16,7 +16,7 @@
     "ecmaVersion": 2019,
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true,
+      "jsx": true
     }
   },
   "plugins": [
@@ -32,7 +32,7 @@
     "progress/activate": "error",
     "import/first": "error",
     "import/newline-after-import": "error",
-    "import/no-cycle": "off", 
+    "import/no-cycle": "off",
     "import/no-duplicates": "error",
     "import/no-extraneous-dependencies": [
       "error",
@@ -43,16 +43,16 @@
       }
     ],
     "linebreak-style": ["error", "unix"],
-    "jsx-a11y/click-events-have-key-events": "off", 
-    "jsx-a11y/no-noninteractive-element-interactions": "off", 
-    "jsx-a11y/no-static-element-interactions": "off", 
-    "jsx-a11y/control-has-associated-label": "off", 
-    "jsx-a11y/label-has-associated-control": "off", 
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "jsx-a11y/label-has-associated-control": "off",
     "no-console": ["warn"],
     "react/boolean-prop-naming": "error",
-    "react/destructuring-assignment": ["off"], 
+    "react/destructuring-assignment": ["off"],
     "react/forbid-prop-types": "error",
-    "react/jsx-child-element-spacing": "off", 
+    "react/jsx-child-element-spacing": "off",
     "react/jsx-filename-extension": "error",
     "react/jsx-handler-names": "error",
     "react/jsx-max-depth": [
@@ -61,7 +61,7 @@
         "max": 10
       }
     ],
-    "react/jsx-no-literals": "off", 
+    "react/jsx-no-literals": "off",
     "react/jsx-no-useless-fragment": "error",
     "react/jsx-props-no-spreading": [
       "off",
@@ -70,12 +70,12 @@
         "custom": "ignore"
       }
     ],
-    "react/jsx-sort-default-props": "off", 
-    "react/sort-prop-types": "off", 
+    "react/jsx-sort-default-props": "off",
+    "react/sort-prop-types": "off",
     "react/no-array-index-key": "error",
     "react/no-did-mount-set-state": "error",
     "react/no-multi-comp": "error",
-    "react/no-set-state": "off", 
+    "react/no-set-state": "off",
     "react/no-unsafe": "error",
     "react/prop-types": "error",
     "react/function-component-definition": [
@@ -84,11 +84,11 @@
         "namedComponents": "arrow-function"
       }
     ],
-    "react/require-optimization": "off", 
+    "react/require-optimization": "off",
     "simple-import-sort/imports": "error",
-    "sort-imports": "off", 
-    "react-redux/prefer-separate-component-file": "off", 
-    "react-perf/jsx-no-new-object-as-prop": "off", 
+    "sort-imports": "off",
+    "react-redux/prefer-separate-component-file": "off",
+    "react-perf/jsx-no-new-object-as-prop": "off",
     "react-perf/jsx-no-new-array-as-prop": "error",
     "react-perf/jsx-no-new-function-as-prop": "off",
     "react-perf/jsx-no-jsx-as-prop": "off",

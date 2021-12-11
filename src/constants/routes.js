@@ -16,6 +16,10 @@ const ROUTES = {
   WEB_GIS_SERVICES: 'web-gis-services',
   WEBEX: 'webex',
   FEEDBACK_SERVICES: 'feedback-services',
+  SIGN_IN: '/signin',
+  FORM: '/form',
+  USER: '/form/user',
+  TEST: '/test',
 };
 
 export default ROUTES;

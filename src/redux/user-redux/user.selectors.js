@@ -4,3 +4,7 @@ export const getSignedupError = (state) => {
 export const getLoadingStatus = (state) => {
   return state.user.isLoading;
 };
+
+export const getSigninError = (state) => {
+  return state.user.error;
+};

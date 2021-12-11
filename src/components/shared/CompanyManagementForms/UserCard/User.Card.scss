@@ -1,0 +1,47 @@
+.user-table {
+  border: 1px solid rgba(0, 0, 0, 0.185);
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.842);
+}
+
+.user-table:hover {
+  background-color: rgba(0, 140, 255, 0.034);
+}
+
+.table-header {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 5px 5px 0px 0px;
+  border: 1px solid rgba(0, 0, 0, 0.185);
+  color: rgba(0, 0, 0, 0.63);
+}
+div.table {
+  display: table;
+  width: 100%;
+}
+div.table span {
+  display: table-cell;
+}
+
+.user {
+  table-layout: fixed;
+  width: 70%;
+}
+
+.role {
+  table-layout: auto;
+  width: 30%;
+}
+
+label {
+  margin-left: 10px;
+}
+
+input {
+  margin-left: 20px;
+}
