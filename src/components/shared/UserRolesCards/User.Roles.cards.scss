@@ -1,7 +1,7 @@
 .user-role-base {
-  border: 0.5px solid rgba(0, 0, 0, 0.247);
-  margin: -0.5px 5px;
-  padding: 6px 15px;
+  border: 1px solid rgba(0, 0, 0, 0.247);
+  margin: 0px 5px;
+  padding: 15px;
   width: 100%;
 }
 
@@ -45,11 +45,11 @@ div.table span {
 }
 
 .action {
-  width: 7%;
+  width: 10%;
 }
 
 .menu-icon {
-  color: #000;
+  color: rgba(0, 0, 0, 0.5);
   margin-left: 20px;
 }
 

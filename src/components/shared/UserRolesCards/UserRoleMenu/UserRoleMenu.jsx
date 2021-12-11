@@ -1,4 +1,4 @@
-import './User.role.scss';
+import './User.role.menu.scss';
 
 import React from 'react';
 
