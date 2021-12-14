@@ -1,13 +1,13 @@
 .user-role-base {
   border: 1px solid rgba(0, 0, 0, 0.247);
-  margin: 0px 5px;
   padding: 15px;
   width: 100%;
+  font-size: 18px;
 }
 
 div.table {
   display: table;
-  width: 95%;
+  width: 100%;
 }
 div.table span {
   display: table-cell;
@@ -55,4 +55,10 @@ div.table span {
 
 .header {
   color: rgba(34, 34, 34, 0.658);
+}
+
+.user-role-base {
+  border: 1px solid rgba(0, 0, 0, 0.247);
+  padding: 15px;
+  width: 100%;
 }

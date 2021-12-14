@@ -11,7 +11,7 @@ import UserRoleMenu from './UserRoleMenu/UserRoleMenu';
 const UserRoleCard = ({
   username = 'testuser@company.com',
   date = '23 Dec 2021',
-  roles = 'Engineer',
+  role = 'Engineer',
   status = 'Inactive',
 }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -27,7 +27,7 @@ const UserRoleCard = ({
         <p>{date}</p>
       </span>
       <span className="role">
-        <p>{roles}</p>
+        <p>{role}</p>
       </span>
       <span className="status non-selectable">
         <Status status={status}> {status}</Status>

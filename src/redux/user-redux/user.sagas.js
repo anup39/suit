@@ -29,8 +29,9 @@ export function* userSagas() {
 export function* signInUser({ payload }) {
   try {
     const signin = yield call(SIGNIN, payload);
-    console.log(signin);
+
     yield put(userSigninSuccess(signin));
+    history.push('pannel/user-roles');
   } catch (error) {
     yield put(userSigninFailure(error.response.data));
   }

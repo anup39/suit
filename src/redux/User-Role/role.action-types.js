@@ -3,7 +3,7 @@ const ROLE_ACTION_TYPE = {
   USER_DATA: 'USER_DATA',
   ERROR: 'ERROR',
   SUCCESS: 'SUCCESS',
-  START: 'STATRT',
+  START: 'START',
 };
 
 export default ROLE_ACTION_TYPE;

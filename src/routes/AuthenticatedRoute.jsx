@@ -8,7 +8,7 @@ const AuthenticatedRoute = ({ children, isAuthenticated }) => {
   return isAuthenticated ? (
     <div>{children}</div>
   ) : (
-    <Navigate to={ROUTES.SIGN_UP} />
+    <Navigate to={ROUTES.SIGN_IN} />
   );
 };
 

@@ -8,7 +8,7 @@ const ROUTES = {
   FORM: '/form',
   USER: '/form/user',
   TEST: '/test',
-  USER_ROLES: '/user-roles',
+  USER_ROLES: '/pannel/user-roles',
   COMPANY_MANAGEMENT: 'company-management',
   PROJECT_MANAGEMENT: 'project-management',
   IMPORT_PROJECT_DATA: 'import-project-data',
@@ -20,6 +20,7 @@ const ROUTES = {
   WEB_GIS_SERVICES: 'web-gis-services',
   WEBEX: 'webex',
   FEEDBACK_SERVICES: 'feedback-services',
+  PANNEL: 'pannel',
 };
 
 export default ROUTES;

@@ -11,7 +11,7 @@ const UnavailablePage = lazy(() =>
 );
 
 const SignupPage = lazy(() => import('../views/Signup/sign-up.view'));
-const UserRoles = lazy(() => import('../views/UserRoles/UserRoles'));
+const Pannel = lazy(() => import('../views/Pannel/Pannel'));
 
 const SigninPage = lazy(() => import('../views/Signin/sign-in.view'));
 
@@ -24,6 +24,12 @@ const UserRolesForms = lazy(() =>
 );
 
 const Test = lazy(() => import('../views/Test/Test'));
+
+const UserRoles = lazy(() => import('../views/UserRoles/UserRoles'));
+
+const CompanyManagement = lazy(() =>
+  import('../views/CompanyManagement/CompanyManagement')
+);
 
 const appRoutes = [
   {
@@ -39,15 +45,15 @@ const appRoutes = [
     element: <SignupPage isRedTheme={false} />,
   },
   {
-    path: ROUTES.USER_ROLES,
-    element: <UserRoles />,
+    path: ROUTES.PANNEL,
+    element: <Pannel />,
     children: [
       {
         element: <UserRoles />,
         path: ROUTES.USER_ROLES,
       },
       {
-        element: 'company-management',
+        element: <CompanyManagement />,
         path: ROUTES.COMPANY_MANAGEMENT,
       },
       {

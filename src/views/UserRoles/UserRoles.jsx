@@ -1,37 +1,63 @@
-// import { Typography } from '@mui/material';
-import React from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+/*eslint-disable*/
+import './styles/UserRoles.scss';
 
-import AdminHeaderComponent from '../../components/shared/Headers/AdminHeader/admin-header';
-import UserRolesDataGrid from '../../components/shared/UserRolesComponent/UserRoles';
-import MenuOptions from './menu-ooptions';
-import { LinkWrapper } from './styles/user-roles.styles';
-import classes from './styles/user-roles.styles.module.scss';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import React, { useEffect } from 'react';
 
-const UserRoles = () => {
-  const location = useLocation();
-  console.log(location);
+import UserRoleCard from '../../components/shared/UserRolesCards/UserRoleCard';
+import { connect, useDispatch } from 'react-redux';
+import { roleStart } from '../../redux/User-Role/role.actions';
+import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
+
+const UserRoles = ({ currentUserData, userRoleData }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(roleStart(currentUserData.accessToken));
+  }, []);
+
   return (
-    <div className={classes.roles_container}>
-      <div className={classes.roles_menu}>
-        <h2 className={classes.menu_header}>ASuit</h2>
-        <ul className={classes.menu_options_container}>
-          {MenuOptions.map((item) => (
-            <li key={item.name} className={classes.menu_option}>
-              <LinkWrapper to={item.path}>{item.name}</LinkWrapper>
-            </li>
-          ))}
-        </ul>
+    <BaseTemplate title="User Roles">
+      {console.log(currentUserData)}
+      <div className="user-role-div">
+        <div className="search-div">
+          <input className="search-input" placeholder="User Search" />
+          <SearchOutlinedIcon className="search-icon" />
+          <p className="delete-botton">Delete</p>
+        </div>
+
+        <div>
+          <div className="user-header">
+            <div>
+              <div className="user-role-base table">
+                <span className="check-input">
+                  <input type="checkbox" />
+                </span>
+                <span className="username text-color">
+                  <p>Username</p>
+                </span>
+                <span className="text-color">
+                  <p>Date</p>
+                </span>
+                <span className="role text-color">
+                  <p>Roles</p>
+                </span>
+                <span className="status text-color">
+                  <p> Status</p>
+                </span>
+                <span className="action text-color">Actions</span>
+              </div>
+              {userRoleData && userRoleData.map((user) => <UserRoleCard />)}
+            </div>
+          </div>
+        </div>
+        <div className="pagination-div">Pagination</div>
       </div>
-      <div className={classes.roles_components}>
-        <AdminHeaderComponent />
-        {location.pathname === '/user-roles' ? (
-          <UserRolesDataGrid />
-        ) : undefined}
-        <Outlet />
-      </div>
-    </div>
+    </BaseTemplate>
   );
 };
 
-export default UserRoles;
+const mapSatateToProps = (state) => ({
+  currentUserData: state.user.userData,
+  userRoleData: state.role.data,
+});
+export default connect(mapSatateToProps)(UserRoles);

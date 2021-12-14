@@ -8,7 +8,15 @@ export const SIGNUP = async (userData) => {
 };
 
 export const SIGNIN = async (userData) => {
-  console.log('Signin');
   const signin = await axios.post(API_END_POINTS.signin, userData);
   return signin.data;
+};
+
+export const GETUSER = async (authToken) => {
+  const users = await axios(API_END_POINTS.getUser, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
+  return users.data;
 };
