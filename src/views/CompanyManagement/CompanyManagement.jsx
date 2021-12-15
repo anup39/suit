@@ -1,15 +1,17 @@
-/*eslint-disable*/
 import './CompanyManagement.scss';
 
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import React, { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
-
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import CompanyManagementCard from '../../components/shared/CompanyManagementCards/CompanyManagementCard';
-import { addNewCompany } from '../../redux/Company-Management/company.actions';
-import { connect, useDispatch } from 'react-redux';
-import { getCompanies } from '../../redux/Company-Management/company.actions';
+import {
+  addNewCompany,
+  getCompanies,
+} from '../../redux/Company-Management/company.actions';
+
+// eslint-disable-next-line
 const CompanyManagement = ({ authToken, companyData }) => {
   const dispatch = useDispatch();
 

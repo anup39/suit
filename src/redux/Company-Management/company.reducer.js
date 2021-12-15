@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import COMPANY_MANAGEMENT from './company-action.types';
 
 const COMPANY_INITIAL_STATE = {

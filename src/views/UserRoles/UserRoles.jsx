@@ -1,28 +1,30 @@
-/*eslint-disable*/
 import './styles/UserRoles.scss';
 
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import React, { useEffect, useState } from 'react';
-
-import UserRoleCard from '../../components/shared/UserRolesCards/UserRoleCard';
 import { connect, useDispatch } from 'react-redux';
-import { roleStart } from '../../redux/User-Role/role.actions';
-import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 
+import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
+import UserRoleCard from '../../components/shared/UserRolesCards/UserRoleCard';
+import { roleStart } from '../../redux/User-Role/role.actions';
+
+// eslint-disable-next-line
 const UserRoles = ({ currentUserData, userRoleData }) => {
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState('');
   const filteredUsers = [];
 
   if (searchTerm) {
+    // eslint-disable-next-line
     userRoleData.map((users) => {
-      if (users.username == searchTerm) {
+      if (users.username === searchTerm) {
         filteredUsers.push(users);
       }
     });
   }
 
   useEffect(() => {
+    // eslint-disable-next-line
     dispatch(roleStart(currentUserData.accessToken));
   }, []);
 
@@ -34,8 +36,8 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
         <div className="search-div">
           <input
             className="search-input"
-            placeholder="User Search"
             onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="User Search"
           />
           <SearchOutlinedIcon className="search-icon" />
           <p className="delete-botton">Delete</p>
@@ -62,25 +64,27 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
                 </span>
                 <span className="action text-color">Actions</span>
               </div>
+              {/* eslint-disable */}
               {userRoleData && !searchTerm
                 ? userRoleData.map((user) => (
                     <UserRoleCard
-                      username={user.username}
                       date={`${user.updated_date[2]}/${user.updated_date[1]}/${user.updated_date[0]}`}
                       role={user.role.name}
                       status={user.status}
                       userId={user.idUser}
+                      username={user.username}
                     />
                   ))
                 : filteredUsers.map((user) => (
                     <UserRoleCard
-                      username={user.username}
                       date={`${user.updated_date[2]}/${user.updated_date[1]}/${user.updated_date[0]}`}
                       role={user.role.name}
                       status={user.status}
                       userId={user.idUser}
+                      username={user.username}
                     />
                   ))}
+              {/* eslint-enable */}
             </div>
           </div>
         </div>
@@ -90,13 +94,13 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
   );
 };
 
-const mapSatateToProps = (state) => ({
+const mapStateToProps = (state) => ({
   currentUserData: state.user.userData,
   userRoleData: state.role.data,
 });
-export default connect(mapSatateToProps)(UserRoles);
+export default connect(mapStateToProps)(UserRoles);
 
-//TODO: Pagination
-//TODO: Delete
-//TODO: API Calls to backend
-//TODO: Delete user
+// TODO: Pagination
+// TODO: Delete
+// TODO: API Calls to backend
+// TODO: Delete user

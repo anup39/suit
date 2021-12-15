@@ -1,5 +1,6 @@
-/*eslint-disable*/
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
+
+import { GET_USER_BY_ID, GETUSERS } from '../../services/api';
 import ROLE_ACTION_TYPE from './role.action-types';
 import {
   roleFailure,
@@ -7,11 +8,11 @@ import {
   userDataFailure,
   userDataSuccess,
 } from './role.actions';
-import { GETUSERS, GET_USER_BY_ID } from '../../services/api';
+
 export function* getRoles(data) {
   try {
-    const getUserData = yield call(GETUSERS, data.payload);
-    yield put(roleSuccess(getUserData));
+    const getData = yield call(GETUSERS, data.payload);
+    yield put(roleSuccess(getData));
   } catch (error) {
     console.log(error);
     yield put(roleFailure(error.response.data));

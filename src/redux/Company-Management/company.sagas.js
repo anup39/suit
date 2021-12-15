@@ -1,14 +1,13 @@
-/*eslint-disable*/
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
-import COMPANY_ACTION_TYPE from './company-action.types';
+
 import { CREATE_COMPANY, GET_COMPANIES } from '../../services/api';
 import {
-  createCompany,
   companyCreationError,
   companyCreationSuccess,
-  getCompanySuccess,
   getCompanyError,
+  getCompanySuccess,
 } from './company.actions';
+import COMPANY_ACTION_TYPE from './company-action.types';
 
 export function* createNewCompany(data) {
   try {

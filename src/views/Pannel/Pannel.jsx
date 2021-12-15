@@ -1,18 +1,18 @@
-/*eslint-disable*/
 import React from 'react';
+import { connect } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
+import CreateCompanyForm from '../../components/shared/CompanyManagementForms/CreateCompany/Create-Company.Forms';
 import AdminHeaderComponent from '../../components/shared/Headers/AdminHeader/admin-header';
 import UserRolesForms from '../../components/shared/UserRolesForms/UserRolesForms';
-import CreateCompanyForm from '../../components/shared/CompanyManagementForms/CreateCompany/Create-Company.Forms';
 import MenuOptions from './menu-ooptions';
 import { LinkWrapper } from './styles/user-roles.styles';
 import classes from './styles/user-roles.styles.module.scss';
-import { connect } from 'react-redux';
-
+// eslint-disable-next-line
 const Pannel = ({ companyFormOpen, editUserRoleForm, addFormOpen }) => {
   return (
     <>
+      {/* eslint-disable-next-line */}
       {addFormOpen && <UserRolesForms addUserRole={true} />}
       {editUserRoleForm && <UserRolesForms />}
       {companyFormOpen && <CreateCompanyForm />}

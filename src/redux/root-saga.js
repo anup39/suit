@@ -1,12 +1,11 @@
-/*eslint-disable*/
 import { all, call } from '@redux-saga/core/effects';
 
-import { signinSagas, userSagas } from './user-redux/user.sagas';
-import { roleSaga, getUserSaga } from './User-Role/role.sagas';
 import {
   companySaga,
   getCompanySaga,
 } from './Company-Management/company.sagas';
+import { signinSagas, userSagas } from './user-redux/user.sagas';
+import { getUserSaga, roleSaga } from './User-Role/role.sagas';
 
 export default function* rootSaga() {
   yield all([
