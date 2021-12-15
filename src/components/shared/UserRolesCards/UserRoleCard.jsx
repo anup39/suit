@@ -1,3 +1,4 @@
+/*eslint-disable */
 import './User.Roles.cards.scss';
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -6,15 +7,9 @@ import React, { useState } from 'react';
 import Status from './styles/User.Roles.Card';
 import UserRoleMenu from './UserRoleMenu/UserRoleMenu';
 
-/*eslint-disable */
-
-const UserRoleCard = ({
-  username = 'testuser@company.com',
-  date = '23 Dec 2021',
-  role = 'Engineer',
-  status = 'Inactive',
-}) => {
+const UserRoleCard = ({ username, date, role, status, userId }) => {
   const [showMenu, setShowMenu] = useState(false);
+
   return (
     <div className="user-role-base table">
       <span className="check-input">
@@ -35,7 +30,7 @@ const UserRoleCard = ({
 
       <span className="action" onClick={() => setShowMenu(!showMenu)}>
         <MoreHorizIcon className="menu-icon" />
-        {showMenu && <UserRoleMenu />}
+        {showMenu && <UserRoleMenu userId={userId} />}
       </span>
     </div>
   );

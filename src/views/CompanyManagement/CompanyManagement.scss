@@ -44,11 +44,10 @@
   cursor: pointer;
 }
 
-.search-icon {
+.company-search-icon {
   position: absolute;
   margin-left: 5px;
   font-size: 25px;
-  margin-top: 15px;
   color: rgba(0, 0, 0, 0.562);
 }
 
@@ -65,7 +64,7 @@
   font-size: 20px;
   color: rgba(0, 0, 0, 0.705);
   border-bottom: 1px solid rgba(0, 0, 0, 0.479);
-  padding: 10px 0px;
+  padding: 10px 10px;
 }
 .header-table span {
   display: table-cell;
@@ -74,10 +73,6 @@
 
 .check-input {
   width: 3%;
-}
-
-.check-input input {
-  height: 15px;
 }
 
 .company-name {

@@ -4,7 +4,15 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 import React from 'react';
 
-const CompanyManagementCard = () => {
+const CompanyManagementCard = ({
+  name,
+  address,
+  city,
+  refContact,
+  lastUpdate,
+  userLastUpdate,
+  companyId,
+}) => {
   return (
     <div className="table">
       <span className="check-input">
@@ -12,27 +20,27 @@ const CompanyManagementCard = () => {
       </span>
 
       <span className="company-name">
-        <p>Company Name</p>
+        <p>{name}</p>
       </span>
 
       <span className="address">
-        <p>Address</p>
+        <p>{address}</p>
       </span>
 
       <span className="city">
-        <p>City</p>
+        <p>{city}</p>
       </span>
 
       <span className="contact">
-        <p> Reference contact </p>
+        <p> {refContact} </p>
       </span>
 
       <span className="update">
-        <p>Last update</p>
+        <p>{lastUpdate}</p>
       </span>
 
       <span className="update">
-        <p>User last update</p>
+        <p>{userLastUpdate}</p>
       </span>
 
       <span className="actions">

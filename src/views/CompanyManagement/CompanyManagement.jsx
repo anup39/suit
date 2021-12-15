@@ -1,17 +1,22 @@
 /*eslint-disable*/
 import './CompanyManagement.scss';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import CompanyManagementCard from '../../components/shared/CompanyManagementCards/CompanyManagementCard';
 import { addNewCompany } from '../../redux/Company-Management/company.actions';
-import { useDispatch } from 'react-redux';
-
-const CompanyManagement = () => {
+import { connect, useDispatch } from 'react-redux';
+import { getCompanies } from '../../redux/Company-Management/company.actions';
+const CompanyManagement = ({ authToken, companyData }) => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(authToken);
+    dispatch(getCompanies(authToken));
+  });
 
   const handelOpenForm = () => {
     dispatch(addNewCompany());
@@ -25,8 +30,8 @@ const CompanyManagement = () => {
 
       <div className="user-role-div">
         <div className="search-div">
-          <input className="search-input" placeholder="User Search" />
-          <SearchOutlinedIcon className="search-icon" />
+          <input className="search-input" placeholder="Company Search" />
+          <SearchOutlinedIcon className="company-search-icon" />
           <p className="delete-botton">Delete</p>
         </div>
         <div className="header-table">
@@ -62,9 +67,8 @@ const CompanyManagement = () => {
             <p>Actions</p>
           </span>
         </div>
-
+        {console.log(companyData)}
         <div>
-          <CompanyManagementCard />
           <CompanyManagementCard />
           <CompanyManagementCard />
           <CompanyManagementCard />
@@ -74,4 +78,18 @@ const CompanyManagement = () => {
   );
 };
 
-export default CompanyManagement;
+const mapStateToProps = (state) => ({
+  authToken: state.user.userData.accessToken,
+  companyData: state.companyManagement.allCompanies,
+});
+export default connect(mapStateToProps)(CompanyManagement);
+
+/*
+ name,
+  address,
+  city,
+  refContact,
+  lastUpdate,
+  userLastUpdate,
+  companyId,
+*/
