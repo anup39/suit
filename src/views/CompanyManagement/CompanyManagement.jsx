@@ -1,11 +1,13 @@
 import './CompanyManagement.scss';
 
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import CompanyManagementCard from '../../components/shared/CompanyManagementCards/CompanyManagementCard';
+import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
+import SearchComponent from '../../components/shared/SearchComponent/SearchComponent';
 import {
   addNewCompany,
   getCompanies,
@@ -16,8 +18,9 @@ const CompanyManagement = ({ authToken, companyData }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(authToken);
-    dispatch(getCompanies(authToken));
+    if (!companyData) {
+      dispatch(getCompanies(authToken));
+    }
   });
 
   const handelOpenForm = () => {
@@ -30,12 +33,8 @@ const CompanyManagement = ({ authToken, companyData }) => {
         + Create Company
       </span>
 
-      <div className="user-role-div">
-        <div className="search-div">
-          <input className="search-input" placeholder="Company Search" />
-          <SearchOutlinedIcon className="company-search-icon" />
-          <p className="delete-botton">Delete</p>
-        </div>
+      <DatagridBase>
+        <SearchComponent title="Company Search" />
         <div className="header-table">
           <span className="check-input">
             <input type="checkbox" />
@@ -69,15 +68,28 @@ const CompanyManagement = ({ authToken, companyData }) => {
             <p>Actions</p>
           </span>
         </div>
-        {console.log(companyData)}
         <div>
-          <CompanyManagementCard />
-          <CompanyManagementCard />
-          <CompanyManagementCard />
+          {companyData &&
+            companyData.map((data) => (
+              <CompanyManagementCard
+                key={data.id}
+                address={data.address}
+                city={data.city}
+                companyId={data.id}
+                lastUpdate={` ${data.last_update[2]}/${data.last_update[1]}/${data.last_update[0]}`}
+                name={data.name}
+                refContact={data.reference_contact}
+                userLastUpdate={data.user_last_update}
+              />
+            ))}
         </div>
-      </div>
+      </DatagridBase>
     </BaseTemplate>
   );
+};
+
+CompanyManagement.propTypes = {
+  companyData: PropTypes.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -85,13 +97,3 @@ const mapStateToProps = (state) => ({
   companyData: state.companyManagement.allCompanies,
 });
 export default connect(mapStateToProps)(CompanyManagement);
-
-/*
- name,
-  address,
-  city,
-  refContact,
-  lastUpdate,
-  userLastUpdate,
-  companyId,
-*/

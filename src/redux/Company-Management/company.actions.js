@@ -11,17 +11,17 @@ export const cancelCompanyCreation = () => ({
 });
 
 export const createCompany = (data) => ({
-  type: COMPANY_MANAGEMENT.START,
+  type: COMPANY_MANAGEMENT.ADD_COMPANY_START,
   payload: data,
 });
 
 export const companyCreationSuccess = (data) => ({
-  type: COMPANY_MANAGEMENT.SUCCESS,
+  type: COMPANY_MANAGEMENT.ADD_COMPANY_SUCCESS,
   payload: data,
 });
 
 export const companyCreationError = (data) => ({
-  type: COMPANY_MANAGEMENT.ERROR,
+  type: COMPANY_MANAGEMENT.ADD_COMPANY_ERROR,
   payload: data,
 });
 
@@ -35,7 +35,7 @@ export const getCompanySuccess = (data) => ({
   payload: data,
 });
 
-export const getCompanyError = (status) => ({
+export const getCompanyError = (data) => ({
   type: COMPANY_MANAGEMENT.GET_COMPANIES_ERROR,
-  payload: status,
+  payload: data,
 });

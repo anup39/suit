@@ -2,7 +2,7 @@ import { all, call } from '@redux-saga/core/effects';
 
 import {
   companySaga,
-  getCompanySaga,
+  getCompaniesSaga,
 } from './Company-Management/company.sagas';
 import { signinSagas, userSagas } from './user-redux/user.sagas';
 import { getUserSaga, roleSaga } from './User-Role/role.sagas';
@@ -13,7 +13,7 @@ export default function* rootSaga() {
     call(signinSagas),
     call(roleSaga),
     call(companySaga),
-    call(getCompanySaga),
+    call(getCompaniesSaga),
     call(getUserSaga),
   ]);
 }

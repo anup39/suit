@@ -31,6 +31,9 @@ const CompanyManagement = lazy(() =>
   import('../views/CompanyManagement/CompanyManagement')
 );
 
+const ProjectManagement = lazy(() =>
+  import('../views/ProjectManagement/ProjectManagement')
+);
 const appRoutes = [
   {
     path: ROUTES.ERROR,
@@ -57,7 +60,7 @@ const appRoutes = [
         path: ROUTES.COMPANY_MANAGEMENT,
       },
       {
-        element: <HomePage />,
+        element: <ProjectManagement />,
         path: ROUTES.PROJECT_MANAGEMENT,
       },
       {

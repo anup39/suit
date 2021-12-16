@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
+import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import UserRoleCard from '../../components/shared/UserRolesCards/UserRoleCard';
 import { roleStart } from '../../redux/User-Role/role.actions';
 
@@ -30,9 +31,7 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
 
   return (
     <BaseTemplate title="User Roles">
-      {console.log(filteredUsers)}
-      {console.log(currentUserData)}
-      <div className="user-role-div">
+      <DatagridBase>
         <div className="search-div">
           <input
             className="search-input"
@@ -89,7 +88,7 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
           </div>
         </div>
         <div className="pagination-div">Pagination</div>
-      </div>
+      </DatagridBase>
     </BaseTemplate>
   );
 };

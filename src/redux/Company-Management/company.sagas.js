@@ -19,27 +19,25 @@ export function* createNewCompany(data) {
 }
 
 export function* createCompanyStart() {
-  yield takeLatest(COMPANY_ACTION_TYPE.START, createNewCompany);
+  yield takeLatest(COMPANY_ACTION_TYPE.ADD_COMPANY_START, createNewCompany);
 }
 
 export function* companySaga() {
   yield all([call(createCompanyStart)]);
 }
-
 export function* getCompanies(data) {
   try {
-    const companyData = yield call(GET_COMPANIES, data.payload);
-    yield put(getCompanySuccess(companyData));
-  } catch (error) {
-    console.log(error);
-    yield put(getCompanyError(error.response.data));
+    const companies = yield call(GET_COMPANIES, data.payload);
+    yield put(getCompanySuccess(companies));
+  } catch (err) {
+    yield put(getCompanyError(err.response.data));
   }
 }
 
-export function* getCompanyStart() {
+export function* getCompaniesStart() {
   yield takeLatest(COMPANY_ACTION_TYPE.GET_COMPANIES, getCompanies);
 }
 
-export function* getCompanySaga() {
-  yield all([call(getCompanyStart)]);
+export function* getCompaniesSaga() {
+  yield all([call(getCompaniesStart)]);
 }

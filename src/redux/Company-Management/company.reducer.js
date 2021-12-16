@@ -24,13 +24,13 @@ const compantManagementReducer = (state = COMPANY_INITIAL_STATE, action) => {
         openForm: action.payload,
       };
 
-    case COMPANY_MANAGEMENT.START:
+    case COMPANY_MANAGEMENT.ADD_COMPANY_START:
       return {
         ...state,
         isLoading: true,
       };
 
-    case COMPANY_MANAGEMENT.SUCCESS:
+    case COMPANY_MANAGEMENT.ADD_COMPANY_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -39,7 +39,7 @@ const compantManagementReducer = (state = COMPANY_INITIAL_STATE, action) => {
         openForm: false,
       };
 
-    case COMPANY_MANAGEMENT.ERROR:
+    case COMPANY_MANAGEMENT.ADD_COMPANY_ERROR:
       return {
         ...state,
         success: false,
@@ -53,17 +53,14 @@ const compantManagementReducer = (state = COMPANY_INITIAL_STATE, action) => {
         isLoading: false,
         allCompanies: action.payload,
         success: true,
-        response: '',
       };
 
     case COMPANY_MANAGEMENT.GET_COMPANIES_ERROR:
       return {
         ...state,
         isLoading: false,
-        allCompanies: '',
         success: false,
         errorDetails: action.payload,
-        response: '',
       };
 
     case COMPANY_MANAGEMENT.GET_COMPANIES:
