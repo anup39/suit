@@ -2,7 +2,9 @@
 import './CompanyManagementCard.scss';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
-import React from 'react';
+import OptionsBase from '../OptionsBase/OptionsBase';
+
+import React, { useState } from 'react';
 
 const CompanyManagementCard = ({
   name,
@@ -13,6 +15,8 @@ const CompanyManagementCard = ({
   userLastUpdate,
   companyId,
 }) => {
+  const [openOptions, setOpenOptions] = useState(false);
+
   return (
     <div className="table">
       <span className="check-input">
@@ -44,7 +48,18 @@ const CompanyManagementCard = ({
       </span>
 
       <span className="actions">
-        <MoreHorizIcon className="menu-icon" />
+        <MoreHorizIcon
+          className="menu-icon"
+          onClick={() => setOpenOptions(!openOptions)}
+        />
+        {openOptions && (
+          <OptionsBase>
+            <p>Add User</p>
+            <p>Edit User</p>
+            <p>Edit</p>
+            <p>Delete</p>
+          </OptionsBase>
+        )}
       </span>
     </div>
   );

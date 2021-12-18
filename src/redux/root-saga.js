@@ -4,13 +4,12 @@ import {
   companySaga,
   getCompaniesSaga,
 } from './Company-Management/company.sagas';
-import { signinSagas, userSagas } from './user-redux/user.sagas';
+import { userSagas } from './user-redux/user.sagas';
 import { getUserSaga, roleSaga } from './User-Role/role.sagas';
 
 export default function* rootSaga() {
   yield all([
     call(userSagas),
-    call(signinSagas),
     call(roleSaga),
     call(companySaga),
     call(getCompaniesSaga),

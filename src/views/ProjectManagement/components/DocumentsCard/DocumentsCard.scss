@@ -1,0 +1,14 @@
+.document-card-base-div {
+  border-bottom: 1px solid black;
+  padding: 15px;
+  font-size: 18px;
+}
+
+div.document-card-base-div {
+  display: table;
+  width: 100%;
+}
+div.document-card-base-div span {
+  display: table-cell;
+  table-layout: fixed;
+}

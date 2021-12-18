@@ -1,0 +1,86 @@
+$text-color: rgba(0, 0, 0, 0.774);
+$border-color: rgba(0, 0, 0, 0.527);
+$label-text-color: rgba(0, 0, 0, 0.603);
+.project-title-div {
+  border: 2px solid $border-color;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.project-edit-icon {
+  float: right;
+  font-size: 22px;
+  color: $text-color;
+  cursor: pointer;
+}
+
+.current-project-title {
+  color: $text-color;
+  font-weight: 700;
+}
+
+.project-details-div {
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  padding: 40px 15px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(150px, auto);
+  grid-auto-columns: 400px;
+  grid-auto-flow: row;
+}
+
+.project-name {
+  grid-column: 1;
+  grid-row: 1;
+  word-wrap: break-word;
+}
+
+.project-client {
+  grid-column: 1;
+  grid-row: 2;
+  word-wrap: break-word;
+}
+
+.project-description {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  word-wrap: break-word;
+}
+
+.project-start-date {
+  grid-column: 3/4;
+  grid-row: 1/2;
+  word-wrap: break-word;
+}
+
+.project-completion-date {
+  grid-column: 3/4;
+  grid-row: 3/2;
+  word-wrap: break-word;
+}
+
+.project-last-update {
+  grid-column: 4/4;
+  grid-row: 1/2;
+  word-wrap: break-word;
+}
+
+.project-updated-by {
+  grid-column: 4/4;
+  grid-row: 2/2;
+  word-wrap: break-word;
+}
+
+.project-data {
+  margin-top: 30px;
+  font-weight: 400;
+  color: #000;
+}
+
+.project-data-label {
+  font-weight: 200px;
+  color: $label-text-color;
+  font-size: 15px;
+}
