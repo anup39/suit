@@ -14,7 +14,12 @@ import {
 } from '../../redux/user-redux/user.selectors';
 import schema from './sign-up.schema';
 import classes from './styles/sign-up.module.scss';
-import { ASuit, FormButton, FormInput } from './styles/sign-up.styles';
+import {
+  ASuit,
+  FormButton,
+  FormInput,
+  LinkWrapper,
+} from './styles/sign-up.styles';
 
 const SignupPage = ({ isRedTheme }) => {
   const dispatch = useDispatch();
@@ -155,6 +160,11 @@ const SignupPage = ({ isRedTheme }) => {
             Sign up
           </FormButton>
         </form>
+        <div className={classes.already_user_container}>
+          <span className={classes.already_user}>
+            Already User? <LinkWrapper to="/signin"> Log in</LinkWrapper>
+          </span>
+        </div>
       </div>
     </div>
   );

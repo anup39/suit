@@ -1,0 +1,48 @@
+.add_list_tables{
+    border-collapse: collapse;
+    font-size: 0.9em;
+    width: 100%;
+    text-align: left;
+}
+
+.table_row_head{
+    text-align: left;
+    color: #000000DE;
+    padding: 12px 15px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+}
+.table_row_head:first-child{
+    width: 15px;
+    padding: 0 0 0 15px;
+}
+.add_list_container{
+    border: 1px solid #ddd;
+}
+.table_head_row{
+    padding: 0 20px;
+}
+
+.action_buttons_container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 38px 0;
+}
+.cancel_button{
+    padding: 0 15px;
+}
+
+.userlist_box{
+    border: 1px solid #ddd;
+    margin: 10px 0 25px 0;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.userlist_header{
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+}

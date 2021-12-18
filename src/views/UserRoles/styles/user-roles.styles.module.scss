@@ -9,6 +9,11 @@ $prime-font: 'Roboto';
 .roles_menu{
     background-color:$primeColor;
     height: 100vh;
+    position: fixed;
+    top: sticky;
+}
+.roles_menu_under{
+    
 }
 .menu_header{
     color: $text-color;

@@ -22,5 +22,5 @@ Alert.propTypes = {
   message: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };
-// eslint-disable-next-line  prettier/prettier
+
 export default Alert;

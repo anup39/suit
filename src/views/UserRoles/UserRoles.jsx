@@ -23,6 +23,7 @@ const UserRoles = () => {
           ))}
         </ul>
       </div>
+      <div className={classes.roles_menu_under}>.</div>
       <div className={classes.roles_components}>
         <AdminHeaderComponent />
         {location.pathname === '/user-roles' ? (

@@ -8,7 +8,17 @@ export const SIGNUP = async (userData) => {
 };
 
 export const SIGNIN = async (userData) => {
-  console.log('Signin');
   const signin = await axios.post(API_END_POINTS.signin, userData);
   return signin.data;
+};
+
+export const CREATECOMPANY = async (companyData) => {
+  const createCompany = await axios.post(
+    API_END_POINTS.company.create,
+    companyData,
+    {
+      auth: '',
+    }
+  );
+  return createCompany.data;
 };

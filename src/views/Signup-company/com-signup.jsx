@@ -1,4 +1,4 @@
-/* import React from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import classes from './styles/com-signup.styles.module.scss';
@@ -40,7 +40,6 @@ const CompanySignup = () => {
               <div className={classes.input_container}>
                 <label className={classes.input_label}>First Name</label>
                 <input
-                  type="text"
                   {...register('firstName')}
                   className={classes.inputform_input}
                   error={errors.firstName?.message}
@@ -57,4 +56,4 @@ const CompanySignup = () => {
   );
 };
 
-export default CompanySignup;*/
+export default CompanySignup;

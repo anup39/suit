@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const ASuit = styled.span`
@@ -19,4 +20,9 @@ export const FormButton = styled.button`
 
 export const FormInput = styled.input`
   border-color: ${(props) => (props.error ? 'red' : '1px solid #ddd')};
+`;
+
+export const LinkWrapper = styled(Link)`
+  text-decoration: none;
+  color: blue;
 `;

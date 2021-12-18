@@ -1,12 +1,12 @@
-/* eslint-disable*/
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
+
+import { SIGNIN, SIGNUP } from '../../services/api';
 import USER_ACTION_TYPES from './user.action-types';
-import { SIGNUP, SIGNIN } from '../../services/api';
 import {
-  userSignupFailure,
-  userSignupSuccess,
   userSigninFailure,
   userSigninSuccess,
+  userSignupFailure,
+  userSignupSuccess,
 } from './user.actions';
 
 export function* registerNewUser({ payload }) {

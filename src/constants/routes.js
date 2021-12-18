@@ -3,7 +3,10 @@ const ROUTES = {
   UNAVAILABLE: '*',
   MAIN: '/',
   HOME: '/home',
-  SIGN_UP: '/signup',
+  SIGN_UP: {
+    COMPANY: '/company/signup',
+    USER: '/user/signup',
+  },
   USER_ROLES: '/user-roles',
   COMPANY_MANAGEMENT: 'company-management',
   PROJECT_MANAGEMENT: 'project-management',
