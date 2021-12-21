@@ -1,0 +1,43 @@
+.work-list-base {
+  border: 1px solid black;
+  height: calc(600px + 10vh);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.work-list-header {
+  height: 50px;
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.work-list-search-input {
+  width: calc(300px + 10%);
+  padding: 0px 30px;
+  height: 30px;
+}
+
+.work-list-search-icon {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 2px;
+  color: rgba(0, 0, 0, 0.548);
+}
+
+.work-list-table-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.247);
+  padding: 15px;
+  width: 100%;
+  font-size: 18px;
+  display: table;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.work-list-table-header span {
+  display: table-cell;
+  table-layout: fixed;
+}

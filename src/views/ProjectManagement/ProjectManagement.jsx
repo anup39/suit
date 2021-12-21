@@ -3,7 +3,7 @@ import './ProjectManagement.scss';
 
 // import Stack from '@mui/material/Stack';
 import { Drawer } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DataGridBase from '../../components/shared/DatagridBase/DatagridBase';
@@ -13,12 +13,10 @@ import ProjectCard from './components/ProjectCard/ProjectCard';
 import ProjectPannel from './components/ProjectPannel/ProjectPannel';
 
 const ProjectManagement = () => {
-  const [projectPannel, setProjectPannel] = useState(true);
+  const [showProjectPannel, setShowProjectPannel] = React.useState(false);
   return (
     <BaseTemplate title="Project Management">
-      {projectPannel ? (
-        <ProjectPannel />
-      ) : (
+      {showProjectPannel ? (
         <>
           <Drawer anchor="right" open={false}>
             <CreateProjectForm />
@@ -35,10 +33,11 @@ const ProjectManagement = () => {
             <ProjectCard />
             <ProjectCard />
             <ProjectCard />
-            <ProjectCard />
-            <ProjectCard onClick={setProjectPannel(false)} />
+            <ProjectCard onClick={setShowProjectPannel(false)} />
           </DataGridBase>
         </>
+      ) : (
+        <ProjectPannel />
       )}
     </BaseTemplate>
   );

@@ -42,7 +42,6 @@ const userReducer = (state = USER_INITIAL_STATE, action) => {
       return {
         ...state,
         isLoading: true,
-        userData: action.payload,
       };
 
     case USER_ACTION_TYPES.USER_SIGNIN_SUCCESS:

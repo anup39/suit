@@ -1,0 +1,12 @@
+.field-update-card-base {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid black;
+  padding: 15px 20px;
+  display: table;
+}
+
+.field-update-card-base span {
+  display: table-cell;
+  table-layout: fixed;
+}

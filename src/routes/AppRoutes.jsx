@@ -15,25 +15,18 @@ const Pannel = lazy(() => import('../views/Pannel/Pannel'));
 
 const SigninPage = lazy(() => import('../views/Signin/sign-in.view'));
 
-const CreateCompanyForm = lazy(() =>
-  import('../components/shared/CompanyManagementForms/AddUser/Add-User-Form')
-);
-
 const UserRolesForms = lazy(() =>
   import('../components/shared/UserRolesForms/UserRolesForms')
 );
 
-const Test = lazy(() => import('../views/Test/Test'));
-
 const UserRoles = lazy(() => import('../views/UserRoles/UserRoles'));
-
-const CompanyManagement = lazy(() =>
-  import('../views/CompanyManagement/CompanyManagement')
-);
 
 const ProjectManagement = lazy(() =>
   import('../views/ProjectManagement/ProjectManagement')
 );
+
+const Webex = lazy(() => import('../views/Webex/Webex'));
+
 const appRoutes = [
   {
     path: ROUTES.ERROR,
@@ -55,10 +48,7 @@ const appRoutes = [
         element: <UserRoles />,
         path: ROUTES.USER_ROLES,
       },
-      {
-        element: <CompanyManagement />,
-        path: ROUTES.COMPANY_MANAGEMENT,
-      },
+
       {
         element: <ProjectManagement />,
         path: ROUTES.PROJECT_MANAGEMENT,
@@ -92,7 +82,7 @@ const appRoutes = [
         path: ROUTES.WEB_GIS_SERVICES,
       },
       {
-        element: 'Webex',
+        element: <Webex />,
         path: ROUTES.WEBEX,
       },
       {
@@ -115,16 +105,8 @@ const appRoutes = [
   },
 
   {
-    path: ROUTES.FORM,
-    element: <CreateCompanyForm />,
-  },
-  {
     path: ROUTES.USER,
     element: <UserRolesForms />,
-  },
-  {
-    path: ROUTES.TEST,
-    element: <Test />,
   },
 ];
 

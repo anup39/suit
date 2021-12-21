@@ -1,0 +1,87 @@
+.activity-report-base {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 50%;
+  height: 63%;
+  background-color: rgb(255, 255, 255);
+  overflow: scroll;
+  display: block;
+}
+
+.activity-close-button {
+  padding: 10px 30px;
+  border: 1px solid blue;
+  float: right;
+  border-radius: 5px;
+  color: blue;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+.activity-report-content {
+  border: 1px solid black;
+  margin: 10px;
+  overflow: scroll;
+  display: block;
+}
+
+.activity-report-content-header {
+  border-bottom: 1px solid black;
+  padding: 10px 5px;
+  display: flex;
+  align-items: center;
+  min-height: 20px;
+  width: 100%;
+}
+
+.activity-report-content-header span {
+  font-weight: 500;
+}
+
+.activity-download-button {
+  padding: 12px 25px;
+  background-color: blue;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.activity-download-icon {
+  margin-right: 10px;
+}
+
+.activity-report-content-body {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+.activity-report-inputs-div {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.activity-report-inputs {
+  width: 90%;
+  height: 40px;
+  border: 1px solid rgb(124, 124, 124);
+  margin-top: 5px;
+  border-radius: 4px;
+}
+
+.activity-report-textarea {
+  width: 100%;
+  resize: none;
+  height: 120px;
+  margin-top: 10px;
+}
