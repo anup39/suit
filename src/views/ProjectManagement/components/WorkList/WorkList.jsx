@@ -1,4 +1,5 @@
 import './WorkList.scss';
+import './components/WorkListCards/WorkListCards.scss';
 
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
@@ -17,39 +18,43 @@ const WorkList = () => {
       </div>
       <div>
         <div className="work-list-table-header">
-          <span>
+          <span className="work-list-card-check-input">
             <input type="checkbox" />
           </span>
 
-          <span>
-            <p> Task id </p>
+          <span className="work-list-card-task-id">
+            <p> Task Id</p>
           </span>
 
-          <span>
+          <span className="work-list-card-task-name">
             <p> Task Name </p>
           </span>
 
-          <span>
+          <span className="work-list-card-task-description">
             <p> Task Description </p>
           </span>
 
-          <span>
+          <span className="work-list-card-task-milestone">
             <p> Ismilestone </p>
           </span>
 
-          <span>
+          <span className="work-list-card-task-type">
             <p> Type </p>
           </span>
 
-          <span>
+          <span className="work-list-card-task-status">
             <p> Status </p>
           </span>
 
-          <span>
+          <span className="work-list-card-task-actions">
             <p> Actions </p>
           </span>
         </div>
         <div>
+          <WorkListCards />
+          <WorkListCards />
+          <WorkListCards />
+          <WorkListCards />
           <WorkListCards />
         </div>
       </div>

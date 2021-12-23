@@ -3,7 +3,7 @@
   height: calc(600px + 10vh);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .field-update-search-div {
@@ -36,9 +36,59 @@
   margin-left: auto;
   margin-right: 20px;
   color: #fff;
+  white-space: nowrap;
   cursor: pointer;
 }
 
 .map-icon {
   margin-right: 15px;
+}
+
+.field-update-header {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid black;
+  padding: 15px 20px;
+  display: table;
+}
+
+.field-update-header span {
+  display: table-cell;
+  table-layout: fixed;
+}
+
+.field-updates-header-checkInput {
+  width: 3%;
+}
+
+.field-updates-header-taskItem {
+  width: 10%;
+}
+
+.field-updates-header-fieldLogs {
+  width: 12%;
+}
+
+.field-updates-header-activityReport {
+  width: 13%;
+}
+
+.field-updates-header-changeRequest {
+  width: 15%;
+}
+
+.field-updates-header-milestoneApproval {
+  width: 20%;
+}
+
+.field-updates-header-status {
+  width: 13%;
+}
+
+.field-updates-header-controlActivity {
+  width: 10%;
+}
+
+.field-updates-header-actions {
+  width: 4%;
 }

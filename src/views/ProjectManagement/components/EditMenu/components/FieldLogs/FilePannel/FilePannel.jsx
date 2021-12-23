@@ -1,3 +1,5 @@
+import './FilePannel.scss';
+
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -6,9 +8,13 @@ const FilePannel = (props) => {
   const { children, value, index } = props;
 
   return (
-    <div hidden={value !== index} role="tabpanel">
+    <div
+      className="file-pannel-base-div"
+      hidden={value !== index}
+      role="tabpanel"
+    >
       {value === index && (
-        <Box sx={{ pt: 2, height: '100%' }}>
+        <Box sx={{ pt: 2 }}>
           <p>{children}</p>
         </Box>
       )}

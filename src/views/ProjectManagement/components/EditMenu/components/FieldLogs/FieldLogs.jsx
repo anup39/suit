@@ -4,9 +4,11 @@ import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import { Box } from '@mui/material';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+// import PropTypes from 'prop-types';
 import React from 'react';
 
 import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
+import FileData from './FileData/FileData';
 import FilePannel from './FilePannel/FilePannel';
 
 const FieldLogs = () => {
@@ -34,19 +36,21 @@ const FieldLogs = () => {
             </Tabs>
           </Box>
           <FilePannel index={0} value={value}>
-            File 1
+            <FileData />
           </FilePannel>
           <FilePannel index={1} value={value}>
-            File 2
+            <FileData />
           </FilePannel>
           <FilePannel index={2} value={value}>
-            File 3
+            <FileData />
           </FilePannel>
           <FilePannel index={3} value={value}>
-            File 4
+            <FileData />
           </FilePannel>
         </div>
-        <div className="field-log-close-button"> Cancel</div>
+        <div className="field-log-close-button" onClick={onclick}>
+          Close
+        </div>
       </div>
     </div>
   );

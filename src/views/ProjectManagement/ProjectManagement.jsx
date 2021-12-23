@@ -13,16 +13,28 @@ import ProjectCard from './components/ProjectCard/ProjectCard';
 import ProjectPannel from './components/ProjectPannel/ProjectPannel';
 
 const ProjectManagement = () => {
+  // eslint-disable-next-line
   const [showProjectPannel, setShowProjectPannel] = React.useState(false);
+  const [addNewProject, setAddNewProject] = React.useState(false);
+
+  const handelDrawerClose = () => {
+    setAddNewProject(false);
+  };
   return (
     <BaseTemplate title="Project Management">
       {showProjectPannel ? (
         <>
-          <Drawer anchor="right" open={false}>
+          <Drawer
+            anchor="right"
+            onClose={handelDrawerClose}
+            open={addNewProject}
+          >
             <CreateProjectForm />
           </Drawer>
-          <span className="create_button_color  new_project_button">
-            {' '}
+          <span
+            className="new_project_button"
+            onClick={() => setAddNewProject(true)}
+          >
             + Create Project
           </span>
           <DataGridBase>
@@ -33,7 +45,6 @@ const ProjectManagement = () => {
             <ProjectCard />
             <ProjectCard />
             <ProjectCard />
-            <ProjectCard onClick={setShowProjectPannel(false)} />
           </DataGridBase>
         </>
       ) : (

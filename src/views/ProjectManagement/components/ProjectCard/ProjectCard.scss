@@ -1,6 +1,8 @@
+@import '../../../../theme/ThemeColors';
+
 .project-card-base-div {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.247);
-  padding: 15px;
+  border-bottom: $border-size solid $border-colors;
+  padding: $table-data-padding;
   width: 100%;
   font-size: 18px;
 }
@@ -11,4 +13,11 @@ div.table {
 div.table span {
   display: table-cell;
   table-layout: fixed;
+  color: $table-data-color-1;
+}
+
+.project-menu-icon {
+  color: $menu-icon-color;
+  cursor: pointer;
+  font-size: $menu-icon-size;
 }

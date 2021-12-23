@@ -33,42 +33,46 @@ const EditMenu = () => {
 
   return (
     <>
-      <Modal keepMounted onClose={handleClose} open={open}>
+      <Modal onClose={handleClose} open={open}>
         {renderComponent(option)}
       </Modal>
       <div className="edit-menu-base">
         <span>
           <p>Task</p>
-          <div className="edit-div">+ 2 Files</div>
+          <div className="edit-div">Task 1</div>
         </span>
         <span>
           <p>Field Logs</p>
-          <div className="edit-div" id={0} onClick={handleOpen}>
-            + 2 Files
+          <div className="edit-div " id={0} onClick={handleOpen}>
+            File 1, File 2, + 2 More File(s)
           </div>
         </span>
         <span>
           <p>Activity Report</p>
           <div className="edit-div" id={1} onClick={handleOpen}>
-            + 2 Files
+            Activity Report 1
           </div>
         </span>
         <span>
           <p>Change Request</p>
           <div className="edit-div" id={2} onClick={handleOpen}>
-            + 2 Files
+            Task 1 Change
           </div>
         </span>
 
         <span index={4} onClick={handleOpen}>
           <p>Milestone</p>
           <div className="edit-div" id={3} onClick={handleOpen}>
-            + 2 Files
+            Milestone 1
           </div>
         </span>
         <span>
           <p>Status</p>
-          <div className="edit-div">+ 2 Files</div>
+          <select className="change-status-div">
+            <option>Completed</option>
+            <option>Suspended</option>
+            <option>Not Started</option>
+          </select>
         </span>
         <span>
           <p>Control Activity</p>

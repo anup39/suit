@@ -39,7 +39,7 @@ const ProjectCard = () => {
       </span>
 
       <div>
-        <MoreHorizIcon />
+        <MoreHorizIcon className="project-menu-icon" />
       </div>
     </div>
   );

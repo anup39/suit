@@ -1,5 +1,6 @@
+@import '../../../../theme/ThemeColors';
 .edit-menu-base {
-  border-bottom: 1px solid black;
+  border-bottom: $border-size solid $border-colors;
   width: 100%;
   height: 180px;
   z-index: 2;
@@ -22,6 +23,8 @@
   padding: 4px;
   border: 1px solid rgb(163, 163, 163);
   cursor: pointer;
+  white-space: wrap;
+  overflow: hidden;
 }
 
 .decision-div {
@@ -44,4 +47,13 @@
   text-align: center;
   color: #fff;
   cursor: pointer;
+}
+
+.change-status-div {
+  width: 100%;
+  height: 40px;
+  margin-top: 6px;
+  background-color: #fff;
+  border: $border-size solid $border-colors;
+  border-radius: $border-radius-size;
 }

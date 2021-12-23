@@ -1,0 +1,9 @@
+.milestone-approval-card {
+  display: table;
+  width: 100%;
+}
+
+.milestone-approval-card span {
+  display: table-cell;
+  table-layout: fixed;
+}

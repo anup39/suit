@@ -1,6 +1,7 @@
 import './styles/UserRoles.scss';
 
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
@@ -9,13 +10,12 @@ import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import UserRoleCard from '../../components/shared/UserRolesCards/UserRoleCard';
 import { roleStart } from '../../redux/User-Role/role.actions';
 
-// eslint-disable-next-line
 const UserRoles = ({ currentUserData, userRoleData }) => {
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState('');
   const filteredUsers = [];
 
-  if (searchTerm) {
+  if (searchTerm && userRoleData.length > 0) {
     // eslint-disable-next-line
     userRoleData.map((users) => {
       if (users.username === searchTerm) {
@@ -93,10 +93,16 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
   );
 };
 
+UserRoles.propTypes = {
+  userRoleData: PropTypes.isRequired,
+  currentUserData: PropTypes.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   currentUserData: state.user.userData,
   userRoleData: state.role.data,
 });
+
 export default connect(mapStateToProps)(UserRoles);
 
 // TODO: Pagination

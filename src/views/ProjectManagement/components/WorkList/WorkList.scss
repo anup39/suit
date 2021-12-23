@@ -34,10 +34,43 @@
   font-size: 18px;
   display: table;
   width: 100%;
-  word-wrap: break-word;
 }
 
 .work-list-table-header span {
   display: table-cell;
   table-layout: fixed;
+  color: rgb(100, 100, 100);
+  font-weight: 500;
+}
+
+.header-worklist-check-input {
+  width: 3%;
+}
+
+.header-worklist-task-id {
+  width: 7%;
+}
+
+.header-worklist-task-name {
+  width: 10%;
+}
+
+.header-worklist-task-description {
+  width: 20%;
+}
+
+.header-worklist-task-milestone {
+  width: 10%;
+}
+
+.header-worklist-task-type {
+  width: 10%;
+}
+
+.header-worklist-task-status {
+  width: 10%;
+}
+
+.header-worklist-task-actions {
+  width: 10%;
 }

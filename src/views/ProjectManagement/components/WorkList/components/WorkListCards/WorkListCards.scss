@@ -1,0 +1,57 @@
+@import '../../../../../../theme/ThemeColors';
+
+.work-list-table-body {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.247);
+  width: 100%;
+  font-size: 18px;
+  display: table;
+  width: 100%;
+  padding: 10px 0px;
+}
+
+.work-list-table-body span {
+  display: table-cell;
+  table-layout: fixed;
+  // white-space: no-wrap;
+  vertical-align: middle;
+  color: $table-data-color-2;
+}
+
+.work-list-card-check-input {
+  width: 3%;
+}
+
+.work-list-card-task-id {
+  width: 12%;
+}
+
+.work-list-card-task-name {
+  width: 15%;
+}
+
+.work-list-card-task-description {
+  width: 35%;
+}
+
+.work-list-card-task-milestone {
+  width: 10%;
+}
+
+.work-list-card-task-type {
+  width: 7%;
+}
+
+.work-list-card-task-status {
+  width: 13%;
+}
+
+.work-list-card-task-actions {
+  width: 5%;
+}
+
+.work-list-menu-icon {
+  color: $menu-icon-color;
+  font-size: 25px;
+  cursor: pointer;
+  font-size: $menu-icon-size;
+}

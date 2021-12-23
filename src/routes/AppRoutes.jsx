@@ -2,6 +2,10 @@ import React, { lazy } from 'react';
 
 import ROUTES from '../constants/routes';
 
+const MilestoneApproval = lazy(() =>
+  import('../views/MilestoneApproval/MilestoneApproval')
+);
+
 const HomePage = lazy(() => import('../views/Home/home.view'));
 const ErrorBoundryPage = lazy(() =>
   import('../views/Error_boundries/error_boundries.view')
@@ -26,6 +30,10 @@ const ProjectManagement = lazy(() =>
 );
 
 const Webex = lazy(() => import('../views/Webex/Webex'));
+
+const OpenLayer = lazy(() =>
+  import('../components/shared/Openlayer/Openlayer')
+);
 
 const appRoutes = [
   {
@@ -70,7 +78,7 @@ const appRoutes = [
         path: ROUTES.ACTIVITIES_MANAGEMENT,
       },
       {
-        element: 'Milestone Approvl',
+        element: <MilestoneApproval />,
         path: ROUTES.MILESTONE_APPROVAl,
       },
       {
@@ -78,7 +86,7 @@ const appRoutes = [
         path: ROUTES.ECM_SERVICES,
       },
       {
-        element: 'Web GIS services',
+        element: <OpenLayer />,
         path: ROUTES.WEB_GIS_SERVICES,
       },
       {

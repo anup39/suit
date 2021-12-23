@@ -1,0 +1,49 @@
+@import '../../theme/ThemeColors';
+.milestone-search-bar {
+  height: 50px;
+  width: 100%;
+  border-bottom: $border-size solid $border-colors;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.milestone-search-icon {
+  position: absolute;
+  margin-top: 6px;
+  margin-left: 5px;
+  color: $search-icon-color;
+}
+
+.milestone-search-input {
+  height: 35px;
+  width: 100%;
+  padding-left: 30px;
+  border: $border-size solid $border-colors;
+  border-radius: $border-radius-size;
+}
+
+.milestone-search-div {
+  width: 300px;
+  margin-right: 10px;
+}
+
+.milestone-table {
+  display: table;
+  width: 100%;
+}
+
+.milestone-header {
+  display: table-header-group;
+  height: 35px;
+}
+
+.milestone-header span {
+  display: table-cell;
+  table-layout: fixed;
+  border-bottom: $border-size solid $border-colors;
+  vertical-align: middle;
+  color: $table-header-text-color;
+  font-size: $table-header-text-color;
+  font-weight: $table-header-font-weight;
+}
