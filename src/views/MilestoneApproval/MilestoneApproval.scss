@@ -1,9 +1,9 @@
 @import '../../theme/ThemeColors';
+
 .milestone-search-bar {
-  height: 50px;
   width: 100%;
   border-bottom: $border-size solid $border-colors;
-  padding: 0px 20px;
+  padding: 10px 20px;
   display: flex;
   align-items: center;
 }
@@ -28,22 +28,49 @@
   margin-right: 10px;
 }
 
-.milestone-table {
+.milestone-header {
   display: table;
   width: 100%;
-}
-
-.milestone-header {
-  display: table-header-group;
-  height: 35px;
+  height: 40px;
+  border-bottom: $border-size solid $border-colors;
+  padding: 0px 7px;
+  color: rgb(54, 54, 54);
 }
 
 .milestone-header span {
   display: table-cell;
   table-layout: fixed;
-  border-bottom: $border-size solid $border-colors;
   vertical-align: middle;
-  color: $table-header-text-color;
-  font-size: $table-header-text-color;
-  font-weight: $table-header-font-weight;
+}
+
+.milestone-approval-checkInput {
+  width: 3%;
+}
+
+.milestone-approval-company {
+  width: 15%;
+}
+
+.milestone-approval-projectName {
+  width: 10%;
+}
+
+.milestone-approval-date {
+  width: 10%;
+}
+
+.milestone-approval-milestoneNr {
+  width: 10%;
+}
+
+.milestone-approval-description {
+  width: 10%;
+}
+
+.milestone-approval-status {
+  width: 10%;
+}
+
+.milestone-approval-action {
+  width: 10%;
 }

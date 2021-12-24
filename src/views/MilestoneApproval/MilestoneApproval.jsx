@@ -38,48 +38,45 @@ const MilestoneApproval = () => {
         </div>
         <div className="milestone-table">
           <div className="milestone-header">
-            <span>
+            <span className="milestone-approval-checkInput">
               <input type="checkbox" />
             </span>
 
-            <span>
+            <span className="milestone-approval-company">
+              <p> Company </p>
+            </span>
+
+            <span className="milestone-approval-projectName">
+              {' '}
               <p>Project Name</p>
             </span>
 
-            <span>
+            <span className="milestone-approval-date">
               <p>Date</p>
             </span>
 
-            <span>
+            <span className="milestone-approval-milestoneNr">
               <p>Milestone Nr</p>
             </span>
 
-            <span>
+            <span className="milestone-approval-description">
               <p>Description</p>
             </span>
 
-            <span>
+            <span className="milestone-approval-status">
               <p>Status</p>
             </span>
 
-            <span>
-              <p>Action</p>
+            <span className="milestone-approval-action">
+              <p>Action </p>
             </span>
           </div>
-          <div>
-            <MilestoneApprovalCard />
-            <MilestoneApprovalCard />
-            <MilestoneApprovalCard />
-            <MilestoneApprovalCard />
-            <MilestoneApprovalCard />
-            <MilestoneApprovalCard />
-            <MilestoneApprovalCard />
-            <MilestoneApprovalCard />
-            <MilestoneApprovalCard />
-            <MilestoneApprovalCard />
-            <MilestoneApprovalCard />
-            <MilestoneApprovalCard />
-          </div>
+        </div>
+        <div>
+          <MilestoneApprovalCard />
+          <MilestoneApprovalCard />
+          <MilestoneApprovalCard />
+          <MilestoneApprovalCard />
         </div>
       </DatagridBase>
     </BaseTemplate>

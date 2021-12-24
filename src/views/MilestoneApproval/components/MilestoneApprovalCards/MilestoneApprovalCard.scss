@@ -1,9 +1,54 @@
+@import '../../../../theme/ThemeColors';
+
 .milestone-approval-card {
   display: table;
   width: 100%;
+  height: 50px;
+  border-bottom: $border-size solid $border-colors;
+  padding: 0px 7px;
 }
 
 .milestone-approval-card span {
   display: table-cell;
   table-layout: fixed;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.milestone-approval-card-checkInput {
+  width: 3%;
+}
+
+.milestone-approval-card-company {
+  width: 15%;
+}
+
+.milestone-approval-card-projectName {
+  width: 10%;
+}
+
+.milestone-approval-card-date {
+  width: 10%;
+}
+
+.milestone-approval-card-milestoneNr {
+  width: 10%;
+}
+
+.milestone-approval-card-description {
+  width: 10%;
+}
+
+.milestone-approval-card-status {
+  width: 10%;
+}
+
+.milestone-approval-card-action {
+  width: 10%;
+}
+
+.milestone-menu-icon {
+  color: $menu-icon-color;
+  font-size: $menu-icon-size;
+  cursor: pointer;
 }
