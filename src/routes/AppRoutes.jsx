@@ -29,10 +29,18 @@ const ProjectManagement = lazy(() =>
   import('../views/ProjectManagement/ProjectManagement')
 );
 
-const Webex = lazy(() => import('../views/Webex/Webex'));
+const Webex = lazy(() => import('../components/shared/Webex/Webex'));
 
 const OpenLayer = lazy(() =>
   import('../components/shared/Openlayer/Openlayer')
+);
+
+const ManagementOfFieldActivities = lazy(() =>
+  import('../views/ManagementOfFieldActivities/ManagementOfFieldActivities')
+);
+
+const WorkListManagement = lazy(() =>
+  import('../views/WorkListManagement/WorkListManagement')
 );
 
 const appRoutes = [
@@ -66,15 +74,15 @@ const appRoutes = [
         path: ROUTES.IMPORT_PROJECT_DATA,
       },
       {
-        element: 'Company Management',
+        element: <WorkListManagement />,
         path: ROUTES.WORKLIST_MANAGEMENT,
       },
       {
-        element: 'Worklist Management',
+        element: 'Assign Actvity',
         path: ROUTES.ASSIGN_WORK_ACTIVITIES,
       },
       {
-        element: 'Assign Work Activities',
+        element: <ManagementOfFieldActivities />,
         path: ROUTES.ACTIVITIES_MANAGEMENT,
       },
       {

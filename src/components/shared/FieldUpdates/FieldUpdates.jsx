@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
 import { GrMap } from 'react-icons/gr';
 
-import FieldUpdateCard from '../FieldUpdateCards/FieldUpdateCard';
+import FieldUpdateCard from './components/FieldUpdateCards/FieldUpdateCard';
 
 const FieldUpdates = () => {
   return (

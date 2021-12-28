@@ -1,0 +1,76 @@
+@import '../../theme/ThemeColors';
+
+.add-task-button {
+  background-color: $button-colors-primary;
+  padding: 10px 30px;
+  width: minmax(150px, auto);
+  text-align: center;
+  color: #fff;
+  margin-right: 10px;
+  margin-left: auto;
+  margin-top: -30px;
+  cursor: pointer;
+  border-radius: $button-border-radius;
+  white-space: nowrap;
+}
+
+.worklist-search-div {
+  height: 60px;
+  width: 100%;
+  border-bottom: $border-size solid $border-colors;
+  display: flex;
+  align-items: center;
+}
+
+.worklist-export-button {
+  background-color: $button-colors-primary;
+  padding: 10px 25px;
+  text-align: center;
+  color: #fff;
+  margin-right: 10px;
+  margin-left: auto;
+  cursor: pointer;
+  border-radius: $button-border-radius;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.worklist-export-icon {
+  margin-right: 10px;
+}
+
+.worklist-input-container {
+  position: relative;
+  margin-left: 10px;
+  width: 300px;
+  margin-right: 20px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  color: $search-icon-color;
+}
+
+.worklist-input-container > input {
+  padding-left: 40px;
+  height: 30px;
+  width: 100%;
+}
+
+.worklist-table-header {
+  border-bottom: $border-size solid $border-colors;
+  height: $table-header-height;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  display: table;
+  width: 100%;
+}
+
+.worklist-table-header span {
+  display: table-cell;
+  table-layout: fixed;
+}

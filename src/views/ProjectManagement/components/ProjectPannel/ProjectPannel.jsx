@@ -5,9 +5,9 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import React from 'react';
 
+import FieldUpdates from '../../../../components/shared/FieldUpdates/FieldUpdates';
 import Dashboard from '../Dashboard/Dashboard';
 import Documents from '../Documents/Documents';
-import FieldUpdates from '../FieldUpdates/FieldUpdates';
 import Projects from '../Projects/Projects';
 import WorkList from '../WorkList/WorkList';
 import TabPanel from './TabPanel';

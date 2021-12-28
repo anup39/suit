@@ -9,7 +9,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import React from 'react';
 
-import WebExIcon from '../../../../assets/webex-icon.png';
+import WebExIcon from '../../../../../assets/webex-icon.png';
 // import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import EditMenu from '../EditMenu/EditMenu';
 
