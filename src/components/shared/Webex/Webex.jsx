@@ -1,25 +1,17 @@
-import './Webex.scss';
 import '@webex/components/dist/css/webex-components.css';
 
-import {
-  WebexAvatar,
-  WebexDataProvider,
-  WebexJSONAdapter,
-} from '@webex/components';
+import { WebexDataProvider, WebexJSONAdapter } from '@webex/components';
 import React from 'react';
 
 const Webex = () => {
-  const JSONData = {};
+  const JSONData = {
+    credentials:
+      'NzI2MTM5ZDEtN2E3ZC00NWQzLTgwYmUtZjIzN2Y5MjE4ZWVmNzkxYTYyODctZWU0_P0A1_23ca1dfa-ad8d-4383-9b62-45cb7418ddf7',
+  };
 
-  const adapter = WebexJSONAdapter(JSONData);
+  const adapter = new WebexJSONAdapter(JSONData);
 
-  return (
-    <div className="webex-base-div">
-      <WebexDataProvider adapter={adapter}>
-        <WebexAvatar personID="XYZ" />
-      </WebexDataProvider>
-    </div>
-  );
+  return <WebexDataProvider adapter={adapter}>Hello</WebexDataProvider>;
 };
 
 export default Webex;

@@ -62,15 +62,50 @@
 
 .worklist-table-header {
   border-bottom: $border-size solid $border-colors;
-  height: $table-header-height;
-  display: flex;
   align-items: center;
   padding: 10px;
   display: table;
   width: 100%;
+  color: $table-header-text-color;
+  font-weight: $table-header-font-weight;
+  font-size: $table-header-font-size;
 }
 
 .worklist-table-header span {
   display: table-cell;
   table-layout: fixed;
+}
+
+.worklist-management-check-input {
+  width: 3%;
+}
+
+.worklist-management-project-name {
+  width: 19%;
+  white-space: nowrap;
+}
+
+.worklist-management-task-name {
+  width: 19%;
+  white-space: nowrap;
+}
+
+.worklist-management-task-description {
+  width: 21%;
+  white-space: nowrap;
+}
+
+.worklist-management-isMilestone {
+  width: 14%;
+  white-space: nowrap;
+}
+
+.worklist-management-type {
+  width: 14%;
+  white-space: nowrap;
+}
+
+.worklist-management-actions {
+  width: 6%;
+  white-space: nowrap;
 }
