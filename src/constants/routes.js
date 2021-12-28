@@ -16,7 +16,6 @@ const ROUTES = {
   ASSIGN_WORK_ACTIVITIES: 'assign-work-activities',
   ACTIVITIES_MANAGEMENT: 'activities-management',
   MILESTONE_APPROVAl: 'milestone-approval',
-  ECM_SERVICES: 'ecm-services',
   WEB_GIS_SERVICES: 'web-gis-services',
   WEBEX: 'webex',
   FEEDBACK_SERVICES: 'feedback-services',

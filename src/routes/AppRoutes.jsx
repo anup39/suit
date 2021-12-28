@@ -43,6 +43,9 @@ const WorkListManagement = lazy(() =>
   import('../views/WorkListManagement/WorkListManagement')
 );
 
+const AssignWorkActivities = lazy(() =>
+  import('../views/AssignWorkActivities/AssignWorkActivities')
+);
 const appRoutes = [
   {
     path: ROUTES.ERROR,
@@ -78,7 +81,7 @@ const appRoutes = [
         path: ROUTES.WORKLIST_MANAGEMENT,
       },
       {
-        element: 'Assign Actvity',
+        element: <AssignWorkActivities />,
         path: ROUTES.ASSIGN_WORK_ACTIVITIES,
       },
       {
@@ -88,10 +91,6 @@ const appRoutes = [
       {
         element: <MilestoneApproval />,
         path: ROUTES.MILESTONE_APPROVAl,
-      },
-      {
-        element: 'ECM services',
-        path: ROUTES.ECM_SERVICES,
       },
       {
         element: <OpenLayer />,
