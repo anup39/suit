@@ -2,15 +2,19 @@ import './AssignWorkActivities.scss';
 
 import SearchIcon from '@mui/icons-material/Search';
 import Drawer from '@mui/material/Drawer';
+import Modal from '@mui/material/Modal';
 import React from 'react';
+import { BiLinkExternal } from 'react-icons/bi';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import AssignActivityCard from './components/AssignActivityCard/AssignActivityCard';
 import AssignProjectModal from './components/AssignProjectModal/AssignProjectModal';
+import AssignTaskModal from './components/AssignTaskModal/AssignTaskModal';
 
 const AssignWorkActivities = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const handelCloseDrawer = () => {
     setIsDrawerOpen(false);
@@ -19,6 +23,9 @@ const AssignWorkActivities = () => {
   const handelOpenDrawer = () => {
     setIsDrawerOpen(true);
   };
+
+  const handleModalOpen = () => setIsModalOpen(true);
+  const handleModalClose = () => setIsModalOpen(false);
 
   return (
     <>
@@ -29,6 +36,14 @@ const AssignWorkActivities = () => {
       >
         <AssignProjectModal handleClose={handelCloseDrawer} />
       </Drawer>
+      <Modal
+        aria-describedby="modal-modal-description"
+        aria-labelledby="modal-modal-title"
+        onClose={handleModalClose}
+        open={isModalOpen}
+      >
+        <AssignTaskModal handleCancel={handleModalClose} />
+      </Modal>
       <BaseTemplate title="Assign Work Activities">
         <span className="assign-project-button" onClick={handelOpenDrawer}>
           + Assign Project
@@ -43,7 +58,13 @@ const AssignWorkActivities = () => {
               <SearchIcon className="assign-work-activity-search-icon" />
               <input placeholder="Task Name" />
             </div>
-            <span>Assign Task</span>
+            <span
+              className="work-activity-assign-task-button"
+              onClick={handleModalOpen}
+            >
+              <BiLinkExternal className="work-activity-assign-logo" />
+              Assign Task
+            </span>
           </div>
           <div className="assign-work-activity-table-header">
             <span className="assign-work-activities-check-input">

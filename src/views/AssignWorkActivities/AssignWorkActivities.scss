@@ -6,6 +6,23 @@
   border-bottom: $border-size solid $border-colors;
 }
 
+.work-activity-assign-task-button {
+  background-color: $button-colors-primary;
+  color: #fff;
+  padding: 10px 30px;
+  margin-left: auto;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.work-activity-assign-logo {
+  margin-right: 7px;
+}
+
 .assign-work-activity-table-header {
   display: table;
   width: 100%;
