@@ -1,13 +1,23 @@
+/* eslint-disable*/
 import './MilestoneApproval.scss';
 
 import SearchIcon from '@mui/icons-material/Search';
+import PropTypes from 'prop-types';
 import React from 'react';
+import { connect, useDispatch } from 'react-redux';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
+import { getAllMilestones } from '../../redux/milestone-management/milestone-management.action';
 import MilestoneApprovalCard from './components/MilestoneApprovalCards/MilestoneApprovalCard';
 
-const MilestoneApproval = () => {
+const MilestoneApproval = ({ authToken, milestoneData }) => {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    console.log(authToken);
+    dispatch(getAllMilestones(authToken));
+  }, []);
   return (
     <BaseTemplate title="Milestone Approval">
       <DatagridBase>
@@ -73,14 +83,34 @@ const MilestoneApproval = () => {
           </div>
         </div>
         <div>
-          <MilestoneApprovalCard />
-          <MilestoneApprovalCard />
-          <MilestoneApprovalCard />
-          <MilestoneApprovalCard />
+          {milestoneData.length === 0 ? (
+            <p className="no-data-to-display">No Data To Display!</p>
+          ) : (
+            milestoneData.map((val) => (
+              <MilestoneApprovalCard
+                company={val.companyName}
+                projectName={val.projectName}
+                date={val.milestoneDate}
+                milestone={val.milestoneNumber}
+                desc="-"
+                status="-"
+                milestoneId={val.milestoneNumber}
+              />
+            ))
+          )}
         </div>
       </DatagridBase>
     </BaseTemplate>
   );
 };
 
-export default MilestoneApproval;
+MilestoneApproval.propTypes = {
+  authToken: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  authToken: state.user.userData.accessToken,
+  milestoneData: state.milestoneManagment.getAllMilestoneData,
+});
+
+export default connect(mapStateToProps)(MilestoneApproval);

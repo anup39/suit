@@ -21,3 +21,31 @@ div.table span {
   cursor: pointer;
   font-size: $menu-icon-size;
 }
+.project-card-check-input {
+  width: 3%;
+}
+.project-card-project-name {
+  width: 15%;
+}
+.project-card-client {
+  width: 11%;
+}
+
+.project-card-description {
+  width: 15%;
+}
+.project-card-start-date {
+  width: 11%;
+}
+.project-card-end-date {
+  width: 11%;
+}
+.project-card-last-update {
+  width: 11%;
+}
+.project-card-user-last-update {
+  width: 15%;
+}
+.project-card-user-actions {
+  width: 6%;
+}

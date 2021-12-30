@@ -15,7 +15,7 @@
 }
 
 .worklist-search-div {
-  height: 60px;
+  height: 50px;
   width: 100%;
   border-bottom: $border-size solid $border-colors;
   display: flex;
@@ -45,6 +45,8 @@
   margin-left: 10px;
   width: 300px;
   margin-right: 20px;
+  height: 50px;
+  margin-top: 15px;
 }
 
 .search-icon {
@@ -108,4 +110,8 @@
 .worklist-management-actions {
   width: 6%;
   white-space: nowrap;
+}
+
+.export-csv-button {
+  all: unset;
 }

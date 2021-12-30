@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 import './MilestoneApprovalCard.scss';
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -8,7 +10,15 @@ import React from 'react';
 
 import MilestoneApprovalModal from '../MilestoneApprovalModal/MilestoneApprovalModal';
 
-const MilestoneApprovalCard = () => {
+const MilestoneApprovalCard = ({
+  company,
+  projectName,
+  date,
+  milestone,
+  desc,
+  status,
+  milestoneId,
+}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [modalOpen, setModalOpen] = React.useState(false);
 
@@ -29,10 +39,21 @@ const MilestoneApprovalCard = () => {
     handleModalOpen();
   };
 
+  const handelView = () => {
+    handleClose();
+  };
+
+  const handelDelete = () => {
+    handleClose();
+  };
+
   return (
     <>
       <Modal onClose={handleModalClose} open={modalOpen}>
-        <MilestoneApprovalModal handelClose={handleModalClose} />
+        <MilestoneApprovalModal
+          handelClose={handleModalClose}
+          milestoneNr={milestoneId}
+        />
       </Modal>
       <div className="milestone-approval-card">
         <span className="milestone-approval-card-checkInput">
@@ -40,27 +61,27 @@ const MilestoneApprovalCard = () => {
         </span>
 
         <span className="milestone-approval-card-company">
-          <p> Company </p>
+          <p> {company} </p>
         </span>
 
         <span className="milestone-approval-card-projectName">
-          <p> Project Name </p>
+          <p> {projectName} </p>
         </span>
 
         <span className="milestone-approval-card-date">
-          <p> Date</p>
+          <p> {date}</p>
         </span>
 
         <span className="milestone-approval-card-milestoneNr">
-          <p> Milestone Nr</p>
+          <p> {milestone}</p>
         </span>
 
         <span className="milestone-approval-card-description">
-          <p> Description </p>
+          <p> {desc} </p>
         </span>
 
         <span className="milestone-approval-card-status">
-          <p> Status </p>
+          <p> {status} </p>
         </span>
 
         <span className="milestone-approval-card-action">
@@ -78,8 +99,8 @@ const MilestoneApprovalCard = () => {
             open={open}
           >
             <MenuItem onClick={handelApprove}>Approve</MenuItem>
-            <MenuItem onClick={handleClose}>View</MenuItem>
-            <MenuItem onClick={handleClose}>Delete</MenuItem>
+            <MenuItem onClick={handelView}>View</MenuItem>
+            <MenuItem onClick={handelDelete}>Delete</MenuItem>
           </Menu>
         </span>
       </div>

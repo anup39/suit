@@ -1,0 +1,56 @@
+@import '../../../../theme/ThemeColors';
+
+.worklist-card-table-body {
+  border-bottom: $border-size solid $border-colors;
+  align-items: center;
+  padding: 10px;
+  display: table;
+  width: 100%;
+  color: $table-header-text-color;
+  font-size: $table-header-font-size;
+}
+
+.worklist-card-table-body span {
+  display: table-cell;
+  table-layout: fixed;
+}
+
+.worklist-card-management-check-input {
+  width: 3%;
+}
+
+.worklist-card-management-project-name {
+  width: 19%;
+  white-space: nowrap;
+}
+
+.worklist-card-management-task-name {
+  width: 19%;
+  white-space: nowrap;
+}
+
+.worklist-card-management-task-description {
+  width: 21%;
+  white-space: nowrap;
+}
+
+.worklist-card-management-isMilestone {
+  width: 14%;
+  white-space: nowrap;
+}
+
+.worklist-card-management-type {
+  width: 14%;
+  white-space: nowrap;
+}
+
+.worklist-card-management-actions {
+  width: 6%;
+  white-space: nowrap;
+}
+
+.worklist-management-card-more-icon {
+  font-size: $menu-icon-size;
+  color: $menu-icon-color;
+  cursor: pointer;
+}

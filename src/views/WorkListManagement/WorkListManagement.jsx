@@ -4,19 +4,28 @@ import SearchIcon from '@mui/icons-material/Search';
 import Drawer from '@mui/material/Drawer';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import { FaRegShareSquare } from 'react-icons/fa';
+import CsvDownload from 'react-json-to-csv';
+import { connect, useDispatch } from 'react-redux';
 
+// import { usePagination, useRowSelect, useTable } from 'react-table';
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
+import { getWorkList } from '../../redux/worklist-management-redux/worklist.actions';
 import WorklistForm from './components/WorklistForm/WorklistForm';
+import WorkListManagementCard from './components/WorklistManagementCard/WorklistManagementCard';
+// import WorkListColumns from './WorkListColumns';
 
-const WorkListManagement = () => {
+const WorkListManagement = ({ authToken, workListData }) => {
+  const dispatch = useDispatch();
+
   const [menuOpen, setMenuOpen] = React.useState(null);
-
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const open = Boolean(menuOpen);
+
   const handelMenuOpen = (event) => {
     setMenuOpen(event.currentTarget);
   };
@@ -32,6 +41,23 @@ const WorkListManagement = () => {
   const handelOpenDrawer = () => {
     setIsDrawerOpen(true);
   };
+
+  // const workListColumns = React.useMemo(() => WorkListColumns, []);
+  // const workListAllData = React.useMemo(() => workListData, []);
+
+  // const { getTableProps, getTableBodyProps, page, headerGroups } = useTable(
+  //   {
+  //     columns: workListColumns,
+  //     data: workListAllData,
+  //   },
+  //   usePagination,
+  //   useRowSelect
+  // );
+
+  useEffect(() => {
+    dispatch(getWorkList(authToken));
+  }, []);
+
   return (
     <>
       <Drawer
@@ -41,6 +67,7 @@ const WorkListManagement = () => {
       >
         <WorklistForm handelClose={handelCloseDrawer} />
       </Drawer>
+
       <BaseTemplate title="Worklist Management">
         <span className="add-task-button" onClick={handelOpenDrawer}>
           + Add Task
@@ -69,7 +96,15 @@ const WorkListManagement = () => {
               onClose={handleMenuClose}
               open={open}
             >
-              <MenuItem onClick={handleMenuClose}>Export CSV</MenuItem>
+              <MenuItem onClick={handleMenuClose}>
+                <CsvDownload
+                  className="export-csv-button"
+                  data={workListData}
+                  filename="worklist.csv"
+                >
+                  Export CSV
+                </CsvDownload>
+              </MenuItem>
               <MenuItem onClick={handleMenuClose}>Export XML</MenuItem>
             </Menu>
           </div>
@@ -79,7 +114,7 @@ const WorkListManagement = () => {
                 <input type="checkbox" />
               </span>
               <span className="worklist-management-project-name">
-                Project Name
+                Project Id
               </span>
               <span className="worklist-management-task-name">Task Name</span>
               <span className="worklist-management-task-description">
@@ -91,6 +126,19 @@ const WorkListManagement = () => {
               <span className="worklist-management-type">Type</span>
               <span className="worklist-management-actions">Actions</span>
             </div>
+            <div>
+              {workListData.map((values) => (
+                <WorkListManagementCard
+                  key={values.taskId}
+                  isMilestone={values.isMilestone}
+                  projectName={values.projectsId}
+                  taskDescription={values.taskDescription}
+                  taskName={values.taskName}
+                  type={values.type}
+                  workId={values.taskId}
+                />
+              ))}
+            </div>
           </div>
         </DatagridBase>
       </BaseTemplate>
@@ -98,4 +146,18 @@ const WorkListManagement = () => {
   );
 };
 
-export default WorkListManagement;
+WorkListManagement.propTypes = {
+  authToken: PropTypes.string.isRequired,
+  workListData: PropTypes.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  authToken: state.user.userData.accessToken,
+  workListData: state.workListManagement.allWorkList,
+});
+
+export default connect(mapStateToProps)(WorkListManagement);
+
+// TODO: Pagination
+// TODO: FORMS
+// TODO: XML
