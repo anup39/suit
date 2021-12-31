@@ -45,23 +45,17 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
         <div>
           <div className="user-header">
             <div>
-              <div className="user-role-base table">
-                <span className="check-input">
+              <div className="user-role-table-header">
+                <span className="user-roles-check-input">
                   <input type="checkbox" />
                 </span>
-                <span className="username text-color">
-                  <p>Username</p>
-                </span>
-                <span className="text-color">
-                  <p>Date</p>
-                </span>
-                <span className="role text-color">
-                  <p>Roles</p>
-                </span>
-                <span className="status text-color">
-                  <p> Status</p>
-                </span>
-                <span className="action text-color">Actions</span>
+                <span className="user-roles-username ">Username</span>
+                <span className="user-roles-company ">Company</span>
+                <span className="user-roles-role ">Roles</span>
+                <span className="user-roles-date">Registration Date</span>
+
+                <span className="user-roles-status ">Status</span>
+                <span className="user-roles-action">Actions</span>
               </div>
               {/* eslint-disable */}
               {userRoleData && !searchTerm

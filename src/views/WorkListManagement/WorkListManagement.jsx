@@ -10,7 +10,6 @@ import { FaRegShareSquare } from 'react-icons/fa';
 import CsvDownload from 'react-json-to-csv';
 import { connect, useDispatch } from 'react-redux';
 
-// import { usePagination, useRowSelect, useTable } from 'react-table';
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import { getWorkList } from '../../redux/worklist-management-redux/worklist.actions';
@@ -41,18 +40,6 @@ const WorkListManagement = ({ authToken, workListData }) => {
   const handelOpenDrawer = () => {
     setIsDrawerOpen(true);
   };
-
-  // const workListColumns = React.useMemo(() => WorkListColumns, []);
-  // const workListAllData = React.useMemo(() => workListData, []);
-
-  // const { getTableProps, getTableBodyProps, page, headerGroups } = useTable(
-  //   {
-  //     columns: workListColumns,
-  //     data: workListAllData,
-  //   },
-  //   usePagination,
-  //   useRowSelect
-  // );
 
   useEffect(() => {
     dispatch(getWorkList(authToken));
@@ -159,5 +146,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps)(WorkListManagement);
 
 // TODO: Pagination
-// TODO: FORMS
+// TODO: FORMS Fill Data
 // TODO: XML

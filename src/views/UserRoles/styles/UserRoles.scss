@@ -38,37 +38,44 @@
   height: 50px;
 }
 
-.table {
+.user-role-table-header {
   display: table;
   width: 100%;
+  border-bottom: 1px solid $border-colors;
+  padding: 10px;
 }
-.table span {
+.user-role-table-header span {
   display: table-cell;
   table-layout: fixed;
-}
-
-.check-input {
-  width: 3%;
-}
-
-.username {
-  width: 30%;
-}
-
-.date {
-  width: 21%;
-}
-
-.role {
-  width: 20%;
-}
-
-.status {
-  width: 16%;
-}
-
-.text-color {
   color: $table-header-text-color;
   font-weight: $table-header-font-weight;
   font-size: $table-header-font-size;
+}
+
+.user-roles-check-input {
+  width: 3%;
+}
+
+.user-roles-username {
+  width: 20%;
+}
+
+.user-roles-company {
+  width: 20%;
+}
+
+.user-roles-role {
+  width: 15%;
+}
+
+.user-roles-date {
+  width: 15%;
+}
+
+.user-roles-status {
+  width: 10%;
+}
+
+.user-roles-action {
+  width: 5%;
 }

@@ -4,20 +4,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 
+// useSelector
 import {
   addWorkList,
   getTaskByID,
 } from '../../../../redux/worklist-management-redux/worklist.actions';
+// import { getCurrentTaskData } from '../../../../redux/worklist-management-redux/worklist.selector';
 // import schema from './work.list.schema';
 
-const WorklistForm = ({
-  isEdit = false,
-  handelClose,
-  authToken,
-  workId,
-  worklistData,
-}) => {
+const WorklistForm = ({ isEdit = false, handelClose, authToken, workId }) => {
   const dispatch = useDispatch();
+  // const currentTaskData = useSelector(getCurrentTaskData);
 
   const [workListFormData, setWorkListFormData] = React.useState({
     taskId: '',
@@ -37,6 +34,8 @@ const WorklistForm = ({
     longitude: '',
     note: '',
     documents: '',
+    geoFence: '',
+    taskStatus: '',
   });
 
   const handleFormDataChange = (e) => {
@@ -47,6 +46,17 @@ const WorklistForm = ({
     }));
   };
 
+  // const populateFormData = (name, value) => {
+  //   setWorkListFormData((prevState) => ({
+  //     ...prevState,
+  //     [name]: value,
+  //   }));
+  // };
+
+  // if (currentTaskData) {
+  //   const keys = Object.keys(currentTaskData);
+  //   keys.map((val) => populateFormData(val, currentTaskData[val]));
+  // }
   const handleSubmit = () => {
     const data = { authToken, workListFormData };
     dispatch(addWorkList(data));
@@ -64,20 +74,36 @@ const WorklistForm = ({
 
   return (
     <div className="worklist-form-base-div">
-      {console.log(worklistData)}
       {!isEdit ? <h2>Add Worklist</h2> : <h2>Edit Worklist</h2>}
       <div className="worklist-form-container">
         <form onSubmit={handleSubmit}>
           <span>
             <label>Project Name</label>
             {isEdit ? (
-              <input disabled />
-            ) : (
-              <input
+              <select
+                className="select-company-field-disabled"
+                disabled
                 name="projectsId"
                 onChange={(e) => handleFormDataChange(e)}
                 value={workListFormData.projectsId}
-              />
+              >
+                <option>Poject 1</option>
+                <option>Poject 2</option>
+                <option>Poject 3</option>
+                <option>Poject 4</option>
+              </select>
+            ) : (
+              <select
+                className="select-company-field"
+                name="projectsId"
+                onChange={(e) => handleFormDataChange(e)}
+                value={workListFormData.projectsId}
+              >
+                <option>Poject 1</option>
+                <option>Poject 2</option>
+                <option>Poject 3</option>
+                <option>Poject 4</option>
+              </select>
             )}
           </span>
 
@@ -110,11 +136,20 @@ const WorklistForm = ({
 
           <span>
             <label>Ismilestone</label>
-            <input
+            {/* <input
               name="isMilestone"
               onChange={(e) => handleFormDataChange(e)}
               value={workListFormData.isMilestone}
-            />
+            /> */}
+            <select
+              className="select-company-field"
+              name="isMilestone"
+              onChange={(e) => handleFormDataChange(e)}
+              value={workListFormData.isMilestone}
+            >
+              <option>Yes</option>
+              <option>No</option>
+            </select>
           </span>
 
           <span>
@@ -141,6 +176,7 @@ const WorklistForm = ({
               <input
                 name="start"
                 onChange={(e) => handleFormDataChange(e)}
+                type="date"
                 value={workListFormData.start}
               />
             </span>
@@ -150,6 +186,7 @@ const WorklistForm = ({
               <input
                 name="end"
                 onChange={(e) => handleFormDataChange(e)}
+                type="date"
                 value={workListFormData.end}
               />
             </span>
@@ -211,6 +248,16 @@ const WorklistForm = ({
           </div>
 
           <span>
+            <label>Geofence</label>
+
+            <input
+              name="geoFence"
+              onChange={(e) => handleFormDataChange(e)}
+              value={workListFormData.geoFence}
+            />
+          </span>
+
+          <span>
             <label>Note</label>
 
             <textarea
@@ -226,6 +273,15 @@ const WorklistForm = ({
               name="documents"
               onChange={(e) => handleFormDataChange(e)}
               value={workListFormData.documents}
+            />
+          </span>
+
+          <span>
+            <label>Task Status</label>
+            <input
+              name="taskStatus"
+              onChange={(e) => handleFormDataChange(e)}
+              value={workListFormData.taskStatus}
             />
           </span>
         </form>
@@ -247,12 +303,10 @@ WorklistForm.propTypes = {
   handelClose: PropTypes.func.isRequired,
   authToken: PropTypes.isRequired,
   workId: PropTypes.isRequired,
-  worklistData: PropTypes.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   authToken: state.user.userData.accessToken,
-  worklistData: state.workListManagement.taskByIdData,
 });
 
 export default connect(mapStateToProps)(WorklistForm);

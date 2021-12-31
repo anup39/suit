@@ -13,9 +13,11 @@ const AssignTaskModal = ({ handleCancel }) => {
         <div>
           <label>Company</label>
           <select>
-            <option>Mahesh</option>
-            <option>Mahesh</option>
-            <option>Mahesh</option>
+            <option>company 1</option>
+            <option>company 2</option>
+            <option>company 3</option>
+            <option>company 4</option>
+            <option>company 5</option>
           </select>
         </div>
       </div>

@@ -46,6 +46,8 @@ const WorkListManagement = lazy(() =>
 const AssignWorkActivities = lazy(() =>
   import('../views/AssignWorkActivities/AssignWorkActivities')
 );
+
+const Feedback = lazy(() => import('../views/Feedback/Feedback.view'));
 const appRoutes = [
   {
     path: ROUTES.ERROR,
@@ -101,7 +103,7 @@ const appRoutes = [
         path: ROUTES.WEBEX,
       },
       {
-        element: 'Feedback',
+        element: <Feedback />,
         path: ROUTES.FEEDBACK_SERVICES,
       },
     ],

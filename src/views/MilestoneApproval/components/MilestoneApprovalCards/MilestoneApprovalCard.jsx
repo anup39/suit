@@ -1,13 +1,13 @@
-/*eslint-disable*/
-
 import './MilestoneApprovalCard.scss';
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Modal from '@mui/material/Modal';
+import PropTypes from 'prop-types';
 import React from 'react';
 
+import MilestoneDetails from '../../../../components/shared/FieldUpdates/components/EditMenu/components/Milestone/Milestone';
 import MilestoneApprovalModal from '../MilestoneApprovalModal/MilestoneApprovalModal';
 
 const MilestoneApprovalCard = ({
@@ -21,6 +21,7 @@ const MilestoneApprovalCard = ({
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [modalOpen, setModalOpen] = React.useState(false);
+  const [milestoneView, setMilestoneView] = React.useState(false);
 
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -32,7 +33,10 @@ const MilestoneApprovalCard = ({
   };
 
   const handleModalOpen = () => setModalOpen(true);
-  const handleModalClose = () => setModalOpen(false);
+  const handleModalClose = () => {
+    setModalOpen(false);
+    setMilestoneView(false);
+  };
 
   const handelApprove = () => {
     handleClose();
@@ -40,6 +44,8 @@ const MilestoneApprovalCard = ({
   };
 
   const handelView = () => {
+    setMilestoneView(true);
+    handleModalOpen();
     handleClose();
   };
 
@@ -50,10 +56,14 @@ const MilestoneApprovalCard = ({
   return (
     <>
       <Modal onClose={handleModalClose} open={modalOpen}>
-        <MilestoneApprovalModal
-          handelClose={handleModalClose}
-          milestoneNr={milestoneId}
-        />
+        {milestoneView ? (
+          <MilestoneDetails />
+        ) : (
+          <MilestoneApprovalModal
+            handelClose={handleModalClose}
+            milestoneNr={milestoneId}
+          />
+        )}
       </Modal>
       <div className="milestone-approval-card">
         <span className="milestone-approval-card-checkInput">
@@ -106,6 +116,16 @@ const MilestoneApprovalCard = ({
       </div>
     </>
   );
+};
+
+MilestoneApprovalCard.propTypes = {
+  company: PropTypes.string.isRequired,
+  projectName: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  milestone: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  milestoneId: PropTypes.string.isRequired,
 };
 
 export default MilestoneApprovalCard;

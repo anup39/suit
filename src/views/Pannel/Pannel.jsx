@@ -10,7 +10,7 @@ const Pannel = () => {
   return (
     <div className={classes.roles_container}>
       <div className={classes.roles_menu}>
-        <h2 className={classes.menu_header}>ASuit</h2>
+        <h2 className={classes.menu_header}>ASuite</h2>
         <ul className={classes.menu_options_container}>
           {MenuOptions.map((item) => (
             <li key={item.name} className={classes.menu_option}>

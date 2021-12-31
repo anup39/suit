@@ -3,13 +3,25 @@ import './Milestone.scss';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
+import PropTypes from 'prop-types';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getMilestoneById } from '../../../../../../../redux/milestone-management/milestone-management.action';
+import { getUserAuthToken } from '../../../../../../../redux/user-redux/user.selectors';
 import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
 
-const Milestone = () => {
-  // eslint-disable-next-line
+const Milestone = ({ milestoneId }) => {
   const [isAccepted, setIsAccepted] = React.useState(true);
+
+  const dispatch = useDispatch();
+  const authToken = useSelector(getUserAuthToken);
+
+  React.useEffect(() => {
+    const data = { id: milestoneId, authToken };
+    setIsAccepted(false);
+    dispatch(getMilestoneById(data));
+  }, []);
 
   return (
     <div className="milestone-base">
@@ -77,6 +89,10 @@ const Milestone = () => {
       </div>
     </div>
   );
+};
+
+Milestone.propTypes = {
+  milestoneId: PropTypes.string.isRequired,
 };
 
 export default Milestone;

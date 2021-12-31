@@ -10,10 +10,22 @@ const AssignProjectModal = ({ handleClose }) => {
 
       <form className="assign-project-form-base">
         <label>Project Name</label>
-        <input />
+        <select className="assign-project-select-input">
+          <option>Project 1</option>
+          <option>Project 2</option>
+          <option>Project 3</option>
+          <option>Project 4</option>
+          <option>Project 5</option>
+        </select>
 
         <label>Company</label>
-        <input />
+        <select className="assign-project-select-input">
+          <option>company 1</option>
+          <option>company 2</option>
+          <option>company 3</option>
+          <option>company 4</option>
+          <option>company 5</option>
+        </select>
       </form>
       <div className="assign-work-submit-div">
         <span className="assign-work-cancel-button" onClick={handleClose}>

@@ -2,6 +2,7 @@ import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 
 import {
   CREATE_NEW_WORKLIST,
+  DELETE_TASK_BY_ID,
   GET_ALL_WORKLIST,
   GET_TASK_BY_ID,
 } from '../../services/WorklistManagement';
@@ -83,7 +84,7 @@ export function* onTaskById() {
 
 export function* deleteTaskById(data) {
   try {
-    const taskByIdData = yield call(GET_TASK_BY_ID, data.payload);
+    const taskByIdData = yield call(DELETE_TASK_BY_ID, data.payload);
     yield put(deleteTaskByIDSuccess(taskByIdData));
   } catch (error) {
     yield put(deleteTaskByIDError(error.response.data));

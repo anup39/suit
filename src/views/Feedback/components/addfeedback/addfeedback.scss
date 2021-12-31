@@ -1,0 +1,167 @@
+.side-head {
+    font-size: 18px;
+    color: #364A63;
+    font-weight: 500;
+    margin: 0 0 30px 0;
+}
+
+.custom-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    min-height: 400px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.modal-head {
+    border-left: 20px solid #0971FE;
+    height: 62px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    font-size: 18px;
+    color: #364A63;
+    font-weight: 500;
+}
+
+.modal-con {
+    background: #F8F9FC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    text-align: center;
+
+    p {
+        color: #A1A1A1;
+        margin-bottom: 15px;
+        font-size: 14px;
+
+    }
+
+    .para {
+        color: #364A63 !important;
+        font-weight: 500;
+    }
+
+    button {
+        background: #526484;
+        color: white;
+        border-radius: 5px;
+        padding: 10px 15px;
+        border: none;
+    }
+}
+
+
+.upload-circle {
+    background: rgba(1, 96, 224, 0.05);
+    width: 154px;
+    height: 154px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.view-document-modal {
+    width: 50%;
+    height: 75%;
+
+    .modal-head {
+        border-bottom: 1px solid #D4DEEA;
+
+    }
+
+    .modal-container {
+        flex: 1;
+        padding: 15px 30px;
+
+        .modal-box {
+            height: calc(100% - 41px);
+            border: 1px solid #D4DEEA;
+            border-radius: 3px;
+            position: relative;
+
+            .img-btn {
+                position: absolute;
+                top: 13px;
+                right: 13px;
+                background: #0160E0;
+                border-radius: 5px;
+                color: white;
+                font-size: 14px;
+                padding: 8px 15px;
+                display: flex;
+                align-items: center;
+                border: none;
+
+                svg {
+                    margin-right: 10px;
+                    font-size: 17px;
+                }
+            }
+        }
+    }
+
+    .MuiButtonBase-root {
+        margin-left: 18px;
+        margin-right: 0;
+    }
+
+    .MuiBox-root,
+    .tab-pannel-base {
+        height: 100%;
+        padding-top: 10px;
+    }
+
+    .doc-view-wrap {
+        width: 100%;
+        height: calc(100% - 36px);
+        background: #E1E1E1;
+        position: relative;
+
+        .option {
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #0160E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: absolute;
+            top: 16px;
+            right: 15px;
+
+            svg {
+                font-size: 17px;
+
+            }
+        }
+    }
+}
+
+.text-right {
+    text-align: right;
+}
+
+.brd-btn {
+    border: 1px solid #0160E0;
+    border-radius: 5px;
+    padding: 7px 15px;
+    color: #0160E0;
+    background: white;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}

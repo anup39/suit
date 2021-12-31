@@ -5,18 +5,18 @@ const MenuOptions = [
     name: 'User Roles',
     path: ROUTES.USER_ROLES,
   },
-  {
-    name: 'Company Management',
-    path: ROUTES.COMPANY_MANAGEMENT,
-  },
+  // {
+  //   name: 'Company Management',
+  //   path: ROUTES.COMPANY_MANAGEMENT,
+  // },
   {
     name: 'Project Management',
     path: ROUTES.PROJECT_MANAGEMENT,
   },
-  {
-    name: 'Import Project Data',
-    path: ROUTES.IMPORT_PROJECT_DATA,
-  },
+  // {
+  //   name: 'Import Project Data',
+  //   path: ROUTES.IMPORT_PROJECT_DATA,
+  // },
   {
     name: 'Worklist Management',
     path: ROUTES.WORKLIST_MANAGEMENT,
