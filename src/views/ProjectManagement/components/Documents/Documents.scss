@@ -1,0 +1,12 @@
+.documents-base-div {
+  border: 1px solid black;
+  height: calc(600px + 10vh);
+  display: flex;
+  flex-direction: column;
+}
+
+.pagination-numbers {
+  margin-top: auto;
+  margin-bottom: 10px;
+  padding: 10px;
+}

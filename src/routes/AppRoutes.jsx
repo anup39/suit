@@ -15,6 +15,7 @@ const CompanySignupPage = lazy(() =>
   import('../views/Signup-company/com-signup')
 );
 const UserRoles = lazy(() => import('../views/UserRoles/UserRoles'));
+const Pannel = lazy(() => import('../views/Pannel/Pannel'));
 
 const SigninPage = lazy(() => import('../views/Signin/sign-in.view'));
 
@@ -34,6 +35,11 @@ const ImportProjectPage = lazy(() =>
 );
 const Test = lazy(() => import('../views/Test/Test'));
 
+const ProjectManagement = lazy(() =>
+  import('../views/ProjectManagement/ProjectManagement')
+);
+
+
 const appRoutes = [
   {
     path: ROUTES.ERROR,
@@ -52,51 +58,44 @@ const appRoutes = [
     element: <CompanySignupPage />,
   },
   {
-    path: ROUTES.USER_ROLES,
-    element: <UserRoles />,
+    path: ROUTES.PANNEL,
+    element: <Pannel />,
     children: [
       {
         element: <UserRoles />,
         path: ROUTES.USER_ROLES,
       },
+
       {
-        element: <CompanyManagementView />,
-        path: ROUTES.COMPANY_MANAGEMENT,
-      },
-      {
-        element: <HomePage />,
+        element: <ProjectManagement />,
         path: ROUTES.PROJECT_MANAGEMENT,
       },
       {
-        element: <ImportProjectPage />,
+        element: <HomePage />,
         path: ROUTES.IMPORT_PROJECT_DATA,
       },
       {
-        element: 'Company Management',
+        element: <WorkListManagement />,
         path: ROUTES.WORKLIST_MANAGEMENT,
       },
       {
-        element: 'Worklist Management',
+        element: <AssignWorkActivities />,
         path: ROUTES.ASSIGN_WORK_ACTIVITIES,
       },
       {
-        element: 'Assign Work Activities',
+        element: <ManagementOfFieldActivities />,
         path: ROUTES.ACTIVITIES_MANAGEMENT,
       },
       {
-        element: 'Milestone Approvl',
+        element: <MilestoneApproval />,
         path: ROUTES.MILESTONE_APPROVAl,
       },
       {
-        element: 'ECM services',
-        path: ROUTES.ECM_SERVICES,
-      },
-      {
-        element: 'Web GIS services',
+        element: <MapWrapper />,
         path: ROUTES.WEB_GIS_SERVICES,
       },
       {
-        element: 'Webex',
+        element: <Webex />,
         path: ROUTES.WEBEX,
       },
       {

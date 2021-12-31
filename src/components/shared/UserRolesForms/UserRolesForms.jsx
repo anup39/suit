@@ -1,44 +1,92 @@
 /*eslint-disable */
-import React from 'react';
+import React, { useEffect } from 'react';
 import './user-form-styles.scss';
 
 import { FormHeader } from './styles/form-styles';
 
 import FormModal from '../FormModal/FormModal';
+import {
+  closeEditForm,
+  closeAddForm,
+} from '../../../redux/User-Role/role.actions';
+import { connect, useDispatch } from 'react-redux';
 
-const UserRolesForms = ({ addUser }) => {
+const UserRolesForms = ({ userData, addUserRole }) => {
+  const dispatch = useDispatch();
+
+  const handelCancel = () => {
+    dispatch(closeEditForm());
+  };
+
+  const handelAddCancel = () => {
+    dispatch(closeAddForm());
+  };
+
   return (
     <FormModal>
       <div className="form-div">
-        {addUser ? (
+        {addUserRole ? (
           <FormHeader>Add User Role</FormHeader>
         ) : (
           <FormHeader>Edit User Role</FormHeader>
         )}
         <form className="form">
           <label className="form_label">UserName</label>
-          {addUser ? (
-            <select className="form_inputs"></select>
+          {addUserRole ? (
+            <select className="form_inputs">
+              {userData && <option>{userData?.username}</option>}
+            </select>
           ) : (
-            <select className="form_inputs" disabled={true}></select>
+            <select className="form_inputs" disabled={true}>
+              {userData && <option>{userData?.username}</option>}
+            </select>
           )}
 
           <label className="form_label">Role</label>
-          <select className="form_inputs">
-            <option>Hello</option>
-            <option>Hello</option>
-            <option>Hello</option>
-            <option>Hello</option>
-            <option>Hello</option>
-          </select>
+          {!addUserRole
+            ? userData && (
+                <select
+                  className="form_inputs"
+                  defaultValue={userData?.role.idRole}
+                >
+                  <option>Engineer</option>
+                  <option>Marketer</option>
+                  <option value={6}>Public</option>
+                </select>
+              )
+            : userData && (
+                <select
+                  className="form_inputs"
+                  defaultValue={userData?.role.idRole}
+                >
+                  <option>Engineer</option>
+                  <option>Marketer</option>
+                  <option value={6}>Public</option>
+                </select>
+              )}
         </form>
 
-        <div className="form-submit">
-          <p className="cancel">Cancel</p>
-          <span className="submit-button">Save</span>
-        </div>
+        {!addUserRole ? (
+          <div className="form-submit">
+            <p className="cancel" onClick={handelCancel}>
+              Cancel
+            </p>
+            <span className="submit-button">Save</span>
+          </div>
+        ) : (
+          <div className="form-submit">
+            <p className="cancel" onClick={handelAddCancel}>
+              Cancel
+            </p>
+            <span className="submit-button">Save</span>
+          </div>
+        )}
       </div>
     </FormModal>
   );
 };
-export default UserRolesForms;
+
+const mapStateToProps = (state) => ({
+  userData: state.role.userData,
+});
+export default connect(mapStateToProps)(UserRolesForms);

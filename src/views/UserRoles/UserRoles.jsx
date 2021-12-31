@@ -1,38 +1,112 @@
-// import { Typography } from '@mui/material';
-import React from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import './styles/UserRoles.scss';
 
-import AdminHeaderComponent from '../../components/shared/Headers/AdminHeader/admin-header';
-import UserRolesDataGrid from '../../components/shared/UserRolesComponent/UserRoles';
-import MenuOptions from './menu-ooptions';
-import { LinkWrapper } from './styles/user-roles.styles';
-import classes from './styles/user-roles.styles.module.scss';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
 
-const UserRoles = () => {
-  const location = useLocation();
-  console.log(location);
+import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
+import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
+import UserRoleCard from '../../components/shared/UserRolesCards/UserRoleCard';
+import { roleStart } from '../../redux/User-Role/role.actions';
+
+// eslint-disable-next-line
+const UserRoles = ({ currentUserData, userRoleData }) => {
+  const dispatch = useDispatch();
+  const [searchTerm, setSearchTerm] = useState('');
+  const filteredUsers = [];
+
+  useEffect(() => {
+    // eslint-disable-next-line
+    if (searchTerm) {
+      userRoleData.map((users) => {
+        if (users.username === searchTerm) {
+          filteredUsers.push(users);
+        }
+
+        return filteredUsers;
+      });
+    }
+    dispatch(roleStart(currentUserData.accessToken));
+  }, []);
+
   return (
-    <div className={classes.roles_container}>
-      <div className={classes.roles_menu}>
-        <h2 className={classes.menu_header}>ASuit</h2>
-        <ul className={classes.menu_options_container}>
-          {MenuOptions.map((item) => (
-            <li key={item.name} className={classes.menu_option}>
-              <LinkWrapper to={item.path}>{item.name}</LinkWrapper>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className={classes.roles_menu_under}>.</div>
-      <div className={classes.roles_components}>
-        <AdminHeaderComponent />
-        {location.pathname === '/user-roles' ? (
-          <UserRolesDataGrid />
-        ) : undefined}
-        <Outlet />
-      </div>
-    </div>
+    <BaseTemplate title="User Roles">
+      <DatagridBase>
+        <div className="search-div">
+          <input
+            className="search-input"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="User Search"
+          />
+          <SearchOutlinedIcon className="search-icon" />
+          <p className="delete-botton">Delete</p>
+        </div>
+
+        <div>
+          <div className="user-header">
+            <div>
+              <div className="user-role-base table">
+                <span className="check-input">
+                  <input type="checkbox" />
+                </span>
+                <span className="username text-color">
+                  <p>Username</p>
+                </span>
+                <span className="text-color">
+                  <p>Date</p>
+                </span>
+                <span className="role text-color">
+                  <p>Roles</p>
+                </span>
+                <span className="status text-color">
+                  <p> Status</p>
+                </span>
+                <span className="action text-color">Actions</span>
+              </div>
+              {/* eslint-disable */}
+              {userRoleData && !searchTerm
+                ? userRoleData.map((user) => (
+                    <UserRoleCard
+                      date={`${user.updated_date[2]}/${user.updated_date[1]}/${user.updated_date[0]}`}
+                      role={user.role.name}
+                      status={user.status}
+                      userId={user.idUser}
+                      username={user.username}
+                    />
+                  ))
+                : filteredUsers.map((user) => (
+                    <UserRoleCard
+                      date={`${user.updated_date[2]}/${user.updated_date[1]}/${user.updated_date[0]}`}
+                      role={user.role.name}
+                      status={user.status}
+                      userId={user.idUser}
+                      username={user.username}
+                    />
+                  ))}
+              {/* eslint-enable */}
+            </div>
+          </div>
+        </div>
+        <div className="pagination-div">Pagination</div>
+      </DatagridBase>
+    </BaseTemplate>
   );
 };
 
-export default UserRoles;
+const mapStateToProps = (state) => ({
+  currentUserData: state.user.userData,
+  userRoleData: state.role.data,
+});
+
+UserRoles.propTypes = {
+  currentUserData: PropTypes.arrayOf.isRequired,
+  userRoleData: PropTypes.arrayOf.isRequired,
+};
+
+export default connect(mapStateToProps)(UserRoles);
+
+// TODO: Pagination
+// TODO: Delete
+// TODO: API Calls to backend
+// TODO: Delete user

@@ -1,0 +1,41 @@
+.table {
+  display: table;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.705);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.356);
+  padding: 15px 10px;
+  width: 100%;
+}
+
+.table span {
+  display: table-cell;
+  table-layout: fixed;
+}
+
+.check-input {
+  width: 3%;
+}
+
+.check-input input {
+  height: 15px;
+}
+
+.company-name {
+  width: 17%;
+}
+
+.address {
+  width: 15%;
+}
+
+.contact {
+  width: 15%;
+}
+
+.update {
+  width: 15%;
+}
+
+.menu-icon {
+  margin-left: 10px;
+}

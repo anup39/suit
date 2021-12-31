@@ -1,0 +1,36 @@
+.create-project-form-base-div {
+  width: 450px;
+  display: flex;
+  padding: 40px;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.create-project-form {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.create-project-form input {
+  width: 100%;
+  height: 45px;
+  margin-top: 10px;
+}
+
+.create-project-form textarea {
+  width: 100%;
+  resize: none;
+  margin-top: 10px;
+}
+
+.create-project-form-submit-div {
+  margin-left: auto;
+  margin-right: 0px;
+  margin-top: auto;
+  margin-bottom: 0px;
+}
+
+.create-project-form-submit-div span {
+  margin-left: 50px;
+}

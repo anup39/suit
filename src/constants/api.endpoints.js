@@ -6,6 +6,10 @@ const API_END_POINTS = {
     create: 'http://65.0.101.186:8080/api/createCompany',
     update: 'http://65.0.101.186:8080/api/updateCompany',
   },
+  getUser: 'http://65.0.101.186:8080/api/ListUser',
+  createCompany: 'http://65.0.101.186:8080/api/createCompany',
+  getCompany: 'http://65.0.101.186:8080/api/ListCompanies',
+  getUserById: 'http://65.0.101.186:8080/api/Userdetails/',
 };
 
 export default API_END_POINTS;
