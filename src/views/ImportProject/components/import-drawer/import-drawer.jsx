@@ -52,7 +52,7 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
               </Button>
             </span>
             <Button type="submit" variant="contained">
-              Submit
+              Upload
             </Button>
           </div>
         </div>
