@@ -39,7 +39,6 @@ const ProjectManagement = lazy(() =>
   import('../views/ProjectManagement/ProjectManagement')
 );
 
-
 const appRoutes = [
   {
     path: ROUTES.ERROR,
@@ -65,37 +64,41 @@ const appRoutes = [
         element: <UserRoles />,
         path: ROUTES.USER_ROLES,
       },
+      {
+        element: <CompanyManagementView />,
+        path: ROUTES.COMPANY_MANAGEMENT,
+      },
 
       {
         element: <ProjectManagement />,
         path: ROUTES.PROJECT_MANAGEMENT,
       },
       {
-        element: <HomePage />,
+        element: <ImportProjectPage />,
         path: ROUTES.IMPORT_PROJECT_DATA,
       },
       {
-        element: <WorkListManagement />,
+        element: 'WorkListManagement',
         path: ROUTES.WORKLIST_MANAGEMENT,
       },
       {
-        element: <AssignWorkActivities />,
+        element: '<AssignWorkActivities />',
         path: ROUTES.ASSIGN_WORK_ACTIVITIES,
       },
       {
-        element: <ManagementOfFieldActivities />,
+        element: '<ManagementOfFieldActivities />',
         path: ROUTES.ACTIVITIES_MANAGEMENT,
       },
       {
-        element: <MilestoneApproval />,
+        element: '<MilestoneApproval />',
         path: ROUTES.MILESTONE_APPROVAl,
       },
       {
-        element: <MapWrapper />,
+        element: '<MapWrapper />',
         path: ROUTES.WEB_GIS_SERVICES,
       },
       {
-        element: <Webex />,
+        element: 'Webex',
         path: ROUTES.WEBEX,
       },
       {

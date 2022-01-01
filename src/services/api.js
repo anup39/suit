@@ -19,10 +19,9 @@ export const CREATECOMPANY = async (companyData) => {
     {
       auth: '',
     }
-    
   );
   return createCompany.data;
-}
+};
 
 export const GETUSERS = async (authToken) => {
   const users = await axios(API_END_POINTS.getUser, {
