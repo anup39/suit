@@ -1,5 +1,7 @@
+@import '../../../theme/ThemeColors';
+
 .search-div {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.342);
+  border-bottom: $border-size solid $border-colors;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -8,7 +10,7 @@
 .delete-botton {
   margin-left: auto;
   margin-right: 10px;
-  color: blue;
+  color: $button-colors-primary;
   font-size: 20px;
   cursor: pointer;
 }
@@ -17,10 +19,10 @@
   height: 40px;
   width: 40%;
   padding-left: 30px;
-  border: 2px solid rgba(0, 0, 0, 0.322);
+  border: $border-size solid $border-colors;
   color: rgba(0, 0, 0, 0.479);
   font-size: 16px;
-  border-radius: 3px;
+  border-radius: $border-radius-size;
 }
 
 .search-icon {
@@ -33,41 +35,47 @@
 .pagination-div {
   margin-top: auto;
   margin-bottom: 1px;
-  border: 1px solid black;
   height: 50px;
 }
 
-.table {
+.user-role-table-header {
   display: table;
   width: 100%;
+  border-bottom: 1px solid $border-colors;
+  padding: 10px;
 }
-.table span {
+.user-role-table-header span {
   display: table-cell;
   table-layout: fixed;
+  color: $table-header-text-color;
+  font-weight: $table-header-font-weight;
+  font-size: $table-header-font-size;
 }
 
-.check-input {
+.user-roles-check-input {
   width: 3%;
 }
 
-.username {
-  width: 30%;
-}
-
-.date {
-  width: 21%;
-}
-
-.role {
+.user-roles-username {
   width: 20%;
 }
 
-.status {
-  width: 16%;
+.user-roles-company {
+  width: 20%;
 }
 
-.text-color {
-  color: rgba(0, 0, 0, 0.712);
-  font-weight: 500;
-  font-size: 20px;
+.user-roles-role {
+  width: 15%;
+}
+
+.user-roles-date {
+  width: 15%;
+}
+
+.user-roles-status {
+  width: 10%;
+}
+
+.user-roles-action {
+  width: 5%;
 }

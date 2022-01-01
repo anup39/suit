@@ -1,0 +1,53 @@
+@import '../../../../theme/ThemeColors';
+
+.assign-work-activity-table-data {
+  display: table;
+  width: 100%;
+  border-bottom: $border-size solid $border-colors;
+  height: minmax(30px, 50px);
+}
+
+.assign-work-activity-table-data span {
+  display: table-cell;
+  table-layout: fixed;
+  padding: 20px 10px;
+  color: $table-data-color-1;
+}
+
+.assign-work-activities-card-menu-icon {
+  font-size: $menu-icon-size;
+  color: $menu-icon-color;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.assign-work-activities-card-check-input {
+  width: 2%;
+}
+.assign-work-activities-card-project-name {
+  width: 15%;
+}
+.assign-work-activities-card-company {
+  width: 10%;
+}
+.assign-work-activities-card-taskId {
+  width: 8%;
+}
+.assign-work-activities-card-task-name {
+  width: 15%;
+}
+.assign-work-activities-card-task-description {
+  width: 17%;
+}
+.assign-work-activities-card-isMilestone {
+  width: 10%;
+}
+.assign-work-activities-card-type {
+  width: 10%;
+}
+.assign-work-activities-card-status {
+  width: 10%;
+}
+.assign-work-activities-card-actions {
+  width: 3%;
+}

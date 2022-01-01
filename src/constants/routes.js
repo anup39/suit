@@ -14,7 +14,6 @@ const ROUTES = {
   USER_ROLES: '/pannel/user-roles',
   COMPANY_MANAGEMENT: '/pannel/company-management',
   PROJECT_MANAGEMENT: '/pannel/project-management',
-  IMPORT_PROJECT_DATA: ' /pannel/import-project-data',
   WORKLIST_MANAGEMENT: '/pannel/worklist-management',
   ASSIGN_WORK_ACTIVITIES: '/pannel/assign-work-activities',
   ACTIVITIES_MANAGEMENT: '/pannel/activities-management',
@@ -23,6 +22,7 @@ const ROUTES = {
   WEB_GIS_SERVICES: '/pannel/web-gis-services',
   WEBEX: '/pannel/webex',
   FEEDBACK_SERVICES: '/pannel/feedback-services',
+  IMPORT_PROJECT_DATA: 'pannel/import-project-data',
   PANNEL: 'pannel',
 };
 

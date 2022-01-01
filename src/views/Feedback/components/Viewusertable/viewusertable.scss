@@ -1,0 +1,99 @@
+.table-head-grid {
+    display: flex;
+    border-bottom: 1px solid #D4DEEA;
+    flex-wrap: wrap;
+
+    >div {
+        padding: 10px;
+        font-size: 14px;
+        color: #8094AE;
+    }
+
+    .table-check {
+        width: 5%;
+    }
+
+    .table-user {
+        width: 20%;
+    }
+
+    .table-date {
+        width: 10%;
+    }
+
+    .table-address {
+        width: 20%;
+    }
+
+    .table-city {
+        width: 10%;
+    }
+
+    .table-satis {
+        width: 10%;
+    }
+
+    .table-zip {
+        width: 25%;
+    }
+
+    .table-doc {
+        width: 15%;
+    }
+
+    .table-actions {
+        width: 10%;
+    }
+}
+
+.tabletbody {
+    .table-head-grid {
+
+        >div {
+            color: #364A63;
+        }
+
+
+
+        &.table-details {
+            background: #F8F9FC;
+
+            h3 {
+                color: #8094AE;
+                font-size: 14px;
+                margin: 0 0 16px 0;
+                font-weight: 400;
+            }
+
+            p {
+                color: #364A63;
+                font-size: 14px;
+
+            }
+
+            .doc-details {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+
+                >div {
+                    font-size: 10px;
+                    color: #364A63;
+                    background: #C9E2FF;
+                    padding: 6px 10px;
+                    border-radius: 12px;
+                    margin-right: 5px;
+                }
+            }
+
+            .table-address {
+                width: 25%;
+            }
+
+            .table-zip {
+                width: 20%;
+            }
+        }
+    }
+
+}

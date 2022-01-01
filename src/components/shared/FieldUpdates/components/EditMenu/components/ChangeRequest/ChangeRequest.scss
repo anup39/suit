@@ -1,0 +1,125 @@
+.change-request-base {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -5%);
+  min-width: 50%;
+  height: 90%;
+  background-color: rgb(255, 255, 255);
+  overflow: scroll;
+}
+
+.change-request-body-div {
+  margin: 10px;
+  border: 1px solid black;
+  min-height: 100%;
+}
+
+.change-request-body-header {
+  border-bottom: 1px solid black;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.change-request-body-header p {
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+.change-request-body {
+  padding: 10px;
+}
+
+.change-body-request-details {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.change-request-details {
+  height: 50px;
+  padding: 10px;
+  width: 95%;
+  border: 1px solid rgb(0, 0, 0);
+  margin-top: 10px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.change-request-details-files {
+  display: block;
+  width: 50%;
+  border: 1px solid black;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
+.filename-base-div {
+  margin-top: 10px;
+}
+
+.change-request-description-details {
+  height: 150px;
+  display: flex;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 5px;
+  margin-top: 10px;
+  overflow: scroll;
+}
+
+.change-request-buttons-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  font-weight: 500;
+}
+
+.change-request-button-reject {
+  padding: 10px 40px;
+  border: 1px solid red;
+  border-radius: 5px;
+  margin-right: 10px;
+  color: red;
+  cursor: pointer;
+}
+
+.change-request-button-accept {
+  padding: 10px 40px;
+  background-color: rgb(54, 161, 161);
+  border-radius: 5px;
+  margin-right: 10px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.reason-of-rejection-details-text-area {
+  width: 100%;
+  height: 150px;
+  border: 1px solid black;
+  margin-top: 10px;
+  border-radius: 4px;
+  resize: none;
+  padding: 10px;
+}
+
+.close-button {
+  padding: 10px 30px;
+  border: 1px solid blue;
+  margin-top: 10px;
+  margin-right: 10px;
+  float: right;
+  border-radius: 5px;
+  color: blue;
+  font-weight: 500;
+  cursor: pointer;
+}

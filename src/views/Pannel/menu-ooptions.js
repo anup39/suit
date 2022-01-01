@@ -34,10 +34,6 @@ const MenuOptions = [
     path: ROUTES.MILESTONE_APPROVAl,
   },
   {
-    name: 'ECM services',
-    path: ROUTES.ECM_SERVICES,
-  },
-  {
     name: 'Web GIS services',
     path: ROUTES.WEB_GIS_SERVICES,
   },

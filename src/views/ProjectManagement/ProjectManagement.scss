@@ -1,6 +1,13 @@
+@import '../../theme/ThemeColors';
 .new_project_button {
   width: 150px;
   margin-right: 0px;
   margin-left: auto;
   margin-top: -30px;
+  background-color: $button-colors-primary;
+  padding: 10px;
+  color: #fff;
+  border-radius: $button-border-radius;
+  text-align: center;
+  cursor: pointer;
 }

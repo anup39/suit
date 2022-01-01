@@ -8,7 +8,9 @@ export const SIGNUP = async (userData) => {
 };
 
 export const SIGNIN = async (userData) => {
+  console.log('Signin Request');
   const signin = await axios.post(API_END_POINTS.signin, userData);
+  console.log(signin.data);
   return signin.data;
 };
 

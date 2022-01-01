@@ -1,0 +1,104 @@
+@import '../../theme/ThemeColors';
+
+.assign-work-activity-search-div {
+  padding: 10px;
+  display: flex;
+  border-bottom: $border-size solid $border-colors;
+}
+
+.work-activity-assign-task-button {
+  background-color: $button-colors-primary;
+  color: #fff;
+  padding: 10px 30px;
+  margin-left: auto;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.work-activity-assign-logo {
+  margin-right: 7px;
+}
+
+.assign-work-activity-table-header {
+  display: table;
+  width: 100%;
+  border-bottom: $border-size solid $border-colors;
+}
+
+.assign-work-activity-table-header span {
+  display: table-cell;
+  table-layout: fixed;
+  padding: 10px;
+  color: $table-header-text-color;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.assign-work-activity-container {
+  position: relative;
+  margin-left: 30px;
+  width: 300px;
+}
+
+.assign-work-activity-container > .assign-work-activity-search-icon {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 5px;
+  color: $search-icon-color;
+  cursor: pointer;
+}
+
+.assign-work-activity-container > input {
+  padding-left: 30px;
+  height: 30px;
+  width: 100%;
+}
+
+.assign-work-activities-check-input {
+  width: 2%;
+}
+.assign-work-activities-project-name {
+  width: 15%;
+}
+.assign-work-activities-company {
+  width: 10%;
+}
+.assign-work-activities-taskId {
+  width: 8%;
+}
+.assign-work-activities-task-name {
+  width: 15%;
+}
+.assign-work-activities-task-description {
+  width: 17%;
+}
+.assign-work-activities-isMilestone {
+  width: 10%;
+}
+.assign-work-activities-type {
+  width: 10%;
+}
+.assign-work-activities-status {
+  width: 10%;
+}
+.assign-work-activities-actions {
+  width: 3%;
+}
+
+.assign-project-button {
+  width: 170px;
+  padding: 10px;
+  white-space: nowrap;
+  background-color: $button-colors-primary;
+  text-align: center;
+  color: #fff;
+  margin-top: -35px;
+  margin-left: auto;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}

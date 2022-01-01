@@ -25,7 +25,6 @@ export function* onUserSignUpStart() {
 export function* signInUser({ payload }) {
   try {
     const signin = yield call(SIGNIN, payload);
-
     yield put(userSigninSuccess(signin));
   } catch (error) {
     yield put(userSigninFailure(error.response.data));
@@ -35,7 +34,6 @@ export function* signInUser({ payload }) {
 export function* onUserSignInStart() {
   yield takeLatest(USER_ACTION_TYPES.USER_SIGNIN_START, signInUser);
 }
-
 export function* userSagas() {
   yield all([call(onUserSignUpStart), call(onUserSignInStart)]);
 }

@@ -10,14 +10,12 @@ import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import UserRoleCard from '../../components/shared/UserRolesCards/UserRoleCard';
 import { roleStart } from '../../redux/User-Role/role.actions';
 
-// eslint-disable-next-line
 const UserRoles = ({ currentUserData, userRoleData }) => {
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState('');
   const filteredUsers = [];
 
   useEffect(() => {
-    // eslint-disable-next-line
     if (searchTerm) {
       userRoleData.map((users) => {
         if (users.username === searchTerm) {
@@ -46,28 +44,22 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
         <div>
           <div className="user-header">
             <div>
-              <div className="user-role-base table">
-                <span className="check-input">
+              <div className="user-role-table-header">
+                <span className="user-roles-check-input">
                   <input type="checkbox" />
                 </span>
-                <span className="username text-color">
-                  <p>Username</p>
-                </span>
-                <span className="text-color">
-                  <p>Date</p>
-                </span>
-                <span className="role text-color">
-                  <p>Roles</p>
-                </span>
-                <span className="status text-color">
-                  <p> Status</p>
-                </span>
-                <span className="action text-color">Actions</span>
+                <span className="user-roles-username ">Username</span>
+                <span className="user-roles-company ">Company</span>
+                <span className="user-roles-role ">Roles</span>
+                <span className="user-roles-date">Registration Date</span>
+
+                <span className="user-roles-status ">Status</span>
+                <span className="user-roles-action">Actions</span>
               </div>
-              {/* eslint-disable */}
               {userRoleData && !searchTerm
                 ? userRoleData.map((user) => (
                     <UserRoleCard
+                      key={user.idUser}
                       date={`${user.updated_date[2]}/${user.updated_date[1]}/${user.updated_date[0]}`}
                       role={user.role.name}
                       status={user.status}
@@ -77,6 +69,7 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
                   ))
                 : filteredUsers.map((user) => (
                     <UserRoleCard
+                      key={user.idUser}
                       date={`${user.updated_date[2]}/${user.updated_date[1]}/${user.updated_date[0]}`}
                       role={user.role.name}
                       status={user.status}
@@ -84,7 +77,6 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
                       username={user.username}
                     />
                   ))}
-              {/* eslint-enable */}
             </div>
           </div>
         </div>
@@ -94,15 +86,15 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
   );
 };
 
+UserRoles.propTypes = {
+  userRoleData: PropTypes.isRequired,
+  currentUserData: PropTypes.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   currentUserData: state.user.userData,
   userRoleData: state.role.data,
 });
-
-UserRoles.propTypes = {
-  currentUserData: PropTypes.arrayOf.isRequired,
-  userRoleData: PropTypes.arrayOf.isRequired,
-};
 
 export default connect(mapStateToProps)(UserRoles);
 

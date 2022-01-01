@@ -1,8 +1,7 @@
-$text-color: rgba(0, 0, 0, 0.774);
-$border-color: rgba(0, 0, 0, 0.527);
-$label-text-color: rgba(0, 0, 0, 0.603);
+@import '../../../../theme/ThemeColors';
+
 .project-title-div {
-  border: 2px solid $border-color;
+  border: 2px solid $border-colors;
   padding: 15px;
   border-radius: 5px;
 }
@@ -10,18 +9,18 @@ $label-text-color: rgba(0, 0, 0, 0.603);
 .project-edit-icon {
   float: right;
   font-size: 22px;
-  color: $text-color;
+  color: $edit-icon-color;
   cursor: pointer;
 }
 
 .current-project-title {
-  color: $text-color;
+  color: $title-text-color;
   font-weight: 700;
 }
 
 .project-details-div {
-  border: 1px solid $border-color;
-  border-radius: 5px;
+  border: 1px solid $border-colors;
+  border-radius: $border-radius-size;
   padding: 40px 15px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);

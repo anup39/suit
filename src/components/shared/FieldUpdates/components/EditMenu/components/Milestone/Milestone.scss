@@ -1,0 +1,96 @@
+.milestone-base {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 50%;
+  height: 70%;
+  background-color: rgb(255, 255, 255);
+  overflow: scroll;
+}
+
+.milestone-content {
+  border: 1px solid black;
+  margin: 10px;
+  border-radius: 3px;
+}
+
+.content-header {
+  height: 50px;
+  border-bottom: 1px solid black;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.content-title {
+  margin-right: 20px;
+  font-weight: 500;
+}
+
+.confirm-status-span {
+  color: aqua;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rejected-status-span {
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-icon {
+  margin-right: 5px;
+}
+
+.milestone-download-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 15px;
+  background-color: blue;
+  margin-left: auto;
+  margin-right: 0px;
+  border-radius: 5px;
+  color: aliceblue;
+  cursor: pointer;
+}
+
+.milestone-content-body {
+  padding: 10px;
+}
+
+.milestone-details {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.milestone-details-label {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.milestone-details-data {
+  width: 95%;
+  height: 50px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  padding: 0px 5px;
+  border-radius: 3px;
+}
+
+.milestone-details-description {
+  height: 150px;
+  width: 100%;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 4px;
+  overflow: scroll;
+}

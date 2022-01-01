@@ -1,5 +1,6 @@
 import './Documents.scss';
 
+import SearchIcon from '@mui/icons-material/Search';
 import Pagination from '@mui/material/Pagination';
 import React, { useState } from 'react';
 
@@ -16,6 +17,10 @@ const Documents = () => {
 
   return (
     <div className="documents-base-div">
+      <div className="documents-search-div">
+        <input className="document-search-input" />
+        <SearchIcon className="document-search-icon" />
+      </div>
       <DocumentsCard />
       <Pagination
         className="pagination-numbers"

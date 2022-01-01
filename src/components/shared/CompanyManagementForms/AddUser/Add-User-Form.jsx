@@ -1,4 +1,3 @@
-/*eslint-disable */
 import React from 'react';
 import FormModal from '../../FormModal/FormModal';
 import UserCard from '../UserCard/User-Card';

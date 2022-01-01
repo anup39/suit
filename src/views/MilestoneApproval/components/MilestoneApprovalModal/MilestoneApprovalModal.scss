@@ -1,0 +1,92 @@
+.milestone-approval-modal-base {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 50%;
+  background-color: rgb(255, 255, 255);
+  display: block;
+  overflow: scroll;
+}
+
+.milestone-approval-modal-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(177, 177, 177);
+}
+
+.milestone-approval-left {
+  background-color: blue;
+  width: 20px;
+  height: 100%;
+  margin-right: 20px;
+}
+
+.milestone-approval-modal-body {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.milestone-approval-form-div {
+  height: 300px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.milestone-approval-form-div label {
+  word-wrap: break-word;
+  margin: 10px 0px;
+  text-align: left;
+}
+
+.milestone-approval-form-div input {
+  height: 40px;
+  margin-bottom: 10px;
+  background-color: rgb(247, 247, 247);
+  border: 1px solid rgb(161, 161, 161);
+  border-radius: 5px;
+}
+
+.milestone-approval-form-div textarea {
+  resize: none;
+  height: 100px;
+  padding: 5px;
+  border: 1px solid rgb(161, 161, 161);
+  border-radius: 5px;
+}
+
+.milestone-approval-submit-div {
+  float: right;
+  margin-right: 50px;
+  margin-bottom: 20px;
+}
+
+.milestone-approval-submit-div span {
+  margin-right: 30px;
+}
+
+.milestone-approval-button-cancel {
+  color: rgb(134, 134, 134);
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.milestone-approval-button-approve {
+  color: #fff;
+  background-color: orange;
+  padding: 10px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+}

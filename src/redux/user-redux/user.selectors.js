@@ -8,3 +8,7 @@ export const getLoadingStatus = (state) => {
 export const getSigninError = (state) => {
   return state.user.error;
 };
+
+export const getUserAuthToken = (state) => {
+  return state.user.userData.accessToken;
+};

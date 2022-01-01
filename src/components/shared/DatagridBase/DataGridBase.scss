@@ -1,8 +1,11 @@
+@import '../../../theme/ThemeColors';
+
 .data-grid-base {
   margin-top: 30px;
   height: 90%;
   width: 100%;
-  border: 2px solid rgba(0, 0, 0, 0.342);
+  border: $border-size solid $border-colors;
   display: flex;
+  border-radius: $border-radius-size;
   flex-direction: column;
 }
