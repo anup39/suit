@@ -1,0 +1,48 @@
+@import '../../../../theme/ThemeColors';
+
+.assign-task-modal-base-div {
+  height: 330px;
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+}
+
+.assign-form-base-div {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.assign-form-base-div select {
+  height: 50px;
+  width: 400px;
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  margin-top: 20px;
+}
+
+.assign-task-modal-control-div {
+  float: right;
+}
+
+.assign-task-modal-cancel-button {
+  margin-right: 30px;
+  color: $form-cancel-button-color;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.assign-task-modal-submit-button {
+  margin-right: 50px;
+  background-color: $form-submit-button-color;
+  padding: 10px 40px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}

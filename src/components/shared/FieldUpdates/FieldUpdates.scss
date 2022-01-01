@@ -1,0 +1,94 @@
+.field-update-base-div {
+  border: 1px solid black;
+  height: calc(600px + 10vh);
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.field-update-search-div {
+  height: 50px;
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+}
+
+.field-input {
+  height: 30px;
+  width: 250px;
+  margin-left: 20px;
+  padding: 0px 25px;
+}
+
+.field-search-icon {
+  position: absolute;
+  margin-top: 4px;
+  margin-left: 20px;
+  color: rgba(0, 0, 0, 0.61);
+  cursor: pointer;
+}
+
+.map-view-button {
+  padding: 10px 20px;
+  background-color: blue;
+  border-radius: 4px;
+  margin-left: auto;
+  margin-right: 20px;
+  color: #fff;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.map-icon {
+  margin-right: 15px;
+}
+
+.field-update-header {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid black;
+  padding: 15px 20px;
+  display: table;
+}
+
+.field-update-header span {
+  display: table-cell;
+  table-layout: fixed;
+}
+
+.field-updates-header-checkInput {
+  width: 3%;
+}
+
+.field-updates-header-taskItem {
+  width: 10%;
+}
+
+.field-updates-header-fieldLogs {
+  width: 12%;
+}
+
+.field-updates-header-activityReport {
+  width: 13%;
+}
+
+.field-updates-header-changeRequest {
+  width: 15%;
+}
+
+.field-updates-header-milestoneApproval {
+  width: 20%;
+}
+
+.field-updates-header-status {
+  width: 13%;
+}
+
+.field-updates-header-controlActivity {
+  width: 10%;
+}
+
+.field-updates-header-actions {
+  width: 4%;
+}

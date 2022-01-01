@@ -2,10 +2,12 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import companyManagementReducer from './Company-Management/company.reducer';
 import companyReducer from './company-redux/company.reducer';
+import milestoneManagmeentReducer from './milestone-management/milestone-management.reducer';
+import projectManagementReducer from './project-management-redux/project-management.reducer';
 import userReducer from './user-redux/user.reducer';
 import roleReducer from './User-Role/role.reducer';
+import WorkListManagementReducer from './worklist-management-redux/worklist.reducer';
 
 const persistConfig = {
   key: 'root',
@@ -17,7 +19,9 @@ const rootReducer = combineReducers({
   user: userReducer,
   company: companyReducer,
   role: roleReducer,
-  companyManagement: companyManagementReducer,
+  projectManagement: projectManagementReducer,
+  workListManagement: WorkListManagementReducer,
+  milestoneManagment: milestoneManagmeentReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

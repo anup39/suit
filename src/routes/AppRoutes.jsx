@@ -2,6 +2,10 @@ import React, { lazy } from 'react';
 
 import ROUTES from '../constants/routes';
 
+const MilestoneApproval = lazy(() =>
+  import('../views/MilestoneApproval/MilestoneApproval')
+);
+
 const HomePage = lazy(() => import('../views/Home/home.view'));
 const ErrorBoundryPage = lazy(() =>
   import('../views/Error_boundries/error_boundries.view')
@@ -19,10 +23,6 @@ const Pannel = lazy(() => import('../views/Pannel/Pannel'));
 
 const SigninPage = lazy(() => import('../views/Signin/sign-in.view'));
 
-const CreateCompanyForm = lazy(() =>
-  import('../components/shared/CompanyManagementForms/AddUser/Add-User-Form')
-);
-
 const UserRolesForms = lazy(() =>
   import('../components/shared/UserRolesForms/UserRolesForms')
 );
@@ -33,13 +33,30 @@ const CompanyManagementView = lazy(() =>
 const ImportProjectPage = lazy(() =>
   import('../views/ImportProject/import-project.view')
 );
-const Test = lazy(() => import('../views/Test/Test'));
 
 const ProjectManagement = lazy(() =>
   import('../views/ProjectManagement/ProjectManagement')
 );
 
+const Webex = lazy(() => import('../components/shared/Webex/Webex'));
 
+const MapWrapper = lazy(() =>
+  import('../components/shared/Openlayer/Openlayer')
+);
+
+const ManagementOfFieldActivities = lazy(() =>
+  import('../views/ManagementOfFieldActivities/ManagementOfFieldActivities')
+);
+
+const WorkListManagement = lazy(() =>
+  import('../views/WorkListManagement/WorkListManagement')
+);
+
+const AssignWorkActivities = lazy(() =>
+  import('../views/AssignWorkActivities/AssignWorkActivities')
+);
+
+const Feedback = lazy(() => import('../views/Feedback/Feedback.view'));
 const appRoutes = [
   {
     path: ROUTES.ERROR,
@@ -65,13 +82,17 @@ const appRoutes = [
         element: <UserRoles />,
         path: ROUTES.USER_ROLES,
       },
+      {
+        element: <CompanyManagementView />,
+        path: ROUTES.COMPANY_MANAGEMENT,
+      },
 
       {
         element: <ProjectManagement />,
         path: ROUTES.PROJECT_MANAGEMENT,
       },
       {
-        element: <HomePage />,
+        element: <ImportProjectPage />,
         path: ROUTES.IMPORT_PROJECT_DATA,
       },
       {
@@ -99,7 +120,7 @@ const appRoutes = [
         path: ROUTES.WEBEX,
       },
       {
-        element: 'Feedback',
+        element: <Feedback />,
         path: ROUTES.FEEDBACK_SERVICES,
       },
     ],
@@ -118,16 +139,8 @@ const appRoutes = [
   },
 
   {
-    path: ROUTES.FORM,
-    element: <CreateCompanyForm />,
-  },
-  {
     path: ROUTES.USER,
     element: <UserRolesForms />,
-  },
-  {
-    path: ROUTES.TEST,
-    element: <Test />,
   },
 ];
 

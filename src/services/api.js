@@ -8,7 +8,9 @@ export const SIGNUP = async (userData) => {
 };
 
 export const SIGNIN = async (userData) => {
+  console.log('Signin Request');
   const signin = await axios.post(API_END_POINTS.signin, userData);
+  console.log(signin.data);
   return signin.data;
 };
 
@@ -19,10 +21,9 @@ export const CREATECOMPANY = async (companyData) => {
     {
       auth: '',
     }
-    
   );
   return createCompany.data;
-}
+};
 
 export const GETUSERS = async (authToken) => {
   const users = await axios(API_END_POINTS.getUser, {

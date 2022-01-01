@@ -10,3 +10,23 @@
   margin-bottom: 10px;
   padding: 10px;
 }
+
+.documents-search-div {
+  height: 50px;
+  border-bottom: 1px solid black;
+  display: flex;
+  padding: 10px;
+}
+
+.document-search-input {
+  width: calc(300px + 10%);
+  padding: 0px 30px;
+  height: 30px;
+}
+
+.document-search-icon {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 2px;
+  color: rgba(0, 0, 0, 0.548);
+}

@@ -1,0 +1,17 @@
+.edit-modal-base-div {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(177, 177, 177);
+}
+.left-span {
+  background-color: blue;
+  width: 20px;
+  height: 100%;
+  margin-right: 20px;
+}
+
+.edit-modal-header-text {
+  color: rgb(37, 37, 37);
+  font-size: 20px;
+}

@@ -1,5 +1,5 @@
 .user-role-base {
-  border: 1px solid rgba(0, 0, 0, 0.247);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.247);
   padding: 15px;
   width: 100%;
   font-size: 18px;
@@ -14,25 +14,32 @@ div.table span {
   table-layout: fixed;
 }
 
-.check-input {
+.user-roles-card-check-input {
   width: 3%;
 }
 
-.username {
-  width: 30%;
-}
-
-.date {
-  width: 21px;
-  color: rgba(54, 54, 54, 0.61);
-}
-
-.role {
+.user-roles-card-username {
   width: 20%;
 }
 
-.status {
-  width: 16%;
+.user-roles-card-company {
+  width: 20%;
+}
+
+.user-roles-card-role {
+  width: 15%;
+}
+
+.user-roles-card-date {
+  width: 15%;
+}
+
+.user-roles-card-status {
+  width: 10%;
+}
+
+.user-roles-card-action {
+  width: 5%;
 }
 
 .non-selectable {
@@ -44,13 +51,10 @@ div.table span {
   user-select: none;
 }
 
-.action {
-  width: 10%;
-}
-
 .menu-icon {
   color: rgba(0, 0, 0, 0.5);
   margin-left: 20px;
+  cursor: pointer;
 }
 
 .header {
@@ -58,7 +62,7 @@ div.table span {
 }
 
 .user-role-base {
-  border: 1px solid rgba(0, 0, 0, 0.247);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.247);
   padding: 15px;
   width: 100%;
 }
