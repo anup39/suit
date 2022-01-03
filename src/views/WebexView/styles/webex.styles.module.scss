@@ -1,0 +1,47 @@
+.webex_container{
+    width: 956px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.webex_footer{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px 10px;
+    font-family: 'Roboto';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #8094AE;
+}
+
+.webex_header_container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.webex_header{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 33px;
+    color: #364A63;
+    text-align: left;
+    width: 100%;
+    padding: 0;
+}
+
+.webex_body{
+    width: 100%;
+}
