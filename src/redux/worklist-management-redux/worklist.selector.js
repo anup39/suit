@@ -5,3 +5,7 @@ export const getCurrentTaskData = (state) => {
 export const getIsTaskDataByIdLoading = (state) => {
   return state.workListManagement.isTaskByIdLoading;
 };
+
+export const getAllWorkListData = (state) => {
+  return state.workListManagement.allWorkList;
+};

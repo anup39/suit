@@ -1,0 +1,82 @@
+@import '../../../../../../theme/ThemeColors';
+
+.datagrid_contaier {
+  border: $border-size solid $border-colors;
+  width: 100%;
+}
+
+.datagrid_head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 15px;
+}
+
+.datagrid_tables {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.head_row_head {
+  text-align: left;
+  color: $table-header-text-color;
+  padding: 12px 15px;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 500;
+  font-size: $table-header-font-size;
+}
+
+.table_heads_row {
+  border-top: 1px solid $border-colors;
+}
+
+.head_search {
+  display: flex;
+  align-items: center;
+  border: 1px solid $border-colors;
+  border-radius: 3px;
+  width: 300px;
+  padding: 2px 0;
+}
+
+.search_input {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.delete_button {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: #1976d2;
+}
+
+.table_body {
+  border-bottom: 1px solid #ddd;
+}
+
+.table_slider_container {
+  padding: 20px;
+}
+
+.table_slider {
+  display: flex;
+  width: max-content;
+}
+
+.page_buttons {
+  display: flex;
+}
+
+.chapter_button {
+  padding: 0 15px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  :first-child {
+    background: #1976d2;
+  }
+}

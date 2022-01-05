@@ -8,6 +8,14 @@ const initialState = {
   isMilestoneByIdLoading: false,
   MilestoneByIdData: '',
   MilestoneByIdError: '',
+
+  isUpdateMilestoneLoading: false,
+  updateMilesotneError: '',
+  updateMilesotneSuccess: '',
+
+  isDeleteMilestoneLoading: false,
+  deleteMilesotneError: '',
+  deleteMilesotneSuccess: '',
 };
 
 // eslint-disable-next-line
@@ -60,6 +68,54 @@ const milestoneManagmeentReducer = (state = initialState, action) => {
         MilestoneByIdData: '',
         MilestoneByIdError: action.payload,
       };
+
+    case MILESTONE_MANAGEMENT_ACTION_TYPES.UPDATE_MILESTONE:
+      return {
+        ...state,
+        isUpdateMilestoneLoading: true,
+        updateMilesotneError: '',
+        updateMilesotneSuccess: '',
+      };
+
+    case MILESTONE_MANAGEMENT_ACTION_TYPES.UPDATE_MILESTONE_SUCCESS:
+      return {
+        ...state,
+        isUpdateMilestoneLoading: false,
+        updateMilesotneError: '',
+        updateMilesotneSuccess: action.payload,
+      };
+
+    case MILESTONE_MANAGEMENT_ACTION_TYPES.UPDATE_MILESTONE_ERROR:
+      return {
+        ...state,
+        isUpdateMilestoneLoading: false,
+        updateMilesotneError: action.payload,
+        updateMilesotneSuccess: '',
+      };
+
+    case MILESTONE_MANAGEMENT_ACTION_TYPES.DELETE_MILESTONE:
+      return {
+        ...state,
+        isDeleteMilestoneLoading: true,
+        deleteMilesotneError: '',
+        deleteMilesotneSuccess: '',
+      };
+
+    case MILESTONE_MANAGEMENT_ACTION_TYPES.DELETE_MILESTONE_SUCCESS:
+      return {
+        ...state,
+        isDeleteMilestoneLoading: false,
+        deleteMilesotneError: '',
+        deleteMilesotneSuccess: action.payload,
+      };
+    case MILESTONE_MANAGEMENT_ACTION_TYPES.DELETE_MILESTONE_ERROR:
+      return {
+        ...state,
+        isDeleteMilestoneLoading: false,
+        deleteMilesotneError: action.payload,
+        deleteMilesotneSuccess: '',
+      };
+
     default:
       return state;
   }

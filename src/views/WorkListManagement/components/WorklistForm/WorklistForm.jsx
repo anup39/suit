@@ -1,10 +1,13 @@
 import './WorklistForm.scss';
 
+// import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 
-// useSelector
+import { getAllProjects } from '../../../../redux/project-management-redux/project.selector';
+import { getProjectList } from '../../../../redux/project-management-redux/project-management.actions';
+import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import {
   addWorkList,
   getTaskByID,
@@ -12,9 +15,11 @@ import {
 // import { getCurrentTaskData } from '../../../../redux/worklist-management-redux/worklist.selector';
 // import schema from './work.list.schema';
 
-const WorklistForm = ({ isEdit = false, handelClose, authToken, workId }) => {
+const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
   const dispatch = useDispatch();
   // const currentTaskData = useSelector(getCurrentTaskData);
+  const authToken = useSelector(getUserAuthToken);
+  const projectList = useSelector(getAllProjects);
 
   const [workListFormData, setWorkListFormData] = React.useState({
     taskId: '',
@@ -40,35 +45,38 @@ const WorklistForm = ({ isEdit = false, handelClose, authToken, workId }) => {
 
   const handleFormDataChange = (e) => {
     const { name, value } = e.target;
+
+    // if (name === 'start' && name === 'end') {
+    //   value = moment(value).format('DD MMMM YYYY');
+    // }
+
     setWorkListFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  // const populateFormData = (name, value) => {
-  //   setWorkListFormData((prevState) => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // if (currentTaskData) {
-  //   const keys = Object.keys(currentTaskData);
-  //   keys.map((val) => populateFormData(val, currentTaskData[val]));
-  // }
   const handleSubmit = () => {
     const data = { authToken, workListFormData };
     dispatch(addWorkList(data));
   };
 
   if (isEdit) {
+    // setWorkListFormData((prevState) => ({
+    // ...prevState,
+    // currentTaskData,
+    // }));
+
     React.useEffect(() => {
       const data = {
         authToken,
         taskId: workId,
       };
       dispatch(getTaskByID(data));
+    }, []);
+  } else {
+    React.useEffect(() => {
+      dispatch(getProjectList(authToken));
     }, []);
   }
 
@@ -87,10 +95,11 @@ const WorklistForm = ({ isEdit = false, handelClose, authToken, workId }) => {
                 onChange={(e) => handleFormDataChange(e)}
                 value={workListFormData.projectsId}
               >
-                <option>Poject 1</option>
-                <option>Poject 2</option>
-                <option>Poject 3</option>
-                <option>Poject 4</option>
+                {projectList.map((project) => (
+                  <option key={project.id} value={project.id}>
+                    {project.name}
+                  </option>
+                ))}
               </select>
             ) : (
               <select
@@ -99,10 +108,11 @@ const WorklistForm = ({ isEdit = false, handelClose, authToken, workId }) => {
                 onChange={(e) => handleFormDataChange(e)}
                 value={workListFormData.projectsId}
               >
-                <option>Poject 1</option>
-                <option>Poject 2</option>
-                <option>Poject 3</option>
-                <option>Poject 4</option>
+                {projectList.map((project) => (
+                  <option key={project.id} value={project.id}>
+                    {project.name}
+                  </option>
+                ))}
               </select>
             )}
           </span>
@@ -147,8 +157,10 @@ const WorklistForm = ({ isEdit = false, handelClose, authToken, workId }) => {
               onChange={(e) => handleFormDataChange(e)}
               value={workListFormData.isMilestone}
             >
-              <option>Yes</option>
-              <option>No</option>
+              <option value={0}>Yes</option>
+              <option selected value={1}>
+                No
+              </option>
             </select>
           </span>
 
@@ -278,11 +290,24 @@ const WorklistForm = ({ isEdit = false, handelClose, authToken, workId }) => {
 
           <span>
             <label>Task Status</label>
-            <input
+            {/* <input
+            
+            /> */}
+            <select
+              className="select-company-field"
               name="taskStatus"
               onChange={(e) => handleFormDataChange(e)}
               value={workListFormData.taskStatus}
-            />
+            >
+              <option> Not assigned</option>
+              <option> Not started</option>
+              <option> In progress/started</option>
+              <option> Waiting for feedback</option>
+              <option> Suspended</option>
+              <option> Completed</option>
+              <option> Canceled</option>
+              <option> Approved</option>
+            </select>
           </span>
         </form>
       </div>
@@ -301,7 +326,6 @@ const WorklistForm = ({ isEdit = false, handelClose, authToken, workId }) => {
 WorklistForm.propTypes = {
   isEdit: PropTypes.isRequired,
   handelClose: PropTypes.func.isRequired,
-  authToken: PropTypes.isRequired,
   workId: PropTypes.isRequired,
 };
 
@@ -310,3 +334,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(WorklistForm);
+
+// TODO: Edit Form

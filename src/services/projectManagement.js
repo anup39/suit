@@ -4,17 +4,17 @@ import PROJECT_MANAGEMENT_API from '../constants/api-endpoints/projectManagement
 
 export const CREATE_NEW_PROJECT = async (payload) => {
   console.log('Create New Project...');
+  console.log(payload);
 
   const { authToken, newCompanyData } = payload;
 
-  const newProject = await axios({
+  const newProject = await axios(PROJECT_MANAGEMENT_API.CREATE_NEW_PROJECT, {
     method: 'POST',
-    url: PROJECT_MANAGEMENT_API.CREATE_NEW_PROJECT,
     data: newCompanyData,
-    headers: `Bearer ${authToken}`,
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
   });
-
-  console.log(newProject.data);
 
   return newProject.data;
 };

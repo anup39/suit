@@ -13,10 +13,10 @@ const MenuOptions = [
     name: 'Project Management',
     path: ROUTES.PROJECT_MANAGEMENT,
   },
-  {
-    name: 'Import Project Data',
-    path: ROUTES.IMPORT_PROJECT_DATA,
-  },
+  // {
+  //   name: 'Import Project Data',
+  //   path: ROUTES.IMPORT_PROJECT_DATA,
+  // },
   {
     name: 'Worklist Management',
     path: ROUTES.WORKLIST_MANAGEMENT,

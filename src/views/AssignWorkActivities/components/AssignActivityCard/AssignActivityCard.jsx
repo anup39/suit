@@ -3,9 +3,19 @@ import './AssignActivityCard.scss';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import PropTypes from 'prop-types';
 import React from 'react';
 
-const AssignActivityCard = () => {
+const AssignActivityCard = ({
+  projectName,
+  companyName,
+  taskId,
+  taskName,
+  taskDescription,
+  isMilestone,
+  type,
+  status,
+}) => {
   const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
 
   const open = Boolean(menuAnchorEl);
@@ -23,19 +33,19 @@ const AssignActivityCard = () => {
         <input type="checkbox" />
       </span>
       <span className="assign-work-activities-card-project-name">
-        Make an Iphone 34
+        {projectName}
       </span>
-      <span className="assign-work-activities-card-comapny">Apple</span>
-      <span className="assign-work-activities-card-taskId">23354</span>
-      <span className="assign-work-activities-card-task-name">
-        Camera Module
-      </span>
+      <span className="assign-work-activities-card-comapny">{companyName}</span>
+      <span className="assign-work-activities-card-taskId">{taskId}</span>
+      <span className="assign-work-activities-card-task-name">{taskName}</span>
       <span className="assign-work-activities-card-task-description">
-        Camera is bad fix it ASAP and nedd it to fix it ASAP Camera is bad fix
+        {taskDescription}
       </span>
-      <span className="assign-work-activities-card-isMilestone">No</span>
-      <span className="assign-work-activities-card-type">Type </span>
-      <span className="assign-work-activities-card-status">Pending</span>
+      <span className="assign-work-activities-card-isMilestone">
+        {isMilestone !== 0 ? 'Yes' : 'No'}
+      </span>
+      <span className="assign-work-activities-card-type">{type} </span>
+      <span className="assign-work-activities-card-status">{status}</span>
       <span className="assign-work-activities-card-actions">
         <MoreHorizIcon
           className="assign-work-activities-card-menu-icon"
@@ -58,4 +68,16 @@ const AssignActivityCard = () => {
   );
 };
 
+AssignActivityCard.propTypes = {
+  projectName: PropTypes.string.isRequired,
+  companyName: PropTypes.string.isRequired,
+  taskId: PropTypes.number.isRequired,
+  taskName: PropTypes.string.isRequired,
+  taskDescription: PropTypes.string.isRequired,
+  isMilestone: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+};
 export default AssignActivityCard;
+
+// TODO: Confirm Is Milestone.

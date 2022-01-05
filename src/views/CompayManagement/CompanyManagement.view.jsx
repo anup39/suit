@@ -1,33 +1,39 @@
-import AddIcon from '@mui/icons-material/Add';
 import React from 'react';
 
+import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
+import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import CreateCompany from './components/create-company/companyCreate';
 import CompanyManagementDataGrid from './components/managmenet.datagrid';
 import classes from './styles/styles.managment.module.scss';
 
 const CompanyManagementView = () => {
-  const [create, setCreate] = React.useState(false);
-  const openCreate = () => {
-    setCreate(true);
+  const [openCreateCompanyDrawer, setOpenCreateCompanyDrawer] =
+    React.useState(false);
+
+  const handleCreateCompanyDrawer = () => {
+    setOpenCreateCompanyDrawer(true);
   };
+
   return (
-    <div className={classes.company_container}>
-      <div className={classes.company_header}>
-        <CreateCompany isClose={setCreate} isOpen={create} />
-        <h3 className={classes.company_headerName}>Company Management</h3>
-        <div className={classes.header_button_container}>
-          <button
-            ButtonUnstyled
-            className={classes.header_button}
-            onClick={openCreate}
-            type="button"
+    <>
+      <CreateCompany
+        isClose={setOpenCreateCompanyDrawer}
+        isOpen={openCreateCompanyDrawer}
+      />
+      <BaseTemplate title="Company Management">
+        <div>
+          <span
+            className={classes.create_new_company_button}
+            onClick={handleCreateCompanyDrawer}
           >
-            <AddIcon /> create company
-          </button>
+            + Create Company
+          </span>
         </div>
-      </div>
-      <CompanyManagementDataGrid />
-    </div>
+        <DatagridBase>
+          <CompanyManagementDataGrid />
+        </DatagridBase>
+      </BaseTemplate>
+    </>
   );
 };
 

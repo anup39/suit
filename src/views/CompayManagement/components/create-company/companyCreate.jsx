@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 
 import Alert from '../../../../components/shared/Alerts/Alert';
 import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner';
-import { startCreateCompany } from '../../../../redux/company-redux/company.actions';
+import { createCompany } from '../../../../redux/company-redux/company.actions';
 import {
   getCreateError,
   getCreateSuccess,
@@ -20,6 +20,7 @@ import {
 } from '../../../../redux/company-redux/company.selectors';
 import classes from './company.module.scss';
 import schema from './schema';
+
 // eslint-disable-next-line react/display-name
 const CreateCompany = ({ isOpen, isClose }) => {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const CreateCompany = ({ isOpen, isClose }) => {
   };
 
   const onSubmit = (data) => {
-    dispatch(startCreateCompany(data));
+    dispatch(createCompany(data));
   };
 
   return (

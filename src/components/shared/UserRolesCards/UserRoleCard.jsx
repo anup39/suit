@@ -6,7 +6,12 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import {
+  deSelectUser,
+  selectUser,
+} from '../../../redux/User-Role/role.actions';
 import UserRolesForms from '../UserRolesForms/UserRolesForms';
 import Status from './styles/User.Roles.Card';
 
@@ -21,12 +26,20 @@ const UserRoleCard = ({
   const [showMenu, setShowMenu] = useState(false);
   const [drawerOpen, seteDrawerOpen] = useState(false);
   const [editUser, seteEditUser] = useState(false);
-
+  const [checkBox, setCheckBox] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const dispatch = useDispatch();
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handelCheckbox = () => {
+    setCheckBox(!checkBox);
+    console.log(checkBox);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -48,9 +61,16 @@ const UserRoleCard = ({
     seteEditUser(false);
   };
 
+  React.useEffect(() => {
+    if (checkBox) {
+      dispatch(selectUser(userId));
+    } else {
+      deSelectUser(userId);
+    }
+  }, [checkBox]);
+
   return (
     <>
-      {console.log(userId)}
       <Drawer anchor="right" onClose={handleDrawerClose} open={drawerOpen}>
         {editUser ? (
           <UserRolesForms editUser handelCancel={handleDrawerClose} />
@@ -60,7 +80,7 @@ const UserRoleCard = ({
       </Drawer>
       <div className="user-role-base table">
         <span className="user-roles-card-check-input">
-          <input type="checkbox" />
+          <input onChange={handelCheckbox} type="checkbox" value={checkBox} />
         </span>
         <span className="user-roles-card-username">{username}</span>
         <span className="user-roles-card-username">

@@ -9,8 +9,6 @@ const MilestoneApprovalModal = ({ handelClose, authToken, milestoneNr }) => {
 
   const [description, setDescription] = React.useState('');
 
-  React.useEffect(() => {}, []);
-
   return (
     <div className="milestone-approval-modal-base">
       <div className="milestone-approval-modal-header">
@@ -53,3 +51,5 @@ const mapStateToProps = (state) => ({
   authToken: state.user.userData.accessToken,
 });
 export default connect(mapStateToProps)(MilestoneApprovalModal);
+
+// TODO: Handel Update

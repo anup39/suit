@@ -30,13 +30,26 @@ export const UPDATE_MILESTONE = async (payload) => {
 };
 
 export const GET_MILESTONE_BY_ID = async (payload) => {
-  console.log('Get Milestone By Id...');
-  const { authToken, id } = payload;
+  const { id, authToken } = payload;
 
   const milestoneData = await axios(
     `${MILESTONE_MANAGEMENT_API.GET_MILESTONE_BY_ID}/${id}`,
     {
-      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    }
+  );
+  return milestoneData.data;
+};
+
+export const DELETE_MILESTONE = async (payload) => {
+  const { id, authToken } = payload;
+
+  const milestoneData = await axios(
+    `${MILESTONE_MANAGEMENT_API.DELETE_MILESTONE_BY_ID}/${id}`,
+    {
+      method: 'DELETE',
       headers: {
         Authorization: `Bearer ${authToken}`,
       },

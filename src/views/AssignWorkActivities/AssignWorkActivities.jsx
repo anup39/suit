@@ -5,27 +5,41 @@ import Drawer from '@mui/material/Drawer';
 import Modal from '@mui/material/Modal';
 import React from 'react';
 import { BiLinkExternal } from 'react-icons/bi';
+import { useDispatch, useSelector } from 'react-redux';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
-import AssignActivityCard from './components/AssignActivityCard/AssignActivityCard';
+import Pagination from '../../components/shared/Pagination/Pagination';
+import { getAllCompany } from '../../redux/company-redux/company.actions';
+import { getUserAuthToken } from '../../redux/user-redux/user.selectors';
+import { getWorkList } from '../../redux/worklist-management-redux/worklist.actions';
+import { getAllWorkListData } from '../../redux/worklist-management-redux/worklist.selector';
 import AssignProjectModal from './components/AssignProjectModal/AssignProjectModal';
 import AssignTaskModal from './components/AssignTaskModal/AssignTaskModal';
 
 const AssignWorkActivities = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const dispatch = useDispatch();
+
+  const workListData = useSelector(getAllWorkListData);
+  const userAuthToken = useSelector(getUserAuthToken);
 
   const handelCloseDrawer = () => {
     setIsDrawerOpen(false);
   };
 
   const handelOpenDrawer = () => {
-    setIsDrawerOpen(true);
+    dispatch(getAllCompany(userAuthToken));
+    // setIsDrawerOpen(true);
   };
 
   const handleModalOpen = () => setIsModalOpen(true);
   const handleModalClose = () => setIsModalOpen(false);
+
+  React.useState(() => {
+    dispatch(getWorkList(userAuthToken));
+  }, []);
 
   return (
     <>
@@ -87,10 +101,11 @@ const AssignWorkActivities = () => {
             <span className="assign-work-activities-actions">Actions</span>
           </div>
           <div>
-            <AssignActivityCard />
-            <AssignActivityCard />
-            <AssignActivityCard />
-            <AssignActivityCard />
+            <Pagination
+              componentNo={2}
+              itemData={workListData}
+              itemsPerPage={7}
+            />
           </div>
         </DatagridBase>
       </BaseTemplate>
