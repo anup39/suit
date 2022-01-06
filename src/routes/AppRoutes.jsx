@@ -47,6 +47,9 @@ const MapWrapper = lazy(() =>
 const ManagementOfFieldActivities = lazy(() =>
   import('../views/ManagementOfFieldActivities/ManagementOfFieldActivities')
 );
+const FieldMapView = lazy(() =>
+  import('../views/ManagementOfFieldActivities/pages/FieldMapView.view')
+);
 
 const WorkListManagement = lazy(() =>
   import('../views/WorkListManagement/WorkListManagement')
@@ -106,6 +109,10 @@ const appRoutes = [
       {
         element: <ManagementOfFieldActivities />,
         path: ROUTES.ACTIVITIES_MANAGEMENT,
+      },
+      {
+        element: <FieldMapView />,
+        path: ROUTES.FIELD_MAP_VIEW,
       },
       {
         element: <MilestoneApproval />,
