@@ -18,3 +18,8 @@ export const FormButton = styled.button`
 export const FormInput = styled.input`
   border-color: ${(props) => (props.error ? 'red' : '1px solid #ddd')};
 `;
+
+export const ASuit = styled.span`
+  color: ${(props) => (props.red ? 'darkred' : '#E78201')};
+  padding-left: 10px;
+`;

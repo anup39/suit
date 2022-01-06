@@ -31,7 +31,7 @@ const AssignWorkActivities = () => {
 
   const handelOpenDrawer = () => {
     dispatch(getAllCompany(userAuthToken));
-    // setIsDrawerOpen(true);
+    setIsDrawerOpen(true);
   };
 
   const handleModalOpen = () => setIsModalOpen(true);
