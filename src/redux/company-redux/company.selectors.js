@@ -7,3 +7,7 @@ export const getCreateError = (state) => {
 export const getLoadingStatus = (state) => {
   return state.company.isLoading;
 };
+
+export const getCompaniesList = (state) => {
+  return state.company.allCompanyData;
+};

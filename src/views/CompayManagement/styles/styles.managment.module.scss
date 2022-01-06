@@ -1,8 +1,30 @@
-.company_container{
-    width: 90%;
-    margin: auto;
-    padding-bottom: 30px;
+@import '../../../theme/ThemeColors';
+
+.company_container {
+  width: 90%;
+  margin: auto;
+  padding-bottom: 30px;
 }
+
+.company_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header_button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: #1976d2;
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 3px 5px;
+  border-radius: 3px;
+};
+
 
 .company_header{
     display: flex;
@@ -11,15 +33,12 @@
     padding: 5px 0;
 }
 
-.header_button{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    background-color: #1976d2;
-    border: none;
-    outline: none;
-    color: #fff;
-    padding: 3px 5px;
-    border-radius: 3px;
+.create_new_company_button {
+  padding: 10px 25px;
+  background-color: $button-colors-primary;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  float: right;
+  margin-top: -30px;
 }

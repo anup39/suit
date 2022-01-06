@@ -9,8 +9,8 @@ import { connect, useDispatch } from 'react-redux';
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import { getAllMilestones } from '../../redux/milestone-management/milestone-management.action';
-import MilestoneApprovalCard from './components/MilestoneApprovalCards/MilestoneApprovalCard';
-
+// import MilestoneApprovalCard from './components/MilestoneApprovalCards/MilestoneApprovalCard';
+import Pagination from '../../components/shared/Pagination/Pagination';
 const MilestoneApproval = ({ authToken, milestoneData }) => {
   const dispatch = useDispatch();
 
@@ -86,17 +86,11 @@ const MilestoneApproval = ({ authToken, milestoneData }) => {
           {milestoneData.length === 0 ? (
             <p className="no-data-to-display">No Data To Display!</p>
           ) : (
-            milestoneData.map((val) => (
-              <MilestoneApprovalCard
-                company={val.companyName}
-                projectName={val.projectName}
-                date={val.milestoneDate}
-                milestone={val.milestoneNumber}
-                desc="-"
-                status="-"
-                milestoneId={val.milestoneNumber}
-              />
-            ))
+            <Pagination
+              itemData={milestoneData}
+              itemsPerPage={7}
+              componentNo={3}
+            />
           )}
         </div>
       </DatagridBase>

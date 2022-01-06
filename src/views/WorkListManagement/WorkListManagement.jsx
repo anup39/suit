@@ -12,10 +12,11 @@ import { connect, useDispatch } from 'react-redux';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
+// import WorkListColumns from './WorkListColumns';
+import Pagination from '../../components/shared/Pagination/Pagination';
 import { getWorkList } from '../../redux/worklist-management-redux/worklist.actions';
 import WorklistForm from './components/WorklistForm/WorklistForm';
-import WorkListManagementCard from './components/WorklistManagementCard/WorklistManagementCard';
-// import WorkListColumns from './WorkListColumns';
+// import WorkListManagementCard from './components/WorklistManagementCard/WorklistManagementCard';
 
 const WorkListManagement = ({ authToken, workListData }) => {
   const dispatch = useDispatch();
@@ -114,7 +115,7 @@ const WorkListManagement = ({ authToken, workListData }) => {
               <span className="worklist-management-actions">Actions</span>
             </div>
             <div>
-              {workListData.map((values) => (
+              {/* {workListData.map((values) => (
                 <WorkListManagementCard
                   key={values.taskId}
                   isMilestone={values.isMilestone}
@@ -124,7 +125,12 @@ const WorkListManagement = ({ authToken, workListData }) => {
                   type={values.type}
                   workId={values.taskId}
                 />
-              ))}
+              ))} */}
+              <Pagination
+                componentNo={1}
+                itemData={workListData}
+                itemsPerPage={5}
+              />
             </div>
           </div>
         </DatagridBase>

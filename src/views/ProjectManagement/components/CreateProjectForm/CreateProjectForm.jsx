@@ -1,8 +1,13 @@
 import './CreateProjectForm.scss';
 import '../../../../theme/ButtonColors.scss';
 
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { createNewProject } from '../../../../redux/project-management-redux/project-management.actions';
+import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 
 const CreateProjectForm = ({ handelClose }) => {
   const [name, setName] = useState('');
@@ -11,14 +16,24 @@ const CreateProjectForm = ({ handelClose }) => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
+  const dispatch = useDispatch();
+  const authToken = useSelector(getUserAuthToken);
+
   const handelSubmit = () => {
-    console.log({
-      name,
-      client,
-      description,
-      startDate,
-      endDate,
-    });
+    const startDateConverted = moment(startDate).format('DD MMMM YYYY');
+    const endDateConverted = moment(endDate).format('DD MMMM YYYY');
+
+    const data = {
+      authToken,
+      newCompanyData: {
+        name,
+        clientName: client,
+        description,
+        startDate: startDateConverted,
+        completionDate: endDateConverted,
+      },
+    };
+    dispatch(createNewProject(data));
   };
 
   return (

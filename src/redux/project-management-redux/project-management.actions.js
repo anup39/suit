@@ -59,3 +59,18 @@ export const deleteProjectError = (data) => ({
   type: PROJECT_MANAGEMENT_TYPES.DELETE_PROJECT_DATA_ERROR,
   payload: data,
 });
+
+export const worklistByProject = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.GET_WORKLIST_BY_PROJECT,
+  payload: data,
+});
+
+export const worklistByProjectSuccess = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.GET_WORKLIST_BY_PROJECT_SUCCESS,
+  payload: data,
+});
+
+export const worklistByProjectError = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.GET_WORKLIST_BY_PROJECT_ERROR,
+  payload: data,
+});
