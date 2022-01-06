@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
 import logo from '../../assets/logoPicture.png';
-import image from '../../assets/signin-image.png';
+import image from '../../assets/signin-info.png';
 import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import { userSignupStart } from '../../redux/user-redux/user.actions';
 import {
@@ -59,7 +59,7 @@ const SignupPage = ({ isRedTheme }) => {
             </ASuit>
           </h1>
           <div className={classes.left_bottom_logo}>
-            <span className={classes.logo_description}>Powered by</span>
+            <span className={classes.logo_description}>Brought to you by</span>
             <img alt="..loading" className={classes.left_logo} src={logo} />
           </div>
           <div className={classes.left_image_container}>
@@ -163,6 +163,22 @@ const SignupPage = ({ isRedTheme }) => {
               />
               <span className={classes.signup_error}>
                 {errors.conPassword?.message}
+              </span>
+            </div>
+            <div className={classes.form_input_container}>
+              <label className={classes.form_label} htmlFor="Company">
+                Company{' '}
+              </label>
+              <FormInput
+                className={classes.form_input}
+                id="Company"
+                {...register('Company')}
+                error={errors.Company?.message}
+                placeholder="Company"
+                type="text"
+              />
+              <span className={classes.signup_error}>
+                {errors.Company?.message}
               </span>
             </div>
             <FormButton
