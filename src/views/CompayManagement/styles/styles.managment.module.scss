@@ -23,6 +23,14 @@
   color: #fff;
   padding: 3px 5px;
   border-radius: 3px;
+};
+
+
+.company_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
 }
 
 .create_new_company_button {

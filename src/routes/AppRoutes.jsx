@@ -35,7 +35,7 @@ const ProjectManagement = lazy(() =>
   import('../views/ProjectManagement/ProjectManagement')
 );
 
-const Webex = lazy(() => import('../components/shared/Webex/Webex'));
+const WebexView = lazy(() => import('../views/WebexView/webex.view'));
 
 const MapWrapper = lazy(() =>
   import('../components/shared/Openlayer/Openlayer')
@@ -110,7 +110,7 @@ const appRoutes = [
         path: ROUTES.WEB_GIS_SERVICES,
       },
       {
-        element: <Webex />,
+        element: <WebexView />,
         path: ROUTES.WEBEX,
       },
       {

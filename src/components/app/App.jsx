@@ -1,6 +1,7 @@
 import 'react-notifications-component/dist/theme.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'animate.css';
+import '@webex/widgets/dist/css/webex-widgets.css';
 
 import React, { Suspense } from 'react';
 import ReactNotifications from 'react-notifications-component';
