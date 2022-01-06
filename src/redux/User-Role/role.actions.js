@@ -49,3 +49,33 @@ export const closeAddForm = () => ({
   type: ROLE_ACTION_TYPE.CLOSE_ADD_FORM,
   payload: false,
 });
+
+export const selectUser = (data) => ({
+  type: ROLE_ACTION_TYPE.SELECT_USER,
+  payload: data,
+});
+
+export const selectUserSuccess = (data) => ({
+  type: ROLE_ACTION_TYPE.SELECT_USER_SUCCESS,
+  payload: data,
+});
+
+export const selectUserError = (data) => ({
+  type: ROLE_ACTION_TYPE.SELECT_USER_ERROR,
+  payload: data,
+});
+
+export const deSelectUser = (data) => ({
+  type: ROLE_ACTION_TYPE.DESELECT_USER,
+  payload: data,
+});
+
+export const deSelectUserSuccess = (data) => ({
+  type: ROLE_ACTION_TYPE.DESELECT_USER_SUCCESS,
+  payload: data,
+});
+
+export const deSelectUserError = (data) => ({
+  type: ROLE_ACTION_TYPE.DESELECT_USER_ERROR,
+  payload: data,
+});

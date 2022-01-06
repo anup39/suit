@@ -7,6 +7,10 @@ const ROLE_INITIAL_DATA = {
   editFormOpen: false,
   userData: '',
   addFormOpen: false,
+
+  selectedUser: [],
+  isSelectedUserLoading: false,
+  selectedUserError: false,
 };
 
 // eslint-disable-next-line default-param-last
@@ -71,6 +75,52 @@ const roleReducer = (state = ROLE_INITIAL_DATA, action) => {
         ...state,
         isLoading: false,
         addFormOpen: false,
+      };
+
+    case ROLE_ACTION_TYPE.SELECT_USER:
+      return {
+        ...state,
+        selectedUser: [...state.selectedUser, action.payload],
+        isSelectedUserLoading: true,
+        selectedUserError: false,
+      };
+
+    case ROLE_ACTION_TYPE.SELECT_USER_SUCCESS:
+      return {
+        ...state,
+        isSelectedUserLoading: false,
+        selectedUserError: false,
+      };
+
+    case ROLE_ACTION_TYPE.SELECT_USER_ERROR:
+      return {
+        ...state,
+        isSelectedUserLoading: false,
+        selectedUserError: true,
+      };
+
+    case ROLE_ACTION_TYPE.DESELECT_USER:
+      return {
+        ...state,
+        selectedUser: state.selectedUser.filter(
+          (val) => val !== action.payload
+        ),
+        isSelectedUserLoading: true,
+        selectedUserError: false,
+      };
+
+    case ROLE_ACTION_TYPE.DESELECT_USER_SUCCESS:
+      return {
+        ...state,
+        isSelectedUserLoading: false,
+        selectedUserError: false,
+      };
+
+    case ROLE_ACTION_TYPE.DESELECT_USER_ERROR:
+      return {
+        ...state,
+        isSelectedUserLoading: false,
+        selectedUserError: true,
       };
 
     default:

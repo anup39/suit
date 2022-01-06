@@ -2,10 +2,19 @@
 
 .data-grid-base {
   margin-top: 30px;
+  display: flex;
   height: 90%;
   width: 100%;
   border: $border-size solid $border-colors;
-  display: flex;
   border-radius: $border-radius-size;
   flex-direction: column;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.data-grid-base::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }

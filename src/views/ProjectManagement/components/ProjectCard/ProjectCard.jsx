@@ -6,7 +6,17 @@ import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const ProjectCard = ({ handelView }) => {
+const ProjectCard = ({
+  handelView,
+  projetName,
+  client,
+  desc,
+  startDate,
+  compDate,
+  lastUpdate,
+  userLastUpdate,
+  projectId,
+}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -18,7 +28,7 @@ const ProjectCard = ({ handelView }) => {
 
   const handelProjectDataView = () => {
     handleClose();
-    handelView();
+    handelView(projectId);
   };
 
   return (
@@ -28,31 +38,29 @@ const ProjectCard = ({ handelView }) => {
       </span>
 
       <span className="project-card-project-name">
-        <p>Project Name</p>
+        <p>{projetName}</p>
       </span>
 
       <span className="project-card-client">
-        <p>Client</p>
+        <p>{client}</p>
       </span>
 
-      <span className="project-card-description">
-        <p>Description</p>
-      </span>
+      <span className="project-card-description">{desc}</span>
 
       <span className="project-card-start-date">
-        <p>Start Date</p>
+        <p>{startDate}</p>
       </span>
 
       <span className="project-card-end-date">
-        <p>Completion Date</p>
+        <p>{compDate}</p>
       </span>
 
       <span className="project-card-last-update">
-        <p>Last Update</p>
+        <p>{lastUpdate}</p>
       </span>
 
       <span className="project-card-user-last-update">
-        <p>User Last Update</p>
+        <p>{userLastUpdate}</p>
       </span>
 
       <span className="project-card-user-actions">
@@ -76,5 +84,13 @@ const ProjectCard = ({ handelView }) => {
 };
 ProjectCard.propTypes = {
   handelView: PropTypes.func.isRequired,
+  projetName: PropTypes.isRequired,
+  client: PropTypes.isRequired,
+  desc: PropTypes.isRequired,
+  startDate: PropTypes.isRequired,
+  compDate: PropTypes.isRequired,
+  lastUpdate: PropTypes.isRequired,
+  userLastUpdate: PropTypes.isRequired,
+  projectId: PropTypes.isRequired,
 };
 export default ProjectCard;

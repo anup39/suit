@@ -30,9 +30,6 @@ const UserRolesForms = lazy(() =>
 const CompanyManagementView = lazy(() =>
   import('../views/CompayManagement/CompanyManagement.view')
 );
-const ImportProjectPage = lazy(() =>
-  import('../views/ImportProject/import-project.view')
-);
 
 const ProjectManagement = lazy(() =>
   import('../views/ProjectManagement/ProjectManagement')
@@ -91,10 +88,7 @@ const appRoutes = [
         element: <ProjectManagement />,
         path: ROUTES.PROJECT_MANAGEMENT,
       },
-      {
-        element: <ImportProjectPage />,
-        path: ROUTES.IMPORT_PROJECT_DATA,
-      },
+
       {
         element: <WorkListManagement />,
         path: ROUTES.WORKLIST_MANAGEMENT,

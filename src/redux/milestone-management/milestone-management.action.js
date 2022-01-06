@@ -26,6 +26,36 @@ export const getMilestoneByIdSuccess = (data) => ({
 });
 
 export const getMilestoneByIdError = (data) => ({
-  type: MILESTONE_MANAGEMENT_ACTION_TYPES.GET_ALL_MILESTONES_ERROR,
+  type: MILESTONE_MANAGEMENT_ACTION_TYPES.GET_MILESTONE_BY_ID_ERROR,
+  payload: data,
+});
+
+export const updateMilestone = (data) => ({
+  type: MILESTONE_MANAGEMENT_ACTION_TYPES.UPDATE_MILESTONE,
+  payload: data,
+});
+
+export const updateMilestoneSuccess = (data) => ({
+  type: MILESTONE_MANAGEMENT_ACTION_TYPES.UPDATE_MILESTONE_SUCCESS,
+  payload: data,
+});
+
+export const updateMilestoneError = (data) => ({
+  type: MILESTONE_MANAGEMENT_ACTION_TYPES.UPDATE_MILESTONE_ERROR,
+  payload: data,
+});
+
+export const deleteMilestoneById = (data) => ({
+  type: MILESTONE_MANAGEMENT_ACTION_TYPES.DELETE_MILESTONE,
+  payload: data,
+});
+
+export const deleteMilestoneByIdSuccess = (data) => ({
+  type: MILESTONE_MANAGEMENT_ACTION_TYPES.DELETE_MILESTONE_SUCCESS,
+  payload: data,
+});
+
+export const deleteMilestoneByIdError = (data) => ({
+  type: MILESTONE_MANAGEMENT_ACTION_TYPES.DELETE_MILESTONE_ERROR,
   payload: data,
 });

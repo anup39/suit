@@ -70,7 +70,7 @@ export const DELETE_TASK_BY_ID = async (payload) => {
   const { authToken, taskId } = payload;
 
   const taskById = await axios(
-    `${WORKLIST_MANAGEMENT_API.DELETE_TASK_BY_ID}/${taskId}`,
+    `${WORKLIST_MANAGEMENT_API.DELETE_TASK_BY_ID}/${parseInt(taskId, 10)}`,
     {
       method: 'DELETE',
       headers: {

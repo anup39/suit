@@ -2,11 +2,29 @@ import './AssignProjectModal.scss';
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getCompaniesList } from '../../../../redux/company-redux/company.selectors';
+import { getAllProjects } from '../../../../redux/project-management-redux/project.selector';
+import { getProjectList } from '../../../../redux/project-management-redux/project-management.actions';
+import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 
 const AssignProjectModal = ({ handleClose }) => {
+  const dispatch = useDispatch();
+  const companiesList = useSelector(getCompaniesList);
+  const projectList = useSelector(getAllProjects);
+  const authToken = useSelector(getUserAuthToken);
+
+  React.useEffect(() => {
+    dispatch(getProjectList(authToken));
+  }, []);
+
   return (
     <div className="assign-project-modal-base">
       <h2> Assign Project</h2>
+
+      {console.log(companiesList)}
+      {console.log(projectList)}
 
       <form className="assign-project-form-base">
         <label>Project Name</label>

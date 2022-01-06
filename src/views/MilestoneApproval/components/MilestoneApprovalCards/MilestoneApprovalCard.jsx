@@ -6,8 +6,11 @@ import MenuItem from '@mui/material/MenuItem';
 import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import MilestoneDetails from '../../../../components/shared/FieldUpdates/components/EditMenu/components/Milestone/Milestone';
+import { deleteMilestoneById } from '../../../../redux/milestone-management/milestone-management.action';
+import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import MilestoneApprovalModal from '../MilestoneApprovalModal/MilestoneApprovalModal';
 
 const MilestoneApprovalCard = ({
@@ -18,11 +21,13 @@ const MilestoneApprovalCard = ({
   desc,
   status,
   milestoneId,
+  projectDocumentsId,
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [modalOpen, setModalOpen] = React.useState(false);
   const [milestoneView, setMilestoneView] = React.useState(false);
-
+  const authToken = useSelector(getUserAuthToken);
+  const dispatch = useDispatch();
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -50,6 +55,8 @@ const MilestoneApprovalCard = ({
   };
 
   const handelDelete = () => {
+    const data = { id: projectDocumentsId, authToken };
+    dispatch(deleteMilestoneById(data));
     handleClose();
   };
 
@@ -57,7 +64,7 @@ const MilestoneApprovalCard = ({
     <>
       <Modal onClose={handleModalClose} open={modalOpen}>
         {milestoneView ? (
-          <MilestoneDetails />
+          <MilestoneDetails milestoneId={projectDocumentsId} />
         ) : (
           <MilestoneApprovalModal
             handelClose={handleModalClose}
@@ -126,6 +133,7 @@ MilestoneApprovalCard.propTypes = {
   desc: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   milestoneId: PropTypes.string.isRequired,
+  projectDocumentsId: PropTypes.isRequired,
 };
 
 export default MilestoneApprovalCard;

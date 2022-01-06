@@ -3,7 +3,6 @@
   height: calc(600px + 10vh);
   display: flex;
   flex-direction: column;
-  overflow: scroll;
 }
 
 .field-update-search-div {
@@ -38,6 +37,9 @@
   color: #fff;
   white-space: nowrap;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .map-icon {
