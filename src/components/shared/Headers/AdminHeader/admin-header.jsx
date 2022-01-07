@@ -179,6 +179,7 @@ const AdminHeaderComponent = () => {
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               aria-label="show more"
+              className="more-icon"
               color="inherit"
               onClick={handleMobileMenuOpen}
               size="large"

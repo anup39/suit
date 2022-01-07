@@ -17,13 +17,15 @@ const MilestoneApprovalModal = ({ handelClose, authToken, milestoneNr }) => {
         <h3 className="edit-modal-header-text">Reason Of Approval</h3>
       </div>
       <div className="milestone-approval-modal-body">
-        <div className="milestone-approval-form-div">
+        <div>
           <label>Milestone Nr</label>
-          <input disabled style={{ paddingLeft: '10px' }} value={milestoneId} />
-
+          <input disabled value={milestoneId} />
+        </div>
+        <div>
           <label>Description</label>
           <textarea
             onChange={(e) => setDescription(e.target.value)}
+            rows="5"
             value={description}
           />
         </div>

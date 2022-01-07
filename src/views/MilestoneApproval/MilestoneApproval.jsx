@@ -11,6 +11,7 @@ import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import { getAllMilestones } from '../../redux/milestone-management/milestone-management.action';
 // import MilestoneApprovalCard from './components/MilestoneApprovalCards/MilestoneApprovalCard';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import MobileDataRow from './components/mobile.data.row';
 const MilestoneApproval = ({ authToken, milestoneData }) => {
   const dispatch = useDispatch();
 
@@ -86,11 +87,22 @@ const MilestoneApproval = ({ authToken, milestoneData }) => {
           {milestoneData.length === 0 ? (
             <p className="no-data-to-display">No Data To Display!</p>
           ) : (
+            <>
             <Pagination
               itemData={milestoneData}
               itemsPerPage={7}
               componentNo={3}
             />
+                <div className="mobile_table">
+                <MobileDataRow/>
+                <MobileDataRow/>
+                <MobileDataRow/>
+                <MobileDataRow/>
+                <MobileDataRow/>
+
+            <MobileDataRow/>
+            </div>
+            </>
           )}
         </div>
       </DatagridBase>

@@ -2,16 +2,13 @@
 
 .data-grid-base {
   margin-top: 30px;
-  display: flex;
-  height: 90%;
+  border: 1px solid #D4DEEA;
+  border-radius: 3px;
   width: 100%;
-  border: $border-size solid $border-colors;
-  border-radius: $border-radius-size;
-  flex-direction: column;
-  overflow-x: scroll;
-  overflow-y: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+
+  @media (max-width: 768px) {
+    margin-top: 0;
+  }
 }
 
 .data-grid-base::-webkit-scrollbar {

@@ -49,6 +49,9 @@ $prime-font: 'Roboto';
   padding: 10px 0;
   height: 64px;
   border-bottom: 1px solid #D4DEEA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media (max-width: 768px) {
     display: none;
