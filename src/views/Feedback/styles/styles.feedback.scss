@@ -2,6 +2,30 @@
     padding: 15px 40px 10px 40px;
     display: flex;
     flex-direction: column;
+
+
+    @media (max-width: 1024px) {
+        padding: 15px;
+    }
+
+    @media (max-width: 991.98px) {
+        padding: 10px;
+    }
+
+    .MuiTabs-root {
+        min-height: inherit;
+    }
+
+    .MuiButtonBase-root {
+        padding: 9px 0;
+        margin-right: 28px;
+        text-transform: initial;
+        min-height: inherit;
+
+        @media (max-width: 768px) {
+            padding: 7px 0;
+        }
+    }
 }
 
 .fb_head {
@@ -10,10 +34,18 @@
     justify-content: space-between;
     margin-bottom: 20px;
 
+    @media (max-width: 768px) {
+        margin-bottom: 15px;
+    }
+
     h3 {
         margin: 0;
         font-size: 28px;
         color: #364A63;
+
+        @media (max-width: 768px) {
+            font-size: 18px;
+        }
     }
 
     button {
@@ -47,16 +79,7 @@
     }
 }
 
-.MuiTabs-root {
-    min-height: inherit;
-}
 
-.MuiButtonBase-root {
-    padding: 9px 0;
-    margin-right: 28px;
-    text-transform: initial;
-    min-height: inherit;
-}
 
 .table-container {
     border: 1px solid #D4DEEA;
@@ -67,6 +90,9 @@
         height: 72px;
         border-bottom: 1px solid #D4DEEA;
 
+        @media (max-width: 768px) {
+            height: 60px;
+        }
     }
 
     .table-container-btm {
@@ -75,10 +101,19 @@
         display: flex;
         align-items: center;
         padding: 15px;
+
+        @media (max-width: 991.98px) {
+            display: none;
+        }
     }
 
     .table-responsive {
-        height: calc(100vh - (72px + 72px + 64px + 16px + 35px + 46px + 55px + 25px + 44px));
+        height: calc(100vh - (72px + 72px + 64px + 16px + 35px + 46px + 55px + 25px + 54px));
+
+        @media (max-width: 991.98px) {
+            width: calc(100vw - 25px);
+            height: calc(100vh - (72px + 72px + 64px + 16px + 35px + 46px + 55px + 25px + 27px)) !important;
+        }
     }
 }
 
@@ -88,6 +123,16 @@
     overflow-x: auto;
     overflow-y: hidden;
 
+
+
+    @media (max-width: 1024px) {
+        width: calc(100vw - 345px);
+    }
+
+    @media (max-width: 991.98px) {
+        width: calc(100vw - 25px);
+        display: none;
+    }
 
     table {
         width: 100%;
@@ -194,6 +239,7 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    gap: 3px;
 
     >div {
         width: 32px;
@@ -205,7 +251,6 @@
         border-radius: 50%;
         font-size: 14px;
         color: #000;
-        margin-right: 8px;
 
         &:hover,
         &.active {
@@ -256,6 +301,17 @@
             background: #8094AE;
             color: white;
         }
+
+        .MuiButtonBase-root {
+            padding: 0;
+            font-size: initial;
+            line-height: initial;
+            padding-right: 10px;
+        }
+
+        p {
+            margin: 0;
+        }
     }
 }
 
@@ -302,6 +358,10 @@
                 border-right: 1px solid #D4DEEA;
                 cursor: pointer;
 
+                @media (max-width: 768px) {
+                    padding: 7px 10px;
+                }
+
                 &.active-num {
                     background: #0160E0;
                     color: white;
@@ -312,6 +372,57 @@
                     color: white;
                 }
             }
+        }
+    }
+}
+
+.grid-3-1 {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    gap: 1rem;
+    border-top: 1px solid #D4DEEA;
+    padding: 10px;
+
+    h3 {
+        color: #8094AE;
+        font-size: 14px;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    svg {
+        fill: #929DB0;
+
+    }
+
+    p {
+        margin: 0;
+        color: #364A63;
+        font-size: 14px;
+
+        &.blue-text {
+            color: #2586FF;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+    }
+}
+
+.mobile-table {
+    height: calc(100vh - 333px);
+    overflow: auto;
+    display: none;
+
+    @media (max-width: 768px) {
+        display: block;
+    }
+
+    >div:nth-child(even) {
+        background: #D4DEEA;
+
+        .grid-3-1 {
+            border-top: 1px solid white;
         }
     }
 }

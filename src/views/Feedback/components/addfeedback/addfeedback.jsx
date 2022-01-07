@@ -1,4 +1,3 @@
-/* eslint-disable*/
 import 'react-toastify/dist/ReactToastify.css';
 import './addfeedback.scss';
 
@@ -30,7 +29,11 @@ const AddFeedback = ({ isOpen, isClose }) => {
       </Modal>
       <Drawer anchor="right" onClose={closeDrawer} open={isOpen}>
         {/* <GlobalSpinner isOpen={isLoading} /> */}
-        <Box role="presentation" sx={{ width: 467, padding: 3 }}>
+        <Box
+          className="add-feedback"
+          role="presentation"
+          sx={{ width: 467, padding: 3 }}
+        >
           <h3 className="side-head">Add Feedback</h3>
           <div className="form_input_container">
             <label className="form_label" htmlFor="Address">

@@ -1,4 +1,3 @@
-/* eslint-disable*/
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';

@@ -2,6 +2,7 @@ import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import Button from '@mui/material/Button';
 import React from 'react';
 
+import MobileDataViewRow from './mobile.data.view.row';
 import ViewUserTable from './Viewusertable';
 
 const ViewUserFeedback = () => {
@@ -10,6 +11,16 @@ const ViewUserFeedback = () => {
       <div className="table-container-head" />
       <div className="table-responsive">
         <ViewUserTable />
+      </div>
+      <div className="mobile-table">
+        <MobileDataViewRow />
+        <MobileDataViewRow />
+        <MobileDataViewRow />
+        <MobileDataViewRow />
+        <MobileDataViewRow />
+
+        <MobileDataViewRow />
+        <MobileDataViewRow />
       </div>
       <div className="table-container-btm ">
         <div className="table_slider_container">

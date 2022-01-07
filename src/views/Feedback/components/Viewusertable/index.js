@@ -1,4 +1,3 @@
-/* eslint-disable*/
 import './viewusertable.scss';
 
 import React from 'react';

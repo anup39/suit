@@ -3,6 +3,10 @@
     border-bottom: 1px solid #D4DEEA;
     flex-wrap: wrap;
 
+    @media (max-width: 768px) {
+        width: 800px;
+    }
+
     >div {
         padding: 10px;
         font-size: 14px;
