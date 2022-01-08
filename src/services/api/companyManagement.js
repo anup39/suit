@@ -3,28 +3,34 @@ import axios from 'axios';
 import COMPANY_MANAGEMENT from '../../constants/api-endpoints/companyManagement';
 
 export const CREATE_COMPANY = async (data) => {
-  const response = await axios.post(
-    COMPANY_MANAGEMENT.createCompany,
-    data.payload.payload,
+  console.log(data);
+  const createResponse = await axios.post(
+    COMPANY_MANAGEMENT.create,
+    data.payload[0],
     {
       headers: {
-        Authorization: `Bearer ${data.payload.token}`,
+        Authorization: `Bearer ${data.payload[1].userAccessToken}`,
       },
     }
   );
-  return response.data;
+  return createResponse;
 };
 
 export const GET_ALL_COMPANY = async (payload) => {
-  console.log('Get Milestone List...');
-  console.log(payload);
-
   const milestoneList = await axios(COMPANY_MANAGEMENT.getCompany, {
-    method: 'GET',
     headers: {
-      Authorization: `Bearer ${payload}`,
+      Authorization: `Bearer ${payload.payload}`,
     },
   });
-  console.log(milestoneList.data);
+
   return milestoneList.data;
+};
+
+export const DELETE_COMPANY_WITH_ID = async (data) => {
+  const deleteCompany = await axios(`${COMPANY_MANAGEMENT.delete}${data.id}`, {
+    headers: {
+      Authorization: `Bearer ${data.accessToken}`,
+    },
+  });
+  return deleteCompany.data;
 };

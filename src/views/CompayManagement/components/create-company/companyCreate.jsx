@@ -12,12 +12,16 @@ import { toast } from 'react-toastify';
 
 import Alert from '../../../../components/shared/Alerts/Alert';
 import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner';
-import { createCompany } from '../../../../redux/company-redux/company.actions';
+import {
+  createCompany,
+  getAllCompany,
+} from '../../../../redux/company-redux/company.actions';
 import {
   getCreateError,
   getCreateSuccess,
   getLoadingStatus,
 } from '../../../../redux/company-redux/company.selectors';
+import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import classes from './company.module.scss';
 import schema from './schema';
 
@@ -27,6 +31,7 @@ const CreateCompany = ({ isOpen, isClose }) => {
   const isLoading = useSelector(getLoadingStatus);
   const successValue = useSelector(getCreateSuccess);
   const errorValue = useSelector(getCreateError);
+  const userAccessToken = useSelector(getUserAuthToken);
   const {
     register,
     handleSubmit,
@@ -47,7 +52,10 @@ const CreateCompany = ({ isOpen, isClose }) => {
   };
 
   const onSubmit = (data) => {
-    dispatch(createCompany(data));
+    dispatch(createCompany([{ ...data }, { userAccessToken }]));
+    setTimeout(() => {
+      dispatch(getAllCompany(userAccessToken));
+    }, 2000);
   };
 
   return (
@@ -80,7 +88,7 @@ const CreateCompany = ({ isOpen, isClose }) => {
               Address
             </label>
             <textarea
-              className={classes.form_form_input}
+              className={classes.form_input}
               {...register('address')}
               id="address"
               rows="5"
@@ -116,11 +124,22 @@ const CreateCompany = ({ isOpen, isClose }) => {
           </div>
           <div className={classes.form_buttons_container}>
             <span className={classes.form_button_1}>
-              <Button color="error" onClick={closeDrawer}>
+              <Button
+                color="error"
+                onClick={closeDrawer}
+                sx={{ color: '#8094AE' }}
+              >
                 Cancel
               </Button>
             </span>
-            <Button type="submit" variant="contained">
+            <Button
+              sx={{
+                backgroundColor: '#EE9949',
+                '&:hover': { backgroundColor: '#EE9949' },
+              }}
+              type="submit"
+              variant="contained"
+            >
               Submit
             </Button>
           </div>

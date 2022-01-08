@@ -1,15 +1,16 @@
 @import '../../../theme/ThemeColors';
 
 .company_container {
-  width: 90%;
+  width: 95%;
   margin: auto;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 
 .company_header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 19px 0 18px;
 }
 
 .header_button {
@@ -21,8 +22,16 @@
   border: none;
   outline: none;
   color: #fff;
-  padding: 3px 5px;
+  padding: 6px 5px;
   border-radius: 3px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
 };
 
 
@@ -31,6 +40,12 @@
     align-items: center;
     justify-content: space-between;
     padding: 5px 0;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 33px;
+    color: #364A63;
 }
 
 .create_new_company_button {

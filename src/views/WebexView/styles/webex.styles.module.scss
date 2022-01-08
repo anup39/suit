@@ -1,12 +1,12 @@
 .webex_container{
-    width: 956px;
+    width: 90%;
     margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    height: 650px;
+    height: 88vh;
 }
 
 .webex_footer{
@@ -41,8 +41,10 @@
     text-align: left;
     width: 100%;
     padding: 0;
+    margin-top: 30px;
 }
 
 .webex_body{
     width: 100%;
+    padding: 10px 0 60px 0;
 }

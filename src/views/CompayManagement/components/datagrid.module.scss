@@ -1,5 +1,6 @@
 .datagrid_contaier{
     border: 1px solid #ddd;
+    height: 76vh;
 }
 
 
@@ -19,10 +20,16 @@
 
 .head_row_head{
     text-align: left;
-    color: #000000DE;
     padding: 12px 15px;
     font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #8094AE;
 }
+
+
 
 .table_heads_row{
     border-top: 1px solid #ddd;
@@ -53,6 +60,7 @@
 
 .table_body{
     border-bottom: 1px solid #ddd;
+    height: 100%;
 }
 
 .table_slider_container{
@@ -77,4 +85,12 @@
     :first-child{
         background: #1976d2;
     }
+}
+
+
+.progress_container{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   margin-top: 150px;
 }

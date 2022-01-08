@@ -1,15 +1,37 @@
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import PropTypes from 'prop-types';
 import React from 'react';
+import { connect, useDispatch } from 'react-redux';
 
+import {
+  eraseCheckedCompany,
+  getCheckedCompany,
+} from '../../../redux/company-redux/company.actions';
 import CompanyUserAdd from './add-company-user/company-user';
 import classes from './row.styles.module.scss';
 
-const DatagridRow = () => {
+const DatagridRow = ({
+  name,
+  address,
+  city,
+  referenceContact,
+  lastUpdate,
+  userLastUpdate,
+  id,
+  isRender,
+  update,
+  // eslint-disable-next-line react/prop-types
+  checkedCompanyList,
+}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isMenu, setMenu] = React.useState(null);
+  const [list, setList] = React.useState({});
+  const [render, setRender] = React.useState(false);
+
   const open = Boolean(anchorEl);
+  const dispatch = useDispatch();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -22,18 +44,43 @@ const DatagridRow = () => {
     setMenu(true);
   };
 
+  const onCheckBoxSelect = (e) => {
+    setRender(e.target.checked);
+    update(true);
+    if (e.target.checked) {
+      dispatch(getCheckedCompany({ name, id, checked: true }));
+    } else if (!e.target.checked) {
+      dispatch(eraseCheckedCompany({ name, id }));
+      setList(false);
+      update(false);
+    }
+  };
+
+  React.useEffect(() => {
+    // eslint-disable-next-line react/prop-types
+    const singleCheckedStatus = checkedCompanyList.filter(
+      (item) => item.id === id
+    )[0];
+    setList(singleCheckedStatus);
+  }, [isRender, render]);
+
   return (
     <tr className={classes.row_container}>
       <CompanyUserAdd handleClose={setMenu} isOpen={isMenu} />
       <td className={classes.row_description}>
-        <input className={classes.row_input} type="checkbox" />
+        <input
+          checked={list?.checked}
+          className={classes.row_input}
+          onClick={onCheckBoxSelect}
+          type="checkbox"
+        />
       </td>
-      <td className={classes.row_description}>Apple</td>
-      <td className={classes.row_description}>#42, Via Sacra.</td>
-      <td className={classes.row_description}>Milan</td>
-      <td className={classes.row_description}>+39 25361 12365</td>
-      <td className={classes.row_description}>06 Dec 2021</td>
-      <td className={classes.row_description}>08 Dec 2021</td>
+      <td className={classes.row_description}>{name}</td>
+      <td className={classes.row_description}>{address}</td>
+      <td className={classes.row_description}>{city}</td>
+      <td className={classes.row_description}>{referenceContact}</td>
+      <td className={classes.row_description}>{lastUpdate}</td>
+      <td className={classes.row_description}>{userLastUpdate}</td>
       <td className={classes.row_description}>
         <MoreHorizIcon
           aria-controls="basic-menu"
@@ -61,4 +108,20 @@ const DatagridRow = () => {
   );
 };
 
-export default DatagridRow;
+DatagridRow.propTypes = {
+  name: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  referenceContact: PropTypes.string.isRequired,
+  lastUpdate: PropTypes.string.isRequired,
+  userLastUpdate: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  isRender: PropTypes.bool.isRequired,
+  update: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  checkedCompanyList: state.company.checkedCompanyList,
+});
+
+export default connect(mapStateToProps)(DatagridRow);
