@@ -52,6 +52,15 @@ export function* allCompanyData(payload) {
     const getCompany = yield call(GET_ALL_COMPANY, payload);
     yield put(getAllCompanySuccess(getCompany));
   } catch (err) {
+    yield toast.error(err.message, {
+      position: 'top-center',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
     yield put(getAllCompanyError(err.response.data));
   }
 }

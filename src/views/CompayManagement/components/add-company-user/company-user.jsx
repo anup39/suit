@@ -8,8 +8,12 @@ import Drawer from '@mui/material/Drawer';
 import TextField from '@mui/material/TextField';
 import { withStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
+import { roleStart } from '../../../../redux/User-Role/role.actions';
+import { getListOfUsers } from '../../../../redux/User-Role/users.selectors';
 import DatagridRow from './company-user.row';
 import classes from './company-user.styles.module.scss';
 
@@ -20,60 +24,18 @@ const StyledAutocompleteWrapper = withStyles({
   border: 'none',
 })(TextField);
 
-const top100Films = [
-  { title: 'The Shawshank Redemption', year: 1994 },
-  { title: 'The Godfather', year: 1972 },
-  { title: 'The Godfather: Part II', year: 1974 },
-  { title: 'The Dark Knight', year: 2008 },
-  { title: '12 Angry Men', year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: 'Pulp Fiction', year: 1994 },
-  {
-    title: 'The Lord of the Rings: The Return of the King',
-    year: 2003,
-  },
-  { title: 'The Good, the Bad and the Ugly', year: 1966 },
-  { title: 'Fight Club', year: 1999 },
-  {
-    title: 'The Lord of the Rings: The Fellowship of the Ring',
-    year: 2001,
-  },
-  {
-    title: 'Star Wars: Episode V - The Empire Strikes Back',
-    year: 1980,
-  },
-  { title: 'Forrest Gump', year: 1994 },
-  { title: 'Inception', year: 2010 },
-  {
-    title: 'The Lord of the Rings: The Two Towers',
-    year: 2002,
-  },
-  { title: "One Flew Over the Cuckoo's Nest", year: 1975 },
-  { title: 'Goodfellas', year: 1990 },
-  { title: 'The Matrix', year: 1999 },
-  { title: 'Seven Samurai', year: 1954 },
-  {
-    title: 'Star Wars: Episode IV - A New Hope',
-    year: 1977,
-  },
-  { title: 'City of God', year: 2002 },
-  { title: 'Se7en', year: 1995 },
-  { title: 'The Silence of the Lambs', year: 1991 },
-  { title: "It's a Wonderful Life", year: 1946 },
-  { title: 'Life Is Beautiful', year: 1997 },
-  { title: 'The Usual Suspects', year: 1995 },
-  { title: 'Léon: The Professional', year: 1994 },
-  { title: 'Spirited Away', year: 2001 },
-  { title: 'Saving Private Ryan', year: 1998 },
-  { title: 'Once Upon a Time in the West', year: 1968 },
-  { title: 'American History X', year: 1998 },
-  { title: 'Interstellar', year: 2014 },
-];
-
 const CompanyUserAdd = ({ isOpen, handleClose }) => {
+  const userAccessToken = useSelector(getUserAuthToken);
   const closeDrawer = () => {
     handleClose(false);
   };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(roleStart(userAccessToken));
+  }, []);
+
+  const listOfUsers = useSelector(getListOfUsers);
+  console.log(listOfUsers, 'right here');
 
   return (
     <Drawer anchor="right" onClose={closeDrawer} open={isOpen}>
@@ -85,10 +47,10 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
             <div className={classes.userlist_box}>
               <Autocomplete
                 disableCloseOnSelect
-                getOptionLabel={(option) => option.title}
+                getOptionLabel={(option) => option.username}
                 id="checkboxes-tags-demo"
                 multiple
-                options={top100Films}
+                options={listOfUsers}
                 renderInput={(params) => (
                   <StyledAutocompleteWrapper
                     {...params}
@@ -105,7 +67,7 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
                       icon={icon}
                       style={{ marginRight: 8 }}
                     />
-                    {option.title}
+                    {option.username}
                   </li>
                 )}
                 style={{ width: '100%' }}

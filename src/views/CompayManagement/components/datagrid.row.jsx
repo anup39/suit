@@ -22,6 +22,7 @@ const DatagridRow = ({
   id,
   isRender,
   update,
+  setAllChecked,
   // eslint-disable-next-line react/prop-types
   checkedCompanyList,
 }) => {
@@ -46,7 +47,8 @@ const DatagridRow = ({
 
   const onCheckBoxSelect = (e) => {
     setRender(e.target.checked);
-    update(true);
+    setAllChecked(false);
+    update((prevState) => !prevState);
     if (e.target.checked) {
       dispatch(getCheckedCompany({ name, id, checked: true }));
     } else if (!e.target.checked) {
@@ -118,6 +120,7 @@ DatagridRow.propTypes = {
   id: PropTypes.string.isRequired,
   isRender: PropTypes.bool.isRequired,
   update: PropTypes.func.isRequired,
+  setAllChecked: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

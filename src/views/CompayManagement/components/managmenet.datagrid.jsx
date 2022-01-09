@@ -56,16 +56,9 @@ const CompanyManagementDataGrid = () => {
   };
 
   React.useState(() => {
-    const updater = () => {
-      if (companyFullListToDelete.length !== companyFullList.length) {
-        setChecked(false);
-      }
-      return {};
-    };
-
-    return () => {
-      updater();
-    };
+    if (companyFullListToDelete.length !== companyFullList.length) {
+      setChecked(false);
+    }
   }, [render]);
 
   function handlePageClick() {
@@ -139,6 +132,7 @@ const CompanyManagementDataGrid = () => {
                       lastUpdate={company.last_update}
                       name={company.name}
                       referenceContact={company.reference_contact}
+                      setAllChecked={setChecked}
                       update={setRender}
                       userLastUpdate={company.user_last_update}
                     />
