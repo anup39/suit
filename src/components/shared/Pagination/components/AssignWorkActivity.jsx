@@ -5,7 +5,7 @@ import AssignActivityCard from '../../../../views/AssignWorkActivities/component
 
 const AssignWorkActivity = ({ currentItems }) => {
   return (
-    <div>
+    <div className="assign-work-activity-table-body">
       {currentItems &&
         currentItems.map((data) => (
           <AssignActivityCard

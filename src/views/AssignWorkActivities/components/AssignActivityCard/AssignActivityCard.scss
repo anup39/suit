@@ -3,15 +3,26 @@
 .assign-work-activity-table-data {
   display: table;
   width: 100%;
-  border-bottom: $border-size solid $border-colors;
-  height: minmax(30px, 50px);
+  border-bottom: 1px solid #D4DEEA;
+
+  &:last-child {
+    border: none;
+  }
+
 }
 
 .assign-work-activity-table-data span {
   display: table-cell;
   table-layout: fixed;
-  padding: 20px 10px;
-  color: $table-data-color-1;
+  padding: 10px;
+  font-size: 14px;
+  vertical-align: middle;
+  color: #364A63;
+  margin-left: 10px;
+
+  svg {
+    font-size: 18px;
+  }
 }
 
 .assign-work-activities-card-menu-icon {
@@ -24,52 +35,61 @@
 .assign-work-activities-card-check-input {
   width: 2%;
 }
+
 .assign-work-activities-card-project-name {
   width: 15%;
   overflow-wrap: break-word;
   display: inline-block;
   word-break: break-word;
 }
+
 .assign-work-activities-card-company {
   overflow-wrap: break-word;
   width: 10%;
   display: inline-block;
   word-break: break-word;
 }
+
 .assign-work-activities-card-taskId {
   overflow-wrap: break-word;
   width: 8%;
   display: inline-block;
   word-break: break-word;
 }
+
 .assign-work-activities-card-task-name {
   overflow-wrap: break-word;
   width: 15%;
   display: inline-block;
   word-break: break-word;
 }
+
 .assign-work-activities-card-task-description {
   overflow-wrap: break-word;
   width: 17%;
   display: inline-block;
   word-break: break-word;
 }
+
 .assign-work-activities-card-isMilestone {
   overflow-wrap: break-word;
   width: 10%;
   display: inline-block;
   word-break: break-word;
 }
+
 .assign-work-activities-card-type {
   overflow-wrap: break-word;
   width: 10%;
 }
+
 .assign-work-activities-card-status {
   overflow-wrap: break-word;
   width: 10%;
   display: inline-block;
   word-break: break-word;
 }
+
 .assign-work-activities-card-actions {
   width: 3%;
 }

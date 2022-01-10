@@ -7,11 +7,11 @@ const BaseTemplate = (props) => {
   return (
     <>
     <div className="base-div">
-        <h2 className="header">{props.title}</h2>
+      
+       {props.title ?  <h2 className="header">{props.title}</h2>: ""}
       {props.children}
     </div>
     <p className="footer">Powered By Negentis</p>
-
     </>
   );
 };

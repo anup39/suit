@@ -1,48 +1,85 @@
 @import '../../../../theme/ThemeColors';
 
 .assign-task-modal-base-div {
-  height: 330px;
-  width: 500px;
+  min-width: 500px;
+  max-width: 50%;
+  // height: 50%;
+  max-height: 90%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    min-width: initial;
+    max-width: initial;
+  }
 }
 
 .assign-form-base-div {
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 70px 50px 40px 50px;
+
+  @media (max-width: 768px) {
+
+    padding: 30px;
+  }
+
+  label {
+    word-wrap: break-word;
+    margin-bottom: 8px;
+    font-size: 14px;
+    text-align: left;
+    color: #526484;
+    display: block;
+  }
 }
 
 .assign-form-base-div select {
-  height: 50px;
-  width: 400px;
-  background-color: #fff;
-  border: 1px solid black;
-  border-radius: 5px;
-  display: flex;
-  margin-top: 20px;
+  border: 1px solid #D4DEEA;
+  border-radius: 3px;
+  padding: 15px;
+  resize: none;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #D4DEEA;
+
+  }
 }
 
 .assign-task-modal-control-div {
-  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 50px 40px 50px;
+
+  @media (max-width: 768px) {
+
+    padding: 0 30px 30px 30px;
+  }
+
+  span {
+    margin-left: 30px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    display: block;
+    font-weight: 500;
+    line-height: initial;
+
+    border-radius: 5px;
+  }
 }
 
 .assign-task-modal-cancel-button {
-  margin-right: 30px;
-  color: $form-cancel-button-color;
-  font-weight: 500;
-  cursor: pointer;
+  color: #8094AE;
+
 }
 
 .assign-task-modal-submit-button {
-  margin-right: 50px;
-  background-color: $form-submit-button-color;
-  padding: 10px 40px;
   color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
+  background-color: #E78201;
 }
