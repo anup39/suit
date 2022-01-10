@@ -10,9 +10,13 @@ export const getSigninError = (state) => {
 };
 
 export const getUserData = (state) => {
-  return state.user.isAuthenticated;
+  return state.user;
 };
 
 export const getUserAuthToken = (state) => {
   return state.user.userData.accessToken;
+};
+
+export const getIfAuthenticated = (state) => {
+  return state.user.isAuthenticated;
 };

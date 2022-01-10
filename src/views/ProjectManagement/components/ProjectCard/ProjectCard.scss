@@ -5,15 +5,19 @@
   padding: $table-data-padding;
   width: 100%;
   font-size: 18px;
-}
-div.table {
+  border-bottom: $border-size solid $border-colors;
+  align-items: center;
+  padding: 10px;
   display: table;
   width: 100%;
+  color: $table-header-text-color;
 }
-div.table span {
+
+.project-card-base-div span {
   display: table-cell;
   table-layout: fixed;
   color: $table-data-color-1;
+  padding-right: 10px;
 }
 
 .project-menu-icon {
@@ -33,7 +37,8 @@ div.table span {
 
 .project-card-description {
   width: 15%;
-  text-overflow: clip;
+  // white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 .project-card-start-date {
   width: 11%;
@@ -49,4 +54,5 @@ div.table span {
 }
 .project-card-user-actions {
   width: 6%;
+  cursor: pointer;
 }

@@ -46,3 +46,40 @@ export const GET_USER_BY_ID = async (data) => {
 
   return userDetails.data;
 };
+
+export const GET_ROLES = async (data) => {
+  const allRoles = await axios.get(API_END_POINTS.getAllUserRoles, {
+    headers: {
+      Authorization: `Bearer ${data}`,
+    },
+  });
+
+  return allRoles.data;
+};
+
+export const UPDATE_ROLES = async (data) => {
+  const updatedUserData = await axios(API_END_POINTS.updateUserRole, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${data.authToken}`,
+    },
+    data: data.userData,
+  });
+
+  return updatedUserData.data;
+};
+
+export const DELETE_USER = async (data) => {
+  console.log('Soft Delete User');
+  const deleteUser = await axios(
+    `${API_END_POINTS.deleteUser}/${data.userId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${data.authToken}`,
+      },
+      data: data.userData,
+    }
+  );
+
+  return deleteUser.data;
+};

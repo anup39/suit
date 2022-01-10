@@ -79,3 +79,48 @@ export const deSelectUserError = (data) => ({
   type: ROLE_ACTION_TYPE.DESELECT_USER_ERROR,
   payload: data,
 });
+
+export const userRoles = (data) => ({
+  type: ROLE_ACTION_TYPE.GET_USER_ROLES_LIST,
+  payload: data,
+});
+
+export const userRolesSuccess = (data) => ({
+  type: ROLE_ACTION_TYPE.GET_USER_ROLES_LIST_SUCCESS,
+  payload: data,
+});
+
+export const userRolesError = (data) => ({
+  type: ROLE_ACTION_TYPE.GET_USER_ROLES_LIST_ERROR,
+  payload: data,
+});
+
+export const updateUserRoleAndCompany = (data) => ({
+  type: ROLE_ACTION_TYPE.UPDATE_USER_ROLE,
+  payload: data,
+});
+
+export const updateUserRoleAndCompanySuccess = (data) => ({
+  type: ROLE_ACTION_TYPE.UPDATE_USER_ROLE_SUCCESS,
+  payload: data,
+});
+
+export const updateUserRoleAndCompanyError = (data) => ({
+  type: ROLE_ACTION_TYPE.UPDATE_USER_ROLE_ERROR,
+  payload: data,
+});
+
+export const deleteUser = (data) => ({
+  type: ROLE_ACTION_TYPE.DELETE_USER,
+  payload: data,
+});
+
+export const deleteUserSuccess = (data) => ({
+  type: ROLE_ACTION_TYPE.DELETE_USER_SUCCESS,
+  payload: data,
+});
+
+export const deleteUserError = (data) => ({
+  type: ROLE_ACTION_TYPE.DELETE_USER_ERROR,
+  payload: data,
+});

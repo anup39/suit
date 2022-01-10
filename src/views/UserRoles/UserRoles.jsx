@@ -20,18 +20,21 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
     <BaseTemplate title="User Roles">
       <DatagridBase>
         <div className="search-div">
-          <input
-            className="search-input"
-            // onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="User Search"
-          />
-          <SearchOutlinedIcon className="search-icon" />
+          <span className="input-container">
+            <input
+              className="search-input"
+              // onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="User Search"
+            />
+            <SearchOutlinedIcon className="search-icon" />
+          </span>
+
           <p className="delete-botton">Delete</p>
         </div>
 
         <div>
           <div className="user-header">
-            <div>
+            <div className="user-roles-table-base">
               <div className="user-role-table-header">
                 <span className="user-roles-check-input">
                   <input type="checkbox" />
@@ -48,7 +51,7 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
               <Pagination
                 componentNo={4}
                 itemData={userRoleData}
-                itemsPerPage={5}
+                itemsPerPage={10}
               />
             </div>
           </div>

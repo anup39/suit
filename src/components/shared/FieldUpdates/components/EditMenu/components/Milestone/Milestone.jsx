@@ -90,7 +90,9 @@ const Milestone = ({ milestoneId }) => {
         </div>
       </div>
       <div className="milestone-btm">
-        <button>Close</button>
+        <button onClick={() => console.log('Close')} type="button">
+          Close
+        </button>
       </div>
     </div>
   );

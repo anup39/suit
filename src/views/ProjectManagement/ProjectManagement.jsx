@@ -71,7 +71,7 @@ const ProjectManagement = ({ userToken }) => {
             <Box>
               <Tabs onChange={handleChange} value={value}>
                 <Tab label="Dashbord" />
-                <Tab label="Documents" />
+                <Tab label="Projects" />
               </Tabs>
             </Box>
             <ProjectManagementTabPannel index={0} value={value}>
@@ -99,7 +99,7 @@ const ProjectManagement = ({ userToken }) => {
                   </div>
 
                   <div>
-                    <div className="project-card-base-div table">
+                    <div className="project-management-table-header">
                       <span className="project-card-check-input">
                         <input type="checkbox" />
                       </span>
@@ -140,7 +140,7 @@ const ProjectManagement = ({ userToken }) => {
                     componentNo={0}
                     handleClose={handelShowProjectPannel}
                     itemData={projectList}
-                    itemsPerPage={5}
+                    itemsPerPage={10}
                   />
                 </DataGridBase>
               </>
