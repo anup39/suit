@@ -32,7 +32,7 @@ const AddFeedback = ({ isOpen, isClose }) => {
         <Box
           className="add-feedback"
           role="presentation"
-          sx={{ width: 467, padding: 3 }}
+          sx={{ width: 400, padding: 3 }}
         >
           <h3 className="side-head">Add Feedback</h3>
           <div className="form_input_container">

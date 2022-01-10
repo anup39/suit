@@ -3,6 +3,12 @@
     border-bottom: 1px solid #D4DEEA;
     flex-wrap: wrap;
 
+    &.table-header-grid {
+        background: #F8F9FC;
+        font-weight: 600;
+
+    }
+
     @media (max-width: 768px) {
         width: 800px;
     }
@@ -66,7 +72,6 @@
                 color: #8094AE;
                 font-size: 14px;
                 margin: 0 0 16px 0;
-                font-weight: 400;
             }
 
             p {

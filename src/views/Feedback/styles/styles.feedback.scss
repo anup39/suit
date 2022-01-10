@@ -32,15 +32,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
-
-    @media (max-width: 768px) {
-        margin-bottom: 15px;
-    }
+    margin-bottom: 10px;
 
     h3 {
         margin: 0;
-        font-size: 28px;
+        font-size: 20px;
         color: #364A63;
 
         @media (max-width: 768px) {
@@ -87,30 +83,26 @@
     width: 100%;
 
     .table-container-head {
-        height: 72px;
+        height: 60px;
         border-bottom: 1px solid #D4DEEA;
 
-        @media (max-width: 768px) {
-            height: 60px;
-        }
+
     }
 
     .table-container-btm {
-        height: 72px;
+        height: 60px;
         border-top: 1px solid #D4DEEA;
         display: flex;
         align-items: center;
         padding: 15px;
 
-        @media (max-width: 991.98px) {
-            display: none;
-        }
+
     }
 
     .table-responsive {
-        height: calc(100vh - (72px + 72px + 64px + 16px + 35px + 46px + 55px + 25px + 54px));
+        height: calc(100vh - 347px);
 
-        @media (max-width: 991.98px) {
+        @media (max-width: 768px) {
             width: calc(100vw - 25px);
             height: calc(100vh - (72px + 72px + 64px + 16px + 35px + 46px + 55px + 25px + 27px)) !important;
         }
@@ -126,10 +118,10 @@
 
 
     @media (max-width: 1024px) {
-        width: calc(100vw - 345px);
+        width: calc(100vw - 307px);
     }
 
-    @media (max-width: 991.98px) {
+    @media (max-width: 768px) {
         width: calc(100vw - 25px);
         display: none;
     }
@@ -146,14 +138,16 @@
         thead {
             position: sticky;
             top: 0;
-            background: white;
+            background: #F8F9FC;
         }
 
         th {
             padding: 10px;
-            font-weight: 400;
+            font-weight: 600;
+            vertical-align: middle;
+
             text-align: left;
-            background: white;
+            background: #F8F9FC;
 
             color: #8094AE;
             font-size: 14px;
@@ -200,7 +194,7 @@
 
 .copy-right-txt {
     border-top: 1px solid #D4DEEA;
-    padding: 14px 14px 10px 14px;
+    padding: 10px 15px;
     color: #8094AE;
     font-size: 12px;
 }
@@ -354,7 +348,7 @@
                 display: block;
                 display: flex;
                 height: 100%;
-                padding: 9px 17px;
+                padding: 13px 17px;
                 border-right: 1px solid #D4DEEA;
                 cursor: pointer;
 
@@ -385,6 +379,8 @@
 
     h3 {
         color: #8094AE;
+        font-weight: 600;
+
         font-size: 14px;
         font-weight: 400;
         margin: 0;
@@ -410,7 +406,7 @@
 }
 
 .mobile-table {
-    height: calc(100vh - 333px);
+    height: calc(100vh - 330px);
     overflow: auto;
     display: none;
 
