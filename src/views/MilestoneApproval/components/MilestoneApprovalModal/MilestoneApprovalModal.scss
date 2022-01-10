@@ -3,11 +3,16 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
-  height: 50%;
+  width: 35%;
+  // height: 50%;
+  max-height: 90%;
   background-color: rgb(255, 255, 255);
   display: block;
-  overflow: scroll;
+  overflow: auto;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 }
 
 .milestone-approval-modal-header {
@@ -18,7 +23,7 @@
 }
 
 .milestone-approval-left {
-  background-color: blue;
+  background-color: #0971FE;
   width: 20px;
   height: 100%;
   margin-right: 20px;
@@ -26,67 +31,61 @@
 
 .milestone-approval-modal-body {
   width: 100%;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
+  padding: 25px 50px 20px 50px;
 
-.milestone-approval-form-div {
-  height: 300px;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-}
+  label {
+    word-wrap: break-word;
+    margin-bottom: 8px;
+    font-size: 14px;
+    text-align: left;
+    color: #526484;
+  }
 
-.milestone-approval-form-div label {
-  word-wrap: break-word;
-  margin: 10px 0px;
-  text-align: left;
-}
+  input,
+  textarea {
+    border: 1px solid #D4DEEA;
+    border-radius: 3px;
+    padding: 15px;
+    resize: none;
+    width: 100%;
+    margin-bottom: 18px;
 
-.milestone-approval-form-div input {
-  height: 40px;
-  margin-bottom: 10px;
-  background-color: rgb(247, 247, 247);
-  border: 1px solid rgb(161, 161, 161);
-  border-radius: 5px;
-}
+    &:focus {
+      outline: none;
+      border: 1px solid #D4DEEA;
 
-.milestone-approval-form-div textarea {
-  resize: none;
-  height: 100px;
-  padding: 5px;
-  border: 1px solid rgb(161, 161, 161);
-  border-radius: 5px;
+    }
+  }
 }
 
 .milestone-approval-submit-div {
-  float: right;
-  margin-right: 50px;
-  margin-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 50px 30px 50px;
 }
 
 .milestone-approval-submit-div span {
-  margin-right: 30px;
+  margin-left: 30px;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  display: block;
+  font-weight: 500;
+  line-height: initial;
+
+  border-radius: 5px;
+
 }
 
 .milestone-approval-button-cancel {
-  color: rgb(134, 134, 134);
-  font-weight: 500;
-  font-size: 15px;
-  cursor: pointer;
+  color: #8094AE;
+
 }
 
 .milestone-approval-button-approve {
   color: #fff;
-  background-color: orange;
-  padding: 10px 30px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 500;
+  background-color: #E78201;
+
 }

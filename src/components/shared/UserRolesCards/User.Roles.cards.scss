@@ -9,6 +9,7 @@ div.table {
   display: table;
   width: 100%;
 }
+
 div.table span {
   display: table-cell;
   table-layout: fixed;
@@ -60,7 +61,8 @@ div.table span {
 }
 
 .header {
-  color: rgba(34, 34, 34, 0.658);
+  color: #364A63;
+
 }
 
 .user-role-base {

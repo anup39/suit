@@ -3,16 +3,25 @@
 .milestone-approval-card {
   display: table;
   width: 100%;
-  height: 50px;
-  border-bottom: $border-size solid $border-colors;
-  padding: 0px 7px;
+  border-bottom: 1px solid #D4DEEA;
+
+  &:last-child {
+    border: none;
+  }
 }
 
 .milestone-approval-card span {
   display: table-cell;
   table-layout: fixed;
+  padding: 10px;
+  font-size: 14px;
   vertical-align: middle;
+  color: #364A63;
   margin-left: 10px;
+
+  svg {
+    font-size: 18px;
+  }
 }
 
 .milestone-approval-card-checkInput {

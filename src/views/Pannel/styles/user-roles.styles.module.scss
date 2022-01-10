@@ -1,22 +1,60 @@
-$primeColor: #0971fe;
+$primeColor: #0160E0;
 $text-color: #fff;
 $prime-font: 'Roboto';
 
 .roles_container {
   display: grid;
-  grid-template-columns: 1fr 3.2fr;
+  grid-template-columns: auto 1fr;
+  height: 100vh;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    display: initial;
+  }
 }
+
+
 .roles_menu {
   background-color: $primeColor;
-  min-height: 100vh;
+  height: 100vh;
+  width: 280px;
+
+  @media (max-width: 768px) {
+    display: none;
+    position: fixed;
+    width: 80%;
+    height: calc(100vh - 58px);
+    box-sizing: 1000;
+    z-index: 999;
+    top: 58px;
+    left: 0;
+  }
+
+  @media (max-width: 1024px) {
+
+    li a {
+      padding: 10px;
+    }
+  }
 }
+
+
+.roles_menu_under {}
+
 .menu_header {
   color: $text-color;
   text-align: center;
   margin: 0;
   padding: 10px 0;
   height: 64px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #D4DEEA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .menu_options_container {

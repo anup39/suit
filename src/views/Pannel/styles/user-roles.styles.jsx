@@ -6,7 +6,7 @@ export const LinkWrapper = styled(Link)`
   text-decoration: none;
   display: block;
   width: 100%;
-  padding: 10px 40px;
+  padding: 15px 25px;
   font-family: 'Roboto';
   box-sizing: border-box;
 `;

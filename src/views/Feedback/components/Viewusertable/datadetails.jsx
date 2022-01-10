@@ -8,7 +8,7 @@ import ViewDocumentsModal from './view.documents.modal';
 
 const DataDetails = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [modalOpen, setModalOpen] = React.useState(true);
+  const [modalOpen, setModalOpen] = React.useState(false);
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 

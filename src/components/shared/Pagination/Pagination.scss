@@ -1,59 +1,77 @@
 $border-color-pagination: rgb(209, 209, 209);
 
 .pagination-base {
-  margin-top: auto;
-  padding: 10px;
+
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-top: 1px solid #D4DEEA;
+
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .pagination-base ul {
   list-style-type: none;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #D4DEEA;
+  border-radius: 4px;
 }
 
 .pagination-base li {
-  display: inline-flex;
-  width: 40px;
-  border: 1px solid $border-color-pagination;
+  display: flex;
+  border: 1px solid #D4DEEA;
   border-right: 0px;
-  height: 50px;
+  padding: 9px 17px;
+  font-size: 14px;
+  height: 40px;
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  color: rgb(29, 29, 29);
+  color: #8094AE;
   cursor: pointer;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: -moz-none;
-  -o-user-select: none;
-  user-select: none;
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background: white;
+    color: #8094AE;
+  }
+
+  &.selected {
+    background-color: #0160e0;
+    color: white;
+  }
 }
 
 .pagination-base li:last-child {
   color: #0160e0;
-  background-color: rgb(228, 228, 228);
-  width: 100px;
+  background-color: #F8F9FC;
   border: 1px solid $border-color-pagination;
+  border-radius: 0 3px 3px 0;
 }
 
 .pagination-base li:first-child {
+  border-radius: 3px 0 0 3px;
+
   color: #0160e0;
-  background-color: rgb(228, 228, 228);
-  width: 100px;
+  background-color: #F8F9FC;
 }
 
-.pagination-active-div {
-  background-color: #0160e0;
-  padding: 15px;
-  width: 100%;
-  color: #fff;
-  text-align: center;
-}
+// .pagination-active-div {
+//   background-color: #0160e0;
+//   padding: 15px;
+//   width: 100%;
+//   color: #fff;
+//   text-align: center;
+// }
 
-.pagination-disabled-div {
-  background-color: rgb(245, 245, 245);
-  padding: 15px;
-  width: 100%;
-  color: #0160e0;
-  text-align: center;
-  opacity: 0.8;
-}
+// .pagination-disabled-div {
+//   color: #0160e0;
+//   text-align: center;
+//   opacity: 0.8;
+// }

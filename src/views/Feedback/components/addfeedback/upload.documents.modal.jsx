@@ -1,4 +1,3 @@
-/* eslint-disable*/
 import React from 'react';
 
 import Download from '../../../../assets/download.svg';

@@ -34,10 +34,10 @@ const FeedbackView = () => {
             Add Feedback
           </button>
         </div>
-        <div className="breadcrumbs">
+        {/* <div className="breadcrumbs">
           <div>Feedback</div>
           <div>Public User Feedback</div>
-        </div>
+        </div> */}
         <Box sx={{ width: '100%' }}>
           <Box>
             <Tabs onChange={handleChange} value={value}>
@@ -45,10 +45,10 @@ const FeedbackView = () => {
               <Tab label="View User Feedback" />
             </Tabs>
           </Box>
-          <TabPanel index={1} value={value}>
+          <TabPanel index={0} value={value}>
             <PublicUserFeedback />
           </TabPanel>
-          <TabPanel index={0} value={value}>
+          <TabPanel index={1} value={value}>
             <ViewUserFeedback />
           </TabPanel>
         </Box>

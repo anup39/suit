@@ -1,4 +1,3 @@
-/* eslint-disable*/
 import './viewusertable.scss';
 
 import React from 'react';
@@ -9,7 +8,7 @@ import Datagrid from './datagrid';
 const ViewUserTable = () => {
   return (
     <>
-      <div className="table-head-grid">
+      <div className="table-head-grid table-header-grid">
         <div className="table-check">
           <input type="checkbox" />
         </div>
