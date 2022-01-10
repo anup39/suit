@@ -101,11 +101,22 @@
 .no-data-to-display {
   text-align: center;
   margin-top: 30px;
-  font-weight: 500;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 209px);
+  font-size: 20px;
+
+  @media (max-width: 768px) {
+    height: calc(100vh - 179px);
+
+  }
+
 }
 
 .milestone-table-body {
-  height: calc(100vh - 361px);
+  height: calc(100vh - 347px);
   overflow: hidden;
 
   @media (max-width: 768px) {
@@ -175,4 +186,12 @@
     width: calc(100vw - 303px);
     overflow: auto;
   }
+
+}
+
+@media (max-width: 768px) {
+  .milestone-table-tbody {
+    width: 100%;
+  }
+
 }

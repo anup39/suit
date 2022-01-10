@@ -46,10 +46,16 @@ const AssignProjectModal = ({ handleClose }) => {
         </select>
       </form>
       <div className="assign-work-submit-div">
-        <span className="assign-work-cancel-button" onClick={handleClose}>
+        <button
+          className="assign-work-cancel-button"
+          onClick={handleClose}
+          type="button"
+        >
           Cancel
-        </span>
-        <span className="assign-work-submit-button">Assign</span>
+        </button>
+        <button className="assign-work-submit-button" type="button">
+          Assign
+        </button>
       </div>
     </div>
   );
