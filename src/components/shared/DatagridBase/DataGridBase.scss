@@ -2,9 +2,11 @@
 
 .data-grid-base {
   margin-top: 16px;
-  border: 1px solid #D4DEEA;
+  border: 1px solid #d4deea;
   border-radius: 3px;
   width: 100%;
+  min-height: 80vh;
+  overflow: scroll;
 
   @media (max-width: 768px) {
     margin-top: 0;

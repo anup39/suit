@@ -50,7 +50,6 @@ const PublicUserFeedback = () => {
         <MobileDataRow />
         <MobileDataRow />
         <MobileDataRow />
-
         <MobileDataRow />
         <MobileDataRow />
       </div>

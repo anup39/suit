@@ -18,7 +18,6 @@ const ViewUserFeedback = () => {
         <MobileDataViewRow />
         <MobileDataViewRow />
         <MobileDataViewRow />
-
         <MobileDataViewRow />
         <MobileDataViewRow />
       </div>

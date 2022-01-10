@@ -17,14 +17,10 @@
   width: 300px;
   height: 40px;
 }
-.project-management-search-div .search-icon {
-  position: absolute;
-  right: 10px;
-}
 
 .project-management-search-icon {
   position: absolute;
-  margin-top: 6px;
+  margin-top: 10px;
   margin-left: 5px;
   color: $search-icon-color;
 }
@@ -66,4 +62,5 @@
   display: table-cell;
   table-layout: fixed;
   padding-right: 10px;
+  font-size: $table-header-font-size;
 }

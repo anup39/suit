@@ -45,15 +45,15 @@
   padding: 10px;
   display: table;
   width: 100%;
-  color: $table-header-text-color;
-  font-weight: $table-header-font-weight;
-  font-size: $table-header-font-size;
 }
 
 .user-role-table-header span {
   display: table-cell;
   table-layout: fixed;
   padding-right: 10px;
+  color: $table-header-text-color;
+  font-weight: $table-header-font-weight;
+  font-size: $table-header-font-size;
 }
 .user-roles-check-input {
   width: 3%;

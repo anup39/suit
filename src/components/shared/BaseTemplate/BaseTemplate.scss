@@ -7,6 +7,7 @@
   padding: 15px 40px 10px 40px;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 
   @media (max-width: 1024px) {
     padding: 15px;
@@ -20,18 +21,17 @@
 .header {
   margin: 0;
   font-size: 20px;
-  color: #364A63;
+  color: #364a63;
   margin-bottom: 10px;
 
   @media (max-width: 991.98px) {
     font-size: 18px;
   }
-
 }
 
 .footer {
-  border-top: 1px solid #D4DEEA;
+  border-top: 1px solid #d4deea;
   padding: 14px 14px 10px 14px;
-  color: #8094AE;
+  color: #8094ae;
   font-size: 12px;
 }

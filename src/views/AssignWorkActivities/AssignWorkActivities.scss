@@ -34,7 +34,8 @@
   table-layout: fixed;
   padding: 10px;
   color: $table-header-text-color;
-  font-weight: 500;
+  font-weight: $table-header-font-weight;
+  font-size: $table-header-font-size;
   white-space: nowrap;
 }
 

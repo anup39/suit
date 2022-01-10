@@ -4,6 +4,7 @@ import AutorenewOutlinedIcon from '@mui/icons-material/AutorenewOutlined';
 import CommentIcon from '@mui/icons-material/Comment';
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import { Modal } from '@mui/material';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
@@ -12,7 +13,7 @@ import ChangeRequest from './components/ChangeRequest/ChangeRequest';
 import FieldLogs from './components/FieldLogs/FieldLogs';
 import Milestone from './components/Milestone/Milestone';
 
-const EditMenu = () => {
+const EditMenu = ({ handleCancel }) => {
   const [open, setOpen] = React.useState(false);
   const [option, setOption] = React.useState(0);
   const handleOpen = (e) => {
@@ -90,12 +91,18 @@ const EditMenu = () => {
           </div>
         </span>
         <span className="decision-div">
-          <span className="cancel-button">Cancel</span>
+          <span className="cancel-button" onClick={() => handleCancel()}>
+            Cancel
+          </span>
           <span className="update-button">Update</span>
         </span>
       </div>
     </>
   );
+};
+
+EditMenu.propTypes = {
+  handleCancel: PropTypes.func.isRequired,
 };
 
 export default EditMenu;

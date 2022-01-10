@@ -68,14 +68,14 @@
   padding: 10px;
   display: table;
   width: 100%;
-  color: $table-header-text-color;
-  font-weight: $table-header-font-weight;
-  font-size: $table-header-font-size;
 }
 
 .worklist-table-header span {
   display: table-cell;
   table-layout: fixed;
+  font-size: $table-header-font-size;
+  font-weight: $table-header-font-weight;
+  color: $table-header-text-color;
 }
 
 .worklist-management-check-input {

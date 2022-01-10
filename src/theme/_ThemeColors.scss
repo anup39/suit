@@ -6,6 +6,7 @@ $form-submit-button-color: #e78201;
 $form-cancel-button-color: #8094ae;
 
 // Borders
+$input-form-border-color: #8094ae;
 $border-colors: rgb(153, 153, 153);
 $border-size: 1px;
 $border-radius-size: 5px;
@@ -13,8 +14,8 @@ $border-radius-size: 5px;
 // Table Headers
 $table-header-text-color: rgb(104, 104, 104);
 $table-header-height: 50px;
-$table-header-font-weight: 500;
-$table-header-font-size: 17px;
+$table-header-font-weight: bold;
+$table-header-font-size: 14px;
 
 //Table Data
 $table-data-color-1: rgb(59, 59, 59);
