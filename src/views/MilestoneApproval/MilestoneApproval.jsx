@@ -47,6 +47,7 @@ const MilestoneApproval = ({ authToken, milestoneData }) => {
             />
           </div>
         </div>
+        <div className='milestone-table-tbody'>
         <div className="milestone-table">
           <div className="milestone-header">
             <span className="milestone-approval-checkInput">
@@ -104,6 +105,7 @@ const MilestoneApproval = ({ authToken, milestoneData }) => {
             </div>
             </>
           )}
+        </div>
         </div>
       </DatagridBase>
     </BaseTemplate>
