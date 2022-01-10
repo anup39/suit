@@ -17,7 +17,7 @@ const ViewDocumentsModal = () => {
       <div className="modal-head">Upload Documents</div>
       <div className="modal-container">
         <div className="modal-box">
-          <button className="img-btn">
+          <button className="img-btn" type="button">
             {' '}
             <FileDownloadIcon />
             Download All

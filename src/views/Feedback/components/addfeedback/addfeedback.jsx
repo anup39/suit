@@ -4,11 +4,11 @@ import './addfeedback.scss';
 import { Modal } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import UploadDocumentsModal from './upload.documents.modal';
 
-// eslint-disable-next-line react/display-name
 const AddFeedback = ({ isOpen, isClose }) => {
   const [modalOpen, setModalOpen] = React.useState(false);
 
@@ -99,6 +99,11 @@ const AddFeedback = ({ isOpen, isClose }) => {
       </Drawer>
     </>
   );
+};
+
+AddFeedback.propTypes = {
+  isOpen: PropTypes.func.isRequired,
+  isClose: PropTypes.func.isRequired,
 };
 
 export default AddFeedback;
