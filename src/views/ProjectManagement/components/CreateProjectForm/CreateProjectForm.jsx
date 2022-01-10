@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createNewProject } from '../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 
-const CreateProjectForm = ({ handelClose }) => {
+const CreateProjectForm = ({ handelClose, editForm }) => {
   const [name, setName] = useState('');
   const [client, setClient] = useState('');
   const [description, setDescription] = useState('');
@@ -38,7 +38,8 @@ const CreateProjectForm = ({ handelClose }) => {
 
   return (
     <div className="create-project-form-base-div">
-      <h2>Create Project</h2>
+      {editForm ? <h2>Edit Project</h2> : <h2>Create Project</h2>}
+
       <form className="create-project-form" onSubmit={handelSubmit}>
         <label>Project Name</label>
         <input onChange={(e) => setName(e.target.value)} value={name} />
@@ -90,6 +91,7 @@ const CreateProjectForm = ({ handelClose }) => {
 
 CreateProjectForm.propTypes = {
   handelClose: PropTypes.isRequired,
+  editForm: PropTypes.string.isRequired,
 };
 
 export default CreateProjectForm;

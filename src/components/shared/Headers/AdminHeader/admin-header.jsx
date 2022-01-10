@@ -11,7 +11,9 @@ import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
+import { getUserData } from '../../../../redux/user-redux/user.selectors';
 import classes from './styles/admin.header.module.scss';
 import {
   AdminAccountIcon,
@@ -56,6 +58,8 @@ const AdminHeaderComponent = () => {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const userData = useSelector(getUserData);
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -158,8 +162,12 @@ const AdminHeaderComponent = () => {
                 </AdminAccountIcon>
               </IconButton>
               <AdminRoleContainer>
-                <AdminInfoRole>Adminstrator</AdminInfoRole>
-                <AdminInfoName>Leonardo M</AdminInfoName>
+                <AdminInfoRole>
+                  {userData.isAuthentcated && userData.userData.roles[0]}
+                </AdminInfoRole>
+                <AdminInfoName>
+                  {userData.isAuthentcated && userData.userData.username}
+                </AdminInfoName>
               </AdminRoleContainer>
               <AdminArrowDown>
                 <KeyboardArrowDownOutlinedIcon />

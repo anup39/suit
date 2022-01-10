@@ -1,12 +1,24 @@
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 
-import { GET_USER_BY_ID, GETUSERS } from '../../services/api';
+import {
+  DELETE_USER,
+  GET_ROLES,
+  GET_USER_BY_ID,
+  GETUSERS,
+  UPDATE_ROLES,
+} from '../../services/api';
 import ROLE_ACTION_TYPE from './role.action-types';
 import {
+  deleteUserError,
+  deleteUserSuccess,
   roleFailure,
   roleSuccess,
+  updateUserRoleAndCompanyError,
+  updateUserRoleAndCompanySuccess,
   userDataFailure,
   userDataSuccess,
+  userRolesError,
+  userRolesSuccess,
 } from './role.actions';
 
 export function* getRoles(data) {
@@ -23,8 +35,52 @@ export function* getRoleSatrt() {
   yield takeLatest(ROLE_ACTION_TYPE.START, getRoles);
 }
 
+export function* getAllRoles(data) {
+  try {
+    const allRoles = yield call(GET_ROLES, data.payload);
+    yield put(userRolesSuccess(allRoles));
+  } catch (error) {
+    yield put(userRolesError(error.response.data));
+  }
+}
+
+export function* onGetAllRoles() {
+  yield takeLatest(ROLE_ACTION_TYPE.GET_USER_ROLES_LIST, getAllRoles);
+}
+
+export function* updateUserRoles(data) {
+  try {
+    const updatedData = yield call(UPDATE_ROLES, data.payload);
+    yield put(updateUserRoleAndCompanySuccess(updatedData));
+  } catch (error) {
+    yield put(updateUserRoleAndCompanyError(error.response.data));
+  }
+}
+
+export function* onUpdateUserRoles() {
+  yield takeLatest(ROLE_ACTION_TYPE.UPDATE_USER_ROLE, updateUserRoles);
+}
+
+export function* deleteUser(data) {
+  try {
+    const deletedUser = yield call(DELETE_USER, data.payload);
+    yield put(deleteUserSuccess(deletedUser));
+  } catch (error) {
+    yield put(deleteUserError(error.response.data));
+  }
+}
+
+export function* onDeleteUser() {
+  yield takeLatest(ROLE_ACTION_TYPE.DELETE_USER, deleteUser);
+}
+
 export function* roleSaga() {
-  yield all([call(getRoleSatrt)]);
+  yield all([
+    call(getRoleSatrt),
+    call(onGetAllRoles),
+    call(onUpdateUserRoles),
+    call(onDeleteUser),
+  ]);
 }
 
 export function* getUserData(data) {

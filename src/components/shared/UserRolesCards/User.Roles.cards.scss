@@ -12,6 +12,8 @@ div.table {
 div.table span {
   display: table-cell;
   table-layout: fixed;
+  padding-right: 10px;
+  word-break: break-all;
 }
 
 .user-roles-card-check-input {

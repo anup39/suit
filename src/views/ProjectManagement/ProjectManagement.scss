@@ -1,4 +1,5 @@
 @import '../../theme/ThemeColors';
+
 .new_project_button {
   width: 150px;
   margin-right: 0px;
@@ -48,4 +49,21 @@
   display: block;
   border-bottom: 1px solid rgb(39, 39, 39);
   padding: 10px;
+}
+
+.project-management-table-header {
+  border-bottom: $border-size solid $border-colors;
+  align-items: center;
+  padding: 10px;
+  display: table;
+  width: 100%;
+  color: $table-header-text-color;
+  font-weight: $table-header-font-weight;
+  font-size: $table-header-font-size;
+}
+
+.project-management-table-header span {
+  display: table-cell;
+  table-layout: fixed;
+  padding-right: 10px;
 }

@@ -15,9 +15,9 @@ import image from '../../assets/signin-info.png';
 import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import { userSigninStart } from '../../redux/user-redux/user.actions';
 import {
+  getIfAuthenticated,
   getLoadingStatus,
   getSigninError,
-  getUserData,
 } from '../../redux/user-redux/user.selectors';
 import schema from './sign-in.schems';
 import classes from './styles/sign-in.module.scss';
@@ -27,7 +27,7 @@ const SigninPage = () => {
   const dispatch = useDispatch();
   const getError = useSelector(getSigninError);
 
-  const userData = useSelector(getUserData);
+  const userData = useSelector(getIfAuthenticated);
   const onLoading = useSelector(getLoadingStatus);
   const [isLoading, setIsLoading] = useState(false);
 

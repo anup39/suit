@@ -1,8 +1,12 @@
 import './EditMenu.scss';
 
+import AutorenewOutlinedIcon from '@mui/icons-material/AutorenewOutlined';
+import CommentIcon from '@mui/icons-material/Comment';
+import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import { Modal } from '@mui/material';
 import React from 'react';
 
+import WebExIcon from '../../../../../assets/webex-icon.png';
 import ActivityReport from './components/ActivityReport/ActivityReport';
 import ChangeRequest from './components/ChangeRequest/ChangeRequest';
 import FieldLogs from './components/FieldLogs/FieldLogs';
@@ -76,7 +80,14 @@ const EditMenu = () => {
         </span>
         <span>
           <p>Control Activity</p>
-          <div className="edit-div">+ 2 Files</div>
+          <div>
+            <span className="field-updates-body-controlActivity">
+              <AutorenewOutlinedIcon className="control-activity-icons" />
+              <UploadFileOutlinedIcon className="control-activity-icons" />
+              <CommentIcon className="control-activity-icons" />
+              <img alt="Webex Icon" className="webex-icon" src={WebExIcon} />
+            </span>
+          </div>
         </span>
         <span className="decision-div">
           <span className="cancel-button">Cancel</span>

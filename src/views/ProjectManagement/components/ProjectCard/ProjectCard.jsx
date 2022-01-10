@@ -32,7 +32,7 @@ const ProjectCard = ({
   };
 
   return (
-    <div className="project-card-base-div table">
+    <div className="project-card-base-div">
       <span className="project-card-check-input">
         <input type="checkbox" />
       </span>
