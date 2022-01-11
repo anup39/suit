@@ -5,7 +5,7 @@ import UserRoleCard from '../../UserRolesCards/UserRoleCard';
 
 const UserRoles = ({ currentItems }) => {
   return (
-    <div>
+    <div className="user-role-table-body">
       {currentItems &&
         currentItems.map((user) => (
           <UserRoleCard
