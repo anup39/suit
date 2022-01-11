@@ -98,7 +98,7 @@ const AssignWorkActivities = () => {
               <span className="assign-work-activities-project-name">
                 Project Name
               </span>
-              <span className="assign-work-activities-comapny">Company</span>
+              <span className="assign-work-activities-company">Company</span>
               <span className="assign-work-activities-taskId">Task Id</span>
               <span className="assign-work-activities-task-name">
                 Task Name
