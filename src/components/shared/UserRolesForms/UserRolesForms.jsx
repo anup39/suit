@@ -63,14 +63,14 @@ const UserRolesForms = ({
   }, []);
 
   return (
-    <div className="form-div">
+    <div className="userroles-form-base-div">
       {!editUser ? (
         <FormHeader>Add User Role</FormHeader>
       ) : (
         <FormHeader>Edit User Role</FormHeader>
       )}
       {editUser ? (
-        <form className="form">
+        <form className="userroles-form-container">
           <label className="form_label">Username</label>
           <input className="form_inputs_disabled" disabled value={userName} />
 
@@ -129,21 +129,29 @@ const UserRolesForms = ({
 
       {!editUser ? (
         <div className="form-submit">
-          <p className="cancel" onClick={handelCancel}>
+          <button className="cancel" onClick={handelCancel} type="button">
             Cancel
-          </p>
-          <span className="submit-button" onClick={handelAddUserRole}>
+          </button>
+          <button
+            className="submit-button"
+            onClick={handelAddUserRole}
+            type="button"
+          >
             Save
-          </span>
+          </button>
         </div>
       ) : (
         <div className="form-submit">
-          <p className="cancel" onClick={handelCancel}>
+          <button className="cancel" onClick={handelCancel} type="button">
             Cancel
-          </p>
-          <span className="submit-button" onClick={handelEditUser}>
+          </button>
+          <button
+            className="submit-button"
+            onClick={handelEditUser}
+            type="button"
+          >
             Save
-          </span>
+          </button>
         </div>
       )}
     </div>

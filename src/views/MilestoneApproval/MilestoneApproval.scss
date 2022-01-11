@@ -121,7 +121,7 @@
 }
 
 .milestone-table-body {
-  height: calc(100vh - 359px);
+  height: calc(100vh - 351px);
   overflow: hidden;
 
   @media (max-width: 1024px) {
@@ -135,7 +135,7 @@
   }
 }
 
-.mobile_table {
+.mobile_table_milestone {
   height: calc(100vh - 213px);
   overflow: auto;
   display: none;

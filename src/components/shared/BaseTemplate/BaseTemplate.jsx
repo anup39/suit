@@ -7,7 +7,7 @@ const BaseTemplate = ({ children, title }) => {
   return (
     <>
       <div className="base-div">
-        <h2 className="header">{title}</h2>
+        {title ? <h2 className="header">{title}</h2> : ''}
         {children}
       </div>
       <p className="footer">Powered By Negentis</p>

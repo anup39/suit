@@ -34,7 +34,6 @@
     margin: 0;
     font-size: 20px;
     color: #364a63;
-    margin-bottom: 10px;
 
     @media (max-width: 991.98px) {
       font-size: 18px;
@@ -63,7 +62,7 @@
 
 .work-activity-assign-logo {
   font-size: 18px;
-  padding-left: 5pxs;
+  margin-right: 5px;
 }
 
 .assign-work-activity-table-tbody {
@@ -105,7 +104,7 @@
 // }
 
 .assign-work-activity-table-body {
-  height: calc(100vh - 359px);
+  height: calc(100vh - 347px);
   overflow: hidden;
 
   @media (max-width: 1024px) {
@@ -120,9 +119,10 @@
 .assign-work-activity-table-header span {
   display: table-cell;
   padding: 15px 10px;
+
   table-layout: fixed;
   padding: 10px;
-  color: $table-header-text-color;
+  color: #8094ae;
   font-weight: $table-header-font-weight;
   font-size: $table-header-font-size;
   white-space: nowrap;
@@ -214,7 +214,7 @@
   border-radius: 5px;
 }
 
-.mobile_table {
+.mobile_table_assignwork {
   height: calc(100vh - 239px);
   overflow: auto;
   display: none;

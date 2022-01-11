@@ -1,5 +1,54 @@
 @import '../../theme/ThemeColors';
 
+.work-list-table-body {
+  height: calc(100vh - 347px);
+  overflow: hidden;
+
+
+  @media (max-width: 1024px) {
+    height: calc(100vh - 313px);
+
+  }
+
+  @media (max-width: 991.98px) {
+    display: none;
+  }
+
+}
+
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+  }
+
+  button {
+    background: #0160e0;
+    color: white;
+    padding: 6px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .header {
+    margin: 0;
+    font-size: 20px;
+    color: #364a63;
+
+    @media (max-width: 991.98px) {
+      font-size: 18px;
+    }
+  }
+}
+
 .add-task-button {
   background-color: $button-colors-primary;
   padding: 10px 30px;
@@ -15,69 +64,97 @@
 }
 
 .worklist-search-div {
-  height: 50px;
-  width: 100%;
-  border-bottom: $border-size solid $border-colors;
+
   display: flex;
   align-items: center;
+  padding: 0 15px;
+  height: 60px;
+  border-bottom: 1px solid #d4deea;
 }
 
 .worklist-export-button {
   background-color: $button-colors-primary;
-  padding: 10px 25px;
-  text-align: center;
   color: #fff;
-  margin-right: 10px;
+  padding: 10px 15px;
   margin-left: auto;
+  border-radius: 5px;
   cursor: pointer;
-  border-radius: $button-border-radius;
   display: flex;
   justify-content: center;
-  white-space: nowrap;
+  align-items: center;
+  border: none;
+  outline: none;
+  font-size: 14px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 7px;
+  }
 }
 
 .worklist-export-icon {
-  margin-right: 10px;
+  font-size: 18px;
+  margin-right: 5px;
 }
 
 .worklist-input-container {
-  position: relative;
-  margin-left: 10px;
-  width: 300px;
-  margin-right: 20px;
-  height: 50px;
-  margin-top: 15px;
+  width: 25%;
+  margin-right: 16px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-right: 5px;
+  }
 }
 
 .search-icon {
   position: absolute;
-  top: 4px;
-  left: 5px;
-  color: $search-icon-color;
+  margin-top: 6px;
+  margin-left: 8px;
+  color: #8094ae;
+  font-size: 18px;
 }
 
-.worklist-input-container > input {
-  padding-left: 40px;
+.worklist-input-container>input {
   height: 30px;
   width: 100%;
+  padding-left: 28px;
+  border: 1px solid #d4deea;
+  color: #8094ae;
+  border-radius: 3px;
 }
 
 .worklist-table-header {
-  border-bottom: $border-size solid $border-colors;
-  align-items: center;
-  padding: 10px;
   display: table;
   width: 100%;
-  vertical-align: middle;
+  height: 40px;
+  font-size: 14px;
+  border-bottom: 1px solid #d4deea;
   background: #f8f9fc;
+  font-weight: 600;
+  // padding: 0px 7px;
+  color: #8094ae;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 }
 
 .worklist-table-header span {
   display: table-cell;
+  padding: 15px 10px;
+
   table-layout: fixed;
-  font-size: $table-header-font-size;
+  padding: 10px;
+  color: #8094ae;
   font-weight: $table-header-font-weight;
-  color: $table-header-text-color;
+  font-size: $table-header-font-size;
+  white-space: nowrap;
+  vertical-align: middle;
+
+  svg {
+    font-size: 18px;
+  }
 }
 
 .worklist-management-check-input {
@@ -116,4 +193,68 @@
 
 .export-csv-button {
   all: unset;
+}
+
+.mobile_table_worklist {
+  height: calc(100vh - 239px);
+  overflow: auto;
+  display: none;
+
+
+
+  @media (max-width: 991.98px) {
+    height: calc(100vh - 244px);
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    height: calc(100vh - 230px);
+    display: block;
+
+  }
+
+
+  >div:nth-child(even) {
+    background: #d4deea;
+
+    .grid_3_1 {
+      border-top: 1px solid white;
+    }
+  }
+}
+
+.grid_3_1 {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  gap: 1rem;
+  border-top: 1px solid #d4deea;
+  padding: 10px;
+
+  h3 {
+    color: #8094ae;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  svg {
+    fill: #929db0;
+  }
+
+  p {
+    margin: 0;
+    color: #364a63;
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    &.blue_text {
+      color: #2586ff;
+    }
+
+    span {
+      color: #2586ff;
+    }
+  }
 }

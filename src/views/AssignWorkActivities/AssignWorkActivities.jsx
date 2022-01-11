@@ -118,7 +118,7 @@ const AssignWorkActivities = () => {
               itemData={workListData}
               itemsPerPage={7}
             />
-            <div className="mobile_table">
+            <div className="mobile_table_assignwork">
               <MobileDataRow />
               <MobileDataRow />
               <MobileDataRow />

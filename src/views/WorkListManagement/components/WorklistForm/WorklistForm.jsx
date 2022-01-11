@@ -83,241 +83,249 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
   return (
     <div className="worklist-form-base-div">
       {!isEdit ? <h2>Add Worklist</h2> : <h2>Edit Worklist</h2>}
-      <div className="worklist-form-container">
-        <form onSubmit={handleSubmit}>
-          <span>
-            <label>Project Name</label>
-            {isEdit ? (
-              <select
-                className="select-company-field-disabled"
-                disabled
-                name="projectsId"
-                onChange={(e) => handleFormDataChange(e)}
-                value={workListFormData.projectsId}
-              >
-                {projectList.map((project) => (
-                  <option key={project.id} value={project.id}>
-                    {project.name}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              <select
-                className="select-company-field"
-                name="projectsId"
-                onChange={(e) => handleFormDataChange(e)}
-                value={workListFormData.projectsId}
-              >
-                {projectList.map((project) => (
-                  <option key={project.id} value={project.id}>
-                    {project.name}
-                  </option>
-                ))}
-              </select>
-            )}
-          </span>
-
-          <span>
-            <label>Task ID</label>
-            <input
-              name="taskId"
+      <form className="worklist-form-container" onSubmit={handleSubmit}>
+        <div>
+          <label>Project Name</label>
+          {isEdit ? (
+            <select
+              className="select-company-field-disabled"
+              disabled
+              name="projectsId"
               onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.taskId}
-            />
-          </span>
-
-          <span>
-            <label>Task Name</label>
-            <input
-              name="taskName"
+              value={workListFormData.projectsId}
+            >
+              {projectList.map((project) => (
+                <option key={project.id} value={project.id}>
+                  {project.name}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <select
+              className="select-company-field"
+              name="projectsId"
               onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.taskName}
-            />
-          </span>
+              value={workListFormData.projectsId}
+            >
+              {projectList.map((project) => (
+                <option key={project.id} value={project.id}>
+                  {project.name}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
 
-          <span>
-            <label>Task Description</label>
-            <textarea
-              name="taskDescription"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.taskDescription}
-            />
-          </span>
+        <div>
+          <label>Task ID</label>
+          <input
+            name="taskId"
+            onChange={(e) => handleFormDataChange(e)}
+            value={workListFormData.taskId}
+          />
+        </div>
 
-          <span>
-            <label>Ismilestone</label>
-            {/* <input
+        <div>
+          <label>Task Name</label>
+          <input
+            name="taskName"
+            onChange={(e) => handleFormDataChange(e)}
+            value={workListFormData.taskName}
+          />
+        </div>
+
+        <div>
+          <label>Task Description</label>
+          <textarea
+            name="taskDescription"
+            onChange={(e) => handleFormDataChange(e)}
+            rows={3}
+            value={workListFormData.taskDescription}
+          />
+        </div>
+
+        <div>
+          <label>Ismilestone</label>
+          {/* <input
               name="isMilestone"
               onChange={(e) => handleFormDataChange(e)}
               value={workListFormData.isMilestone}
             /> */}
-            <select
-              className="select-company-field"
-              name="isMilestone"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.isMilestone}
-            >
-              <option value={0}>Yes</option>
-              <option selected value={1}>
-                No
-              </option>
-            </select>
-          </span>
+          <select
+            className="select-company-field"
+            name="isMilestone"
+            onChange={(e) => handleFormDataChange(e)}
+            value={workListFormData.isMilestone}
+          >
+            <option value={0}>Yes</option>
+            <option selected value={1}>
+              No
+            </option>
+          </select>
+        </div>
 
-          <span>
-            <label>Type</label>
+        <div>
+          <label>Type</label>
+          <input
+            name="type"
+            onChange={(e) => handleFormDataChange(e)}
+            value={workListFormData.type}
+          />
+        </div>
+
+        <div>
+          <label>Priority</label>
+          <input
+            name="priority"
+            onChange={(e) => handleFormDataChange(e)}
+            value={workListFormData.priority}
+          />
+        </div>
+
+        <div className="worklist-management-gird">
+          <div>
+            <label>Start Date</label>
             <input
-              name="type"
+              name="start"
               onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.type}
+              type="date"
+              value={workListFormData.start}
             />
-          </span>
-
-          <span>
-            <label>Priority</label>
-            <input
-              name="priority"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.priority}
-            />
-          </span>
-
-          <div className="worklist-management-gird">
-            <span>
-              <label>Start Date</label>
-              <input
-                name="start"
-                onChange={(e) => handleFormDataChange(e)}
-                type="date"
-                value={workListFormData.start}
-              />
-            </span>
-
-            <span>
-              <label>End Date</label>
-              <input
-                name="end"
-                onChange={(e) => handleFormDataChange(e)}
-                type="date"
-                value={workListFormData.end}
-              />
-            </span>
           </div>
 
-          <span>
-            <label>Street</label>
+          <div>
+            <label>End Date</label>
             <input
-              name="street"
+              name="end"
               onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.street}
+              type="date"
+              value={workListFormData.end}
             />
-          </span>
+          </div>
+        </div>
 
-          <span>
-            <label>Zip Code</label>
+        <div>
+          <label>Street</label>
+          <input
+            name="street"
+            onChange={(e) => handleFormDataChange(e)}
+            value={workListFormData.street}
+          />
+        </div>
+
+        <div>
+          <label>Zip Code</label>
+          <input
+            name="zipCode"
+            onChange={(e) => handleFormDataChange(e)}
+            value={workListFormData.zipCode}
+          />
+        </div>
+
+        <div>
+          <label>City</label>
+          <input
+            name="city"
+            onChange={(e) => handleFormDataChange(e)}
+            value={workListFormData.city}
+          />
+        </div>
+
+        <div>
+          <label>Country</label>
+          <input
+            name="country"
+            onChange={(e) => handleFormDataChange(e)}
+            value={workListFormData.country}
+          />
+        </div>
+        <div className="worklist-management-gird">
+          <div>
+            <label>Latitude</label>
             <input
-              name="zipCode"
+              name="latitude"
               onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.zipCode}
+              value={workListFormData.latitude}
             />
-          </span>
-
-          <span>
-            <label>City</label>
-            <input
-              name="city"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.city}
-            />
-          </span>
-
-          <span>
-            <label>Country</label>
-            <input
-              name="country"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.country}
-            />
-          </span>
-          <div className="worklist-management-gird">
-            <span>
-              <label>Latitude</label>
-              <input
-                name="latitude"
-                onChange={(e) => handleFormDataChange(e)}
-                value={workListFormData.latitude}
-              />
-            </span>
-
-            <span>
-              <label>Longitude</label>
-              <input
-                name="longitude"
-                onChange={(e) => handleFormDataChange(e)}
-                value={workListFormData.longitude}
-              />
-            </span>
           </div>
 
-          <span>
-            <label>Geofence</label>
-
+          <div>
+            <label>Longitude</label>
             <input
-              name="geoFence"
+              name="longitude"
               onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.geoFence}
+              value={workListFormData.longitude}
             />
-          </span>
+          </div>
+        </div>
 
-          <span>
-            <label>Note</label>
+        <div>
+          <label>Geofence</label>
 
-            <textarea
-              name="note"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.note}
-            />
-          </span>
+          <input
+            name="geoFence"
+            onChange={(e) => handleFormDataChange(e)}
+            value={workListFormData.geoFence}
+          />
+        </div>
 
-          <span>
-            <label>Documents</label>
-            <input
-              name="documents"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.documents}
-            />
-          </span>
+        <div>
+          <label>Note</label>
 
-          <span>
-            <label>Task Status</label>
-            {/* <input
+          <textarea
+            name="note"
+            onChange={(e) => handleFormDataChange(e)}
+            rows={3}
+            value={workListFormData.note}
+          />
+        </div>
+
+        <div>
+          <label>Documents</label>
+          <input
+            name="documents"
+            onChange={(e) => handleFormDataChange(e)}
+            value={workListFormData.documents}
+          />
+        </div>
+
+        <div>
+          <label>Task Status</label>
+          {/* <input
             
             /> */}
-            <select
-              className="select-company-field"
-              name="taskStatus"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.taskStatus}
-            >
-              <option> Not assigned</option>
-              <option> Not started</option>
-              <option> In progress/started</option>
-              <option> Waiting for feedback</option>
-              <option> Suspended</option>
-              <option> Completed</option>
-              <option> Canceled</option>
-              <option> Approved</option>
-            </select>
-          </span>
-        </form>
-      </div>
+          <select
+            className="select-company-field"
+            name="taskStatus"
+            onChange={(e) => handleFormDataChange(e)}
+            value={workListFormData.taskStatus}
+          >
+            <option> Not assigned</option>
+            <option> Not started</option>
+            <option> In progress/started</option>
+            <option> Waiting for feedback</option>
+            <option> Suspended</option>
+            <option> Completed</option>
+            <option> Canceled</option>
+            <option> Approved</option>
+          </select>
+        </div>
+      </form>
       <div className="worklist-submit-div">
-        <span className="worklist-cancel-button" onClick={handelClose}>
+        <button
+          className="worklist-cancel-button"
+          onClick={handelClose}
+          type="button"
+        >
           Cancel
-        </span>
-        <span className="worklist-submit-button" onClick={handleSubmit}>
+        </button>
+        <button
+          className="worklist-submit-button"
+          onClick={handleSubmit}
+          type="button"
+        >
           Submit
-        </span>
+        </button>
       </div>
     </div>
   );

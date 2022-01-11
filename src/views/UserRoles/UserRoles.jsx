@@ -9,6 +9,7 @@ import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import Pagination from '../../components/shared/Pagination/Pagination';
 import { roleStart } from '../../redux/User-Role/role.actions';
+import MobileDataRow from './mobile.data.row';
 
 const UserRoles = ({ currentUserData, userRoleData }) => {
   const dispatch = useDispatch();
@@ -20,14 +21,14 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
     <BaseTemplate title="User Roles">
       <DatagridBase>
         <div className="search-div">
-          <span className="input-container">
+          <div className="input-container">
             <input
               className="search-input"
               // onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="User Search"
             />
             <SearchOutlinedIcon className="search-icon" />
-          </span>
+          </div>
 
           <p className="delete-botton">Delete</p>
         </div>
@@ -53,6 +54,15 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
                 itemData={userRoleData}
                 itemsPerPage={10}
               />
+              <div className="mobile_table_userroles">
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+
+                <MobileDataRow />
+              </div>
             </div>
           </div>
         </div>

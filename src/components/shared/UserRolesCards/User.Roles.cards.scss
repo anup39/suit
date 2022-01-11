@@ -1,24 +1,39 @@
 @import '../../../theme/ThemeColors';
 
-.user-role-base {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.247);
-  padding: 15px;
-  width: 100%;
-  font-size: 18px;
+.user-role-table-body {
+  height: calc(100vh - 343px);
+  overflow: hidden;
+
+
+  @media (max-width: 1024px) {
+    height: calc(100vh - 349px);
+
+  }
+
+  @media (max-width: 991.98px) {
+    display: none;
+  }
 }
 
-div.table {
+.user-role-base {
   display: table;
   width: 100%;
+  border-bottom: 1px solid #D4DEEA;
+
+  span {
+    display: table-cell;
+    table-layout: fixed;
+    padding: 10px;
+    font-size: 14px;
+    vertical-align: middle;
+    color: #364A63;
+  }
+
 }
 
-div.table span {
-  display: table-cell;
-  table-layout: fixed;
-  padding-right: 10px;
-  word-break: break-all;
-  font-size: $table-data-font-size;
-}
+
+
+
 
 .user-roles-card-check-input {
   width: 3%;
@@ -65,10 +80,4 @@ div.table span {
 
 .header {
   color: #364a63;
-}
-
-.user-role-base {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.247);
-  padding: 15px;
-  width: 100%;
 }

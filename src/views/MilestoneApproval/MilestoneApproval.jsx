@@ -96,7 +96,7 @@ const MilestoneApproval = ({ authToken, milestoneData }) => {
                 itemsPerPage={7}
                 componentNo={3}
               />
-              <div className="mobile_table">
+              <div className="mobile_table_milestone">
                 <MobileDataRow />
                 <MobileDataRow />
                 <MobileDataRow />
