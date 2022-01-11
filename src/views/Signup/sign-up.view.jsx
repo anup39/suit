@@ -7,8 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import logo from '../../assets/logoPicture.png';
 import image from '../../assets/signin-info.png';
 import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
+import englishToGerman from '../../constants/Language/enToGr';
 import { userSignupStart } from '../../redux/user-redux/user.actions';
 import {
+  getCurrentLanguage,
   getLoadingStatus,
   getSignedupError,
 } from '../../redux/user-redux/user.selectors';
@@ -25,6 +27,7 @@ const SignupPage = ({ isRedTheme }) => {
   const dispatch = useDispatch();
   const getError = useSelector(getSignedupError);
   const onLoading = useSelector(getLoadingStatus);
+  const currentLanguage = useSelector(getCurrentLanguage);
   const [alerts, setAlerts] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -186,7 +189,7 @@ const SignupPage = ({ isRedTheme }) => {
               red={isRedTheme}
               type="submit"
             >
-              Sign up
+              {englishToGerman.signup[currentLanguage]}
             </FormButton>
           </form>
           <div className={classes.already_user_container}>

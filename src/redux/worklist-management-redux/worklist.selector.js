@@ -9,3 +9,7 @@ export const getIsTaskDataByIdLoading = (state) => {
 export const getAllWorkListData = (state) => {
   return state.workListManagement.allWorkList;
 };
+
+export const getTasksByProject = (state) => {
+  return state.workListManagement.taskByProject;
+};

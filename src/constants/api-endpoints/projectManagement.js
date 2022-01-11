@@ -3,6 +3,7 @@ const PROJECT_MANAGEMENT_API = {
   GET_PROJECT_LIST: 'http://13.233.23.132:8080/api/listProjects',
   GET_PROJECT_DETAILS: 'http://13.233.23.132:8080/api/projectsDetails/',
   DELETE_PROJECT_DATA: 'http://13.233.23.132:8080/api/deleteProjects/',
+  // GET_PROJECT_DOCUMENTS : ""
 };
 
 export default PROJECT_MANAGEMENT_API;

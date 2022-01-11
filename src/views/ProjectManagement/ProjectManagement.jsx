@@ -57,7 +57,7 @@ const ProjectManagement = ({ userToken }) => {
 
   return (
     <BaseTemplate title="Project Management">
-      {value === 2 && (
+      {value === 1 && (
         <span
           className="new_project_button"
           onClick={() => setAddNewProject(true)}

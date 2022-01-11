@@ -79,11 +79,28 @@ export function* onDeleteProjectData() {
   );
 }
 
+// export function* getProjectDocuments({ payload }) {
+//   try {
+//     const projectData = yield call(DELETE_PROJECT_DATA, payload);
+//     yield put(deleteProjectDataSuccess(projectData));
+//   } catch (err) {
+//     yield put(deleteProjectError(err.response.data));
+//   }
+// }
+
+// export function* onGetProjectDocuments() {
+//   yield takeLatest(
+//     PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DOCUMENTS,
+//     getProjectDocuments
+//   );
+// }
+
 export function* projectManagementSagas() {
   yield all([
     call(onCreateNewProjectStart),
     call(onGetAllProjectList),
     call(onGetProjectData),
     call(onDeleteProjectData),
+    // call(onGetProjectDocuments),
   ]);
 }

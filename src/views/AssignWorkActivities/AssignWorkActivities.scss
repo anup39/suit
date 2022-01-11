@@ -110,7 +110,6 @@
 
   @media (max-width: 1024px) {
     height: calc(100vh - 368px);
-
   }
 
   @media (max-width: 1024px) {
@@ -140,7 +139,7 @@
   }
 }
 
-.assign-work-activity-container>.assign-work-activity-search-icon {
+.assign-work-activity-container > .assign-work-activity-search-icon {
   position: absolute;
   margin-top: 6px;
   margin-left: 8px;
@@ -148,7 +147,7 @@
   font-size: 18px;
 }
 
-.assign-work-activity-container>input {
+.assign-work-activity-container > input {
   height: 30px;
   width: 100%;
   padding-left: 28px;
@@ -223,21 +222,17 @@
   @media (max-width: 1024px) {
     display: block;
     height: calc(100vh - 263px);
-
   }
 
   @media (max-width: 991.98px) {
     height: calc(100vh - 254px);
-
   }
 
   @media (max-width: 768px) {
     height: calc(100vh - 239px);
-
   }
 
-
-  >div:nth-child(even) {
+  > div:nth-child(even) {
     background: #d4deea;
 
     .grid_3_1 {

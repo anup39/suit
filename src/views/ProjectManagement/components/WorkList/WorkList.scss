@@ -3,7 +3,7 @@
   height: calc(600px + 10vh);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .work-list-header {
@@ -18,15 +18,19 @@
   width: calc(300px + 10%);
   padding: 0px 30px;
   height: 30px;
+  padding-left: 40px;
+}
+
+.work-list-input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .work-list-search-icon {
   position: absolute;
-  margin-top: 5px;
-  margin-left: 2px;
-  color: rgba(0, 0, 0, 0.548);
+  left: 5px;
 }
-
 .work-list-table-header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.247);
   padding: 15px;

@@ -6,8 +6,9 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import { deleteTaskByID } from '../../../../redux/worklist-management-redux/worklist.actions';
 import WorklistForm from '../WorklistForm/WorklistForm';
 
@@ -18,12 +19,14 @@ const WorkListManagementCard = ({
   isMilestone,
   workId,
   type,
-  authToken,
 }) => {
   const dispatch = useDispatch();
+  console.log(dispatch);
 
   const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = React.useState(false);
+
+  const authToken = useSelector(getUserAuthToken);
 
   const menuOpen = Boolean(menuAnchorEl);
   const handleMenuClick = (event) => {
@@ -47,11 +50,12 @@ const WorkListManagementCard = ({
       authToken,
       taskId: workId,
     };
-    handelMenuClose();
     dispatch(deleteTaskByID(data));
+
+    handelMenuClose();
   };
 
-  const isMilestoneName = isMilestone === 0 ? 'No' : 'Yes';
+  const isMilestoneName = isMilestone !== 0 ? 'No' : 'Yes';
 
   return (
     <>
@@ -98,7 +102,7 @@ const WorkListManagementCard = ({
             <MenuItem itmeId={workId} onClick={handelOpenEditDrawer}>
               Edit
             </MenuItem>
-            <MenuItem itmeId={workId} onClick={hadelDeleteTask}>
+            <MenuItem itmeId={workId} onClick={() => hadelDeleteTask()}>
               Delete
             </MenuItem>
           </Menu>
@@ -115,11 +119,6 @@ WorkListManagementCard.propTypes = {
   isMilestone: PropTypes.isRequired,
   workId: PropTypes.isRequired,
   type: PropTypes.isRequired,
-  authToken: PropTypes.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authToken: state.user.userData.accessToken,
-});
-
-export default connect(mapStateToProps)(WorkListManagementCard);
+export default WorkListManagementCard;

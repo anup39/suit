@@ -29,11 +29,12 @@ const AssignProjectModal = ({ handleClose }) => {
       <form className="assign-project-form-base">
         <label>Project Name</label>
         <select className="assign-project-select-input">
-          <option>Project 1</option>
-          <option>Project 2</option>
-          <option>Project 3</option>
-          <option>Project 4</option>
-          <option>Project 5</option>
+          {projectList &&
+            projectList.map((project) => (
+              <option key={project.id} value={project.id}>
+                {project.name}
+              </option>
+            ))}
         </select>
 
         <label>Company</label>

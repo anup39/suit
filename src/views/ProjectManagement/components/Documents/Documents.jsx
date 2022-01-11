@@ -1,19 +1,19 @@
 import './Documents.scss';
 
 import SearchIcon from '@mui/icons-material/Search';
-import Pagination from '@mui/material/Pagination';
-import React, { useState } from 'react';
+import React from 'react';
 
 import DocumentsCard from '../DocumentsCard/DocumentsCard';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { getProjectData } from '../../../../redux/project-management-redux/project.selector';
+// import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 
 const Documents = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalNoDiv, setTotalNoDiv] = useState(200);
-  const perPage = 10;
-  const handelChange = (event, val) => {
-    setCurrentPage(val);
-    setTotalNoDiv(200);
-  };
+  // const currentProject = useSelector(getProjectData);
+  // const authToken = useSelector(getUserAuthToken);
+  // const dispatch = useDispatch();
+
+  // React.useEffect(() => {}, []);
 
   return (
     <div className="documents-base-div">
@@ -22,14 +22,10 @@ const Documents = () => {
         <SearchIcon className="document-search-icon" />
       </div>
       <DocumentsCard />
-      <Pagination
-        className="pagination-numbers"
-        count={totalNoDiv / perPage}
-        onChange={handelChange}
-        page={currentPage}
-        shape="rounded"
-        variant="outlined"
-      />
+      <DocumentsCard />
+      <DocumentsCard />
+      <DocumentsCard />
+      <DocumentsCard />
     </div>
   );
 };

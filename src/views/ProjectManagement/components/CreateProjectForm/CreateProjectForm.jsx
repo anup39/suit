@@ -1,90 +1,92 @@
 import './CreateProjectForm.scss';
 import '../../../../theme/ButtonColors.scss';
 
+import { yupResolver } from '@hookform/resolvers/yup';
+import Button from '@mui/material/Button';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { createNewProject } from '../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
+import schema from './create-form-schema';
 
 const CreateProjectForm = ({ handelClose, editForm }) => {
-  const [name, setName] = useState('');
-  const [client, setClient] = useState('');
-  const [description, setDescription] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
 
-  const handelSubmit = () => {
-    const startDateConverted = moment(startDate).format('DD MMMM YYYY');
-    const endDateConverted = moment(endDate).format('DD MMMM YYYY');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-    const data = {
+  const onSubmit = (data) => {
+    // eslint-disable-next-line
+    data.startDate = moment(data.startDate).format('DD MMM YYYY');
+    // eslint-disable-next-line
+    data.completionDate = moment(data.completionDate).format('DD MMM YYYY');
+
+    const payloadData = {
       authToken,
-      newCompanyData: {
-        name,
-        clientName: client,
-        description,
-        startDate: startDateConverted,
-        completionDate: endDateConverted,
-      },
+      newCompanyData: data,
     };
-    dispatch(createNewProject(data));
+    dispatch(createNewProject(payloadData));
   };
 
   return (
     <div className="create-project-form-base-div">
       {editForm ? <h2>Edit Project</h2> : <h2>Create Project</h2>}
 
-      <form className="create-project-form" onSubmit={handelSubmit}>
+      <form className="create-project-form" onSubmit={handleSubmit(onSubmit)}>
         <label>Project Name</label>
-        <input onChange={(e) => setName(e.target.value)} value={name} />
-        {/* <span className="form-error-text">{errors.name?.message}</span> */}
+        <input {...register('name')} id="name" type="text" />
+        <span className="form-error-text">{errors.name?.message}</span>
 
         <label>Client</label>
-        <input onChange={(e) => setClient(e.target.value)} value={client} />
-        {/* <span className="form-error-text">{errors.clientName?.message}</span> */}
+        <input {...register('clientName')} id="clientName" type="text" />
+        <span className="form-error-text">{errors.clientName?.message}</span>
 
         <label>Description</label>
         <textarea
-          onChange={(e) => setDescription(e.target.value)}
           rows={6}
+          {...register('description')}
+          id="description"
           type="text"
-          value={description}
         />
-        {/* <span className="form-error-text">{errors.description?.message}</span> */}
+        <span className="form-error-text">{errors.description?.message}</span>
 
         <label>Start Date</label>
-        <input
-          onChange={(e) => setStartDate(e.target.value)}
-          type="date"
-          value={startDate}
-        />
-        {/* <span className="form-error-text">{errors.startDate?.message}</span> */}
+        <input {...register('startDate')} id="startDate" type="date" />
+        <span className="form-error-text">{errors.startDate?.message}</span>
 
         <label>Completion Date</label>
         <input
-          onChange={(e) => setEndDate(e.target.value)}
+          {...register('completionDate')}
+          id="completionDate"
           type="date"
-          value={endDate}
         />
         <span className="form-error-text">
-          {/* {errors.completionDate?.message} */}
+          {errors.completionDate?.message}
         </span>
-      </form>
 
-      <div className="create-project-form-submit-div">
-        <span className="cancel-button" onClick={handelClose}>
-          Cancel
-        </span>
-        <span className="submit_button_colors" onClick={() => handelSubmit()}>
-          Submit
-        </span>
-      </div>
+        <div className="create-project-form-submit-div">
+          <span className="cancel-button" onClick={handelClose}>
+            Cancel
+          </span>
+          <Button
+            className="create-project-submit-button"
+            type="submit"
+            variant="contained"
+          >
+            Submit
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };
