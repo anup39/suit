@@ -7,6 +7,8 @@ const USER_INITIAL_STATE = {
   userType: null,
   userData: '',
   isAuthenticated: false,
+
+  currentLanguage: 'en',
 };
 
 // eslint-disable-next-line default-param-last
@@ -58,6 +60,12 @@ const userReducer = (state = USER_INITIAL_STATE, action) => {
         isLoading: false,
         isAuthenticated: false,
         error: action.payload,
+      };
+
+    case USER_ACTION_TYPES.CHANGE_LANGUAGE:
+      return {
+        ...state,
+        currentLanguage: action.payload,
       };
 
     default:

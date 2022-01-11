@@ -20,12 +20,12 @@ import UserRolesForms from '../UserRolesForms/UserRolesForms';
 import Status from './styles/User.Roles.Card';
 
 const UserRoleCard = ({
-  username,
-  date,
-  role,
-  status,
-  userId,
-  companyName,
+  username = '',
+  date = '',
+  role = '',
+  status = '',
+  userId = '',
+  companyName = '',
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [drawerOpen, seteDrawerOpen] = useState(false);
@@ -140,12 +140,12 @@ const UserRoleCard = ({
 };
 
 UserRoleCard.propTypes = {
-  username: PropTypes.isRequired,
-  date: PropTypes.isRequired,
-  role: PropTypes.isRequired,
-  status: PropTypes.isRequired,
-  userId: PropTypes.isRequired,
-  companyName: PropTypes.isRequired,
+  username: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+  companyName: PropTypes.string.isRequired,
 };
 
 export default UserRoleCard;
