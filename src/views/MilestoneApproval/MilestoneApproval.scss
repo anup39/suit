@@ -121,8 +121,14 @@
 }
 
 .milestone-table-body {
-  height: calc(100vh - 351px);
+  height: calc(100vh - 359px);
   overflow: hidden;
+
+  @media (max-width: 1024px) {
+    height: calc(100vh - 370px);
+
+
+  }
 
   @media (max-width: 991.98px) {
     display: none;

@@ -70,6 +70,10 @@
   @media (max-width: 1024px) {
     width: calc(100vw - 303px);
     overflow: auto;
+
+    .pagination-base {
+      display: none;
+    }
   }
 
   @media (max-width: 768px) {
@@ -88,7 +92,7 @@
   // padding: 0px 7px;
   color: #8094ae;
 
-  @media (max-width: 991.98px) {
+  @media (max-width: 1024px) {
     display: none;
   }
 }
@@ -101,15 +105,15 @@
 // }
 
 .assign-work-activity-table-body {
-  height: calc(100vh - 297px);
+  height: calc(100vh - 359px);
   overflow: hidden;
 
   @media (max-width: 1024px) {
-    height: calc(100vh - 308px);
+    height: calc(100vh - 368px);
 
   }
 
-  @media (max-width: 991.98px) {
+  @media (max-width: 1024px) {
     display: none;
   }
 }
@@ -155,6 +159,10 @@
 
 .assign-work-activities-check-input {
   width: 2%;
+}
+
+.assign-work-activities-comapny {
+  width: 10%;
 }
 
 .assign-work-activities-project-name {
@@ -212,8 +220,13 @@
   overflow: auto;
   display: none;
 
-  @media (max-width: 991.98px) {
+  @media (max-width: 1024px) {
     display: block;
+    height: calc(100vh - 263px);
+
+  }
+
+  @media (max-width: 991.98px) {
     height: calc(100vh - 254px);
 
   }
