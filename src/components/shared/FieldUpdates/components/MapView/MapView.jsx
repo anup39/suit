@@ -3,10 +3,14 @@ import './MapView.scss';
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
 
+import MapWrapper from '../../../Openlayer/Openlayer';
+
 const MapView = () => {
   return (
     <div className="map-view-base-div">
-      <div className="map-view-map-div"> MAP </div>
+      <div className="map-view-map-div">
+        <MapWrapper />
+      </div>
       <div className="map-view-details-div">
         <h5 className="map-view-assign-project-header">Assign Project</h5>
         <div className="map-view-document-search-div">

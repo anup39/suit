@@ -2,6 +2,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr auto;
+
 }
 
 .signup_left {
@@ -18,9 +19,12 @@
 .left_header_blue {
   font-size: 60px;
   color: #008cec;
+  font-weight: 500;
   text-align: center;
+  font-family: 'Rubik', sans-serif;
   margin: 10px 10px 28px 10px;
 }
+
 
 .form_input_container {
   display: flex;
@@ -28,12 +32,20 @@
   margin: 0 0 10px 0;
 }
 
-.left_image {
+.left_image_container {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 400px;
+  height: calc(100vh - 220px);
+  max-height: 700px;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+  }
 }
 
 .left_bottom_logo {
@@ -45,6 +57,8 @@
   span {
     font-family: 'Rubik', sans-serif;
     font-size: 10px;
+    padding-right: 18px;
+
     color: #747474;
   }
 }
@@ -52,13 +66,14 @@
 .left_coyright {
   font-family: 'Rubik', sans-serif;
   font-size: 18px;
-  color: #e78201;
+  color: #E78201;
   text-align: center;
 }
 
 .left_logo {
   width: 100px;
 }
+
 
 .signup_right {
   width: 570px;
@@ -67,12 +82,12 @@
   align-items: center;
   justify-content: center;
   padding: 25px 50px;
-  background: #0160e0;
+  background: #0160E0;
 
-  > div {
+  >div {
     background: white;
     border-radius: 8px;
-    padding: 100px 40px;
+    padding: 50px 40px;
     width: 100%;
   }
 
@@ -84,7 +99,7 @@
     width: 400px;
     padding: 25px;
 
-    > div {
+    >div {
       padding: 25px;
     }
   }
@@ -93,8 +108,12 @@
     width: 100%;
     padding: 20px;
 
-    > div {
-      padding: 50px 15px;
+    button {
+      padding: 10px;
+    }
+
+    >div {
+      padding: 20px;
     }
 
     .left_header_blue {
@@ -105,25 +124,25 @@
 
     .right_header {
       font-size: 20px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .form_input {
-      padding: 10px;
+      padding: 8px;
     }
   }
 }
 
 .right_header {
-  color: #7499f1;
+  color: #7499F1;
   text-align: center;
-  font-size: 32px;
+  font-size: 30px;
   margin: 0 0 20px 0;
 }
 
 .form_label {
   color: #000;
-  padding: 0 0 5px 0;
+  padding: 0 0 2px 0;
   font-size: 14px;
 }
 
@@ -131,7 +150,7 @@
   padding: 15px;
   border-radius: 5px;
   outline: none;
-  border: 1px solid #b8b8b8;
+  border: 1px solid #B8B8B8;
 }
 
 .signup_error {
@@ -146,6 +165,11 @@
   font-family: 'Roboto';
   font-size: 14px;
   margin-top: 10px;
+
+  .create_account_text {
+    color: #698AFF;
+    padding-left: 5px;
+  }
 }
 
 .remember_me_text {
@@ -153,23 +177,68 @@
   align-items: center;
   justify-content: space-between;
 
-  label {
-    font-size: 14pxs;
-  }
-
   p {
-    color: #698aff;
+    color: #698AFF;
     margin: 0;
     font-size: 14px;
   }
 }
 
-.no_account_text {
-  text-align: center;
-  margin-top: 10px;
+.check_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-left: 22px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #000000;
+}
 
-  > .create_account_text {
-    color: blue;
-    cursor: pointer;
-  }
+.check_container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: #eee;
+  border-radius: 3px;
+}
+
+.check_container:hover input~.checkmark {
+  background-color: #ccc;
+}
+
+.check_container input:checked~.checkmark {
+  background-color: #698AFF;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.check_container input:checked~.checkmark:after {
+  display: block;
+}
+
+.check_container .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 3px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 1px 1px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }

@@ -63,6 +63,7 @@
     "@testing-library/user-event": "^12.8.3",
     "@webex/components": "^1.222.0",
     "@webex/widget-recents": "^0.44.0",
+    "@webex/widget-space": "^0.44.0",
     "@webex/widgets": "^1.23.0",
     "animate.css": "^4.1.1",
     "axios": "^0.24.0",

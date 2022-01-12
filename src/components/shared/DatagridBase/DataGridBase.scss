@@ -1,17 +1,16 @@
 @import '../../../theme/ThemeColors';
 
 .data-grid-base {
-  margin-top: 30px;
-  display: flex;
-  height: 90%;
+  margin-top: 16px;
+  border: 1px solid #d4deea;
+  border-radius: 3px;
   width: 100%;
-  border: $border-size solid $border-colors;
-  border-radius: $border-radius-size;
-  flex-direction: column;
-  overflow-x: scroll;
-  overflow-y: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  // min-height: 80vh;
+  overflow: scroll;
+
+  @media (max-width: 768px) {
+    margin-top: 0;
+  }
 }
 
 .data-grid-base::-webkit-scrollbar {

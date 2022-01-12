@@ -20,6 +20,10 @@ const worklistInitialState = {
   isDeleteTaskByIDLoading: false,
   DeleteTaskByIdData: '',
   DeleteTaskByIdError: '',
+
+  isTaskByProjectLoading: false,
+  taskByProject: '',
+  taskByProjectError: '',
 };
 
 // eslint-disable-next-line
@@ -144,6 +148,31 @@ const WorkListManagementReducer = (state = worklistInitialState, action) => {
         DeleteTaskByIdData: '',
         DeleteTaskByIdError: action.payload,
       };
+
+    case WORKLIST_MANAGEMENT_ACTION_TYPE.GET_TASK_BY_PROJECT:
+      return {
+        ...state,
+        isTaskByProjectLoading: true,
+        taskByProject: '',
+        taskByProjectError: '',
+      };
+
+    case WORKLIST_MANAGEMENT_ACTION_TYPE.GET_TASK_BY_PROJECT_SUCCESS:
+      return {
+        ...state,
+        isTaskByProjectLoading: false,
+        taskByProject: action.payload,
+        taskByProjectError: '',
+      };
+
+    case WORKLIST_MANAGEMENT_ACTION_TYPE.GET_TASK_BY_PROJECT_ERROR:
+      return {
+        ...state,
+        isTaskByProjectLoading: false,
+        taskByProject: '',
+        taskByProjectError: action.payload,
+      };
+
     default:
       return state;
   }

@@ -1,5 +1,6 @@
 import './WorkListManagement.scss';
 
+import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import Drawer from '@mui/material/Drawer';
 import Menu from '@mui/material/Menu';
@@ -16,6 +17,7 @@ import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import Pagination from '../../components/shared/Pagination/Pagination';
 import { getWorkList } from '../../redux/worklist-management-redux/worklist.actions';
 import WorklistForm from './components/WorklistForm/WorklistForm';
+import MobileDataRow from './mobile.data.row';
 // import WorkListManagementCard from './components/WorklistManagementCard/WorklistManagementCard';
 
 const WorkListManagement = ({ authToken, workListData }) => {
@@ -56,10 +58,16 @@ const WorkListManagement = ({ authToken, workListData }) => {
         <WorklistForm handelClose={handelCloseDrawer} />
       </Drawer>
 
-      <BaseTemplate title="Worklist Management">
-        <span className="add-task-button" onClick={handelOpenDrawer}>
-          + Add Task
-        </span>
+      <BaseTemplate>
+        <div className="header-wrapper">
+          <h2 className="header">Worklist Management</h2>
+
+          <button onClick={handelOpenDrawer} type="button">
+            <AddIcon />
+            Add Task
+          </button>
+        </div>
+
         <DatagridBase>
           <div className="worklist-search-div">
             <div className="worklist-input-container">
@@ -115,22 +123,19 @@ const WorkListManagement = ({ authToken, workListData }) => {
               <span className="worklist-management-actions">Actions</span>
             </div>
             <div>
-              {/* {workListData.map((values) => (
-                <WorkListManagementCard
-                  key={values.taskId}
-                  isMilestone={values.isMilestone}
-                  projectName={values.projectsId}
-                  taskDescription={values.taskDescription}
-                  taskName={values.taskName}
-                  type={values.type}
-                  workId={values.taskId}
-                />
-              ))} */}
               <Pagination
                 componentNo={1}
                 itemData={workListData}
-                itemsPerPage={5}
+                itemsPerPage={10}
               />
+              <div className="mobile_table_worklist">
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+              </div>
             </div>
           </div>
         </DatagridBase>

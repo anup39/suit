@@ -5,6 +5,7 @@ import {
   DELETE_TASK_BY_ID,
   GET_ALL_WORKLIST,
   GET_TASK_BY_ID,
+  GET_TASK_BY_PROJECT,
 } from '../../services/WorklistManagement';
 import WORKLIST_MANAGEMENT_ACTION_TYPE from './worklist.action-types';
 import {
@@ -18,6 +19,8 @@ import {
   getTaskByIDSuccess,
   getWorkListError,
   getWorkListSuccess,
+  taskByProjectError,
+  taskByProjectSuccess,
 } from './worklist.actions';
 
 export function* getAllWorkListData(data) {
@@ -98,6 +101,22 @@ export function* onDeleteTaskById() {
   );
 }
 
+export function* getTaskByProject(data) {
+  try {
+    const taskByProjectData = yield call(GET_TASK_BY_PROJECT, data.payload);
+    yield put(taskByProjectSuccess(taskByProjectData));
+  } catch (error) {
+    yield put(taskByProjectError(error.response.data));
+  }
+}
+
+export function* onGetTaskByProject() {
+  yield takeLatest(
+    WORKLIST_MANAGEMENT_ACTION_TYPE.GET_TASK_BY_PROJECT,
+    getTaskByProject
+  );
+}
+
 export function* worklistManagementSaga() {
   yield all([
     call(onGetAllWorkListData),
@@ -105,5 +124,6 @@ export function* worklistManagementSaga() {
     call(onEidtWorkList),
     call(onTaskById),
     call(onDeleteTaskById),
+    call(onGetTaskByProject),
   ]);
 }

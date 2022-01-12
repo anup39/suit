@@ -1,17 +1,31 @@
-.user-role-base {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.247);
-  padding: 15px;
-  width: 100%;
-  font-size: 18px;
+@import '../../../theme/ThemeColors';
+
+.user-role-table-body {
+  height: calc(100vh - 343px);
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    height: calc(100vh - 349px);
+  }
+
+  @media (max-width: 991.98px) {
+    display: none;
+  }
 }
 
-div.table {
+.user-role-base {
   display: table;
   width: 100%;
-}
-div.table span {
-  display: table-cell;
-  table-layout: fixed;
+  border-bottom: 1px solid #d4deea;
+
+  span {
+    display: table-cell;
+    table-layout: fixed;
+    padding: 10px;
+    font-size: 14px;
+    vertical-align: middle;
+    color: #364a63;
+  }
 }
 
 .user-roles-card-check-input {
@@ -58,11 +72,5 @@ div.table span {
 }
 
 .header {
-  color: rgba(34, 34, 34, 0.658);
-}
-
-.user-role-base {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.247);
-  padding: 15px;
-  width: 100%;
+  color: #364a63;
 }

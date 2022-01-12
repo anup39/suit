@@ -1,6 +1,5 @@
 import './styles/styles.feedback.scss';
 
-import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -29,15 +28,18 @@ const FeedbackView = () => {
 
         <div className="fb_head">
           <h3>Feedback</h3>
-          <button onClick={openCreate} type="button">
-            <AddIcon />
-            Add Feedback
-          </button>
+          <span
+            className="add_new_feedback_button"
+            onClick={openCreate}
+            type="button"
+          >
+            + Add Feedback
+          </span>
         </div>
-        <div className="breadcrumbs">
+        {/* <div className="breadcrumbs">
           <div>Feedback</div>
           <div>Public User Feedback</div>
-        </div>
+        </div> */}
         <Box sx={{ width: '100%' }}>
           <Box>
             <Tabs onChange={handleChange} value={value}>
@@ -45,10 +47,10 @@ const FeedbackView = () => {
               <Tab label="View User Feedback" />
             </Tabs>
           </Box>
-          <TabPanel index={1} value={value}>
+          <TabPanel index={0} value={value}>
             <PublicUserFeedback />
           </TabPanel>
-          <TabPanel index={0} value={value}>
+          <TabPanel index={1} value={value}>
             <ViewUserFeedback />
           </TabPanel>
         </Box>

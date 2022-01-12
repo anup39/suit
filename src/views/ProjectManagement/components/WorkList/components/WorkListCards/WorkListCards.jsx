@@ -3,11 +3,12 @@ import './WorkListCards.scss';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import WorkListDetailsCard from '../WorkListDetailsCard/WorkListDetailsCard';
 
-const WorkListCards = () => {
+const WorkListCards = ({ taskInfo }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [view, setView] = React.useState(false);
   const open = Boolean(anchorEl);
@@ -35,21 +36,21 @@ const WorkListCards = () => {
             {/* <input type="checkbox" /> */}
           </span>
 
-          <span className="work-list-card-task-id">23353534</span>
+          <span className="work-list-card-task-id">{taskInfo.taskId}</span>
 
-          <span className="work-list-card-task-name">
-            A long Long task name
-          </span>
+          <span className="work-list-card-task-name">{taskInfo.taskName}</span>
 
           <span className="work-list-card-task-description">
-            Task Description Task Description Task Description Task Description
+            {taskInfo.taskDescription}
           </span>
 
-          <span className="work-list-card-task-milestone">True</span>
+          <span className="work-list-card-task-milestone">
+            {taskInfo.isMilestone === 0 ? 'Yes' : 'No'}
+          </span>
 
-          <span className="work-list-card-task-type">Enum</span>
+          <span className="work-list-card-task-type">{taskInfo.type}</span>
 
-          <span className="work-list-card-task-status">Not Started</span>
+          <span className="work-list-card-task-status">{taskInfo.status}</span>
 
           <span className="work-list-card-task-actions">
             <MoreHorizIcon
@@ -71,10 +72,14 @@ const WorkListCards = () => {
           </span>
         </div>
       ) : (
-        <WorkListDetailsCard undo={handelUndoView} />
+        <WorkListDetailsCard taskInfo={taskInfo} undo={handelUndoView} />
       )}
     </div>
   );
+};
+
+WorkListCards.propTypes = {
+  taskInfo: PropTypes.isRequired,
 };
 
 export default WorkListCards;

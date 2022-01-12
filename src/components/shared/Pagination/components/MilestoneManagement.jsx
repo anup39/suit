@@ -5,7 +5,7 @@ import MilestoneApprovalCard from '../../../../views/MilestoneApproval/component
 
 const ProjectManagement = ({ currentItems }) => {
   return (
-    <div>
+    <div className="milestone-table-body">
       {currentItems &&
         currentItems.map((val) => (
           <MilestoneApprovalCard

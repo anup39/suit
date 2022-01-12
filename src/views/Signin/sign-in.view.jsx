@@ -8,16 +8,16 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import logo from '../../assets/logo.png';
-import image from '../../assets/signin-image.png';
+import image from '../../assets/signin-info.png';
 // Images
 // import mainImage from '../../assets/signin-image.png';
 // Spinner
 import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import { userSigninStart } from '../../redux/user-redux/user.actions';
 import {
+  getIfAuthenticated,
   getLoadingStatus,
   getSigninError,
-  getUserData,
 } from '../../redux/user-redux/user.selectors';
 import schema from './sign-in.schems';
 import classes from './styles/sign-in.module.scss';
@@ -27,7 +27,7 @@ const SigninPage = () => {
   const dispatch = useDispatch();
   const getError = useSelector(getSigninError);
 
-  const userData = useSelector(getUserData);
+  const userData = useSelector(getIfAuthenticated);
   const onLoading = useSelector(getLoadingStatus);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -87,7 +87,7 @@ const SigninPage = () => {
             <ASuit className={classes.left_header_orange}>ASuite</ASuit>
           </h1>
           <div className={classes.left_bottom_logo}>
-            <span className={classes.logo_description}>Powered by</span>
+            <span className={classes.logo_description}>Brought to you by</span>
             <img alt="..loading" className={classes.left_logo} src={logo} />
           </div>
           <div className={classes.left_image_container}>
@@ -142,19 +142,22 @@ const SigninPage = () => {
             </div>
             <div className={classes.remember_me_text}>
               <div>
-                <input
-                  id="rememberMe"
-                  type="checkbox"
-                  {...register('rememberMe')}
-                />
-                <label>Remember Me</label>
+                <label className={classes.check_container}>
+                  Remember Me
+                  <input
+                    id="rememberMe"
+                    type="checkbox"
+                    {...register('rememberMe')}
+                  />
+                  <span className={classes.checkmark} />
+                </label>
               </div>
               <p className={classes.fotgot_text}>Forgot Code? </p>
             </div>
             <FormButton>Login</FormButton>
           </form>
-          <div className={classes.no_account_text}>
-            <span>Not a User?</span>{' '}
+          <div className={classes.already_user_container}>
+            <span className={classes.already_user}>Not a User?</span>{' '}
             <span
               className={classes.create_account_text}
               onClick={handelNavigateUser}

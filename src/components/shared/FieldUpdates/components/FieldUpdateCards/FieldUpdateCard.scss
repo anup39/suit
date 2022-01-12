@@ -12,11 +12,12 @@
   display: table-cell;
   table-layout: fixed;
   vertical-align: middle;
+  font-size: $table-header-font-size;
+  color: $table-data-color-2;
 }
 
 .field-updates-body-checkInput {
   width: 3%;
-  color: $table-data-color-2;
 }
 
 .field-updates-body-taskItem {
@@ -80,6 +81,7 @@
 .webex-icon {
   height: 25px;
   cursor: pointer;
+  width: auto;
 }
 
 .filed-update-menu-icon {

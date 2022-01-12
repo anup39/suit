@@ -70,7 +70,9 @@ const Milestone = ({ milestoneId }) => {
           </div>
           <div>
             <span>
-              <p className="milestone-details-label">Activity Description</p>
+              <p className="milestone-details-label mt-24">
+                Activity Description
+              </p>
               <div className="milestone-details-description">A big Text</div>
             </span>
           </div>
@@ -86,6 +88,11 @@ const Milestone = ({ milestoneId }) => {
             </span>
           </div>
         </div>
+      </div>
+      <div className="milestone-btm">
+        <button onClick={() => console.log('Close')} type="button">
+          Close
+        </button>
       </div>
     </div>
   );

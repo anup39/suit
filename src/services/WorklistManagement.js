@@ -80,3 +80,20 @@ export const DELETE_TASK_BY_ID = async (payload) => {
   );
   return taskById.data;
 };
+
+export const GET_TASK_BY_PROJECT = async (payload) => {
+  console.log('Task By Project...');
+  console.log(payload);
+
+  const { authToken, projectId } = payload;
+
+  const taskByProjectId = await axios(
+    `${WORKLIST_MANAGEMENT_API.GET_TASKS_BY_PROJECT_ID}${projectId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    }
+  );
+  return taskByProjectId.data;
+};

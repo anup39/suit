@@ -11,6 +11,18 @@ const ROLE_INITIAL_DATA = {
   selectedUser: [],
   isSelectedUserLoading: false,
   selectedUserError: false,
+
+  userRoleList: [],
+  isUserRoleListLoading: false,
+  userRoleListError: '',
+
+  updateUserRole: '',
+  isupdateUserRoleLoading: false,
+  updateUserRoleError: '',
+
+  deleteUserData: '',
+  isDeleteUserLoading: false,
+  deleteUserError: '',
 };
 
 // eslint-disable-next-line default-param-last
@@ -123,6 +135,77 @@ const roleReducer = (state = ROLE_INITIAL_DATA, action) => {
         selectedUserError: true,
       };
 
+    case ROLE_ACTION_TYPE.GET_USER_ROLES_LIST:
+      return {
+        ...state,
+        userRoleList: [],
+        isUserRoleListLoading: true,
+        userRoleListError: '',
+      };
+
+    case ROLE_ACTION_TYPE.GET_USER_ROLES_LIST_SUCCESS:
+      return {
+        ...state,
+        userRoleList: action.payload,
+        isUserRoleListLoading: false,
+        userRoleListError: '',
+      };
+
+    case ROLE_ACTION_TYPE.GET_USER_ROLES_LIST_ERROR:
+      return {
+        ...state,
+        userRoleList: [],
+        isUserRoleListLoading: false,
+        userRoleListError: action.payload,
+      };
+
+    case ROLE_ACTION_TYPE.UPDATE_USER_ROLE:
+      return {
+        ...state,
+        updateUserRole: '',
+        isupdateUserRoleLoading: true,
+        updateUserRoleError: '',
+      };
+
+    case ROLE_ACTION_TYPE.UPDATE_USER_ROLE_SUCCESS:
+      return {
+        ...state,
+        updateUserRole: action.payload,
+        isupdateUserRoleLoading: false,
+        updateUserRoleError: '',
+      };
+
+    case ROLE_ACTION_TYPE.UPDATE_USER_ROLE_ERROR:
+      return {
+        ...state,
+        updateUserRole: '',
+        isupdateUserRoleLoading: false,
+        updateUserRoleError: action.payload,
+      };
+
+    case ROLE_ACTION_TYPE.DELETE_USER:
+      return {
+        ...state,
+        deleteUserData: '',
+        isDeleteUserLoading: true,
+        deleteUserError: '',
+      };
+
+    case ROLE_ACTION_TYPE.DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        deleteUserData: action.payload,
+        isDeleteUserLoading: false,
+        deleteUserError: '',
+      };
+
+    case ROLE_ACTION_TYPE.DELETE_USER_ERROR:
+      return {
+        ...state,
+        deleteUserData: '',
+        isDeleteUserLoading: false,
+        deleteUserError: action.payload,
+      };
     default:
       return state;
   }

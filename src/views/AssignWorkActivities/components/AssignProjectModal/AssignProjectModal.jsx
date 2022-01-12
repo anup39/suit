@@ -29,11 +29,12 @@ const AssignProjectModal = ({ handleClose }) => {
       <form className="assign-project-form-base">
         <label>Project Name</label>
         <select className="assign-project-select-input">
-          <option>Project 1</option>
-          <option>Project 2</option>
-          <option>Project 3</option>
-          <option>Project 4</option>
-          <option>Project 5</option>
+          {projectList &&
+            projectList.map((project) => (
+              <option key={project.id} value={project.id}>
+                {project.name}
+              </option>
+            ))}
         </select>
 
         <label>Company</label>
@@ -46,10 +47,16 @@ const AssignProjectModal = ({ handleClose }) => {
         </select>
       </form>
       <div className="assign-work-submit-div">
-        <span className="assign-work-cancel-button" onClick={handleClose}>
+        <button
+          className="assign-work-cancel-button"
+          onClick={handleClose}
+          type="button"
+        >
           Cancel
-        </span>
-        <span className="assign-work-submit-button">Assign</span>
+        </button>
+        <button className="assign-work-submit-button" type="button">
+          Assign
+        </button>
       </div>
     </div>
   );

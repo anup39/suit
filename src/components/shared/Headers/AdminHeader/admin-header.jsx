@@ -5,13 +5,21 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material/styles';
+import Switch from '@mui/material/Switch';
 import Toolbar from '@mui/material/Toolbar';
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { userLanguageChange } from '../../../../redux/user-redux/user.actions';
+import {
+  getCurrentLanguage,
+  getUserData,
+} from '../../../../redux/user-redux/user.selectors';
 import classes from './styles/admin.header.module.scss';
 import {
   AdminAccountIcon,
@@ -36,9 +44,21 @@ export const NotificationsIconOutlined = styled(NotificationsNoneOutlinedIcon)(
 const AdminHeaderComponent = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [isGerman, setIsGerman] = React.useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const dispatch = useDispatch();
+  const handleLanguageChange = (e) => {
+    setIsGerman(e.target.checked);
+
+    if (e.target.checked) {
+      dispatch(userLanguageChange('gr'));
+    } else {
+      dispatch(userLanguageChange('en'));
+    }
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -57,7 +77,16 @@ const AdminHeaderComponent = () => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const userData = useSelector(getUserData);
+  const currentLanguage = useSelector(getCurrentLanguage);
+
   const menuId = 'primary-search-account-menu';
+
+  React.useEffect(() => {
+    if (currentLanguage === 'gr') {
+      setIsGerman(true);
+    }
+  }, []);
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -158,8 +187,12 @@ const AdminHeaderComponent = () => {
                 </AdminAccountIcon>
               </IconButton>
               <AdminRoleContainer>
-                <AdminInfoRole>Adminstrator</AdminInfoRole>
-                <AdminInfoName>Leonardo M</AdminInfoName>
+                <AdminInfoRole>
+                  {userData.userData && userData.userData.roles[0]}
+                </AdminInfoRole>
+                <AdminInfoName>
+                  {userData.userData && userData.userData.username}
+                </AdminInfoName>
               </AdminRoleContainer>
               <AdminArrowDown>
                 <KeyboardArrowDownOutlinedIcon />
@@ -173,12 +206,24 @@ const AdminHeaderComponent = () => {
               <span className={classes.notify_dot} />
               <NotificationsIconOutlined />
             </IconButton>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={isGerman}
+                  name="language"
+                  onChange={handleLanguageChange}
+                />
+              }
+              label="German"
+              style={{ color: 'black' }}
+            />
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               aria-label="show more"
+              className="more-icon"
               color="inherit"
               onClick={handleMobileMenuOpen}
               size="large"

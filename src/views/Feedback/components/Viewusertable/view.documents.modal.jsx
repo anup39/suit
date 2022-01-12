@@ -1,4 +1,3 @@
-/* eslint-disable*/
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -18,7 +17,7 @@ const ViewDocumentsModal = () => {
       <div className="modal-head">Upload Documents</div>
       <div className="modal-container">
         <div className="modal-box">
-          <button className="img-btn">
+          <button className="img-btn" type="button">
             {' '}
             <FileDownloadIcon />
             Download All

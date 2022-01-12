@@ -1,18 +1,18 @@
 @import '../../../../theme/ThemeColors';
 
 .worklist-card-table-body {
-  border-bottom: $border-size solid $border-colors;
-  align-items: center;
-  padding: 10px;
   display: table;
   width: 100%;
-  color: $table-header-text-color;
-  font-size: $table-header-font-size;
+  border-bottom: 1px solid #D4DEEA;
 }
 
 .worklist-card-table-body span {
   display: table-cell;
   table-layout: fixed;
+  padding: 10px;
+  font-size: 14px;
+  vertical-align: middle;
+  color: #364A63;
 }
 
 .worklist-card-management-check-input {
@@ -50,7 +50,6 @@
 }
 
 .worklist-management-card-more-icon {
-  font-size: $menu-icon-size;
   color: $menu-icon-color;
   cursor: pointer;
 }

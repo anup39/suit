@@ -1,90 +1,201 @@
 @import '../../theme/ThemeColors';
 
 .assign-work-activity-search-div {
-  padding: 10px;
   display: flex;
-  border-bottom: $border-size solid $border-colors;
+  align-items: center;
+  padding: 0 15px;
+  height: 60px;
+  border-bottom: 1px solid #d4deea;
+}
+
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+  }
+
+  button {
+    background: #0160e0;
+    color: white;
+    padding: 6px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .header {
+    margin: 0;
+    font-size: 20px;
+    color: #364a63;
+
+    @media (max-width: 991.98px) {
+      font-size: 18px;
+    }
+  }
 }
 
 .work-activity-assign-task-button {
   background-color: $button-colors-primary;
   color: #fff;
-  padding: 10px 30px;
+  padding: 10px 15px;
   margin-left: auto;
-  margin-right: 10px;
   border-radius: 5px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
+  outline: none;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 7px;
+  }
 }
 
 .work-activity-assign-logo {
-  margin-right: 7px;
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.assign-work-activity-table-tbody {
+  @media (max-width: 1024px) {
+    width: calc(100vw - 303px);
+    overflow: auto;
+
+    .pagination-base {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 }
 
 .assign-work-activity-table-header {
   display: table;
   width: 100%;
-  border-bottom: $border-size solid $border-colors;
+  height: 40px;
+  font-size: 14px;
+  border-bottom: 1px solid #d4deea;
+  background: #f8f9fc;
+  font-weight: 600;
+  // padding: 0px 7px;
+  color: #8094ae;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+// .assign-work-activity-table-header {
+//   display: table;
+//   width: 100%;
+//   border-bottom: $border-size solid $border-colors;
+
+// }
+
+.assign-work-activity-table-body {
+  height: calc(100vh - 347px);
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    height: calc(100vh - 368px);
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 }
 
 .assign-work-activity-table-header span {
   display: table-cell;
+  padding: 15px 10px;
+
   table-layout: fixed;
   padding: 10px;
-  color: $table-header-text-color;
-  font-weight: 500;
+  color: #8094ae;
+  font-weight: $table-header-font-weight;
+  font-size: $table-header-font-size;
   white-space: nowrap;
+  vertical-align: middle;
 }
 
 .assign-work-activity-container {
-  position: relative;
-  margin-left: 30px;
-  width: 300px;
+  width: 25%;
+  margin-right: 16px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-right: 5px;
+  }
 }
 
 .assign-work-activity-container > .assign-work-activity-search-icon {
   position: absolute;
-  margin-top: 5px;
-  margin-left: 5px;
-  color: $search-icon-color;
-  cursor: pointer;
+  margin-top: 6px;
+  margin-left: 8px;
+  color: #8094ae;
+  font-size: 18px;
 }
 
 .assign-work-activity-container > input {
-  padding-left: 30px;
   height: 30px;
   width: 100%;
+  padding-left: 28px;
+  border: 1px solid #d4deea;
+  color: #8094ae;
+  border-radius: 3px;
 }
 
 .assign-work-activities-check-input {
   width: 2%;
 }
+
+.assign-work-activities-comapny {
+  width: 10%;
+}
+
 .assign-work-activities-project-name {
   width: 15%;
 }
+
 .assign-work-activities-company {
   width: 10%;
 }
+
 .assign-work-activities-taskId {
   width: 8%;
 }
+
 .assign-work-activities-task-name {
   width: 15%;
 }
+
 .assign-work-activities-task-description {
   width: 17%;
 }
+
 .assign-work-activities-isMilestone {
   width: 10%;
 }
+
 .assign-work-activities-type {
   width: 10%;
 }
+
 .assign-work-activities-status {
   width: 10%;
 }
+
 .assign-work-activities-actions {
   width: 3%;
 }
@@ -101,4 +212,67 @@
   margin-right: 10px;
   cursor: pointer;
   border-radius: 5px;
+}
+
+.mobile_table_assignwork {
+  height: calc(100vh - 239px);
+  overflow: auto;
+  display: none;
+
+  @media (max-width: 1024px) {
+    display: block;
+    height: calc(100vh - 263px);
+  }
+
+  @media (max-width: 991.98px) {
+    height: calc(100vh - 254px);
+  }
+
+  @media (max-width: 768px) {
+    height: calc(100vh - 239px);
+  }
+
+  > div:nth-child(even) {
+    background: #d4deea;
+
+    .grid_3_1 {
+      border-top: 1px solid white;
+    }
+  }
+}
+
+.grid_3_1 {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  gap: 1rem;
+  border-top: 1px solid #d4deea;
+  padding: 10px;
+
+  h3 {
+    color: #8094ae;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  svg {
+    fill: #929db0;
+  }
+
+  p {
+    margin: 0;
+    color: #364a63;
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    &.blue_text {
+      color: #2586ff;
+    }
+
+    span {
+      color: #2586ff;
+    }
+  }
 }

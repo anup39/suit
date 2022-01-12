@@ -14,7 +14,7 @@ import WebExIcon from '../../../../../assets/webex-icon.png';
 import EditMenu from '../EditMenu/EditMenu';
 
 const FieldUpdateCard = () => {
-  const [editMenu, setEditMenu] = React.useState(true);
+  const [editMenu, setEditMenu] = React.useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -22,13 +22,21 @@ const FieldUpdateCard = () => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
-    setEditMenu(false);
     setAnchorEl(null);
+  };
+
+  const handelViewOrEdit = () => {
+    handleClose();
+    setEditMenu(true);
+  };
+
+  const handleCancel = () => {
+    setEditMenu(false);
   };
 
   return (
     <div>
-      {editMenu ? (
+      {!editMenu ? (
         <div>
           <div className="field-update-card-base">
             <span className="field-updates-body-checkInput">
@@ -76,14 +84,14 @@ const FieldUpdateCard = () => {
                 onClose={handleClose}
                 open={open}
               >
-                <MenuItem onClick={handleClose}>View/Edit</MenuItem>
+                <MenuItem onClick={handelViewOrEdit}>View/Edit</MenuItem>
                 <MenuItem onClick={handleClose}>Delete</MenuItem>
               </Menu>
             </span>
           </div>
         </div>
       ) : (
-        <EditMenu />
+        <EditMenu handleCancel={handleCancel} />
       )}
     </div>
   );

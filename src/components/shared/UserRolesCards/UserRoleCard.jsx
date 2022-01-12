@@ -6,9 +6,13 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import companyNameList from '../../../constants/CompanyNames';
+import UserStatus from '../../../constants/UserStatus';
+import { getUserAuthToken } from '../../../redux/user-redux/user.selectors';
 import {
+  deleteUser,
   deSelectUser,
   selectUser,
 } from '../../../redux/User-Role/role.actions';
@@ -16,18 +20,20 @@ import UserRolesForms from '../UserRolesForms/UserRolesForms';
 import Status from './styles/User.Roles.Card';
 
 const UserRoleCard = ({
-  username,
-  date,
-  role,
-  status,
-  userId,
-  companyName,
+  username = '',
+  date = '',
+  role = '',
+  status = '',
+  userId = '',
+  companyName = '',
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [drawerOpen, seteDrawerOpen] = useState(false);
   const [editUser, seteEditUser] = useState(false);
   const [checkBox, setCheckBox] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const authToken = useSelector(getUserAuthToken);
 
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
@@ -61,6 +67,17 @@ const UserRoleCard = ({
     seteEditUser(false);
   };
 
+  const handleDeleteUser = () => {
+    handleClose();
+
+    const data = {
+      authToken,
+      userId,
+    };
+
+    dispatch(deleteUser(data));
+  };
+
   React.useEffect(() => {
     if (checkBox) {
       dispatch(selectUser(userId));
@@ -73,9 +90,16 @@ const UserRoleCard = ({
     <>
       <Drawer anchor="right" onClose={handleDrawerClose} open={drawerOpen}>
         {editUser ? (
-          <UserRolesForms editUser handelCancel={handleDrawerClose} />
+          <UserRolesForms
+            editUser
+            handelCancel={handleDrawerClose}
+            userName={username}
+          />
         ) : (
-          <UserRolesForms handelCancel={handleDrawerClose} />
+          <UserRolesForms
+            handelCancel={handleDrawerClose}
+            userName={username}
+          />
         )}
       </Drawer>
       <div className="user-role-base table">
@@ -84,12 +108,12 @@ const UserRoleCard = ({
         </span>
         <span className="user-roles-card-username">{username}</span>
         <span className="user-roles-card-username">
-          {!companyName ? <p>-</p> : companyName}
+          {!companyName ? <p>-</p> : companyNameList[companyName]}
         </span>
-        <span className="user-roles-card-date">{date}</span>
-        <span className="user-roles-card-role">{role}</span>
+        <span className="user-roles-card-date">{role}</span>
+        <span className="user-roles-card-role">{date}</span>
         <span className="user-roles-card-status">
-          <Status status={status}> {status}</Status>
+          <Status status={status}> {UserStatus[status]}</Status>
         </span>
         <span
           className="user-roles-card-action"
@@ -107,7 +131,7 @@ const UserRoleCard = ({
           >
             <MenuItem onClick={handleAddRoleDrawerOpen}>Assign Role</MenuItem>
             <MenuItem onClick={handleEditDrawerOpen}>Edit </MenuItem>
-            <MenuItem onClick={handleClose}>Delete</MenuItem>
+            <MenuItem onClick={handleDeleteUser}>Delete</MenuItem>
           </Menu>
         </span>
       </div>
@@ -116,12 +140,12 @@ const UserRoleCard = ({
 };
 
 UserRoleCard.propTypes = {
-  username: PropTypes.isRequired,
-  date: PropTypes.isRequired,
-  role: PropTypes.isRequired,
-  status: PropTypes.isRequired,
-  userId: PropTypes.isRequired,
-  companyName: PropTypes.isRequired,
+  username: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+  companyName: PropTypes.string.isRequired,
 };
 
 export default UserRoleCard;

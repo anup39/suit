@@ -1,10 +1,11 @@
 @import '../../../theme/ThemeColors';
 
 .search-div {
-  border-bottom: $border-size solid $border-colors;
-  padding: 10px;
   display: flex;
   align-items: center;
+  padding: 0 15px;
+  height: 60px;
+  border-bottom: 1px solid #d4deea;
 }
 
 .search-input {

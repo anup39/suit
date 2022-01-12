@@ -34,3 +34,8 @@ export const userSigninFailure = (data) => ({
   type: USER_ACTION_TYPES.USER_SIGNIN_FAILURE,
   payload: data,
 });
+
+export const userLanguageChange = (data) => ({
+  type: USER_ACTION_TYPES.CHANGE_LANGUAGE,
+  payload: data,
+});

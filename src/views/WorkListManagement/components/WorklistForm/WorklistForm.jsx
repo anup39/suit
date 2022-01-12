@@ -1,79 +1,54 @@
 import './WorklistForm.scss';
 
+import { yupResolver } from '@hookform/resolvers/yup';
+import Button from '@mui/material/Button';
 // import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { connect, useDispatch, useSelector } from 'react-redux';
 
 import { getAllProjects } from '../../../../redux/project-management-redux/project.selector';
 import { getProjectList } from '../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import {
-  addWorkList,
+  // addWorkList,
   getTaskByID,
 } from '../../../../redux/worklist-management-redux/worklist.actions';
-// import { getCurrentTaskData } from '../../../../redux/worklist-management-redux/worklist.selector';
-// import schema from './work.list.schema';
+import { getCurrentTaskData } from '../../../../redux/worklist-management-redux/worklist.selector';
+import schema from './work.list.schema';
 
 const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
   const dispatch = useDispatch();
-  // const currentTaskData = useSelector(getCurrentTaskData);
+  const currentTaskData = useSelector(getCurrentTaskData);
   const authToken = useSelector(getUserAuthToken);
   const projectList = useSelector(getAllProjects);
 
-  const [workListFormData, setWorkListFormData] = React.useState({
-    taskId: '',
-    projectsId: '',
-    taskName: '',
-    taskDescription: '',
-    isMilestone: '',
-    type: '',
-    priority: '',
-    start: '',
-    end: '',
-    street: '',
-    zipCode: '',
-    city: '',
-    country: '',
-    latitude: '',
-    longitude: '',
-    note: '',
-    documents: '',
-    geoFence: '',
-    taskStatus: '',
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
   });
 
-  const handleFormDataChange = (e) => {
-    const { name, value } = e.target;
-
-    // if (name === 'start' && name === 'end') {
-    //   value = moment(value).format('DD MMMM YYYY');
-    // }
-
-    setWorkListFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = () => {
-    const data = { authToken, workListFormData };
-    dispatch(addWorkList(data));
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
   if (isEdit) {
-    // setWorkListFormData((prevState) => ({
-    // ...prevState,
-    // currentTaskData,
-    // }));
-
     React.useEffect(() => {
       const data = {
         authToken,
         taskId: workId,
       };
-      dispatch(getTaskByID(data));
-    }, []);
+      if (!currentTaskData) {
+        dispatch(getTaskByID(data));
+        dispatch(getProjectList(authToken));
+      }
+      reset(currentTaskData);
+    }, [currentTaskData]);
   } else {
     React.useEffect(() => {
       dispatch(getProjectList(authToken));
@@ -82,243 +57,216 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
 
   return (
     <div className="worklist-form-base-div">
+      {console.log(currentTaskData)}
       {!isEdit ? <h2>Add Worklist</h2> : <h2>Edit Worklist</h2>}
-      <div className="worklist-form-container">
-        <form onSubmit={handleSubmit}>
-          <span>
-            <label>Project Name</label>
-            {isEdit ? (
-              <select
-                className="select-company-field-disabled"
-                disabled
-                name="projectsId"
-                onChange={(e) => handleFormDataChange(e)}
-                value={workListFormData.projectsId}
-              >
-                {projectList.map((project) => (
-                  <option key={project.id} value={project.id}>
-                    {project.name}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              <select
-                className="select-company-field"
-                name="projectsId"
-                onChange={(e) => handleFormDataChange(e)}
-                value={workListFormData.projectsId}
-              >
-                {projectList.map((project) => (
-                  <option key={project.id} value={project.id}>
-                    {project.name}
-                  </option>
-                ))}
-              </select>
-            )}
-          </span>
-
-          <span>
-            <label>Task ID</label>
-            <input
-              name="taskId"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.taskId}
-            />
-          </span>
-
-          <span>
-            <label>Task Name</label>
-            <input
-              name="taskName"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.taskName}
-            />
-          </span>
-
-          <span>
-            <label>Task Description</label>
-            <textarea
-              name="taskDescription"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.taskDescription}
-            />
-          </span>
-
-          <span>
-            <label>Ismilestone</label>
-            {/* <input
-              name="isMilestone"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.isMilestone}
-            /> */}
+      <form
+        className="worklist-form-container"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div>
+          <label>Project Name</label>
+          {isEdit ? (
+            <select
+              className="select-company-field-disabled"
+              disabled
+              name="projectsId"
+              {...register('projectsId')}
+            >
+              {projectList.map((project) => (
+                <option key={project.id} value={project.id}>
+                  {project.name}
+                </option>
+              ))}
+            </select>
+          ) : (
             <select
               className="select-company-field"
-              name="isMilestone"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.isMilestone}
+              name="projectsId"
+              {...register('projectsId')}
             >
-              <option value={0}>Yes</option>
-              <option selected value={1}>
-                No
-              </option>
+              {projectList.map((project) => (
+                <option key={project.id} value={project.id}>
+                  {project.name}
+                </option>
+              ))}
             </select>
+          )}
+          <span className="worklistform-error-text">
+            {errors.projectsId?.message}
           </span>
+        </div>
 
-          <span>
-            <label>Type</label>
-            <input
-              name="type"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.type}
-            />
+        <div>
+          <label>Task ID</label>
+          <input name="taskId" {...register('taskId')} />
+          <span className="worklistform-error-text">
+            {errors.taskId?.message}
           </span>
+        </div>
 
-          <span>
-            <label>Priority</label>
-            <input
-              name="priority"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.priority}
-            />
+        <div>
+          <label>Task Name</label>
+          <input name="taskName" {...register('taskName')} />
+          <span className="worklistform-error-text">
+            {errors.taskName?.message}
           </span>
+        </div>
 
-          <div className="worklist-management-gird">
-            <span>
-              <label>Start Date</label>
-              <input
-                name="start"
-                onChange={(e) => handleFormDataChange(e)}
-                type="date"
-                value={workListFormData.start}
-              />
-            </span>
+        <div>
+          <label>Task Description</label>
+          <textarea
+            name="taskDescription"
+            rows={3}
+            {...register('taskDescription')}
+          />
+          <span className="worklistform-error-text">
+            {errors.taskDescription?.message}
+          </span>
+        </div>
 
-            <span>
-              <label>End Date</label>
-              <input
-                name="end"
-                onChange={(e) => handleFormDataChange(e)}
-                type="date"
-                value={workListFormData.end}
-              />
+        <div>
+          <label>Ismilestone</label>
+
+          <select
+            className="select-company-field"
+            name="isMilestone"
+            {...register('isMilestone')}
+          >
+            <option value={0}>Yes</option>
+            <option selected value={1}>
+              No
+            </option>
+          </select>
+          <span className="worklistform-error-text">
+            {errors.isMilestone?.message}
+          </span>
+        </div>
+
+        <div>
+          <label>Type</label>
+          <input name="type" {...register('type')} />
+          <span className="worklistform-error-text">
+            {errors.type?.message}
+          </span>
+        </div>
+
+        <div>
+          <label>Priority</label>
+          <input name="priority" {...register('priority')} />
+          <span className="worklistform-error-text">
+            {errors.priority?.message}
+          </span>
+        </div>
+
+        <div className="worklist-management-gird">
+          <div>
+            <label>Start Date</label>
+            <input name="start" type="date" {...register('start')} />
+            <span className="worklistform-error-text">
+              {errors.start?.message}
             </span>
           </div>
 
-          <span>
-            <label>Street</label>
-            <input
-              name="street"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.street}
-            />
-          </span>
-
-          <span>
-            <label>Zip Code</label>
-            <input
-              name="zipCode"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.zipCode}
-            />
-          </span>
-
-          <span>
-            <label>City</label>
-            <input
-              name="city"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.city}
-            />
-          </span>
-
-          <span>
-            <label>Country</label>
-            <input
-              name="country"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.country}
-            />
-          </span>
-          <div className="worklist-management-gird">
-            <span>
-              <label>Latitude</label>
-              <input
-                name="latitude"
-                onChange={(e) => handleFormDataChange(e)}
-                value={workListFormData.latitude}
-              />
+          <div>
+            <label>End Date</label>
+            <input name="end" type="date" {...register('end')} />
+            <span className="worklistform-error-text">
+              {errors.end?.message}
             </span>
+          </div>
+        </div>
 
-            <span>
-              <label>Longitude</label>
-              <input
-                name="longitude"
-                onChange={(e) => handleFormDataChange(e)}
-                value={workListFormData.longitude}
-              />
+        <div>
+          <label>Street</label>
+          <input name="street" {...register('street')} />
+          <span className="worklistform-error-text">
+            {errors.street?.message}
+          </span>
+        </div>
+
+        <div>
+          <label>Zip Code</label>
+          <input name="zipCode" {...register('zipCode')} />
+          <span className="worklistform-error-text">
+            {errors.zipCode?.message}
+          </span>
+        </div>
+
+        <div>
+          <label>City</label>
+          <input name="city" {...register('city')} />
+          <span className="worklistform-error-text">
+            {errors.city?.message}
+          </span>
+        </div>
+
+        <div>
+          <label>Country</label>
+          <input name="country" {...register('country')} />
+          <span className="worklistform-error-text">
+            {errors.country?.message}
+          </span>
+        </div>
+        <div className="worklist-management-gird">
+          <div>
+            <label>Latitude</label>
+            <input name="latitude" {...register('latitude')} />
+            <span className="worklistform-error-text">
+              {errors.latitude?.message}
             </span>
           </div>
 
-          <span>
-            <label>Geofence</label>
+          <div>
+            <label>Longitude</label>
+            <input name="longitude" {...register('longitude')} />
+            <span className="worklistform-error-text">
+              {errors.longitude?.message}
+            </span>
+          </div>
+        </div>
 
-            <input
-              name="geoFence"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.geoFence}
-            />
+        <div>
+          <label>Geofence</label>
+
+          <input name="geoFence" {...register('geoFence')} />
+          <span className="worklistform-error-text">
+            {errors.geoFence?.message}
           </span>
+        </div>
 
-          <span>
-            <label>Note</label>
+        <div>
+          <label>Note</label>
 
-            <textarea
-              name="note"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.note}
-            />
+          <textarea name="note" rows={3} {...register('note')} />
+          <span className="worklistform-error-text">
+            {errors.note?.message}
           </span>
+        </div>
 
-          <span>
-            <label>Documents</label>
-            <input
-              name="documents"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.documents}
-            />
+        <div>
+          <label>Documents</label>
+          <input name="documents" {...register('documents')} />
+          <span className="worklistform-error-text">
+            {errors.documents?.message}
           </span>
-
-          <span>
-            <label>Task Status</label>
-            {/* <input
-            
-            /> */}
-            <select
-              className="select-company-field"
-              name="taskStatus"
-              onChange={(e) => handleFormDataChange(e)}
-              value={workListFormData.taskStatus}
-            >
-              <option> Not assigned</option>
-              <option> Not started</option>
-              <option> In progress/started</option>
-              <option> Waiting for feedback</option>
-              <option> Suspended</option>
-              <option> Completed</option>
-              <option> Canceled</option>
-              <option> Approved</option>
-            </select>
-          </span>
-        </form>
-      </div>
-      <div className="worklist-submit-div">
-        <span className="worklist-cancel-button" onClick={handelClose}>
-          Cancel
-        </span>
-        <span className="worklist-submit-button" onClick={handleSubmit}>
-          Submit
-        </span>
-      </div>
+        </div>
+        <div className="worklist-submit-div">
+          <button
+            className="worklist-cancel-button"
+            onClick={handelClose}
+            type="button"
+          >
+            Cancel
+          </button>
+          <Button
+            className="create-project-submit-button"
+            type="submit"
+            variant="contained"
+          >
+            Submit
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };
@@ -334,5 +282,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(WorklistForm);
-
-// TODO: Edit Form

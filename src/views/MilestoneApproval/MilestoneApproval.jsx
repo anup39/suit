@@ -11,6 +11,7 @@ import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import { getAllMilestones } from '../../redux/milestone-management/milestone-management.action';
 // import MilestoneApprovalCard from './components/MilestoneApprovalCards/MilestoneApprovalCard';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import MobileDataRow from './mobile.data.row';
 const MilestoneApproval = ({ authToken, milestoneData }) => {
   const dispatch = useDispatch();
 
@@ -21,7 +22,10 @@ const MilestoneApproval = ({ authToken, milestoneData }) => {
   return (
     <BaseTemplate title="Milestone Approval">
       <DatagridBase>
-        <div className="milestone-search-bar">
+        {milestoneData.length === 0 ? (
+         ""
+        ) : (
+          <div className="milestone-search-bar">
           <div className="milestone-search-div">
             <SearchIcon className="milestone-search-icon" />
             <input
@@ -45,52 +49,63 @@ const MilestoneApproval = ({ authToken, milestoneData }) => {
               placeholder="Milestone Name"
             />
           </div>
-        </div>
-        <div className="milestone-table">
-          <div className="milestone-header">
-            <span className="milestone-approval-checkInput">
-              <input type="checkbox" />
-            </span>
-
-            <span className="milestone-approval-company">
-              <p> Company </p>
-            </span>
-
-            <span className="milestone-approval-projectName">
-              {' '}
-              <p>Project Name</p>
-            </span>
-
-            <span className="milestone-approval-date">
-              <p>Date</p>
-            </span>
-
-            <span className="milestone-approval-milestoneNr">
-              <p>Milestone Nr</p>
-            </span>
-
-            <span className="milestone-approval-description">
-              <p>Description</p>
-            </span>
-
-            <span className="milestone-approval-status">
-              <p>Status</p>
-            </span>
-
-            <span className="milestone-approval-action">
-              <p>Action </p>
-            </span>
-          </div>
-        </div>
-        <div>
+        </div>        )}
+        <div className="milestone-table-tbody">
           {milestoneData.length === 0 ? (
             <p className="no-data-to-display">No Data To Display!</p>
           ) : (
-            <Pagination
-              itemData={milestoneData}
-              itemsPerPage={7}
-              componentNo={3}
-            />
+            <>
+              <div className="milestone-table">
+                <div className="milestone-header">
+                  <span className="milestone-approval-checkInput">
+                    <input type="checkbox" />
+                  </span>
+
+                  <span className="milestone-approval-company">
+                    <p> Company </p>
+                  </span>
+
+                  <span className="milestone-approval-projectName">
+                    {' '}
+                    <p>Project Name</p>
+                  </span>
+
+                  <span className="milestone-approval-date">
+                    <p>Date</p>
+                  </span>
+
+                  <span className="milestone-approval-milestoneNr">
+                    <p>Milestone Nr</p>
+                  </span>
+
+                  <span className="milestone-approval-description">
+                    <p>Description</p>
+                  </span>
+
+                  <span className="milestone-approval-status">
+                    <p>Status</p>
+                  </span>
+
+                  <span className="milestone-approval-action">
+                    <p>Action </p>
+                  </span>
+                </div>
+              </div>
+              <Pagination
+                itemData={milestoneData}
+                itemsPerPage={7}
+                componentNo={3}
+              />
+              <div className="mobile_table_milestone">
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+
+                <MobileDataRow />
+              </div> 
+            </>
           )}
         </div>
       </DatagridBase>

@@ -27,7 +27,7 @@ const Projects = () => {
   return (
     <div className="projects-base-div">
       <Drawer anchor="right" onClose={toggleDrawer(false)} open={isOpen}>
-        <CreateProjectForm />
+        <CreateProjectForm editForm />
       </Drawer>
 
       <div className="project-title-div">

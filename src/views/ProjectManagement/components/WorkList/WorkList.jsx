@@ -3,18 +3,36 @@ import './components/WorkListCards/WorkListCards.scss';
 
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getProjectData } from '../../../../redux/project-management-redux/project.selector';
+import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
+import { taskByProject } from '../../../../redux/worklist-management-redux/worklist.actions';
+import { getTasksByProject } from '../../../../redux/worklist-management-redux/worklist.selector';
 import WorkListCards from './components/WorkListCards/WorkListCards';
 
 const WorkList = () => {
+  const authToken = useSelector(getUserAuthToken);
+  const project = useSelector(getProjectData);
+  const worklistTasks = useSelector(getTasksByProject);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    const data = { authToken, projectId: project.id };
+
+    dispatch(taskByProject(data));
+  }, []);
+
   return (
     <div className="work-list-base">
       <div className="work-list-header">
-        <input
-          className="work-list-search-input"
-          placeholder="Search Worklist"
-        />
-        <SearchIcon className="work-list-search-icon" />
+        <div className="work-list-input-container">
+          <SearchIcon className="work-list-search-icon" />
+          <input
+            className="work-list-search-input"
+            placeholder="Search Worklist"
+          />
+        </div>
       </div>
       <div>
         <div className="work-list-table-header">
@@ -50,12 +68,11 @@ const WorkList = () => {
             <p> Actions </p>
           </span>
         </div>
-        <div>
-          <WorkListCards />
-          <WorkListCards />
-          <WorkListCards />
-          <WorkListCards />
-          <WorkListCards />
+        <div className="worklist-table-body">
+          {worklistTasks &&
+            worklistTasks.map((val) => (
+              <WorkListCards key={val.taskId} taskInfo={val} />
+            ))}
         </div>
       </div>
     </div>

@@ -17,6 +17,10 @@ const PROJECT_MANAGEMENT_INITIAL_STATE = {
   isDeleteProjectDataLoading: false,
   deleteProjectDataSuccess: '',
   deleteProjectDataError: '',
+
+  currentProjectDocuments: '',
+  isCurrentProjectDocumentsLoading: false,
+  currentProjectDocumentsError: '',
 };
 
 const projectManagementReducer = (
@@ -118,6 +122,30 @@ const projectManagementReducer = (
         isDeleteProjectDataLoading: false,
         deleteProjectDataSuccess: '',
         deleteProjectDataError: action.payload,
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DOCUMENTS:
+      return {
+        ...state,
+        currentProjectDocuments: '',
+        isCurrentProjectDocumentsLoading: true,
+        currentProjectDocumentsError: '',
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DOCUMENTS_SUCCESS:
+      return {
+        ...state,
+        currentProjectDocuments: action.payload,
+        isCurrentProjectDocumentsLoading: false,
+        currentProjectDocumentsError: '',
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DOCUMENTS_ERROR:
+      return {
+        ...state,
+        currentProjectDocuments: '',
+        isCurrentProjectDocumentsLoading: false,
+        currentProjectDocumentsError: action.payload,
       };
 
     default:

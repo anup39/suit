@@ -74,3 +74,18 @@ export const worklistByProjectError = (data) => ({
   type: PROJECT_MANAGEMENT_TYPES.GET_WORKLIST_BY_PROJECT_ERROR,
   payload: data,
 });
+
+export const projectDocuments = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DOCUMENTS,
+  payload: data,
+});
+
+export const projectDocumentsSuccess = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DOCUMENTS_SUCCESS,
+  payload: data,
+});
+
+export const projectDocumentsError = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DOCUMENTS_ERROR,
+  payload: data,
+});

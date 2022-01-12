@@ -1,23 +1,58 @@
-$primeColor: #0971fe;
+$primeColor: #0160e0;
 $text-color: #fff;
 $prime-font: 'Roboto';
 
 .roles_container {
   display: grid;
-  grid-template-columns: 1fr 3.2fr;
+  grid-template-columns: auto 1fr;
+  min-height: 100%;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    display: initial;
+  }
 }
+
 .roles_menu {
   background-color: $primeColor;
-  min-height: 100vh;
-  top: 0;
+  width: 280px;
+  height: auto;
+
+  @media (max-width: 768px) {
+    display: none;
+    position: fixed;
+    width: 80%;
+    height: calc(100vh - 58px);
+    box-sizing: 1000;
+    z-index: 999;
+    top: 58px;
+    left: 0;
+  }
+
+  @media (max-width: 1024px) {
+    li a {
+      padding: 10px;
+    }
+  }
 }
+
+.roles_menu_under {
+}
+
 .menu_header {
   color: $text-color;
   text-align: center;
   margin: 0;
   padding: 10px 0;
   height: 64px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #d4deea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .menu_options_container {
@@ -29,6 +64,7 @@ $prime-font: 'Roboto';
   margin-inline-start: 0;
   margin-inline-end: 0px;
   padding-inline-start: 0px;
+  height: 90%;
 }
 
 .menu_option {

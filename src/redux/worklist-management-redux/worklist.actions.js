@@ -74,3 +74,18 @@ export const deleteTaskByIDError = (data) => ({
   type: WORKLIST_MANAGEMENT_ACTION_TYPE.DELETE_TASK_BY_ID_ERROR,
   payload: data,
 });
+
+export const taskByProject = (data) => ({
+  type: WORKLIST_MANAGEMENT_ACTION_TYPE.GET_TASK_BY_PROJECT,
+  payload: data,
+});
+
+export const taskByProjectSuccess = (data) => ({
+  type: WORKLIST_MANAGEMENT_ACTION_TYPE.GET_TASK_BY_PROJECT_SUCCESS,
+  payload: data,
+});
+
+export const taskByProjectError = (data) => ({
+  type: WORKLIST_MANAGEMENT_ACTION_TYPE.GET_TASK_BY_PROJECT_ERROR,
+  payload: data,
+});

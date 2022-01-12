@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import React from 'react';
 
 import Datarow from './Datarow';
+import MobileDataRow from './mobile.data.row';
 
 const PublicUserFeedback = () => {
   return (
@@ -42,6 +43,15 @@ const PublicUserFeedback = () => {
             <Datarow />
           </tbody>
         </table>
+      </div>
+      <div className="mobile-table">
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
       </div>
       <div className="table-container-btm ">
         <div className="table_slider_container">

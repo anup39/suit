@@ -1,18 +1,22 @@
-/*eslint-disable*/
 import './BaseTemplate.scss';
 
+import PropTypes from 'prop-types';
 import React from 'react';
 
-const BaseTemplate = (props) => {
+const BaseTemplate = ({ children, title }) => {
   return (
-    <div className="base-div">
-      <div>
-        <h2 className="header">{props.title}</h2>
+    <>
+      <div className="base-div">
+        {title ? <h2 className="header">{title}</h2> : ''}
+        {children}
       </div>
-      {props.children}
       <p className="footer">Powered By Negentis</p>
-    </div>
+    </>
   );
 };
 
+BaseTemplate.propTypes = {
+  children: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
+};
 export default BaseTemplate;
