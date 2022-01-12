@@ -1,20 +1,37 @@
 import './styles/UserRoles.scss';
 
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import { getUserAuthToken } from '../../redux/user-redux/user.selectors';
 import { roleStart } from '../../redux/User-Role/role.actions';
+import { getUserRoleList } from '../../redux/User-Role/User-Role.selectors';
 import MobileDataRow from './mobile.data.row';
 
-const UserRoles = ({ currentUserData, userRoleData }) => {
+const UserRoles = () => {
   const dispatch = useDispatch();
+  const userRoleData = useSelector(getUserRoleList);
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [filteredData, setfilteredData] = React.useState([]);
+
+  const userAuthToken = useSelector(getUserAuthToken);
+
+  const filterLists = (e) => {
+    setSearchTerm(e.target.value);
+    const filteredList = userRoleData.filter((item) =>
+      item?.username.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setfilteredData(filteredList);
+  };
+
   useEffect(() => {
-    dispatch(roleStart(currentUserData.accessToken));
+    if (userRoleData.length === 0) {
+      dispatch(roleStart(userAuthToken));
+    }
   }, []);
 
   return (
@@ -24,15 +41,16 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
           <div className="input-container">
             <input
               className="search-input"
-              // onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => filterLists(e)}
               placeholder="User Search"
+              value={searchTerm}
             />
             <SearchOutlinedIcon className="search-icon" />
           </div>
 
           <p className="delete-botton">Delete</p>
         </div>
-
+        {console.log(userRoleData)}
         <div>
           <div className="user-header">
             <div className="user-roles-table-base">
@@ -48,10 +66,10 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
                 <span className="user-roles-status ">Status</span>
                 <span className="user-roles-action">Actions</span>
               </div>
-
+              {console.log(filteredData)}
               <Pagination
                 componentNo={4}
-                itemData={userRoleData}
+                itemData={searchTerm ? filteredData : userRoleData}
                 itemsPerPage={10}
               />
               <div className="mobile_table_userroles">
@@ -71,17 +89,7 @@ const UserRoles = ({ currentUserData, userRoleData }) => {
   );
 };
 
-UserRoles.propTypes = {
-  userRoleData: PropTypes.isRequired,
-  currentUserData: PropTypes.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  currentUserData: state.user.userData,
-  userRoleData: state.role.data,
-});
-
-export default connect(mapStateToProps)(UserRoles);
+export default UserRoles;
 
 // TODO: Delete
 // TODO: Delete user

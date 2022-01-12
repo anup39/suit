@@ -16,7 +16,7 @@ import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import { userSigninStart } from '../../redux/user-redux/user.actions';
 import {
   getIfAuthenticated,
-  getLoadingStatus,
+  // getLoadingStatus,
   getSigninError,
 } from '../../redux/user-redux/user.selectors';
 import schema from './sign-in.schems';
@@ -27,8 +27,7 @@ const SigninPage = () => {
   const dispatch = useDispatch();
   const getError = useSelector(getSigninError);
 
-  const userData = useSelector(getIfAuthenticated);
-  const onLoading = useSelector(getLoadingStatus);
+  const isAuthenticated = useSelector(getIfAuthenticated);
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -41,6 +40,7 @@ const SigninPage = () => {
   });
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     dispatch(userSigninStart(data));
   };
 
@@ -49,9 +49,8 @@ const SigninPage = () => {
   };
 
   useEffect(() => {
-    setIsLoading(onLoading);
-    console.log(userData);
     if (getError) {
+      setIsLoading(false);
       toast.error(getError.message, {
         position: 'top-center',
         autoClose: 2000,
@@ -63,7 +62,8 @@ const SigninPage = () => {
       });
     }
 
-    if (userData) {
+    if (isAuthenticated) {
+      setIsLoading(false);
       navigate('/pannel/user-roles');
       toast.success('Signin Success', {
         position: 'top-center',
@@ -75,7 +75,7 @@ const SigninPage = () => {
         progress: undefined,
       });
     }
-  }, [onLoading, userData]);
+  }, [isAuthenticated]);
 
   return (
     <div className={classes.signup_container}>

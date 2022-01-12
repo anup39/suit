@@ -1,9 +1,12 @@
 import './user-form-styles.scss';
 
+import { yupResolver } from '@hookform/resolvers/yup';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { getAllCompany } from '../../../redux/company-redux/company.actions';
 import { getCompaniesList } from '../../../redux/company-redux/company.selectors';
 import { getUserAuthToken } from '../../../redux/user-redux/user.selectors';
 import {
@@ -12,6 +15,7 @@ import {
 } from '../../../redux/User-Role/role.actions';
 import { getUserRoles } from '../../../redux/User-Role/User-Role.selectors';
 import { FormHeader } from './styles/form-styles';
+import schema from './user.roles.schema';
 
 const UserRolesForms = ({
   editUser,
@@ -20,46 +24,46 @@ const UserRolesForms = ({
   userCompany,
   role,
 }) => {
-  const [companyName, setCompanyName] = React.useState('');
-  const [userRole, setUserRole] = React.useState(role);
-
   const dispatch = useDispatch();
   const userAuthToken = useSelector(getUserAuthToken);
   const roles = useSelector(getUserRoles);
   const companyList = useSelector(getCompaniesList);
 
-  const handelAddUserRole = () => {
+  const { register, handleSubmit, reset } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const handelAddUserRole = (userData) => {
     const data = {
       authToken: userAuthToken,
-      userData: {
-        username: userName,
-        roles_id: userRole,
-        companies_id: companyName,
-      },
+      userData,
     };
-
+    console.log(data);
     dispatch(updateUserRoleAndCompany(data));
     handelCancel();
   };
   const handelEditUser = () => {
-    const data = {
-      authToken: userAuthToken,
-      userData: {
-        username: userName,
-        roles_id: userRole,
-      },
-    };
+    // const data = {
+    //   authToken: userAuthToken,
+    //   userData: {
+    //     username: userName,
+    //     roles_id: userRole,
+    //   },
+    // };
 
-    dispatch(updateUserRoleAndCompany(data));
+    // dispatch(updateUserRoleAndCompany(data));
     handelCancel();
   };
 
   React.useEffect(() => {
     dispatch(userRoles(userAuthToken));
+    dispatch(getAllCompany(userAuthToken));
 
-    if (editUser) {
-      setCompanyName(userCompany);
-    }
+    reset({
+      username: userName,
+      companies_id: userCompany,
+      roles_id: role,
+    });
   }, []);
 
   return (
@@ -76,83 +80,77 @@ const UserRolesForms = ({
 
           <label className="form_label"> Company</label>
           <select className="form_inputs_disabled" disabled value={userCompany}>
-            <option>0</option>
+            {companyList &&
+              companyList.map((comp) => (
+                <option key={comp.id} value={comp.id}>
+                  {comp.name}
+                </option>
+              ))}
           </select>
 
           <label className="form_label"> Role</label>
-          <select
-            className="form_inputs"
-            onChange={(e) => setUserRole(e.target.value)}
-            value={userRole}
-          >
+          <select className="form_inputs">
             {roles.map((val) => (
               <option key="roles" value={val.idRole}>
                 {val.name}
               </option>
             ))}
           </select>
+
+          <div className="form-submit">
+            <button className="cancel" onClick={handelCancel} type="button">
+              Cancel
+            </button>
+            <button
+              className="submit-button"
+              onClick={handelEditUser}
+              type="button"
+            >
+              Save
+            </button>
+          </div>
         </form>
       ) : (
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit(handelAddUserRole)}>
           <label className="form_label">Username</label>
-          <input className="form_inputs_disabled" disabled value={userName} />
+          <input
+            className="form_inputs_disabled"
+            disabled
+            {...register('username')}
+          />
 
           <label className="form_label"> Company</label>
-          <select
-            className="form_inputs"
-            onChange={(e) => setCompanyName(e.target.value)}
-            value={companyName}
-          >
-            {console.log(companyList)}
-
-            <option value={1}>Test Company</option>
-            <option value={2}>Company2 </option>
-            <option value={3}>Mango</option>
-            <option value={4}>MS </option>
-            <option value={5}>Companyyy </option>
+          <select className="form_inputs" {...register('companies_id')}>
+            {companyList &&
+              companyList.map((comp) => (
+                <option key={comp.id} value={comp.id}>
+                  {comp.name}
+                </option>
+              ))}
           </select>
 
           <label className="form_label"> Role</label>
-          <select
-            className="form_inputs"
-            onChange={(e) => setUserRole(e.target.value)}
-            value={userRole}
-          >
+          <select className="form_inputs" {...register('roles_id')}>
             {roles.map((val) => (
               <option key="roles" value={val.idRole}>
                 {val.name}
               </option>
             ))}
           </select>
-        </form>
-      )}
 
-      {!editUser ? (
-        <div className="form-submit">
-          <button className="cancel" onClick={handelCancel} type="button">
-            Cancel
-          </button>
-          <button
-            className="submit-button"
-            onClick={handelAddUserRole}
-            type="button"
-          >
-            Save
-          </button>
-        </div>
-      ) : (
-        <div className="form-submit">
-          <button className="cancel" onClick={handelCancel} type="button">
-            Cancel
-          </button>
-          <button
-            className="submit-button"
-            onClick={handelEditUser}
-            type="button"
-          >
-            Save
-          </button>
-        </div>
+          <div className="form-submit">
+            <button className="cancel" onClick={handelCancel} type="button">
+              Cancel
+            </button>
+            <button
+              className="submit-button"
+              onClick={handelAddUserRole}
+              type="submit"
+            >
+              Save
+            </button>
+          </div>
+        </form>
       )}
     </div>
   );
@@ -167,3 +165,5 @@ UserRolesForms.propTypes = {
 };
 
 export default UserRolesForms;
+
+// TODO: Check for the response.
