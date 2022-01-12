@@ -3,12 +3,13 @@ import '../../../../theme/ButtonColors.scss';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@mui/material/Button';
-import moment from 'moment';
+// import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { getProjectData } from '../../../../redux/project-management-redux/project.selector';
 import { createNewProject } from '../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import schema from './create-form-schema';
@@ -16,6 +17,7 @@ import schema from './create-form-schema';
 const CreateProjectForm = ({ handelClose, editForm }) => {
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
+  const projectData = useSelector(getProjectData);
 
   const {
     register,
@@ -23,14 +25,10 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: projectData,
   });
 
   const onSubmit = (data) => {
-    // eslint-disable-next-line
-    data.startDate = moment(data.startDate).format('DD MMM YYYY');
-    // eslint-disable-next-line
-    data.completionDate = moment(data.completionDate).format('DD MMM YYYY');
-
     const payloadData = {
       authToken,
       newCompanyData: data,

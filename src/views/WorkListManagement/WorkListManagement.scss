@@ -2,18 +2,15 @@
 
 .work-list-table-body {
   height: calc(100vh - 347px);
-  overflow: hidden;
-
+  overflow: scroll;
 
   @media (max-width: 1024px) {
     height: calc(100vh - 313px);
-
   }
 
   @media (max-width: 991.98px) {
     display: none;
   }
-
 }
 
 .header-wrapper {
@@ -64,7 +61,6 @@
 }
 
 .worklist-search-div {
-
   display: flex;
   align-items: center;
   padding: 0 15px;
@@ -115,7 +111,7 @@
   font-size: 18px;
 }
 
-.worklist-input-container>input {
+.worklist-input-container > input {
   height: 30px;
   width: 100%;
   padding-left: 28px;
@@ -200,8 +196,6 @@
   overflow: auto;
   display: none;
 
-
-
   @media (max-width: 991.98px) {
     height: calc(100vh - 244px);
     display: block;
@@ -210,11 +204,9 @@
   @media (max-width: 768px) {
     height: calc(100vh - 230px);
     display: block;
-
   }
 
-
-  >div:nth-child(even) {
+  > div:nth-child(even) {
     background: #d4deea;
 
     .grid_3_1 {

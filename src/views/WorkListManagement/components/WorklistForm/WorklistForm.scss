@@ -11,12 +11,11 @@
 
   h2 {
     font-size: 18px;
-    color: #364A63;
+    color: #364a63;
     font-weight: 500;
     margin: 0 0 30px 0;
   }
 }
-
 
 .worklist-form-container label {
   color: #526484;
@@ -28,24 +27,24 @@
 
 .worklist-form-container input {
   width: 100%;
-  border: 1px solid #D4DEEA;
+  border: 1px solid #d4deea;
   border-radius: 3px;
   width: 100%;
   padding: 8px;
   background-color: #fff;
-  color: #364A63;
+  color: #364a63;
   margin-bottom: 15px;
   outline: none;
 }
 
 .select-company-field {
   width: 100%;
-  border: 1px solid #D4DEEA;
+  border: 1px solid #d4deea;
   border-radius: 3px;
   width: 100%;
   padding: 8px;
   background-color: #fff;
-  color: #364A63;
+  color: #364a63;
   margin-bottom: 15px;
   outline: none;
 }
@@ -61,12 +60,12 @@
 
 .worklist-form-container textarea {
   width: 100%;
-  border: 1px solid #D4DEEA;
+  border: 1px solid #d4deea;
   border-radius: 3px;
   width: 100%;
   padding: 8px;
   background-color: #fff;
-  color: #364A63;
+  color: #364a63;
   resize: none;
   margin-bottom: 15px;
   outline: none;
@@ -90,17 +89,23 @@
 }
 
 .worklist-submit-button {
-  background: #E78201;
+  background: #e78201;
   color: white;
 }
 
 .worklist-cancel-button {
   background: transparent;
-  color: #8094AE;
+  color: #8094ae;
 }
 
 .worklist-management-gird {
   display: grid;
   grid-template-columns: repeat(2, 48.5%);
   gap: 10px;
+}
+
+.worklistform-error-text {
+  color: red;
+  font-size: 10px;
+  float: right;
 }

@@ -1,23 +1,24 @@
-import { object, string } from 'yup';
+import * as yup from 'yup';
 
-const schema = object().shape({
-  taskId: string().required('Required'),
-  projectsId: string().required('Required'),
-  taskName: string().required('Required'),
-  taskDescription: string().required('Required'),
-  isMilestone: string().required('Required'),
-  type: string().required('Required'),
-  priority: string().required('Required'),
-  start: string().required('Required'),
-  end: string().required('Required'),
-  street: string().required('Required'),
-  zipCode: string().required('Required'),
-  city: string().required('Required'),
-  country: string().required('Required'),
-  latitude: string().required('Required'),
-  longitude: string().required('Required'),
-  note: string().required('Required'),
-  documents: string().required('Required'),
+const schema = yup.object().shape({
+  taskId: yup.string().required('Required'),
+  projectsId: yup.string().required('Required'),
+  taskName: yup.string().required('Required'),
+  taskDescription: yup.string().required('Required'),
+  isMilestone: yup.string().required('Required'),
+  type: yup.string().required('Required'),
+  priority: yup.string().required('Required'),
+  start: yup.string().required('Required'),
+  end: yup.string().required('Required'),
+  street: yup.string().required('Required'),
+  zipCode: yup.string().required('Required'),
+  city: yup.string().required('Required'),
+  country: yup.string().required('Required'),
+  latitude: yup.string().required('Required'),
+  longitude: yup.string().required('Required'),
+  note: yup.string().required('Required'),
+  documents: yup.string().required('Required'),
+  taskStatus: yup.string().default('Not assigned'),
 });
 
 export default schema;

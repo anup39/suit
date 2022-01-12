@@ -123,21 +123,10 @@ const WorkListManagement = ({ authToken, workListData }) => {
               <span className="worklist-management-actions">Actions</span>
             </div>
             <div>
-              {/* {workListData.map((values) => (
-                <WorkListManagementCard
-                  key={values.taskId}
-                  isMilestone={values.isMilestone}
-                  projectName={values.projectsId}
-                  taskDescription={values.taskDescription}
-                  taskName={values.taskName}
-                  type={values.type}
-                  workId={values.taskId}
-                />
-              ))} */}
               <Pagination
                 componentNo={1}
                 itemData={workListData}
-                itemsPerPage={5}
+                itemsPerPage={10}
               />
               <div className="mobile_table_worklist">
                 <MobileDataRow />
@@ -145,7 +134,6 @@ const WorkListManagement = ({ authToken, workListData }) => {
                 <MobileDataRow />
                 <MobileDataRow />
                 <MobileDataRow />
-
                 <MobileDataRow />
               </div>
             </div>
