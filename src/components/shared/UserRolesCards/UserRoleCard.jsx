@@ -102,7 +102,7 @@ const UserRoleCard = ({
           />
         )}
       </Drawer>
-      <div className="user-role-base table">
+      <div className="user-role-base">
         <span className="user-roles-card-check-input">
           <input onChange={handelCheckbox} type="checkbox" value={checkBox} />
         </span>
