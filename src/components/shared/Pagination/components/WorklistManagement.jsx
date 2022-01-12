@@ -5,7 +5,7 @@ import WorklistManagementCard from '../../../../views/WorkListManagement/compone
 
 const WorklistManagement = ({ currentItems }) => {
   return (
-    <div className="work-list-table-body">
+    <div className="work-list-table-tbody">
       {currentItems &&
         currentItems.map((values) => (
           <WorklistManagementCard
