@@ -1,25 +1,31 @@
 @import '../../../../theme/ThemeColors';
 
 .project-card-base-div {
-  border-bottom: $border-size solid $border-colors;
-  padding: $table-data-padding;
-  width: 100%;
-  font-size: 18px;
-  border-bottom: $border-size solid $border-colors;
-  align-items: center;
-  padding: 10px;
   display: table;
   width: 100%;
-  color: $table-header-text-color;
+  border-bottom: 1px solid #D4DEEA;
+
+  &:last-child {
+    border: none;
+  }
 }
 
 .project-card-base-div span {
   display: table-cell;
   table-layout: fixed;
-  color: $table-data-color-1;
-  padding-right: 10px;
-  font-size: $table-data-font-size;
+  padding: 10px;
+  font-size: 14px;
   vertical-align: middle;
+  color: #364A63;
+  margin-left: 10px;
+
+  p {
+    margin: 0;
+  }
+
+  svg {
+    font-size: 18px;
+  }
 }
 
 .project-menu-icon {
@@ -27,12 +33,15 @@
   cursor: pointer;
   font-size: $menu-icon-size;
 }
+
 .project-card-check-input {
   width: 3%;
 }
+
 .project-card-project-name {
   width: 15%;
 }
+
 .project-card-client {
   width: 11%;
 }
@@ -42,18 +51,23 @@
   // white-space: pre-wrap;
   overflow-wrap: break-word;
 }
+
 .project-card-start-date {
   width: 11%;
 }
+
 .project-card-end-date {
   width: 11%;
 }
+
 .project-card-last-update {
   width: 11%;
 }
+
 .project-card-user-last-update {
   width: 15%;
 }
+
 .project-card-user-actions {
   width: 6%;
   cursor: pointer;

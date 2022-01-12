@@ -45,6 +45,10 @@ $border-color-pagination: rgb(209, 209, 209);
   &.selected {
     background-color: #0160e0;
     color: white;
+
+    a {
+      color: white;
+    }
   }
 }
 
