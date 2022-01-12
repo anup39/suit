@@ -1,16 +1,51 @@
 @import '../../theme/ThemeColors';
 
-.new_project_button {
-  width: 150px;
-  margin-right: 0px;
-  margin-left: auto;
-  margin-top: -30px;
-  background-color: $button-colors-primary;
-  padding: 10px;
-  color: #fff;
-  border-radius: $button-border-radius;
-  text-align: center;
-  cursor: pointer;
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 36px;
+  margin-bottom: 10px;
+
+  button {
+    background: #0160e0;
+    color: white;
+    padding: 6px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .header {
+    margin: 0;
+    font-size: 20px;
+    color: #364a63;
+
+    @media (max-width: 991.98px) {
+      font-size: 18px;
+    }
+  }
+}
+
+.base-div {
+  .MuiTabs-root {
+    min-height: inherit;
+  }
+
+  .MuiButtonBase-root {
+    padding: 8px 0;
+    margin-right: 28px;
+    text-transform: initial;
+    min-height: inherit;
+
+    @media (max-width: 768px) {
+      padding: 7px 0;
+    }
+  }
 }
 
 .project-management-search-div input {

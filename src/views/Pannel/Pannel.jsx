@@ -23,7 +23,7 @@ const Pannel = () => {
       <div className={classes.roles_components}>
         <AdminHeaderComponent />
         <Outlet />
-        <FooterNegentis />
+        {/* <FooterNegentis /> */}
       </div>
     </div>
   );

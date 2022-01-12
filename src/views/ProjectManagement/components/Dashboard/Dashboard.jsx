@@ -83,121 +83,147 @@ const Dashboard = () => {
   };
   return (
     <div className="project-management-dashboard-base-div">
-      <div className="project-management-dashoard-graph-1">
-        <Bar data={data} options={options} />
+      <div className="project-management-dashoard-graph graph-1">
+        <h5>% Completion</h5>
+        <div className="pm-dg-wrap">
+          <Bar data={data} options={options} />
+        </div>
       </div>
-      <div className="project-management-dashoard-graph-2">
-        <Bar data={effiecncyData} options={options} />
+      <div className="project-management-dashoard-graph graph-2">
+        <h5>Efficiency</h5>
+
+        <div className="pm-dg-wrap">
+          <Bar data={effiecncyData} options={options} />
+        </div>
       </div>
+
       <div className="project-management-dashoard-table-1">
+        <h5>Overview</h5>
+
         <table>
-          <tr>
-            <th>Project</th>
-            <th>% Completion</th>
-            <th>Nr Task</th>
-            <th>Nr Days Worked</th>
-            <th>Nr Days Spanned</th>
-            <th>Nr Task Change</th>
-            <th>Efficency</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>% Completion</th>
+              <th>Nr Task</th>
+              <th>Nr Days Worked</th>
+              <th>Nr Days Spanned</th>
+              <th>Nr Task Change</th>
+              <th>Efficency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Project 1</td>
+              <td>70 %</td>
+              <td>35</td>
+              <td>Nr 12</td>
+              <td>16</td>
+              <td>19</td>
+              <td>0.80</td>
+            </tr>
 
-          <tr>
-            <td>Project 1</td>
-            <td>70 %</td>
-            <td>35</td>
-            <td>Nr 12</td>
-            <td>16</td>
-            <td>19</td>
-            <td>0.80</td>
-          </tr>
+            <tr>
+              <td>Project 1</td>
+              <td>70 %</td>
+              <td>35</td>
+              <td>Nr 12</td>
+              <td>16</td>
+              <td>19</td>
+              <td>0.80</td>
+            </tr>
 
-          <tr>
-            <td>Project 1</td>
-            <td>70 %</td>
-            <td>35</td>
-            <td>Nr 12</td>
-            <td>16</td>
-            <td>19</td>
-            <td>0.80</td>
-          </tr>
+            <tr>
+              <td>Project 1</td>
+              <td>70 %</td>
+              <td>35</td>
+              <td>Nr 12</td>
+              <td>16</td>
+              <td>19</td>
+              <td>0.80</td>
+            </tr>
 
-          <tr>
-            <td>Project 1</td>
-            <td>70 %</td>
-            <td>35</td>
-            <td>Nr 12</td>
-            <td>16</td>
-            <td>19</td>
-            <td>0.80</td>
-          </tr>
+            <tr>
+              <td>Project 1</td>
+              <td>70 %</td>
+              <td>35</td>
+              <td>Nr 12</td>
+              <td>16</td>
+              <td>19</td>
+              <td>0.80</td>
+            </tr>
 
-          <tr>
-            <td>Project 1</td>
-            <td>70 %</td>
-            <td>35</td>
-            <td>Nr 12</td>
-            <td>16</td>
-            <td>19</td>
-            <td>0.80</td>
-          </tr>
-
-          <tr>
-            <td>Project 1</td>
-            <td>70 %</td>
-            <td>35</td>
-            <td>Nr 12</td>
-            <td>16</td>
-            <td>19</td>
-            <td>0.80</td>
-          </tr>
+            <tr>
+              <td>Project 1</td>
+              <td>70 %</td>
+              <td>35</td>
+              <td>Nr 12</td>
+              <td>16</td>
+              <td>19</td>
+              <td>0.80</td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div className="project-management-dashoard-graph-3">
-        <Pie className="project-management-dashbord-pie" data={chartData} />
+        <div className="head-wrap-1">
+          {' '}
+          <h5>Efficiency</h5>
+        </div>
+        <div className="pm-dg-wrap">
+          <Pie className="project-management-dashbord-pie" data={chartData} />
+        </div>
       </div>
       <div className="project-management-dashoard-table-2">
+        <h5>
+          <span className="rect-wrap" />
+          Completed
+        </h5>
         <table>
-          <tr>
-            <th>Task Id</th>
-            <th>Task Name</th>
-            <th>Task Description</th>
-            <th>Is Milestone</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>Task Id</th>
+              <th>Task Name</th>
+              <th>Task Description</th>
+              <th>Is Milestone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Task 1</td>
+              <td>Solve Bug</td>
+              <td>To solve a bug in media player app</td>
+              <td>Yes</td>
+            </tr>
 
-          <tr>
-            <td>Task 1</td>
-            <td>Solve Bug</td>
-            <td>To solve a bug in media player app</td>
-            <td>Yes</td>
-          </tr>
+            <tr>
+              <td>Task 2</td>
+              <td>Solve Bug</td>
+              <td>To solve a bug in media player app</td>
+              <td>Yes</td>
+            </tr>
 
-          <tr>
-            <td>Task 2</td>
-            <td>Solve Bug</td>
-            <td>To solve a bug in media player app</td>
-            <td>Yes</td>
-          </tr>
+            <tr>
+              <td>Task 3</td>
+              <td>Solve Bug</td>
+              <td>To solve a bug in media player app</td>
+              <td>Yes</td>
+            </tr>
 
-          <tr>
-            <td>Task 3</td>
-            <td>Solve Bug</td>
-            <td>To solve a bug in media player app</td>
-            <td>Yes</td>
-          </tr>
+            <tr>
+              <td>Task 4</td>
+              <td>Solve Bug</td>
+              <td>To solve a bug in media player app</td>
+              <td>Yes</td>
+            </tr>
 
-          <tr>
-            <td>Task 4</td>
-            <td>Solve Bug</td>
-            <td>To solve a bug in media player app</td>
-            <td>Yes</td>
-          </tr>
-
-          <tr>
-            <td>Task 5</td>
-            <td>Solve Bug</td>
-            <td>To solve a bug in media player app</td>
-            <td>Yes</td>
-          </tr>
+            <tr>
+              <td>Task 5</td>
+              <td>Solve Bug</td>
+              <td>To solve a bug in media player app</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import '../../theme/ButtonColors.scss';
 import './ProjectManagement.scss';
 
+import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import { Drawer } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -56,15 +57,17 @@ const ProjectManagement = ({ userToken }) => {
   }, []);
 
   return (
-    <BaseTemplate title="Project Management">
-      {value === 1 && (
-        <span
-          className="new_project_button"
-          onClick={() => setAddNewProject(true)}
-        >
-          + Create Project
-        </span>
-      )}
+    <BaseTemplate>
+      <div className="header-wrapper">
+        <h2 className="header">Project Management</h2>
+        {value === 1 && (
+          <button onClick={() => setAddNewProject(true)} type="button">
+            <AddIcon />
+            Create Project
+          </button>
+        )}
+      </div>
+
       {!showProjectPannel ? (
         <div>
           <Box sx={{ width: '100%' }}>

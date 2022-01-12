@@ -1,59 +1,164 @@
 .project-management-dashboard-base-div {
   width: 100%;
-  height: 90%;
-  display: grid;
-  grid-template-columns: repeat(2, 500px);
-  gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
+  display: flex;
+  flex-wrap: wrap;
+
+  height: calc(100vh - 244px);
+  overflow: auto;
+
+  @media (max-width: 768px) {
+    height: calc(100vh - 231px);
+
+  }
 }
 
-.project-management-dashoard-graph-1 {
-  grid-row: 1;
-  grid-column: 1;
+.project-management-dashoard-graph {
+  width: calc(50% - 12px);
+  border: 1px solid #E9E9E9;
+  margin-bottom: 24px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 24px 0 !important;
+  }
+
+  &.graph-1 {
+    margin-right: 12px;
+  }
+
+  &.graph-2 {
+    margin-left: 12px;
+  }
+
+  h5 {
+    padding: 12px;
+    color: #364A63;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 1px solid #E9E9E9;
+
+  }
+
+
 }
 
-.project-management-dashoard-graph-2 {
-  grid-row: 1;
-  grid-column: 2;
+.pm-dg-wrap {
+  width: 100%;
+  height: 290px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+.pie-chart {
+  width: 250px;
 }
 
 .project-management-dashoard-graph-3 {
-  grid-row: 3;
-  grid-column: 1;
-  margin-top: 50px;
+  width: 40%;
+  border: 1px solid #E9E9E9;
+  margin-bottom: 24px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+  .head-wrap-1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border-bottom: 1px solid #E9E9E9;
+
+    h5 {
+      color: #364A63;
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0;
+
+    }
+  }
 }
 
 .project-management-dashoard-table-1 {
-  grid-row: 2;
-  grid-column: 1/-1;
-  width: 99%;
-  margin-top: 50px;
+  margin-bottom: 24px;
+  width: 100%;
+  border: 1px solid #E9E9E9;
+  overflow: auto;
+
+  h5 {
+    padding: 12px;
+    margin: 0;
+
+    color: #364A63;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 1px solid #E9E9E9;
+
+  }
 }
 
 .project-management-dashoard-table-1 table {
   width: 100%;
-  border: 1px solid rgb(148, 148, 148);
   border-collapse: collapse;
 }
 
 .project-management-dashoard-table-1 td {
-  text-align: center;
-  margin-top: 2px;
-  padding: 10px;
-  color: rgb(51, 51, 51);
+  vertical-align: middle;
+  padding: 12px;
+  font-size: 12px;
+  color: #364A63;
+}
+
+.project-management-dashoard-table-1 tbody tr {
+  border-top: 1px solid #E9E9E9;
 }
 
 .project-management-dashoard-table-1 th {
-  text-align: center;
-  margin-top: 2px;
-  padding: 10px;
-  color: rgb(145, 145, 145);
+  vertical-align: middle;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px;
+  color: #8094AE;
 }
 
-.project-management-dashoard-table-2 table {
+.project-management-dashoard-table-2 {
+  margin-bottom: 24px;
   width: 100%;
-  border: 1px solid rgb(148, 148, 148);
-  border-collapse: collapse;
+  border: 1px solid #E9E9E9;
+  width: 60%;
+  overflow: auto;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+  h5 {
+    padding: 12px;
+    color: #364A63;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 1px solid #E9E9E9;
+    display: flex;
+    margin: 0;
+
+    align-items: center;
+
+    .rect-wrap {
+      display: block;
+      width: 10px;
+      height: 10px;
+      background: #43BEE1;
+    }
+  }
+}
+
+.project-management-dashoard-table-2 tbody tr {
+  border-top: 1px solid #E9E9E9;
 }
 
 .project-management-dashoard-table-2 td {
@@ -64,22 +169,23 @@
 }
 
 .project-management-dashoard-table-2 th {
-  text-align: center;
-  margin-top: 2px;
-  padding: 10px;
-  color: rgb(145, 145, 145);
+  vertical-align: middle;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px;
+  color: #8094AE;
 }
 
 .project-management-dashoard-table-2 tr {
-  border-bottom: 1px solid rgb(196, 196, 196);
+  vertical-align: middle;
+  padding: 12px;
+  font-size: 12px;
+  color: #364A63;
 }
 
-.project-management-dashoard-table-2 {
-  grid-row: 3;
-  grid-column: 2;
-  margin-top: 50px;
-}
+
 
 .project-management-dashbord-pie {
-  width: 200px;
+  width: 70% !important;
+  height: 100% !important;
 }
