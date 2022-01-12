@@ -1,52 +1,76 @@
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
+import Checkbox from '@mui/material/Checkbox';
 import Drawer from '@mui/material/Drawer';
+import TextField from '@mui/material/TextField';
+import { withStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
+import { roleStart } from '../../../../redux/User-Role/role.actions';
+import { getListOfUsers } from '../../../../redux/User-Role/users.selectors';
 import DatagridRow from './company-user.row';
 import classes from './company-user.styles.module.scss';
 
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
+const StyledAutocompleteWrapper = withStyles({
+  border: 'none',
+})(TextField);
+
 const CompanyUserAdd = ({ isOpen, handleClose }) => {
+  const userAccessToken = useSelector(getUserAuthToken);
   const closeDrawer = () => {
     handleClose(false);
   };
-  const handleClick = () => {
-    console.info('You clicked the Chip.');
-  };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(roleStart(userAccessToken));
+  }, []);
 
-  const handleDelete = () => {
-    console.info('You clicked the delete icon.');
-  };
+  const listOfUsers = useSelector(getListOfUsers);
+  console.log(listOfUsers, 'right here');
 
   return (
     <Drawer anchor="right" onClose={closeDrawer} open={isOpen}>
-      <Box role="presentation" sx={{ width: 450, padding: 5 }}>
+      <Box role="presentation" sx={{ width: 495, padding: 5 }}>
         <div className={classes.add_container}>
           <h2 className={classes.userlist_header_1}>Add Users</h2>
           <div className={classes.userlist_container}>
             <h3 className={classes.userlist_header}>Search</h3>
             <div className={classes.userlist_box}>
-              <Chip
-                label="Clickable"
-                onClick={handleClick}
-                onDelete={handleDelete}
-              />
-              <Chip
-                label="Clickable"
-                onClick={handleClick}
-                onDelete={handleDelete}
-              />
-              <Chip
-                label="Clickable"
-                onClick={handleClick}
-                onDelete={handleDelete}
-              />
-              <Chip
-                label="Clickable"
-                onClick={handleClick}
-                onDelete={handleDelete}
+              <Autocomplete
+                disableCloseOnSelect
+                getOptionLabel={(option) => option.username}
+                id="checkboxes-tags-demo"
+                multiple
+                options={listOfUsers}
+                renderInput={(params) => (
+                  <StyledAutocompleteWrapper
+                    {...params}
+                    label="Users"
+                    placeholder="search..."
+                    sx={{ border: 'none' }}
+                  />
+                )}
+                renderOption={(props, option, { selected }) => (
+                  <li {...props}>
+                    <Checkbox
+                      checked={selected}
+                      checkedIcon={checkedIcon}
+                      icon={icon}
+                      style={{ marginRight: 8 }}
+                    />
+                    {option.username}
+                  </li>
+                )}
+                style={{ width: '100%' }}
               />
             </div>
           </div>
@@ -74,11 +98,24 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
           </div>
           <div className={classes.action_buttons_container}>
             <span className={classes.cancel_button}>
-              <Button color="error" onClick={closeDrawer} variant="text">
+              <Button
+                color="error"
+                onClick={closeDrawer}
+                sx={{ color: '#8094AE' }}
+                variant="text"
+              >
                 Cancel
               </Button>
             </span>
-            <Button variant="contained">Update</Button>
+            <Button
+              sx={{
+                backgroundColor: '#EE9949',
+                '&:hover': { backgroundColor: '#EE9949' },
+              }}
+              variant="contained"
+            >
+              Update
+            </Button>
           </div>
         </div>
       </Box>

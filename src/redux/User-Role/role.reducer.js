@@ -3,7 +3,7 @@ import ROLE_ACTION_TYPE from './role.action-types';
 const ROLE_INITIAL_DATA = {
   isLoading: false,
   error: false,
-  data: '',
+  data: [],
   editFormOpen: false,
   userData: '',
   addFormOpen: false,

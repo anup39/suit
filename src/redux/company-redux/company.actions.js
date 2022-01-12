@@ -29,3 +29,26 @@ export const getAllCompanyError = (data) => ({
   type: COMPANY_ACTION_TYPES.GET_ALL_COMPANY_ERROR,
   payload: data,
 });
+
+export const getCheckedCompany = (data) => ({
+  type: COMPANY_ACTION_TYPES.GET_CHECKED_COMPANY,
+  payload: data,
+});
+
+export const eraseCheckedCompany = (data) => ({
+  type: COMPANY_ACTION_TYPES.EREASE_CHECKED_COMPANY,
+  payload: data,
+});
+
+export const deleteCompanyStart = (data) => ({
+  type: COMPANY_ACTION_TYPES.DELETE_COMPANY_START,
+  payload: data,
+});
+export const deleteCompanySuccess = (data) => ({
+  type: COMPANY_ACTION_TYPES.DELETE_COMPANY_SUCCESS,
+  payload: data,
+});
+export const deleteCompanyFail = (data) => ({
+  type: COMPANY_ACTION_TYPES.DELETE_COMPANY_FAIL,
+  payload: data,
+});

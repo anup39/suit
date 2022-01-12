@@ -1,0 +1,133 @@
+.mapview_container{
+    width: 900px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.mapview_box{
+    border: 1px solid #D4DEEA;
+    box-sizing: border-box;
+    border-radius: 3px;
+}
+
+
+.box_header{
+    width: 390px;
+    height: 33px;
+    left: 440px;
+    top: 90px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 33px;
+    color: #364A63;
+    border-bottom: 1px solid #D4DEEA;
+}
+
+.map_data_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.document_container{
+    width: 324px;
+    top: 239px;
+    background: #FFFFFF;
+    border-left: 1px solid #D4DEEA;
+    border-right: none;
+    border-bottom: none;
+    box-sizing: border-box;
+    padding: 30px 27px 10px 29px;
+}
+
+.doc_container_header{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: #364A63;
+    margin-bottom: 27px;
+}
+
+.box_header{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 7px;
+    height: 55px;
+}
+
+.box_button{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    background: #0160E0;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.document_search_container{
+    display: flex;
+    align-items: center;
+    margin: 8px 0 13px 0;
+}
+
+.document_preview{
+    width: 268px;
+    height: 318px;
+    left: 1101px;
+    top: 388px;
+    background: #F8F9FC;
+    border: 1px solid #8094AE;
+    box-sizing: border-box;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.doc_container_header_name{
+    margin: 0;
+    padding: 0;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #526484;
+}
+
+.document_details_box{
+    background: #F8F9FC;
+    border: 1px solid #8094AE;
+    box-sizing: border-box;
+    border-radius: 3px;
+    width: 268px;
+    height: 216px;
+}
+
+.document_detail_header{
+    margin: 23px 0 11px 0;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #526484;
+}
+
+.map_conntainer{
+    height: 100%;
+    width: 90%;
+}

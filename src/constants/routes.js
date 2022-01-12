@@ -15,6 +15,7 @@ const ROUTES = {
   COMPANY_MANAGEMENT: '/pannel/company-management',
   PROJECT_MANAGEMENT: '/pannel/project-management',
   WORKLIST_MANAGEMENT: '/pannel/worklist-management',
+  FIELD_MAP_VIEW: '/pannel/activities-management/field-map-view',
   ASSIGN_WORK_ACTIVITIES: '/pannel/assign-work-activities',
   ACTIVITIES_MANAGEMENT: '/pannel/activities-management',
   MILESTONE_APPROVAl: '/pannel/milestone-approval',

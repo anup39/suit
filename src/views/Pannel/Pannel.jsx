@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
+import FooterNegentis from '../../components/shared/Footer-negentis/footer.component';
 import AdminHeaderComponent from '../../components/shared/Headers/AdminHeader/admin-header';
 import MenuOptions from './menu-ooptions';
 import { LinkWrapper } from './styles/user-roles.styles';
@@ -22,6 +23,7 @@ const Pannel = () => {
       <div className={classes.roles_components}>
         <AdminHeaderComponent />
         <Outlet />
+        <FooterNegentis />
       </div>
     </div>
   );

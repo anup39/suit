@@ -1,4 +1,8 @@
 import COMPANY_ACTION_TYPES from './company.action-types';
+import {
+  eraseUncheckedCompany,
+  makeCheckedCompanyArray,
+} from './company.utils';
 
 const COMPANY_INITIAL_STATE = {
   isLoading: false,
@@ -9,6 +13,14 @@ const COMPANY_INITIAL_STATE = {
   isAllCompanyLoading: false,
   allCompanyData: '',
   allCompanyError: '',
+
+  checkedCompanyList: [],
+  globalCheckedStatus: false,
+
+  deleteCompanySuccess: undefined,
+  deleteCompanyError: undefined,
+  isDeleteOnProgress: false,
+  deletingItem: {},
 };
 
 // eslint-disable-next-line default-param-last
@@ -58,6 +70,40 @@ const companyReducer = (state = COMPANY_INITIAL_STATE, action) => {
         isAllCompanyLoading: false,
         allCompanyData: '',
         allCompanyError: action.payload,
+      };
+    case COMPANY_ACTION_TYPES.GET_CHECKED_COMPANY:
+      return {
+        ...state,
+        checkedCompanyList: makeCheckedCompanyArray(
+          state.checkedCompanyList,
+          action.payload
+        ),
+      };
+    case COMPANY_ACTION_TYPES.EREASE_CHECKED_COMPANY:
+      return {
+        ...state,
+        checkedCompanyList: eraseUncheckedCompany(
+          state.checkedCompanyList,
+          action.payload
+        ),
+      };
+    case COMPANY_ACTION_TYPES.DELETE_COMPANY_START:
+      return {
+        ...state,
+        isDeleteOnProgress: true,
+        deletingItem: action.payload,
+      };
+    case COMPANY_ACTION_TYPES.DELETE_COMPANY_SUCCESS:
+      return {
+        ...state,
+        isDeleteOnProgress: false,
+        deleteCompanySuccess: action.payload,
+      };
+    case COMPANY_ACTION_TYPES.DELETE_COMPANY_FAIL:
+      return {
+        ...state,
+        isDeleteOnProgress: false,
+        deleteCompanyError: action.payload,
       };
 
     default:
