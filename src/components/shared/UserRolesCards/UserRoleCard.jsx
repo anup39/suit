@@ -43,7 +43,6 @@ const UserRoleCard = ({
 
   const handelCheckbox = () => {
     setCheckBox(!checkBox);
-    console.log(checkBox);
   };
 
   const handleClose = () => {

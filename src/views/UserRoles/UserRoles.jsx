@@ -50,7 +50,6 @@ const UserRoles = () => {
 
           <p className="delete-botton">Delete</p>
         </div>
-        {console.log(userRoleData)}
         <div>
           <div className="user-header">
             <div className="user-roles-table-base">
@@ -66,7 +65,6 @@ const UserRoles = () => {
                 <span className="user-roles-status ">Status</span>
                 <span className="user-roles-action">Actions</span>
               </div>
-              {console.log(filteredData)}
               <Pagination
                 componentNo={4}
                 itemData={searchTerm ? filteredData : userRoleData}
