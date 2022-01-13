@@ -1,7 +1,7 @@
 @import '../../theme/ThemeColors';
 
-.work-list-table-body {
-  height: calc(100vh - 347px);
+.work-list-table-tbody {
+  height: calc(100vh - 357px);
   overflow: scroll;
 
   @media (max-width: 1024px) {
@@ -111,7 +111,7 @@
   font-size: 18px;
 }
 
-.worklist-input-container > input {
+.worklist-input-container>input {
   height: 30px;
   width: 100%;
   padding-left: 28px;
@@ -206,7 +206,7 @@
     display: block;
   }
 
-  > div:nth-child(even) {
+  >div:nth-child(even) {
     background: #d4deea;
 
     .grid_3_1 {

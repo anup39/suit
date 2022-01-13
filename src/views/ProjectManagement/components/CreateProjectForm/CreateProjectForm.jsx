@@ -2,7 +2,6 @@ import './CreateProjectForm.scss';
 import '../../../../theme/ButtonColors.scss';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import Button from '@mui/material/Button';
 // import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -41,48 +40,53 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
       {editForm ? <h2>Edit Project</h2> : <h2>Create Project</h2>}
 
       <form className="create-project-form" onSubmit={handleSubmit(onSubmit)}>
-        <label>Project Name</label>
-        <input {...register('name')} id="name" type="text" />
-        <span className="form-error-text">{errors.name?.message}</span>
-
-        <label>Client</label>
-        <input {...register('clientName')} id="clientName" type="text" />
-        <span className="form-error-text">{errors.clientName?.message}</span>
-
-        <label>Description</label>
-        <textarea
-          rows={6}
-          {...register('description')}
-          id="description"
-          type="text"
-        />
-        <span className="form-error-text">{errors.description?.message}</span>
-
-        <label>Start Date</label>
-        <input {...register('startDate')} id="startDate" type="date" />
-        <span className="form-error-text">{errors.startDate?.message}</span>
-
-        <label>Completion Date</label>
-        <input
-          {...register('completionDate')}
-          id="completionDate"
-          type="date"
-        />
-        <span className="form-error-text">
-          {errors.completionDate?.message}
-        </span>
-
-        <div className="create-project-form-submit-div">
-          <span className="cancel-button" onClick={handelClose}>
-            Cancel
+        <div>
+          <label>Project Name</label>
+          <input {...register('name')} id="name" type="text" />
+          <span className="form-error-text">{errors.name?.message}</span>
+        </div>
+        <div>
+          <label>Client</label>
+          <input {...register('clientName')} id="clientName" type="text" />
+          <span className="form-error-text">{errors.clientName?.message}</span>
+        </div>
+        <div>
+          <label>Description</label>
+          <textarea
+            rows={5}
+            {...register('description')}
+            id="description"
+            type="text"
+          />
+          <span className="form-error-text">{errors.description?.message}</span>
+        </div>
+        <div>
+          <label>Start Date</label>
+          <input {...register('startDate')} id="startDate" type="date" />
+          <span className="form-error-text">{errors.startDate?.message}</span>
+        </div>
+        <div>
+          <label>Completion Date</label>
+          <input
+            {...register('completionDate')}
+            id="completionDate"
+            type="date"
+          />
+          <span className="form-error-text">
+            {errors.completionDate?.message}
           </span>
-          <Button
+        </div>
+        <div className="create-project-form-submit-div">
+          <button className="cancel-button" onClick={handelClose} type="button">
+            Cancel
+          </button>
+          <button
             className="create-project-submit-button"
             type="submit"
             variant="contained"
           >
             Submit
-          </Button>
+          </button>
         </div>
       </form>
     </div>

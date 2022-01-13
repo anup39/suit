@@ -64,6 +64,10 @@
 
   table-layout: fixed;
   vertical-align: middle;
+
+  p {
+    margin: 0;
+  }
 }
 
 .milestone-approval-checkInput {
@@ -121,7 +125,7 @@
 }
 
 .milestone-table-body {
-  height: calc(100vh - 351px);
+  height: calc(100vh - 353px);
   overflow: hidden;
 
   @media (max-width: 1024px) {

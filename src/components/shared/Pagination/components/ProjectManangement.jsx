@@ -5,7 +5,7 @@ import ProjectCard from '../../../../views/ProjectManagement/components/ProjectC
 
 const ProjectManagement = ({ currentItems, handelShowProjectPannel }) => {
   return (
-    <div>
+    <div className="pm-table-body">
       {currentItems &&
         currentItems.map((data) => (
           <ProjectCard
