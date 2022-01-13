@@ -92,4 +92,3 @@ const UserRoles = () => {
 export default UserRoles;
 
 // TODO: Delete
-// TODO: Delete user

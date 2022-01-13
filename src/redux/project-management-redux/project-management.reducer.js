@@ -21,6 +21,10 @@ const PROJECT_MANAGEMENT_INITIAL_STATE = {
   currentProjectDocuments: '',
   isCurrentProjectDocumentsLoading: false,
   currentProjectDocumentsError: '',
+
+  assingProject: '',
+  isAssingProjectLoading: false,
+  assingProjectError: '',
 };
 
 const projectManagementReducer = (
@@ -146,6 +150,30 @@ const projectManagementReducer = (
         currentProjectDocuments: '',
         isCurrentProjectDocumentsLoading: false,
         currentProjectDocumentsError: action.payload,
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.ASSIGN_PROJECT_TO_COMPANY:
+      return {
+        ...state,
+        assingProject: '',
+        isAssingProjectLoading: true,
+        assingProjectError: '',
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.ASSIGN_PROJECT_TO_COMPANY_ERROR:
+      return {
+        ...state,
+        assingProject: '',
+        isAssingProjectLoading: false,
+        assingProjectError: action.payload,
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.ASSIGN_PROJECT_TO_COMPANY_SUCCESS:
+      return {
+        ...state,
+        assingProject: action.payload,
+        isAssingProjectLoading: false,
+        assingProjectError: '',
       };
 
     default:

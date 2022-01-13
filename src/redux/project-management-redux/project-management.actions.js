@@ -89,3 +89,18 @@ export const projectDocumentsError = (data) => ({
   type: PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DOCUMENTS_ERROR,
   payload: data,
 });
+
+export const assignProject = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.ASSIGN_PROJECT_TO_COMPANY,
+  payload: data,
+});
+
+export const assignProjectSuccess = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.ASSIGN_PROJECT_TO_COMPANY_SUCCESS,
+  payload: data,
+});
+
+export const assignProjectError = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.ASSIGN_PROJECT_TO_COMPANY_ERROR,
+  payload: data,
+});

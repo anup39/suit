@@ -2,26 +2,35 @@ import './MilestoneApprovalModal.scss';
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-// useDispatch;
-// import { updateMilestone } from '../../../../redux/milestone-management/milestone-management.action';
-import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
+import { updateMilestone } from '../../../../redux/milestone-management/milestone-management.action';
+import {
+  getUserAuthToken,
+  getUserData,
+} from '../../../../redux/user-redux/user.selectors';
 
 const MilestoneApprovalModal = ({ handelClose, milestoneNr }) => {
   const milestoneId = milestoneNr;
   const [description, setDescription] = React.useState('');
   const authToken = useSelector(getUserAuthToken);
-  // const dispatch = useDispatch();
+  const currentUser = useSelector(getUserData);
+
+  const dispatch = useDispatch();
 
   const handleApprove = () => {
-    console.log(milestoneId);
-    console.log(authToken);
-    // const data = {
-    //   authToken,
-
-    // }
-    // dispatch(updateMilestone(data))
+    // const currentDate = new Date();
+    // `${currentDate.getDate()}/${
+    // currentDate.getMonth() + 1
+    // }/${currentDate.getFullYear()}`
+    const data = {
+      authToken,
+      id: milestoneId,
+      date: '10 Nov 2001',
+      desc: description,
+      userName: currentUser.userData.id,
+    };
+    dispatch(updateMilestone(data));
   };
 
   return (

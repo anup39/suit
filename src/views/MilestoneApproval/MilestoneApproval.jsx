@@ -1,57 +1,84 @@
-/* eslint-disable*/
 import './MilestoneApproval.scss';
 
 import SearchIcon from '@mui/icons-material/Search';
-import PropTypes from 'prop-types';
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
-import { getAllMilestones } from '../../redux/milestone-management/milestone-management.action';
 // import MilestoneApprovalCard from './components/MilestoneApprovalCards/MilestoneApprovalCard';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import { getAllMilestone } from '../../redux/milestone-management/milestone.selector';
+import { getAllMilestones } from '../../redux/milestone-management/milestone-management.action';
+import { getUserAuthToken } from '../../redux/user-redux/user.selectors';
 import MobileDataRow from './mobile.data.row';
-const MilestoneApproval = ({ authToken, milestoneData }) => {
+
+const MilestoneApproval = () => {
   const dispatch = useDispatch();
 
+  const authToken = useSelector(getUserAuthToken);
+  const milestoneData = useSelector(getAllMilestone);
+  const [companyText, setCompanyText] = React.useState('');
+  const [projectText, setProjectText] = React.useState('');
+
+  const [resultsToShow, setResultsToShow] = React.useState('');
+
+  const handleCompanyTextChange = (e) => {
+    const searchTerm = e.target.value;
+    setCompanyText(searchTerm);
+    const filteredList = resultsToShow.filter((item) =>
+      item?.companyName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setResultsToShow(filteredList);
+  };
+
+  const handleProjectTextChange = (e) => {
+    const searchTerm = e.target.value;
+    setProjectText(searchTerm);
+    const filteredList = resultsToShow.filter((item) =>
+      item?.projectName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setResultsToShow(filteredList);
+  };
+
   React.useEffect(() => {
-    console.log(authToken);
-    dispatch(getAllMilestones(authToken));
-  }, []);
+    if (!milestoneData) {
+      dispatch(getAllMilestones(authToken));
+    } else if (!companyText && !projectText) {
+      setResultsToShow(milestoneData);
+    }
+  }, [milestoneData, companyText, projectText]);
   return (
     <BaseTemplate title="Milestone Approval">
+      {console.log(milestoneData)}
       <DatagridBase>
-        {milestoneData.length === 0 ? (
-         ""
+        {milestoneData && milestoneData.length === 0 ? (
+          ''
         ) : (
           <div className="milestone-search-bar">
-          <div className="milestone-search-div">
-            <SearchIcon className="milestone-search-icon" />
-            <input
-              className="milestone-search-input"
-              placeholder="Search Project"
-            />
-          </div>
+            <div className="milestone-search-div">
+              <SearchIcon className="milestone-search-icon" />
+              <input
+                className="milestone-search-input"
+                onChange={(e) => handleProjectTextChange(e)}
+                placeholder="Search Project"
+                value={projectText}
+              />
+            </div>
 
-          <div className="milestone-search-div">
-            <SearchIcon className="milestone-search-icon" />
-            <input
-              className="milestone-search-input"
-              placeholder="Search Company"
-            />
+            <div className="milestone-search-div">
+              <SearchIcon className="milestone-search-icon" />
+              <input
+                className="milestone-search-input"
+                onChange={(e) => handleCompanyTextChange(e)}
+                placeholder="Search Company"
+                value={companyText}
+              />
+            </div>
           </div>
-
-          <div className="milestone-search-div">
-            <SearchIcon className="milestone-search-icon" />
-            <input
-              className="milestone-search-input"
-              placeholder="Milestone Name"
-            />
-          </div>
-        </div>        )}
+        )}
         <div className="milestone-table-tbody">
-          {milestoneData.length === 0 ? (
+          {milestoneData && milestoneData.length === 0 ? (
             <p className="no-data-to-display">No Data To Display!</p>
           ) : (
             <>
@@ -92,9 +119,9 @@ const MilestoneApproval = ({ authToken, milestoneData }) => {
                 </div>
               </div>
               <Pagination
-                itemData={milestoneData}
-                itemsPerPage={7}
                 componentNo={3}
+                itemData={!milestoneData ? '' : resultsToShow}
+                itemsPerPage={10}
               />
               <div className="mobile_table_milestone">
                 <MobileDataRow />
@@ -102,9 +129,8 @@ const MilestoneApproval = ({ authToken, milestoneData }) => {
                 <MobileDataRow />
                 <MobileDataRow />
                 <MobileDataRow />
-
                 <MobileDataRow />
-              </div> 
+              </div>
             </>
           )}
         </div>
@@ -113,13 +139,6 @@ const MilestoneApproval = ({ authToken, milestoneData }) => {
   );
 };
 
-MilestoneApproval.propTypes = {
-  authToken: PropTypes.string.isRequired,
-};
+export default MilestoneApproval;
 
-const mapStateToProps = (state) => ({
-  authToken: state.user.userData.accessToken,
-  milestoneData: state.milestoneManagment.getAllMilestoneData,
-});
-
-export default connect(mapStateToProps)(MilestoneApproval);
+// TODO: Improve the search

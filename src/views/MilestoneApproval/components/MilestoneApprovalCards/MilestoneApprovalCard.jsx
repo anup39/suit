@@ -9,7 +9,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import MilestoneDetails from '../../../../components/shared/FieldUpdates/components/EditMenu/components/Milestone/Milestone';
-import { deleteMilestoneById } from '../../../../redux/milestone-management/milestone-management.action';
+import {
+  deleteMilestoneById,
+  getAllMilestones,
+} from '../../../../redux/milestone-management/milestone-management.action';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import MilestoneApprovalModal from '../MilestoneApprovalModal/MilestoneApprovalModal';
 
@@ -58,13 +61,20 @@ const MilestoneApprovalCard = ({
     const data = { id: projectDocumentsId, authToken };
     dispatch(deleteMilestoneById(data));
     handleClose();
+
+    setTimeout(() => {
+      dispatch(getAllMilestones(authToken));
+    }, 2000);
   };
 
   return (
     <>
       <Modal onClose={handleModalClose} open={modalOpen}>
         {milestoneView ? (
-          <MilestoneDetails milestoneId={projectDocumentsId} />
+          <MilestoneDetails
+            handleClose={handleModalClose}
+            milestoneId={projectDocumentsId}
+          />
         ) : (
           <MilestoneApprovalModal
             handelClose={handleModalClose}

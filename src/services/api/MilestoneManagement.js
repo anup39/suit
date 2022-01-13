@@ -17,14 +17,23 @@ export const GET_MILESTONE_LIST = async (payload) => {
 };
 
 export const UPDATE_MILESTONE = async (payload) => {
-  console.log('Get Milestone List...');
   console.log(payload);
+  const { authToken, id, date, desc, userName } = payload;
 
-  const milestoneList = await axios(MILESTONE_MANAGEMENT_API.LIST_MILESTONE, {
-    headers: {
-      Authorization: `Bearer ${payload}`,
-    },
-  });
+  const milestoneList = await axios(
+    `${MILESTONE_MANAGEMENT_API.UPDATE_MILESTONE}/${id}`,
+    {
+      method: 'PUT',
+      data: {
+        approvalNote: desc,
+        approvedBy: userName,
+        approvalDate: date,
+      },
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    }
+  );
   console.log(milestoneList.data);
   return milestoneList.data;
 };

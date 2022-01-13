@@ -1,6 +1,7 @@
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 
 import {
+  ASSIGN_PROJECT_TO_COMPANY,
   CREATE_NEW_PROJECT,
   DELETE_PROJECT_DATA,
   GET_PROJECT_DETAILS,
@@ -8,6 +9,8 @@ import {
 } from '../../services/projectManagement';
 import PROJECT_MANAGEMENT_TYPES from './project-management.action-types';
 import {
+  assignProjectError,
+  assignProjectSuccess,
   createNewProjectError,
   createNewProjectSuccess,
   deleteProjectDataSuccess,
@@ -95,6 +98,22 @@ export function* onDeleteProjectData() {
 //   );
 // }
 
+export function* assignProjectToCompany({ payload }) {
+  try {
+    const projectData = yield call(ASSIGN_PROJECT_TO_COMPANY, payload);
+    yield put(assignProjectSuccess(projectData));
+  } catch (err) {
+    yield put(assignProjectError(err.response.data));
+  }
+}
+
+export function* onAssignProjectToCompany() {
+  yield takeLatest(
+    PROJECT_MANAGEMENT_TYPES.ASSIGN_PROJECT_TO_COMPANY,
+    assignProjectToCompany
+  );
+}
+
 export function* projectManagementSagas() {
   yield all([
     call(onCreateNewProjectStart),
@@ -102,5 +121,6 @@ export function* projectManagementSagas() {
     call(onGetProjectData),
     call(onDeleteProjectData),
     // call(onGetProjectDocuments),
+    call(onAssignProjectToCompany),
   ]);
 }

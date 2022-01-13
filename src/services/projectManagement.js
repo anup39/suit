@@ -65,3 +65,18 @@ export const DELETE_PROJECT_DATA = async (payload) => {
   );
   return deletedProjectData.data;
 };
+
+export const ASSIGN_PROJECT_TO_COMPANY = async (payload) => {
+  console.log('Assing Project');
+  const { authToken, projectId, companyId } = payload;
+  const url = `${PROJECT_MANAGEMENT_API.ASSIGN_PROJECT}projectId=${projectId}&companyId=${companyId}`;
+  console.log(url);
+
+  const projectAssigned = await axios(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
+  return projectAssigned.data;
+};
