@@ -126,7 +126,7 @@
 
 .milestone-table-body {
   height: calc(100vh - 353px);
-  overflow: hidden;
+  overflow: auto;
 
   @media (max-width: 1024px) {
     height: calc(100vh - 370px);
