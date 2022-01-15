@@ -11,6 +11,7 @@ const ROLE_INITIAL_DATA = {
   selectedUser: [],
   isSelectedUserLoading: false,
   selectedUserError: false,
+  isSelectAllUser: false,
 
   userRoleList: [],
   isUserRoleListLoading: false,
@@ -109,6 +110,20 @@ const roleReducer = (state = ROLE_INITIAL_DATA, action) => {
         ...state,
         isSelectedUserLoading: false,
         selectedUserError: true,
+      };
+
+    case ROLE_ACTION_TYPE.SELECT_ALL_USER:
+      return {
+        ...state,
+        isSelectAllUser: action.payload,
+        selectedUser: [],
+      };
+
+    case ROLE_ACTION_TYPE.DESELECT_ALL_USER:
+      return {
+        ...state,
+        isSelectAllUser: action.payload,
+        selectedUser: [],
       };
 
     case ROLE_ACTION_TYPE.DESELECT_USER:

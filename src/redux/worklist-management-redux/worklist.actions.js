@@ -89,3 +89,23 @@ export const taskByProjectError = (data) => ({
   type: WORKLIST_MANAGEMENT_ACTION_TYPE.GET_TASK_BY_PROJECT_ERROR,
   payload: data,
 });
+
+export const selectOneWorkList = (id) => ({
+  type: WORKLIST_MANAGEMENT_ACTION_TYPE.SELECT_ONE_WORKLIST,
+  payload: id,
+});
+
+export const deselectOneWorkList = (id) => ({
+  type: WORKLIST_MANAGEMENT_ACTION_TYPE.DESELECT_ONE_WORKLIST,
+  payload: id,
+});
+
+export const selectAllWorkList = () => ({
+  type: WORKLIST_MANAGEMENT_ACTION_TYPE.SELECT_ALL_WORKLIST,
+  payload: true,
+});
+
+export const deselectAllWorkList = () => ({
+  type: WORKLIST_MANAGEMENT_ACTION_TYPE.DESELECT_ALL_WORKLIST,
+  payload: false,
+});

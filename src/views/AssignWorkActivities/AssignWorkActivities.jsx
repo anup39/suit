@@ -10,11 +10,27 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
+import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import {
+  getIsSelectAll,
+  getSelectedTaskList,
+} from '../../redux/assign-worklist/assign-work-list.selector';
+import {
+  deselectAllTask,
+  selectAllTask,
+} from '../../redux/assign-worklist/assign-worklist.action';
 import { getAllCompany } from '../../redux/company-redux/company.actions';
-import { getUserAuthToken } from '../../redux/user-redux/user.selectors';
+import {
+  getIfAuthenticated,
+  getUserAuthToken,
+} from '../../redux/user-redux/user.selectors';
 import { getWorkList } from '../../redux/worklist-management-redux/worklist.actions';
-import { getAllWorkListData } from '../../redux/worklist-management-redux/worklist.selector';
+import {
+  getAllWorkListData,
+  getIsAllWorklistLoading,
+} from '../../redux/worklist-management-redux/worklist.selector';
+import AuthenticatedRoute from '../../routes/AuthenticatedRoute';
 import AssignProjectModal from './components/AssignProjectModal/AssignProjectModal';
 import AssignTaskModal from './components/AssignTaskModal/AssignTaskModal';
 import MobileDataRow from './components/mobile.data.row';
@@ -23,9 +39,14 @@ const AssignWorkActivities = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const dispatch = useDispatch();
+  const [checkBox, setCheckbox] = React.useState(false);
 
   const workListData = useSelector(getAllWorkListData);
   const userAuthToken = useSelector(getUserAuthToken);
+  const isAllSelected = useSelector(getIsSelectAll);
+  const selectedTasks = useSelector(getSelectedTaskList);
+  const isWorklistLoading = useSelector(getIsAllWorklistLoading);
+  const isAuthenticated = useSelector(getIfAuthenticated);
 
   const handelCloseDrawer = () => {
     setIsDrawerOpen(false);
@@ -36,15 +57,32 @@ const AssignWorkActivities = () => {
     setIsDrawerOpen(true);
   };
 
+  const handleCheckbox = (e) => {
+    setCheckbox(e.target.checked);
+    if (e.target.checked) {
+      dispatch(selectAllTask());
+    } else {
+      dispatch(deselectAllTask());
+    }
+  };
+
   const handleModalOpen = () => setIsModalOpen(true);
   const handleModalClose = () => setIsModalOpen(false);
 
-  React.useState(() => {
-    dispatch(getWorkList(userAuthToken));
+  React.useEffect(() => {
+    if (workListData.length === 0) {
+      dispatch(getWorkList(userAuthToken));
+    }
+
+    if (isAllSelected) {
+      setCheckbox(true);
+    } else {
+      setCheckbox(false);
+    }
   }, []);
 
   return (
-    <>
+    <AuthenticatedRoute isAuthenticated={isAuthenticated}>
       <Drawer
         anchor="right"
         onClose={() => handelCloseDrawer()}
@@ -65,6 +103,7 @@ const AssignWorkActivities = () => {
           <h2 className="header">Assign Work Activities</h2>
           {/* <span className="assign-project-button" >
           </span> */}
+
           <button onClick={handelOpenDrawer} type="button">
             <AddIcon />
             Assign Project
@@ -81,19 +120,25 @@ const AssignWorkActivities = () => {
               <SearchIcon className="assign-work-activity-search-icon" />
               <input placeholder="Task Name" />
             </div>
-            <button
-              className="work-activity-assign-task-button"
-              onClick={handleModalOpen}
-              type="button"
-            >
-              <BiLinkExternal className="work-activity-assign-logo" />
-              Assign Task
-            </button>
+            {selectedTasks.length !== 0 && (
+              <button
+                className="work-activity-assign-task-button"
+                onClick={handleModalOpen}
+                type="button"
+              >
+                <BiLinkExternal className="work-activity-assign-logo" />
+                Assign Task
+              </button>
+            )}
           </div>
           <div className="assign-work-activity-table-tbody">
             <div className="assign-work-activity-table-header">
               <span className="assign-work-activities-check-input">
-                <input type="checkbox" />
+                <input
+                  checked={checkBox}
+                  onChange={handleCheckbox}
+                  type="checkbox"
+                />
               </span>
               <span className="assign-work-activities-project-name">
                 Project Name
@@ -113,11 +158,16 @@ const AssignWorkActivities = () => {
               <span className="assign-work-activities-status">Status</span>
               <span className="assign-work-activities-actions">Actions</span>
             </div>
-            <Pagination
-              componentNo={2}
-              itemData={workListData}
-              itemsPerPage={7}
-            />
+            {isWorklistLoading ? (
+              <LoadingSpinner />
+            ) : (
+              <Pagination
+                componentNo={2}
+                itemData={workListData}
+                itemsPerPage={7}
+              />
+            )}
+
             <div className="mobile_table_assignwork">
               <MobileDataRow />
               <MobileDataRow />
@@ -130,7 +180,7 @@ const AssignWorkActivities = () => {
           </div>
         </DatagridBase>
       </BaseTemplate>
-    </>
+    </AuthenticatedRoute>
   );
 };
 

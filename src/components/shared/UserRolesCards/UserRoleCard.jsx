@@ -16,6 +16,12 @@ import {
   deSelectUser,
   selectUser,
 } from '../../../redux/User-Role/role.actions';
+import {
+  getIfAllSelected,
+  getSelectedUsers,
+  // getDeleteUserData,
+  // getDeleteUserError,
+} from '../../../redux/User-Role/User-Role.selectors';
 import UserRolesForms from '../UserRolesForms/UserRolesForms';
 import Status from './styles/User.Roles.Card';
 
@@ -31,9 +37,15 @@ const UserRoleCard = ({
   const [drawerOpen, seteDrawerOpen] = useState(false);
   const [editUser, seteEditUser] = useState(false);
   const [checkBox, setCheckBox] = useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [currentStatus, setCurrentStatus] = useState(status);
+  // const [isUserDeleted, setIsUserDeleted] = useState(false);
 
   const authToken = useSelector(getUserAuthToken);
+  const selectedUsers = useSelector(getSelectedUsers);
+  const isAllSelected = useSelector(getIfAllSelected);
+  // const deleteUserSuccess = useSelector(getDeleteUserData);
+  // const isDeleteUserError = useSelector(getDeleteUserError);
 
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
@@ -41,8 +53,14 @@ const UserRoleCard = ({
     setAnchorEl(event.currentTarget);
   };
 
-  const handelCheckbox = () => {
-    setCheckBox(!checkBox);
+  const handelCheckbox = (e) => {
+    setCheckBox(e.target.checked);
+
+    if (e.target.checked) {
+      dispatch(selectUser(userId));
+    } else {
+      dispatch(deSelectUser(userId));
+    }
   };
 
   const handleClose = () => {
@@ -73,17 +91,31 @@ const UserRoleCard = ({
       authToken,
       userId,
     };
-
+    setCurrentStatus(0);
     dispatch(deleteUser(data));
   };
 
   React.useEffect(() => {
-    if (checkBox) {
-      dispatch(selectUser(userId));
-    } else {
-      deSelectUser(userId);
+    let alreadyInList = false;
+
+    // eslint-disable-next-line
+    selectedUsers.map((user) => {
+      if (user === userId) {
+        setCheckBox(true);
+        alreadyInList = true;
+      }
+    });
+
+    if (isAllSelected) {
+      if (!alreadyInList) {
+        setCheckBox(true);
+        dispatch(selectUser(userId));
+      }
+    } else if (checkBox) {
+      setCheckBox(false);
+      dispatch(deSelectUser(userId));
     }
-  }, [checkBox]);
+  }, [isAllSelected]);
 
   return (
     <>
@@ -103,7 +135,11 @@ const UserRoleCard = ({
       </Drawer>
       <div className="user-role-base">
         <span className="user-roles-card-check-input">
-          <input onChange={handelCheckbox} type="checkbox" value={checkBox} />
+          <input
+            checked={checkBox}
+            onChange={(e) => handelCheckbox(e)}
+            type="checkbox"
+          />
         </span>
         <span className="user-roles-card-username">{username}</span>
         <span className="user-roles-card-username">
@@ -112,7 +148,7 @@ const UserRoleCard = ({
         <span className="user-roles-card-date">{role}</span>
         <span className="user-roles-card-role">{date}</span>
         <span className="user-roles-card-status">
-          <Status status={status}> {UserStatus[status]}</Status>
+          <Status status={currentStatus}> {UserStatus[currentStatus]}</Status>
         </span>
         <span
           className="user-roles-card-action"

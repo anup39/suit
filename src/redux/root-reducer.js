@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
+import AssignWorkListReducer from './assign-worklist/assign-worklist.reducer';
 import companyReducer from './company-redux/company.reducer';
 import milestoneManagmeentReducer from './milestone-management/milestone-management.reducer';
 import projectManagementReducer from './project-management-redux/project-management.reducer';
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   projectManagement: projectManagementReducer,
   workListManagement: WorkListManagementReducer,
   milestoneManagment: milestoneManagmeentReducer,
+  assingWorkList: AssignWorkListReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

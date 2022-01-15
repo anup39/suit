@@ -39,3 +39,8 @@ export const userLanguageChange = (data) => ({
   type: USER_ACTION_TYPES.CHANGE_LANGUAGE,
   payload: data,
 });
+
+export const userSingout = () => ({
+  type: USER_ACTION_TYPES.USER_SIGNOUT,
+  payload: '',
+});

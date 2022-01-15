@@ -59,3 +59,23 @@ export const deleteMilestoneByIdError = (data) => ({
   type: MILESTONE_MANAGEMENT_ACTION_TYPES.DELETE_MILESTONE_ERROR,
   payload: data,
 });
+
+export const selectAllMilestone = () => ({
+  type: MILESTONE_MANAGEMENT_ACTION_TYPES.SELECT_ALL,
+  payload: true,
+});
+
+export const deselectAllMilestone = () => ({
+  type: MILESTONE_MANAGEMENT_ACTION_TYPES.DESELECT_ALL,
+  payload: false,
+});
+
+export const selectMilestone = (id) => ({
+  type: MILESTONE_MANAGEMENT_ACTION_TYPES.SELECT_MILESTONE,
+  payload: id,
+});
+
+export const deselectMilestone = (id) => ({
+  type: MILESTONE_MANAGEMENT_ACTION_TYPES.DESELECT_MILESTONE,
+  payload: id,
+});

@@ -10,6 +10,7 @@ import Tabs from '@mui/material/Tabs';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DataGridBase from '../../components/shared/DatagridBase/DatagridBase';
@@ -19,7 +20,10 @@ import {
   getProjectDetails,
   getProjectList,
 } from '../../redux/project-management-redux/project-management.actions';
-import { getUserAuthToken } from '../../redux/user-redux/user.selectors';
+import {
+  getIfAuthenticated,
+  getUserAuthToken,
+} from '../../redux/user-redux/user.selectors';
 import CreateProjectForm from './components/CreateProjectForm/CreateProjectForm';
 import Dashboard from './components/Dashboard/Dashboard';
 import ProjectManagementTabPannel from './components/ProjectManagementTabPannel/ProjectManagementTabPannel';
@@ -40,6 +44,9 @@ const ProjectManagement = ({ userToken }) => {
 
   const projectList = useSelector(getAllProjects);
   const authToken = useSelector(getUserAuthToken);
+  const isAuthenticated = useSelector(getIfAuthenticated);
+
+  const navigate = useNavigate();
 
   const handelShowProjectPannel = (projectId) => {
     setShowProjectPannel(true);
@@ -54,8 +61,12 @@ const ProjectManagement = ({ userToken }) => {
     setAddNewProject(false);
   };
   useEffect(() => {
-    dispatch(getProjectList(userToken));
-  }, []);
+    if (isAuthenticated) {
+      dispatch(getProjectList(userToken));
+    } else {
+      navigate('/signin');
+    }
+  }, [isAuthenticated]);
 
   return (
     <BaseTemplate>

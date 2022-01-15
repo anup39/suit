@@ -2,15 +2,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import logo from '../../assets/logoPicture.png';
 import image from '../../assets/signin-info.png';
 import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
-import englishToGerman from '../../constants/Language/enToGr';
 import { userSignupStart } from '../../redux/user-redux/user.actions';
 import {
-  getCurrentLanguage,
   getLoadingStatus,
   getSignedupError,
 } from '../../redux/user-redux/user.selectors';
@@ -27,9 +26,10 @@ const SignupPage = ({ isRedTheme }) => {
   const dispatch = useDispatch();
   const getError = useSelector(getSignedupError);
   const onLoading = useSelector(getLoadingStatus);
-  const currentLanguage = useSelector(getCurrentLanguage);
   const [alerts, setAlerts] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { t } = useTranslation();
 
   const {
     register,
@@ -56,44 +56,46 @@ const SignupPage = ({ isRedTheme }) => {
       <div className={classes.signup_left}>
         <div>
           <h1 className={classes.left_header_blue}>
-            Welcome to{' '}
+            {t('welcomeTo')}
             <ASuit className={classes.left_header_orange} red={isRedTheme}>
               ASuite
             </ASuit>
           </h1>
           <div className={classes.left_bottom_logo}>
-            <span className={classes.logo_description}>Brought to you by</span>
+            <span className={classes.logo_description}>
+              {t('broughtToYouBy')}
+            </span>
             <img alt="..loading" className={classes.left_logo} src={logo} />
           </div>
           <div className={classes.left_image_container}>
             <img alt="...Loading" className={classes.left_image} src={image} />
           </div>
-          <p className={classes.left_coyright}>Powered by Negentis</p>
+          <p className={classes.left_coyright}>{t('poweredBy')} Negentis</p>
         </div>
       </div>
       <div className={classes.signup_right}>
         <div>
           <h1 className={classes.left_header_blue}>
-            Welcome to{' '}
+            {t('welcomeTo')}
             <ASuit className={classes.left_header_orange} red={isRedTheme}>
               ASuite
             </ASuit>
           </h1>
-          <h2 className={classes.right_header}> Sign Up </h2>
+          <h2 className={classes.right_header}> {t('signup')} </h2>
           <form
             className={classes.right_form}
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className={classes.form_input_container}>
               <label className={classes.form_label} htmlFor="firstName">
-                First Name
+                {t('firstName')}
               </label>
               <FormInput
                 className={classes.form_input}
                 id="firstName"
                 {...register('firstName')}
                 error={errors.firstName?.message}
-                placeholder="First Name"
+                placeholder={t('firstName')}
                 type="text"
               />
               <span className={classes.signup_error}>
@@ -102,14 +104,14 @@ const SignupPage = ({ isRedTheme }) => {
             </div>
             <div className={classes.form_input_container}>
               <label className={classes.form_label} htmlFor="lasttName">
-                Last Name
+                {t('lastName')}
               </label>
               <FormInput
                 className={classes.form_input}
                 id="lastName"
                 {...register('lastName')}
                 error={errors.lastName?.message}
-                placeholder="Last Name"
+                placeholder={t('lastName')}
                 type="text"
               />
               <span className={classes.signup_error}>
@@ -138,14 +140,14 @@ const SignupPage = ({ isRedTheme }) => {
             </div>
             <div className={classes.form_input_container}>
               <label className={classes.form_label} htmlFor="password">
-                Password
+                {t('password')}
               </label>
               <FormInput
                 className={classes.form_input}
                 id="password"
                 {...register('password')}
                 error={errors.password?.message}
-                placeholder="Password"
+                placeholder={t('password')}
                 type="password"
               />
               <span className={classes.signup_error}>
@@ -154,14 +156,14 @@ const SignupPage = ({ isRedTheme }) => {
             </div>
             <div className={classes.form_input_container}>
               <label className={classes.form_label} htmlFor="conPassword">
-                Confirm Password
+                {t(`confirmPassword`)}
               </label>
               <FormInput
                 className={classes.form_input}
                 id="conPassword"
                 {...register('conPassword')}
                 error={errors.conPassword?.message}
-                placeholder="Confirm Password"
+                placeholder={t(`confirmPassword`)}
                 type="password"
               />
               <span className={classes.signup_error}>
@@ -170,14 +172,14 @@ const SignupPage = ({ isRedTheme }) => {
             </div>
             <div className={classes.form_input_container}>
               <label className={classes.form_label} htmlFor="Company">
-                Company{' '}
+                {t('company')}
               </label>
               <FormInput
                 className={classes.form_input}
                 id="Company"
                 {...register('Company')}
                 error={errors.Company?.message}
-                placeholder="Company"
+                placeholder={t('company')}
                 type="text"
               />
               <span className={classes.signup_error}>
@@ -189,12 +191,13 @@ const SignupPage = ({ isRedTheme }) => {
               red={isRedTheme}
               type="submit"
             >
-              {englishToGerman.signup[currentLanguage]}
+              {t('signup')}
             </FormButton>
           </form>
           <div className={classes.already_user_container}>
             <span className={classes.already_user}>
-              Already User? <LinkWrapper to="/signin"> Log in</LinkWrapper>
+              {t('alreadyUser')}
+              <LinkWrapper to="/signin"> {t('login')}</LinkWrapper>
             </span>
           </div>
         </div>

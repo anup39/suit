@@ -80,3 +80,18 @@ export const ASSIGN_PROJECT_TO_COMPANY = async (payload) => {
   });
   return projectAssigned.data;
 };
+
+export const GET_PROJECT_DOCUMENTS = async (payload) => {
+  console.log('Project Documents');
+  const { authToken, projectId } = payload;
+  console.log(payload);
+  const url = `${PROJECT_MANAGEMENT_API.PROECT_DOCUMNETS}=${projectId}`;
+  console.log(url);
+  const projectDocs = await axios(url, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
+  console.log(projectDocs.data);
+  return projectDocs.data;
+};

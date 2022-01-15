@@ -1,4 +1,5 @@
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
 import MailIcon from '@mui/icons-material/Mail';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
@@ -15,7 +16,10 @@ import Toolbar from '@mui/material/Toolbar';
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { userLanguageChange } from '../../../../redux/user-redux/user.actions';
+import {
+  userLanguageChange,
+  userSingout,
+} from '../../../../redux/user-redux/user.actions';
 import {
   getCurrentLanguage,
   getUserData,
@@ -73,6 +77,10 @@ const AdminHeaderComponent = () => {
     handleMobileMenuClose();
   };
 
+  const handleSignOut = () => {
+    handleMenuClose();
+    dispatch(userSingout());
+  };
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -105,6 +113,10 @@ const AdminHeaderComponent = () => {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleSignOut}>
+        {' '}
+        <LogoutIcon style={{ color: 'red', marginRight: '10px' }} /> Log Out
+      </MenuItem>
     </Menu>
   );
 
