@@ -17,3 +17,15 @@ export const getAssignProjectError = (state) => {
 export const getAssignProjectSuccess = (state) => {
   return state.projectManagement.assingProject;
 };
+
+export const getCreateProjectLoadingStatus = (state) => {
+  return state.projectManagement.isCreateNewProjectLoading;
+};
+
+export const getCreateProjectError = (state) => {
+  return state.projectManagement.createNewProjectError;
+};
+
+export const getCreateProjectData = (state) => {
+  return state.projectManagement.createNewProjectData;
+};

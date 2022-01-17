@@ -3,7 +3,7 @@ import PROJECT_MANAGEMENT_TYPES from './project-management.action-types';
 
 const PROJECT_MANAGEMENT_INITIAL_STATE = {
   isCreateNewProjectLoading: false,
-  createNewProjectSuccess: false,
+  createNewProjectError: false,
   createNewProjectData: '',
 
   isProjectListLoading: false,
@@ -36,7 +36,7 @@ const projectManagementReducer = (
       return {
         ...state,
         isCreateNewProjectLoading: true,
-        createNewProjectSuccess: false,
+        createNewProjectError: false,
         createNewProjectData: '',
       };
 
@@ -44,7 +44,7 @@ const projectManagementReducer = (
       return {
         ...state,
         isCreateNewProjectLoading: false,
-        createNewProjectSuccess: true,
+        createNewProjectError: false,
         createNewProjectData: action.payload,
       };
 
@@ -52,8 +52,16 @@ const projectManagementReducer = (
       return {
         ...state,
         isCreateNewProjectLoading: false,
-        createNewProjectSuccess: false,
-        createNewProjectData: action.payload,
+        createNewProjectError: action.payload,
+        createNewProjectData: '',
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.RESET_NEW_PROJECT_DATA:
+      return {
+        ...state,
+        isCreateNewProjectLoading: false,
+        createNewProjectError: '',
+        createNewProjectData: '',
       };
 
     case PROJECT_MANAGEMENT_TYPES.GET_PROJECT_LIST:

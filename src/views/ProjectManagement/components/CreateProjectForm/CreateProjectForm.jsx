@@ -2,14 +2,24 @@ import './CreateProjectForm.scss';
 import '../../../../theme/ButtonColors.scss';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-// import moment from 'moment';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
-import { getProjectData } from '../../../../redux/project-management-redux/project.selector';
-import { createNewProject } from '../../../../redux/project-management-redux/project-management.actions';
+import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner';
+import {
+  getCreateProjectData,
+  getCreateProjectError,
+  getCreateProjectLoadingStatus,
+  getProjectData,
+} from '../../../../redux/project-management-redux/project.selector';
+import {
+  createNewProject,
+  resetNewProjectData,
+} from '../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import schema from './create-form-schema';
 
@@ -17,6 +27,9 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
   const projectData = useSelector(getProjectData);
+  const isCreateProjectLoading = useSelector(getCreateProjectLoadingStatus);
+  const isCreateProjectError = useSelector(getCreateProjectError);
+  const createdProjectData = useSelector(getCreateProjectData);
 
   const {
     register,
@@ -28,6 +41,16 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
   });
 
   const onSubmit = (data) => {
+    // eslint-disable-next-line
+    data.startDate = moment(data['startDate'], 'YYYY-MM-DD').format(
+      'DD MMM YYYY'
+    );
+
+    // eslint-disable-next-line
+    data.completionDate = moment(data['completionDate'], 'YYYY-MM-DD').format(
+      'DD MMM YYYY'
+    );
+
     const payloadData = {
       authToken,
       newCompanyData: data,
@@ -35,8 +58,37 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
     dispatch(createNewProject(payloadData));
   };
 
+  React.useEffect(() => {
+    if (isCreateProjectError) {
+      toast.error('Failed to Create New Project!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch(resetNewProjectData());
+    } else if (createdProjectData) {
+      toast.success('New Project Created!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      handelClose();
+      dispatch(resetNewProjectData());
+    }
+  }, [isCreateProjectLoading]);
+
   return (
     <div className="create-project-form-base-div">
+      {}
+      {<GlobalSpinner isOpen={isCreateProjectLoading} />}
       {editForm ? <h2>Edit Project</h2> : <h2>Create Project</h2>}
 
       <form className="create-project-form" onSubmit={handleSubmit(onSubmit)}>
@@ -62,7 +114,12 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
         </div>
         <div>
           <label>Start Date</label>
-          <input {...register('startDate')} id="startDate" type="date" />
+          <input
+            {...register('startDate')}
+            id="startDate"
+            min={new Date().toISOString().split('T')[0]}
+            type="date"
+          />
           <span className="form-error-text">{errors.startDate?.message}</span>
         </div>
         <div>
@@ -70,6 +127,7 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
           <input
             {...register('completionDate')}
             id="completionDate"
+            min={new Date().toISOString().split('T')[0]}
             type="date"
           />
           <span className="form-error-text">

@@ -15,6 +15,31 @@ export const createNewProjectError = (data) => ({
   payload: data,
 });
 
+export const resetNewProjectData = () => ({
+  type: PROJECT_MANAGEMENT_TYPES.RESET_NEW_PROJECT_DATA,
+  payload: '',
+});
+
+export const updateProject = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.UPDATE_PROJECT,
+  payload: data,
+});
+
+export const updateProjectSuccess = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.UPDATE_PROJECT_SUCCESS,
+  payload: data,
+});
+
+export const updateProjectError = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.UPDATE_PROJECT_ERROR,
+  payload: data,
+});
+
+export const resetUpdateProjectData = () => ({
+  type: PROJECT_MANAGEMENT_TYPES.RESET_UPDATE_PROJECT_DATA,
+  payload: '',
+});
+
 export const getProjectList = (data) => ({
   type: PROJECT_MANAGEMENT_TYPES.GET_PROJECT_LIST,
   payload: data,
