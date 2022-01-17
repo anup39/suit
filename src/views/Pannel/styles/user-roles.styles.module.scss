@@ -36,8 +36,7 @@ $prime-font: 'Roboto';
   }
 }
 
-.roles_menu_under {
-}
+.roles_menu_under {}
 
 .menu_header {
   color: $text-color;
@@ -56,6 +55,8 @@ $prime-font: 'Roboto';
 }
 
 .menu_options_container {
+  height: calc(100vh - 64px);
+  overflow: aut;
   list-style: none;
   padding: none;
   margin: none;
