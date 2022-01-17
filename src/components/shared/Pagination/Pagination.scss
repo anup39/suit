@@ -35,6 +35,10 @@ $border-color-pagination: rgb(209, 209, 209);
   color: #8094AE;
   cursor: pointer;
 
+  a {
+    text-decoration: none;
+  }
+
   &.disabled {
     cursor: not-allowed;
     opacity: 0.5;
