@@ -57,6 +57,11 @@ const AssignWorkActivities = lazy(() =>
 );
 
 const Feedback = lazy(() => import('../views/Feedback/Feedback.view'));
+
+const EmailNotVerified = lazy(() =>
+  import('../views/EmailNotVerified/EmailNotVerified')
+);
+
 const appRoutes = [
   {
     path: ROUTES.ERROR,
@@ -73,6 +78,10 @@ const appRoutes = [
   {
     path: ROUTES.SIGN_UP.COMPANY,
     element: <CompanySignupPage />,
+  },
+  {
+    path: ROUTES.NOT_VERIFIED,
+    element: <EmailNotVerified />,
   },
   {
     path: ROUTES.PANNEL,
