@@ -1,11 +1,11 @@
 @import '../../../theme/ThemeColors';
 
 .user-role-table-body {
-  height: calc(100vh - 345px);
+  height: calc(100vh - 335px);
   overflow: auto;
 
   @media (max-width: 1024px) {
-    height: calc(100vh - 349px);
+    height: calc(100vh - 339px);
   }
 
   @media (max-width: 991.98px) {

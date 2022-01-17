@@ -3,11 +3,17 @@
   display: flex;
   flex-wrap: wrap;
 
-  height: calc(100vh - 244px);
+  height: calc(100vh - 218px);
   overflow: auto;
 
+  @media (max-width: 1024px) {
+
+    height: calc(100vh - 225px);
+
+  }
+
   @media (max-width: 768px) {
-    height: calc(100vh - 231px);
+    height: calc(100vh - 213px);
 
   }
 }
@@ -186,6 +192,6 @@
 
 
 .project-management-dashbord-pie {
-  width: 70% !important;
-  height: 100% !important;
+  width: 250px !important;
+  height: 250px !important;
 }

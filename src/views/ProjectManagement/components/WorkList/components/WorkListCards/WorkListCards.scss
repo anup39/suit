@@ -1,21 +1,31 @@
 @import '../../../../../../theme/ThemeColors';
 
 .work-list-table-body {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.247);
-  width: 100%;
-  font-size: 18px;
   display: table;
   width: 100%;
-  padding: 10px 0px;
-  height: 50px;
+  border-bottom: 1px solid #D4DEEA;
+
+  &:last-child {
+    border: none;
+  }
 }
 
 .work-list-table-body span {
   display: table-cell;
   table-layout: fixed;
-  // white-space: no-wrap;
+  padding: 10px;
+  font-size: 14px;
   vertical-align: middle;
-  color: $table-data-color-2;
+  color: #364A63;
+  margin-left: 10px;
+
+  p {
+    margin: 0;
+  }
+
+  svg {
+    font-size: 18px;
+  }
 }
 
 .work-list-card-check-input {

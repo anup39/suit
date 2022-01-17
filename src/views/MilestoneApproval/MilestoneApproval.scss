@@ -125,11 +125,11 @@
 }
 
 .milestone-table-body {
-  height: calc(100vh - 353px);
+  height: calc(100vh - 343px);
   overflow: auto;
 
   @media (max-width: 1024px) {
-    height: calc(100vh - 370px);
+    height: calc(100vh - 360px);
 
 
   }
@@ -146,11 +146,11 @@
 
   @media (max-width: 991.98px) {
     display: block;
-    height: calc(100vh - 237px);
+    height: calc(100vh - 230px);
   }
 
   @media (max-width: 768px) {
-    height: calc(100vh - 213px);
+    height: calc(100vh - 205px);
 
   }
 
