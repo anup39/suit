@@ -12,6 +12,7 @@ const ROUTES = {
   USER: '/form/user',
   TEST: '/test',
   USER_ROLES: '/pannel/user-roles',
+
   COMPANY_MANAGEMENT: '/pannel/company-management',
   PROJECT_MANAGEMENT: '/pannel/project-management',
   WORKLIST_MANAGEMENT: '/pannel/worklist-management',
@@ -24,6 +25,7 @@ const ROUTES = {
   WEBEX: '/pannel/webex',
   FEEDBACK_SERVICES: '/pannel/feedback-services',
   PANNEL: 'pannel',
+  NOT_VERIFIED: 'verify',
 };
 
 export default ROUTES;
