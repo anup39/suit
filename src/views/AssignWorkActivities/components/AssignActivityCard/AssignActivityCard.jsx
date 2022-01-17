@@ -5,6 +5,16 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {
+  getIsSelectAll,
+  getSelectedTaskList,
+} from '../../../../redux/assign-worklist/assign-work-list.selector';
+import {
+  deselectOneTask,
+  selectOneTask,
+} from '../../../../redux/assign-worklist/assign-worklist.action';
 
 const AssignActivityCard = ({
   projectName,
@@ -17,6 +27,10 @@ const AssignActivityCard = ({
   status,
 }) => {
   const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
+  const [checkBox, setCheckBox] = React.useState(false);
+  const isAllSelected = useSelector(getIsSelectAll);
+  const selectedTaskList = useSelector(getSelectedTaskList);
+  const dispatch = useDispatch();
 
   const open = Boolean(menuAnchorEl);
 
@@ -27,10 +41,40 @@ const AssignActivityCard = ({
     setMenuAnchorEl(null);
   };
 
+  const handelCheckbox = (e) => {
+    setCheckBox(e.target.checked);
+
+    if (e.target.checked) {
+      dispatch(selectOneTask(taskId));
+    } else {
+      dispatch(deselectOneTask(taskId));
+    }
+  };
+
+  React.useEffect(() => {
+    let alreadyInList = false;
+    // eslint-disable-next-line
+    selectedTaskList.map((task) => {
+      if (task === taskId) {
+        setCheckBox(true);
+        alreadyInList = true;
+      }
+    });
+    if (isAllSelected) {
+      if (!alreadyInList) {
+        setCheckBox(true);
+        dispatch(selectOneTask(taskId));
+      }
+    } else if (checkBox) {
+      setCheckBox(false);
+      // dispatch(deselectOneTask(taskId));
+    }
+  }, [isAllSelected]);
+
   return (
     <div className="assign-work-activity-table-data">
       <span className="assign-work-activities-card-check-input">
-        <input type="checkbox" />
+        <input checked={checkBox} onChange={handelCheckbox} type="checkbox" />
       </span>
       <span className="assign-work-activities-card-project-name">
         {projectName}

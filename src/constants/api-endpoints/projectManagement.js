@@ -4,6 +4,7 @@ const PROJECT_MANAGEMENT_API = {
   GET_PROJECT_DETAILS: 'http://13.233.23.132:8080/api/projectsDetails/',
   DELETE_PROJECT_DATA: 'http://13.233.23.132:8080/api/deleteProjects/',
   ASSIGN_PROJECT: 'http://13.233.23.132:8080/api/assignCompany?',
+  PROECT_DOCUMNETS: 'http://13.233.23.132:8080/listProjectsDocuments?projectId',
 };
 
 export default PROJECT_MANAGEMENT_API;

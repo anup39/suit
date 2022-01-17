@@ -24,6 +24,9 @@ const worklistInitialState = {
   isTaskByProjectLoading: false,
   taskByProject: '',
   taskByProjectError: '',
+
+  selectedWorkList: [],
+  isSelectAllWorkList: false,
 };
 
 // eslint-disable-next-line
@@ -171,6 +174,34 @@ const WorkListManagementReducer = (state = worklistInitialState, action) => {
         isTaskByProjectLoading: false,
         taskByProject: '',
         taskByProjectError: action.payload,
+      };
+
+    case WORKLIST_MANAGEMENT_ACTION_TYPE.SELECT_ALL_WORKLIST:
+      return {
+        ...state,
+        selectedWorkList: [],
+        isSelectAllWorkList: action.payload,
+      };
+
+    case WORKLIST_MANAGEMENT_ACTION_TYPE.DESELECT_ALL_WORKLIST:
+      return {
+        ...state,
+        selectedWorkList: [],
+        isSelectAllWorkList: action.payload,
+      };
+
+    case WORKLIST_MANAGEMENT_ACTION_TYPE.SELECT_ONE_WORKLIST:
+      return {
+        ...state,
+        selectedWorkList: [...state.selectedWorkList, action.payload],
+      };
+
+    case WORKLIST_MANAGEMENT_ACTION_TYPE.DESELECT_ONE_WORKLIST:
+      return {
+        ...state,
+        selectedWorkList: state.selectedWorkList.filter(
+          (val) => val !== action.payload
+        ),
       };
 
     default:

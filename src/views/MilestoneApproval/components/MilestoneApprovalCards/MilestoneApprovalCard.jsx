@@ -10,8 +10,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import MilestoneDetails from '../../../../components/shared/FieldUpdates/components/EditMenu/components/Milestone/Milestone';
 import {
+  getIsSelctAll,
+  getSelectedMilestone,
+} from '../../../../redux/milestone-management/milestone.selector';
+import {
   deleteMilestoneById,
+  deselectMilestone,
   getAllMilestones,
+  selectMilestone,
 } from '../../../../redux/milestone-management/milestone-management.action';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import MilestoneApprovalModal from '../MilestoneApprovalModal/MilestoneApprovalModal';
@@ -29,9 +35,23 @@ const MilestoneApprovalCard = ({
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [modalOpen, setModalOpen] = React.useState(false);
   const [milestoneView, setMilestoneView] = React.useState(false);
+  const [checkbox, setCheckBox] = React.useState(false);
   const authToken = useSelector(getUserAuthToken);
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
+  const selectedMilestone = useSelector(getSelectedMilestone);
+  const isSelectAll = useSelector(getIsSelctAll);
+
+  const handelCheckbox = (e) => {
+    setCheckBox(e.target.checked);
+
+    if (e.target.checked) {
+      dispatch(selectMilestone(milestoneId));
+    } else {
+      dispatch(deselectMilestone(milestoneId));
+    }
+  };
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -67,6 +87,27 @@ const MilestoneApprovalCard = ({
     }, 2000);
   };
 
+  React.useEffect(() => {
+    let alreadyInList = false;
+
+    // eslint-disable-next-line
+    selectedMilestone.map((milestone) => {
+      if (milestone === milestoneId) {
+        setCheckBox(true);
+        alreadyInList = true;
+      }
+    });
+
+    if (isSelectAll) {
+      if (!alreadyInList) {
+        setCheckBox(true);
+        dispatch(selectMilestone(milestoneId));
+      }
+    } else if (checkbox) {
+      setCheckBox(false);
+      dispatch(deselectMilestone(milestoneId));
+    }
+  }, [isSelectAll]);
   return (
     <>
       <Modal onClose={handleModalClose} open={modalOpen}>
@@ -84,7 +125,7 @@ const MilestoneApprovalCard = ({
       </Modal>
       <div className="milestone-approval-card">
         <span className="milestone-approval-card-checkInput">
-          <input type="checkbox" />
+          <input checked={checkbox} onChange={handelCheckbox} type="checkbox" />
         </span>
 
         <span className="milestone-approval-card-company">

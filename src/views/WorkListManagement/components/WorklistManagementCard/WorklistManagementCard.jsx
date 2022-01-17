@@ -9,7 +9,15 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
-import { deleteTaskByID } from '../../../../redux/worklist-management-redux/worklist.actions';
+import {
+  deleteTaskByID,
+  deselectOneWorkList,
+  selectOneWorkList,
+} from '../../../../redux/worklist-management-redux/worklist.actions';
+import {
+  getIfAllWorkListSelected,
+  getSelectedWorkList,
+} from '../../../../redux/worklist-management-redux/worklist.selector';
 import WorklistForm from '../WorklistForm/WorklistForm';
 
 const WorkListManagementCard = ({
@@ -21,12 +29,14 @@ const WorkListManagementCard = ({
   type,
 }) => {
   const dispatch = useDispatch();
-  console.log(dispatch);
 
   const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = React.useState(false);
+  const [checkBox, setCheckBox] = React.useState(false);
 
   const authToken = useSelector(getUserAuthToken);
+  const selectedWorkList = useSelector(getSelectedWorkList);
+  const isAllSelected = useSelector(getIfAllWorkListSelected);
 
   const menuOpen = Boolean(menuAnchorEl);
   const handleMenuClick = (event) => {
@@ -55,7 +65,39 @@ const WorkListManagementCard = ({
     handelMenuClose();
   };
 
+  const handelCheckbox = (e) => {
+    setCheckBox(e.target.checked);
+
+    if (e.target.checked) {
+      dispatch(selectOneWorkList(workId));
+    } else {
+      dispatch(deselectOneWorkList(workId));
+    }
+  };
+
   const isMilestoneName = isMilestone !== 0 ? 'No' : 'Yes';
+
+  React.useEffect(() => {
+    let alreadyInList = false;
+
+    // eslint-disable-next-line
+    selectedWorkList.map((work) => {
+      if (work === workId) {
+        setCheckBox(true);
+        alreadyInList = true;
+      }
+    });
+
+    if (isAllSelected) {
+      if (!alreadyInList) {
+        setCheckBox(true);
+        dispatch(selectOneWorkList(workId));
+      }
+    } else if (checkBox) {
+      setCheckBox(false);
+      dispatch(deselectOneWorkList(workId));
+    }
+  }, [isAllSelected]);
 
   return (
     <>
@@ -72,7 +114,7 @@ const WorkListManagementCard = ({
       </Drawer>
       <div className="worklist-card-table-body">
         <span className="worklist-card-management-check-input">
-          <input type="checkbox" />
+          <input checked={checkBox} onChange={handelCheckbox} type="checkbox" />
         </span>
         <span className="worklist-card-management-project-name">
           {projectName}

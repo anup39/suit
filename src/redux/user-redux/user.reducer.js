@@ -68,6 +68,13 @@ const userReducer = (state = USER_INITIAL_STATE, action) => {
         currentLanguage: action.payload,
       };
 
+    case USER_ACTION_TYPES.USER_SIGNOUT:
+      return {
+        ...state,
+        userData: action.payload,
+        isAuthenticated: false,
+      };
+
     default:
       return state;
   }

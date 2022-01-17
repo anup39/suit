@@ -13,3 +13,15 @@ export const getAllWorkListData = (state) => {
 export const getTasksByProject = (state) => {
   return state.workListManagement.taskByProject;
 };
+
+export const getIsAllWorklistLoading = (state) => {
+  return state.workListManagement.isGetAllWorklistLoading;
+};
+
+export const getIfAllWorkListSelected = (state) => {
+  return state.workListManagement.isSelectAllWorkList;
+};
+
+export const getSelectedWorkList = (state) => {
+  return state.workListManagement.selectedWorkList;
+};

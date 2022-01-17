@@ -1,0 +1,27 @@
+const German = {
+  signup: 'Anmelden',
+  login: 'Anmeldung',
+  alreadyUser: 'Bereits Benutzer?',
+  welcomeTo: 'Willkommen zu',
+  broughtToYouBy: 'Zur Verfügung gestellt von',
+  poweredBy: 'Bereitgestellt von',
+  firstName: 'Vorname',
+  lastName: 'Nachname',
+  password: 'Passwort',
+  confirmPassword: 'Kennwort bestätigen',
+  company: 'Begleitung',
+  cancel: 'Abbrechen',
+  submit: 'Einreichen',
+  userRoles: 'Benutzerregeln',
+  companyManagement: 'Firmenmanagement',
+  projectManagement: 'Projektmanagement',
+  workListManagement: 'Arbeitslistenverwaltung',
+  assingWorkActivities: 'Arbeitsaktivitäten zuweisen',
+  managementOfFieldActivities: 'Management von Feldaktivitäten',
+  milesotneApproval: 'Milesotne-Zulassung',
+  webGisServices: 'Web-GIS-Dienste',
+  webEx: 'WebEx',
+  feedback: 'Feedback',
+};
+
+export default German;

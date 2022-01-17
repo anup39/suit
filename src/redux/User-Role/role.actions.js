@@ -80,6 +80,16 @@ export const deSelectUserError = (data) => ({
   payload: data,
 });
 
+export const selectAllUser = () => ({
+  type: ROLE_ACTION_TYPE.SELECT_ALL_USER,
+  payload: true,
+});
+
+export const deselectAllUser = () => ({
+  type: ROLE_ACTION_TYPE.DESELECT_ALL_USER,
+  payload: false,
+});
+
 export const userRoles = (data) => ({
   type: ROLE_ACTION_TYPE.GET_USER_ROLES_LIST,
   payload: data,

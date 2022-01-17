@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import { roleStart } from '../../../../redux/User-Role/role.actions';
-import { getListOfUsers } from '../../../../redux/User-Role/users.selectors';
+import { getListOfUsers } from '../../../../redux/User-Role/User-Role.selectors';
 import DatagridRow from './company-user.row';
 import classes from './company-user.styles.module.scss';
 

@@ -16,6 +16,9 @@ const initialState = {
   isDeleteMilestoneLoading: false,
   deleteMilesotneError: '',
   deleteMilesotneSuccess: '',
+
+  selectAllMilestone: false,
+  selectedMilestone: [],
 };
 
 // eslint-disable-next-line
@@ -116,6 +119,33 @@ const milestoneManagmeentReducer = (state = initialState, action) => {
         deleteMilesotneSuccess: '',
       };
 
+    case MILESTONE_MANAGEMENT_ACTION_TYPES.SELECT_ALL:
+      return {
+        ...state,
+        selectAllMilestone: action.payload,
+        selectedMilestone: [],
+      };
+
+    case MILESTONE_MANAGEMENT_ACTION_TYPES.DESELECT_ALL:
+      return {
+        ...state,
+        selectAllMilestone: action.payload,
+        selectedMilestone: [],
+      };
+
+    case MILESTONE_MANAGEMENT_ACTION_TYPES.SELECT_MILESTONE:
+      return {
+        ...state,
+        selectedMilestone: [...state.selectedMilestone, action.payload],
+      };
+
+    case MILESTONE_MANAGEMENT_ACTION_TYPES.DESELECT_MILESTONE:
+      return {
+        ...state,
+        selectedMilestone: state.selectedMilestone.filter(
+          (val) => val !== action.payload
+        ),
+      };
     default:
       return state;
   }

@@ -5,6 +5,7 @@ import {
   CREATE_NEW_PROJECT,
   DELETE_PROJECT_DATA,
   GET_PROJECT_DETAILS,
+  GET_PROJECT_DOCUMENTS,
   GET_PROJECT_LIST,
 } from '../../services/projectManagement';
 import PROJECT_MANAGEMENT_TYPES from './project-management.action-types';
@@ -19,6 +20,8 @@ import {
   getProjectDetailsSuccess,
   getProjectListError,
   getProjectListSuccess,
+  projectDocumentsError,
+  projectDocumentsSuccess,
 } from './project-management.actions';
 
 export function* onCreateNewProject({ payload }) {
@@ -82,21 +85,21 @@ export function* onDeleteProjectData() {
   );
 }
 
-// export function* getProjectDocuments({ payload }) {
-//   try {
-//     const projectData = yield call(DELETE_PROJECT_DATA, payload);
-//     yield put(deleteProjectDataSuccess(projectData));
-//   } catch (err) {
-//     yield put(deleteProjectError(err.response.data));
-//   }
-// }
+export function* getProjectDocuments({ payload }) {
+  try {
+    const projectDocuments = yield call(GET_PROJECT_DOCUMENTS, payload);
+    yield put(projectDocumentsSuccess(projectDocuments));
+  } catch (err) {
+    yield put(projectDocumentsError(err.response.data));
+  }
+}
 
-// export function* onGetProjectDocuments() {
-//   yield takeLatest(
-//     PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DOCUMENTS,
-//     getProjectDocuments
-//   );
-// }
+export function* onGetProjectDocuments() {
+  yield takeLatest(
+    PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DOCUMENTS,
+    getProjectDocuments
+  );
+}
 
 export function* assignProjectToCompany({ payload }) {
   try {
@@ -120,7 +123,7 @@ export function* projectManagementSagas() {
     call(onGetAllProjectList),
     call(onGetProjectData),
     call(onDeleteProjectData),
-    // call(onGetProjectDocuments),
+    call(onGetProjectDocuments),
     call(onAssignProjectToCompany),
   ]);
 }

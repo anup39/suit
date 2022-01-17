@@ -87,13 +87,13 @@ export const GET_TASK_BY_PROJECT = async (payload) => {
 
   const { authToken, projectId } = payload;
 
-  const taskByProjectId = await axios(
-    `${WORKLIST_MANAGEMENT_API.GET_TASKS_BY_PROJECT_ID}${projectId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
-    }
-  );
+  const url = `${WORKLIST_MANAGEMENT_API.GET_TASKS_BY_PROJECT_ID}${projectId}`;
+
+  console.log(url);
+  const taskByProjectId = await axios(url, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
   return taskByProjectId.data;
 };
