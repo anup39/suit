@@ -243,3 +243,23 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.left_header_orange {
+  padding-left: 10px;
+  color: #e78201;
+}
+
+.right_button {
+  background: #e78201;
+  margin: 20px auto auto;
+  display: block;
+  width: 100%;
+  padding: 15px 0px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+
+}

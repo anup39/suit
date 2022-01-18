@@ -31,6 +31,11 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
 
+  span,
+  p {
+    word-break: break-all;
+  }
+
   @media (max-width:768px) {
     display: flex;
 
