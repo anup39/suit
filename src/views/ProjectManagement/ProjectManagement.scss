@@ -116,11 +116,11 @@
 }
 
 .pm-table-body {
-  height: calc(100vh - 445px);
+  height: calc(100vh - 419px);
   overflow: auto;
 
   @media (max-width: 1024px) {
-    height: calc(100vh - 450px);
+    height: calc(100vh - 424px);
 
 
   }
@@ -141,7 +141,7 @@
   }
 
   @media (max-width: 768px) {
-    height: calc(100vh - 301px);
+    height: calc(100vh - 275px);
 
   }
 

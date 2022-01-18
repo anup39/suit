@@ -15,7 +15,7 @@ const FilePannel = (props) => {
     >
       {value === index && (
         <Box sx={{ pt: 2 }}>
-          <p>{children}</p>
+          <>{children}</>
         </Box>
       )}
     </div>

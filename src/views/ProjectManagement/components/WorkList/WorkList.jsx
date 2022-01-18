@@ -34,7 +34,7 @@ const WorkList = () => {
           />
         </div>
       </div>
-      <div>
+      <div className="work-list-table-tbody">
         <div className="work-list-table-header">
           <span className="work-list-card-check-input">
             <input type="checkbox" />

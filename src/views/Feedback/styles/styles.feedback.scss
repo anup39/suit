@@ -92,7 +92,7 @@
   }
 
   .table-responsive {
-    height: calc(100vh - 347px);
+    height: calc(100vh - 337px);
     overflow: scroll;
 
     @media (max-width: 768px) {
@@ -402,7 +402,7 @@
 }
 
 .mobile-table {
-  height: calc(100vh - 330px);
+  height: calc(100vh - 319px);
   overflow: auto;
   display: none;
 

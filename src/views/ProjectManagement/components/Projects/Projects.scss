@@ -30,6 +30,14 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
+
+  @media (max-width:768px) {
+    display: flex;
+
+    span {
+      width: 100%;
+    }
+  }
 }
 
 .project-name {
@@ -86,6 +94,12 @@
 }
 
 .projects-base-div {
-  height: calc(100vh - 291px);
+  height: calc(100vh - 265px);
   overflow: auto;
+
+  @media (max-width: 1024px) {
+    height: calc(100vh - 272px);
+
+
+  }
 }
