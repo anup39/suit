@@ -10,6 +10,7 @@ import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import { taskByProject } from '../../../../redux/worklist-management-redux/worklist.actions';
 import { getTasksByProject } from '../../../../redux/worklist-management-redux/worklist.selector';
 import WorkListCards from './components/WorkListCards/WorkListCards';
+import MobileDataRow from './mobile.data.row';
 
 const WorkList = () => {
   const authToken = useSelector(getUserAuthToken);
@@ -34,7 +35,15 @@ const WorkList = () => {
           />
         </div>
       </div>
-      <div className="work-list-table-tbody">
+      <div className="mobile_table_project_worklist">
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+      </div>
+      <div className="project-work-list-table-tbody">
         <div className="work-list-table-header">
           <span className="work-list-card-check-input">
             <input type="checkbox" />

@@ -12,7 +12,7 @@
     width: 800px;
   }
 
-  > div {
+  >div {
     padding: 10px;
     font-size: 14px;
     color: #8094ae;
@@ -57,12 +57,14 @@
 
 .tabletbody {
   .table-head-grid {
-    > div {
+    >div {
       color: #364a63;
     }
 
     &.table-details {
       background: #f8f9fc;
+      width: 100%;
+      border: none;
 
       h3 {
         color: #8094ae;
@@ -80,7 +82,7 @@
         align-items: center;
         flex-wrap: wrap;
 
-        > div {
+        >div {
           font-size: 10px;
           color: #364a63;
           background: #c9e2ff;

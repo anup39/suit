@@ -51,7 +51,7 @@
   font-size: 18px;
 }
 
-.work-list-table-tbody {
+.project-work-list-table-tbody {
   // @media (max-width: 1024px) {
   //   width: calc(100vw - 303px);
   //   overflow: auto;
@@ -137,4 +137,64 @@
 
 .header-worklist-task-actions {
   width: 10%;
+}
+
+.mobile_table_project_worklist {
+  height: calc(100vh - 314px);
+  overflow: auto;
+  display: none;
+
+  @media (max-width: 991.98px) {
+    height: calc(100vh - 340px);
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    height: calc(100vh - 314px);
+    display: block;
+  }
+
+  >div:nth-child(even) {
+    background: #d4deea;
+
+    .grid_3_1 {
+      border-top: 1px solid white;
+    }
+  }
+}
+
+.grid_3_1 {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  gap: 1rem;
+  border-top: 1px solid #d4deea;
+  padding: 10px;
+
+  h3 {
+    color: #8094ae;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  svg {
+    fill: #929db0;
+  }
+
+  p {
+    margin: 0;
+    color: #364a63;
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    &.blue_text {
+      color: #2586ff;
+    }
+
+    span {
+      color: #2586ff;
+    }
+  }
 }
