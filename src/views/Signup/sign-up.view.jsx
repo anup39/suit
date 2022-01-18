@@ -61,6 +61,7 @@ const SignupPage = ({ isRedTheme }) => {
               ASuite
             </ASuit>
           </h1>
+
           <div className={classes.left_bottom_logo}>
             <span className={classes.logo_description}>
               {t('broughtToYouBy')}
