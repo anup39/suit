@@ -108,3 +108,36 @@ export const GET_PROJECT_DASHBORD = async (payload) => {
   console.log(dashbord.data);
   return dashbord.data;
 };
+
+export const IMPORT_PROJECT_DATA = async (payload) => {
+  console.log('IMPORT PROJECT DATA');
+  console.log(payload);
+
+  const { data, authToken } = payload;
+
+  const url = PROJECT_MANAGEMENT_API.IMPORT_PROJECT_DATA;
+  const dashbord = await axios(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+      'Content-Type': 'multipart/form-data',
+    },
+    data,
+  });
+  console.log(dashbord.data);
+  return dashbord.data;
+};
+
+export const GET_DASHBORD_BY_PROJECT_ID = async (payload) => {
+  console.log('Project Dashbord BY ID');
+  const { authToken, projectId } = payload;
+
+  const url = `${PROJECT_MANAGEMENT_API.PROJECT_STATUS_DASHBORD}/${projectId}`;
+  const dashbord = await axios(url, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
+  console.log(dashbord.data);
+  return dashbord.data;
+};

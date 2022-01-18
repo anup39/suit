@@ -33,3 +33,15 @@ export const getDeleteFeedbackSuccess = (state) => {
 export const getIsDeleteFeedbackLoading = (state) => {
   return state.feedback.isDeleteFeedbackLoading;
 };
+
+export const getFeebackByUserID = (state) => {
+  return state.feedback.getFeedbackById;
+};
+
+export const getFeebackByUserIDError = (state) => {
+  return state.feedback.getFeedbackByIdError;
+};
+
+export const getFeebackByUserIDLoading = (state) => {
+  return state.feedback.isGetFeedbackByIdLoading;
+};

@@ -12,6 +12,10 @@ const feedbackInitialState = {
   deleteFeedback: '',
   deleteFeedbackError: '',
   isDeleteFeedbackLoading: false,
+
+  getFeedbackById: '',
+  getFeedbackByIdError: '',
+  isGetFeedbackByIdLoading: false,
 };
 
 // eslint-disable-next-line
@@ -103,6 +107,30 @@ const feedbackReducer = (state = feedbackInitialState, action) => {
         deleteFeedback: '',
         deleteFeedbackError: '',
         isDeleteFeedbackLoading: false,
+      };
+
+    case FEEDBACK_ACTIONS_TYPES.GET_FEEDBACK_BY_ID_USERID:
+      return {
+        ...state,
+        getFeedbackById: '',
+        getFeedbackByIdError: '',
+        isGetFeedbackByIdLoading: true,
+      };
+
+    case FEEDBACK_ACTIONS_TYPES.GET_FEEDBACK_BY_ID_USERID_SUCCESS:
+      return {
+        ...state,
+        getFeedbackById: action.payload,
+        getFeedbackByIdError: '',
+        isGetFeedbackByIdLoading: false,
+      };
+
+    case FEEDBACK_ACTIONS_TYPES.GET_FEEDBACK_BY_ID_USERID_ERROR:
+      return {
+        ...state,
+        getFeedbackById: '',
+        getFeedbackByIdError: action.payload,
+        isGetFeedbackByIdLoading: false,
       };
 
     default:

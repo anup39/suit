@@ -4,10 +4,12 @@ import {
   ASSIGN_PROJECT_TO_COMPANY,
   CREATE_NEW_PROJECT,
   DELETE_PROJECT_DATA,
+  GET_DASHBORD_BY_PROJECT_ID,
   GET_PROJECT_DASHBORD,
   GET_PROJECT_DETAILS,
   GET_PROJECT_DOCUMENTS,
   GET_PROJECT_LIST,
+  IMPORT_PROJECT_DATA,
 } from '../../services/projectManagement';
 import PROJECT_MANAGEMENT_TYPES from './project-management.action-types';
 import {
@@ -15,12 +17,16 @@ import {
   assignProjectSuccess,
   createNewProjectError,
   createNewProjectSuccess,
+  dashbordByProjectIdError,
+  dashbordByProjectIdSuccess,
   deleteProjectDataSuccess,
   deleteProjectError,
   getProjectDetailsError,
   getProjectDetailsSuccess,
   getProjectListError,
   getProjectListSuccess,
+  importProjectDataError,
+  importProjectDataSuccess,
   projectDashbordError,
   projectDashbordSuccess,
   projectDocumentsError,
@@ -136,6 +142,38 @@ export function* onGetProjectDashbord() {
   );
 }
 
+export function* importProjectData({ payload }) {
+  try {
+    const projectDashbord = yield call(IMPORT_PROJECT_DATA, payload);
+    yield put(importProjectDataSuccess(projectDashbord));
+  } catch (err) {
+    yield put(importProjectDataError(err.response.data));
+  }
+}
+
+export function* onImportProjectData() {
+  yield takeLatest(
+    PROJECT_MANAGEMENT_TYPES.IMPORT_PROJECT_DATA,
+    importProjectData
+  );
+}
+
+export function* dashbordByProjectId({ payload }) {
+  try {
+    const projectDashbord = yield call(GET_DASHBORD_BY_PROJECT_ID, payload);
+    yield put(dashbordByProjectIdSuccess(projectDashbord));
+  } catch (err) {
+    yield put(dashbordByProjectIdError(err.response.data));
+  }
+}
+
+export function* onDashbordByProjectId() {
+  yield takeLatest(
+    PROJECT_MANAGEMENT_TYPES.DASHBORD_BY_PROJECT_ID,
+    dashbordByProjectId
+  );
+}
+
 export function* projectManagementSagas() {
   yield all([
     call(onCreateNewProjectStart),
@@ -145,5 +183,7 @@ export function* projectManagementSagas() {
     call(onGetProjectDocuments),
     call(onAssignProjectToCompany),
     call(onGetProjectDashbord),
+    call(onImportProjectData),
+    call(onDashbordByProjectId),
   ]);
 }
