@@ -15,6 +15,7 @@ import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 // import WorkListColumns from './WorkListColumns';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import { getProjectList } from '../../redux/project-management-redux/project-management.actions';
 import {
   getIfAuthenticated,
   getUserAuthToken,
@@ -78,6 +79,7 @@ const WorkListManagement = () => {
 
   useEffect(() => {
     dispatch(getWorkList(authToken));
+    dispatch(getProjectList(authToken));
 
     if (ifAllSelected) {
       setCheckbox(true);
@@ -135,7 +137,7 @@ const WorkListManagement = () => {
                   <MenuItem onClick={handleMenuClose}>
                     <CsvDownload
                       className="export-csv-button"
-                      data={workListData}
+                      data={selectedWorklist}
                       filename="worklist.csv"
                     >
                       Export CSV
@@ -197,6 +199,4 @@ const WorkListManagement = () => {
 
 export default WorkListManagement;
 
-// TODO: Pagination
-// TODO: FORMS Fill Data
 // TODO: XML

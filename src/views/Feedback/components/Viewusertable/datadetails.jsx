@@ -2,11 +2,12 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { Modal } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import ViewDocumentsModal from './view.documents.modal';
 
-const DataDetails = () => {
+const DataDetails = ({ feedBackDetails, deleteFeedback }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [modalOpen, setModalOpen] = React.useState(false);
   const handleModalOpen = () => setModalOpen(true);
@@ -23,6 +24,11 @@ const DataDetails = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleDeleteFeedback = () => {
+    handleClose();
+    deleteFeedback();
+  };
   return (
     <>
       <Modal onClose={handleModalClose} open={modalOpen}>
@@ -30,12 +36,12 @@ const DataDetails = () => {
       </Modal>
 
       <div className="table-head-grid table-details">
-        <div className="table-check">
+        {/* <div className="table-check">
           <input type="checkbox" />
-        </div>
+        </div> */}
         <div className="table-user">
           <h3>User Name</h3>
-          <p>User@mail.com</p>
+          <p>{feedBackDetails.idUser}</p>
         </div>
         <div className="table-date">
           <h3>Date</h3>
@@ -43,15 +49,15 @@ const DataDetails = () => {
         </div>
         <div className="table-address">
           <h3>Address</h3>
-          <p>Dummy text refers to the bits of content that are used to</p>
+          <p>{feedBackDetails.address}</p>
         </div>
         <div className="table-city">
           <h3>City</h3>
-          <p>Chennai</p>
+          <p>{feedBackDetails.city}</p>
         </div>
         <div className="table-zip">
           <h3>Zip Code</h3>
-          <p>52352 235235</p>
+          <p>{feedBackDetails?.zipCode}</p>
         </div>
         <div className="table-actions">
           <MoreHorizIcon
@@ -70,18 +76,18 @@ const DataDetails = () => {
             onClose={handleClose}
             open={open}
           >
-            <MenuItem>View</MenuItem>
-            <MenuItem>Delete</MenuItem>
+            {/* <MenuItem>View</MenuItem> */}
+            <MenuItem onClick={handleDeleteFeedback}>Delete</MenuItem>
           </Menu>
         </div>
         <div className="table-check" />
         <div className="table-user">
           <h3>Coment</h3>
-          <p>Dummy text refers to the bits of content that are used to </p>
+          <p>{feedBackDetails.comment}</p>
         </div>
         <div className="table-date">
           <h3>Satisfaction</h3>
-          <p>9</p>
+          <p>{feedBackDetails.satisfactionLevel}</p>
         </div>
         <div className="table-address">
           <h3>Documents</h3>
@@ -93,6 +99,11 @@ const DataDetails = () => {
       </div>
     </>
   );
+};
+
+DataDetails.propTypes = {
+  feedBackDetails: PropTypes.isRequired,
+  deleteFeedback: PropTypes.func.isRequired,
 };
 
 export default DataDetails;

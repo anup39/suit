@@ -174,13 +174,14 @@ const UserRoleCard = ({
   );
 };
 
+/* eslint-disable */
 UserRoleCard.propTypes = {
-  username: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  role: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
-  companyName: PropTypes.string.isRequired,
+  username: PropTypes.string,
+  date: PropTypes.string,
+  role: PropTypes.string,
+  status: PropTypes.number,
+  userId: PropTypes.number,
+  companyName: PropTypes.string,
 };
 
 export default UserRoleCard;

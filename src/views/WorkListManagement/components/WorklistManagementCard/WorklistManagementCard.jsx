@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { getAllProjects } from '../../../../redux/project-management-redux/project.selector';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import {
   deleteTaskByID,
@@ -27,16 +28,19 @@ const WorkListManagementCard = ({
   isMilestone,
   workId,
   type,
+  allData,
 }) => {
   const dispatch = useDispatch();
 
   const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = React.useState(false);
   const [checkBox, setCheckBox] = React.useState(false);
+  const [actualProjectName, setActualProjectName] = React.useState('');
 
   const authToken = useSelector(getUserAuthToken);
   const selectedWorkList = useSelector(getSelectedWorkList);
   const isAllSelected = useSelector(getIfAllWorkListSelected);
+  const projectList = useSelector(getAllProjects);
 
   const menuOpen = Boolean(menuAnchorEl);
   const handleMenuClick = (event) => {
@@ -69,7 +73,7 @@ const WorkListManagementCard = ({
     setCheckBox(e.target.checked);
 
     if (e.target.checked) {
-      dispatch(selectOneWorkList(workId));
+      dispatch(selectOneWorkList(allData));
     } else {
       dispatch(deselectOneWorkList(workId));
     }
@@ -78,11 +82,20 @@ const WorkListManagementCard = ({
   const isMilestoneName = isMilestone !== 0 ? 'No' : 'Yes';
 
   React.useEffect(() => {
+    if (projectList.length !== 0) {
+      // eslint-disable-next-line
+      projectList.map((val) => {
+        if (val.id === projectName) {
+          setActualProjectName(val.name);
+        }
+      });
+    }
+
     let alreadyInList = false;
 
     // eslint-disable-next-line
     selectedWorkList.map((work) => {
-      if (work === workId) {
+      if (work?.taskId === workId) {
         setCheckBox(true);
         alreadyInList = true;
       }
@@ -91,13 +104,13 @@ const WorkListManagementCard = ({
     if (isAllSelected) {
       if (!alreadyInList) {
         setCheckBox(true);
-        dispatch(selectOneWorkList(workId));
+        dispatch(selectOneWorkList(allData));
       }
     } else if (checkBox) {
       setCheckBox(false);
       dispatch(deselectOneWorkList(workId));
     }
-  }, [isAllSelected]);
+  }, [isAllSelected, projectList]);
 
   return (
     <>
@@ -117,7 +130,7 @@ const WorkListManagementCard = ({
           <input checked={checkBox} onChange={handelCheckbox} type="checkbox" />
         </span>
         <span className="worklist-card-management-project-name">
-          {projectName}
+          {actualProjectName}
         </span>
         <span className="worklist-card-management-task-name">{taskName}</span>
         <span className="worklist-card-management-task-description">
@@ -154,13 +167,15 @@ const WorkListManagementCard = ({
   );
 };
 
+/* eslint-disable */
 WorkListManagementCard.propTypes = {
-  projectName: PropTypes.isRequired,
-  taskName: PropTypes.isRequired,
-  taskDescription: PropTypes.isRequired,
-  isMilestone: PropTypes.isRequired,
-  workId: PropTypes.isRequired,
-  type: PropTypes.isRequired,
+  projectName: PropTypes.number,
+  taskName: PropTypes.string,
+  taskDescription: PropTypes.string,
+  isMilestone: PropTypes.number,
+  workId: PropTypes.string,
+  type: PropTypes.string,
+  allData: PropTypes.object,
 };
 
 export default WorkListManagementCard;

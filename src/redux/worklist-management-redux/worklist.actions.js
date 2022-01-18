@@ -109,3 +109,13 @@ export const deselectAllWorkList = () => ({
   type: WORKLIST_MANAGEMENT_ACTION_TYPE.DESELECT_ALL_WORKLIST,
   payload: false,
 });
+
+export const resetAddTaskData = () => ({
+  type: WORKLIST_MANAGEMENT_ACTION_TYPE.RESET_ADD_WORKLIST,
+  payload: '',
+});
+
+export const resetEditTaskData = () => ({
+  type: WORKLIST_MANAGEMENT_ACTION_TYPE.RESET_EDIT_WORKLIST,
+  payload: '',
+});

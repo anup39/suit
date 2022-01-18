@@ -25,3 +25,27 @@ export const getIfAllWorkListSelected = (state) => {
 export const getSelectedWorkList = (state) => {
   return state.workListManagement.selectedWorkList;
 };
+
+export const getAddWorklistLoading = (state) => {
+  return state.workListManagement.isAddWorkListLoading;
+};
+
+export const getEditWorklistLoading = (state) => {
+  return state.workListManagement.isEditWorkListLoading;
+};
+
+export const getAddWorkListError = (state) => {
+  return state.workListManagement.addWorklistError;
+};
+
+export const getEditWorkListError = (state) => {
+  return state.workListManagement.editWorklistError;
+};
+
+export const getAddWorkListSuccess = (state) => {
+  return state.workListManagement.addWorkListData;
+};
+
+export const getEditWorkListSuccess = (state) => {
+  return state.workListManagement.editWorkListData;
+};

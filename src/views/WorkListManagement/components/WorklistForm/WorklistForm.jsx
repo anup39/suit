@@ -2,20 +2,30 @@ import './WorklistForm.scss';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@mui/material/Button';
-// import moment from 'moment';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { connect, useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { getAllProjects } from '../../../../redux/project-management-redux/project.selector';
 import { getProjectList } from '../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import {
-  // addWorkList,
+  addWorkList,
+  editWorkList,
   getTaskByID,
+  resetAddTaskData,
+  resetEditTaskData,
 } from '../../../../redux/worklist-management-redux/worklist.actions';
-import { getCurrentTaskData } from '../../../../redux/worklist-management-redux/worklist.selector';
+import {
+  getAddWorkListError,
+  getAddWorkListSuccess,
+  getCurrentTaskData,
+  getEditWorkListError,
+  getEditWorkListSuccess,
+} from '../../../../redux/worklist-management-redux/worklist.selector';
 import schema from './work.list.schema';
 
 const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
@@ -23,6 +33,11 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
   const currentTaskData = useSelector(getCurrentTaskData);
   const authToken = useSelector(getUserAuthToken);
   const projectList = useSelector(getAllProjects);
+  const addWorklistSuccess = useSelector(getAddWorkListSuccess);
+  const addWorklistError = useSelector(getAddWorkListError);
+
+  const editWorklistSuccess = useSelector(getEditWorkListSuccess);
+  const editWorklistError = useSelector(getEditWorkListError);
 
   const {
     register,
@@ -34,7 +49,27 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    // eslint-disable-next-line
+    data.start = moment(data.start, 'YYYY-MM-DD').format('DD MMM YYYY');
+    // eslint-disable-next-line
+    data.end = moment(data.end, 'YYYY-MM-DD').format('DD MMM YYYY');
+    const dataToSend = {
+      authToken,
+      workListFormData: data,
+    };
+    dispatch(addWorkList(dataToSend));
+  };
+
+  const onEditSubmit = (data) => {
+    // eslint-disable-next-line
+    data.start = moment(data.start, 'YYYY-MM-DD').format('DD MMM YYYY');
+    // eslint-disable-next-line
+    data.end = moment(data.end, 'YYYY-MM-DD').format('DD MMM YYYY');
+    const dataToSend = {
+      authToken,
+      workListFormData: data,
+    };
+    dispatch(editWorkList(dataToSend));
   };
 
   if (isEdit) {
@@ -43,25 +78,82 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
         authToken,
         taskId: workId,
       };
-      if (!currentTaskData) {
+      if (currentTaskData.taskId !== workId) {
         dispatch(getTaskByID(data));
-        dispatch(getProjectList(authToken));
+      } else {
+        currentTaskData.start = moment(
+          currentTaskData.start,
+          'DD MMM YYYY'
+        ).format('YYYY-MM-DD');
+
+        currentTaskData.end = moment(currentTaskData.end, 'DD MMM YYYY').format(
+          'YYYY-MM-DD'
+        );
+        reset(currentTaskData);
       }
-      reset(currentTaskData);
-    }, [currentTaskData]);
+
+      if (editWorklistSuccess) {
+        toast.success('Task Updated Successfully!', {
+          position: 'top-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        handelClose();
+        dispatch(resetEditTaskData());
+      } else if (editWorklistError) {
+        toast.error('Failed to Edit Task!', {
+          position: 'top-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        dispatch(resetEditTaskData());
+      }
+    }, [currentTaskData, editWorklistSuccess, editWorklistError]);
   } else {
     React.useEffect(() => {
-      dispatch(getProjectList(authToken));
-    }, []);
+      if (projectList.length === 0) {
+        dispatch(getProjectList(authToken));
+      } else if (addWorklistSuccess) {
+        toast.success('New Task Added Successfully!', {
+          position: 'top-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        handelClose();
+        dispatch(resetAddTaskData());
+      } else if (addWorklistError) {
+        toast.error('Failed to add task!', {
+          position: 'top-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        dispatch(resetAddTaskData());
+      }
+    }, [addWorklistSuccess, addWorklistError]);
   }
 
   return (
     <div className="worklist-form-base-div">
-      {console.log(currentTaskData)}
       {!isEdit ? <h2>Add Worklist</h2> : <h2>Edit Worklist</h2>}
       <form
         className="worklist-form-container"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={isEdit ? handleSubmit(onEditSubmit) : handleSubmit(onSubmit)}
       >
         <div>
           <label>Project Name</label>
@@ -71,7 +163,9 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
               disabled
               name="projectsId"
               {...register('projectsId')}
+              defaultValue={register('projectsId')}
             >
+              <option value={false}> Select A Project </option>
               {projectList.map((project) => (
                 <option key={project.id} value={project.id}>
                   {project.name}
@@ -84,6 +178,8 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
               name="projectsId"
               {...register('projectsId')}
             >
+              <option> Select A Project </option>
+
               {projectList.map((project) => (
                 <option key={project.id} value={project.id}>
                   {project.name}

@@ -1,12 +1,29 @@
 import 'react-toastify/dist/ReactToastify.css';
 import './addfeedback.scss';
 
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Modal } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
+import {
+  addNewFeedback,
+  resetNewFeedback,
+} from '../../../../redux/feedback-redux/feedback.actions';
+import {
+  getAddFeedbackError,
+  getAddFeedbackSuccess,
+} from '../../../../redux/feedback-redux/feedback.selector';
+import {
+  getUserAuthToken,
+  getUserData,
+} from '../../../../redux/user-redux/user.selectors';
+import schema from './schema';
 import UploadDocumentsModal from './upload.documents.modal';
 
 const AddFeedback = ({ isOpen, isClose }) => {
@@ -21,6 +38,62 @@ const AddFeedback = ({ isOpen, isClose }) => {
 
   const ratingValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
+  const dispatch = useDispatch();
+  const authToken = useSelector(getUserAuthToken);
+  const userData = useSelector(getUserData);
+  const addFeedbackSuccess = useSelector(getAddFeedbackSuccess);
+  const addFeedbackError = useSelector(getAddFeedbackError);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  /* eslint-disable */
+  const onAddFeedbackSubmit = (data) => {
+    if (rating) {
+      data.satisfactionLevel = rating;
+    }
+    data.idUser = userData.id;
+    console.log(authToken);
+    const dataToSend = { authToken, feedBackDetails: data };
+    dispatch(addNewFeedback(dataToSend));
+  };
+  /* eslint-enable */
+
+  React.useEffect(() => {
+    if (addFeedbackSuccess) {
+      toast.success('Feedback Added Successfully!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setRating('');
+      reset();
+      dispatch(resetNewFeedback());
+      closeDrawer();
+    } else if (addFeedbackError) {
+      toast.error('Failed to add Feedback!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch(resetNewFeedback());
+    }
+  }, [addFeedbackSuccess, addFeedbackError]);
+
   return (
     <>
       <Modal onClose={handleModalClose} open={modalOpen}>
@@ -34,69 +107,96 @@ const AddFeedback = ({ isOpen, isClose }) => {
           sx={{ width: 400, padding: 3 }}
         >
           <h3 className="side-head">Add Feedback</h3>
-          <div className="form_input_container">
-            <label className="form_label" htmlFor="Address">
-              Address
-            </label>
-            <input className="form_inputs" id="Address" type="text" />
-            <span className="form_error">message</span>
-          </div>
-          <div className="form_input_container">
-            <label className="form_label" htmlFor="City">
-              City
-            </label>
-            <input className="form_inputs" id="City" type="text" />
-          </div>
-          <div className="form_input_container">
-            <label className="form_label" htmlFor="ZipCode">
-              Zip Code
-            </label>
-            <input className="form_inputs" id="ZipCode" type="text" />
-          </div>
-          <div className="form_input_container">
-            <label className="form_label" htmlFor="Comment">
-              Comment
-            </label>
-            <textarea className="form_textarea_input" id="Comment" rows="3" />
-          </div>
-          <div className="form_input_container">
-            <label className="form_label" htmlFor="Satisfaction">
-              Satisfaction{' '}
-            </label>
-            <div className="sat-con">
-              {ratingValues.map((val) => (
-                <div
-                  key={val}
-                  className={rating === val ? 'active' : ''}
-                  onClick={() => setRating(val)}
-                >
-                  {val}
-                </div>
-              ))}
+          <form onSubmit={handleSubmit(onAddFeedbackSubmit)}>
+            <div className="form_input_container">
+              <label className="form_label" htmlFor="Address">
+                Address
+              </label>
+              <input
+                className="form_inputs"
+                id="Address"
+                type="text"
+                {...register('address')}
+              />
+              <span className="form_error"> {errors.address?.message}</span>
             </div>
-          </div>
-          <div className="form_input_container">
-            <label className="form_label" htmlFor="Upload">
-              Upload{' '}
-            </label>
-            <div
-              className="file_upload_inputs"
-              disabled
-              id="Upload"
-              onClick={handleModalOpen}
-            >
-              {' '}
-              Select File To Upload{' '}
+            <div className="form_input_container">
+              <label className="form_label" htmlFor="City">
+                City
+              </label>
+              <input
+                className="form_inputs"
+                id="City"
+                type="text"
+                {...register('city')}
+              />
+
+              <span className="form_error"> {errors.city?.message}</span>
             </div>
-          </div>
-          <div className="btn-btm">
-            <button className="transparent-btn" type="button">
-              Cancel
-            </button>
-            <button className="orange-btn" type="button">
-              Submit
-            </button>
-          </div>
+            <div className="form_input_container">
+              <label className="form_label" htmlFor="ZipCode">
+                Zip Code
+              </label>
+              <input
+                className="form_inputs"
+                id="ZipCode"
+                type="text"
+                {...register('zipCode')}
+              />
+              <span className="form_error"> {errors.zipCode?.message}</span>
+            </div>
+            <div className="form_input_container">
+              <label className="form_label" htmlFor="Comment">
+                Comment
+              </label>
+              <textarea
+                className="form_textarea_input"
+                id="Comment"
+                rows="3"
+                {...register('comment')}
+              />
+              <span className="form_error"> {errors.comment?.message}</span>
+            </div>
+            <div className="form_input_container">
+              <label className="form_label" htmlFor="Satisfaction">
+                Satisfaction{' '}
+              </label>
+              <div className="sat-con">
+                {ratingValues.map((val) => (
+                  <div
+                    key={val}
+                    className={rating === val ? 'active' : ''}
+                    onClick={() => setRating(val)}
+                  >
+                    {val}
+                  </div>
+                ))}
+                {/* <span className="form_error"></span> */}
+              </div>
+            </div>
+            <div className="form_input_container">
+              <label className="form_label" htmlFor="Upload">
+                Upload{' '}
+              </label>
+              <div
+                className="file_upload_inputs"
+                disabled
+                id="Upload"
+                onClick={handleModalOpen}
+              >
+                {' '}
+                Select File To Upload{' '}
+              </div>
+            </div>
+            <div className="btn-btm">
+              <button className="transparent-btn" type="button">
+                Cancel
+              </button>
+              <button className="orange-btn" type="submit">
+                Submit
+              </button>
+            </div>
+          </form>
         </Box>
       </Drawer>
     </>

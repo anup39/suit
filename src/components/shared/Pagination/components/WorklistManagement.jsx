@@ -10,6 +10,7 @@ const WorklistManagement = ({ currentItems }) => {
         currentItems.map((values) => (
           <WorklistManagementCard
             key={values.taskId}
+            allData={values}
             isMilestone={values.isMilestone}
             projectName={values.projectsId}
             taskDescription={values.taskDescription}

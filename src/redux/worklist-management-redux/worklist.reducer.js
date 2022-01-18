@@ -80,6 +80,14 @@ const WorkListManagementReducer = (state = worklistInitialState, action) => {
         addWorkListData: '',
       };
 
+    case WORKLIST_MANAGEMENT_ACTION_TYPE.RESET_ADD_WORKLIST:
+      return {
+        ...state,
+        isAddWorkListLoading: false,
+        addWorklistError: '',
+        addWorkListData: '',
+      };
+
     case WORKLIST_MANAGEMENT_ACTION_TYPE.EDIT_WORKLIST:
       return {
         ...state,
@@ -101,6 +109,14 @@ const WorkListManagementReducer = (state = worklistInitialState, action) => {
         ...state,
         isEditWorkListLoading: false,
         editWorklistError: action.payload,
+        editWorkListData: '',
+      };
+
+    case WORKLIST_MANAGEMENT_ACTION_TYPE.RESET_EDIT_WORKLIST:
+      return {
+        ...state,
+        isEditWorkListLoading: false,
+        editWorklistError: '',
         editWorkListData: '',
       };
 
@@ -200,7 +216,7 @@ const WorkListManagementReducer = (state = worklistInitialState, action) => {
       return {
         ...state,
         selectedWorkList: state.selectedWorkList.filter(
-          (val) => val !== action.payload
+          (val) => val.taskId !== action.payload
         ),
       };
 

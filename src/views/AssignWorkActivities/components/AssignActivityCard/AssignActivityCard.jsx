@@ -113,15 +113,16 @@ const AssignActivityCard = ({
   );
 };
 
+/* eslint-disable */
 AssignActivityCard.propTypes = {
-  projectName: PropTypes.string.isRequired,
-  companyName: PropTypes.string.isRequired,
-  taskId: PropTypes.number.isRequired,
-  taskName: PropTypes.string.isRequired,
-  taskDescription: PropTypes.string.isRequired,
-  isMilestone: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
+  projectName: PropTypes.string,
+  companyName: PropTypes.string,
+  taskId: PropTypes.number,
+  taskName: PropTypes.string,
+  taskDescription: PropTypes.string,
+  isMilestone: PropTypes.number,
+  type: PropTypes.string,
+  status: PropTypes.string,
 };
 export default AssignActivityCard;
 

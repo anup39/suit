@@ -10,7 +10,7 @@ export const getSigninError = (state) => {
 };
 
 export const getUserData = (state) => {
-  return state.user;
+  return state.user.userData;
 };
 
 export const getUserAuthToken = (state) => {
@@ -19,8 +19,4 @@ export const getUserAuthToken = (state) => {
 
 export const getIfAuthenticated = (state) => {
   return state.user.isAuthenticated;
-};
-
-export const getCurrentLanguage = (state) => {
-  return state.user.currentLanguage;
 };
