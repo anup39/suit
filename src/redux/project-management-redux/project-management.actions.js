@@ -129,3 +129,18 @@ export const assignProjectError = (data) => ({
   type: PROJECT_MANAGEMENT_TYPES.ASSIGN_PROJECT_TO_COMPANY_ERROR,
   payload: data,
 });
+
+export const projectDashbord = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DASHBORD,
+  payload: data,
+});
+
+export const projectDashbordSuccess = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DASHBORD_SUCCESS,
+  payload: data,
+});
+
+export const projectDashbordError = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DASHBORD_ERROR,
+  payload: data,
+});

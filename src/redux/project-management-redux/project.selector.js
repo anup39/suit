@@ -29,3 +29,7 @@ export const getCreateProjectError = (state) => {
 export const getCreateProjectData = (state) => {
   return state.projectManagement.createNewProjectData;
 };
+
+export const getDashbordData = (state) => {
+  return state.projectManagement.projectDashbord;
+};

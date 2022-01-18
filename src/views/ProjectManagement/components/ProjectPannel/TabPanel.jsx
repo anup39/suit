@@ -9,11 +9,7 @@ const TabPanel = (props) => {
 
   return (
     <div className="tab-pannel-base" hidden={value !== index} role="tabpanel">
-      {value === index && (
-        <Box sx={{ pt: 2, height: '100%' }}>
-          <>{children}</>
-        </Box>
-      )}
+      {value === index && <Box sx={{ pt: 2, height: '100%' }}>{children}</Box>}
     </div>
   );
 };

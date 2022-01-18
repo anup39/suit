@@ -95,3 +95,16 @@ export const GET_PROJECT_DOCUMENTS = async (payload) => {
   console.log(projectDocs.data);
   return projectDocs.data;
 };
+
+export const GET_PROJECT_DASHBORD = async (payload) => {
+  console.log('Project Dashbord');
+  console.log(payload);
+  const url = PROJECT_MANAGEMENT_API.DASHBORD;
+  const dashbord = await axios(url, {
+    headers: {
+      Authorization: `Bearer ${payload}`,
+    },
+  });
+  console.log(dashbord.data);
+  return dashbord.data;
+};

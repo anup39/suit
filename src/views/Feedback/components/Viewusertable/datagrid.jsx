@@ -32,7 +32,7 @@ const Datagrid = ({ feedBackDetails }) => {
     handleClose();
     const data = {
       authToken,
-      feedbackId: feedBackDetails.id,
+      feedbackId: feedBackDetails?.id,
     };
 
     dispatch(deleteFeedback(data));
@@ -44,14 +44,14 @@ const Datagrid = ({ feedBackDetails }) => {
           {/* <div className="table-check"> 
     <input type="checkbox" />
   </div> */}
-          <div className="table-user">{feedBackDetails.idUser}</div>
-          <div className="table-date">9 Nov 2021</div>
-          <div className="table-address">{feedBackDetails.address}</div>
-          <div className="table-city">{feedBackDetails.city}</div>
+          <div className="table-user">{feedBackDetails?.userName}</div>
+          <div className="table-date">{feedBackDetails?.createdDate}</div>
+          <div className="table-address">{feedBackDetails?.address}</div>
+          <div className="table-city">{feedBackDetails?.city}</div>
           <div className="table-satis">
-            {feedBackDetails.satisfactionLevel === 0
+            {feedBackDetails?.satisfactionLevel === 0
               ? '-'
-              : feedBackDetails.satisfactionLevel}
+              : feedBackDetails?.satisfactionLevel}
           </div>
           <div className="table-doc">-</div>
           <div className="table-actions">

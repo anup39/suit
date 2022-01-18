@@ -25,6 +25,10 @@ const PROJECT_MANAGEMENT_INITIAL_STATE = {
   assingProject: '',
   isAssingProjectLoading: false,
   assingProjectError: '',
+
+  projectDashbord: '',
+  isprojectDashbordLoading: false,
+  projectDashbordError: '',
 };
 
 const projectManagementReducer = (
@@ -182,6 +186,30 @@ const projectManagementReducer = (
         assingProject: action.payload,
         isAssingProjectLoading: false,
         assingProjectError: '',
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DASHBORD:
+      return {
+        ...state,
+        projectDashbord: '',
+        isprojectDashbordLoading: true,
+        projectDashbordError: '',
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DASHBORD_ERROR:
+      return {
+        ...state,
+        projectDashbord: '',
+        isprojectDashbordLoading: false,
+        projectDashbordError: action.payload,
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DASHBORD_SUCCESS:
+      return {
+        ...state,
+        projectDashbord: action.payload,
+        isprojectDashbordLoading: false,
+        projectDashbordError: '',
       };
 
     default:

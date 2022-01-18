@@ -13,11 +13,7 @@ const FilePannel = (props) => {
       hidden={value !== index}
       role="tabpanel"
     >
-      {value === index && (
-        <Box sx={{ pt: 2 }}>
-          <>{children}</>
-        </Box>
-      )}
+      {value === index && <Box sx={{ pt: 2 }}>{children}</Box>}
     </div>
   );
 };

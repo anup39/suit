@@ -4,6 +4,7 @@ import {
   ASSIGN_PROJECT_TO_COMPANY,
   CREATE_NEW_PROJECT,
   DELETE_PROJECT_DATA,
+  GET_PROJECT_DASHBORD,
   GET_PROJECT_DETAILS,
   GET_PROJECT_DOCUMENTS,
   GET_PROJECT_LIST,
@@ -20,6 +21,8 @@ import {
   getProjectDetailsSuccess,
   getProjectListError,
   getProjectListSuccess,
+  projectDashbordError,
+  projectDashbordSuccess,
   projectDocumentsError,
   projectDocumentsSuccess,
 } from './project-management.actions';
@@ -117,6 +120,22 @@ export function* onAssignProjectToCompany() {
   );
 }
 
+export function* getProjectDashbord({ payload }) {
+  try {
+    const projectDashbord = yield call(GET_PROJECT_DASHBORD, payload);
+    yield put(projectDashbordSuccess(projectDashbord));
+  } catch (err) {
+    yield put(projectDashbordError(err.response.data));
+  }
+}
+
+export function* onGetProjectDashbord() {
+  yield takeLatest(
+    PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DASHBORD,
+    getProjectDashbord
+  );
+}
+
 export function* projectManagementSagas() {
   yield all([
     call(onCreateNewProjectStart),
@@ -125,5 +144,6 @@ export function* projectManagementSagas() {
     call(onDeleteProjectData),
     call(onGetProjectDocuments),
     call(onAssignProjectToCompany),
+    call(onGetProjectDashbord),
   ]);
 }

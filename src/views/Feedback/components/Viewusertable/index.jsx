@@ -80,7 +80,7 @@ const ViewUserTable = () => {
         ) : (
           feedbackList &&
           feedbackList.map((data) => (
-            <Datagrid key={data.id} feedBackDetails={data} />
+            <Datagrid key={data?.id} feedBackDetails={data} />
           ))
         )}
       </div>

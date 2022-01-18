@@ -41,7 +41,7 @@ const DataDetails = ({ feedBackDetails, deleteFeedback }) => {
         </div> */}
         <div className="table-user">
           <h3>User Name</h3>
-          <p>{feedBackDetails.idUser}</p>
+          <p>{feedBackDetails.userName}</p>
         </div>
         <div className="table-date">
           <h3>Date</h3>

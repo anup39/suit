@@ -12,8 +12,20 @@ import {
 } from 'chart.js';
 import React from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getDashbordData } from '../../../../redux/project-management-redux/project.selector';
+import { projectDashbord } from '../../../../redux/project-management-redux/project-management.actions';
+import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const authToken = useSelector(getUserAuthToken);
+  const dashboardData = useSelector(getDashbordData);
+  const [actualLabels, setActualLabels] = React.useState('');
+  const [efficencyData, setEfficencyData] = React.useState('');
+  const [completedData, setCompletedData] = React.useState('');
+
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -37,25 +49,23 @@ const Dashboard = () => {
     },
   };
 
-  const labels = ['Proj 1', 'Proj 2', 'Proj 3', 'proj 4', 'Proj 5'];
-
   const data = {
-    labels,
+    labels: actualLabels,
     datasets: [
       {
         label: '% Completion',
-        data: [10, 20, 20, 30, 50],
+        data: completedData,
         backgroundColor: '#BB89FB',
       },
     ],
   };
 
   const effiecncyData = {
-    labels,
+    labels: actualLabels,
     datasets: [
       {
         label: '% Efficency',
-        data: [50, 40, 30, 20, 10],
+        data: efficencyData,
         backgroundColor: '#5DA0FF',
       },
     ],
@@ -81,6 +91,22 @@ const Dashboard = () => {
       },
     ],
   };
+
+  React.useEffect(() => {
+    if (!dashboardData) {
+      dispatch(projectDashbord(authToken));
+    } else {
+      const lables = [];
+      const completed = [];
+      const efficency = [];
+      dashboardData.map((vals) => lables.push(vals.Projects.name));
+      dashboardData.map((vals) => completed.push(vals?.Completion));
+      dashboardData.map((vals) => efficency.push(vals?.Efficiency));
+      setActualLabels(lables);
+      setCompletedData(completed);
+      setEfficencyData(efficency);
+    }
+  }, [dashboardData]);
   return (
     <div className="project-management-dashboard-base-div">
       <div className="project-management-dashoard-graph graph-1">
@@ -113,55 +139,18 @@ const Dashboard = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Project 1</td>
-              <td>70 %</td>
-              <td>35</td>
-              <td>Nr 12</td>
-              <td>16</td>
-              <td>19</td>
-              <td>0.80</td>
-            </tr>
-
-            <tr>
-              <td>Project 1</td>
-              <td>70 %</td>
-              <td>35</td>
-              <td>Nr 12</td>
-              <td>16</td>
-              <td>19</td>
-              <td>0.80</td>
-            </tr>
-
-            <tr>
-              <td>Project 1</td>
-              <td>70 %</td>
-              <td>35</td>
-              <td>Nr 12</td>
-              <td>16</td>
-              <td>19</td>
-              <td>0.80</td>
-            </tr>
-
-            <tr>
-              <td>Project 1</td>
-              <td>70 %</td>
-              <td>35</td>
-              <td>Nr 12</td>
-              <td>16</td>
-              <td>19</td>
-              <td>0.80</td>
-            </tr>
-
-            <tr>
-              <td>Project 1</td>
-              <td>70 %</td>
-              <td>35</td>
-              <td>Nr 12</td>
-              <td>16</td>
-              <td>19</td>
-              <td>0.80</td>
-            </tr>
+            {dashboardData &&
+              dashboardData.map((vals) => (
+                <tr key={vals?.Projects.id}>
+                  <td> {vals?.Projects.name}</td>
+                  <td> {vals?.Completion}</td>
+                  <td> {vals?.NrTasks} </td>
+                  <td>-</td>
+                  <td>{vals?.NrTasksSpanned}</td>
+                  <td>{vals?.NrTasksChanges}</td>
+                  <td>{vals?.Efficiency}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
