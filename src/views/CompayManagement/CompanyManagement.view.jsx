@@ -36,10 +36,9 @@ const CompanyManagementView = () => {
             isClose={handleCloseCompanyDrawer}
             isOpen={openCreateCompanyDrawer}
           />
-          <h3 className={classes.company_headerName}>Company Management</h3>
+          <h3>Company Management</h3>
           <button
             ButtonUnstyled
-            className={classes.header_button}
             onClick={handleCreateCompanyDrawer}
             type="button"
           >
@@ -48,6 +47,7 @@ const CompanyManagementView = () => {
         </div>
         <CompanyManagementDataGrid />
       </div>
+      <p className={classes.footer}>Powered By Negentis</p>
     </div>
   );
 };

@@ -1,14 +1,12 @@
-.row_description{
-    padding: 8px 15px;
-    text-align: left;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: normal;
+.row_description {
+    padding: 10px;
+    word-break: break-all;
     font-size: 14px;
-    line-height: 16px;
-    color: #8094AE;
+    vertical-align: middle;
+    color: #364a63;
+
 }
 
-.row_container{
+.row_container {
     border-top: 1px solid #ddd;
 }

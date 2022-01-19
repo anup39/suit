@@ -39,7 +39,12 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
 
   return (
     <Drawer anchor="right" onClose={closeDrawer} open={isOpen}>
-      <Box role="presentation" sx={{ width: 495, padding: 5 }}>
+      <Box
+        className="add-feedback"
+        role="presentation"
+        sx={{ width: 400, padding: 3 }}
+      >
+        {' '}
         <div className={classes.add_container}>
           <h2 className={classes.userlist_header_1}>Add Users</h2>
           <div className={classes.userlist_container}>
@@ -109,8 +114,8 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
             </span>
             <Button
               sx={{
-                backgroundColor: '#EE9949',
-                '&:hover': { backgroundColor: '#EE9949' },
+                backgroundColor: '#e78201',
+                '&:hover': { backgroundColor: '#e78201' },
               }}
               variant="contained"
             >

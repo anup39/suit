@@ -65,7 +65,11 @@ const CreateCompany = ({ isOpen, isClose }) => {
       {successValue ? (
         <Alert message={successValue.message} title="error" type="success" />
       ) : undefined}
-      <Box role="presentation" sx={{ width: 350, padding: 5 }}>
+      <Box
+        className="add-feedback"
+        role="presentation"
+        sx={{ width: 400, padding: 3 }}
+      >
         <h3 className={classes.form_header}>Create Company</h3>
         <form
           className={classes.form_container}
@@ -134,8 +138,8 @@ const CreateCompany = ({ isOpen, isClose }) => {
             </span>
             <Button
               sx={{
-                backgroundColor: '#EE9949',
-                '&:hover': { backgroundColor: '#EE9949' },
+                backgroundColor: '#e78201',
+                '&:hover': { backgroundColor: '#e78201' },
               }}
               type="submit"
               variant="contained"

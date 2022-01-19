@@ -17,6 +17,7 @@ import {
   getCompaniesListToDelete,
 } from '../../../redux/company-redux/company.selectors';
 import { getUserAuthToken } from '../../../redux/user-redux/user.selectors';
+import MobileDataRow from '../mobile.data.row';
 import classes from './datagrid.module.scss';
 import DatagridRow from './datagrid.row';
 
@@ -81,8 +82,8 @@ const CompanyManagementDataGrid = () => {
   };
 
   return (
-    <div className={classes.datagrid_contaier}>
-      <div className={classes.datagrid_head}>
+    <div className={classes.company_datagrid_contaier}>
+      <div className={classes.cpy_datagrid_head}>
         <div className={classes.head_search}>
           <SearchIcon sx={{ color: '#8094AE' }} />
           <input
@@ -140,38 +141,46 @@ const CompanyManagementDataGrid = () => {
               : undefined}
           </tbody>
         </table>
-        <div className={classes.table_slider_container}>
-          <div className={classes.table_slider}>
-            {!companyFullList ||
-            filterLists(companyFullList).length < 10 ? undefined : (
-              <ReactPaginate
-                activeClassName="active"
-                breakClassName="page-item"
-                breakLabel="..."
-                breakLinkClassName="page-link"
-                containerClassName="pagination"
-                marginPagesDisplayed={2}
-                nextClassName="page-item"
-                nextLabel="Next>>"
-                nextLinkClassName="page-link"
-                // eslint-disable-next-line react/jsx-no-bind
-                onPageChange={handlePageClick}
-                pageClassName="page-item"
-                pageCount={pageCount}
-                pageLinkClassName="page-link"
-                pageRangeDisplayed={5}
-                previousClassName="page-item"
-                previousLabel="<<Previous"
-                previousLinkClassName="page-link"
-              />
-            )}
-          </div>
-        </div>
+
         {companyFullList ? undefined : (
           <div className={classes.progress_container}>
             <CircularProgress />
           </div>
         )}
+      </div>
+      <div className={classes.table_slider}>
+        {!companyFullList ||
+        filterLists(companyFullList).length < 10 ? undefined : (
+          <ReactPaginate
+            activeClassName="active"
+            breakClassName="page-item"
+            breakLabel="..."
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            marginPagesDisplayed={2}
+            nextClassName="page-item"
+            nextLabel="Next>>"
+            nextLinkClassName="page-link"
+            // eslint-disable-next-line react/jsx-no-bind
+            onPageChange={handlePageClick}
+            pageClassName="page-item"
+            pageCount={pageCount}
+            pageLinkClassName="page-link"
+            pageRangeDisplayed={5}
+            previousClassName="page-item"
+            previousLabel="<<Previous"
+            previousLinkClassName="page-link"
+          />
+        )}
+      </div>
+      <div className={classes.mobile_table_cmpy_mgmt}>
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
       </div>
     </div>
   );
