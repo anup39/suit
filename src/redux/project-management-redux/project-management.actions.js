@@ -144,3 +144,33 @@ export const projectDashbordError = (data) => ({
   type: PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DASHBORD_ERROR,
   payload: data,
 });
+
+export const importProjectData = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.IMPORT_PROJECT_DATA,
+  payload: data,
+});
+
+export const importProjectDataSuccess = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.IMPORT_PROJECT_DATA_SUCCESS,
+  payload: data,
+});
+
+export const importProjectDataError = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.IMPORT_PROJECT_DATA_ERROR,
+  payload: data,
+});
+
+export const dashbordByProjectId = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.DASHBORD_BY_PROJECT_ID,
+  payload: data,
+});
+
+export const dashbordByProjectIdSuccess = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.DASHBORD_BY_PROJECT_ID_SUCCESS,
+  payload: data,
+});
+
+export const dashbordByProjectIdError = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.DASHBORD_BY_PROJECT_ID_ERROR,
+  payload: data,
+});

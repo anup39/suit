@@ -1,11 +1,35 @@
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import Button from '@mui/material/Button';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import LoadingSpinner from '../../../components/shared/LoadingSpinner/LoadingSpinner';
+import { feedbackByUserId } from '../../../redux/feedback-redux/feedback.actions';
+import {
+  getFeebackByUserID,
+  // getFeebackByUserIDError,
+  getFeebackByUserIDLoading,
+} from '../../../redux/feedback-redux/feedback.selector';
+import {
+  getUserAuthToken,
+  getUserData,
+} from '../../../redux/user-redux/user.selectors';
 import Datarow from './Datarow';
 import MobileDataRow from './mobile.data.row';
 
 const PublicUserFeedback = () => {
+  const dispatch = useDispatch();
+  const authToken = useSelector(getUserAuthToken);
+  const userData = useSelector(getUserData);
+  const isFeedbackLoading = useSelector(getFeebackByUserIDLoading);
+  const feedbackData = useSelector(getFeebackByUserID);
+  // const feedbackDataError = useSelector(getFeebackByUserIDError);
+
+  React.useEffect(() => {
+    const data = { authToken, userId: userData.id };
+    dispatch(feedbackByUserId(data));
+  }, []);
+
   return (
     <div className="table-container">
       <div className="table-container-head" />
@@ -13,10 +37,10 @@ const PublicUserFeedback = () => {
         <table>
           <thead>
             <tr>
-              <th className="check-con" scope="col">
+              {/* <th className="check-con" scope="col">
                 {' '}
                 <input type="checkbox" />
-              </th>
+              </th> */}
               <th scope="col">User Name</th>
               <th scope="col">Date</th>
               <th scope="col" style={{ width: '25%' }}>
@@ -31,16 +55,12 @@ const PublicUserFeedback = () => {
             </tr>
           </thead>
           <tbody>
-            <Datarow />
-            <Datarow />
-            <Datarow />
-            <Datarow />
-            <Datarow />
-            <Datarow />
-            <Datarow />
-            <Datarow />
-            <Datarow />
-            <Datarow />
+            {isFeedbackLoading ? (
+              <LoadingSpinner />
+            ) : (
+              feedbackData &&
+              feedbackData.map((val) => <Datarow key={val.id} data={val} />)
+            )}
           </tbody>
         </table>
       </div>

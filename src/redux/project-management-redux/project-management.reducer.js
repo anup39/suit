@@ -29,6 +29,14 @@ const PROJECT_MANAGEMENT_INITIAL_STATE = {
   projectDashbord: '',
   isprojectDashbordLoading: false,
   projectDashbordError: '',
+
+  projectDashbordById: '',
+  isprojectDashbordByIdLoading: false,
+  projectDashbordByIdError: '',
+
+  ImportProjectData: '',
+  isImportProjectDataLoading: false,
+  ImportProjectDataError: '',
 };
 
 const projectManagementReducer = (
@@ -210,6 +218,54 @@ const projectManagementReducer = (
         projectDashbord: action.payload,
         isprojectDashbordLoading: false,
         projectDashbordError: '',
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.IMPORT_PROJECT_DATA:
+      return {
+        ...state,
+        ImportProjectData: '',
+        isImportProjectDataLoading: true,
+        ImportProjectDataError: '',
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.IMPORT_PROJECT_DATA_SUCCESS:
+      return {
+        ...state,
+        ImportProjectData: action.payload,
+        isImportProjectDataLoading: false,
+        ImportProjectDataError: '',
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.IMPORT_PROJECT_DATA_ERROR:
+      return {
+        ...state,
+        ImportProjectData: '',
+        isImportProjectDataLoading: false,
+        ImportProjectDataError: action.payload,
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.DASHBORD_BY_PROJECT_ID:
+      return {
+        ...state,
+        projectDashbordById: '',
+        isprojectDashbordByIdLoading: true,
+        projectDashbordByIdError: '',
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.DASHBORD_BY_PROJECT_ID_SUCCESS:
+      return {
+        ...state,
+        projectDashbordById: action.payload,
+        isprojectDashbordByIdLoading: false,
+        projectDashbordByIdError: '',
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.DASHBORD_BY_PROJECT_ID_ERROR:
+      return {
+        ...state,
+        projectDashbordById: '',
+        isprojectDashbordByIdLoading: false,
+        projectDashbordByIdError: action.payload,
       };
 
     default:

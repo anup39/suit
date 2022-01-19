@@ -4,8 +4,12 @@ const PROJECT_MANAGEMENT_API = {
   GET_PROJECT_DETAILS: 'http://13.233.23.132:8080/api/projectsDetails/',
   DELETE_PROJECT_DATA: 'http://13.233.23.132:8080/api/deleteProjects/',
   ASSIGN_PROJECT: 'http://13.233.23.132:8080/api/assignCompany?',
-  PROECT_DOCUMNETS: 'http://13.233.23.132:8080/listProjectsDocuments?projectId',
+  PROECT_DOCUMNETS:
+    'http://13.233.23.132:8080/api/listProjectsDocuments?projectId=',
   DASHBORD: 'http://13.233.23.132:8080/api/ProjectDashboardList',
+  IMPORT_PROJECT_DATA: 'http://13.233.23.132:8080/api/importProjectData',
+  PROJECT_STATUS_DASHBORD:
+    'http://13.233.23.132:8080/api/ProjectDashboardStatus',
 };
 
 export default PROJECT_MANAGEMENT_API;

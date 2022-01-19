@@ -33,3 +33,15 @@ export const getCreateProjectData = (state) => {
 export const getDashbordData = (state) => {
   return state.projectManagement.projectDashbord;
 };
+
+export const getDashbordByProjectId = (state) => {
+  return state.projectManagement.projectDashbordById;
+};
+
+export const getIfDashbordByProjectIdLoading = (state) => {
+  return state.projectManagement.isprojectDashbordByIdLoading;
+};
+
+export const getDashbordByProjectIdError = (state) => {
+  return state.projectManagement.projectDashbordByIdError;
+};

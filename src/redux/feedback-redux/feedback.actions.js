@@ -54,3 +54,23 @@ export const resetDeleteFeedback = (data) => ({
   type: FEEDBACK_ACTIONS_TYPES.RESET_DELETE_FEEDBACK,
   payload: data,
 });
+
+export const feedbackByUserId = (data) => ({
+  type: FEEDBACK_ACTIONS_TYPES.GET_FEEDBACK_BY_ID_USERID,
+  payload: data,
+});
+
+export const feedbackByUserIdSuccess = (data) => ({
+  type: FEEDBACK_ACTIONS_TYPES.GET_FEEDBACK_BY_ID_USERID_SUCCESS,
+  payload: data,
+});
+
+export const feedbackByUserIdError = (data) => ({
+  type: FEEDBACK_ACTIONS_TYPES.GET_FEEDBACK_BY_ID_USERID_ERROR,
+  payload: data,
+});
+
+export const resetFeedbackById = () => ({
+  type: FEEDBACK_ACTIONS_TYPES.RESET_GET_FEEDBACK_BY_USER_ID,
+  payload: '',
+});

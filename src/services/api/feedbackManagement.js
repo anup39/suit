@@ -42,17 +42,18 @@ export const GET_ALL_FEEDBACK = async (data) => {
   return feebdackData.data;
 };
 
-export const GET_FEEDBACK_BY_ID = async (data) => {
-  const { authToken, feedbackId } = data;
+export const GET_FEEDBACK_BY_USER_ID = async (data) => {
+  console.log('Feedback By User Id');
+  const { authToken, userId } = data;
 
-  const feebdackData = await axios(
-    `${FEEDBACK_MANAGEMENT.viewFeedbackById}/${feedbackId}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
-    }
-  );
+  const url = `${FEEDBACK_MANAGEMENT.getAllFeedBackByUserID}/${userId}`;
+  console.log(url);
+
+  const feebdackData = await axios(url, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
   return feebdackData.data;
 };
