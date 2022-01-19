@@ -47,6 +47,7 @@ const CompanyManagementView = () => {
         </div>
         <CompanyManagementDataGrid />
       </div>
+      <p className={classes.footer}>Powered By Negentis</p>
     </div>
   );
 };
