@@ -6,6 +6,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import companyNameList from '../../../constants/CompanyNames';
@@ -62,6 +63,7 @@ const UserRoleCard = ({
       dispatch(deSelectUser(userId));
     }
   };
+  const { t } = useTranslation();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -142,6 +144,7 @@ const UserRoleCard = ({
           />
         </span>
         <span className="user-roles-card-username">{username}</span>
+
         <span className="user-roles-card-username">
           {!companyName ? <p>-</p> : companyNameList[companyName]}
         </span>

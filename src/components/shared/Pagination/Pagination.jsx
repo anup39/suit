@@ -2,6 +2,7 @@ import './Pagination.scss';
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import ReactPaginate from 'react-paginate';
 
 import AssignWorkActivity from './components/AssignWorkActivity';
@@ -37,6 +38,7 @@ const CustomPagination = ({
     );
     setItemOffset(newOffset);
   };
+  const { t } = useTranslation();
 
   const renderComponents = (value) => {
     const components = [
@@ -68,11 +70,11 @@ const CustomPagination = ({
         className="pagination-base"
         disabledLinkClassName="pagination-disabled-div"
         marginPagesDisplayed={2}
-        nextLabel="Next >>"
+        nextLabel={t('next')}
         onPageChange={handlePageClick}
         pageCount={pageCount}
         pageRangeDisplayed={0}
-        previousLabel="<< Prev"
+        previousLabel={t('prev')}
         renderOnZeroPageCount={null}
       />
     </>

@@ -27,6 +27,16 @@ const German = {
   webGisServices: 'Web-GIS-Dienste',
   webEx: 'WebEx',
   feedback: 'Feedback',
+  userSearch: 'Benutzersuche',
+  delete: 'Löschen',
+  roles: 'Rollen',
+  registrationDate: 'Registrierungsdatum',
+  status: 'Status',
+  next: 'Weiter  >>',
+  prev: '<< Zurück',
+  profile: 'Profil',
+  myAccount: 'Mein Konto',
+  logOut: 'Ausloggen',
 };
 
 export default German;
