@@ -27,6 +27,7 @@ const English = {
   webGisServices: 'Web GIS Services',
   webEx: 'WebEx',
   feedback: 'Feedback',
+  projectName: 'Project Name',
   userSearch: 'User Search',
   delete: 'Delete',
   save: 'Save',

@@ -134,3 +134,18 @@ export const deleteUserError = (data) => ({
   type: ROLE_ACTION_TYPE.DELETE_USER_ERROR,
   payload: data,
 });
+
+export const deleteUserInBulk = (dataa) => ({
+  type: ROLE_ACTION_TYPE.DELETE_USER_IN_BULK,
+  payload: dataa,
+});
+
+export const deleteUserInBulkSuccess = (data) => ({
+  type: ROLE_ACTION_TYPE.DELETE_USER_IN_BULK_SUCCESS,
+  payload: data,
+});
+
+export const deleteUserInBulkError = (data) => ({
+  type: ROLE_ACTION_TYPE.DELETE_USER_IN_BULK_ERROR,
+  payload: data,
+});

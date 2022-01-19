@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Drawer from '@mui/material/Drawer';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import exportFromJSON from 'export-from-json';
 import React, { useEffect } from 'react';
 import { FaRegShareSquare } from 'react-icons/fa';
 import CsvDownload from 'react-json-to-csv';
@@ -57,6 +58,16 @@ const WorkListManagement = () => {
 
   const handleMenuClose = () => {
     setMenuOpen(null);
+  };
+
+  const handleExportAsXML = () => {
+    handleMenuClose();
+    const exportType = 'xml';
+    const fileName = 'WorkList.xml';
+
+    const data = selectedWorklist;
+
+    exportFromJSON({ data, fileName, exportType });
   };
 
   const handelCloseDrawer = () => {
@@ -143,7 +154,7 @@ const WorkListManagement = () => {
                       Export CSV
                     </CsvDownload>
                   </MenuItem>
-                  <MenuItem onClick={handleMenuClose}>Export XML</MenuItem>
+                  <MenuItem onClick={handleExportAsXML}>Export XML</MenuItem>
                 </Menu>
               </span>
             )}

@@ -1,15 +1,16 @@
 import axios from 'axios';
 
 import COMPANY_MANAGEMENT from '../../constants/api-endpoints/companyManagement';
+import { REFERSH_TOKEN } from '../api';
 
 export const CREATE_COMPANY = async (data) => {
-  console.log(data);
+  const newToken = await REFERSH_TOKEN(data.payload[1].userAccessToken);
   const createResponse = await axios.post(
     COMPANY_MANAGEMENT.create,
     data.payload[0],
     {
       headers: {
-        Authorization: `Bearer ${data.payload[1].userAccessToken}`,
+        Authorization: `Bearer ${newToken}`,
       },
     }
   );
@@ -17,9 +18,11 @@ export const CREATE_COMPANY = async (data) => {
 };
 
 export const GET_ALL_COMPANY = async (payload) => {
+  const newToken = await REFERSH_TOKEN(payload.payload);
+
   const milestoneList = await axios(COMPANY_MANAGEMENT.getCompany, {
     headers: {
-      Authorization: `Bearer ${payload.payload}`,
+      Authorization: `Bearer ${newToken}`,
     },
   });
 
@@ -27,9 +30,11 @@ export const GET_ALL_COMPANY = async (payload) => {
 };
 
 export const DELETE_COMPANY_WITH_ID = async (data) => {
+  const newToken = await REFERSH_TOKEN(data.accessToken);
+
   const deleteCompany = await axios(`${COMPANY_MANAGEMENT.delete}${data.id}`, {
     headers: {
-      Authorization: `Bearer ${data.accessToken}`,
+      Authorization: `Bearer ${newToken}`,
     },
   });
   return deleteCompany.data;

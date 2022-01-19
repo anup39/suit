@@ -35,9 +35,9 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: projectData,
   });
 
   const onSubmit = (data) => {
@@ -58,8 +58,42 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
     dispatch(createNewProject(payloadData));
   };
 
+  const onEditSubmit = (data) => {
+    // eslint-disable-next-line
+    data.startDate = moment(data['startDate'], 'YYYY-MM-DD').format(
+      'DD MMM YYYY'
+    );
+
+    // eslint-disable-next-line
+    data.completionDate = moment(data['completionDate'], 'YYYY-MM-DD').format(
+      'DD MMM YYYY'
+    );
+
+    const payloadData = {
+      authToken,
+      newCompanyData: data,
+    };
+    dispatch(createNewProject(payloadData));
+  };
+
   React.useEffect(() => {
-    if (isCreateProjectError) {
+    if (editForm) {
+      const tempProjectData = projectData;
+
+      // eslint-disable-next-line
+      tempProjectData.startDate = moment(
+        tempProjectData.startDate,
+        'DD MMM YYYY'
+      ).format('YYYY-MM-DD');
+
+      // eslint-disable-next-line
+      tempProjectData.completionDate = moment(
+        tempProjectData.completionDate,
+        'DD MMM YYYY'
+      ).format('YYYY-MM-DD');
+
+      reset(tempProjectData);
+    } else if (isCreateProjectError) {
       toast.error('Failed to Create New Project!', {
         position: 'top-center',
         autoClose: 2000,
@@ -83,7 +117,7 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
       handelClose();
       dispatch(resetNewProjectData());
     }
-  }, [isCreateProjectLoading]);
+  }, [isCreateProjectLoading, projectData]);
 
   return (
     <div className="create-project-form-base-div">
@@ -91,7 +125,12 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
       {<GlobalSpinner isOpen={isCreateProjectLoading} />}
       {editForm ? <h2>Edit Project</h2> : <h2>Create Project</h2>}
 
-      <form className="create-project-form" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="create-project-form"
+        onSubmit={
+          editForm ? handleSubmit(onEditSubmit) : handleSubmit(onSubmit)
+        }
+      >
         <div>
           <label>Project Name</label>
           <input {...register('name')} id="name" type="text" />
@@ -151,6 +190,7 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
   );
 };
 
+/* eslint-disable */
 CreateProjectForm.propTypes = {
   handelClose: PropTypes.isRequired,
   editForm: PropTypes.string.isRequired,

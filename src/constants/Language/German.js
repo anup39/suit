@@ -27,6 +27,7 @@ const German = {
   webGisServices: 'Web-GIS-Dienste',
   webEx: 'WebEx',
   feedback: 'Feedback',
+  projectName: 'Projektname',
   userSearch: 'Benutzersuche',
   delete: 'Löschen',
   save: 'Speichern',

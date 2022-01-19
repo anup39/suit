@@ -14,7 +14,7 @@ export const getUserData = (state) => {
 };
 
 export const getUserAuthToken = (state) => {
-  return state.user.userData.accessToken;
+  return state.user.userData.refreshToken;
 };
 
 export const getIfAuthenticated = (state) => {

@@ -1,5 +1,6 @@
 import { all, call } from '@redux-saga/core/effects';
 
+import { assignTaskSagas } from './assign-worklist/assign-work.sagas';
 import { companySagas } from './company-redux/company.sagas';
 import { feedbackSagas } from './feedback-redux/feedback.sagas';
 import { milestoneManagementSagas } from './milestone-management/milestone-management.sagas';
@@ -18,5 +19,6 @@ export default function* rootSaga() {
     call(milestoneManagementSagas),
     call(companySagas),
     call(feedbackSagas),
+    call(assignTaskSagas),
   ]);
 }

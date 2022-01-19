@@ -2,13 +2,21 @@ import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import Button from '@mui/material/Button';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import LoadingSpinner from '../../../components/shared/LoadingSpinner/LoadingSpinner';
-import { feedbackByUserId } from '../../../redux/feedback-redux/feedback.actions';
+import GlobalSpinner from '../../../components/shared/Spinners/GlobalSpinner';
 import {
+  feedbackByUserId,
+  resetDeleteFeedback,
+} from '../../../redux/feedback-redux/feedback.actions';
+import {
+  getDeleteFeedbackError,
+  getDeleteFeedbackSuccess,
   getFeebackByUserID,
   // getFeebackByUserIDError,
   getFeebackByUserIDLoading,
+  getIsDeleteFeedbackLoading,
 } from '../../../redux/feedback-redux/feedback.selector';
 import {
   getUserAuthToken,
@@ -23,15 +31,45 @@ const PublicUserFeedback = () => {
   const userData = useSelector(getUserData);
   const isFeedbackLoading = useSelector(getFeebackByUserIDLoading);
   const feedbackData = useSelector(getFeebackByUserID);
+  const isDeleteFeedbackLoading = useSelector(getIsDeleteFeedbackLoading);
+  const deleteFeedbackError = useSelector(getDeleteFeedbackError);
+  const deleteFeedbackSuccess = useSelector(getDeleteFeedbackSuccess);
   // const feedbackDataError = useSelector(getFeebackByUserIDError);
 
   React.useEffect(() => {
-    const data = { authToken, userId: userData.id };
-    dispatch(feedbackByUserId(data));
-  }, []);
+    if (!feedbackData) {
+      const data = { authToken, userId: userData.id };
+      dispatch(feedbackByUserId(data));
+    } else if (deleteFeedbackSuccess) {
+      toast.success('Feedback Deleted Successfully!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch(resetDeleteFeedback());
+      const data = { authToken, userId: userData.id };
+      dispatch(feedbackByUserId(data));
+    } else if (deleteFeedbackError) {
+      toast.error('Failed To Delete Feedback!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch(resetDeleteFeedback());
+    }
+  }, [deleteFeedbackError, deleteFeedbackSuccess]);
 
   return (
     <div className="table-container">
+      <GlobalSpinner isOpen={isDeleteFeedbackLoading} />
       <div className="table-container-head" />
       <div className="table-responsive">
         <table>
