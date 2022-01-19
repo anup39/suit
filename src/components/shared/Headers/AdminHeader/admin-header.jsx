@@ -88,6 +88,7 @@ const AdminHeaderComponent = () => {
   const userData = useSelector(getUserData);
 
   const menuId = 'primary-search-account-menu';
+  const { t } = useTranslation();
 
   const renderMenu = (
     <Menu
@@ -105,11 +106,12 @@ const AdminHeaderComponent = () => {
         horizontal: 'right',
       }}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{t('profile')}</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{t('myAccount')}</MenuItem>
       <MenuItem onClick={handleSignOut}>
         {' '}
-        <LogoutIcon style={{ color: 'red', marginRight: '10px' }} /> Log Out
+        <LogoutIcon style={{ color: 'red', marginRight: '10px' }} />{' '}
+        {t('logOut')}
       </MenuItem>
     </Menu>
   );

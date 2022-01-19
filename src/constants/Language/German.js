@@ -28,6 +28,16 @@ const German = {
   webEx: 'WebEx',
   feedback: 'Feedback',
   projectName: 'Projektname',
+  userSearch: 'Benutzersuche',
+  delete: 'Löschen',
+  roles: 'Rollen',
+  registrationDate: 'Registrierungsdatum',
+  status: 'Status',
+  next: 'Weiter  >>',
+  prev: '<< Zurück',
+  profile: 'Profil',
+  myAccount: 'Mein Konto',
+  logOut: 'Ausloggen',
 };
 
 export default German;

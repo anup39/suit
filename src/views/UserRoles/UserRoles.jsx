@@ -123,7 +123,7 @@ const UserRoles = () => {
             <input
               className="search-input"
               onChange={(e) => filterLists(e)}
-              placeholder="User Search"
+              placeholder={t('userSearch')}
               value={searchTerm}
             />
             <SearchOutlinedIcon className="search-icon" />
@@ -131,7 +131,7 @@ const UserRoles = () => {
 
           {selectedUsers.length !== 0 && (
             <span className="delete-botton" onClick={handleDeleteMultipleUsers}>
-              Delete
+              {t('Delete')}
             </span>
           )}
         </div>
@@ -147,11 +147,11 @@ const UserRoles = () => {
                   />
                 </span>
                 <span className="user-roles-username ">{t('username')}</span>
-                <span className="user-roles-company ">Company</span>
-                <span className="user-roles-role ">Roles</span>
-                <span className="user-roles-date">Registration Date</span>
-                <span className="user-roles-status ">Status</span>
-                <span className="user-roles-action">Actions</span>
+                <span className="user-roles-company ">{t('company')}</span>
+                <span className="user-roles-role ">{t('roles')}</span>
+                <span className="user-roles-date">{t('registrationDate')}</span>
+                <span className="user-roles-status ">{t('status')}</span>
+                <span className="user-roles-action">{t('actions')}</span>
               </div>
               {isLoading ? (
                 <LoadingSpinner />
