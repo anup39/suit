@@ -1,38 +1,47 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { importProjectData } from '../../../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../../../redux/user-redux/user.selectors';
 import classes from './import-drawer.styles.module.scss';
-import schema from './importData';
 
 const ImportDrawer = ({ isOpen, handleClose }) => {
-  const {
-    register,
-    handleSubmit,
-    // formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-
+  const [projectId, setprojectId] = React.useState('');
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
+  const formData = new FormData();
 
   const closeDrawer = () => {
     handleClose(false);
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
-    const dataToSend = { authToken, data };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    formData.append('projectId', projectId);
+    const dataToSend = {
+      authToken,
+      data: formData,
+    };
     dispatch(importProjectData(dataToSend));
+  };
+
+  const handleQgisChangeChange = (e) => {
+    formData.append('qgisFile', e.target.files[0]);
+  };
+
+  const handleWorkListChange = (e) => {
+    e.preventDefault();
+    formData.append('workListFile', e.target.files[0]);
+  };
+
+  const handleDocumntsChange = (e) => {
+    e.preventDefault();
+    formData.append('documents', e.target.files[0]);
   };
 
   return (
@@ -43,14 +52,17 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
             <h3 className={classes.import_form_header}>Import Project Data</h3>
             <form
               className={classes.form_container}
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={(e) => handleSubmit(e)}
             >
               <div className={classes.form_input_container}>
                 <label className={classes.form_label} htmlFor="name">
                   Project Name
                 </label>
-                <select className={classes.form_input}>
-                  <option>Please Select A Project</option>
+                <select
+                  className={classes.form_input}
+                  onChange={(e) => setprojectId(e.target.value)}
+                >
+                  <option value=""> Select A Project</option>
                   <option>Please Select A Project</option>
                   <option>Please Select A Project</option>
                   <option>Please Select A Project</option>
@@ -63,8 +75,8 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                 <input
                   className={classes.form_input}
                   multiple
+                  onChange={handleWorkListChange}
                   type="file"
-                  {...register('workListFile')}
                 />
               </div>
               <div className={classes.form_input_container}>
@@ -74,8 +86,8 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                 <input
                   className={classes.form_input}
                   multiple
+                  onChange={handleQgisChangeChange}
                   type="file"
-                  {...register('qgisFile')}
                 />
               </div>
               <div className={classes.form_input_container}>
@@ -85,8 +97,8 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                 <input
                   className={classes.form_input}
                   multiple
+                  onChange={handleDocumntsChange}
                   type="file"
-                  {...register('documents')}
                 />
               </div>
 

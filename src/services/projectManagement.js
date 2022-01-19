@@ -110,7 +110,7 @@ export const IMPORT_PROJECT_DATA = async (payload) => {
   const newToken = await REFERSH_TOKEN(authToken);
 
   const url = PROJECT_MANAGEMENT_API.IMPORT_PROJECT_DATA;
-  const dashbord = await axios(url, {
+  const importData = await axios(url, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${newToken}`,
@@ -118,7 +118,7 @@ export const IMPORT_PROJECT_DATA = async (payload) => {
     },
     data,
   });
-  return dashbord.data;
+  return importData.data;
 };
 
 export const GET_DASHBORD_BY_PROJECT_ID = async (payload) => {

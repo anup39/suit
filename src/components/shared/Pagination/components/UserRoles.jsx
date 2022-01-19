@@ -10,7 +10,7 @@ const UserRoles = ({ currentItems }) => {
         currentItems.map((user) => (
           <UserRoleCard
             key={user.idUser}
-            companyName={user.companies ? user.companies.id : ''}
+            companyName={user?.companies ? user.companies.name : ''}
             date={`${user.updated_date[2]}/${user.updated_date[1]}/${user.updated_date[0]}`}
             role={user.role.name}
             status={user.status}

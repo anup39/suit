@@ -8,14 +8,14 @@ export const ASSGN_TASK = async (data) => {
 
   const newToken = await REFERSH_TOKEN(authToken);
 
-  const assignTaskResponse = await axios.post(ASSING_WORKLIST.assingTask, {
-    method: 'PUT',
+  const assignTaskResponse = await axios(ASSING_WORKLIST.assingTask, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${newToken}`,
+    },
     data: {
       taskId: taskIdList,
       companyId,
-    },
-    headers: {
-      Authorization: `Bearer ${newToken}`,
     },
   });
   return assignTaskResponse.data;
