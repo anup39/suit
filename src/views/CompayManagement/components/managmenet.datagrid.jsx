@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 // import Button from '@mui/material/Button';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -30,6 +31,7 @@ const CompanyManagementDataGrid = () => {
   const [checked, setChecked] = useState(false);
   const dispatch = useDispatch();
   const accessToken = useSelector(getUserAuthToken);
+  const { t } = useTranslation();
 
   const updateCheckbox = (e) => {
     setRender(e.target.checked);
@@ -90,7 +92,7 @@ const CompanyManagementDataGrid = () => {
             checked={checked}
             className={classes.search_input}
             onChange={updateSearchItem}
-            placeholder="Company search"
+            placeholder={t('companySearch')}
             type="text"
           />
         </div>
@@ -100,7 +102,7 @@ const CompanyManagementDataGrid = () => {
           onClick={deleteCompany}
           type="button"
         >
-          Delete
+          {t('delete')}
         </Button>
       </div>
       <div className={classes.datagrid_tables_containers}>
@@ -110,13 +112,13 @@ const CompanyManagementDataGrid = () => {
               <th className={classes.head_row_head}>
                 <input onClick={updateCheckbox} type="checkbox" />
               </th>
-              <th className={classes.head_row_head}>Company Name</th>
-              <th className={classes.head_row_head}>Address</th>
-              <th className={classes.head_row_head}>City</th>
-              <th className={classes.head_row_head}>Reference contact</th>
-              <th className={classes.head_row_head}>Last update</th>
-              <th className={classes.head_row_head}>User last update</th>
-              <th className={classes.head_row_head}>Actions</th>
+              <th className={classes.head_row_head}>{t('companyName')}</th>
+              <th className={classes.head_row_head}>{t('address')}</th>
+              <th className={classes.head_row_head}>{t('city')}</th>
+              <th className={classes.head_row_head}>{t('referenceContact')}</th>
+              <th className={classes.head_row_head}>{t('lastUpdate')}</th>
+              <th className={classes.head_row_head}>{t('userlastUpdate')}</th>
+              <th className={classes.head_row_head}>{t('actions')}</th>
             </tr>
           </thead>
           <tbody className={classes.table_body}>
@@ -159,7 +161,7 @@ const CompanyManagementDataGrid = () => {
             containerClassName="pagination"
             marginPagesDisplayed={2}
             nextClassName="page-item"
-            nextLabel="Next>>"
+            nextLabel={t('next')}
             nextLinkClassName="page-link"
             // eslint-disable-next-line react/jsx-no-bind
             onPageChange={handlePageClick}
@@ -168,7 +170,7 @@ const CompanyManagementDataGrid = () => {
             pageLinkClassName="page-link"
             pageRangeDisplayed={5}
             previousClassName="page-item"
-            previousLabel="<<Previous"
+            previousLabel={t('prev')}
             previousLinkClassName="page-link"
           />
         )}

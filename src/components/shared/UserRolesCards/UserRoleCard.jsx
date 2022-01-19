@@ -41,6 +41,7 @@ const UserRoleCard = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentStatus, setCurrentStatus] = useState(status);
   // const [isUserDeleted, setIsUserDeleted] = useState(false);
+  const { t } = useTranslation();
 
   const authToken = useSelector(getUserAuthToken);
   const selectedUsers = useSelector(getSelectedUsers);
@@ -63,7 +64,6 @@ const UserRoleCard = ({
       dispatch(deSelectUser(userId));
     }
   };
-  const { t } = useTranslation();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -167,9 +167,12 @@ const UserRoleCard = ({
             onClose={handleClose}
             open={open}
           >
-            <MenuItem onClick={handleAddRoleDrawerOpen}>Assign Role</MenuItem>
-            <MenuItem onClick={handleEditDrawerOpen}>Edit </MenuItem>
-            <MenuItem onClick={handleDeleteUser}>Delete</MenuItem>
+            <MenuItem onClick={handleAddRoleDrawerOpen}>
+              {t('assignRole')}
+            </MenuItem>
+
+            <MenuItem onClick={handleEditDrawerOpen}>{t('edit')} </MenuItem>
+            <MenuItem onClick={handleDeleteUser}>{t('delete')}</MenuItem>
           </Menu>
         </span>
       </div>

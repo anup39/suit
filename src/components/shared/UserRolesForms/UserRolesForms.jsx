@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getAllCompany } from '../../../redux/company-redux/company.actions';
@@ -32,6 +33,7 @@ const UserRolesForms = ({
   const { register, handleSubmit, reset } = useForm({
     resolver: yupResolver(schema),
   });
+  const { t } = useTranslation();
 
   const handelAddUserRole = (userData) => {
     const data = {
@@ -69,16 +71,16 @@ const UserRolesForms = ({
   return (
     <div className="userroles-form-base-div">
       {!editUser ? (
-        <FormHeader>Add User Role</FormHeader>
+        <FormHeader>{t('addUserRole')}</FormHeader>
       ) : (
-        <FormHeader>Edit User Role</FormHeader>
+        <FormHeader>{t('editUserRole')}</FormHeader>
       )}
       {editUser ? (
         <form className="userroles-form-container">
-          <label className="form_label">Username</label>
+          <label className="form_label">{t('username')}</label>
           <input className="form_inputs_disabled" disabled value={userName} />
 
-          <label className="form_label"> Company</label>
+          <label className="form_label"> {t('company')}</label>
           <select className="form_inputs_disabled" disabled value={userCompany}>
             {companyList &&
               companyList.map((comp) => (
@@ -88,7 +90,7 @@ const UserRolesForms = ({
               ))}
           </select>
 
-          <label className="form_label"> Role</label>
+          <label className="form_label"> {t('roles')}</label>
           <select className="form_inputs">
             {roles.map((val) => (
               <option key="roles" value={val.idRole}>
@@ -99,27 +101,27 @@ const UserRolesForms = ({
 
           <div className="form-submit">
             <button className="cancel" onClick={handelCancel} type="button">
-              Cancel
+              {t('cancel')}
             </button>
             <button
               className="submit-button"
               onClick={handelEditUser}
               type="button"
             >
-              Save
+              {t('save')}
             </button>
           </div>
         </form>
       ) : (
         <form className="form" onSubmit={handleSubmit(handelAddUserRole)}>
-          <label className="form_label">Username</label>
+          <label className="form_label">{t('username')}</label>
           <input
             className="form_inputs_disabled"
             disabled
             {...register('username')}
           />
 
-          <label className="form_label"> Company</label>
+          <label className="form_label"> {t('company')}</label>
           <select className="form_inputs" {...register('companies_id')}>
             {companyList &&
               companyList.map((comp) => (
@@ -129,7 +131,7 @@ const UserRolesForms = ({
               ))}
           </select>
 
-          <label className="form_label"> Role</label>
+          <label className="form_label"> {t('roles')}</label>
           <select className="form_inputs" {...register('roles_id')}>
             {roles.map((val) => (
               <option key="roles" value={val.idRole}>
@@ -140,14 +142,14 @@ const UserRolesForms = ({
 
           <div className="form-submit">
             <button className="cancel" onClick={handelCancel} type="button">
-              Cancel
+              {t('cancel')}
             </button>
             <button
               className="submit-button"
               onClick={handelAddUserRole}
               type="submit"
             >
-              Save
+              {t('save')}
             </button>
           </div>
         </form>

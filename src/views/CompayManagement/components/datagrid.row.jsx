@@ -3,6 +3,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { connect, useDispatch } from 'react-redux';
 
 import {
@@ -44,6 +45,7 @@ const DatagridRow = ({
     handleClose();
     setMenu(true);
   };
+  const { t } = useTranslation();
 
   const onCheckBoxSelect = (e) => {
     setRender(e.target.checked);
@@ -100,10 +102,11 @@ const DatagridRow = ({
           onClose={handleClose}
           open={open}
         >
-          <MenuItem onClick={handleMenu}>Add User</MenuItem>
-          <MenuItem onClick={handleClose}>Edit User</MenuItem>
-          <MenuItem onClick={handleClose}>Edit</MenuItem>
-          <MenuItem onClick={handleClose}>Delete</MenuItem>
+          <MenuItem onClick={handleMenu}>{t('addUsers')}</MenuItem>
+          <MenuItem onClick={handleClose}>{t('editUser')}</MenuItem>
+
+          <MenuItem onClick={handleClose}>{t('edit')}</MenuItem>
+          <MenuItem onClick={handleClose}>{t('delete')}</MenuItem>
         </Menu>
       </td>
     </tr>
