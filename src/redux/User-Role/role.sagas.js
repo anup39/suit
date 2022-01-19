@@ -2,6 +2,7 @@ import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 
 import {
   DELETE_USER,
+  DELETE_USER_IN_BULK,
   GET_ROLES,
   GET_USER_BY_ID,
   GETUSERS,
@@ -10,6 +11,8 @@ import {
 import ROLE_ACTION_TYPE from './role.action-types';
 import {
   deleteUserError,
+  deleteUserInBulkError,
+  deleteUserInBulkSuccess,
   deleteUserSuccess,
   roleFailure,
   roleSuccess,
@@ -74,12 +77,26 @@ export function* onDeleteUser() {
   yield takeLatest(ROLE_ACTION_TYPE.DELETE_USER, deleteUser);
 }
 
+export function* deleteUserInBulk(data) {
+  try {
+    const deletedUserInBulk = yield call(DELETE_USER_IN_BULK, data.payload);
+    yield put(deleteUserInBulkSuccess(deletedUserInBulk));
+  } catch (error) {
+    yield put(deleteUserInBulkError(error.response.data));
+  }
+}
+
+export function* onDeleteUserInBulk() {
+  yield takeLatest(ROLE_ACTION_TYPE.DELETE_USER_IN_BULK, deleteUserInBulk);
+}
+
 export function* roleSaga() {
   yield all([
     call(getRoleSatrt),
     call(onGetAllRoles),
     call(onUpdateUserRoles),
     call(onDeleteUser),
+    call(onDeleteUserInBulk),
   ]);
 }
 

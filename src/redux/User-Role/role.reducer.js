@@ -24,6 +24,10 @@ const ROLE_INITIAL_DATA = {
   deleteUserData: '',
   isDeleteUserLoading: false,
   deleteUserError: '',
+
+  deleteUserDataInBulk: '',
+  isDeleteUserInBulkLoading: false,
+  deleteUserInBulkError: '',
 };
 
 // eslint-disable-next-line default-param-last
@@ -220,6 +224,30 @@ const roleReducer = (state = ROLE_INITIAL_DATA, action) => {
         deleteUserData: '',
         isDeleteUserLoading: false,
         deleteUserError: action.payload,
+      };
+
+    case ROLE_ACTION_TYPE.DELETE_USER_IN_BULK:
+      return {
+        ...state,
+        deleteUserDataInBulk: '',
+        isDeleteUserInBulkLoading: true,
+        deleteUserInBulkError: '',
+      };
+
+    case ROLE_ACTION_TYPE.DELETE_USER_IN_BULK_SUCCESS:
+      return {
+        ...state,
+        deleteUserDataInBulk: action.payload,
+        isDeleteUserInBulkLoading: false,
+        deleteUserInBulkError: '',
+      };
+
+    case ROLE_ACTION_TYPE.DELETE_USER_IN_BULK_ERROR:
+      return {
+        ...state,
+        deleteUserDataInBulk: '',
+        isDeleteUserInBulkLoading: false,
+        deleteUserInBulkError: action.payload,
       };
     default:
       return state;

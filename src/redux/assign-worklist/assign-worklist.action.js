@@ -19,3 +19,18 @@ export const deselectAllTask = () => ({
   type: WORKLIST_MANAGEMENT_TYPES.DESELECT_ALL,
   payload: false,
 });
+
+export const assingTask = (data) => ({
+  type: WORKLIST_MANAGEMENT_TYPES.ASSIGN_TASK,
+  payload: data,
+});
+
+export const assingTaskSuccess = (data) => ({
+  type: WORKLIST_MANAGEMENT_TYPES.ASSIGN_TASK_SUCCESS,
+  payload: data,
+});
+
+export const assingTaskError = (data) => ({
+  type: WORKLIST_MANAGEMENT_TYPES.ASSIGN_TASK_ERROR,
+  payload: data,
+});

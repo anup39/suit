@@ -68,6 +68,7 @@
     "animate.css": "^4.1.1",
     "axios": "^0.24.0",
     "chart.js": "^3.7.0",
+    "export-from-json": "^1.4.1",
     "faker": "^6.6.6",
     "file-saver": "^2.0.5",
     "history": "^5.2.0",

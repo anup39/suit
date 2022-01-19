@@ -124,7 +124,9 @@ const Dashboard = () => {
   React.useEffect(() => {
     if (!dashboardData) {
       dispatch(projectDashbord(authToken));
-      dispatch(getProjectList(authToken));
+      setTimeout(() => {
+        dispatch(getProjectList(authToken));
+      }, 1000);
     } else {
       const lables = [];
       const completed = [];

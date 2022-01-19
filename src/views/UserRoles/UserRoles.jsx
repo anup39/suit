@@ -2,6 +2,7 @@ import './styles/UserRoles.scss';
 
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -10,13 +11,14 @@ import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import {
   getIfAuthenticated,
   getUserAuthToken,
 } from '../../redux/user-redux/user.selectors';
 import {
-  deleteUser,
   deleteUserError,
+  deleteUserInBulk,
   deselectAllUser,
   roleStart,
   selectAllUser,
@@ -24,9 +26,12 @@ import {
 import {
   getDeleteUserError,
   getIfAllSelected,
+  getIsDeleteUserInBulkLoading,
   getIsLoading,
   getSelectedUsers,
   getUserRoleList,
+  // getDeleteUserInBulkSuccess,
+  // getDeleteUserInBulkError,
 } from '../../redux/User-Role/User-Role.selectors';
 import MobileDataRow from './mobile.data.row';
 
@@ -43,18 +48,19 @@ const UserRoles = () => {
   const deleteUserErrorMessage = useSelector(getDeleteUserError);
   const isLoading = useSelector(getIsLoading);
   const isAuthenticated = useSelector(getIfAuthenticated);
+  const isDeleteUserInBulkLoading = useSelector(getIsDeleteUserInBulkLoading);
+
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
 
   const handleDeleteMultipleUsers = () => {
-    // eslint-disable-next-line
-    selectedUsers.map((user) => {
-      const data = {
-        authToken: userAuthToken,
-        userId: user,
-      };
+    const data = {
+      authToken: userAuthToken,
+      userIdList: selectedUsers,
+    };
 
-      dispatch(deleteUser(data));
-    });
+    dispatch(deleteUserInBulk(data));
   };
 
   const handleCheckbox = (e) => {
@@ -110,6 +116,7 @@ const UserRoles = () => {
 
   return (
     <BaseTemplate title="User Roles">
+      <GlobalSpinner isOpen={isDeleteUserInBulkLoading} />
       <DatagridBase>
         <div className="search-div">
           <div className="input-container">
@@ -139,7 +146,7 @@ const UserRoles = () => {
                     type="checkbox"
                   />
                 </span>
-                <span className="user-roles-username ">Username</span>
+                <span className="user-roles-username ">{t('username')}</span>
                 <span className="user-roles-company ">Company</span>
                 <span className="user-roles-role ">Roles</span>
                 <span className="user-roles-date">Registration Date</span>

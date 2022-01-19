@@ -1,18 +1,17 @@
 import axios from 'axios';
 
 import PROJECT_MANAGEMENT_API from '../constants/api-endpoints/projectManagement';
+import { REFERSH_TOKEN } from './api';
 
 export const CREATE_NEW_PROJECT = async (payload) => {
-  console.log('Create New Project...');
-  console.log(payload);
-
   const { authToken, newCompanyData } = payload;
+  const newToken = await REFERSH_TOKEN(authToken);
 
   const newProject = await axios(PROJECT_MANAGEMENT_API.CREATE_NEW_PROJECT, {
     method: 'POST',
     data: newCompanyData,
     headers: {
-      Authorization: `Bearer ${authToken}`,
+      Authorization: `Bearer ${newToken}`,
     },
   });
 
@@ -20,28 +19,26 @@ export const CREATE_NEW_PROJECT = async (payload) => {
 };
 
 export const GET_PROJECT_LIST = async (payload) => {
-  console.log('Get Project List...');
   console.log(payload);
+  const newToken = await REFERSH_TOKEN(payload);
 
   const projectList = await axios(PROJECT_MANAGEMENT_API.GET_PROJECT_LIST, {
     headers: {
-      Authorization: `Bearer ${payload}`,
+      Authorization: `Bearer ${newToken}`,
     },
   });
-  console.log(projectList.data);
   return projectList.data;
 };
 
 export const GET_PROJECT_DETAILS = async (payload) => {
-  console.log('Get Project Data');
-
   const { projectId, authToken } = payload;
+  const newToken = await REFERSH_TOKEN(authToken);
 
   const currentProjectData = await axios(
     `${PROJECT_MANAGEMENT_API.GET_PROJECT_DETAILS}/${projectId}`,
     {
       headers: {
-        Authorization: `Bearer ${authToken}`,
+        Authorization: `Bearer ${newToken}`,
       },
     }
   );
@@ -50,16 +47,15 @@ export const GET_PROJECT_DETAILS = async (payload) => {
 };
 
 export const DELETE_PROJECT_DATA = async (payload) => {
-  console.log('Delete Project Data');
-
   const { authToken, projectId } = payload;
+  const newToken = await REFERSH_TOKEN(authToken);
 
   const deletedProjectData = await axios(
     `${PROJECT_MANAGEMENT_API.DELETE_PROJECT_DATA}/${projectId}`,
     {
       method: 'DELETE',
       headers: {
-        Authorization: `Bearer ${authToken}`,
+        Authorization: `Bearer ${newToken}`,
       },
     }
   );
@@ -67,77 +63,74 @@ export const DELETE_PROJECT_DATA = async (payload) => {
 };
 
 export const ASSIGN_PROJECT_TO_COMPANY = async (payload) => {
-  console.log('Assing Project');
   const { authToken, projectId, companyId } = payload;
+
+  const newToken = await REFERSH_TOKEN(authToken);
+
   const url = `${PROJECT_MANAGEMENT_API.ASSIGN_PROJECT}projectId=${projectId}&companyId=${companyId}`;
-  console.log(url);
 
   const projectAssigned = await axios(url, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${authToken}`,
+      Authorization: `Bearer ${newToken}`,
     },
   });
   return projectAssigned.data;
 };
 
 export const GET_PROJECT_DOCUMENTS = async (payload) => {
-  console.log('Project Documents');
   const { authToken, projectId } = payload;
-  console.log(payload);
+
+  const newToken = await REFERSH_TOKEN(authToken);
+
   const url = `${PROJECT_MANAGEMENT_API.PROECT_DOCUMNETS}=${projectId}`;
-  console.log(url);
   const projectDocs = await axios(url, {
     headers: {
-      Authorization: `Bearer ${authToken}`,
+      Authorization: `Bearer ${newToken}`,
     },
   });
-  console.log(projectDocs.data);
   return projectDocs.data;
 };
 
 export const GET_PROJECT_DASHBORD = async (payload) => {
-  console.log('Project Dashbord');
-  console.log(payload);
+  const newToken = await REFERSH_TOKEN(payload);
+
   const url = PROJECT_MANAGEMENT_API.DASHBORD;
   const dashbord = await axios(url, {
     headers: {
-      Authorization: `Bearer ${payload}`,
+      Authorization: `Bearer ${newToken}`,
     },
   });
-  console.log(dashbord.data);
+
   return dashbord.data;
 };
 
 export const IMPORT_PROJECT_DATA = async (payload) => {
-  console.log('IMPORT PROJECT DATA');
-  console.log(payload);
-
   const { data, authToken } = payload;
+  const newToken = await REFERSH_TOKEN(authToken);
 
   const url = PROJECT_MANAGEMENT_API.IMPORT_PROJECT_DATA;
   const dashbord = await axios(url, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${authToken}`,
+      Authorization: `Bearer ${newToken}`,
       'Content-Type': 'multipart/form-data',
     },
     data,
   });
-  console.log(dashbord.data);
   return dashbord.data;
 };
 
 export const GET_DASHBORD_BY_PROJECT_ID = async (payload) => {
-  console.log('Project Dashbord BY ID');
   const { authToken, projectId } = payload;
+
+  const newToken = await REFERSH_TOKEN(authToken);
 
   const url = `${PROJECT_MANAGEMENT_API.PROJECT_STATUS_DASHBORD}/${projectId}`;
   const dashbord = await axios(url, {
     headers: {
-      Authorization: `Bearer ${authToken}`,
+      Authorization: `Bearer ${newToken}`,
     },
   });
-  console.log(dashbord.data);
   return dashbord.data;
 };
