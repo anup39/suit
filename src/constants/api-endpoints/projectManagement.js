@@ -8,7 +8,8 @@ const PROJECT_MANAGEMENT_API = {
   PROECT_DOCUMNETS:
     'http://13.233.23.132:8080/api/listProjectsDocuments?projectId=',
   DASHBORD: 'http://13.233.23.132:8080/api/ProjectDashboardList',
-  IMPORT_PROJECT_DATA: 'http://13.233.23.132:8080/api/importProjectData',
+  IMPORT_PROJECT_DATA:
+    'http://13.233.23.132:8080/api/auth/importProjectQgis?projectId=',
   PROJECT_STATUS_DASHBORD:
     'http://13.233.23.132:8080/api/ProjectDashboardStatus',
 };

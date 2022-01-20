@@ -139,9 +139,15 @@ const WorkListManagement = () => {
 
   useEffect(() => {
     if (!projectList || workListData.length === 0) {
-      dispatch(getWorkList(authToken));
-      dispatch(getProjectList(authToken));
-      dispatch(getAllCompany(authToken));
+      setTimeout(() => {
+        dispatch(getProjectList(authToken));
+      }, 500);
+      setTimeout(() => {
+        dispatch(getAllCompany(authToken));
+      }, 500);
+      setTimeout(() => {
+        dispatch(getWorkList(authToken));
+      }, 500);
     } else {
       const filteredData = [];
 
@@ -321,8 +327,22 @@ const WorkListManagement = () => {
               <span className="worklist-management-actions">Actions</span>
             </div>
             <div>
+              {/* eslint-disable */}
               {isWorklistLoading ? (
                 <LoadingSpinner />
+              ) : workListData && workListData.length === 0 ? (
+                <div>
+                  {' '}
+                  <p
+                    style={{
+                      textAlign: 'center',
+                      paddingTop: '20%',
+                      paddingBottom: '15%',
+                    }}
+                  >
+                    No Data Found!
+                  </p>{' '}
+                </div>
               ) : (
                 <Pagination
                   componentNo={1}
@@ -332,7 +352,7 @@ const WorkListManagement = () => {
                   itemsPerPage={10}
                 />
               )}
-
+              {/* eslint-enable */}
               <div className="mobile_table_worklist">
                 <MobileDataRow />
                 <MobileDataRow />

@@ -23,7 +23,7 @@
 }
 
 .milestone-approval-left {
-  background-color: #0971FE;
+  background-color: #0971fe;
   width: 20px;
   height: 100%;
   margin-right: 20px;
@@ -43,7 +43,7 @@
 
   input,
   textarea {
-    border: 1px solid #D4DEEA;
+    border: 1px solid #d4deea;
     border-radius: 3px;
     padding: 15px;
     resize: none;
@@ -52,14 +52,12 @@
 
     &:focus {
       outline: none;
-      border: 1px solid #D4DEEA;
-
+      border: 1px solid #d4deea;
     }
   }
 }
 
 .milestone-approval-submit-div {
-
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -76,16 +74,17 @@
   line-height: initial;
 
   border-radius: 5px;
-
 }
 
 .milestone-approval-button-cancel {
-  color: #8094AE;
-
+  color: #8094ae;
 }
 
-.milestone-approval-button-approve {
+.handle-approve-button {
+  all: none;
+  padding: 10px 30px;
+  border: 0px;
+  border-radius: 4px;
+  background-color: #e78201;
   color: #fff;
-  background-color: #E78201;
-
 }

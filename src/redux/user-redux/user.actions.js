@@ -39,3 +39,8 @@ export const userSingout = () => ({
   type: USER_ACTION_TYPES.USER_SIGNOUT,
   payload: '',
 });
+
+export const resetSignupError = () => ({
+  type: USER_ACTION_TYPES.RESET_SIGNUP_ERROR,
+  payload: '',
+});

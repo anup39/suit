@@ -45,3 +45,11 @@ export const getDeleteUserInBulkSuccess = (state) => {
 export const getDeleteUserInBulkError = (state) => {
   return state.role.deleteUserInBulkError;
 };
+
+export const getIsUpdateUserRoleLoading = (state) => {
+  return state.role.isupdateUserRoleLoading;
+};
+
+export const getUpdateUserRoleData = (state) => {
+  return state.role.updateUserRole;
+};

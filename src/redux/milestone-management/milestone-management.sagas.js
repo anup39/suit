@@ -1,4 +1,5 @@
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
+import { toast } from 'react-toastify';
 
 import {
   DELETE_MILESTONE,
@@ -24,6 +25,15 @@ export function* getAllMilestones({ payload }) {
     yield put(getAllMilestonesSuccess(allMilestones));
   } catch (error) {
     yield put(getAllMilestonesError(error.response.data));
+    yield toast.error('Failed To Get All Milestones!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 }
 
@@ -40,6 +50,15 @@ export function* getMilestoneById({ payload }) {
     yield put(getMilestoneByIdSuccess(milestoneData));
   } catch (error) {
     yield put(getMilestoneByIdError(error.response.data));
+    yield toast.error('Failed To Get Milestone Details!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 }
 
@@ -54,8 +73,27 @@ export function* updateMilestoneById({ payload }) {
   try {
     const milestoneData = yield call(UPDATE_MILESTONE, payload);
     yield put(updateMilestoneSuccess(milestoneData));
+
+    yield toast.success('Milestone Updated Successfully!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   } catch (error) {
     yield put(updateMilestoneError(error.response.data));
+    yield toast.error('Failed To Update Milestone!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 }
 
@@ -70,8 +108,26 @@ export function* deleteMilestoneById({ payload }) {
   try {
     const milestoneData = yield call(DELETE_MILESTONE, payload);
     yield put(deleteMilestoneByIdSuccess(milestoneData));
+    yield toast.success('Milestones Deleted Successfully!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   } catch (error) {
     yield put(deleteMilestoneByIdError(error.response.data));
+    yield toast.error('Failed To Delete Milestone!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 }
 

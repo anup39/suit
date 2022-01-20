@@ -4,11 +4,16 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
 import logo from '../../assets/logoPicture.png';
 import image from '../../assets/signin-info.png';
 import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
-import { userSignupStart } from '../../redux/user-redux/user.actions';
+import {
+  resetSignupError,
+  userSignupStart,
+} from '../../redux/user-redux/user.actions';
 import {
   getLoadingStatus,
   getSignedupError,
@@ -24,11 +29,12 @@ import {
 
 const SignupPage = ({ isRedTheme }) => {
   const dispatch = useDispatch();
-  const getError = useSelector(getSignedupError);
   const onLoading = useSelector(getLoadingStatus);
   const [alerts, setAlerts] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
+  const signupError = useSelector(getSignedupError);
 
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const {
@@ -46,9 +52,22 @@ const SignupPage = ({ isRedTheme }) => {
   };
 
   useEffect(() => {
-    setAlerts(getError);
     setIsLoading(onLoading);
-  }, [getError, onLoading]);
+
+    if (signupError) {
+      toast.error('Email Already Exists! Please Login!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch(resetSignupError());
+      navigate('/signin');
+    }
+  }, [onLoading, signupError]);
 
   return (
     <div className={classes.signup_container}>

@@ -49,3 +49,11 @@ export const getAddWorkListSuccess = (state) => {
 export const getEditWorkListSuccess = (state) => {
   return state.workListManagement.editWorkListData;
 };
+
+export const getDeleteWorkListSuccess = (state) => {
+  return state.workListManagement.DeleteTaskByIdData;
+};
+
+export const getIsDeleteWorkListLoading = (state) => {
+  return state.workListManagement.isDeleteTaskByIDLoading;
+};

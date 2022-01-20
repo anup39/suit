@@ -36,27 +36,27 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
         progress: undefined,
       });
     } else {
-      formData.append('projectId', projectId);
       const dataToSend = {
         authToken,
         data: formData,
+        projectId,
       };
       dispatch(importProjectData(dataToSend));
     }
   };
 
   const handleQgisChangeChange = (e) => {
-    formData.append('qgisFile', e.target.files[0]);
+    formData.append('qgisFile', e.target.files);
   };
 
   const handleWorkListChange = (e) => {
     e.preventDefault();
-    formData.append('workListFile', e.target.files[0]);
+    formData.append('workListFile', e.target.files);
   };
 
   const handleDocumntsChange = (e) => {
     e.preventDefault();
-    formData.append('documents', e.target.files[0]);
+    formData.append('documentsFile', e.target.files);
   };
 
   React.useEffect(() => {}, []);
@@ -92,8 +92,9 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                   Work List
                 </label>
                 <input
-                  accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4"
+                  accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4, .xml, .zip"
                   className={classes.form_input}
+                  multiple
                   onChange={handleWorkListChange}
                   type="file"
                 />
@@ -103,8 +104,9 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                   QGIS Files
                 </label>
                 <input
-                  accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4"
+                  accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4, .xml, .zip"
                   className={classes.form_input}
+                  multiple
                   onChange={handleQgisChangeChange}
                   type="file"
                 />
@@ -114,8 +116,9 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                   Documents
                 </label>
                 <input
-                  accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4"
+                  accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4, .xml, .zip"
                   className={classes.form_input}
+                  multiple
                   onChange={handleDocumntsChange}
                   type="file"
                 />

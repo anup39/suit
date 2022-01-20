@@ -4,9 +4,7 @@ const ROLE_INITIAL_DATA = {
   isLoading: false,
   error: false,
   data: [],
-  editFormOpen: false,
   userData: '',
-  addFormOpen: false,
 
   selectedUser: [],
   isSelectedUserLoading: false,
@@ -38,13 +36,14 @@ const roleReducer = (state = ROLE_INITIAL_DATA, action) => {
         ...state,
         isLoading: true,
         error: false,
+        data: [],
       };
     case ROLE_ACTION_TYPE.ERROR:
       return {
         ...state,
         isLoading: false,
         error: action.payload,
-        success: false,
+        data: [],
       };
     case ROLE_ACTION_TYPE.SUCCESS:
       return {

@@ -17,17 +17,17 @@ export const GET_MILESTONE_LIST = async (payload) => {
 };
 
 export const UPDATE_MILESTONE = async (payload) => {
-  const { authToken, id, date, desc, userName } = payload;
+  const { authToken, milestoneId, date, desc, userId } = payload;
 
   const newToken = await REFERSH_TOKEN(authToken);
 
   const milestoneList = await axios(
-    `${MILESTONE_MANAGEMENT_API.UPDATE_MILESTONE}/${id}`,
+    `${MILESTONE_MANAGEMENT_API.UPDATE_MILESTONE}/${milestoneId}`,
     {
       method: 'PUT',
       data: {
         approvalNote: desc,
-        approvedBy: userName,
+        approvedBy: userId,
         approvalDate: date,
       },
       headers: {
@@ -35,7 +35,6 @@ export const UPDATE_MILESTONE = async (payload) => {
       },
     }
   );
-  console.log(milestoneList.data);
   return milestoneList.data;
 };
 

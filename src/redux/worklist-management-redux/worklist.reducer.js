@@ -168,6 +168,14 @@ const WorkListManagementReducer = (state = worklistInitialState, action) => {
         DeleteTaskByIdError: action.payload,
       };
 
+    case WORKLIST_MANAGEMENT_ACTION_TYPE.RESET_DELETE_TASK_BY_ID:
+      return {
+        ...state,
+        isDeleteTaskByIDLoading: false,
+        DeleteTaskByIdData: '',
+        DeleteTaskByIdError: '',
+      };
+
     case WORKLIST_MANAGEMENT_ACTION_TYPE.GET_TASK_BY_PROJECT:
       return {
         ...state,

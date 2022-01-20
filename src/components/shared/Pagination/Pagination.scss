@@ -1,13 +1,12 @@
 $border-color-pagination: rgb(209, 209, 209);
 
 .pagination-base {
-
   height: 60px;
   display: flex;
   align-items: center;
   padding: 15px;
-  border-top: 1px solid #D4DEEA;
-  margin-bottom: 0;
+  border-top: 1px solid #d4deea;
+  margin-bottom: 0px;
 
   @media (max-width: 991.98px) {
     display: none;
@@ -18,13 +17,13 @@ $border-color-pagination: rgb(209, 209, 209);
   list-style-type: none;
   display: flex;
   align-items: center;
-  border: 1px solid #D4DEEA;
+  border: 1px solid #d4deea;
   border-radius: 4px;
 }
 
 .pagination-base li {
   display: flex;
-  border: 1px solid #D4DEEA;
+  border: 1px solid #d4deea;
   border-right: 0px;
   padding: 9px 17px;
   font-size: 14px;
@@ -32,7 +31,7 @@ $border-color-pagination: rgb(209, 209, 209);
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  color: #8094AE;
+  color: #8094ae;
   cursor: pointer;
 
   a {
@@ -43,7 +42,7 @@ $border-color-pagination: rgb(209, 209, 209);
     cursor: not-allowed;
     opacity: 0.5;
     background: white;
-    color: #8094AE;
+    color: #8094ae;
   }
 
   &.selected {
@@ -58,7 +57,7 @@ $border-color-pagination: rgb(209, 209, 209);
 
 .pagination-base li:last-child {
   color: #0160e0;
-  background-color: #F8F9FC;
+  background-color: #f8f9fc;
   border: 1px solid $border-color-pagination;
   border-radius: 0 3px 3px 0;
 }
@@ -67,7 +66,7 @@ $border-color-pagination: rgb(209, 209, 209);
   border-radius: 3px 0 0 3px;
 
   color: #0160e0;
-  background-color: #F8F9FC;
+  background-color: #f8f9fc;
 }
 
 // .pagination-active-div {

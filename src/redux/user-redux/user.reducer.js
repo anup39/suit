@@ -67,6 +67,12 @@ const userReducer = (state = USER_INITIAL_STATE, action) => {
         isAuthenticated: false,
       };
 
+    case USER_ACTION_TYPES.RESET_SIGNUP_ERROR:
+      return {
+        ...state,
+        error: '',
+      };
+
     default:
       return state;
   }
