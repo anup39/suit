@@ -77,6 +77,14 @@
   border: 1px solid #d4deea;
   border-radius: 3px;
   width: 100%;
+  position: relative;
+
+  .pagination-base {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
 
   .table-container-head {
     height: 60px;
@@ -92,8 +100,8 @@
   }
 
   .table-responsive {
-    height: calc(100vh - 337px);
-    overflow: scroll;
+    height: calc(100vh - 342px);
+    overflow: auto;
 
     @media (max-width: 768px) {
       width: calc(100vw - 25px);
@@ -155,7 +163,7 @@
 
     td {
       border-top: 1px solid #d4deea;
-      padding: 15px 10px;
+      padding: 10px;
       color: #364a63;
       font-size: 14px;
       text-align: left;
@@ -402,7 +410,7 @@
 }
 
 .mobile-table {
-  height: calc(100vh - 319px);
+  height: calc(100vh - 334px);
   overflow: auto;
   display: none;
 
