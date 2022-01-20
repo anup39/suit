@@ -1,5 +1,4 @@
 import AddIcon from '@mui/icons-material/Add';
-import { t } from 'i18next';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';

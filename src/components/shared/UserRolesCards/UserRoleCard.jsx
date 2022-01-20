@@ -6,7 +6,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import UserStatus from '../../../constants/UserStatus';
@@ -40,8 +40,6 @@ const UserRoleCard = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentStatus, setCurrentStatus] = useState(status);
   // const [isUserDeleted, setIsUserDeleted] = useState(false);
-  const { t } = useTranslation();
-
   const authToken = useSelector(getUserAuthToken);
   const selectedUsers = useSelector(getSelectedUsers);
   const isAllSelected = useSelector(getIfAllSelected);
@@ -63,7 +61,7 @@ const UserRoleCard = ({
       dispatch(deSelectUser(userId));
     }
   };
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
 
   const handleClose = () => {
     setAnchorEl(null);
