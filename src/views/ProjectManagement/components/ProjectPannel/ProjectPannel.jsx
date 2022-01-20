@@ -4,8 +4,11 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import FieldUpdates from '../../../../components/shared/FieldUpdates/FieldUpdates';
+import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner';
+import { getImportProjectDataLoading } from '../../../../redux/project-management-redux/project.selector';
 import Documents from '../Documents/Documents';
 import ImportDrawer from '../ImportProject/components/import-drawer/import-drawer';
 import ImportProject from '../ImportProject/import-project.view';
@@ -18,6 +21,8 @@ const ProjectPannel = () => {
 
   const [isAddProjectDataOpen, setIsAddProjectDatatisOpen] =
     React.useState(false);
+
+  const isImportProejctDataLoading = useSelector(getImportProjectDataLoading);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -33,6 +38,7 @@ const ProjectPannel = () => {
   return (
     <>
       <ImportDrawer handleClose={handleClose} isOpen={isAddProjectDataOpen} />
+      <GlobalSpinner isOpen={isImportProejctDataLoading} />
       <div className="project-pannel-base-div">
         {value === 4 && (
           <div>

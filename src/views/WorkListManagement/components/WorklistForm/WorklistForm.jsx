@@ -194,7 +194,12 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
 
         <div>
           <label>Task ID</label>
-          <input name="taskId" {...register('taskId')} />
+          {isEdit ? (
+            <input name="taskId" {...register('taskId')} disabled />
+          ) : (
+            <input name="taskId" {...register('taskId')} />
+          )}
+
           <span className="worklistform-error-text">
             {errors.taskId?.message}
           </span>

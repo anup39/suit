@@ -23,7 +23,7 @@ const schema = yup.object().shape({
   latitude: yup
     .number()
     .max(90, 'Please Enter Valid Value')
-    .min(-90, 'Please Enter Valid Value')
+    .min(0, 'Please Enter Valid Value')
     .transform((_, val) => (val ? Number(val) : null))
     .nullable(true),
   longitude: yup

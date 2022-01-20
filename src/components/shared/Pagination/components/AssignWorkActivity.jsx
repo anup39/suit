@@ -10,9 +10,9 @@ const AssignWorkActivity = ({ currentItems }) => {
         currentItems.map((data) => (
           <AssignActivityCard
             key={data.taskId}
-            companyName={data.companiesId}
+            companyName={data?.companiesId}
             isMilestone={data.isMilestone}
-            projectName={data.projectsId}
+            projectName={data.projectsName}
             status={data.taskStatus}
             taskDescription={data.taskDescription}
             taskId={data.taskId}

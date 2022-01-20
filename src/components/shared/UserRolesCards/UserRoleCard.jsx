@@ -29,9 +29,11 @@ const UserRoleCard = ({
   username = '',
   date = '',
   role = '',
+  roleName = '',
   status = '',
   userId = '',
   companyName = '',
+  companyId = '',
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [drawerOpen, seteDrawerOpen] = useState(false);
@@ -122,8 +124,10 @@ const UserRoleCard = ({
       <Drawer anchor="right" onClose={handleDrawerClose} open={drawerOpen}>
         {editUser ? (
           <UserRolesForms
+            companyId={companyId}
             editUser
             handelCancel={handleDrawerClose}
+            role={role}
             userName={username}
           />
         ) : (
@@ -146,7 +150,7 @@ const UserRoleCard = ({
         <span className="user-roles-card-username">
           {!companyName ? <p>-</p> : companyName}
         </span>
-        <span className="user-roles-card-date">{role}</span>
+        <span className="user-roles-card-date">{roleName}</span>
         <span className="user-roles-card-role">{date}</span>
         <span className="user-roles-card-status">
           <Status status={currentStatus}> {UserStatus[currentStatus]}</Status>
@@ -186,6 +190,8 @@ UserRoleCard.propTypes = {
   status: PropTypes.number,
   userId: PropTypes.number,
   companyName: PropTypes.string,
+  companyId: PropTypes.number,
+  roleName: PropTypes.any,
 };
 
 export default UserRoleCard;

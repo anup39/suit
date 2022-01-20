@@ -18,6 +18,21 @@ export const CREATE_NEW_PROJECT = async (payload) => {
   return newProject.data;
 };
 
+export const UPDATE_PROJECT = async (payload) => {
+  const { authToken, companyData } = payload;
+  const newToken = await REFERSH_TOKEN(authToken);
+
+  const newProject = await axios(PROJECT_MANAGEMENT_API.UPDATE_PROJECT, {
+    method: 'PUT',
+    data: companyData,
+    headers: {
+      Authorization: `Bearer ${newToken}`,
+    },
+  });
+
+  return newProject.data;
+};
+
 export const GET_PROJECT_LIST = async (payload) => {
   console.log(payload);
   const newToken = await REFERSH_TOKEN(payload);

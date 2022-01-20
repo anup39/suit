@@ -4,7 +4,9 @@ import Drawer from '@mui/material/Drawer';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
+import { getAllProjects } from '../../../../../../redux/project-management-redux/project.selector';
 import { importProjectData } from '../../../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../../../redux/user-redux/user.selectors';
 import classes from './import-drawer.styles.module.scss';
@@ -13,6 +15,7 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
   const [projectId, setprojectId] = React.useState('');
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
+  const projectList = useSelector(getAllProjects);
   const formData = new FormData();
 
   const closeDrawer = () => {
@@ -22,12 +25,24 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    formData.append('projectId', projectId);
-    const dataToSend = {
-      authToken,
-      data: formData,
-    };
-    dispatch(importProjectData(dataToSend));
+    if (!projectId) {
+      toast.warn('Please Select A Project!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      formData.append('projectId', projectId);
+      const dataToSend = {
+        authToken,
+        data: formData,
+      };
+      dispatch(importProjectData(dataToSend));
+    }
   };
 
   const handleQgisChangeChange = (e) => {
@@ -43,6 +58,8 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
     e.preventDefault();
     formData.append('documents', e.target.files[0]);
   };
+
+  React.useEffect(() => {}, []);
 
   return (
     <Drawer anchor="right" onClose={closeDrawer} open={isOpen}>
@@ -63,9 +80,11 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                   onChange={(e) => setprojectId(e.target.value)}
                 >
                   <option value=""> Select A Project</option>
-                  <option>Please Select A Project</option>
-                  <option>Please Select A Project</option>
-                  <option>Please Select A Project</option>
+                  {projectList.map((vals) => (
+                    <option key={vals.id} value={vals.id}>
+                      {vals.name}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className={classes.form_input_container}>
@@ -73,8 +92,8 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                   Work List
                 </label>
                 <input
+                  accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4"
                   className={classes.form_input}
-                  multiple
                   onChange={handleWorkListChange}
                   type="file"
                 />
@@ -84,8 +103,8 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                   QGIS Files
                 </label>
                 <input
+                  accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4"
                   className={classes.form_input}
-                  multiple
                   onChange={handleQgisChangeChange}
                   type="file"
                 />
@@ -95,8 +114,8 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                   Documents
                 </label>
                 <input
+                  accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4"
                   className={classes.form_input}
-                  multiple
                   onChange={handleDocumntsChange}
                   type="file"
                 />

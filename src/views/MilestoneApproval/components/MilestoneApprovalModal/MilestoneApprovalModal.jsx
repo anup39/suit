@@ -2,9 +2,10 @@ import './MilestoneApprovalModal.scss';
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { updateMilestone } from '../../../../redux/milestone-management/milestone-management.action';
+// useDispatch,
+// import { updateMilestone } from '../../../../redux/milestone-management/milestone-management.action';
 import {
   getUserAuthToken,
   getUserData,
@@ -16,9 +17,10 @@ const MilestoneApprovalModal = ({ handelClose, milestoneNr }) => {
   const authToken = useSelector(getUserAuthToken);
   const currentUser = useSelector(getUserData);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handleApprove = () => {
+  const handleMilestoneApproval = (e) => {
+    e.preventDefault();
     // const currentDate = new Date();
     // `${currentDate.getDate()}/${
     // currentDate.getMonth() + 1
@@ -30,7 +32,10 @@ const MilestoneApprovalModal = ({ handelClose, milestoneNr }) => {
       desc: description,
       userName: currentUser.userData.id,
     };
-    dispatch(updateMilestone(data));
+    //   dispatch(updateMilestone(data));
+
+    console.log('Milesotne');
+    console.log(data);
   };
 
   return (
@@ -62,7 +67,8 @@ const MilestoneApprovalModal = ({ handelClose, milestoneNr }) => {
         </span>
         <span
           className="milestone-approval-button-approve"
-          onClick={handleApprove}
+          onClick={(e) => handleMilestoneApproval(e)}
+          type="submit"
         >
           Approve
         </span>
@@ -71,9 +77,10 @@ const MilestoneApprovalModal = ({ handelClose, milestoneNr }) => {
   );
 };
 
+/* eslint-disable */
 MilestoneApprovalModal.propTypes = {
-  handelClose: PropTypes.func.isRequired,
-  milestoneNr: PropTypes.isRequired,
+  handelClose: PropTypes.func,
+  milestoneNr: PropTypes.string,
 };
 
 export default MilestoneApprovalModal;

@@ -19,7 +19,7 @@
 }
 
 .document-search-input {
-  width: calc(300px + 10%);
+  width: calc(300px + 20%);
   padding: 0px 30px;
   height: 30px;
 }
@@ -29,4 +29,36 @@
   margin-top: 5px;
   margin-left: 2px;
   color: rgba(0, 0, 0, 0.548);
+}
+
+.document-header-table {
+  display: table;
+  width: 100%;
+  border-bottom: 1px solid #d4deea;
+  padding: 10px 20px;
+
+  span {
+    display: table-cell;
+    table-layout: fixed;
+  }
+}
+
+.document-name {
+  width: 30%;
+}
+
+.document-importd-from {
+  width: 20%;
+}
+
+.document-type {
+  width: 20%;
+}
+
+.document-uploaded-on {
+  width: 20%;
+}
+
+.document-actions {
+  width: 10%;
 }

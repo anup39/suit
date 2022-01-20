@@ -1,4 +1,5 @@
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
+import { toast } from 'react-toastify';
 
 import {
   ASSIGN_PROJECT_TO_COMPANY,
@@ -10,6 +11,7 @@ import {
   GET_PROJECT_DOCUMENTS,
   GET_PROJECT_LIST,
   IMPORT_PROJECT_DATA,
+  UPDATE_PROJECT,
 } from '../../services/projectManagement';
 import PROJECT_MANAGEMENT_TYPES from './project-management.action-types';
 import {
@@ -31,6 +33,8 @@ import {
   projectDashbordSuccess,
   projectDocumentsError,
   projectDocumentsSuccess,
+  updateProjectError,
+  updateProjectSuccess,
 } from './project-management.actions';
 
 export function* onCreateNewProject({ payload }) {
@@ -82,8 +86,26 @@ export function* deleteProjectData({ payload }) {
   try {
     const projectData = yield call(DELETE_PROJECT_DATA, payload);
     yield put(deleteProjectDataSuccess(projectData));
+    yield toast.success('Project Deleted Successfully!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   } catch (err) {
     yield put(deleteProjectError(err.response.data));
+    yield toast.error('Failed To Delete Project!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 }
 
@@ -146,8 +168,26 @@ export function* importProjectData({ payload }) {
   try {
     const projectDashbord = yield call(IMPORT_PROJECT_DATA, payload);
     yield put(importProjectDataSuccess(projectDashbord));
+    yield toast.success(' Import Project Data Successsful!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   } catch (err) {
-    yield put(importProjectDataError(err.response.data));
+    yield put(importProjectDataError(err?.response?.data));
+    yield toast.error('Failed To Import Project Data!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 }
 
@@ -174,6 +214,37 @@ export function* onDashbordByProjectId() {
   );
 }
 
+export function* updateProject({ payload }) {
+  try {
+    const updatedData = yield call(UPDATE_PROJECT, payload);
+    yield put(updateProjectSuccess(updatedData));
+    yield toast.success('Project Updated Successfully!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  } catch (err) {
+    yield put(updateProjectError(err.response.data));
+    yield toast.error('Failed To Update Project!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+}
+
+export function* onUpdateProject() {
+  yield takeLatest(PROJECT_MANAGEMENT_TYPES.UPDATE_PROJECT, updateProject);
+}
+
 export function* projectManagementSagas() {
   yield all([
     call(onCreateNewProjectStart),
@@ -185,5 +256,6 @@ export function* projectManagementSagas() {
     call(onGetProjectDashbord),
     call(onImportProjectData),
     call(onDashbordByProjectId),
+    call(onUpdateProject),
   ]);
 }

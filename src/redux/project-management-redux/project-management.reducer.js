@@ -6,6 +6,10 @@ const PROJECT_MANAGEMENT_INITIAL_STATE = {
   createNewProjectError: false,
   createNewProjectData: '',
 
+  isUpdateProjectLoading: false,
+  updateProjectError: false,
+  updateProjectData: '',
+
   isProjectListLoading: false,
   projectList: [],
   projectListError: false,
@@ -66,6 +70,30 @@ const projectManagementReducer = (
         isCreateNewProjectLoading: false,
         createNewProjectError: action.payload,
         createNewProjectData: '',
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.UPDATE_PROJECT:
+      return {
+        ...state,
+        isUpdateProjectLoading: true,
+        updateProjectError: false,
+        updateProjectData: '',
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.UPDATE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        isUpdateProjectLoading: false,
+        updateProjectError: false,
+        updateProjectData: action.payload,
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.UPDATE_PROJECT_ERROR:
+      return {
+        ...state,
+        isUpdateProjectLoading: false,
+        updateProjectError: true,
+        updateProjectData: '',
       };
 
     case PROJECT_MANAGEMENT_TYPES.RESET_NEW_PROJECT_DATA:

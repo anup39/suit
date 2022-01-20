@@ -1,10 +1,11 @@
-import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
-import Button from '@mui/material/Button';
+// import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+// import Button from '@mui/material/Button';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import LoadingSpinner from '../../../components/shared/LoadingSpinner/LoadingSpinner';
+import Pagination from '../../../components/shared/Pagination/Pagination';
 import GlobalSpinner from '../../../components/shared/Spinners/GlobalSpinner';
 import {
   feedbackByUserId,
@@ -22,7 +23,7 @@ import {
   getUserAuthToken,
   getUserData,
 } from '../../../redux/user-redux/user.selectors';
-import Datarow from './Datarow';
+// import Datarow from './Datarow';
 import MobileDataRow from './mobile.data.row';
 
 const PublicUserFeedback = () => {
@@ -96,8 +97,13 @@ const PublicUserFeedback = () => {
             {isFeedbackLoading ? (
               <LoadingSpinner />
             ) : (
-              feedbackData &&
-              feedbackData.map((val) => <Datarow key={val.id} data={val} />)
+              feedbackData && (
+                <Pagination
+                  componentNo={5}
+                  itemData={feedbackData}
+                  itemsPerPage={10}
+                />
+              )
             )}
           </tbody>
         </table>
@@ -111,7 +117,7 @@ const PublicUserFeedback = () => {
         <MobileDataRow />
         <MobileDataRow />
       </div>
-      <div className="table-container-btm ">
+      {/* <div className="table-container-btm ">
         <div className="table_slider_container">
           <div className="table_slider">
             <span className="previous_button">
@@ -132,7 +138,7 @@ const PublicUserFeedback = () => {
             </span>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

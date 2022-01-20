@@ -1,32 +1,21 @@
 import './DocumentsCard.scss';
 
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import React from 'react';
 
 const DocumentsCard = () => {
   return (
-    <div className="document-card-base-div">
-      <span>
-        <input type="checkbox" />
-      </span>
+    <div className="project-document-card-base-div">
+      <span className="document-name">Document Name</span>
 
-      <span>
-        <p>Document Name</p>
-      </span>
+      <span className="document-importd-from">Imported From</span>
 
-      <span>
-        <p>Imported From</p>
-      </span>
+      <span className="document-type">Document Type</span>
 
-      <span>
-        <p>Document Type</p>
-      </span>
+      <span className="document-uploaded-on">Uploaded On</span>
 
-      <span>
-        <p>Uploaded On</p>
-      </span>
-
-      <span>
-        <p>Actions</p>
+      <span className="document-actions">
+        <MoreHorizIcon className="document-menu-icon" />
       </span>
     </div>
   );

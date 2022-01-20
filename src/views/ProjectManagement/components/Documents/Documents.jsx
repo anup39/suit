@@ -29,6 +29,14 @@ const Documents = () => {
         <input className="document-search-input" />
         <SearchIcon className="document-search-icon" />
       </div>
+      <div className="document-header-table">
+        <span className="document-name">Docuemnt Name</span>
+        <span className="document-importd-from">Imported From</span>
+        <span className="document-type">Document Type</span>
+        <span className="document-uploaded-on">Uploaded On</span>
+        <span className="document-actions">Actions</span>
+      </div>
+
       <DocumentsCard />
     </div>
   );
