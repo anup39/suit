@@ -1,14 +1,15 @@
-.document-card-base-div {
-  border-bottom: 1px solid black;
-  padding: 15px;
-  font-size: 18px;
-}
-
-div.document-card-base-div {
+.project-document-card-base-div {
   display: table;
   width: 100%;
+  border-bottom: 1px solid #d4deea;
+  padding: 10px 20px;
 }
-div.document-card-base-div span {
+
+.project-document-card-base-div span {
   display: table-cell;
   table-layout: fixed;
+}
+
+.document-menu-icon {
+  cursor: pointer;
 }

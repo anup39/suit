@@ -8,7 +8,9 @@ import ReactPaginate from 'react-paginate';
 import AssignWorkActivity from './components/AssignWorkActivity';
 import MilestoneManagement from './components/MilestoneManagement';
 import ProjectManangement from './components/ProjectManangement';
+import PublicFeedback from './components/PublicFeedback';
 import UserRoles from './components/UserRoles';
+import ViewUserFeedback from './components/ViewUserFeedback';
 import WorklistManagement from './components/WorklistManagement';
 
 const CustomPagination = ({
@@ -26,16 +28,13 @@ const CustomPagination = ({
 
   React.useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(items.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(items.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, itemData]);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % items.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+
     setItemOffset(newOffset);
   };
   const { t } = useTranslation();
@@ -57,6 +56,8 @@ const CustomPagination = ({
         currentItems={currentItems}
       />,
       <UserRoles key="UserRoles" currentItems={currentItems} />,
+      <PublicFeedback key="Public Feedback" currentItems={currentItems} />,
+      <ViewUserFeedback key="View User Feedback" currentItems={currentItems} />,
     ];
 
     return components[value];
@@ -81,10 +82,11 @@ const CustomPagination = ({
   );
 };
 
+/* eslint-disable */
 CustomPagination.propTypes = {
   itemsPerPage: PropTypes.isRequired,
   itemData: PropTypes.isRequired,
-  handleClose: PropTypes.func.isRequired,
+  handleClose: PropTypes.func,
   componentNo: PropTypes.number.isRequired,
 };
 

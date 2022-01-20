@@ -19,6 +19,7 @@ import {
 import {
   createNewProject,
   resetNewProjectData,
+  updateProject,
 } from '../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import schema from './create-form-schema';
@@ -71,9 +72,9 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
 
     const payloadData = {
       authToken,
-      newCompanyData: data,
+      companyData: data,
     };
-    dispatch(createNewProject(payloadData));
+    dispatch(updateProject(payloadData));
   };
 
   React.useEffect(() => {

@@ -156,13 +156,12 @@ const UserRolesForms = ({
   );
 };
 
-/* eslint-disable */
 UserRolesForms.propTypes = {
-  editUser: PropTypes.bool,
-  handelCancel: PropTypes.func,
-  userName: PropTypes.string,
-  userCompany: PropTypes.number,
-  role: PropTypes.string,
+  editUser: PropTypes.isRequired,
+  handelCancel: PropTypes.isRequired,
+  userName: PropTypes.string.isRequired,
+  userCompany: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
 };
 
 export default UserRolesForms;

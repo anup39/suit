@@ -1,4 +1,5 @@
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
+import { toast } from 'react-toastify';
 
 import {
   DELETE_USER,
@@ -55,8 +56,26 @@ export function* updateUserRoles(data) {
   try {
     const updatedData = yield call(UPDATE_ROLES, data.payload);
     yield put(updateUserRoleAndCompanySuccess(updatedData));
+    yield toast.success('User Updated Successfully!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   } catch (error) {
     yield put(updateUserRoleAndCompanyError(error.response.data));
+    yield toast.error('User Updation Error!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 }
 

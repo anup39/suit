@@ -5,12 +5,19 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getUserAuthToken } from '../../../../../../redux/user-redux/user.selectors';
+import { deleteTaskByID } from '../../../../../../redux/worklist-management-redux/worklist.actions';
 import WorkListDetailsCard from '../WorkListDetailsCard/WorkListDetailsCard';
 
 const WorkListCards = ({ taskInfo }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [view, setView] = React.useState(false);
+
+  const dispatch = useDispatch();
+  const authToken = useSelector(getUserAuthToken);
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,6 +35,16 @@ const WorkListCards = ({ taskInfo }) => {
     setView(false);
   };
 
+  const handleDelete = () => {
+    handleClose();
+
+    const data = {
+      authToken,
+      taskId: taskInfo.taskId,
+    };
+
+    dispatch(deleteTaskByID(data));
+  };
   return (
     <div>
       {!view ? (
@@ -67,7 +84,7 @@ const WorkListCards = ({ taskInfo }) => {
               open={open}
             >
               <MenuItem onClick={handleView}>View</MenuItem>
-              <MenuItem onClick={handleClose}>Delete</MenuItem>
+              <MenuItem onClick={handleDelete}>Delete</MenuItem>
             </Menu>
           </span>
         </div>

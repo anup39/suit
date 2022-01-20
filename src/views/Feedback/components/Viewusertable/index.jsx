@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import LoadingSpinner from '../../../../components/shared/LoadingSpinner/LoadingSpinner';
+// import Datagrid from './datagrid';
+import Pagination from '../../../../components/shared/Pagination/Pagination';
 import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner';
 import {
   getAllFeedback,
@@ -18,7 +20,6 @@ import {
   getListAllFeedback,
 } from '../../../../redux/feedback-redux/feedback.selector';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
-import Datagrid from './datagrid';
 
 const ViewUserTable = () => {
   const dispatch = useDispatch();
@@ -78,10 +79,13 @@ const ViewUserTable = () => {
         {isFeedbackLoading ? (
           <LoadingSpinner />
         ) : (
-          feedbackList &&
-          feedbackList.map((data) => (
-            <Datagrid key={data?.id} feedBackDetails={data} />
-          ))
+          feedbackList && (
+            <Pagination
+              componentNo={6}
+              itemData={feedbackList}
+              itemsPerPage={10}
+            />
+          )
         )}
       </div>
     </>

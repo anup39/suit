@@ -5,6 +5,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { deleteProjectData } from '../../../../redux/project-management-redux/project-management.actions';
+import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 
 const ProjectCard = ({
   handelView,
@@ -19,6 +23,10 @@ const ProjectCard = ({
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  const authToken = useSelector(getUserAuthToken);
+  const dispatch = useDispatch();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -29,6 +37,16 @@ const ProjectCard = ({
   const handelProjectDataView = () => {
     handleClose();
     handelView(projectId);
+  };
+
+  const handelProjecDelete = () => {
+    handleClose();
+    const data = {
+      authToken,
+      projectId,
+    };
+
+    dispatch(deleteProjectData(data));
   };
 
   return (
@@ -75,8 +93,7 @@ const ProjectCard = ({
           open={open}
         >
           <MenuItem onClick={handelProjectDataView}>View </MenuItem>
-          <MenuItem onClick={handleClose}>Edit </MenuItem>
-          <MenuItem onClick={handleClose}>Delete</MenuItem>
+          <MenuItem onClick={handelProjecDelete}>Delete</MenuItem>
         </Menu>
       </span>
     </div>

@@ -15,6 +15,8 @@ import {
   deselectOneTask,
   selectOneTask,
 } from '../../../../redux/assign-worklist/assign-worklist.action';
+import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
+import { deleteTaskByID } from '../../../../redux/worklist-management-redux/worklist.actions';
 
 const AssignActivityCard = ({
   projectName,
@@ -30,6 +32,7 @@ const AssignActivityCard = ({
   const [checkBox, setCheckBox] = React.useState(false);
   const isAllSelected = useSelector(getIsSelectAll);
   const selectedTaskList = useSelector(getSelectedTaskList);
+  const authToken = useSelector(getUserAuthToken);
   const dispatch = useDispatch();
 
   const open = Boolean(menuAnchorEl);
@@ -49,6 +52,16 @@ const AssignActivityCard = ({
     } else {
       dispatch(deselectOneTask(taskId));
     }
+  };
+
+  const handleDelete = () => {
+    handleMenuClose();
+
+    const dataToSend = {
+      authToken,
+      taskId,
+    };
+    dispatch(deleteTaskByID(dataToSend));
   };
 
   React.useEffect(() => {
@@ -87,7 +100,7 @@ const AssignActivityCard = ({
         {taskDescription}
       </span>
       <span className="assign-work-activities-card-isMilestone">
-        {isMilestone !== 0 ? 'Yes' : 'No'}
+        {isMilestone === 0 ? 'Yes' : 'No'}
       </span>
       <span className="assign-work-activities-card-type">{type} </span>
       <span className="assign-work-activities-card-status">{status}</span>
@@ -105,8 +118,8 @@ const AssignActivityCard = ({
           onClose={handleMenuClose}
           open={open}
         >
-          <MenuItem onClick={handleMenuClose}>Edit</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Delete</MenuItem>
+          {/* <MenuItem onClick={handleMenuClose}>Edit</MenuItem> */}
+          <MenuItem onClick={handleDelete}>Delete</MenuItem>
         </Menu>
       </span>
     </div>

@@ -1,4 +1,5 @@
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
+import { toast } from 'react-toastify';
 
 import {
   CREATE_NEW_WORKLIST,
@@ -89,8 +90,26 @@ export function* deleteTaskById(data) {
   try {
     const taskByIdData = yield call(DELETE_TASK_BY_ID, data.payload);
     yield put(deleteTaskByIDSuccess(taskByIdData));
+    yield toast.success('Task Deleted Successfully!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   } catch (error) {
     yield put(deleteTaskByIDError(error.response.data));
+    yield toast.error('Failed To Delete Task!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 }
 

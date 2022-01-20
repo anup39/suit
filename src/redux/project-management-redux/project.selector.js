@@ -45,3 +45,7 @@ export const getIfDashbordByProjectIdLoading = (state) => {
 export const getDashbordByProjectIdError = (state) => {
   return state.projectManagement.projectDashbordByIdError;
 };
+
+export const getImportProjectDataLoading = (state) => {
+  return state.projectManagement.isImportProjectDataLoading;
+};
