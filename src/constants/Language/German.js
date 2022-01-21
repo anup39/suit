@@ -65,6 +65,23 @@ const German = {
   description: 'Beschreibung',
   startDate: 'Startdatum',
   completionDate: 'Fertigstellungstermin',
+  completion: '% Fertigstellung',
+  efficiency: 'Effizienz',
+  overview: 'Überblick',
+  NrTask: 'Nummer der Aufgabe',
+  NrDaysWorked: 'Anzahl Arbeitstage',
+  NrDaysSpanned: 'Anzahl Tage überspannt',
+  NrTaskChange: 'Änderung der Nummernaufgabe',
+  projectStatus: 'Projekt-Status',
+  noTaskNotFound: 'Keine Aufgabe nicht gefunden!',
+  pleaseSelectAProject: 'Bitte wählen Sie ein Projekt aus',
+  completed: 'Vollendet',
+  taskId: 'Aufgaben-ID',
+  taskName: 'Aufgabennname',
+  taskDescription: 'Aufgabenbeschreibung',
+  isMilestone: 'Ist Meilenstein',
+  view: 'Aussicht',
+  editProject: 'Projekt bearbeiten',
 };
 
 export default German;

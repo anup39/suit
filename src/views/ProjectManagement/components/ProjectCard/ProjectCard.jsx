@@ -5,6 +5,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteProjectData } from '../../../../redux/project-management-redux/project-management.actions';
@@ -23,6 +24,7 @@ const ProjectCard = ({
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const { t } = useTranslation();
 
   const authToken = useSelector(getUserAuthToken);
   const dispatch = useDispatch();
@@ -92,8 +94,8 @@ const ProjectCard = ({
           onClose={handleClose}
           open={open}
         >
-          <MenuItem onClick={handelProjectDataView}>View </MenuItem>
-          <MenuItem onClick={handelProjecDelete}>Delete</MenuItem>
+          <MenuItem onClick={handelProjectDataView}>{t('view')} </MenuItem>
+          <MenuItem onClick={handelProjecDelete}>{t('delete')}</MenuItem>
         </Menu>
       </span>
     </div>

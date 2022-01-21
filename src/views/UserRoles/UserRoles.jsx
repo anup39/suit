@@ -115,7 +115,7 @@ const UserRoles = () => {
   }, [deleteUserErrorMessage, isAuthenticated]);
 
   return (
-    <BaseTemplate title="User Roles">
+    <BaseTemplate title="userRoles">
       <GlobalSpinner isOpen={isDeleteUserInBulkLoading} />
       <DatagridBase>
         <div className="search-div">

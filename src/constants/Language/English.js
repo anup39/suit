@@ -66,6 +66,23 @@ const English = {
   description: 'Description',
   startDate: 'Start Date',
   completionDate: 'Completion Date',
+  completion: '% Completion',
+  efficiency: 'Efficiency',
+  overview: 'Overview',
+  NrTask: 'Nr Task',
+  NrDaysWorked: 'Nr Days Worked',
+  NrDaysSpanned: 'Nr Days Spanned',
+  NrTaskChange: 'Nr Task Change',
+  projectStatus: 'Project Status,',
+  noTaskNotFound: 'No Task Not Found!',
+  pleaseSelectAProject: 'Please Select A Project',
+  completed: 'Completed',
+  taskId: 'Task Id',
+  taskName: 'Task Name',
+  taskDescription: 'Task Description',
+  isMilestone: 'Is Milestone',
+  view: 'View',
+  editProject: 'Edit Project',
 };
 
 export default English;
