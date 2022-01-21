@@ -7,6 +7,7 @@ import Drawer from '@mui/material/Drawer';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -40,6 +41,7 @@ const CreateCompany = ({ isOpen, isClose }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const { t } = useTranslation();
 
   const closeDrawer = () => {
     isClose(false);
@@ -70,14 +72,14 @@ const CreateCompany = ({ isOpen, isClose }) => {
         role="presentation"
         sx={{ width: 400, padding: 3 }}
       >
-        <h3 className={classes.form_header}>Create Company</h3>
+        <h3 className={classes.form_header}>{t('companyName')}</h3>
         <form
           className={classes.form_container}
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className={classes.form_input_container}>
             <label className={classes.form_label} htmlFor="name">
-              Name
+              {t('username')}
             </label>
             <input
               className={classes.form_input}
@@ -89,7 +91,7 @@ const CreateCompany = ({ isOpen, isClose }) => {
           </div>
           <div className={classes.form_input_container}>
             <label className={classes.form_label} htmlFor="address">
-              Address
+              {t('address')}
             </label>
             <textarea
               className={classes.form_input}
@@ -104,7 +106,7 @@ const CreateCompany = ({ isOpen, isClose }) => {
           </div>
           <div className={classes.form_input_container}>
             <label className={classes.form_label} htmlFor="city">
-              City
+              {t('city')}
             </label>
             <input
               className={classes.form_input}
@@ -116,7 +118,7 @@ const CreateCompany = ({ isOpen, isClose }) => {
           </div>
           <div className={classes.form_input_container}>
             <label className={classes.form_label} htmlFor="reference_contact">
-              Reference Contact Number
+              {t('referenceContactNumber')}{' '}
             </label>
             <input
               className={classes.form_input}
@@ -133,7 +135,7 @@ const CreateCompany = ({ isOpen, isClose }) => {
                 onClick={closeDrawer}
                 sx={{ color: '#8094AE' }}
               >
-                Cancel
+                {t('cancel')}
               </Button>
             </span>
             <Button
@@ -144,7 +146,7 @@ const CreateCompany = ({ isOpen, isClose }) => {
               type="submit"
               variant="contained"
             >
-              Submit
+              {t('submit')}
             </Button>
           </div>
         </form>

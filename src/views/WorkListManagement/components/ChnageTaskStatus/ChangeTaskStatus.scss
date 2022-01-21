@@ -1,0 +1,67 @@
+.change-task-status-form-base-div {
+  width: 400px;
+  padding: 24px;
+  height: 100%;
+
+  h2 {
+    font-size: 18px;
+    color: #364a63;
+    font-weight: 500;
+    margin: 0 0 30px 0;
+  }
+}
+
+.change-task-status-form-base-div label {
+  color: #526484;
+  font-size: 14px;
+  margin-bottom: 8px;
+  width: 100%;
+  display: block;
+}
+
+.change-task-status-form-base-div input {
+  width: 100%;
+  border: 1px solid #d4deea;
+  border-radius: 3px;
+  width: 100%;
+  padding: 8px;
+  background-color: #fff;
+  color: #364a63;
+  margin-bottom: 15px;
+  outline: none;
+}
+
+.change-task-status-form-base-div select {
+  width: 100%;
+  border: 1px solid #d4deea;
+  border-radius: 3px;
+  width: 100%;
+  padding: 8px;
+  background-color: #fff;
+  color: #364a63;
+  margin-bottom: 15px;
+  outline: none;
+}
+
+.change-task-status-form-submit-div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  span {
+    cursor: pointer;
+  }
+
+  button {
+    padding: 9px 18px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    margin-left: 10px;
+    font-size: 14px;
+    background: #e78201;
+    color: white;
+  }
+}

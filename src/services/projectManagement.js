@@ -98,7 +98,7 @@ export const GET_PROJECT_DOCUMENTS = async (payload) => {
 
   const newToken = await REFERSH_TOKEN(authToken);
 
-  const url = `${PROJECT_MANAGEMENT_API.PROECT_DOCUMNETS}=${projectId}`;
+  const url = `${PROJECT_MANAGEMENT_API.PROECT_DOCUMNETS}${projectId}`;
   const projectDocs = await axios(url, {
     headers: {
       Authorization: `Bearer ${newToken}`,

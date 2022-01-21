@@ -1,5 +1,3 @@
-import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
-import Button from '@mui/material/Button';
 import React from 'react';
 
 import MobileDataViewRow from './mobile.data.view.row';
@@ -22,7 +20,7 @@ const ViewUserFeedback = () => {
         <MobileDataViewRow />
       </div>
       <div className="table-container-btm ">
-        <div className="table_slider_container">
+        {/* <div className="table_slider_container">
           <div className="table_slider">
             <span className="previous_button">
               <Button disabled variant="outlined">
@@ -41,7 +39,7 @@ const ViewUserFeedback = () => {
               </Button>
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

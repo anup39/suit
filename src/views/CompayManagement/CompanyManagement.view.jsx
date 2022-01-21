@@ -1,5 +1,6 @@
 import AddIcon from '@mui/icons-material/Add';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getAllCompany } from '../../redux/company-redux/company.actions';
@@ -27,6 +28,7 @@ const CompanyManagementView = () => {
       dispatch(getAllCompany(userAccessToken));
     }
   }, []);
+  const { t } = useTranslation();
 
   return (
     <div className={classes.dfc}>
@@ -36,18 +38,18 @@ const CompanyManagementView = () => {
             isClose={handleCloseCompanyDrawer}
             isOpen={openCreateCompanyDrawer}
           />
-          <h3>Company Management</h3>
+          <h3>{t('companyManagement')}</h3>
           <button
             ButtonUnstyled
             onClick={handleCreateCompanyDrawer}
             type="button"
           >
-            <AddIcon /> Create Company
+            <AddIcon /> {t('createCompany')}
           </button>
         </div>
         <CompanyManagementDataGrid />
       </div>
-      <p className={classes.footer}>Powered By Negentis</p>
+      <p className={classes.footer}>{t('poweredBy')} Negentis</p>
     </div>
   );
 };

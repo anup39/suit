@@ -93,19 +93,17 @@ const PublicUserFeedback = () => {
               <th scope="col">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {isFeedbackLoading ? (
-              <LoadingSpinner />
-            ) : (
-              feedbackData && (
-                <Pagination
-                  componentNo={5}
-                  itemData={feedbackData}
-                  itemsPerPage={10}
-                />
-              )
-            )}
-          </tbody>
+          {isFeedbackLoading ? (
+            <LoadingSpinner />
+          ) : (
+            feedbackData && (
+              <Pagination
+                componentNo={5}
+                itemData={feedbackData}
+                itemsPerPage={10}
+              />
+            )
+          )}
         </table>
       </div>
       <div className="mobile-table">
@@ -117,6 +115,7 @@ const PublicUserFeedback = () => {
         <MobileDataRow />
         <MobileDataRow />
       </div>
+      <div className="table-container-btm " />
       {/* <div className="table-container-btm ">
         <div className="table_slider_container">
           <div className="table_slider">

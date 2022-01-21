@@ -15,6 +15,7 @@ const WorklistManagement = ({ currentItems }) => {
             projectName={values.projectsId}
             taskDescription={values.taskDescription}
             taskName={values.taskName}
+            taskStatus={values.taskStatus}
             type={values.type}
             workId={values.taskId}
           />

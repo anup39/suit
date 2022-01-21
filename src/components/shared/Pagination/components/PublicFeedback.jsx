@@ -5,10 +5,10 @@ import Daterow from '../../../../views/Feedback/components/Datarow';
 
 const PublicUserFeedback = ({ currentItems }) => {
   return (
-    <div>
+    <tbody>
       {currentItems &&
         currentItems.map((values) => <Daterow key={values.id} data={values} />)}
-    </div>
+    </tbody>
   );
 };
 

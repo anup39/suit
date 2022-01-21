@@ -6,7 +6,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import UserStatus from '../../../constants/UserStatus';
@@ -42,7 +42,6 @@ const UserRoleCard = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentStatus, setCurrentStatus] = useState(status);
   // const [isUserDeleted, setIsUserDeleted] = useState(false);
-
   const authToken = useSelector(getUserAuthToken);
   const selectedUsers = useSelector(getSelectedUsers);
   const isAllSelected = useSelector(getIfAllSelected);
@@ -64,7 +63,7 @@ const UserRoleCard = ({
       dispatch(deSelectUser(userId));
     }
   };
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -133,7 +132,10 @@ const UserRoleCard = ({
           />
         ) : (
           <UserRolesForms
+            companyId={companyId}
+            editUser
             handelCancel={handleDrawerClose}
+            role={role}
             userName={username}
           />
         )}
@@ -170,9 +172,12 @@ const UserRoleCard = ({
             onClose={handleClose}
             open={open}
           >
-            <MenuItem onClick={handleAddRoleDrawerOpen}>Assign Role</MenuItem>
-            <MenuItem onClick={handleEditDrawerOpen}>Edit </MenuItem>
-            <MenuItem onClick={handleDeleteUser}>Delete</MenuItem>
+            <MenuItem onClick={handleAddRoleDrawerOpen}>
+              {t('assignRole')}
+            </MenuItem>
+
+            <MenuItem onClick={handleEditDrawerOpen}>{t('edit')} </MenuItem>
+            <MenuItem onClick={handleDeleteUser}>{t('delete')}</MenuItem>
           </Menu>
         </span>
       </div>

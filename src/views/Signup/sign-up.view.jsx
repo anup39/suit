@@ -108,7 +108,7 @@ const SignupPage = ({ isRedTheme }) => {
           >
             <div className={classes.form_input_container}>
               <label className={classes.form_label} htmlFor="firstName">
-                {t('firstName')}
+                {t('firstName')} <sup>*</sup>
               </label>
               <FormInput
                 className={classes.form_input}
@@ -124,7 +124,7 @@ const SignupPage = ({ isRedTheme }) => {
             </div>
             <div className={classes.form_input_container}>
               <label className={classes.form_label} htmlFor="lasttName">
-                {t('lastName')}
+                {t('lastName')} <sup>*</sup>
               </label>
               <FormInput
                 className={classes.form_input}
@@ -140,7 +140,7 @@ const SignupPage = ({ isRedTheme }) => {
             </div>
             <div className={classes.form_input_container}>
               <label className={classes.form_label} htmlFor="email">
-                Email
+                Email <sup>*</sup>
               </label>
               <FormInput
                 className={classes.form_input}
@@ -160,7 +160,7 @@ const SignupPage = ({ isRedTheme }) => {
             </div>
             <div className={classes.form_input_container}>
               <label className={classes.form_label} htmlFor="password">
-                {t('password')}
+                {t('password')} <sup>*</sup>
               </label>
               <FormInput
                 className={classes.form_input}
@@ -176,7 +176,7 @@ const SignupPage = ({ isRedTheme }) => {
             </div>
             <div className={classes.form_input_container}>
               <label className={classes.form_label} htmlFor="conPassword">
-                {t(`confirmPassword`)}
+                {t(`confirmPassword`)} <sup>*</sup>
               </label>
               <FormInput
                 className={classes.form_input}

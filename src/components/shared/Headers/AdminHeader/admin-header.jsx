@@ -59,6 +59,7 @@ const AdminHeaderComponent = () => {
 
   const handleChangeLanguage = (e) => {
     handleTranslateMenuClose();
+    localStorage.setItem('preferredLanguage', e.target.id);
     i18n.changeLanguage(e.target.id);
   };
 
@@ -106,8 +107,8 @@ const AdminHeaderComponent = () => {
         horizontal: 'right',
       }}
     >
-      <MenuItem onClick={handleMenuClose}>{t('profile')}</MenuItem>
-      <MenuItem onClick={handleMenuClose}>{t('myAccount')}</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}>{t('profile')}</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{t('myAccount')}</MenuItem> */}
       <MenuItem onClick={handleSignOut}>
         {' '}
         <LogoutIcon style={{ color: 'red', marginRight: '10px' }} />{' '}

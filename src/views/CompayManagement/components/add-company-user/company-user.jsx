@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import { withStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
@@ -36,6 +37,7 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
 
   const listOfUsers = useSelector(getListOfUsers);
   console.log(listOfUsers, 'right here');
+  const { t } = useTranslation();
 
   return (
     <Drawer anchor="right" onClose={closeDrawer} open={isOpen}>
@@ -46,9 +48,9 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
       >
         {' '}
         <div className={classes.add_container}>
-          <h2 className={classes.userlist_header_1}>Add Users</h2>
+          <h2 className={classes.userlist_header_1}>{t('addUsers')}</h2>
           <div className={classes.userlist_container}>
-            <h3 className={classes.userlist_header}>Search</h3>
+            <h3 className={classes.userlist_header}>{t('search')}</h3>
             <div className={classes.userlist_box}>
               <Autocomplete
                 disableCloseOnSelect
@@ -59,8 +61,8 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
                 renderInput={(params) => (
                   <StyledAutocompleteWrapper
                     {...params}
-                    label="Users"
-                    placeholder="search..."
+                    label={t('users')}
+                    placeholder={t('search')}
                     sx={{ border: 'none' }}
                   />
                 )}
@@ -89,8 +91,8 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
                       type="checkbox"
                     />
                   </th>
-                  <th className={classes.table_row_head}>Users</th>
-                  <th className={classes.table_row_head}>Roles</th>
+                  <th className={classes.table_row_head}>{t('users')}</th>
+                  <th className={classes.table_row_head}>{t('roles')}</th>
                 </tr>
               </thead>
               <tbody className={classes.table_body}>
@@ -109,7 +111,7 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
                 sx={{ color: '#8094AE' }}
                 variant="text"
               >
-                Cancel
+                {t('cancel')}
               </Button>
             </span>
             <Button
@@ -119,7 +121,7 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
               }}
               variant="contained"
             >
-              Update
+              {t('update')}
             </Button>
           </div>
         </div>
