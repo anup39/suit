@@ -1,104 +1,96 @@
 .company_datagrid_contaier {
-    margin-top: 16px;
-    border: 1px solid #d4deea;
-    border-radius: 3px;
-    width: 100%;
-    overflow: auto;
+  margin-top: 16px;
+  border: 1px solid #d4deea;
+  border-radius: 3px;
+  width: 100%;
+  overflow: auto;
 }
 
-
 .cpy_datagrid_head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    padding: 0 15px;
-    height: 60px;
-    border-bottom: 1px solid #d4deea;
+  padding: 0 15px;
+  height: 60px;
+  border-bottom: 1px solid #d4deea;
 }
 
 .datagrid_tables {
-    border-collapse: collapse;
-    width: 100%;
+  border-collapse: collapse;
+  width: 100%;
 
-    thead {
-        position: sticky;
-        top: 0;
-        background: #f8f9fc;
-    }
+  thead {
+    position: sticky;
+    top: 0;
+    background: #f8f9fc;
+  }
 }
 
 .datagrid_tables_containers {
-    display: block;
-    width: 100%;
-    height: calc(100vh - 303px);
-    overflow: auto;
+  display: block;
+  width: 100%;
+  height: calc(100vh - 303px);
+  overflow: auto;
 
-    @media (max-width: 1024px) {
-        width: calc(100vw - 307px);
-        height: calc(100vh - 308px);
+  @media (max-width: 1024px) {
+    width: calc(100vw - 307px);
+    height: calc(100vh - 308px);
+  }
 
-    }
-
-    @media (max-width: 768px) {
-        width: calc(100vw - 25px);
-        display: none;
-    }
+  @media (max-width: 768px) {
+    width: calc(100vw - 25px);
+    display: none;
+  }
 }
 
 .head_row_head {
-    padding: 10px;
-    font-weight: 600;
-    vertical-align: middle;
-    text-align: left;
-    background: #f8f9fc;
-    color: #8094ae;
-    font-size: 14px;
+  padding: 10px;
+  font-weight: 600;
+  vertical-align: middle;
+  text-align: left;
+  background: #f8f9fc;
+  color: #8094ae;
+  font-size: 14px;
 }
-
-
-
-
 
 .mobile_table_cmpy_mgmt {
-    height: calc(100vh - 240px);
-    overflow: auto;
-    display: none;
+  height: calc(100vh - 240px);
+  overflow: auto;
+  display: none;
 
-    @media (max-width: 768px) {
-        display: block;
+  @media (max-width: 768px) {
+    display: block;
+  }
+
+  > div:nth-child(even) {
+    background: #d4deea;
+
+    .grid-3-1 {
+      border-top: 1px solid white;
     }
-
-    >div:nth-child(even) {
-        background: #d4deea;
-
-        .grid-3-1 {
-            border-top: 1px solid white;
-        }
-    }
+  }
 }
 
-
 .head_search {
-    width: 25%;
-    margin-right: 16px;
-    display: flex;
-    align-items: center;
-    border: 1px solid #d4deea;
-    height: 30px;
-    border-radius: 3px;
-    padding: 5px;
+  width: 25%;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #d4deea;
+  height: 30px;
+  border-radius: 3px;
+  padding: 5px;
 
-    input {
-        flex: 1;
-        border: none;
-    }
+  input {
+    flex: 1;
+    border: none;
+  }
 
-    @media (max-width: 768px) {
-        width: 100%;
-        margin-right: 5px;
-    }
-
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-right: 5px;
+  }
 }
 
 // .search_input {
@@ -110,65 +102,59 @@
 // }
 
 .delete_button {
-    border: none;
-    outline: none;
-    background: none;
-    cursor: pointer;
-    color: #1976d2 !important;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: #1976d2 !important;
 }
 
 .table_body {
-    border-bottom: 1px solid #ddd;
-    height: 100%;
+  border-bottom: 1px solid #ddd;
+  height: 100%;
 }
-
 
 .table_slider {
-    height: 60px;
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    border-top: 1px solid #D4DEEA;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-top: 1px solid #d4deea;
 
-    @media (max-width: 768px) {
-        display: none;
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  ul {
+    margin-bottom: 0;
+
+    a {
+      padding: 9px 17px;
+      font-size: 14px;
+      color: #8094ae;
     }
-
-    ul {
-        margin-bottom: 0;
-
-        a {
-            padding: 9px 17px;
-            font-size: 14px;
-            color: #8094AE;
-
-        }
-    }
-
+  }
 }
 
-
-
 .page_buttons {
-    display: flex;
+  display: flex;
 }
 
 .chapter_button {
-    padding: 0 15px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    color: #000000;
+  padding: 0 15px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: #000000;
 
-    :first-child {
-        background: #1976d2;
-    }
+  :first-child {
+    background: #1976d2;
+  }
 }
 
-
 .progress_container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 150px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
 }

@@ -1,5 +1,3 @@
-import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
-import Button from '@mui/material/Button';
 import React from 'react';
 
 import MobileDataViewRow from './mobile.data.view.row';

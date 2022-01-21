@@ -100,8 +100,27 @@ export function* deleteUserInBulk(data) {
   try {
     const deletedUserInBulk = yield call(DELETE_USER_IN_BULK, data.payload);
     yield put(deleteUserInBulkSuccess(deletedUserInBulk));
+
+    yield toast.success('User Deleted Successfully!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   } catch (error) {
     yield put(deleteUserInBulkError(error.response.data));
+    yield toast.error('Failed To Delete  Users', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 }
 

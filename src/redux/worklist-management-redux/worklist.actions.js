@@ -65,6 +65,11 @@ export const deleteTaskByID = (data) => ({
   payload: data,
 });
 
+export const resetDeleteTask = () => ({
+  type: WORKLIST_MANAGEMENT_ACTION_TYPE.RESET_DELETE_TASK_BY_ID,
+  payload: 'data',
+});
+
 export const deleteTaskByIDSuccess = (data) => ({
   type: WORKLIST_MANAGEMENT_ACTION_TYPE.DELETE_TASK_BY_ID_SUCCESS,
   payload: data,

@@ -28,10 +28,12 @@ import {
   getIfAllSelected,
   getIsDeleteUserInBulkLoading,
   getIsLoading,
-  getSelectedUsers,
-  getUserRoleList,
   // getDeleteUserInBulkSuccess,
   // getDeleteUserInBulkError,
+  getIsUpdateUserRoleLoading,
+  getSelectedUsers,
+  getUpdateUserRoleData,
+  getUserRoleList,
 } from '../../redux/User-Role/User-Role.selectors';
 import MobileDataRow from './mobile.data.row';
 
@@ -49,6 +51,8 @@ const UserRoles = () => {
   const isLoading = useSelector(getIsLoading);
   const isAuthenticated = useSelector(getIfAuthenticated);
   const isDeleteUserInBulkLoading = useSelector(getIsDeleteUserInBulkLoading);
+  const isUpdateUserLoading = useSelector(getIsUpdateUserRoleLoading);
+  const updateUserData = useSelector(getUpdateUserRoleData);
 
   const { t } = useTranslation();
 
@@ -87,6 +91,10 @@ const UserRoles = () => {
         dispatch(roleStart(userAuthToken));
       }
 
+      if (updateUserData) {
+        dispatch(roleStart(userAuthToken));
+      }
+
       if (ifAllSelected) {
         setCheckbox(true);
       } else {
@@ -112,11 +120,13 @@ const UserRoles = () => {
     } else {
       navigate('/signin');
     }
-  }, [deleteUserErrorMessage, isAuthenticated]);
+  }, [deleteUserErrorMessage, isAuthenticated, isUpdateUserLoading]);
 
   return (
     <BaseTemplate title="userRoles">
-      <GlobalSpinner isOpen={isDeleteUserInBulkLoading} />
+      <GlobalSpinner
+        isOpen={isDeleteUserInBulkLoading || isUpdateUserLoading}
+      />
       <DatagridBase>
         <div className="search-div">
           <div className="input-container">

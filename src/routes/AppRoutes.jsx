@@ -62,6 +62,10 @@ const EmailNotVerified = lazy(() =>
   import('../views/EmailNotVerified/EmailNotVerified')
 );
 
+const VerifyEmail = lazy(() => import('../views/VerifyEmail/VerifyEmail'));
+
+const NewPassword = lazy(() => import('../views/NewPassword/NewPassword'));
+
 const appRoutes = [
   {
     path: ROUTES.ERROR,
@@ -151,6 +155,15 @@ const appRoutes = [
   {
     path: ROUTES.USER,
     element: <UserRolesForms />,
+  },
+  {
+    path: ROUTES.VERIFY_EMAIL,
+    element: <VerifyEmail />,
+  },
+
+  {
+    path: ROUTES.NEW_PASSWORD,
+    element: <NewPassword />,
   },
 ];
 

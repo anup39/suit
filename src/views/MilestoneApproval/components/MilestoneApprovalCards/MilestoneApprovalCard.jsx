@@ -119,6 +119,7 @@ const MilestoneApprovalCard = ({
         ) : (
           <MilestoneApprovalModal
             handelClose={handleModalClose}
+            milestoneId={projectDocumentsId}
             milestoneNr={milestoneId}
           />
         )}

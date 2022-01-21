@@ -65,19 +65,28 @@ const CustomPagination = ({
   return (
     <>
       {renderComponents(componentNo)}
-      <ReactPaginate
-        activeLinkClassName="pagination-active-div"
-        breakLabel="..."
-        className="pagination-base"
-        disabledLinkClassName="pagination-disabled-div"
-        marginPagesDisplayed={2}
-        nextLabel={t('next')}
-        onPageChange={handlePageClick}
-        pageCount={pageCount}
-        pageRangeDisplayed={0}
-        previousLabel={t('prev')}
-        renderOnZeroPageCount={null}
-      />
+      <div className="table-slider">
+        <ReactPaginate
+          activeClassName="active"
+          breakClassName="page-item"
+          breakLabel="..."
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          marginPagesDisplayed={2}
+          nextClassName="page-item"
+          nextLabel={t('next')}
+          nextLinkClassName="page-link"
+          // eslint-disable-next-line react/jsx-no-bind
+          onPageChange={handlePageClick}
+          pageClassName="page-item"
+          pageCount={pageCount}
+          pageLinkClassName="page-link"
+          pageRangeDisplayed={5}
+          previousClassName="page-item"
+          previousLabel="<<Previous"
+          previousLinkClassName="page-link"
+        />
+      </div>
     </>
   );
 };

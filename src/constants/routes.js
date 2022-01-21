@@ -25,7 +25,9 @@ const ROUTES = {
   WEBEX: '/pannel/webex',
   FEEDBACK_SERVICES: '/pannel/feedback-services',
   PANNEL: 'pannel',
-  NOT_VERIFIED: 'verify',
+  NOT_VERIFIED: 'forgotPassword',
+  VERIFY_EMAIL: 'verifyEmail',
+  NEW_PASSWORD: 'newPassword',
 };
 
 export default ROUTES;

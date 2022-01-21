@@ -98,7 +98,7 @@ export const GET_PROJECT_DOCUMENTS = async (payload) => {
 
   const newToken = await REFERSH_TOKEN(authToken);
 
-  const url = `${PROJECT_MANAGEMENT_API.PROECT_DOCUMNETS}=${projectId}`;
+  const url = `${PROJECT_MANAGEMENT_API.PROECT_DOCUMNETS}${projectId}`;
   const projectDocs = await axios(url, {
     headers: {
       Authorization: `Bearer ${newToken}`,
@@ -121,12 +121,12 @@ export const GET_PROJECT_DASHBORD = async (payload) => {
 };
 
 export const IMPORT_PROJECT_DATA = async (payload) => {
-  const { data, authToken } = payload;
+  const { data, authToken, projectId } = payload;
   const newToken = await REFERSH_TOKEN(authToken);
 
-  const url = PROJECT_MANAGEMENT_API.IMPORT_PROJECT_DATA;
+  const url = `${PROJECT_MANAGEMENT_API.IMPORT_PROJECT_DATA}${projectId}`;
   const importData = await axios(url, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       Authorization: `Bearer ${newToken}`,
       'Content-Type': 'multipart/form-data',

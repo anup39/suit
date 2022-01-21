@@ -124,15 +124,17 @@ const UserRoleCard = ({
       <Drawer anchor="right" onClose={handleDrawerClose} open={drawerOpen}>
         {editUser ? (
           <UserRolesForms
-            companyId={companyId}
             editUser
             handelCancel={handleDrawerClose}
             role={role}
+            userCompanyId={companyId}
             userName={username}
           />
         ) : (
           <UserRolesForms
             handelCancel={handleDrawerClose}
+            role={role}
+            userCompanyId={companyId}
             userName={username}
           />
         )}

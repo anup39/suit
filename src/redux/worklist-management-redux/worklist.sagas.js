@@ -29,8 +29,29 @@ export function* getAllWorkListData(data) {
     const getWorklistData = yield call(GET_ALL_WORKLIST, data.payload);
     yield put(getWorkListSuccess(getWorklistData));
   } catch (error) {
-    console.log(error);
     yield put(getWorkListError(error.response.data));
+
+    if (error.response.data.status === 500) {
+      yield toast.error('Something Went Wrong. Please Try Again Later!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      yield toast.error('Failed To Get Worklist Data!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   }
 }
 

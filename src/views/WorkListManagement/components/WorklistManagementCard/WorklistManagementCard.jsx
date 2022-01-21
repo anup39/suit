@@ -19,6 +19,7 @@ import {
   getIfAllWorkListSelected,
   getSelectedWorkList,
 } from '../../../../redux/worklist-management-redux/worklist.selector';
+import ChangeTaskStatus from '../ChnageTaskStatus/ChangeTaskStatus';
 import WorklistForm from '../WorklistForm/WorklistForm';
 
 const WorkListManagementCard = ({
@@ -29,6 +30,7 @@ const WorkListManagementCard = ({
   workId,
   type,
   allData,
+  taskStatus,
 }) => {
   const dispatch = useDispatch();
 
@@ -36,6 +38,8 @@ const WorkListManagementCard = ({
   const [isEditDrawerOpen, setIsEditDrawerOpen] = React.useState(false);
   const [checkBox, setCheckBox] = React.useState(false);
   const [actualProjectName, setActualProjectName] = React.useState('');
+  const [isEditStatusDrawerOpen, setIsEditStatusDrawerOpen] =
+    React.useState(false);
 
   const authToken = useSelector(getUserAuthToken);
   const selectedWorkList = useSelector(getSelectedWorkList);
@@ -77,6 +81,15 @@ const WorkListManagementCard = ({
     } else {
       dispatch(deselectOneWorkList(workId));
     }
+  };
+
+  const handleEditStatusDrawerClose = () => {
+    setIsEditStatusDrawerOpen(false);
+  };
+
+  const handleEditStatusDrawerOpen = () => {
+    handelMenuClose();
+    setIsEditStatusDrawerOpen(true);
   };
 
   const isMilestoneName = isMilestone !== 0 ? 'No' : 'Yes';
@@ -125,6 +138,20 @@ const WorkListManagementCard = ({
           workId={workId}
         />
       </Drawer>
+
+      <Drawer
+        anchor="right"
+        onClose={() => handleEditStatusDrawerClose()}
+        open={isEditStatusDrawerOpen}
+      >
+        <ChangeTaskStatus
+          handleClose={handleEditStatusDrawerClose}
+          taskId={workId}
+          taskName={taskName}
+          taskStatus={taskStatus}
+        />
+      </Drawer>
+
       <div className="worklist-card-table-body">
         <span className="worklist-card-management-check-input">
           <input checked={checkBox} onChange={handelCheckbox} type="checkbox" />
@@ -157,6 +184,9 @@ const WorkListManagementCard = ({
             <MenuItem itmeId={workId} onClick={handelOpenEditDrawer}>
               Edit
             </MenuItem>
+            <MenuItem itmeId={workId} onClick={handleEditStatusDrawerOpen}>
+              Change Task Status
+            </MenuItem>
             <MenuItem itmeId={workId} onClick={() => hadelDeleteTask()}>
               Delete
             </MenuItem>
@@ -176,6 +206,7 @@ WorkListManagementCard.propTypes = {
   workId: PropTypes.string,
   type: PropTypes.string,
   allData: PropTypes.object,
+  taskStatus: PropTypes.string,
 };
 
 export default WorkListManagementCard;

@@ -51,6 +51,10 @@ const SigninPage = () => {
     navigate('/user/signup');
   };
 
+  const handleForgotPassword = () => {
+    navigate('/forgotPassword');
+  };
+
   useEffect(() => {
     if (getError) {
       setIsLoading(false);
@@ -83,7 +87,7 @@ const SigninPage = () => {
         });
       }
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, getError]);
 
   return (
     <div className={classes.signup_container}>
@@ -125,7 +129,9 @@ const SigninPage = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className={classes.form_input_container}>
-              <label className={classes.form_label}>{t('username')}</label>
+              <label className={classes.form_label}>
+                {t('username')} <sup>*</sup>{' '}
+              </label>
               <FormInput
                 className={classes.form_input}
                 id="username"
@@ -139,7 +145,9 @@ const SigninPage = () => {
               </span>
             </div>
             <div className={classes.form_input_container}>
-              <label className={classes.form_label}>{t('password')}</label>
+              <label className={classes.form_label}>
+                {t('password')} <sup>*</sup>{' '}
+              </label>
               <FormInput
                 className={classes.form_input}
                 id="password"
@@ -154,7 +162,7 @@ const SigninPage = () => {
             </div>
             <div className={classes.remember_me_text}>
               <div>
-                <label className={classes.check_container}>
+                {/* <label className={classes.check_container}>
                   {t('rememberMe')}
                   <input
                     id="rememberMe"
@@ -162,9 +170,11 @@ const SigninPage = () => {
                     {...register('rememberMe')}
                   />
                   <span className={classes.checkmark} />
-                </label>
+                </label> */}
               </div>
-              <p className={classes.fotgot_text}>{t('fotgotCode')} </p>
+              <p className={classes.fotgot_text} onClick={handleForgotPassword}>
+                {t('fotgotCode')}{' '}
+              </p>
             </div>
             <FormButton>{t('login')}</FormButton>
           </form>

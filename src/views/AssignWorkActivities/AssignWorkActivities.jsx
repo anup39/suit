@@ -12,6 +12,7 @@ import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import {
   getIsSelectAll,
   getSelectedTaskList,
@@ -25,10 +26,15 @@ import {
   getIfAuthenticated,
   getUserAuthToken,
 } from '../../redux/user-redux/user.selectors';
-import { getWorkList } from '../../redux/worklist-management-redux/worklist.actions';
+import {
+  getWorkList,
+  resetDeleteTask,
+} from '../../redux/worklist-management-redux/worklist.actions';
 import {
   getAllWorkListData,
+  getDeleteWorkListSuccess,
   getIsAllWorklistLoading,
+  getIsDeleteWorkListLoading,
 } from '../../redux/worklist-management-redux/worklist.selector';
 import AuthenticatedRoute from '../../routes/AuthenticatedRoute';
 import AssignProjectModal from './components/AssignProjectModal/AssignProjectModal';
@@ -47,6 +53,8 @@ const AssignWorkActivities = () => {
   const selectedTasks = useSelector(getSelectedTaskList);
   const isWorklistLoading = useSelector(getIsAllWorklistLoading);
   const isAuthenticated = useSelector(getIfAuthenticated);
+  const isDeleteWorklistLoading = useSelector(getIsDeleteWorkListLoading);
+  const deleteWorklistSuccess = useSelector(getDeleteWorkListSuccess);
 
   const handelCloseDrawer = () => {
     setIsDrawerOpen(false);
@@ -72,6 +80,11 @@ const AssignWorkActivities = () => {
   React.useEffect(() => {
     if (workListData.length === 0) {
       dispatch(getWorkList(userAuthToken));
+    } else if (deleteWorklistSuccess) {
+      setTimeout(() => {
+        dispatch(getWorkList(userAuthToken));
+        dispatch(resetDeleteTask());
+      }, 1000);
     }
 
     if (isAllSelected) {
@@ -79,10 +92,11 @@ const AssignWorkActivities = () => {
     } else {
       setCheckbox(false);
     }
-  }, []);
+  }, [isDeleteWorklistLoading]);
 
   return (
     <AuthenticatedRoute isAuthenticated={isAuthenticated}>
+      <GlobalSpinner isOpen={isDeleteWorklistLoading} />
       <Drawer
         anchor="right"
         onClose={() => handelCloseDrawer()}
@@ -158,15 +172,30 @@ const AssignWorkActivities = () => {
               <span className="assign-work-activities-status">Status</span>
               <span className="assign-work-activities-actions">Actions</span>
             </div>
+            {/*eslint-disable */}
             {isWorklistLoading ? (
               <LoadingSpinner />
-            ) : (
+            ) : workListData && workListData.length !== 0 ? (
               <Pagination
                 componentNo={2}
                 itemData={workListData}
                 itemsPerPage={7}
               />
+            ) : (
+              <div>
+                {' '}
+                <p
+                  style={{
+                    textAlign: 'center',
+                    paddingTop: '20%',
+                    paddingBottom: '15%',
+                  }}
+                >
+                  No Data Found!
+                </p>{' '}
+              </div>
             )}
+            {/* eslint-enable */}
 
             <div className="mobile_table_assignwork">
               <MobileDataRow />

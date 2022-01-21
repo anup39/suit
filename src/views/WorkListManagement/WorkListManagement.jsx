@@ -21,6 +21,7 @@ import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 // import WorkListColumns from './WorkListColumns';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import { getAllCompany } from '../../redux/company-redux/company.actions';
 import { getCompaniesList } from '../../redux/company-redux/company.selectors';
 import { getAllProjects } from '../../redux/project-management-redux/project.selector';
@@ -32,12 +33,15 @@ import {
 import {
   deselectAllWorkList,
   getWorkList,
+  resetDeleteTask,
   selectAllWorkList,
 } from '../../redux/worklist-management-redux/worklist.actions';
 import {
   getAllWorkListData,
+  getDeleteWorkListSuccess,
   getIfAllWorkListSelected,
   getIsAllWorklistLoading,
+  getIsDeleteWorkListLoading,
   getSelectedWorkList,
 } from '../../redux/worklist-management-redux/worklist.selector';
 import AuthenticatedRoute from '../../routes/AuthenticatedRoute';
@@ -63,6 +67,8 @@ const WorkListManagement = () => {
   const workListData = useSelector(getAllWorkListData);
   const projectList = useSelector(getAllProjects);
   const companyList = useSelector(getCompaniesList);
+  const deleteWorkListSuccess = useSelector(getDeleteWorkListSuccess);
+  const isDeleteWorkListLoading = useSelector(getIsDeleteWorkListLoading);
   const theme = useTheme();
 
   const open = Boolean(menuOpen);
@@ -139,9 +145,15 @@ const WorkListManagement = () => {
 
   useEffect(() => {
     if (!projectList || workListData.length === 0) {
-      dispatch(getWorkList(authToken));
-      dispatch(getProjectList(authToken));
-      dispatch(getAllCompany(authToken));
+      setTimeout(() => {
+        dispatch(getProjectList(authToken));
+      }, 500);
+      setTimeout(() => {
+        dispatch(getAllCompany(authToken));
+      }, 500);
+      setTimeout(() => {
+        dispatch(getWorkList(authToken));
+      }, 500);
     } else {
       const filteredData = [];
 
@@ -167,10 +179,6 @@ const WorkListManagement = () => {
         });
       }
 
-      console.log(filteredData);
-      console.log(companyName.length);
-      console.log(projectName.length);
-
       setFilteredList(filteredData);
 
       if (ifAllSelected) {
@@ -179,10 +187,16 @@ const WorkListManagement = () => {
         setCheckbox(false);
       }
     }
-  }, [projectName, companyName]);
+
+    if (deleteWorkListSuccess) {
+      dispatch(getWorkList(authToken));
+      dispatch(resetDeleteTask());
+    }
+  }, [projectName, companyName, isDeleteWorkListLoading]);
 
   return (
     <AuthenticatedRoute isAuthenticated={isAuthenticated}>
+      <GlobalSpinner isOpen={isDeleteWorkListLoading} />
       <Drawer
         anchor="right"
         onClose={() => handelCloseDrawer()}
@@ -321,8 +335,22 @@ const WorkListManagement = () => {
               <span className="worklist-management-actions">Actions</span>
             </div>
             <div>
+              {/* eslint-disable */}
               {isWorklistLoading ? (
                 <LoadingSpinner />
+              ) : workListData && workListData.length === 0 ? (
+                <div>
+                  {' '}
+                  <p
+                    style={{
+                      textAlign: 'center',
+                      paddingTop: '20%',
+                      paddingBottom: '15%',
+                    }}
+                  >
+                    No Data Found!
+                  </p>{' '}
+                </div>
               ) : (
                 <Pagination
                   componentNo={1}
@@ -332,7 +360,7 @@ const WorkListManagement = () => {
                   itemsPerPage={10}
                 />
               )}
-
+              {/* eslint-enable */}
               <div className="mobile_table_worklist">
                 <MobileDataRow />
                 <MobileDataRow />

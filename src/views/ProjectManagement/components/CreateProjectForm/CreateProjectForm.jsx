@@ -78,6 +78,21 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
     dispatch(updateProject(payloadData));
   };
 
+  const handelEditCancel = () => {
+    handelClose();
+
+    // eslint-disable-next-line
+    projectData.startDate = moment(projectData.startDate, 'YYYY-MM-DD').format(
+      'DD MMM YYYY'
+    );
+
+    // eslint-disable-next-line
+    projectData.completionDate = moment(
+      projectData.completionDate,
+      'YYYY-MM-DD'
+    ).format('DD MMM YYYY');
+  };
+
   React.useEffect(() => {
     if (editForm) {
       const tempProjectData = projectData;
@@ -176,7 +191,11 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
           </span>
         </div>
         <div className="create-project-form-submit-div">
-          <button className="cancel-button" onClick={handelClose} type="button">
+          <button
+            className="cancel-button"
+            onClick={editForm ? handelEditCancel : handelClose}
+            type="button"
+          >
             {t('cancel')}
           </button>
           <button

@@ -24,10 +24,14 @@ const Projects = () => {
     setIsOpen(open);
   };
 
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="projects-base-div">
       <Drawer anchor="right" onClose={toggleDrawer(false)} open={isOpen}>
-        <CreateProjectForm editForm />
+        <CreateProjectForm editForm handelClose={handleClose} />
       </Drawer>
 
       <div className="project-title-div">

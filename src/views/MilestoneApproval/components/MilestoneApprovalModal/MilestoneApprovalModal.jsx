@@ -1,41 +1,32 @@
 import './MilestoneApprovalModal.scss';
 
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-// useDispatch,
-// import { updateMilestone } from '../../../../redux/milestone-management/milestone-management.action';
+import { updateMilestone } from '../../../../redux/milestone-management/milestone-management.action';
 import {
   getUserAuthToken,
   getUserData,
 } from '../../../../redux/user-redux/user.selectors';
 
-const MilestoneApprovalModal = ({ handelClose, milestoneNr }) => {
-  const milestoneId = milestoneNr;
+const MilestoneApprovalModal = ({ handelClose, milestoneNr, milestoneId }) => {
   const [description, setDescription] = React.useState('');
   const authToken = useSelector(getUserAuthToken);
   const currentUser = useSelector(getUserData);
+  const dispatch = useDispatch();
 
-  // const dispatch = useDispatch();
-
-  const handleMilestoneApproval = (e) => {
+  const handleApprovalOfMilestone = (e) => {
     e.preventDefault();
-    // const currentDate = new Date();
-    // `${currentDate.getDate()}/${
-    // currentDate.getMonth() + 1
-    // }/${currentDate.getFullYear()}`
-    const data = {
+    const currentData = {
       authToken,
-      id: milestoneId,
-      date: '10 Nov 2001',
       desc: description,
-      userName: currentUser.userData.id,
+      userId: currentUser.id,
+      date: moment(new Date()).format('DD MMM YYYY'),
+      milestoneId,
     };
-    //   dispatch(updateMilestone(data));
-
-    console.log('Milesotne');
-    console.log(data);
+    dispatch(updateMilestone(currentData));
   };
 
   return (
@@ -47,7 +38,7 @@ const MilestoneApprovalModal = ({ handelClose, milestoneNr }) => {
       <div className="milestone-approval-modal-body">
         <div>
           <label>Milestone Nr</label>
-          <input disabled value={milestoneId} />
+          <input disabled value={milestoneNr} />
         </div>
         <div>
           <label>Description</label>
@@ -65,13 +56,13 @@ const MilestoneApprovalModal = ({ handelClose, milestoneNr }) => {
         >
           Cancel
         </span>
-        <span
-          className="milestone-approval-button-approve"
-          onClick={(e) => handleMilestoneApproval(e)}
-          type="submit"
+        <button
+          className="handle-approve-button"
+          onClick={handleApprovalOfMilestone}
+          type="button"
         >
-          Approve
-        </span>
+          Approve Milestone
+        </button>
       </div>
     </div>
   );
@@ -80,7 +71,8 @@ const MilestoneApprovalModal = ({ handelClose, milestoneNr }) => {
 /* eslint-disable */
 MilestoneApprovalModal.propTypes = {
   handelClose: PropTypes.func,
-  milestoneNr: PropTypes.string,
+  milestoneNr: PropTypes.number,
+  milestoneId: PropTypes.any,
 };
 
 export default MilestoneApprovalModal;

@@ -1,4 +1,5 @@
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
+import { toast } from 'react-toastify';
 
 import { SIGNIN, SIGNUP } from '../../services/api';
 import USER_ACTION_TYPES from './user.action-types';
@@ -13,6 +14,15 @@ export function* registerNewUser({ payload }) {
   try {
     const registerUser = yield call(SIGNUP, payload);
     yield put(userSignupSuccess(registerUser.status));
+    yield toast.success('Please Check Your Email For Verification Link!', {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   } catch (error) {
     yield put(userSignupFailure(error.response.data));
   }

@@ -5,6 +5,10 @@
   padding: 24px;
   height: 100%;
 
+  sup {
+    color: red;
+  }
+
   @media (max-width: 768.98px) {
     width: 100vw;
   }
