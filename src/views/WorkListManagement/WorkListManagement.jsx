@@ -21,6 +21,7 @@ import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 // import WorkListColumns from './WorkListColumns';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import { getAllCompany } from '../../redux/company-redux/company.actions';
 import { getCompaniesList } from '../../redux/company-redux/company.selectors';
 import { getAllProjects } from '../../redux/project-management-redux/project.selector';
@@ -32,12 +33,15 @@ import {
 import {
   deselectAllWorkList,
   getWorkList,
+  resetDeleteTask,
   selectAllWorkList,
 } from '../../redux/worklist-management-redux/worklist.actions';
 import {
   getAllWorkListData,
+  getDeleteWorkListSuccess,
   getIfAllWorkListSelected,
   getIsAllWorklistLoading,
+  getIsDeleteWorkListLoading,
   getSelectedWorkList,
 } from '../../redux/worklist-management-redux/worklist.selector';
 import AuthenticatedRoute from '../../routes/AuthenticatedRoute';
@@ -63,6 +67,8 @@ const WorkListManagement = () => {
   const workListData = useSelector(getAllWorkListData);
   const projectList = useSelector(getAllProjects);
   const companyList = useSelector(getCompaniesList);
+  const deleteWorkListSuccess = useSelector(getDeleteWorkListSuccess);
+  const isDeleteWorkListLoading = useSelector(getIsDeleteWorkListLoading);
   const theme = useTheme();
 
   const open = Boolean(menuOpen);
@@ -173,10 +179,6 @@ const WorkListManagement = () => {
         });
       }
 
-      console.log(filteredData);
-      console.log(companyName.length);
-      console.log(projectName.length);
-
       setFilteredList(filteredData);
 
       if (ifAllSelected) {
@@ -185,10 +187,16 @@ const WorkListManagement = () => {
         setCheckbox(false);
       }
     }
-  }, [projectName, companyName]);
+
+    if (deleteWorkListSuccess) {
+      dispatch(getWorkList(authToken));
+      dispatch(resetDeleteTask());
+    }
+  }, [projectName, companyName, isDeleteWorkListLoading]);
 
   return (
     <AuthenticatedRoute isAuthenticated={isAuthenticated}>
+      <GlobalSpinner isOpen={isDeleteWorkListLoading} />
       <Drawer
         anchor="right"
         onClose={() => handelCloseDrawer()}

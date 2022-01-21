@@ -87,7 +87,7 @@ const SigninPage = () => {
         });
       }
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, getError]);
 
   return (
     <div className={classes.signup_container}>

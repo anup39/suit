@@ -1,11 +1,10 @@
 import './user-form-styles.scss';
 
-import { yupResolver } from '@hookform/resolvers/yup';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { getAllCompany } from '../../../redux/company-redux/company.actions';
 import { getCompaniesList } from '../../../redux/company-redux/company.selectors';
@@ -16,13 +15,12 @@ import {
 } from '../../../redux/User-Role/role.actions';
 import { getUserRoles } from '../../../redux/User-Role/User-Role.selectors';
 import { FormHeader } from './styles/form-styles';
-import schema from './user.roles.schema';
 
 const UserRolesForms = ({
   editUser,
   handelCancel,
   userName,
-  userCompany,
+  userCompanyId,
   role,
 }) => {
   const dispatch = useDispatch();
@@ -30,42 +28,66 @@ const UserRolesForms = ({
   const roles = useSelector(getUserRoles);
   const companyList = useSelector(getCompaniesList);
 
-  const { register, handleSubmit, reset } = useForm({
-    resolver: yupResolver(schema),
-  });
+  const [roleId, setRoleId] = React.useState(role);
+  const [companyId, setCompanyId] = React.useState(userCompanyId);
+
   const { t } = useTranslation();
 
-  const handelAddUserRole = (userData) => {
-    const data = {
-      authToken: userAuthToken,
-      userData,
-    };
-    console.log(data);
-    dispatch(updateUserRoleAndCompany(data));
-    handelCancel();
-  };
-  const handelEditUser = () => {
-    // const data = {
-    //   authToken: userAuthToken,
-    //   userData: {
-    //     username: userName,
-    //     roles_id: userRole,
-    //   },
-    // };
+  const handelAddUserRole = (e) => {
+    e.preventDefault();
 
-    // dispatch(updateUserRoleAndCompany(data));
-    handelCancel();
+    if (!companyId || !roleId) {
+      toast.warn('Please Select All Fields!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      const data = {
+        authToken: userAuthToken,
+        userData: {
+          username: userName,
+          roles_id: roleId,
+          companies_id: companyId,
+        },
+      };
+      dispatch(updateUserRoleAndCompany(data));
+      handelCancel();
+    }
+  };
+
+  const handelEditUser = (e) => {
+    e.preventDefault();
+    if (!roleId) {
+      toast.warn('Please Select Valid Field!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      const data = {
+        authToken: userAuthToken,
+        userData: {
+          username: userName,
+          roles_id: roleId,
+        },
+      };
+      dispatch(updateUserRoleAndCompany(data));
+      handelCancel();
+    }
   };
 
   React.useEffect(() => {
     dispatch(userRoles(userAuthToken));
     dispatch(getAllCompany(userAuthToken));
-
-    reset({
-      username: userName,
-      companies_id: userCompany,
-      roles_id: role,
-    });
   }, []);
 
   return (
@@ -76,12 +98,13 @@ const UserRolesForms = ({
         <FormHeader>{t('editUserRole')}</FormHeader>
       )}
       {editUser ? (
-        <form className="userroles-form-container">
+        <form className="userroles-form-container" onSubmit={handelEditUser}>
           <label className="form_label">{t('username')}</label>
           <input className="form_inputs_disabled" disabled value={userName} />
 
           <label className="form_label"> {t('company')}</label>
-          <select className="form_inputs_disabled" disabled value={userCompany}>
+          <select className="form_inputs_disabled" disabled value={companyId}>
+            <option value="">No Company Is Assigned To The User</option>
             {companyList &&
               companyList.map((comp) => (
                 <option key={comp.id} value={comp.id}>
@@ -91,7 +114,13 @@ const UserRolesForms = ({
           </select>
 
           <label className="form_label"> {t('roles')}</label>
-          <select className="form_inputs">
+          <select
+            className="form_inputs"
+            onChange={(e) => setRoleId(e.target.value)}
+            value={roleId}
+          >
+            <option value="">Please Select A Role</option>
+
             {roles.map((val) => (
               <option key="roles" value={val.idRole}>
                 {val.name}
@@ -106,23 +135,25 @@ const UserRolesForms = ({
             <button
               className="submit-button"
               onClick={handelEditUser}
-              type="button"
+              type="submit"
             >
               {t('save')}
             </button>
           </div>
         </form>
       ) : (
-        <form className="form" onSubmit={handleSubmit(handelAddUserRole)}>
+        <form className="form" onSubmit={handelAddUserRole}>
           <label className="form_label">{t('username')}</label>
-          <input
-            className="form_inputs_disabled"
-            disabled
-            {...register('username')}
-          />
+          <input className="form_inputs_disabled" disabled value={userName} />
 
           <label className="form_label"> {t('company')}</label>
-          <select className="form_inputs" {...register('companies_id')}>
+          <select
+            className="form_inputs"
+            onChange={(e) => setCompanyId(e.target.value)}
+            value={companyId}
+          >
+            <option value="">Please Select A Company</option>
+
             {companyList &&
               companyList.map((comp) => (
                 <option key={comp.id} value={comp.id}>
@@ -132,7 +163,14 @@ const UserRolesForms = ({
           </select>
 
           <label className="form_label"> {t('roles')}</label>
-          <select className="form_inputs" {...register('roles_id')}>
+          <select
+            className="form_inputs"
+            onChange={(e) => setRoleId(e.target.value)}
+            value={roleId}
+            // defaultChecked={}
+          >
+            <option value="">Please Select A Role</option>
+
             {roles.map((val) => (
               <option key="roles" value={val.idRole}>
                 {val.name}
@@ -162,8 +200,8 @@ UserRolesForms.propTypes = {
   editUser: PropTypes.isRequired,
   handelCancel: PropTypes.isRequired,
   userName: PropTypes.string.isRequired,
-  userCompany: PropTypes.string.isRequired,
   role: PropTypes.string.isRequired,
+  userCompanyId: PropTypes.number.isRequired,
 };
 
 export default UserRolesForms;
