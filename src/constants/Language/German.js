@@ -57,6 +57,14 @@ const German = {
   users: 'Benutzer',
   update: 'Aktualisieren',
   editUser: 'Benutzer bearbeiten',
+  createProject: 'Projekt erstellen',
+  dashbord: 'Armaturenbrett',
+  projects: 'Projekte',
+  searchProject: 'Projekt suchen',
+  client: 'Klientin',
+  description: 'Beschreibung',
+  startDate: 'Startdatum',
+  completionDate: 'Fertigstellungstermin',
 };
 
 export default German;

@@ -58,6 +58,14 @@ const English = {
   users: 'Users',
   update: 'Update',
   editUser: 'Edit User',
+  createProject: 'Create Project',
+  dashbord: 'Dashbord',
+  projects: 'Projects',
+  searchProject: 'Search Project',
+  client: 'Client',
+  description: 'Description',
+  startDate: 'Start Date',
+  completionDate: 'Completion Date',
 };
 
 export default English;

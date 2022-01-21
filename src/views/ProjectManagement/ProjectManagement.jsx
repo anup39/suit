@@ -9,6 +9,7 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,6 +33,7 @@ import MobileDataRow from './mobile.data.row';
 
 const ProjectManagement = ({ userToken }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const [value, setValue] = React.useState(0);
 
@@ -71,11 +73,11 @@ const ProjectManagement = ({ userToken }) => {
   return (
     <BaseTemplate>
       <div className="header-wrapper">
-        <h2 className="header">Project Management</h2>
+        <h2 className="header">{t('projectManagement')}</h2>
         {value === 1 && (
           <button onClick={() => setAddNewProject(true)} type="button">
             <AddIcon />
-            Create Project
+            {t('createProject')}
           </button>
         )}
       </div>
@@ -85,8 +87,8 @@ const ProjectManagement = ({ userToken }) => {
           <Box sx={{ width: '100%' }}>
             <Box>
               <Tabs onChange={handleChange} value={value}>
-                <Tab label="Dashbord" />
-                <Tab label="Projects" />
+                <Tab label={t('dashbord')} />
+                <Tab label={t('projects')} />
               </Tabs>
             </Box>
             <ProjectManagementTabPannel index={0} value={value}>
@@ -108,7 +110,7 @@ const ProjectManagement = ({ userToken }) => {
                       <SearchIcon className="project-management-search-icon" />
                       <input
                         className="project-management-search-input"
-                        placeholder="Search Project"
+                        placeholder={t('searchProject')}
                       />
                     </div>
                   </div>
@@ -120,34 +122,36 @@ const ProjectManagement = ({ userToken }) => {
                       </span>
 
                       <span className="project-card-project-name">
-                        <p>Project Name</p>
+                        <p>{t('projectName')}</p>
                       </span>
 
                       <span className="project-card-client">
-                        <p>Client</p>
+                        <p>{t('client')}</p>
                       </span>
 
                       <span className="project-card-description">
-                        <p>Description</p>
+                        <p>{t('description')}</p>
                       </span>
 
                       <span className="project-card-start-date">
-                        <p>Start Date</p>
+                        <p>{t('startDate')}</p>
                       </span>
 
                       <span className="project-card-end-date">
-                        <p>Completion Date</p>
+                        <p>{t('completionDate')}</p>
                       </span>
 
                       <span className="project-card-last-update">
-                        <p>Last Update</p>
+                        <p>{t('lastUpdate')}</p>
                       </span>
 
                       <span className="project-card-user-last-update">
-                        <p>User Last Update</p>
+                        <p>{t('userlastUpdate')}</p>
                       </span>
 
-                      <span className="project-card-user-actions">Actions</span>
+                      <span className="project-card-user-actions">
+                        {t('actions')}
+                      </span>
                     </div>
                   </div>
 

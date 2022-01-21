@@ -146,6 +146,7 @@
 
       text-align: left;
       background: #f8f9fc;
+      word-break: break-all;
 
       color: #8094ae;
       font-size: 14px;
@@ -154,6 +155,7 @@
     th,
     td {
       min-width: 100px;
+      word-break: break-all;
 
       &.check-con {
         min-width: inherit;
