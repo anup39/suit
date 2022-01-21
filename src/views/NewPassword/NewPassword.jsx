@@ -1,18 +1,60 @@
 import './NewPassword.scss';
 
+import axios from 'axios';
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import logo from '../../assets/logo.png';
 import image from '../../assets/signin-info.png';
 
 const NewPassword = () => {
+  const [password, setPassword] = React.useState('');
+  const [confirmPassword, setConfirmPassword] = React.useState('');
+  const navigate = useNavigate();
   const searchParams = useLocation().search;
 
-  const handelResetPassword = (e) => {
+  const handelResetPassword = async (e) => {
     e.preventDefault();
     const verificationCode = new URLSearchParams(searchParams).get('code');
-    console.log(verificationCode);
+
+    if (password === confirmPassword) {
+      const url = `http://13.233.23.132:8080/api/auth/setForgetPassword?code=${verificationCode}&password=${password}&retypePassword=${confirmPassword}`;
+
+      try {
+        await axios.put(url);
+        toast.success('New Password Set!', {
+          position: 'top-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        navigate('/signin');
+      } catch (err) {
+        toast.error('Failed To Set Password!', {
+          position: 'top-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } else {
+      toast.warn('Passwords Must Be Same!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   return (
@@ -44,19 +86,19 @@ const NewPassword = () => {
               <input
                 className="form_input"
                 id="password"
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="New Password"
                 type="password"
               />
-              <span className="signup_error">{/* message */}</span>
 
               <label className="form_label">Confirm Password</label>
               <input
                 className="form_input"
                 id="confirmPassword"
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm Password"
                 type="password"
               />
-              <span className="signup_error">{/* message */}</span>
             </div>
             <button
               className="right_button"
