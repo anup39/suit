@@ -123,7 +123,7 @@ const UserRoles = () => {
   }, [deleteUserErrorMessage, isAuthenticated, isUpdateUserLoading]);
 
   return (
-    <BaseTemplate title="User Roles">
+    <BaseTemplate title="userRoles">
       <GlobalSpinner
         isOpen={isDeleteUserInBulkLoading || isUpdateUserLoading}
       />

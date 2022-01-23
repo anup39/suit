@@ -2,6 +2,7 @@ import './CreateProjectForm.scss';
 import '../../../../theme/ButtonColors.scss';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import { t } from 'i18next';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -149,7 +150,7 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
   return (
     <div className="create-project-form-base-div">
       {<GlobalSpinner isOpen={isCreateProjectLoading} />}
-      {editForm ? <h2>Edit Project</h2> : <h2>Create Project</h2>}
+      {editForm ? <h2>{t('editProject')}</h2> : <h2>{t('createProject')}</h2>}
 
       <form
         className="create-project-form"
@@ -159,22 +160,23 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
       >
         <div>
           <label>
-            Project Name <sup>*</sup>{' '}
+            {t('projectName')} <sup>*</sup>{' '}
           </label>
           <input {...register('name')} id="name" type="text" />
           <span className="form-error-text">{errors.name?.message}</span>
         </div>
         <div>
           <label>
-            Client <sup>*</sup>{' '}
+            {t('client')} <sup>*</sup>{' '}
           </label>
           <input {...register('clientName')} id="clientName" type="text" />
           <span className="form-error-text">{errors.clientName?.message}</span>
         </div>
         <div>
           <label>
-            Description <sup>*</sup>{' '}
+            {t('description')} <sup>*</sup>{' '}
           </label>
+
           <textarea
             rows={5}
             {...register('description')}
@@ -185,7 +187,7 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
         </div>
         <div>
           <label>
-            Start Date <sup>*</sup>{' '}
+            {t('startDate')} <sup>*</sup>{' '}
           </label>
           <input
             {...register('startDate')}
@@ -198,7 +200,7 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
         </div>
         <div>
           <label>
-            Completion Date <sup>*</sup>{' '}
+            {t('completionDate')} <sup>*</sup>{' '}
           </label>
           <input
             {...register('completionDate')}
@@ -220,14 +222,14 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
             onClick={editForm ? handelEditCancel : handelClose}
             type="button"
           >
-            Cancel
+            {t('cancel')}
           </button>
           <button
             className="create-project-submit-button"
             type="submit"
             variant="contained"
           >
-            Submit
+            {t('submit')}
           </button>
         </div>
       </form>

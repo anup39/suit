@@ -12,6 +12,7 @@ import {
 } from 'chart.js';
 import React from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner';
@@ -32,6 +33,8 @@ import { taskByProject } from '../../../../redux/worklist-management-redux/workl
 import { getTasksByProject } from '../../../../redux/worklist-management-redux/worklist.selector';
 
 const Dashboard = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
   const dashboardData = useSelector(getDashbordData);
@@ -151,13 +154,13 @@ const Dashboard = () => {
     <div className="project-management-dashboard-base-div">
       <GlobalSpinner isOpen={isGetDashbordByProjectIdLoading} />
       <div className="project-management-dashoard-graph graph-1">
-        <h5>% Completion</h5>
+        <h5>{t('completion')}</h5>
         <div className="pm-dg-wrap">
           <Bar data={data} options={options} />
         </div>
       </div>
       <div className="project-management-dashoard-graph graph-2">
-        <h5>Efficiency</h5>
+        <h5>{t('efficiency')}</h5>
 
         <div className="pm-dg-wrap">
           <Bar data={effiecncyData} options={options} />
@@ -165,18 +168,18 @@ const Dashboard = () => {
       </div>
 
       <div className="project-management-dashoard-table-1">
-        <h5>Overview</h5>
+        <h5>{t('overview')}</h5>
 
         <table>
           <thead>
             <tr>
-              <th>Project</th>
-              <th>% Completion</th>
-              <th>Nr Task</th>
-              <th>Nr Days Worked</th>
-              <th>Nr Days Spanned</th>
-              <th>Nr Task Change</th>
-              <th>Efficency</th>
+              <th>{t('projects')}</th>
+              <th>{t('completion')}</th>
+              <th>{t('NrTask')}</th>
+              <th>{t('NrDaysWorked')}</th>
+              <th>{t('NrDaysSpanned')}</th>
+              <th>{t('NrTaskChange')}</th>
+              <th>{t('efficiency')}</th>
             </tr>
           </thead>
           <tbody>
@@ -197,7 +200,7 @@ const Dashboard = () => {
       </div>
       <div className="project-management-dashoard-graph-3">
         <div className="head-wrap-1">
-          <h5>Project Status</h5>
+          <h5>{t('projectStatus')}</h5>
 
           <select onChange={handleChange}>
             <option>Select Project</option>
@@ -217,10 +220,10 @@ const Dashboard = () => {
                 data={chartData}
               />
             ) : (
-              <p>No Task Not Found!</p>
+              <p>{t('noTaskNotFound')}</p>
             )
           ) : (
-            <p> Please Select A Project</p>
+            <p> {t('pleaseSelectAProject')}</p>
           )}
         </div>
       </div>
@@ -229,22 +232,21 @@ const Dashboard = () => {
       <div className="project-management-dashoard-table-2">
         <h5>
           <span className="rect-wrap" />
-          Completed
+          {t('completed')}
         </h5>
         {!selectedProject ? (
           <p style={{ textAlign: 'center', marginTop: '20px' }}>
-            {' '}
-            Please Select A Project
+            {t('pleaseSelectAProject')}
           </p>
         ) : (
           taskDetailsByProject.length !== 0 && (
             <table>
               <thead>
                 <tr>
-                  <th>Task Id</th>
-                  <th>Task Name</th>
-                  <th>Task Description</th>
-                  <th>Is Milestone</th>
+                  <th>{t('taskId')}</th>
+                  <th>{t('taskName')}</th>
+                  <th>{t('taskDescription')}</th>
+                  <th>{t('isMilestone')}</th>
                 </tr>
               </thead>
               <tbody>

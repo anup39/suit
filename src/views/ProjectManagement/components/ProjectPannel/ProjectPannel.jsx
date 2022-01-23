@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import FieldUpdates from '../../../../components/shared/FieldUpdates/FieldUpdates';
@@ -18,6 +19,7 @@ import TabPanel from './TabPanel';
 
 const ProjectPannel = () => {
   const [value, setValue] = React.useState(0);
+  const { t } = useTranslation();
 
   const [isAddProjectDataOpen, setIsAddProjectDatatisOpen] =
     React.useState(false);
@@ -58,7 +60,7 @@ const ProjectPannel = () => {
           <Box sx={{ width: '100%' }}>
             <Box>
               <Tabs onChange={handleChange} value={value}>
-                <Tab label="Projects" />
+                <Tab label={t('projects')} />
                 <Tab label="Documents" />
                 <Tab label="Field Updates" />
                 <Tab label="Work List" />
