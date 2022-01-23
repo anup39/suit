@@ -16,6 +16,8 @@ const feedbackInitialState = {
   getFeedbackById: '',
   getFeedbackByIdError: '',
   isGetFeedbackByIdLoading: false,
+
+  feedbackImage: '',
 };
 
 // eslint-disable-next-line
@@ -133,6 +135,17 @@ const feedbackReducer = (state = feedbackInitialState, action) => {
         isGetFeedbackByIdLoading: false,
       };
 
+    case FEEDBACK_ACTIONS_TYPES.ADD_IMAGE:
+      return {
+        ...state,
+        feedbackImage: action.payload,
+      };
+
+    case FEEDBACK_ACTIONS_TYPES.REMOVE_IMAGE:
+      return {
+        ...state,
+        feedbackImage: '',
+      };
     default:
       return state;
   }

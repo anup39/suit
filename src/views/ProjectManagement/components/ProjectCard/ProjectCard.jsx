@@ -51,9 +51,9 @@ const ProjectCard = ({
 
   return (
     <div className="project-card-base-div">
-      <span className="project-card-check-input">
+      {/* <span className="project-card-check-input">
         <input type="checkbox" />
-      </span>
+      </span> */}
 
       <span className="project-card-project-name">
         <p>{projetName}</p>

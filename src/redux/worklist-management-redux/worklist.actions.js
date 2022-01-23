@@ -124,3 +124,18 @@ export const resetEditTaskData = () => ({
   type: WORKLIST_MANAGEMENT_ACTION_TYPE.RESET_EDIT_WORKLIST,
   payload: '',
 });
+
+export const changeTaskStatus = (data) => ({
+  type: WORKLIST_MANAGEMENT_ACTION_TYPE.CHANGE_TASK_STATUS,
+  payload: data,
+});
+
+export const changeTaskStatusSuccess = (data) => ({
+  type: WORKLIST_MANAGEMENT_ACTION_TYPE.CHANGE_TASK_STATUS_SUCCESS,
+  payload: data,
+});
+
+export const changeTaskStatusError = (data) => ({
+  type: WORKLIST_MANAGEMENT_ACTION_TYPE.CHANGE_TASK_STATUS_ERROR,
+  payload: data,
+});

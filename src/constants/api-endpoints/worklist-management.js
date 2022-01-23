@@ -6,6 +6,7 @@ const WORKLIST_MANAGEMENT_API = {
   DELETE_TASK_BY_ID: 'http://13.233.23.132:8080/api/deleteWorkListDetails',
   GET_TASKS_BY_PROJECT_ID:
     'http://13.233.23.132:8080/api/listWorkList?projectId=',
+  CHANGE_TASK: 'http://13.233.23.132:8080/api/changeTask',
 };
 
 export default WORKLIST_MANAGEMENT_API;

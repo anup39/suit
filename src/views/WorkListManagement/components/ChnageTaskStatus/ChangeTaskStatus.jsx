@@ -2,13 +2,28 @@ import './ChangeTaskStatus.scss';
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
+import { changeTaskStatus } from '../../../../redux/worklist-management-redux/worklist.actions';
 
 const ChangeTaskStatus = ({ handleClose, taskName, taskId, taskStatus }) => {
+  const [status, setStatus] = React.useState(taskStatus);
+
+  const authToken = useSelector(getUserAuthToken);
+  const dispatch = useDispatch();
+
   const handleChangeTaskStatus = (e) => {
     e.preventDefault();
 
-    console.log(taskId);
-    console.log(taskStatus);
+    const data = {
+      authToken,
+      data: {
+        taskIdValue: taskId,
+        taskStatus: status,
+      },
+    };
+    dispatch(changeTaskStatus(data));
   };
 
   return (
@@ -23,7 +38,7 @@ const ChangeTaskStatus = ({ handleClose, taskName, taskId, taskStatus }) => {
 
         <div>
           <label>Status</label>
-          <select>
+          <select onChange={(e) => setStatus(e.target.value)} value={status}>
             <option>Not assigned</option>
             <option>Not started</option>
             <option>In progress/started</option>

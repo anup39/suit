@@ -49,3 +49,11 @@ export const getDashbordByProjectIdError = (state) => {
 export const getImportProjectDataLoading = (state) => {
   return state.projectManagement.isImportProjectDataLoading;
 };
+
+export const getUpdateProjectSuccess = (state) => {
+  return state.projectManagement.updateProjectData;
+};
+
+export const getProjcectDocuments = (state) => {
+  return state.projectManagement.currentProjectDocuments;
+};

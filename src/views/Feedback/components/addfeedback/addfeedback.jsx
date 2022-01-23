@@ -18,6 +18,7 @@ import {
 import {
   getAddFeedbackError,
   getAddFeedbackSuccess,
+  getFeebackImage,
 } from '../../../../redux/feedback-redux/feedback.selector';
 import {
   getUserAuthToken,
@@ -28,6 +29,8 @@ import UploadDocumentsModal from './upload.documents.modal';
 
 const AddFeedback = ({ isOpen, isClose }) => {
   const [modalOpen, setModalOpen] = React.useState(false);
+
+  // const [feedbackImage, setfeedbackImage] = React.useState('');
   const [rating, setRating] = React.useState('');
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
@@ -43,6 +46,7 @@ const AddFeedback = ({ isOpen, isClose }) => {
   const userData = useSelector(getUserData);
   const addFeedbackSuccess = useSelector(getAddFeedbackSuccess);
   const addFeedbackError = useSelector(getAddFeedbackError);
+  const feedbackImage = useSelector(getFeebackImage);
 
   const {
     register,
@@ -58,6 +62,11 @@ const AddFeedback = ({ isOpen, isClose }) => {
     if (rating) {
       data.satisfactionLevel = rating;
     }
+
+    if (feedbackImage) {
+      data.documentDetails = feedbackImage;
+    }
+
     data.idUser = userData.id;
     console.log(authToken);
     const dataToSend = { authToken, feedBackDetails: data };

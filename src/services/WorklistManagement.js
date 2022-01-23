@@ -90,3 +90,19 @@ export const GET_TASK_BY_PROJECT = async (payload) => {
   });
   return taskByProjectId.data;
 };
+
+export const CHANGE_TASK_STATUS = async (payload) => {
+  const { authToken, data } = payload;
+  const newToken = await REFERSH_TOKEN(authToken);
+
+  const url = WORKLIST_MANAGEMENT_API.CHANGE_TASK;
+
+  const changeTaskStatus = await axios(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${newToken}`,
+    },
+    data,
+  });
+  return changeTaskStatus.data;
+};

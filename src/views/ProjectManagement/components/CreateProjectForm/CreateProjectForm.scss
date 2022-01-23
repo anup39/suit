@@ -3,6 +3,10 @@
   padding: 24px;
   height: 100%;
 
+  sup {
+    color: red;
+  }
+
   @media (max-width: 768.98px) {
     width: 100vw;
   }
@@ -13,7 +17,6 @@
     font-weight: 500;
     margin: 0 0 30px 0;
   }
-
 }
 
 .create-project-form {
@@ -23,10 +26,9 @@
   margin-top: 30px;
   margin-bottom: 20px;
 
-  >div {
+  > div {
     width: 100%;
     margin-bottom: 15px;
-
   }
 
   label {
@@ -83,7 +85,6 @@
 }
 
 .create-project-form-submit-div .cancel-button {
-
   background: transparent;
   color: #8098b8;
 }

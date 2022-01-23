@@ -27,6 +27,10 @@ const worklistInitialState = {
 
   selectedWorkList: [],
   isSelectAllWorkList: false,
+
+  isChangeTaskStatusLoading: false,
+  changeTaskStatusData: '',
+  changeTaskStatusError: '',
 };
 
 // eslint-disable-next-line
@@ -228,6 +232,29 @@ const WorkListManagementReducer = (state = worklistInitialState, action) => {
         ),
       };
 
+    case WORKLIST_MANAGEMENT_ACTION_TYPE.CHANGE_TASK_STATUS:
+      return {
+        ...state,
+        isChangeTaskStatusLoading: true,
+        changeTaskStatusData: '',
+        changeTaskStatusError: '',
+      };
+
+    case WORKLIST_MANAGEMENT_ACTION_TYPE.CHANGE_TASK_STATUS_SUCCESS:
+      return {
+        ...state,
+        isChangeTaskStatusLoading: false,
+        changeTaskStatusData: action.payload,
+        changeTaskStatusError: '',
+      };
+
+    case WORKLIST_MANAGEMENT_ACTION_TYPE.CHANGE_TASK_STATUS_ERROR:
+      return {
+        ...state,
+        isChangeTaskStatusLoading: false,
+        changeTaskStatusData: '',
+        changeTaskStatusError: action.payload,
+      };
     default:
       return state;
   }

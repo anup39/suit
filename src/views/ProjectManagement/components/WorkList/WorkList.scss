@@ -5,6 +5,14 @@
   width: 100%;
   overflow: auto;
 
+  .no-task-found-text {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   @media (max-width: 768px) {
     margin-top: 0;
   }
@@ -15,7 +23,7 @@
   align-items: center;
   padding: 0 15px;
   height: 60px;
-  border-bottom: 1px solid #D4DEEA;
+  border-bottom: 1px solid #d4deea;
 
   @media (max-width: 768px) {
     justify-content: space-between;
@@ -27,8 +35,8 @@
   height: 30px;
   width: 100%;
   padding-left: 28px;
-  border: 1px solid #D4DEEA;
-  color: #8094AE;
+  border: 1px solid #d4deea;
+  color: #8094ae;
   border-radius: 3px;
 }
 
@@ -47,7 +55,7 @@
   position: absolute;
   margin-top: 6px;
   margin-left: 8px;
-  color: #8094AE;
+  color: #8094ae;
   font-size: 18px;
 }
 
@@ -60,8 +68,6 @@
   @media (max-width: 768px) {
     width: 100%;
   }
-
-
 }
 
 .work-list-table-header {
@@ -69,11 +75,11 @@
   width: 100%;
   height: 40px;
   font-size: 14px;
-  border-bottom: 1px solid #D4DEEA;
-  background: #F8F9FC;
+  border-bottom: 1px solid #d4deea;
+  background: #f8f9fc;
   font-weight: 600;
   // padding: 0px 7px;
-  color: #8094AE;
+  color: #8094ae;
 
   @media (max-width: 991.98px) {
     display: none;
@@ -98,8 +104,6 @@
 
   @media (max-width: 1024px) {
     height: calc(100vh - 411px);
-
-
   }
 
   @media (max-width: 991.98px) {
@@ -154,7 +158,7 @@
     display: block;
   }
 
-  >div:nth-child(even) {
+  > div:nth-child(even) {
     background: #d4deea;
 
     .grid_3_1 {

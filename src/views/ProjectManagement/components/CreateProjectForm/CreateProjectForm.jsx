@@ -15,10 +15,13 @@ import {
   getCreateProjectError,
   getCreateProjectLoadingStatus,
   getProjectData,
+  getUpdateProjectSuccess,
 } from '../../../../redux/project-management-redux/project.selector';
 import {
   createNewProject,
+  getProjectList,
   resetNewProjectData,
+  resetUpdateProjectData,
   updateProject,
 } from '../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
@@ -31,6 +34,8 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
   const isCreateProjectLoading = useSelector(getCreateProjectLoadingStatus);
   const isCreateProjectError = useSelector(getCreateProjectError);
   const createdProjectData = useSelector(getCreateProjectData);
+  const updateProjectSuccess = useSelector(getUpdateProjectSuccess);
+  const [startDateValue, setStartDateValue] = React.useState('');
 
   const {
     register,
@@ -101,7 +106,7 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
         tempProjectData.startDate,
         'DD MMM YYYY'
       ).format('YYYY-MM-DD');
-
+      setStartDateValue(tempProjectData.startDate);
       // eslint-disable-next-line
       tempProjectData.completionDate = moment(
         tempProjectData.completionDate,
@@ -109,6 +114,11 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
       ).format('YYYY-MM-DD');
 
       reset(tempProjectData);
+
+      if (updateProjectSuccess) {
+        dispatch(resetUpdateProjectData());
+        handelEditCancel();
+      }
     } else if (isCreateProjectError) {
       toast.error('Failed to Create New Project!', {
         position: 'top-center',
@@ -131,13 +141,13 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
         progress: undefined,
       });
       handelClose();
+      dispatch(getProjectList(authToken));
       dispatch(resetNewProjectData());
     }
-  }, [isCreateProjectLoading, projectData]);
+  }, [isCreateProjectLoading, projectData, updateProjectSuccess]);
 
   return (
     <div className="create-project-form-base-div">
-      {}
       {<GlobalSpinner isOpen={isCreateProjectLoading} />}
       {editForm ? <h2>Edit Project</h2> : <h2>Create Project</h2>}
 
@@ -148,17 +158,23 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
         }
       >
         <div>
-          <label>Project Name</label>
+          <label>
+            Project Name <sup>*</sup>{' '}
+          </label>
           <input {...register('name')} id="name" type="text" />
           <span className="form-error-text">{errors.name?.message}</span>
         </div>
         <div>
-          <label>Client</label>
+          <label>
+            Client <sup>*</sup>{' '}
+          </label>
           <input {...register('clientName')} id="clientName" type="text" />
           <span className="form-error-text">{errors.clientName?.message}</span>
         </div>
         <div>
-          <label>Description</label>
+          <label>
+            Description <sup>*</sup>{' '}
+          </label>
           <textarea
             rows={5}
             {...register('description')}
@@ -168,21 +184,30 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
           <span className="form-error-text">{errors.description?.message}</span>
         </div>
         <div>
-          <label>Start Date</label>
+          <label>
+            Start Date <sup>*</sup>{' '}
+          </label>
           <input
             {...register('startDate')}
             id="startDate"
             min={new Date().toISOString().split('T')[0]}
+            onChange={(e) => setStartDateValue(e.target.value)}
             type="date"
           />
           <span className="form-error-text">{errors.startDate?.message}</span>
         </div>
         <div>
-          <label>Completion Date</label>
+          <label>
+            Completion Date <sup>*</sup>{' '}
+          </label>
           <input
             {...register('completionDate')}
             id="completionDate"
-            min={new Date().toISOString().split('T')[0]}
+            min={
+              !startDateValue
+                ? new Date().toISOString().split('T')[0]
+                : startDateValue
+            }
             type="date"
           />
           <span className="form-error-text">

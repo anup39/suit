@@ -2,6 +2,7 @@ import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 import { toast } from 'react-toastify';
 
 import {
+  CHANGE_TASK_STATUS,
   CREATE_NEW_WORKLIST,
   DELETE_TASK_BY_ID,
   GET_ALL_WORKLIST,
@@ -12,6 +13,8 @@ import WORKLIST_MANAGEMENT_ACTION_TYPE from './worklist.action-types';
 import {
   addWorkListError,
   addWorkListSuccess,
+  changeTaskStatusError,
+  changeTaskStatusSuccess,
   deleteTaskByIDError,
   deleteTaskByIDSuccess,
   editWorkListError,
@@ -157,6 +160,41 @@ export function* onGetTaskByProject() {
   );
 }
 
+export function* changeTaskStatus(data) {
+  try {
+    const taskStatus = yield call(CHANGE_TASK_STATUS, data.payload);
+    yield put(changeTaskStatusSuccess(taskStatus));
+    yield toast.success('Task Status Changed!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  } catch (error) {
+    yield put(changeTaskStatusError(error.response.data));
+
+    yield toast.error('Failed To Change Task Status!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+}
+
+export function* onChangeTaskStatus() {
+  yield takeLatest(
+    WORKLIST_MANAGEMENT_ACTION_TYPE.CHANGE_TASK_STATUS,
+    changeTaskStatus
+  );
+}
+
 export function* worklistManagementSaga() {
   yield all([
     call(onGetAllWorkListData),
@@ -165,5 +203,6 @@ export function* worklistManagementSaga() {
     call(onTaskById),
     call(onDeleteTaskById),
     call(onGetTaskByProject),
+    call(onChangeTaskStatus),
   ]);
 }
