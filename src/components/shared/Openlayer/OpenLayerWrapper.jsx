@@ -12,6 +12,7 @@ import XYZ from 'ol/source/XYZ';
 import { transform } from 'ol/proj';
 import { toStringXY } from 'ol/coordinate';
 import { fromLonLat } from 'ol/proj';
+import TileWMS from 'ol/source/TileWMS';
 
 function MapWrapper(props) {
   // set intial state
@@ -91,6 +92,37 @@ function MapWrapper(props) {
       });
     }
   }, [props.features]);
+
+  useEffect(() => {
+    if(map){
+      if (props.wmsLayers.length) {
+        console.log(map,'map');
+        // may be null on first render
+
+        props.wmsLayers.forEach((layer,i)=> {
+            const tileLayer =new TileLayer({
+              source: new TileWMS({
+              // crossOrigin: 'anonymous',
+              // url:`http://13.233.23.132:7080/geoserver/`,
+              url: 'http://13.233.23.132:7080/geoserver/Anuptest3/wms',
+              params: {'FORMAT': 'image/png', 
+                   'VERSION': '1.1.1',
+                   tiled: true,
+                  "STYLES": '',
+                  "LAYERS": `Anuptest3:${layer.name}`,
+            }
+            }),
+          });
+          tileLayer.setZIndex(5-i);
+          map.addLayer(tileLayer);
+        });
+        // fit map to feature extent (with 100px of padding)
+        // map.getView().fit(featuresLayer.getSource().getExtent(), {
+        //   padding: [100, 100, 100, 100],
+        // });
+      }
+    }
+  }, [props.wmsLayers,map]);
 
   // map click handler
   const handleMapClick = (event) => {
