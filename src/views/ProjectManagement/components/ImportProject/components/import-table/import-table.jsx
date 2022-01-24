@@ -1,10 +1,30 @@
-import Button from '@mui/material/Button';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import {
+  getProjcectDocuments,
+  getProjectData,
+} from '../../../../../../redux/project-management-redux/project.selector';
+import { projectDocuments } from '../../../../../../redux/project-management-redux/project-management.actions';
+import { getUserAuthToken } from '../../../../../../redux/user-redux/user.selectors';
 import classes from './import-table.styles.module.scss';
 import DatagridRow from './table-row';
 
 const ImportDataGrid = () => {
+  const dispatch = useDispatch();
+  const authToken = useSelector(getUserAuthToken);
+  const currentProject = useSelector(getProjectData);
+  const currentProjectDocuments = useSelector(getProjcectDocuments);
+
+  React.useEffect(() => {
+    const data = {
+      authToken,
+      projectId: currentProject.id,
+    };
+
+    dispatch(projectDocuments(data));
+  }, []);
+
   return (
     <div className={classes.datagrid_contaier}>
       <div className={classes.datagrid_head} />
@@ -24,33 +44,16 @@ const ImportDataGrid = () => {
             </tr>
           </thead>
           <tbody className={classes.table_body}>
-            <DatagridRow />
-            <DatagridRow />
-            <DatagridRow />
-            <DatagridRow />
-            <DatagridRow />
-            <DatagridRow />
-            <DatagridRow />
-            <DatagridRow />
-            <DatagridRow />
+            {currentProjectDocuments && currentProjectDocuments.length === 0 ? (
+              <div className={classes.no_data_found}>
+                <p style={{ textAlign: 'center' }}>No Data Found!</p>
+              </div>
+            ) : (
+              currentProjectDocuments &&
+              currentProjectDocuments.map(() => <DatagridRow key="test" />)
+            )}
           </tbody>
         </table>
-        <div className={classes.table_slider_container}>
-          <div className={classes.table_slider}>
-            <span className={classes.previous_button}>
-              <Button disabled variant="outlined">
-                Prev
-              </Button>
-            </span>
-            <div className={classes.page_buttons}>
-              <span className={classes.chapter_button}>1</span>
-              <span className={classes.chapter_button}>2</span>
-            </div>
-            <span className={classes.next_button}>
-              <Button variant="outlined">Next</Button>
-            </span>
-          </div>
-        </div>
       </div>
     </div>
   );

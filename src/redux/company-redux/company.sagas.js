@@ -5,6 +5,7 @@ import {
   CREATE_COMPANY,
   DELETE_COMPANY_WITH_ID,
   GET_ALL_COMPANY,
+  UPDATE_COMPANY,
 } from '../../services/api/companyManagement';
 import COMPANY_ACTION_TYPES from './company.action-types';
 import {
@@ -14,6 +15,8 @@ import {
   getAllCompanyError,
   getAllCompanySuccess,
   succeedCreateCompany,
+  updateCompanyError,
+  updateCompanySuccess,
 } from './company.actions';
 
 export function* createNewCompany(payload) {
@@ -103,10 +106,44 @@ export function* onDeleteCompanyStart() {
   yield takeLatest(COMPANY_ACTION_TYPES.DELETE_COMPANY_START, deleteCompany);
 }
 
+export function* updateCompany({ payload }) {
+  try {
+    const updateCompanyData = yield call(UPDATE_COMPANY, payload);
+    yield put(updateCompanySuccess(updateCompanyData));
+    yield toast.success('Company Updated Successfully!', {
+      position: 'top-center',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    yield put(updateCompanySuccess(''));
+  } catch (err) {
+    yield put(updateCompanyError(err.response.data));
+    yield toast.error('Failed To Update Company!', {
+      position: 'top-center',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    yield put(updateCompanyError(''));
+  }
+}
+
+export function* onUpdateCompany() {
+  yield takeLatest(COMPANY_ACTION_TYPES.UPDATE_COMPANY, updateCompany);
+}
+
 export function* companySagas() {
   yield all([
     call(onDeleteCompanyStart),
     call(onCompanyCreateStart),
     call(onAllCompanyData),
+    call(onUpdateCompany),
   ]);
 }

@@ -1,0 +1,150 @@
+.milestone-base {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 60%;
+  max-height: 95%;
+  background-color: rgb(255, 255, 255);
+  overflow: auto;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+}
+
+.milestone-content {
+  border: 1px solid #D4DEEA;
+  margin: 20px 30px;
+  border-radius: 3px;
+}
+
+.content-header {
+  height: 50px;
+  border-bottom: 1px solid #D4DEEA;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    height: initial;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+  }
+}
+
+.content-title {
+  margin-right: 10px;
+  font-size: 14px;
+  color: #364A63;
+  font-weight: 500;
+}
+
+.confirm-status-span {
+  color: #1EE0AC;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rejected-status-span {
+  font-size: 12px;
+
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-icon {
+  padding-right: 5px;
+}
+
+.milestone-download-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 20px;
+  background-color: #0160E0;
+  border-radius: 5px;
+  margin-left: auto;
+
+  color: white;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    margin-left: initial;
+    margin-top: 20px;
+  }
+}
+
+.milestone-content-body {
+  padding: 15px;
+
+}
+
+.milestone-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+.milestone-details-label {
+  color: #526484;
+  margin: 0;
+  margin-bottom: 8px;
+  font-size: 14px;
+
+}
+
+.milestone-details-data {
+  width: 100%;
+  border: 1px solid #D4DEEA;
+  color: #364A63;
+  line-height: initial;
+  font-size: 14px;
+  padding: 15px;
+  border-radius: 3px;
+}
+
+.mt-24 {
+  margin-top: 20px;
+}
+
+.milestone-details-description {
+  min-height: 70px;
+  font-size: 14px;
+
+  max-height: 130px;
+  overflow: auto;
+  width: 100%;
+  border: 1px solid #D4DEEA;
+  padding: 15px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.milestone-btm {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 30px 20px 30px;
+
+  button {
+    border: 1px solid #0160E0;
+    border-radius: 5px;
+    color: #0160E0;
+    font-size: 14px;
+    padding: 7px 14px;
+    background: white;
+  }
+}

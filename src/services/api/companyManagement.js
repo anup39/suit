@@ -17,6 +17,20 @@ export const CREATE_COMPANY = async (data) => {
   return createResponse;
 };
 
+export const UPDATE_COMPANY = async (data) => {
+  const { authToken, updatedData } = data;
+
+  const newToken = await REFERSH_TOKEN(authToken);
+  const updateResponse = await axios(COMPANY_MANAGEMENT.update, {
+    headers: {
+      Authorization: `Bearer ${newToken}`,
+    },
+    data: updatedData,
+    method: 'PUT',
+  });
+  return updateResponse;
+};
+
 export const GET_ALL_COMPANY = async (payload) => {
   const newToken = await REFERSH_TOKEN(payload.payload);
 

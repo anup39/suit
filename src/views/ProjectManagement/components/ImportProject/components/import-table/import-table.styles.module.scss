@@ -55,6 +55,7 @@
 
 .table_body {
   border-bottom: 1px solid #ddd;
+  min-height: 500px;
 }
 
 .table_slider_container {
@@ -79,4 +80,9 @@
   :first-child {
     background: #1976d2;
   }
+}
+
+.no_data_found {
+  width: 100%;
+  text-align: center;
 }

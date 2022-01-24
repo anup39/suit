@@ -21,6 +21,10 @@ const COMPANY_INITIAL_STATE = {
   deleteCompanyError: undefined,
   isDeleteOnProgress: false,
   deletingItem: {},
+
+  isUpdateCompanyLoading: false,
+  updateCompanyData: '',
+  updateCompanyError: '',
 };
 
 // eslint-disable-next-line default-param-last
@@ -104,6 +108,30 @@ const companyReducer = (state = COMPANY_INITIAL_STATE, action) => {
         ...state,
         isDeleteOnProgress: false,
         deleteCompanyError: action.payload,
+      };
+
+    case COMPANY_ACTION_TYPES.UPDATE_COMPANY:
+      return {
+        ...state,
+        isUpdateCompanyLoading: true,
+        updateCompanyData: '',
+        updateCompanyError: '',
+      };
+
+    case COMPANY_ACTION_TYPES.UPDATE_COMPANY_SUCCESS:
+      return {
+        ...state,
+        isUpdateCompanyLoading: false,
+        updateCompanyData: action.payload,
+        updateCompanyError: '',
+      };
+
+    case COMPANY_ACTION_TYPES.UPDATE_COMPANY_ERROR:
+      return {
+        ...state,
+        isUpdateCompanyLoading: false,
+        updateCompanyData: '',
+        updateCompanyError: action.payload,
       };
 
     default:

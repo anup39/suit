@@ -26,3 +26,7 @@ export const getCompanyDeleteSuccess = (state) => {
 export const getCompanyDeleteError = (state) => {
   return state.company.deleteCompanySuccess;
 };
+
+export const getDeleteCompanyLoading = (state) => {
+  return state.company.isUpdateCompanyLoading;
+};

@@ -1,0 +1,91 @@
+@import '../../../../../theme/ThemeColors';
+
+.field-update-card-base {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid black;
+  padding: 15px 20px;
+  display: table;
+}
+
+.field-update-card-base span {
+  display: table-cell;
+  table-layout: fixed;
+  vertical-align: middle;
+  font-size: $table-header-font-size;
+  color: $table-data-color-2;
+}
+
+.field-updates-body-checkInput {
+  width: 3%;
+}
+
+.field-updates-body-taskItem {
+  width: 10%;
+}
+
+.field-updates-body-fieldLogs {
+  width: 12%;
+}
+
+.field-updates-body-activityReport {
+  width: 13%;
+}
+
+.field-updates-body-changeRequest {
+  width: 15%;
+}
+
+.field-updates-body-milestoneApproval {
+  width: 20%;
+}
+
+.field-updates-body-status {
+  width: 13%;
+}
+
+.field-updates-body-controlActivity {
+  width: 10%;
+}
+
+.field-updates-body-actions {
+  width: 4%;
+}
+
+.milestone-accepted-icon {
+  color: $success-icon-color;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.milestone-rejected-icon {
+  color: $rejected-icon-color;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.field-update-status-select {
+  width: 80%;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+}
+
+.control-activity-icons {
+  color: $icon-color;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.webex-icon {
+  height: 25px;
+  cursor: pointer;
+  width: auto;
+}
+
+.filed-update-menu-icon {
+  color: $menu-icon-color;
+  cursor: pointer;
+  font-size: $menu-icon-size;
+}

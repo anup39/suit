@@ -244,5 +244,3 @@ CreateProjectForm.propTypes = {
 };
 
 export default CreateProjectForm;
-
-// TODO: FORM VALIDATION AND SUBMITTION

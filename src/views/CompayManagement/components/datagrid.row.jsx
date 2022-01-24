@@ -11,6 +11,7 @@ import {
   getCheckedCompany,
 } from '../../../redux/company-redux/company.actions';
 import CompanyUserAdd from './add-company-user/company-user';
+import CreateCompany from './create-company/companyCreate';
 import classes from './row.styles.module.scss';
 
 const DatagridRow = ({
@@ -32,11 +33,22 @@ const DatagridRow = ({
   const [list, setList] = React.useState({});
   const [render, setRender] = React.useState(false);
 
+  const data = {
+    name,
+    address,
+    city,
+    referenceContact,
+  };
+
+  const [openEditCompanyDrawer, setOpenEditCompanyDrawer] =
+    React.useState(false);
+
   const open = Boolean(anchorEl);
   const dispatch = useDispatch();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -46,6 +58,14 @@ const DatagridRow = ({
     setMenu(true);
   };
   const { t } = useTranslation();
+
+  const handleEditCompanyDrawer = () => {
+    handleClose();
+    setOpenEditCompanyDrawer(true);
+  };
+  const handleCloseEditCompanyDrawer = () => {
+    setOpenEditCompanyDrawer(false);
+  };
 
   const onCheckBoxSelect = (e) => {
     setRender(e.target.checked);
@@ -69,47 +89,55 @@ const DatagridRow = ({
   }, [isRender, render]);
 
   return (
-    <tr className={classes.row_container}>
-      <CompanyUserAdd handleClose={setMenu} isOpen={isMenu} />
-      <td className={classes.row_description}>
-        <input
-          checked={list?.checked}
-          className={classes.row_input}
-          onClick={onCheckBoxSelect}
-          type="checkbox"
-        />
-      </td>
-      <td className={classes.row_description}>{name}</td>
-      <td className={classes.row_description}>{address}</td>
-      <td className={classes.row_description}>{city}</td>
-      <td className={classes.row_description}>{referenceContact}</td>
-      <td className={classes.row_description}>{lastUpdate}</td>
-      <td className={classes.row_description}>{userLastUpdate}</td>
-      <td className={classes.row_description}>
-        <MoreHorizIcon
-          aria-controls="basic-menu"
-          aria-expanded={open ? 'true' : undefined}
-          aria-haspopup="true"
-          id="basic-button"
-          onClick={handleClick}
-        />
-        <Menu
-          anchorEl={anchorEl}
-          id="basic-menu"
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
-          onClose={handleClose}
-          open={open}
-        >
-          <MenuItem onClick={handleMenu}>{t('addUsers')}</MenuItem>
-          <MenuItem onClick={handleClose}>{t('editUser')}</MenuItem>
+    <>
+      <CreateCompany
+        isClose={handleCloseEditCompanyDrawer}
+        isEdit
+        isOpen={openEditCompanyDrawer}
+        prevData={data}
+      />
+      <tr className={classes.row_container}>
+        <CompanyUserAdd handleClose={setMenu} isOpen={isMenu} />
+        <td className={classes.row_description}>
+          <input
+            checked={list?.checked}
+            className={classes.row_input}
+            onClick={onCheckBoxSelect}
+            type="checkbox"
+          />
+        </td>
+        <td className={classes.row_description}>{name}</td>
+        <td className={classes.row_description}>{address}</td>
+        <td className={classes.row_description}>{city}</td>
+        <td className={classes.row_description}>{referenceContact}</td>
+        <td className={classes.row_description}>{lastUpdate}</td>
+        <td className={classes.row_description}>{userLastUpdate}</td>
+        <td className={classes.row_description}>
+          <MoreHorizIcon
+            aria-controls="basic-menu"
+            aria-expanded={open ? 'true' : undefined}
+            aria-haspopup="true"
+            id="basic-button"
+            onClick={handleClick}
+          />
+          <Menu
+            anchorEl={anchorEl}
+            id="basic-menu"
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+            onClose={handleClose}
+            open={open}
+          >
+            <MenuItem onClick={handleMenu}>{t('addUsers')}</MenuItem>
+            <MenuItem onClick={handleClose}>{t('editUser')}</MenuItem>
 
-          <MenuItem onClick={handleClose}>{t('edit')}</MenuItem>
-          <MenuItem onClick={handleClose}>{t('delete')}</MenuItem>
-        </Menu>
-      </td>
-    </tr>
+            <MenuItem onClick={handleEditCompanyDrawer}>{t('edit')}</MenuItem>
+            <MenuItem onClick={handleClose}>{t('delete')}</MenuItem>
+          </Menu>
+        </td>
+      </tr>
+    </>
   );
 };
 
