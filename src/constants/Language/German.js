@@ -44,7 +44,7 @@ const German = {
   edit: 'Bearbeiten',
   assignRole: 'Rolle zuweisen',
   createCompany: 'Unternehmen erstellen',
-  editCompany:'Unternehmen bearbeiten',
+  editCompany: 'Unternehmen bearbeiten',
   companySearch: 'Firmensuche',
   companyName: 'Name der Firma',
   address: 'Adresse',
