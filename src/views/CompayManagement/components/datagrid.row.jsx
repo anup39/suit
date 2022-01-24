@@ -34,6 +34,7 @@ const DatagridRow = ({
   const [render, setRender] = React.useState(false);
 
   const data = {
+    id,
     name,
     address,
     city,
@@ -130,10 +131,12 @@ const DatagridRow = ({
             open={open}
           >
             <MenuItem onClick={handleMenu}>{t('addUsers')}</MenuItem>
-            <MenuItem onClick={handleClose}>{t('editUser')}</MenuItem>
+            <MenuItem onClick={handleClose}>{t('editUsers')}</MenuItem>
 
-            <MenuItem onClick={handleEditCompanyDrawer}>{t('edit')}</MenuItem>
-            <MenuItem onClick={handleClose}>{t('delete')}</MenuItem>
+            <MenuItem onClick={handleEditCompanyDrawer}>
+              {t('editComapny')}
+            </MenuItem>
+            {/* <MenuItem onClick={handleClose}>{t('delete')}</MenuItem> */}
           </Menu>
         </td>
       </tr>

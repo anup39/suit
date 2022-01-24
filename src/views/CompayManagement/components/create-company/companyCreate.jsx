@@ -42,6 +42,7 @@ const CreateCompany = ({ isOpen, isClose, isEdit, prevData }) => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
+      id: prevData?.id,
       name: prevData?.name,
       address: prevData?.address,
       city: prevData?.city,
@@ -78,6 +79,9 @@ const CreateCompany = ({ isOpen, isClose, isEdit, prevData }) => {
     };
 
     dispatch(updateCompany(dataToSend));
+    setTimeout(() => {
+      dispatch(getAllCompany(userAccessToken));
+    }, 2000);
   };
 
   return (
@@ -93,9 +97,9 @@ const CreateCompany = ({ isOpen, isClose, isEdit, prevData }) => {
         sx={{ width: 400, padding: 3 }}
       >
         {isEdit ? (
-          <h3 className={classes.form_header}>Edit Company</h3>
+          <h3 className={classes.form_header}>{t('editCompany')}</h3>
         ) : (
-          <h3 className={classes.form_header}>{t('companyName')}</h3>
+          <h3 className={classes.form_header}>{t('createCompany')}</h3>
         )}
         {!isEdit ? (
           <form
@@ -104,7 +108,7 @@ const CreateCompany = ({ isOpen, isClose, isEdit, prevData }) => {
           >
             <div className={classes.form_input_container}>
               <label className={classes.form_label} htmlFor="name">
-                {t('username')}
+                {t('companyName')}
               </label>
               <input
                 className={classes.form_input}
@@ -184,13 +188,19 @@ const CreateCompany = ({ isOpen, isClose, isEdit, prevData }) => {
           >
             <div className={classes.form_input_container}>
               <label className={classes.form_label} htmlFor="name">
-                {t('username')}
+                {t('companyName')}
               </label>
               <input
                 className={classes.form_input}
                 {...register('name')}
                 id="name"
                 type="text"
+              />
+              <input
+                className={classes.form_input}
+                {...register('id')}
+                id="_id"
+                type="hidden"
               />
               <span className={classes.form_error}>{errors.name?.message}</span>
             </div>
