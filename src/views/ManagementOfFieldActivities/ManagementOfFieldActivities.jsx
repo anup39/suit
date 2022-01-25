@@ -59,14 +59,14 @@ const ManagementOfFieldActivities = () => {
                 <div className="mgmt-field-container">
                   <SearchIcon className="field-search-icon" />
                   <input
-                    className="field-input"
+                    className="field-input-mgmt"
                     placeholder={t('searchTask')}
                   />
                 </div>
                 <div className="mgmt-field-container">
                   <SearchIcon className="field-search-icon" />
                   <input
-                    className="field-input"
+                    className="field-input-mgmt"
                     placeholder={t('searchCompany')}
                   />
                 </div>
@@ -84,7 +84,7 @@ const ManagementOfFieldActivities = () => {
           </div>
           {!isMapView ? (
             <>
-              <div className="field-update-header">
+              <div className="mgmt-field-update-header">
                 {/* <span className="field-updates-header-checkInput">
                   <input type="checkbox" />
                 </span> */}

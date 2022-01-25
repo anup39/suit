@@ -32,7 +32,7 @@
   margin-right: 16px;
 }
 
-.field-input {
+.field-input-mgmt {
   height: 30px;
   width: 100%;
   padding-left: 28px;
@@ -70,20 +70,26 @@
   margin-right: 15px;
 }
 
-.field-update-header {
-  width: 100%;
-  height: 50px;
-  border-bottom: 1px solid black;
-  padding: 15px 20px;
+.mgmt-field-update-header {
   display: table;
-}
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  border-bottom: 1px solid #d4deea;
+  background: #f8f9fc;
+  font-weight: 600;
+  color: #8094ae;
 
-.field-update-header span {
-  display: table-cell;
-  table-layout: fixed;
-  font-size: $table-header-font-size;
-  font-weight: $table-header-font-weight;
-  color: $table-header-text-color;
+  span {
+    display: table-cell;
+    table-layout: fixed;
+    padding: 10px;
+    color: #8094ae;
+    font-weight: 600;
+    font-size: 14px;
+    // white-space: nowrap;
+    vertical-align: middle;
+  }
 }
 
 // .field-updates-header-checkInput {
