@@ -52,24 +52,24 @@ const ManagementOfFieldActivities = () => {
   return (
     <AuthenticatedRoute isAuthenticated={isAuthenticated}>
       <BaseTemplate title={t('managementOfFieldActivities')}>
-        <div className="field-update-base-div">
-          <div className="field-update-search-div">
+        <div className="mgmt-field-update">
+          <div className="mgmt-field-update-search-div">
             {!isMapView && (
               <>
-                <span>
+                <div className="mgmt-field-container">
                   <SearchIcon className="field-search-icon" />
                   <input
                     className="field-input"
                     placeholder={t('searchTask')}
                   />
-                </span>
-                <span>
+                </div>
+                <div className="mgmt-field-container">
                   <SearchIcon className="field-search-icon" />
                   <input
                     className="field-input"
                     placeholder={t('searchCompany')}
                   />
-                </span>
+                </div>
               </>
             )}
             {!isMapView ? (
