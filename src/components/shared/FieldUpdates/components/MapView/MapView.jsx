@@ -140,6 +140,13 @@ const MapView = ({ page }) => {
         return <div />;
     }
   };
+  // eslint-disable-next-line no-console
+  console.log(
+    `http://ecm.digital-twinsuite.com/VistaEcmWeb.aspx?LogonType=3&UserName=Administrator&Password=Asuite&Ap
+  pName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~
+  TASK_NAME=${filteredTaskByTaskId?.taskName} PROJ_NAME=${filteredTaskByTaskId?.projectsName}`,
+    'url'
+  );
   return (
     <div className="map-view-base-div">
       <div className="map-view-map-div">
