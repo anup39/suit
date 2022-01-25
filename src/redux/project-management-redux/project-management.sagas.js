@@ -250,6 +250,8 @@ export function* onUpdateProject() {
 export function* getSelectedProjectLayersList({ payload }) {
   try {
     const projectData = yield call(GET_SELECTED_PROJECT_LAYERS_LIST, payload);
+    // eslint-disable-next-line no-console
+    console.log(projectData, 'projectData');
     yield put(getSelectedProjectLayersListSuccess(projectData));
   } catch (err) {
     yield put(getSelectedProjectLayersListError(err.response.data));
