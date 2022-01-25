@@ -41,6 +41,10 @@ const PROJECT_MANAGEMENT_INITIAL_STATE = {
   ImportProjectData: '',
   isImportProjectDataLoading: false,
   ImportProjectDataError: '',
+
+  selectedProjectLayerList:[],
+  isSelectedProjectLayerListDataLoading: false,
+
 };
 
 const projectManagementReducer = (
@@ -302,6 +306,35 @@ const projectManagementReducer = (
         projectDashbordById: '',
         isprojectDashbordByIdLoading: false,
         projectDashbordByIdError: action.payload,
+      };
+    case PROJECT_MANAGEMENT_TYPES.GET_SELECTED_PROJECT_LAYERS_LIST:
+      return {
+        ...state,
+        // isSelectedProjectListLoading: true,
+        // projectList: [],
+        // projectListSuccess: false,
+        isSelectedProjectLayerListDataLoading:true,
+        selectedProjectLayerList:[],
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.GET_SELECTED_PROJECT_LAYERS_LIST_SUCCESS:
+      return {
+        ...state,
+        // isProjectListLoading: false,
+        // projectList: action.payload,
+        // projectListError: '',
+        isSelectedProjectLayerListDataLoading:false,
+        selectedProjectLayerList:action.payload,
+      };
+
+    case PROJECT_MANAGEMENT_TYPES.GET_SELECTED_PROJECT_LAYERS_LIST_ERROR:
+      return {
+        ...state,
+        // isProjectListLoading: false,
+        // projectList: [],
+        // projectListError: action.payload,
+        isSelectedProjectLayerListDataLoading:false,
+        selectedProjectLayerList:[],
       };
 
     default:
