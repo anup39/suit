@@ -1,6 +1,6 @@
 import './MapView.scss';
 
-import SearchIcon from '@mui/icons-material/Search';
+// import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -58,7 +58,11 @@ const MapView = () => {
       <div className="map-view-details-div">
         {/* <h5 className="map-view-assign-project-header">Assign Project</h5> */}
         <div className={classes.form_input_container}>
-          <label className={classes.form_label} htmlFor="name">
+          <label
+            className={classes.form_label}
+            htmlFor="name"
+            style={{ color: 'white' }}
+          >
             Project Name
           </label>
           <select
@@ -97,7 +101,7 @@ const MapView = () => {
           />
         </div>
         <div className="map-view-document-details-base">
-          <p>Document Details</p>
+          <p style={{ color: 'white' }}>Document Details</p>
           <div className="map-view-document-details">
             <span>
               <p>Geometry Type:</p>

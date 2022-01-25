@@ -17,6 +17,12 @@ import TileWMS from 'ol/source/TileWMS';
 import { get } from 'ol/proj';
 import { useDispatch } from 'react-redux';
 import { selectTaskId } from '../../../redux/project-management-redux/project-management.actions';
+// import Style from 'ol/style/Style';
+// import Fill from 'ol/style/Fill';
+// import Circle from 'ol/geom/Circle';
+// import Stroke from 'ol/style/Stroke';
+import {Circle, Fill, Stroke, Style} from 'ol/style';
+
 
 function MapWrapper(props) {
   const dispatch = useDispatch();
@@ -120,6 +126,20 @@ function MapWrapper(props) {
             featureProjection: get('EPSG:3857'),
           }),
         }),
+        style:new Style({
+          image: new Circle({
+            radius: 5 * 2,
+            fill: new Fill({
+              color: 'yellow',
+            }),
+            stroke: new Stroke({
+              color: 'black',
+              width: 5 / 2,
+            }),
+          }),
+          zIndex: Infinity,
+        })
+        // style: style,
       });
       setVectorLayer(projectTasks);
       map.addLayer(projectTasks);
