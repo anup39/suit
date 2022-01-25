@@ -2,6 +2,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import MapWrapper from '../../../components/shared/Openlayer/Openlayer';
 import classes from './styles/styles.map.module.scss';
@@ -24,6 +25,7 @@ const top100Films = [
 ];
 
 const filter = createFilterOptions();
+const { t } = useTranslation();
 
 const FieldMapView = () => {
   const [value, setValue] = React.useState(null);
@@ -31,14 +33,14 @@ const FieldMapView = () => {
     <div className={classes.mapview_container}>
       <div className={classes.mapview_header_container}>
         <h3 className={classes.mapview_header}>
-          Management of Field Activities
+          {t('managementOfFieldActivities')}
         </h3>
       </div>
       <div className={classes.mapview_box}>
         <div className={classes.box_header}>
           <button className={classes.box_button} type="button">
             <FormatListBulletedIcon sx={{ padding: '0 5px' }} />
-            List View
+            {t('listView')}
           </button>
         </div>
         <div className={classes.map_data_container}>
@@ -46,8 +48,12 @@ const FieldMapView = () => {
             <MapWrapper />
           </div>
           <div className={classes.document_container}>
-            <h2 className={classes.doc_container_header}>Assign Project</h2>
-            <h2 className={classes.doc_container_header_name}>Doument Name</h2>
+            <h2 className={classes.doc_container_header}>
+              {t('assignProject')}
+            </h2>
+            <h2 className={classes.doc_container_header_name}>
+              {t('docuemntName')}
+            </h2>
             <div className={classes.document_search_container}>
               <Autocomplete
                 clearOnBlur
@@ -109,10 +115,12 @@ const FieldMapView = () => {
                 value={value}
               />
             </div>
-            <div className={classes.document_preview}>Document Preview</div>
+            <div className={classes.document_preview}>
+              {t('documentPreview')}
+            </div>
             <div className={classes.document_details}>
               <h4 className={classes.document_detail_header}>
-                Document Details
+                {t('documentDetails')}
               </h4>
               <div className={classes.document_details_box}>
                 details goes here

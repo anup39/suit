@@ -10,6 +10,7 @@ import milestoneManagmeentReducer from './milestone-management/milestone-managem
 import projectManagementReducer from './project-management-redux/project-management.reducer';
 import userReducer from './user-redux/user.reducer';
 import roleReducer from './User-Role/role.reducer';
+import webexReducer from './webex-redux/webex.reducer';
 import WorkListManagementReducer from './worklist-management-redux/worklist.reducer';
 
 const persistConfig = {
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   assingWorkList: AssignWorkListReducer,
   feedback: feedbackReducer,
   fieldActivities: magagementOfFieldActivitiesReducer,
+  webex: webexReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

@@ -2,6 +2,7 @@ import './AssignTaskModal.scss';
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -18,6 +19,7 @@ const AssignTaskModal = ({ handleCancel }) => {
   const companiesList = useSelector(getCompaniesList);
   const selectedTask = useSelector(getSelectedTaskList);
   const [companyId, setCompanyId] = React.useState('');
+  const { t } = useTranslation();
 
   const handleAssignTask = () => {
     if (!companyId) {
@@ -50,9 +52,9 @@ const AssignTaskModal = ({ handleCancel }) => {
       {console.log(companiesList)}
       <div className="assign-form-base-div">
         <div>
-          <label>Company</label>
+          <label>{t('company')}</label>
           <select onChange={handleCompanySelection}>
-            <option value="">Please Select A Company</option>
+            <option value="">{t('pleaseSelectACompany')}</option>
             {companiesList &&
               companiesList.map((vals) => (
                 <option key={vals?.id} value={vals?.id}>
@@ -67,13 +69,13 @@ const AssignTaskModal = ({ handleCancel }) => {
           className="assign-task-modal-cancel-button"
           onClick={handleCancel}
         >
-          Cancel
+          {t('cancel')}
         </span>
         <span
           className="assign-task-modal-submit-button"
           onClick={handleAssignTask}
         >
-          Submit
+          {t('submit')}
         </span>
       </div>
     </div>

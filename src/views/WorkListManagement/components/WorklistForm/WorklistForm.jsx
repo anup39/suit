@@ -6,6 +6,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -39,6 +40,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
 
   const editWorklistSuccess = useSelector(getEditWorkListSuccess);
   const editWorklistError = useSelector(getEditWorkListError);
+  const { t } = useTranslation();
 
   const {
     register,
@@ -153,7 +155,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
 
   return (
     <div className="worklist-form-base-div">
-      {!isEdit ? <h2>Add Worklist</h2> : <h2>Edit Worklist</h2>}
+      {!isEdit ? <h2>{t('addWorklist')}</h2> : <h2>{t('editWorklist')}</h2>}
 
       <form
         className="worklist-form-container"
@@ -161,7 +163,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
       >
         <div>
           <label>
-            Project Name <sup>*</sup>{' '}
+            {t('projectName')} <sup>*</sup>{' '}
           </label>
           {isEdit ? (
             <select
@@ -171,7 +173,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
               {...register('projectsId')}
               defaultValue={register('projectsId')}
             >
-              <option value={false}> Select A Project </option>
+              <option value={false}> {t('selectAProject')} </option>
               {projectList.map((project) => (
                 <option key={project.id} value={project.id}>
                   {project.name}
@@ -184,7 +186,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
               name="projectsId"
               {...register('projectsId')}
             >
-              <option> Select A Project </option>
+              <option> {t('selectAProject')} </option>
 
               {projectList.map((project) => (
                 <option key={project.id} value={project.id}>
@@ -200,7 +202,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
 
         <div>
           <label>
-            Task ID <sup>*</sup>{' '}
+            {t('taskId')} <sup>*</sup>{' '}
           </label>
           {isEdit ? (
             <input name="taskId" {...register('taskId')} disabled />
@@ -215,7 +217,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
 
         <div>
           <label>
-            Task Name <sup>*</sup>{' '}
+            {t('taskName')} <sup>*</sup>{' '}
           </label>
           <input name="taskName" {...register('taskName')} />
           <span className="worklistform-error-text">
@@ -225,7 +227,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
 
         <div>
           <label>
-            Task Description <sup>*</sup>{' '}
+            {t('taskDescription')} <sup>*</sup>{' '}
           </label>
           <textarea
             name="taskDescription"
@@ -238,16 +240,16 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
         </div>
 
         <div>
-          <label>Ismilestone</label>
+          <label>{t('isMilestone')}</label>
 
           <select
             className="select-company-field"
             name="isMilestone"
             {...register('isMilestone')}
           >
-            <option value={0}>Yes</option>
+            <option value={0}>{t('yes')}</option>
             <option selected value={1}>
-              No
+              {t('no')}
             </option>
           </select>
           <span className="worklistform-error-text">
@@ -257,7 +259,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
 
         <div>
           <label>
-            Type <sup>*</sup>{' '}
+            {t('type')} <sup>*</sup>{' '}
           </label>
           <input name="type" {...register('type')} />
           <span className="worklistform-error-text">
@@ -267,7 +269,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
 
         <div>
           <label>
-            Priority <sup>*</sup>{' '}
+            {t('priority')} <sup>*</sup>{' '}
           </label>
           <input name="priority" {...register('priority')} />
           <span className="worklistform-error-text">
@@ -278,7 +280,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
         <div className="worklist-management-gird">
           <div>
             <label>
-              Start Date <sup>*</sup>{' '}
+              {t('startDate')} <sup>*</sup>{' '}
             </label>
             <input name="start" type="date" {...register('start')} />
             <span className="worklistform-error-text">
@@ -288,7 +290,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
 
           <div>
             <label>
-              End Date <sup>*</sup>{' '}
+              {t('endDate')} <sup>*</sup>{' '}
             </label>
             <input name="end" type="date" {...register('end')} />
             <span className="worklistform-error-text">
@@ -298,7 +300,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
         </div>
 
         <div>
-          <label>Street</label>
+          <label>{t('street')}</label>
           <input name="street" {...register('street')} />
           <span className="worklistform-error-text">
             {errors.street?.message}
@@ -306,7 +308,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
         </div>
 
         <div>
-          <label>Zip Code</label>
+          <label>{t('zipCode')}</label>
           <input name="zipCode" {...register('zipCode')} />
           <span className="worklistform-error-text">
             {errors.zipCode?.message}
@@ -314,7 +316,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
         </div>
 
         <div>
-          <label>City</label>
+          <label>{t('city')}</label>
           <input name="city" {...register('city')} />
           <span className="worklistform-error-text">
             {errors.city?.message}
@@ -323,7 +325,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
 
         <div>
           <label>
-            Country <sup>*</sup>{' '}
+            {t('country')} <sup>*</sup>{' '}
           </label>
           <input name="country" {...register('country')} />
           <span className="worklistform-error-text">
@@ -332,7 +334,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
         </div>
         <div className="worklist-management-gird">
           <div>
-            <label>Latitude</label>
+            <label>{t('latitude')}</label>
             <input name="latitude" {...register('latitude')} />
             <span className="worklistform-error-text">
               {errors.latitude?.message}
@@ -340,7 +342,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
           </div>
 
           <div>
-            <label>Longitude</label>
+            <label>{t('longitude')}</label>
             <input name="longitude" {...register('longitude')} />
             <span className="worklistform-error-text">
               {errors.longitude?.message}
@@ -349,7 +351,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
         </div>
 
         <div>
-          <label>Geofence</label>
+          <label>{t('geofence')}</label>
 
           <input name="geoFence" {...register('geoFence')} />
           <span className="worklistform-error-text">
@@ -358,7 +360,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
         </div>
 
         <div>
-          <label>Note</label>
+          <label>{t('note')}</label>
 
           <textarea name="note" rows={3} {...register('note')} />
           <span className="worklistform-error-text">
@@ -367,7 +369,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
         </div>
 
         <div>
-          <label>Documents</label>
+          <label>{t('documents')}</label>
           <input name="documents" {...register('documents')} />
           <span className="worklistform-error-text">
             {errors.documents?.message}
@@ -375,7 +377,7 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
         </div>
 
         <p>
-          Field Marked with <sup>*</sup> are Required
+          {t('fieldmarkedwith')} <sup>*</sup> {t('areRequired')}
         </p>
         <div className="worklist-submit-div">
           <button
@@ -383,14 +385,14 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
             onClick={handelClose}
             type="button"
           >
-            Cancel
+            {t('cancel')}
           </button>
           <Button
             className="create-project-submit-button"
             type="submit"
             variant="contained"
           >
-            Submit
+            {t('submit')}
           </Button>
         </div>
       </form>

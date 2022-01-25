@@ -65,14 +65,14 @@ const FieldUpdateCard = ({ activityData }) => {
             </span>
             <span className="field-updates-body-status">
               <select className="field-update-status-select">
-                <option>Not assigned</option>
-                <option>Not started</option>
-                <option>In progress/started</option>
-                <option>Waiting for feedback</option>
-                <option>Approved</option>
-                <option>Canceled</option>
-                <option>Completed</option>
-                <option>Suspended</option>
+                <option>{t('notassigned')}</option>
+                <option>{t('notStarted')}</option>
+                <option>{t('inprogressstarted')}</option>
+                <option>{t('waitingforfeedback')}</option>
+                <option>{t('approved')}</option>
+                <option>{t('canceled')}</option>
+                <option>{t('completed')}</option>
+                <option>{t('suspended')}</option>
               </select>
             </span>
             <span className="field-updates-body-controlActivity">

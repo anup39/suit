@@ -8,6 +8,7 @@ import { milestoneManagementSagas } from './milestone-management/milestone-manag
 import { projectManagementSagas } from './project-management-redux/project-management.sagas';
 import { userSagas } from './user-redux/user.sagas';
 import { getUserSaga, roleSaga } from './User-Role/role.sagas';
+import { webexSagas } from './webex-redux/webex.saga';
 import { worklistManagementSaga } from './worklist-management-redux/worklist.sagas';
 
 export default function* rootSaga() {
@@ -22,5 +23,6 @@ export default function* rootSaga() {
     call(feedbackSagas),
     call(assignTaskSagas),
     call(managementOfFieldActivitiesSagas),
+    call(webexSagas),
   ]);
 }
