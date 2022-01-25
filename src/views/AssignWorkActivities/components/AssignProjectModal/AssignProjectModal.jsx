@@ -4,6 +4,7 @@ import './AssignProjectModal.scss';
 // import CircularProgress from '@mui/material/CircularProgress';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -24,6 +25,7 @@ const AssignProjectModal = ({ handleClose }) => {
 
   const [selectedCompany, setSelectedCompany] = React.useState('');
   const [selectedProject, setSelectedProject] = React.useState('');
+  const { t } = useTranslation();
 
   const handleSubmit = () => {
     if (!selectedCompany && !selectedProject) {
@@ -53,15 +55,15 @@ const AssignProjectModal = ({ handleClose }) => {
 
   return (
     <div className="assign-project-modal-base">
-      <h2> Assign Project</h2>
+      <h2> {t('assignProject')}</h2>
       <form className="assign-project-form-base">
-        <label>Project Name</label>
+        <label>{t('projectName')}</label>
         <select
           className="assign-project-select-input"
           onChange={(e) => setSelectedProject(e.target.value)}
           value={selectedProject}
         >
-          <option value=""> Select a Project</option>
+          <option value=""> {t('selectAProject')}</option>
 
           {projectList &&
             projectList.map((project) => (
@@ -71,13 +73,13 @@ const AssignProjectModal = ({ handleClose }) => {
             ))}
         </select>
 
-        <label>Company</label>
+        <label>{t('company')}</label>
         <select
           className="assign-project-select-input"
           onChange={(e) => setSelectedCompany(e.target.value)}
           value={selectedCompany}
         >
-          <option value=""> Select a Company</option>
+          <option value=""> {t('pleaseSelectACompany')}</option>
           {companiesList &&
             companiesList.map((company) => (
               <option key="company" value={company.id}>
@@ -92,7 +94,7 @@ const AssignProjectModal = ({ handleClose }) => {
           onClick={handleClose}
           type="button"
         >
-          Cancel
+          {t('cancel')}
         </button>
         {/* {isAssignProjectLoading ? (
           <Box sx={{ display: 'flex' }}>
@@ -104,7 +106,7 @@ const AssignProjectModal = ({ handleClose }) => {
           onClick={handleSubmit}
           type="button"
         >
-          Assign
+          {t('assign')}
         </button>
         {/* )} */}
       </div>

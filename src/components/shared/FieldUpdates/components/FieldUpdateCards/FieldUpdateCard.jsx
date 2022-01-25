@@ -7,6 +7,7 @@ import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import PropType from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -14,7 +15,7 @@ import WebExIcon from '../../../../../assets/webex-icon.png';
 // import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import EditMenu from '../EditMenu/EditMenu';
 
-const FieldUpdateCard = () => {
+const FieldUpdateCard = ({ activityData }) => {
   const [editMenu, setEditMenu] = React.useState(false);
   const { t } = useTranslation();
 
@@ -44,26 +45,34 @@ const FieldUpdateCard = () => {
             <span className="field-updates-body-checkInput">
               <input type="checkbox" />
             </span>
-            <span className="field-updates-body-taskItem">Task Item 1 </span>
+            <span className="field-updates-body-taskItem">
+              {' '}
+              {activityData.taskName}{' '}
+            </span>
             <span className="field-updates-body-fieldLogs">
-              File 1, File 2, +6 more
+              {/* File 1, File 2, +6 more */} -
             </span>
             <span className="field-updates-body-activityReport">
-              Activity report 1
+              {/* Activity report 1 */} -
             </span>
             <span className="field-updates-body-changeRequest">
-              Task 1 Change
+              {/* Task 1 Change */} -
             </span>
             <span className="field-updates-body-milestoneApproval">
               <CheckCircleOutlinedIcon className="milestone-accepted-icon" />
               {/* <CancelOutlinedIcon className="milestone-rejected-icon" /> */}
-              Milestone approval 1
+              {activityData.isMilestone === 0 ? 'Milestone' : 'Not a Milestone'}
             </span>
             <span className="field-updates-body-status">
               <select className="field-update-status-select">
-                <option>Completed</option>
-                <option>Suspended</option>
-                <option>Not Started</option>
+                <option>{t('notassigned')}</option>
+                <option>{t('notStarted')}</option>
+                <option>{t('inprogressstarted')}</option>
+                <option>{t('waitingforfeedback')}</option>
+                <option>{t('approved')}</option>
+                <option>{t('canceled')}</option>
+                <option>{t('completed')}</option>
+                <option>{t('suspended')}</option>
               </select>
             </span>
             <span className="field-updates-body-controlActivity">
@@ -97,6 +106,10 @@ const FieldUpdateCard = () => {
       )}
     </div>
   );
+};
+
+FieldUpdateCard.propTypes = {
+  activityData: PropType.isRequired,
 };
 
 export default FieldUpdateCard;

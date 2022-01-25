@@ -1,6 +1,7 @@
 import './viewusertable.scss';
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -29,6 +30,7 @@ const ViewUserTable = () => {
   const isDeleteFeedbackLoading = useSelector(getIsDeleteFeedbackLoading);
   const deleteFeedbackError = useSelector(getDeleteFeedbackError);
   const deleteFeedbackSuccess = useSelector(getDeleteFeedbackSuccess);
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     if (!feedbackList) {
@@ -67,13 +69,13 @@ const ViewUserTable = () => {
         {/* <div className="table-check">
           <input type="checkbox" />
         </div> */}
-        <div className="table-user">User Name</div>
-        <div className="table-date">Date</div>
-        <div className="table-address">Address</div>
-        <div className="table-city">City</div>
-        <div className="table-satis">Satisfaction</div>
-        <div className="table-doc">Documents</div>
-        <div className="table-actions">Actions</div>
+        <div className="table-user">{t('username')}</div>
+        <div className="table-date">{t('date')}</div>
+        <div className="table-address">{t('address')}</div>
+        <div className="table-city">{t('city')}</div>
+        <div className="table-satis">{t('satisfaction')}</div>
+        <div className="table-doc">{t('documents')}</div>
+        <div className="table-actions">{t('actions')}</div>
       </div>
       <div className="tabletbody">
         {isFeedbackLoading ? (

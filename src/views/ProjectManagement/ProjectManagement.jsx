@@ -7,10 +7,9 @@ import { Drawer } from '@mui/material';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
@@ -31,7 +30,7 @@ import ProjectManagementTabPannel from './components/ProjectManagementTabPannel/
 import ProjectPannel from './components/ProjectPannel/ProjectPannel';
 import MobileDataRow from './mobile.data.row';
 
-const ProjectManagement = ({ userToken }) => {
+const ProjectManagement = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -76,7 +75,7 @@ const ProjectManagement = ({ userToken }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(getProjectList(userToken));
+      dispatch(getProjectList(authToken));
     } else {
       navigate('/signin');
     }
@@ -195,12 +194,4 @@ const ProjectManagement = ({ userToken }) => {
   );
 };
 
-ProjectManagement.propTypes = {
-  userToken: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  userToken: state.user.userData.accessToken,
-});
-
-export default connect(mapStateToProps)(ProjectManagement);
+export default ProjectManagement;

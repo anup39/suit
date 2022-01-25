@@ -5,6 +5,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getUserAuthToken } from '../../../../../../redux/user-redux/user.selectors';
@@ -14,6 +15,7 @@ import WorkListDetailsCard from '../WorkListDetailsCard/WorkListDetailsCard';
 const WorkListCards = ({ taskInfo }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [view, setView] = React.useState(false);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
@@ -46,7 +48,7 @@ const WorkListCards = ({ taskInfo }) => {
     dispatch(deleteTaskByID(data));
   };
   return (
-    <>
+    <div>
       {!view ? (
         <div className="work-list-table-body">
           <span className="work-list-card-check-input">
@@ -83,15 +85,15 @@ const WorkListCards = ({ taskInfo }) => {
               onClose={handleClose}
               open={open}
             >
-              <MenuItem onClick={handleView}>View</MenuItem>
-              <MenuItem onClick={handleDelete}>Delete</MenuItem>
+              <MenuItem onClick={handleView}>{t('view')}</MenuItem>
+              <MenuItem onClick={handleDelete}>{t('delete')}</MenuItem>
             </Menu>
           </span>
         </div>
       ) : (
         <WorkListDetailsCard taskInfo={taskInfo} undo={handelUndoView} />
       )}
-    </>
+    </div>
   );
 };
 
