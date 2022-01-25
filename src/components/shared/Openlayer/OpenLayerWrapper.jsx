@@ -76,7 +76,7 @@ function MapWrapper(props) {
 
   // update map if features prop changes - logic formerly put into componentDidUpdate
   useEffect(() => {
-    if (props.features.length) {
+    if (props?.features?.length) {
       // may be null on first render
 
       // set features to map
@@ -95,7 +95,7 @@ function MapWrapper(props) {
 
   useEffect(() => {
     if(map){
-      if (props.wmsLayers.length) {
+      if (props?.wmsLayers?.length) {
         console.log(map,'map');
         // may be null on first render
 

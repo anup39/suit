@@ -37,8 +37,8 @@ const ProjectManagement = lazy(() =>
 
 const WebexView = lazy(() => import('../views/WebexView/webex.view'));
 
-const MapWrapper = lazy(() =>
-  import('../components/shared/Openlayer/Openlayer')
+const WebGisServices = lazy(() =>
+  import('../views/WebGisServices/WebGisServices')
 );
 
 const ManagementOfFieldActivities = lazy(() =>
@@ -126,7 +126,7 @@ const appRoutes = [
         path: ROUTES.MILESTONE_APPROVAl,
       },
       {
-        element: <MapWrapper />,
+        element: <WebGisServices />,
         path: ROUTES.WEB_GIS_SERVICES,
       },
       {

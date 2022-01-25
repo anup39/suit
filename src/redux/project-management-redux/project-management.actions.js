@@ -174,3 +174,18 @@ export const dashbordByProjectIdError = (data) => ({
   type: PROJECT_MANAGEMENT_TYPES.DASHBORD_BY_PROJECT_ID_ERROR,
   payload: data,
 });
+
+export const getSelectedProjectLayersList = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.GET_SELECTED_PROJECT_LAYERS_LIST,
+  payload: data,
+});
+
+export const getSelectedProjectLayersListSuccess = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.GET_SELECTED_PROJECT_LAYERS_LIST_SUCCESS,
+  payload: data,
+});
+
+export const getSelectedProjectLayersListError = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.GET_SELECTED_PROJECT_LAYERS_LIST_ERROR,
+  payload: data,
+});

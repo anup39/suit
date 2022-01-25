@@ -149,3 +149,35 @@ export const GET_DASHBORD_BY_PROJECT_ID = async (payload) => {
   });
   return dashbord.data;
 };
+
+export const GET_SELECTED_PROJECT_LAYERS_LIST = async (payload) => {
+  // const { projectName } = payload;
+  // const newToken = await REFERSH_TOKEN(authToken);
+
+  const selectedLayersList = await axios(
+    `${PROJECT_MANAGEMENT_API.GEOSERVER_LAYER_LIST}/${payload}/layers/`,
+    {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Basic YWRtaW46Z2Vvc2VydmVy',
+      },
+
+      auth: {
+        username: 'admin',
+        password: 'geoserver',
+      },
+      // proxy: {
+      //   protocol: 'http',
+      //   host: 'http://13.233.23.132',
+      //   port: 7080,
+      //   auth: {
+      //     username: 'admin',
+      //     password: 'geoserver',
+      //   },
+      // },
+    }
+  );
+  // eslint-disable-next-line no-console
+  console.log(selectedLayersList.data);
+  return selectedLayersList.data;
+};
