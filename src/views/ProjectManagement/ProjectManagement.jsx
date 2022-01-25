@@ -34,6 +34,7 @@ import MobileDataRow from './mobile.data.row';
 const ProjectManagement = ({ userToken }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  import { useTranslation } from 'react-i18next';
 
   const [value, setValue] = React.useState(0);
 
