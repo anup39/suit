@@ -8,6 +8,7 @@ import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
 // import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
@@ -15,6 +16,7 @@ import EditMenu from '../EditMenu/EditMenu';
 
 const FieldUpdateCard = () => {
   const [editMenu, setEditMenu] = React.useState(false);
+  const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -84,8 +86,8 @@ const FieldUpdateCard = () => {
                 onClose={handleClose}
                 open={open}
               >
-                <MenuItem onClick={handelViewOrEdit}>View/Edit</MenuItem>
-                <MenuItem onClick={handleClose}>Delete</MenuItem>
+                <MenuItem onClick={handelViewOrEdit}>{t('view')}</MenuItem>
+                <MenuItem onClick={handleClose}>{t('delete')}</MenuItem>
               </Menu>
             </span>
           </div>

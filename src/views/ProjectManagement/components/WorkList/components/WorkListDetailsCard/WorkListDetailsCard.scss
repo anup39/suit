@@ -4,19 +4,30 @@
   width: 100%;
   height: 300px;
   overflow: scroll;
-  border-bottom: $border-size solid $border-colors;
+  border-bottom: 1px solid #d4deea;
   padding: 10px;
   display: grid;
   grid-template-columns: repeat(6, 15%);
   gap: 20px;
+  font-size: 14px;
   grid-auto-rows: minmax(35px, auto);
-  background-color: rgb(241, 241, 241);
+  background: #f8f9fc;
+
+  p {
+    margin-bottom: 0;
+    color: #364a63;
+    font-size: 14px;
+
+    &.task-info-title {
+      color: #8094ae;
+      margin-bottom: 5px;
+      font-size: 14px;
+
+    }
+  }
 }
 
-.task-info-title {
-  font-weight: 800;
-  margin-bottom: 5px;
-}
+
 
 .work-list-task-id {
   grid-column: 1;

@@ -6,6 +6,7 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 // import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
 import FileData from './FileData/FileData';
@@ -13,6 +14,7 @@ import FilePannel from './FilePannel/FilePannel';
 
 const FieldLogs = () => {
   const [value, setValue] = React.useState(0);
+  const { t } = useTranslation();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -20,7 +22,7 @@ const FieldLogs = () => {
 
   return (
     <div className="field-log-base">
-      <EditModalHeaders headerName="Field Logs" />
+      <EditModalHeaders headerName={t('fieldLogs')} />
       <div className="field-log-content-div">
         <div>
           <Box sx={{ width: '100%' }}>
@@ -31,7 +33,7 @@ const FieldLogs = () => {
               <Tab label="File 4" />
               <span className="file-logs-download-app-button">
                 <FileDownloadOutlinedIcon className="download-all-files-icon" />
-                <p>Download</p>
+                <p>{t('download')}</p>
               </span>
             </Tabs>
           </Box>
@@ -49,7 +51,7 @@ const FieldLogs = () => {
           </FilePannel>
         </div>
         <div className="field-log-close-button" onClick={onclick}>
-          Close
+          {t('close')}
         </div>
       </div>
     </div>

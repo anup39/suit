@@ -2,6 +2,7 @@ import './Documents.scss';
 
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getProjectData } from '../../../../redux/project-management-redux/project.selector';
@@ -13,6 +14,7 @@ const Documents = () => {
   const currentProject = useSelector(getProjectData);
   const authToken = useSelector(getUserAuthToken);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     const data = {
@@ -30,11 +32,11 @@ const Documents = () => {
         <SearchIcon className="document-search-icon" />
       </div>
       <div className="document-header-table">
-        <span className="document-name">Docuemnt Name</span>
-        <span className="document-importd-from">Imported From</span>
-        <span className="document-type">Document Type</span>
-        <span className="document-uploaded-on">Uploaded On</span>
-        <span className="document-actions">Actions</span>
+        <span className="document-name">{t('docuemntName')}</span>
+        <span className="document-importd-from">{t('importedFrom')}</span>
+        <span className="document-type">{t('documentType')}</span>
+        <span className="document-uploaded-on">{t('uploadedOn')}</span>
+        <span className="document-actions">{t('actions')}</span>
       </div>
 
       <DocumentsCard />

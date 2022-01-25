@@ -3,6 +3,7 @@ import './components/WorkListCards/WorkListCards.scss';
 
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getProjectData } from '../../../../redux/project-management-redux/project.selector';
@@ -17,6 +18,7 @@ const WorkList = () => {
   const project = useSelector(getProjectData);
   const worklistTasks = useSelector(getTasksByProject);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     const data = { authToken, projectId: project.id };
@@ -31,7 +33,7 @@ const WorkList = () => {
           <SearchIcon className="work-list-search-icon" />
           <input
             className="work-list-search-input"
-            placeholder="Search Worklist"
+            placeholder={t('searchWorklist')}
           />
         </div>
       </div>
@@ -50,31 +52,31 @@ const WorkList = () => {
           </span>
 
           <span className="work-list-card-task-id">
-            <p> Task Id</p>
+            <p> {t('taskId')}</p>
           </span>
 
           <span className="work-list-card-task-name">
-            <p> Task Name </p>
+            <p> {t('taskName')} </p>
           </span>
 
           <span className="work-list-card-task-description">
-            <p> Task Description </p>
+            <p> {t('taskDescription')} </p>
           </span>
 
           <span className="work-list-card-task-milestone">
-            <p> Ismilestone </p>
+            <p> {t('isMilestone')} </p>
           </span>
 
           <span className="work-list-card-task-type">
-            <p> Type </p>
+            <p> {t('type')} </p>
           </span>
 
           <span className="work-list-card-task-status">
-            <p> Status </p>
+            <p> {t('status')} </p>
           </span>
 
           <span className="work-list-card-task-actions">
-            <p> Actions </p>
+            <p> {t('actions')} </p>
           </span>
         </div>
         <div className="worklist-table-body">

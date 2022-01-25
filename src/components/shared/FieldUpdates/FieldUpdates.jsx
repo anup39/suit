@@ -3,6 +3,7 @@ import './FieldUpdates.scss';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { GrMap } from 'react-icons/gr';
 
 import FieldUpdateCard from './components/FieldUpdateCards/FieldUpdateCard';
@@ -10,7 +11,7 @@ import MapView from './components/MapView/MapView';
 
 const FieldUpdates = () => {
   const [isMapView, setIsMapView] = React.useState(false);
-
+  const { t } = useTranslation();
   const showMapView = () => {
     setIsMapView(true);
   };
@@ -26,21 +27,21 @@ const FieldUpdates = () => {
           <>
             <span>
               <SearchIcon className="field-search-icon" />
-              <input className="field-input" placeholder="Search Task" />
+              <input className="field-input" placeholder={t('searchTask')} />
             </span>
             <span>
               <SearchIcon className="field-search-icon" />
-              <input className="field-input" placeholder="Search Company" />
+              <input className="field-input" placeholder={t('searchCompany')} />
             </span>
           </>
         )}
         {!isMapView ? (
           <span className="map-view-button" onClick={showMapView}>
-            <GrMap className="map-icon" /> Map View
+            <GrMap className="map-icon" /> {t('mapView')}
           </span>
         ) : (
           <span className="map-view-button" onClick={showListView}>
-            <FormatListBulletedIcon className="map-icon" /> List View
+            <FormatListBulletedIcon className="map-icon" /> {t('listView')}
           </span>
         )}
       </div>
@@ -50,22 +51,26 @@ const FieldUpdates = () => {
             <span className="field-updates-header-checkInput">
               <input type="checkbox" />
             </span>
-            <span className="field-updates-header-taskItem">Task Item</span>
-            <span className="field-updates-header-fieldLogs">Field Logs</span>
+            <span className="field-updates-header-taskItem">
+              {t('taskItem')}
+            </span>
+            <span className="field-updates-header-fieldLogs">
+              {t('fieldLogs')}
+            </span>
             <span className="field-updates-header-activityReport">
-              Activity report
+              {t('activityreport')}
             </span>
             <span className="field-updates-header-changeRequest">
-              Change request
+              {t('changerequest')}
             </span>
             <span className="field-updates-header-milestoneApproval">
-              Milestone approval
+              {t('milestoneapproval')}
             </span>
-            <span className="field-updates-header-status">Status</span>
+            <span className="field-updates-header-status">{t('status')}</span>
             <span className="field-updates-header-controlActivity">
-              Control Activity
+              {t('controlActivity')}
             </span>
-            <span className="field-updates-header-actions">Actions</span>
+            <span className="field-updates-header-actions">{t('actions')}</span>
           </div>
           <div>
             <FieldUpdateCard />
