@@ -12,6 +12,7 @@ const PROJECT_MANAGEMENT_API = {
     'http://13.233.23.132:8080/api/auth/importProjectQgis?projectId=',
   PROJECT_STATUS_DASHBORD:
     'http://13.233.23.132:8080/api/ProjectDashboardStatus',
+  GEOSERVER_LAYER_LIST: 'http://13.233.23.132:7080/geoserver/rest/workspaces',
 };
 
 export default PROJECT_MANAGEMENT_API;
