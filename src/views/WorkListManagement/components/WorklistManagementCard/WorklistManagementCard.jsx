@@ -6,6 +6,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getAllProjects } from '../../../../redux/project-management-redux/project.selector';
@@ -33,6 +34,7 @@ const WorkListManagementCard = ({
   taskStatus,
 }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = React.useState(false);
@@ -182,13 +184,13 @@ const WorkListManagementCard = ({
             open={menuOpen}
           >
             <MenuItem itmeId={workId} onClick={handelOpenEditDrawer}>
-              Edit
+              {t('edit')}
             </MenuItem>
             <MenuItem itmeId={workId} onClick={handleEditStatusDrawerOpen}>
-              Change Task Status
+              ('changeTaskStatus')}
             </MenuItem>
-            <MenuItem itmeId={workId} onClick={() => hadelDeleteTask()}>
-              Delete
+            <MenuItem ieId={workId} onClick={() => hadelDeleteTask()}>
+              {t('delete')}
             </MenuItem>
           </Menu>
         </span>
@@ -197,7 +199,7 @@ const WorkListManagementCard = ({
   );
 };
 
-/* eslint-disable */
+//  eslint-disable */
 WorkListManagementCard.propTypes = {
   projectName: PropTypes.number,
   taskName: PropTypes.string,

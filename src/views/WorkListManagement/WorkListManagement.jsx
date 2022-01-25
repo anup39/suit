@@ -12,6 +12,7 @@ import Select from '@mui/material/Select';
 import { useTheme } from '@mui/material/styles';
 import exportFromJSON from 'export-from-json';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaRegShareSquare } from 'react-icons/fa';
 import CsvDownload from 'react-json-to-csv';
 import { useDispatch, useSelector } from 'react-redux';
@@ -50,6 +51,7 @@ import MobileDataRow from './mobile.data.row';
 
 const WorkListManagement = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const [menuOpen, setMenuOpen] = React.useState(null);
   const [checkbox, setCheckbox] = React.useState(false);
@@ -207,11 +209,11 @@ const WorkListManagement = () => {
 
       <BaseTemplate>
         <div className="header-wrapper">
-          <h2 className="header">Worklist Management</h2>
+          <h2 className="header">{t('worklistManagement')}</h2>
 
           <button onClick={handelOpenDrawer} type="button">
             <AddIcon />
-            Add Task
+            {t('addTask')}
           </button>
         </div>
 
@@ -230,11 +232,11 @@ const WorkListManagement = () => {
             <div>
               <FormControl sx={{ m: 1, width: 300 }}>
                 <InputLabel id="demo-multiple-name-label">
-                  Company Name
+                  {t('companyName')}
                 </InputLabel>
                 <Select
                   id="demo-multiple-name"
-                  input={<OutlinedInput label="Company Name" />}
+                  input={<OutlinedInput label={t('companyName')} />}
                   labelId="demo-multiple-name-label"
                   MenuProps={MenuProps}
                   multiple
@@ -258,7 +260,7 @@ const WorkListManagement = () => {
             <div>
               <FormControl sx={{ m: 1, width: 300 }}>
                 <InputLabel id="demo-multiple-name-label">
-                  Project Name
+                  {t('projectName')}
                 </InputLabel>
                 <Select
                   id="demo-multiple-name"
@@ -287,7 +289,7 @@ const WorkListManagement = () => {
               <span className="worklist-export-button">
                 <span onClick={handelMenuOpen}>
                   <FaRegShareSquare className="worklist-export-icon" />
-                  Export Worklist
+                  {t('exportWorklist')}
                 </span>
                 <Menu
                   anchorEl={menuOpen}
@@ -304,10 +306,12 @@ const WorkListManagement = () => {
                       data={selectedWorklist}
                       filename="worklist.csv"
                     >
-                      Export CSV
+                      {t('exportCSV')}
                     </CsvDownload>
                   </MenuItem>
-                  <MenuItem onClick={handleExportAsXML}>Export XML</MenuItem>
+                  <MenuItem onClick={handleExportAsXML}>
+                    {t('exportXML')}
+                  </MenuItem>
                 </Menu>
               </span>
             )}
@@ -322,17 +326,21 @@ const WorkListManagement = () => {
                 />
               </span>
               <span className="worklist-management-project-name">
-                Project Name
+                {t('projectName')}
               </span>
-              <span className="worklist-management-task-name">Task Name</span>
+              <span className="worklist-management-task-name">
+                {t('taskName')}
+              </span>
               <span className="worklist-management-task-description">
-                Task Description
+                {t('taskDescription')}
               </span>
               <span className="worklist-management-isMilestone">
-                Ismilestone
+                {t('isMilestone')}
               </span>
-              <span className="worklist-management-type">Type</span>
-              <span className="worklist-management-actions">Actions</span>
+              <span className="worklist-management-type">{t('type')}</span>
+              <span className="worklist-management-actions">
+                {t('actions')}
+              </span>
             </div>
             <div>
               {/* eslint-disable */}
@@ -348,7 +356,7 @@ const WorkListManagement = () => {
                       paddingBottom: '15%',
                     }}
                   >
-                    No Data Found!
+                   {t('noDataFound')}
                   </p>{' '}
                 </div>
               ) : (

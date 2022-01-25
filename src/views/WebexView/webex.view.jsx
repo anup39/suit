@@ -1,5 +1,6 @@
 import { WebexMeetingsWidget } from '@webex/widgets';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { getIfAuthenticated } from '../../redux/user-redux/user.selectors';
@@ -8,12 +9,13 @@ import classes from './styles/webex.styles.module.scss';
 
 const WebexView = () => {
   const isAuthenticated = useSelector(getIfAuthenticated);
+  const { t } = useTranslation();
 
   return (
     <AuthenticatedRoute isAuthenticated={isAuthenticated}>
       <div className={classes.webex_container}>
         <div className={classes.webex_header_container}>
-          <h2 className={classes.webex_header}>Webex</h2>
+          <h2 className={classes.webex_header}>{t('webEx')}</h2>
         </div>
         <div className={classes.webex_body}>
           <WebexMeetingsWidget
