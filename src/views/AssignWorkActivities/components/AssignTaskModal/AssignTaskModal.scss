@@ -10,6 +10,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
+  overflow: scroll;
 
   @media (max-width: 768px) {
     width: 90%;
@@ -22,7 +23,6 @@
   padding: 70px 50px 40px 50px;
 
   @media (max-width: 768px) {
-
     padding: 30px;
   }
 
@@ -37,7 +37,7 @@
 }
 
 .assign-form-base-div select {
-  border: 1px solid #D4DEEA;
+  border: 1px solid #d4deea;
   border-radius: 3px;
   padding: 15px;
   resize: none;
@@ -45,8 +45,7 @@
 
   &:focus {
     outline: none;
-    border: 1px solid #D4DEEA;
-
+    border: 1px solid #d4deea;
   }
 }
 
@@ -57,7 +56,6 @@
   padding: 0 50px 40px 50px;
 
   @media (max-width: 768px) {
-
     padding: 0 30px 30px 30px;
   }
 
@@ -75,11 +73,10 @@
 }
 
 .assign-task-modal-cancel-button {
-  color: #8094AE;
-
+  color: #8094ae;
 }
 
 .assign-task-modal-submit-button {
   color: #fff;
-  background-color: #E78201;
+  background-color: #e78201;
 }

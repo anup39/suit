@@ -147,9 +147,8 @@ const WorkListManagement = () => {
 
   useEffect(() => {
     if (!projectList || workListData.length === 0) {
-      setTimeout(() => {
-        dispatch(getProjectList(authToken));
-      }, 500);
+      dispatch(getProjectList(authToken));
+
       setTimeout(() => {
         dispatch(getAllCompany(authToken));
       }, 500);

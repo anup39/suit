@@ -16,7 +16,7 @@ import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 const AssignTaskModal = ({ handleCancel }) => {
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
-  const companyList = useSelector(getCompaniesList);
+  const companiesList = useSelector(getCompaniesList);
   const selectedTask = useSelector(getSelectedTaskList);
   const [companyId, setCompanyId] = React.useState('');
   const { t } = useTranslation();
@@ -45,16 +45,18 @@ const AssignTaskModal = ({ handleCancel }) => {
   React.useEffect(() => {
     dispatch(getAllCompany(authToken));
   }, []);
+
   return (
     <div className="assign-task-modal-base-div">
       <EditModalHeaders headerName="Assign Task" />
+      {console.log(companiesList)}
       <div className="assign-form-base-div">
         <div>
           <label>{t('company')}</label>
           <select onChange={handleCompanySelection}>
             <option value="">{t('pleaseSelectACompany')}</option>
-            {companyList &&
-              companyList.map((vals) => (
+            {companiesList &&
+              companiesList.map((vals) => (
                 <option key={vals?.id} value={vals?.id}>
                   {vals.name}
                 </option>
