@@ -14,7 +14,7 @@ const MapView = () => {
       <div className="map-view-details-div">
         <h5 className="map-view-assign-project-header">Assign Project</h5>
         <div className="map-view-document-search-div">
-          <label>Document Name</label>
+          <label>Document Name </label>
           <div>
             <input />
             <SearchIcon className="searchIcon" />
