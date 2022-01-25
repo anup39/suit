@@ -92,7 +92,7 @@ const CustomPagination = ({
           pageLinkClassName="page-link"
           pageRangeDisplayed={5}
           previousClassName="page-item"
-          previousLabel="<<Previous"
+          previousLabel={t('prev')}
           previousLinkClassName="page-link"
         />
       </div>

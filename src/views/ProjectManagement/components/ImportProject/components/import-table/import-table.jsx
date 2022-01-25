@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -11,6 +12,8 @@ import classes from './import-table.styles.module.scss';
 import DatagridRow from './table-row';
 
 const ImportDataGrid = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
   const currentProject = useSelector(getProjectData);
@@ -35,18 +38,18 @@ const ImportDataGrid = () => {
               <th className={classes.head_row_head}>
                 <input type="checkbox" />
               </th>
-              <th className={classes.head_row_head}>Project Name</th>
-              <th className={classes.head_row_head}>Worklist File</th>
+              <th className={classes.head_row_head}>{t('projectName')}</th>
+              <th className={classes.head_row_head}>{t('worklistFile')}</th>
               <th className={classes.head_row_head}>QGIS</th>
-              <th className={classes.head_row_head}>Documents</th>
-              <th className={classes.head_row_head}>Uploaded on</th>
-              <th className={classes.head_row_head}>Actions</th>
+              <th className={classes.head_row_head}>{t('documents')}</th>
+              <th className={classes.head_row_head}>{t('uploadedOn')}</th>
+              <th className={classes.head_row_head}>{t('actions')}</th>
             </tr>
           </thead>
           <tbody className={classes.table_body}>
             {currentProjectDocuments && currentProjectDocuments.length === 0 ? (
               <div className={classes.no_data_found}>
-                <p style={{ textAlign: 'center' }}>No Data Found!</p>
+                <p style={{ textAlign: 'center' }}>{t('noDataFound')}</p>
               </div>
             ) : (
               currentProjectDocuments &&
