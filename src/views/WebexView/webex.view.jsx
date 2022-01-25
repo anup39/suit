@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer'; */
 // import { destinationTypes } from '@webex/widget-space';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
@@ -114,12 +115,14 @@ const WebexView = () => {
         'https://webexapis.com/v1/authorize?client_id=Ce03f73ac5eb97bcdc2ea9dd2a417273c4683ebe66d966844c44f1842d5a58fba&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fpannel%2Fwebex&scope=meeting%3Aparticipants_read%20spark%3Apeople_read%20meeting%3Aadmin_participants_read%20spark%3Acalls_read%20spark%3Ateams_write%20spark-admin%3Apeople_write%20spark-admin%3Aroles_read%20spark-compliance%3Awebhooks_write%20spark%3Apeople_write%20spark%3Aorganizations_read%20spark%3Arooms_write%20spark%3Aall%20spark-compliance%3Arooms_read%20spark-compliance%3Awebhooks_read%20spark%3Akms%20spark%3Arooms_read%20spark-compliance%3Ateams_read%20meeting%3Aparticipants_write%20spark%3Ateams_read%20spark-compliance%3Arooms_write%20spark-admin%3Apeople_read&state=newstate';
     }
   }, []);
+  // const isAuthenticated = useSelector(getIfAuthenticated);
+  const { t } = useTranslation();
 
   return (
     <>
       <div className={classes.webex_container}>
         <div className={classes.webex_header_container}>
-          <h2 className={classes.webex_header}>Webex</h2>
+          <h2 className={classes.webex_header}>{t('webEx')}</h2>
         </div>
         <div className={classes.webex_body}>
           {/* <div className={classes.body_header}>

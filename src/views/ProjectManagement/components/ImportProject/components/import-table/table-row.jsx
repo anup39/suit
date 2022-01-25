@@ -2,10 +2,13 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import classes from './table-row.styles.module.scss';
 
 const DatagridRow = () => {
+  const { t } = useTranslation();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -46,9 +49,9 @@ const DatagridRow = () => {
           onClose={handleClose}
           open={open}
         >
-          <MenuItem onClick={handleMenu}>View</MenuItem>
-          <MenuItem onClick={handleClose}>Edit</MenuItem>
-          <MenuItem onClick={handleClose}>Delete</MenuItem>
+          <MenuItem onClick={handleMenu}>{t('view')}</MenuItem>
+          <MenuItem onClick={handleClose}>{t('edit')}</MenuItem>
+          <MenuItem onClick={handleClose}>{t('delete')}</MenuItem>
         </Menu>
       </td>
     </tr>

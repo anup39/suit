@@ -1,5 +1,6 @@
 import './ProjectPannel.scss';
 
+import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -48,7 +49,8 @@ const ProjectPannel = () => {
               className="import-project-data-add-button"
               onClick={handleOpen}
             >
-              + Import Data
+              <AddIcon />
+              {t('importData')}{' '}
             </span>
           </div>
         )}
@@ -61,10 +63,10 @@ const ProjectPannel = () => {
             <Box>
               <Tabs onChange={handleChange} value={value}>
                 <Tab label={t('projects')} />
-                <Tab label="Documents" />
-                <Tab label="Field Updates" />
-                <Tab label="Work List" />
-                <Tab label="Import Project Data" />
+                <Tab label={t('documents')} />
+                <Tab label={t('fieldUpdates')} />
+                <Tab label={t('workList')} />
+                <Tab label={t('importProjectData')} />
               </Tabs>
             </Box>
             <TabPanel index={0} value={value}>

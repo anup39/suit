@@ -3,10 +3,13 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import TabPanel from '../../TabPanel';
 
 const ViewDocumentsModal = () => {
+  const { t } = useTranslation();
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -14,13 +17,13 @@ const ViewDocumentsModal = () => {
   };
   return (
     <div className="custom-modal view-document-modal">
-      <div className="modal-head">Upload Documents</div>
+      <div className="modal-head">{t('uploadDocuments')}</div>
       <div className="modal-container">
         <div className="modal-box">
           <button className="img-btn" type="button">
             {' '}
             <FileDownloadIcon />
-            Download All
+            {t('downloadAll')}
           </button>
           <Box sx={{ width: '100%' }}>
             <Tabs onChange={handleChange} value={value}>
@@ -41,7 +44,7 @@ const ViewDocumentsModal = () => {
         </div>
         <div className="text-right">
           <button className="brd-btn" type="button">
-            Close
+            {t('close')}
           </button>
         </div>
       </div>

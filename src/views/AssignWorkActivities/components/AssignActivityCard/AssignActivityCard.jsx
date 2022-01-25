@@ -5,6 +5,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -34,6 +35,7 @@ const AssignActivityCard = ({
   const selectedTaskList = useSelector(getSelectedTaskList);
   const authToken = useSelector(getUserAuthToken);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const open = Boolean(menuAnchorEl);
 
@@ -119,7 +121,7 @@ const AssignActivityCard = ({
           open={open}
         >
           {/* <MenuItem onClick={handleMenuClose}>Edit</MenuItem> */}
-          <MenuItem onClick={handleDelete}>Delete</MenuItem>
+          <MenuItem onClick={handleDelete}>{t('delete')}</MenuItem>
         </Menu>
       </span>
     </div>

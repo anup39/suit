@@ -4,6 +4,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import ViewDocumentsModal from './view.documents.modal';
 
@@ -12,6 +13,7 @@ const DataDetails = ({ feedBackDetails, deleteFeedback }) => {
   const [modalOpen, setModalOpen] = React.useState(false);
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
+  const { t } = useTranslation();
 
   const handelApprove = () => {
     handleModalOpen();
@@ -40,23 +42,23 @@ const DataDetails = ({ feedBackDetails, deleteFeedback }) => {
           <input type="checkbox" />
         </div> */}
         <div className="table-user">
-          <h3>User Name</h3>
+          <h3>{t('username')}</h3>
           <p>{feedBackDetails.userName}</p>
         </div>
         <div className="table-date">
-          <h3>Date</h3>
-          <p>9 Nov 2021</p>
+          <h3>{t('date')}</h3>
+          <p>-</p>
         </div>
         <div className="table-address">
-          <h3>Address</h3>
+          <h3>{t('address')}</h3>
           <p>{feedBackDetails.address}</p>
         </div>
         <div className="table-city">
-          <h3>City</h3>
+          <h3>{t('city')}</h3>
           <p>{feedBackDetails.city}</p>
         </div>
         <div className="table-zip">
-          <h3>Zip Code</h3>
+          <h3>{t('zipCode')}</h3>
           <p>{feedBackDetails?.zipCode}</p>
         </div>
         <div className="table-actions">
@@ -77,20 +79,20 @@ const DataDetails = ({ feedBackDetails, deleteFeedback }) => {
             open={open}
           >
             {/* <MenuItem>View</MenuItem> */}
-            <MenuItem onClick={handleDeleteFeedback}>Delete</MenuItem>
+            <MenuItem onClick={handleDeleteFeedback}>{t('delete')}</MenuItem>
           </Menu>
         </div>
         <div className="table-check" />
         <div className="table-user">
-          <h3>Coment</h3>
+          <h3>{t('comment')}</h3>
           <p>{feedBackDetails.comment}</p>
         </div>
         <div className="table-date">
-          <h3>Satisfaction</h3>
+          <h3>{t('satisfaction')}</h3>
           <p>{feedBackDetails.satisfactionLevel}</p>
         </div>
         <div className="table-address">
-          <h3>Documents</h3>
+          <h3>{t('documents')}</h3>
           <div className="doc-details">
             <div onClick={handelApprove}>Document1</div>
             <div>Document2</div>

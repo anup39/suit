@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import MilestoneDetails from '../../../../components/shared/FieldUpdates/components/EditMenu/components/Milestone/Milestone';
@@ -41,6 +42,7 @@ const MilestoneApprovalCard = ({
   const open = Boolean(anchorEl);
   const selectedMilestone = useSelector(getSelectedMilestone);
   const isSelectAll = useSelector(getIsSelctAll);
+  const { t } = useTranslation();
 
   const handelCheckbox = (e) => {
     setCheckBox(e.target.checked);
@@ -167,9 +169,9 @@ const MilestoneApprovalCard = ({
             onClose={handleClose}
             open={open}
           >
-            <MenuItem onClick={handelApprove}>Approve</MenuItem>
-            <MenuItem onClick={handelView}>View</MenuItem>
-            <MenuItem onClick={handelDelete}>Delete</MenuItem>
+            <MenuItem onClick={handelApprove}>{t('approved')}</MenuItem>
+            <MenuItem onClick={handelView}>{t('view')}</MenuItem>
+            <MenuItem onClick={handelDelete}>{t('delete')}</MenuItem>
           </Menu>
         </span>
       </div>

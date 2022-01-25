@@ -9,6 +9,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
@@ -27,6 +28,8 @@ import {
 import EditMenu from '../EditMenu/EditMenu';
 
 const FieldUpdateCard = ({ activityData }) => {
+  const { t } = useTranslation();
+
   const [editMenu, setEditMenu] = React.useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -120,14 +123,14 @@ const FieldUpdateCard = ({ activityData }) => {
                 onChange={(e) => handleTaskChange(e)}
                 value={taskStatus}
               >
-                <option>Not assigned</option>
-                <option>Not started</option>
-                <option>In progress/started</option>
-                <option>Waiting for feedback</option>
-                <option>Approved</option>
-                <option>Canceled</option>
-                <option>Completed</option>
-                <option>Suspended</option>
+                <option>{t('notassigned')}</option>
+                <option>{t('notStarted')}</option>
+                <option>{t('inprogressstarted')}</option>
+                <option>{t('waitingforfeedback')}</option>
+                <option>{t('approved')}</option>
+                <option>{t('canceled')}</option>
+                <option>{t('completed')}</option>
+                <option>{t('suspended')}</option>
               </select>
             </span>
             <span className="field-updates-body-controlActivity">
@@ -150,8 +153,8 @@ const FieldUpdateCard = ({ activityData }) => {
                 onClose={handleClose}
                 open={open}
               >
-                <MenuItem onClick={handelViewOrEdit}>View/Edit</MenuItem>
-                <MenuItem onClick={handleDeleteTask}>Delete</MenuItem>
+                <MenuItem onClick={handelViewOrEdit}>{t('viewEdit')}</MenuItem>
+                <MenuItem onClick={handleDeleteTask}>{t('delete')}</MenuItem>
               </Menu>
             </span>
           </div>

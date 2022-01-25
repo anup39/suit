@@ -3,6 +3,7 @@ import './MilestoneApprovalModal.scss';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { updateMilestone } from '../../../../redux/milestone-management/milestone-management.action';
@@ -16,6 +17,7 @@ const MilestoneApprovalModal = ({ handelClose, milestoneNr, milestoneId }) => {
   const authToken = useSelector(getUserAuthToken);
   const currentUser = useSelector(getUserData);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleApprovalOfMilestone = (e) => {
     e.preventDefault();
@@ -33,15 +35,15 @@ const MilestoneApprovalModal = ({ handelClose, milestoneNr, milestoneId }) => {
     <div className="milestone-approval-modal-base">
       <div className="milestone-approval-modal-header">
         <span className="milestone-approval-left" />
-        <h3 className="edit-modal-header-text">Reason Of Approval</h3>
+        <h3 className="edit-modal-header-text">{t('reasonOfApproval')}</h3>
       </div>
       <div className="milestone-approval-modal-body">
         <div>
-          <label>Milestone Nr</label>
+          <label>{t('milestonenr')}</label>
           <input disabled value={milestoneNr} />
         </div>
         <div>
-          <label>Description</label>
+          <label>{t('description')}</label>
           <textarea
             onChange={(e) => setDescription(e.target.value)}
             rows="5"
@@ -54,14 +56,14 @@ const MilestoneApprovalModal = ({ handelClose, milestoneNr, milestoneId }) => {
           className="milestone-approval-button-cancel"
           onClick={handelClose}
         >
-          Cancel
+          {t('cancel')}
         </span>
         <button
           className="handle-approve-button"
           onClick={handleApprovalOfMilestone}
           type="button"
         >
-          Approve Milestone
+          {t('approveMilestone')}
         </button>
       </div>
     </div>

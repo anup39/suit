@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
 import Download from '../../../../assets/download.svg';
@@ -10,6 +11,7 @@ const UploadDocumentsModal = () => {
 
   const [isLoading, setIsLoading] = React.useState(false);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleImageOnChange = (e) => {
     const image = e.target.files[0];
@@ -46,13 +48,13 @@ const UploadDocumentsModal = () => {
   return (
     <div className="custom-modal">
       <GlobalSpinner isOpen={isLoading} />
-      <div className="modal-head">Upload Documents</div>
+      <div className="modal-head">{t('Upload Documents')}</div>
       <div className="modal-con">
         <div>
           <div className="upload-circle">
             <img alt="Download" src={Download} />
           </div>
-          <p className="para">Drag and Drop Files Here</p>
+          <p className="para">{t('dragandDropFilesHere')}</p>
           <p>Or</p>
           <input
             ref={inputField}
@@ -66,7 +68,7 @@ const UploadDocumentsModal = () => {
             onClick={handleSelectFileClick}
             type="button"
           >
-            Browse Files
+            {t('browseFiles')}
           </button>
         </div>
       </div>
