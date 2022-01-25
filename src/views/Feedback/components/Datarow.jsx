@@ -29,7 +29,7 @@ const Datarow = ({ data }) => {
   };
 
   return (
-    <tr>
+    <tr style={{ borderBottom: '1px solid black' }}>
       <td>{data.userName}</td>
       <td> {data.createdDate} </td>
       <td style={{ width: '25%' }}>{data.address}</td>

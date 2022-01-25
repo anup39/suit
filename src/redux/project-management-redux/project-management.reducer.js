@@ -96,6 +96,14 @@ const projectManagementReducer = (
         updateProjectData: '',
       };
 
+    case PROJECT_MANAGEMENT_TYPES.RESET_UPDATE_PROJECT_DATA:
+      return {
+        ...state,
+        isUpdateProjectLoading: false,
+        updateProjectError: '',
+        updateProjectData: '',
+      };
+
     case PROJECT_MANAGEMENT_TYPES.RESET_NEW_PROJECT_DATA:
       return {
         ...state,

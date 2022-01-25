@@ -74,3 +74,13 @@ export const resetFeedbackById = () => ({
   type: FEEDBACK_ACTIONS_TYPES.RESET_GET_FEEDBACK_BY_USER_ID,
   payload: '',
 });
+
+export const addFeedbackImage = (data) => ({
+  type: FEEDBACK_ACTIONS_TYPES.ADD_IMAGE,
+  payload: data,
+});
+
+export const removeFeedbackImage = () => ({
+  type: FEEDBACK_ACTIONS_TYPES.REMOVE_IMAGE,
+  payload: '',
+});

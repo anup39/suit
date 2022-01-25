@@ -45,3 +45,7 @@ export const getFeebackByUserIDError = (state) => {
 export const getFeebackByUserIDLoading = (state) => {
   return state.feedback.isGetFeedbackByIdLoading;
 };
+
+export const getFeebackImage = (state) => {
+  return state.feedback.feedbackImage;
+};

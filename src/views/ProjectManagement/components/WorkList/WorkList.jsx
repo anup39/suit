@@ -6,11 +6,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Pagination from '../../../../components/shared/Pagination/Pagination';
 import { getProjectData } from '../../../../redux/project-management-redux/project.selector';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import { taskByProject } from '../../../../redux/worklist-management-redux/worklist.actions';
 import { getTasksByProject } from '../../../../redux/worklist-management-redux/worklist.selector';
-import WorkListCards from './components/WorkListCards/WorkListCards';
 import MobileDataRow from './mobile.data.row';
 
 const WorkList = () => {
@@ -19,6 +19,18 @@ const WorkList = () => {
   const worklistTasks = useSelector(getTasksByProject);
   const dispatch = useDispatch();
   const { t } = useTranslation();
+
+  const [filteredData, setFilteredData] = React.useState('');
+  const [serchText, setSerchText] = React.useState('');
+
+  const handelSearchTextChange = (e) => {
+    setSerchText(e.target.value);
+
+    const filteredList = worklistTasks.filter((item) =>
+      item?.taskName.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setFilteredData(filteredList);
+  };
 
   React.useEffect(() => {
     const data = { authToken, projectId: project.id };
@@ -33,7 +45,9 @@ const WorkList = () => {
           <SearchIcon className="work-list-search-icon" />
           <input
             className="work-list-search-input"
+            onChange={(e) => handelSearchTextChange(e)}
             placeholder={t('searchWorklist')}
+            value={serchText}
           />
         </div>
       </div>
@@ -80,10 +94,19 @@ const WorkList = () => {
           </span>
         </div>
         <div className="worklist-table-body">
-          {worklistTasks &&
-            worklistTasks.map((val) => (
-              <WorkListCards key={val.taskId} taskInfo={val} />
-            ))}
+          {worklistTasks && worklistTasks?.length === 0 ? (
+            <div className="no-task-found-text">
+              <p> No Task Found!</p>
+            </div>
+          ) : (
+            worklistTasks && (
+              <Pagination
+                componentNo={7}
+                itemData={serchText ? filteredData : worklistTasks}
+                itemsPerPage={10}
+              />
+            )
+          )}
         </div>
       </div>
     </div>

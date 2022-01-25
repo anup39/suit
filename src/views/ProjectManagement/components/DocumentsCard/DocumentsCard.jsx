@@ -3,9 +3,10 @@ import './DocumentsCard.scss';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import PropTypes from 'prop-types';
 import React from 'react';
 
-const DocumentsCard = () => {
+const DocumentsCard = ({ documentsDetails }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const open = Boolean(anchorEl);
@@ -20,13 +21,15 @@ const DocumentsCard = () => {
 
   return (
     <div className="project-document-card-base-div">
-      <span className="document-name">Document Name</span>
+      <span className="document-name"> {documentsDetails.fileName} </span>
 
-      <span className="document-importd-from">Imported From</span>
+      <span className="document-importd-from"> - </span>
 
-      <span className="document-type">Document Type</span>
+      <span className="document-type">
+        {!documentsDetails.fileType ? '-' : documentsDetails.fileType}
+      </span>
 
-      <span className="document-uploaded-on">Uploaded On</span>
+      <span className="document-uploaded-on">-</span>
 
       <span className="document-actions">
         <MoreHorizIcon
@@ -49,6 +52,11 @@ const DocumentsCard = () => {
       </span>
     </div>
   );
+};
+
+/* eslint-disable */
+DocumentsCard.propTypes = {
+  documentsDetails: PropTypes.object,
 };
 
 export default DocumentsCard;

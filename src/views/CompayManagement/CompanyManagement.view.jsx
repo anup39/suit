@@ -38,6 +38,7 @@ const CompanyManagementView = () => {
             isClose={handleCloseCompanyDrawer}
             isOpen={openCreateCompanyDrawer}
           />
+
           <h3>{t('companyManagement')}</h3>
           <button
             ButtonUnstyled

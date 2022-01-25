@@ -1,18 +1,22 @@
 import './Documents.scss';
 
-import SearchIcon from '@mui/icons-material/Search';
+// import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getProjectData } from '../../../../redux/project-management-redux/project.selector';
+import Pagination from '../../../../components/shared/Pagination/Pagination';
+import {
+  getProjcectDocuments,
+  getProjectData,
+} from '../../../../redux/project-management-redux/project.selector';
 import { projectDocuments } from '../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
-import DocumentsCard from '../DocumentsCard/DocumentsCard';
 
 const Documents = () => {
   const currentProject = useSelector(getProjectData);
   const authToken = useSelector(getUserAuthToken);
+  const currentProjectDocuments = useSelector(getProjcectDocuments);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -27,10 +31,10 @@ const Documents = () => {
 
   return (
     <div className="documents-base-div">
-      <div className="documents-search-div">
+      {/* <div className="documents-search-div">
         <input className="document-search-input" />
         <SearchIcon className="document-search-icon" />
-      </div>
+      </div> */}
       <div className="document-header-table">
         <span className="document-name">{t('docuemntName')}</span>
         <span className="document-importd-from">{t('importedFrom')}</span>
@@ -39,7 +43,17 @@ const Documents = () => {
         <span className="document-actions">{t('actions')}</span>
       </div>
 
-      <DocumentsCard />
+      {currentProjectDocuments && currentProjectDocuments.length === 0 ? (
+        <div className="no-data-found">
+          <p>No Data Found!</p>
+        </div>
+      ) : (
+        <Pagination
+          componentNo={8}
+          itemData={currentProjectDocuments}
+          itemsPerPage={10}
+        />
+      )}
     </div>
   );
 };

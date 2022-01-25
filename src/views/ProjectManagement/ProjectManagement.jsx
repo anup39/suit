@@ -36,6 +36,8 @@ const ProjectManagement = ({ userToken }) => {
   const { t } = useTranslation();
 
   const [value, setValue] = React.useState(0);
+  const [serchText, setSerchText] = React.useState('');
+  const [filteredData, setFilteredData] = React.useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -62,6 +64,16 @@ const ProjectManagement = ({ userToken }) => {
   const handelDrawerClose = () => {
     setAddNewProject(false);
   };
+
+  const handelSearchTextChange = (e) => {
+    setSerchText(e.target.value);
+
+    const filteredList = projectList.filter((item) =>
+      item?.name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setFilteredData(filteredList);
+  };
+
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(getProjectList(userToken));
@@ -110,16 +122,18 @@ const ProjectManagement = ({ userToken }) => {
                       <SearchIcon className="project-management-search-icon" />
                       <input
                         className="project-management-search-input"
+                        onChange={(e) => handelSearchTextChange(e)}
                         placeholder={t('searchProject')}
+                        value={serchText}
                       />
                     </div>
                   </div>
 
                   <div>
                     <div className="project-management-table-header">
-                      <span className="project-card-check-input">
+                      {/* <span className="project-card-check-input">
                         <input type="checkbox" />
-                      </span>
+                      </span> */}
 
                       <span className="project-card-project-name">
                         <p>{t('projectName')}</p>
@@ -158,7 +172,7 @@ const ProjectManagement = ({ userToken }) => {
                   <Pagination
                     componentNo={0}
                     handleClose={handelShowProjectPannel}
-                    itemData={projectList}
+                    itemData={serchText ? filteredData : projectList}
                     itemsPerPage={10}
                   />
                   <div className="mobile_table_pm-project">

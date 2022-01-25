@@ -6,12 +6,15 @@ import { useTranslation } from 'react-i18next';
 import ReactPaginate from 'react-paginate';
 
 import AssignWorkActivity from './components/AssignWorkActivity';
+import ManagementOfFieldActivity from './components/ManagementOfFieldActivity';
 import MilestoneManagement from './components/MilestoneManagement';
+import ProjectDocuments from './components/ProjectDocuments';
 import ProjectManangement from './components/ProjectManangement';
 import PublicFeedback from './components/PublicFeedback';
 import UserRoles from './components/UserRoles';
 import ViewUserFeedback from './components/ViewUserFeedback';
 import WorklistManagement from './components/WorklistManagement';
+import WorkListTasks from './components/WorkListTasks';
 
 const CustomPagination = ({
   itemsPerPage,
@@ -58,6 +61,12 @@ const CustomPagination = ({
       <UserRoles key="UserRoles" currentItems={currentItems} />,
       <PublicFeedback key="Public Feedback" currentItems={currentItems} />,
       <ViewUserFeedback key="View User Feedback" currentItems={currentItems} />,
+      <WorkListTasks key="Worklist Tasks" currentItems={currentItems} />,
+      <ProjectDocuments key="Project Documents" currentItems={currentItems} />,
+      <ManagementOfFieldActivity
+        key="Management Of Field Activity"
+        currentItems={currentItems}
+      />,
     ];
 
     return components[value];

@@ -52,3 +52,16 @@ export const deleteCompanyFail = (data) => ({
   type: COMPANY_ACTION_TYPES.DELETE_COMPANY_FAIL,
   payload: data,
 });
+
+export const updateCompany = (data) => ({
+  type: COMPANY_ACTION_TYPES.UPDATE_COMPANY,
+  payload: data,
+});
+export const updateCompanySuccess = (data) => ({
+  type: COMPANY_ACTION_TYPES.UPDATE_COMPANY_SUCCESS,
+  payload: data,
+});
+export const updateCompanyError = (data) => ({
+  type: COMPANY_ACTION_TYPES.UPDATE_COMPANY_FAIL,
+  payload: data,
+});

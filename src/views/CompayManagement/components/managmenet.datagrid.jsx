@@ -51,9 +51,17 @@ const CompanyManagementDataGrid = () => {
   };
 
   const filterLists = (list) => {
-    const filteredList = list.filter((item) =>
-      item?.name.toLowerCase().includes(searchItem.toLowerCase())
-    );
+    const filteredList = list.filter((item) => {
+      const query = searchItem.toLowerCase();
+      return (
+        item?.name.toLowerCase().includes(query) ||
+        item?.address.toLowerCase().includes(query) ||
+        item?.city.toLowerCase().includes(query) ||
+        item?.reference_contact.toLowerCase().includes(query) ||
+        item?.last_update.includes(query) ||
+        item?.user_last_update.toLowerCase().includes(query)
+      );
+    });
 
     return filteredList;
   };
@@ -96,14 +104,18 @@ const CompanyManagementDataGrid = () => {
             type="text"
           />
         </div>
-        <Button
-          className={classes.delete_button}
-          disabled={companyFullListToDelete.length === 0}
-          onClick={deleteCompany}
-          type="button"
-        >
-          {t('delete')}
-        </Button>
+        {companyFullListToDelete.length === 0 ? (
+          ''
+        ) : (
+          <Button
+            className={classes.delete_button}
+            disabled={companyFullListToDelete.length === 0}
+            onClick={deleteCompany}
+            type="button"
+          >
+            {t('delete')}
+          </Button>
+        )}
       </div>
       <div className={classes.datagrid_tables_containers}>
         <table className={classes.datagrid_tables}>
