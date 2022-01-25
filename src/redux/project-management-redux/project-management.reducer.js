@@ -45,6 +45,8 @@ const PROJECT_MANAGEMENT_INITIAL_STATE = {
   selectedProjectLayerList:[],
   isSelectedProjectLayerListDataLoading: false,
 
+  selectedTaskId: null,
+
 };
 
 const projectManagementReducer = (
@@ -335,6 +337,11 @@ const projectManagementReducer = (
         // projectListError: action.payload,
         isSelectedProjectLayerListDataLoading:false,
         selectedProjectLayerList:[],
+      };
+    case PROJECT_MANAGEMENT_TYPES.SELECT_TASK_ID:
+      return {
+        ...state,
+        selectedTaskId:action.payload,
       };
 
     default:

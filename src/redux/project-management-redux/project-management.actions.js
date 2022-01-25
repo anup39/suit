@@ -189,3 +189,7 @@ export const getSelectedProjectLayersListError = (data) => ({
   type: PROJECT_MANAGEMENT_TYPES.GET_SELECTED_PROJECT_LAYERS_LIST_ERROR,
   payload: data,
 });
+export const selectTaskId = (data) => ({
+  type: PROJECT_MANAGEMENT_TYPES.SELECT_TASK_ID,
+  payload: data,
+});

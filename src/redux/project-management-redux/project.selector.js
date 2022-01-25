@@ -58,6 +58,9 @@ export const getProjcectDocuments = (state) => {
   return state.projectManagement.currentProjectDocuments;
 };
 
-export const getSelectedProjectLayersList = (state) => {
+export const getSelectedProjectLayersListSuccess = (state) => {
   return state.projectManagement.selectedProjectLayerList;
+};
+export const getSelectedTaskId = (state) => {
+  return state.projectManagement.selectedTaskId;
 };

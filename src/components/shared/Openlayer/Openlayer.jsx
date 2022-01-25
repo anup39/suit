@@ -1,21 +1,34 @@
-/*eslint-disable*/
 import './Openlayer.scss';
-
-// react
-import React, { useState, useEffect } from 'react';
 
 // openlayers
 import GeoJSON from 'ol/format/GeoJSON';
-import Feature from 'ol/Feature';
+// react
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { selectTaskId } from '../../../redux/project-management-redux/project-management.actions';
+// import { getSelectedProjectLayersList } from '../../../redux/project-management-redux/project-management.actions';
+// import { getSelectedProjectLayersList } from '../../../redux/project-management-redux/project-management.actions';
+import { getTasksByProject } from '../../../redux/worklist-management-redux/worklist.selector';
 // components
 import MapWrapper from './OpenLayerWrapper';
 
-function OpenLayer() {
+const OpenLayer = () => {
+  const dispatch = useDispatch();
   // set intial state
   const [features, setFeatures] = useState([]);
-  const [projectLayers, setProjectLayers] = useState([{"name":14,"href":"http:\/\/13.233.23.132:7080\/geoserver\/rest\/workspaces\/Anuptest3\/layers\/14.json"},{"name":141,"href":"http:\/\/13.233.23.132:7080\/geoserver\/rest\/workspaces\/Anuptest3\/layers\/141.json"},{"name":"20200101_LKDH_AXFlurstueck","href":"http:\/\/13.233.23.132:7080\/geoserver\/rest\/workspaces\/Anuptest3\/layers\/20200101_LKDH_AXFlurstueck.json"},{"name":"Schutzrohre_vor_POPBaulos14","href":"http:\/\/13.233.23.132:7080\/geoserver\/rest\/workspaces\/Anuptest3\/layers\/Schutzrohre_vor_POPBaulos14.json"},{"name":"TrassenStand_baulos14","href":"http:\/\/13.233.23.132:7080\/geoserver\/rest\/workspaces\/Anuptest3\/layers\/TrassenStand_baulos14.json"}]);
+  // eslint-disable-next-line react-redux/useSelector-prefer-selectors
+  const selectedProjectLayersList = useSelector(
+    (state) => state.projectManagement.selectedProjectLayerList
+  )?.layers?.layer;
+  const [wmsLayers, setWmsLayers] = useState([]);
+  const taskDetailsByProject = useSelector(getTasksByProject);
 
+  useEffect(() => {
+    if (taskDetailsByProject?.length > 0) {
+      dispatch(selectTaskId(taskDetailsByProject?.[0]?.taskId));
+    }
+  }, [taskDetailsByProject]);
 
   // initialization - retrieve GeoJSON features from Mock JSON API get features from mock
   //  GeoJson API (read from flat .json file in public directory)
@@ -42,9 +55,15 @@ function OpenLayer() {
 
   return (
     <div className="App">
-      <MapWrapper features={features} wmsLayers={projectLayers}/>
+      <MapWrapper
+        features={features}
+        projectLayersList={selectedProjectLayersList}
+        setWmsLayers={setWmsLayers}
+        taskDetailsByProject={taskDetailsByProject}
+        wmsLayers={wmsLayers}
+      />
     </div>
   );
-}
+};
 
 export default OpenLayer;

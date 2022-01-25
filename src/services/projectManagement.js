@@ -166,18 +166,7 @@ export const GET_SELECTED_PROJECT_LAYERS_LIST = async (payload) => {
         username: 'admin',
         password: 'geoserver',
       },
-      // proxy: {
-      //   protocol: 'http',
-      //   host: 'http://13.233.23.132',
-      //   port: 7080,
-      //   auth: {
-      //     username: 'admin',
-      //     password: 'geoserver',
-      //   },
-      // },
     }
   );
-  // eslint-disable-next-line no-console
-  console.log(selectedLayersList.data);
   return selectedLayersList.data;
 };
