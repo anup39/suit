@@ -134,7 +134,7 @@ const DatagridRow = ({
             <MenuItem onClick={handleClose}>{t('editUsers')}</MenuItem>
 
             <MenuItem onClick={handleEditCompanyDrawer}>
-              {t('editComapny')}
+              {t('editCompany')}
             </MenuItem>
             {/* <MenuItem onClick={handleClose}>{t('delete')}</MenuItem> */}
           </Menu>
