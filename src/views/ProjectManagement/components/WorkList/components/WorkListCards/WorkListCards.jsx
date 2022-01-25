@@ -46,7 +46,7 @@ const WorkListCards = ({ taskInfo }) => {
     dispatch(deleteTaskByID(data));
   };
   return (
-    <>
+    <div>
       {!view ? (
         <div className="work-list-table-body">
           <span className="work-list-card-check-input">
@@ -91,7 +91,7 @@ const WorkListCards = ({ taskInfo }) => {
       ) : (
         <WorkListDetailsCard taskInfo={taskInfo} undo={handelUndoView} />
       )}
-    </>
+    </div>
   );
 };
 

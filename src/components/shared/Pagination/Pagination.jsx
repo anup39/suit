@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import ReactPaginate from 'react-paginate';
 
 import AssignWorkActivity from './components/AssignWorkActivity';
+import FieldUpdates from './components/FieldUpdates';
 import ManagementOfFieldActivity from './components/ManagementOfFieldActivity';
 import MilestoneManagement from './components/MilestoneManagement';
 import ProjectDocuments from './components/ProjectDocuments';
@@ -67,6 +68,7 @@ const CustomPagination = ({
         key="Management Of Field Activity"
         currentItems={currentItems}
       />,
+      <FieldUpdates key="Field Updates" currentItems={currentItems} />,
     ];
 
     return components[value];
