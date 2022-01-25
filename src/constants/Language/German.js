@@ -166,6 +166,16 @@ const German = {
   viewEdit: 'Anzeigen/Bearbeiten',
   reasonOfApproval: 'Grund der Genehmigung',
   approveMilestone: 'Meilenstein genehmigen',
+  addFeedback: 'Feedback hinzufügen',
+  publicUserFeedback: 'Öffentliches Benutzer-Feedback',
+  viewUserFeedback: 'Benutzerfeedback anzeigen',
+  satisfaction: 'Zufriedenheit',
+  uploadDocuments: 'Dokumente hochladen',
+  downloadAll: 'Alles herunterladen',
+  comment: 'Kommentar',
+  selectFileToUpload: 'Wählen Sie Hochzuladende Datei aus',
+  dragandDropFilesHere: 'Ziehen Sie Dateien hierher und legen Sie sie dort ab',
+  browseFiles: 'Dateien durchsuchen',
 };
 
 export default German;

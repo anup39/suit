@@ -166,6 +166,16 @@ const English = {
   viewEdit: 'View/Edit',
   reasonOfApproval: 'Reason Of Approval',
   approveMilestone: 'Approve Milestone',
+  addFeedback: 'Add Feedback',
+  publicUserFeedback: 'Public User Feedback',
+  viewUserFeedback: 'View User Feedback',
+  satisfaction: 'Satisfaction',
+  uploadDocuments: 'Upload Documents',
+  downloadAll: 'Download All',
+  comment: 'Comment',
+  selectFileToUpload: 'Select File To Upload',
+  dragandDropFilesHere: 'Drag and Drop Files Here',
+  browseFiles: 'Browse Files',
 };
 
 export default English;

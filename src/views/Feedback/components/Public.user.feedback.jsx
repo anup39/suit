@@ -1,6 +1,7 @@
 // import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 // import Button from '@mui/material/Button';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -27,6 +28,8 @@ import {
 import MobileDataRow from './mobile.data.row';
 
 const PublicUserFeedback = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
   const userData = useSelector(getUserData);
@@ -80,17 +83,17 @@ const PublicUserFeedback = () => {
                 {' '}
                 <input type="checkbox" />
               </th> */}
-              <th scope="col">User Name</th>
-              <th scope="col">Date</th>
+              <th scope="col">{t('username')}</th>
+              <th scope="col">{t('date')}</th>
               <th scope="col" style={{ width: '25%' }}>
-                Address
+                {t('address')}
               </th>
-              <th scope="col">City</th>
-              <th scope="col">Satisfaction</th>
+              <th scope="col">{t('city')}</th>
+              <th scope="col">{t('satisfaction')}</th>
               <th scope="col" style={{ width: '15%' }}>
-                Documents
+                {t('documents')}
               </th>
-              <th scope="col">Actions</th>
+              <th scope="col">{t('actions')}</th>
             </tr>
           </thead>
           {isFeedbackLoading ? (
