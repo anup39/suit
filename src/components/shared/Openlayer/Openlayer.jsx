@@ -4,8 +4,9 @@ import './Openlayer.scss';
 import GeoJSON from 'ol/format/GeoJSON';
 // react
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { selectTaskId } from '../../../redux/project-management-redux/project-management.actions';
 // import { getSelectedProjectLayersList } from '../../../redux/project-management-redux/project-management.actions';
 // import { getSelectedProjectLayersList } from '../../../redux/project-management-redux/project-management.actions';
 import { getTasksByProject } from '../../../redux/worklist-management-redux/worklist.selector';
@@ -13,6 +14,7 @@ import { getTasksByProject } from '../../../redux/worklist-management-redux/work
 import MapWrapper from './OpenLayerWrapper';
 
 const OpenLayer = () => {
+  const dispatch = useDispatch();
   // set intial state
   const [features, setFeatures] = useState([]);
   // eslint-disable-next-line react-redux/useSelector-prefer-selectors
@@ -21,6 +23,12 @@ const OpenLayer = () => {
   )?.layers?.layer;
   const [wmsLayers, setWmsLayers] = useState([]);
   const taskDetailsByProject = useSelector(getTasksByProject);
+
+  useEffect(() => {
+    if (taskDetailsByProject?.length > 0) {
+      dispatch(selectTaskId(taskDetailsByProject?.[0]?.taskId));
+    }
+  }, [taskDetailsByProject]);
 
   // initialization - retrieve GeoJSON features from Mock JSON API get features from mock
   //  GeoJson API (read from flat .json file in public directory)

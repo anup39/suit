@@ -15,14 +15,18 @@ import { toStringXY } from 'ol/coordinate';
 import { fromLonLat } from 'ol/proj';
 import TileWMS from 'ol/source/TileWMS';
 import { get } from 'ol/proj';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectTaskId } from '../../../redux/project-management-redux/project-management.actions';
 // import Style from 'ol/style/Style';
 // import Fill from 'ol/style/Fill';
 // import Circle from 'ol/geom/Circle';
 // import Stroke from 'ol/style/Stroke';
 import {Circle, Fill, Stroke, Style} from 'ol/style';
-
+  import {
+    getAllProjects,
+    getSelectedTaskId,
+    // getTasksByProject,
+  } from '../../../redux/project-management-redux/project.selector';
 
 function MapWrapper(props) {
   const dispatch = useDispatch();
@@ -34,7 +38,30 @@ function MapWrapper(props) {
 
   const washingtonLonLat = [-77.036667, 38.895];
   const washingtonWebMercator = fromLonLat(washingtonLonLat);
+  // const taskDetailsByProject = useSelector(getTasksByProject);
+  const selectedTaskId = useSelector(getSelectedTaskId);
 
+
+  useEffect(() => {
+    if(map && vectorLayer && props?.taskDetailsByProject){
+      var source = vectorLayer.getSource();
+      var features = source.getFeatures();
+      features.forEach(feat=>{
+        if(feat.values_.taskId === selectedTaskId){
+          var ext=feat.getGeometry().getExtent();
+          // map.getView().fitExtent(ext,map.getSize());
+          map.getView().fit(ext, {
+            padding: [50, 50, 50, 50],
+            duration: 500,
+            maxZoom:8,
+            constrainResolution: true,
+          });
+        }
+      })
+
+    }
+  }, [map,props.taskDetailsByProject,vectorLayer]);
+  
   // pull refs
   const mapElement = useRef();
 
@@ -176,12 +203,10 @@ function MapWrapper(props) {
           ]));
           map.addLayer(tileLayer);
         });
-        console.log(props.wmsLayers,'');
 
       }
     }
       return () => {
-        console.log(props.wmsLayers,'unmount')
         props.wmsLayers.forEach(layer=>{
           map.removeLayer(layer);
         })
@@ -191,7 +216,6 @@ function MapWrapper(props) {
     useEffect(() => {
     
       return () => {
-        console.log(props.wmsLayers,'2ndunmount')
 
         props.wmsLayers.forEach(layer=>{
           map.removeLayer(layer);
@@ -218,7 +242,6 @@ function MapWrapper(props) {
       return featurex;
     });
     if (feature) {
-     console.log(feature,'feature');
      if(feature.values_.taskId){
       dispatch(selectTaskId(feature.values_.taskId));
      }

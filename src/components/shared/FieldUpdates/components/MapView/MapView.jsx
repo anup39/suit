@@ -1,13 +1,22 @@
 import './MapView.scss';
 
+import CancelIcon from '@mui/icons-material/Cancel';
+import ChatIcon from '@mui/icons-material/Chat';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
+import PauseCircleIcon from '@mui/icons-material/PauseCircle';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import TimelapseIcon from '@mui/icons-material/Timelapse';
+import { red, yellow } from '@mui/material/colors';
 // import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
   getAllProjects,
-  getSelectedTaskId,
   // getTasksByProject,
+  getProjectData,
+  getSelectedTaskId,
 } from '../../../../../redux/project-management-redux/project.selector';
 import {
   getProjectList,
@@ -19,7 +28,8 @@ import { getTasksByProject } from '../../../../../redux/worklist-management-redu
 import classes from '../../../../../views/ProjectManagement/components/ImportProject/components/import-drawer/import-drawer.styles.module.scss';
 import MapWrapper from '../../../Openlayer/Openlayer';
 
-const MapView = () => {
+// eslint-disable-next-line react/prop-types
+const MapView = ({ page }) => {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const [projectId, setprojectId] = React.useState(null);
@@ -28,6 +38,7 @@ const MapView = () => {
   // eslint-disable-next-line no-unused-vars
   const taskDetailsByProject = useSelector(getTasksByProject);
   const selectedTaskId = useSelector(getSelectedTaskId);
+  const selectedProjectData = useSelector(getProjectData);
 
   React.useEffect(() => {
     dispatch(getProjectList(authToken));
@@ -47,9 +58,88 @@ const MapView = () => {
       dispatch(taskByProject(data));
     }
   }, [projectList, projectId]);
+  React.useEffect(() => {
+    if (!selectedProjectData && projectList.length > 0) {
+      setprojectId(`${projectList?.[0]?.id}`);
+    }
+    if (selectedProjectData) {
+      setprojectId(`${selectedProjectData?.id}`);
+    }
+  }, [projectList, selectedProjectData]);
+  // React.useEffect(() => {
+  //   if (selectedProjectData) {
+  //     setprojectId(`${selectedProjectData?.id}`);
+  //   }
+  // }, [selectedProjectData]);
+
   const filteredTaskByTaskId =
     taskDetailsByProject &&
     taskDetailsByProject?.find((task) => task.taskId === selectedTaskId);
+
+  const getStatusIcons = (status) => {
+    switch (status) {
+      case 'Not assigned':
+        return (
+          <DoNotDisturbAltIcon
+            className="field-search-icon"
+            color="grey"
+            fontSize="large"
+          />
+        );
+      case 'Not started':
+        return (
+          <RemoveCircleOutlineIcon
+            className="field-search-icon"
+            fontSize="large"
+          />
+        );
+      case 'In progress/started':
+        return <TimelapseIcon color="primary" fontSize="large" />;
+      case 'Waiting for feedback':
+        return (
+          <ChatIcon
+            className="field-search-icon"
+            color="primary"
+            fontSize="large"
+          />
+        );
+      case 'Suspended':
+        return (
+          <PauseCircleIcon
+            className="field-search-icon"
+            fontSize="large"
+            sx={{ color: yellow[900] }}
+          />
+        );
+      case 'Completed':
+        return (
+          <CheckCircleIcon
+            className="field-search-icon"
+            color="primary"
+            fontSize="large"
+          />
+        );
+      case 'Canceled':
+        return (
+          <CancelIcon
+            className="field-search-icon"
+            fontSize="large"
+            sx={{ color: red[900] }}
+          />
+        );
+      case 'Approved':
+        return (
+          <CheckCircleIcon
+            className="field-search-icon"
+            color="success"
+            fontSize="large"
+          />
+        );
+
+      default:
+        return <div />;
+    }
+  };
   return (
     <div className="map-view-base-div">
       <div className="map-view-map-div">
@@ -65,17 +155,20 @@ const MapView = () => {
           >
             Project Name
           </label>
-          <select
-            className={classes.form_input}
-            onChange={(e) => setprojectId(e.target.value)}
-          >
-            <option value=""> Select A Project</option>
-            {projectList.map((vals) => (
-              <option key={vals.id} value={vals.id}>
-                {vals.name}
-              </option>
-            ))}
-          </select>
+          {page === 'webgisservices' && (
+            <select
+              className={classes.form_input}
+              onChange={(e) => setprojectId(e.target.value)}
+              value={projectId}
+            >
+              <option value=""> Select A Project</option>
+              {projectList.map((vals) => (
+                <option key={vals.id} value={vals.id}>
+                  {vals.name}
+                </option>
+              ))}
+            </select>
+          )}
         </div>
         {/* <div className="map-view-document-search-div">
           <label>Document Name</label>
@@ -85,17 +178,13 @@ const MapView = () => {
           </div>
         </div> */}
         <div className="map-view-document-preview">
-          {/* <embed
-            // src={successStoryDetailData?.resource_file}
-            // src={taskDetailsByProject[0].documents}
-            src="http://www.africau.edu/images/default/sample.pdf"
-            style={{ height: '100%' }}
-            type="application/pdf"
-            width="100%"
-          /> */}
           <iframe
             height="100%"
-            src="http://asuite.arkivista.it/VistaEcmWeb.aspx?AppName=ASuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&LogonType=3&OperationType=10&DispayMode=0&UserName=Administrator&PwdHash=FE5925DF339948B95B605D595DF8861729F3EB3A&IdxId=69&DocId=66"
+            src={`http://ecm.digital-twinsuite.com/VistaEcmWeb.aspx?LogonType=3&UserName=Administrator&Password=Asuite&Ap
+            pName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~
+            TASK_NAME=${filteredTaskByTaskId?.taskName ?? ''} PROJ_NAME=${
+              filteredTaskByTaskId?.projectsName ?? ''
+            }`}
             title="Pdf Title"
             width="100%"
           />
@@ -107,6 +196,22 @@ const MapView = () => {
               <p>Geometry Type:</p>
               <p>Point</p>
             </span>
+            <span>
+              <p>Project Name:</p>
+              <p>{filteredTaskByTaskId?.projectsName}</p>
+            </span>
+            <span>
+              <p>Project Id:</p>
+              <p>{filteredTaskByTaskId?.projectsId}</p>
+            </span>
+            <span>
+              <p>Task Id:</p>
+              <p>{filteredTaskByTaskId?.taskId}</p>
+            </span>
+            <span>
+              <p>Type:</p>
+              <p>{filteredTaskByTaskId?.type}</p>
+            </span>
 
             <span>
               <h6>Task Name:</h6>
@@ -115,7 +220,8 @@ const MapView = () => {
 
             <span>
               <p>Task Status:</p>
-              <p>{filteredTaskByTaskId?.taskStatus}</p>
+              <p>{getStatusIcons(filteredTaskByTaskId?.taskStatus)}</p>
+              {/* <p>{filteredTaskByTaskId?.taskStatus}</p> */}
             </span>
 
             <span>

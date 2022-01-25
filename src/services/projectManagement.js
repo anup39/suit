@@ -168,7 +168,5 @@ export const GET_SELECTED_PROJECT_LAYERS_LIST = async (payload) => {
       },
     }
   );
-  // eslint-disable-next-line no-console
-  console.log(selectedLayersList.data);
   return selectedLayersList.data;
 };
