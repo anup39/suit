@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { getIfAuthenticated } from '../../redux/user-redux/user.selectors';
@@ -15,6 +16,8 @@ import ViewUserFeedback from './components/View.user.feedback';
 import TabPanel from './TabPanel';
 
 const FeedbackView = () => {
+  const { t } = useTranslation();
+
   const [value, setValue] = React.useState(0);
   const [create, setCreate] = React.useState(false);
 
@@ -34,13 +37,13 @@ const FeedbackView = () => {
           <AddFeedback isClose={setCreate} isOpen={create} />
 
           <div className="fb_head">
-            <h3>Feedback</h3>
+            <h3>{t('feedback')}</h3>
             <span
               className="add_new_feedback_button"
               onClick={openCreate}
               type="button"
             >
-              <AddIcon /> Add Feedback
+              <AddIcon /> {t('addFeedback')}
             </span>
           </div>
           {/* <div className="breadcrumbs">
@@ -50,8 +53,8 @@ const FeedbackView = () => {
           <Box sx={{ width: '100%' }}>
             <Box>
               <Tabs onChange={handleChange} value={value}>
-                <Tab label="Public User Feedback" />
-                <Tab label="View User Feedback" />
+                <Tab label={t('publicUserFeedback')} />
+                <Tab label={t('viewUserFeedback')} />
               </Tabs>
             </Box>
             <TabPanel index={0} value={value}>
@@ -62,7 +65,7 @@ const FeedbackView = () => {
             </TabPanel>
           </Box>
         </div>
-        <div className="copy-right-txt">Powered by Negentis</div>
+        <div className="copy-right-txt">{t('poweredBy')} Negentis</div>
       </div>
     </AuthenticatedRoute>
   );

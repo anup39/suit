@@ -3,6 +3,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteFeedback } from '../../../../redux/feedback-redux/feedback.actions';
@@ -10,6 +11,8 @@ import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import DataDetails from './datadetails';
 
 const Datagrid = ({ feedBackDetails }) => {
+  const { t } = useTranslation();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [viewFeedback, setViewFeedback] = React.useState(false);
 
@@ -71,8 +74,8 @@ const Datagrid = ({ feedBackDetails }) => {
               onClose={handleClose}
               open={open}
             >
-              <MenuItem onClick={handleViewFeedback}>View</MenuItem>
-              <MenuItem onClick={handleDeleteFeedback}>Delete</MenuItem>
+              <MenuItem onClick={handleViewFeedback}>{t('view')}</MenuItem>
+              <MenuItem onClick={handleDeleteFeedback}>{t('delete')}</MenuItem>
             </Menu>
           </div>
         </>

@@ -1,12 +1,10 @@
 .webex_container{
-    width: 90%;
+    width: 95%;
     margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-    height: 88vh;
 }
 
 .webex_footer{
@@ -46,5 +44,81 @@
 
 .webex_body{
     width: 100%;
-    padding: 10px 0 60px 0;
+    padding: 10px 0 0 0;
+    background: #F7F7F7;
+    border: 1px solid #D4DEEA;
+    box-sizing: border-box;
+    border-radius: 3px;
+    height: 100vh;
+    margin-top: 50px;
+    margin-bottom: 48px;
+}
+
+.body_header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 20px 10px;
+}
+
+.input_container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+}
+
+.form_container{
+    width: 412px;
+    padding: 36px 54px 10px 55px;
+}
+
+.input_label{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #526484;
+    padding-bottom: 8px;
+}
+
+.form_input{
+    background: #FFFFFF;
+    border: 1px solid #8094AE;
+    box-sizing: border-box;
+    border-radius: 3px;
+    outline: none;
+    padding: 7px 8px;
+}
+
+.buttons_group{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: 48px;
+}
+
+.add_room{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: #364A63;
+}
+
+.input_error{
+    height: 10px;
+    color: red;
+    font-size: 10px;
+    font-family: 'Roboto';
+    margin-top: 5px;
+}
+
+.webex_space{
+    height: 100%;
+    display: grid;
+    width: 60%;
+    grid-template-columns: 2fr;
 }

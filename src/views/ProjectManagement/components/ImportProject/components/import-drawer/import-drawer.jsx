@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -17,6 +18,7 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
   const authToken = useSelector(getUserAuthToken);
   const projectList = useSelector(getAllProjects);
   const formData = new FormData();
+  const { t } = useTranslation();
 
   const closeDrawer = () => {
     handleClose(false);
@@ -66,20 +68,22 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
       <Box role="presentation" sx={{ width: 350, padding: 5, height: '100%' }}>
         <div className={classes.import_container}>
           <div className={classes.import_form_box}>
-            <h3 className={classes.import_form_header}>Import Project Data</h3>
+            <h3 className={classes.import_form_header}>
+              {t('importProjectData')}
+            </h3>
             <form
               className={classes.form_container}
               onSubmit={(e) => handleSubmit(e)}
             >
               <div className={classes.form_input_container}>
                 <label className={classes.form_label} htmlFor="name">
-                  Project Name
+                  {t('projectName ')}
                 </label>
                 <select
                   className={classes.form_input}
                   onChange={(e) => setprojectId(e.target.value)}
                 >
-                  <option value=""> Select A Project</option>
+                  <option value=""> {t('selectAProject ')}</option>
                   {projectList.map((vals) => (
                     <option key={vals.id} value={vals.id}>
                       {vals.name}
@@ -89,7 +93,7 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
               </div>
               <div className={classes.form_input_container}>
                 <label className={classes.form_label} htmlFor="name">
-                  Work List
+                  {t('workList ')}
                 </label>
                 <input
                   accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4, .xml, .zip"
@@ -101,7 +105,7 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
               </div>
               <div className={classes.form_input_container}>
                 <label className={classes.form_label} htmlFor="name">
-                  QGIS Files
+                  {t('QGISFiles')}
                 </label>
                 <input
                   accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4, .xml, .zip"
@@ -113,7 +117,7 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
               </div>
               <div className={classes.form_input_container}>
                 <label className={classes.form_label} htmlFor="name">
-                  Documents
+                  {t('documents')}
                 </label>
                 <input
                   accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4, .xml, .zip"
@@ -127,11 +131,11 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
               <div className={classes.action_buttons_container}>
                 <span className={classes.form_button_1}>
                   <Button color="error" onClick={closeDrawer}>
-                    Cancel
+                    {t('cancel')}
                   </Button>
                 </span>
                 <Button type="submit" variant="contained">
-                  Upload
+                  {t('upload')}
                 </Button>
               </div>
             </form>

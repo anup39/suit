@@ -3,6 +3,7 @@ import './components/FieldUpdates.scss';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { GrMap } from 'react-icons/gr';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -30,6 +31,7 @@ const ManagementOfFieldActivities = () => {
   const [isMapView, setIsMapView] = React.useState(false);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const showMapView = () => {
     setIsMapView(true);
@@ -49,63 +51,75 @@ const ManagementOfFieldActivities = () => {
 
   return (
     <AuthenticatedRoute isAuthenticated={isAuthenticated}>
-      <BaseTemplate title="Management Of Field Activities">
-        <div className="field-update-base-div">
-          <div className="field-update-search-div">
+      <BaseTemplate title={t('managementOfFieldActivities')}>
+        <div className="mgmt-field-update">
+          <div className="mgmt-field-update-search-div">
             {!isMapView && (
               <>
-                <span>
+                <div className="mgmt-field-container">
                   <SearchIcon className="field-search-icon" />
-                  <input className="field-input" placeholder="Search Task" />
-                </span>
-                <span>
+                  <input
+                    className="field-input-mgmt"
+                    placeholder={t('searchTask')}
+                  />
+                </div>
+                <div className="mgmt-field-container">
                   <SearchIcon className="field-search-icon" />
-                  <input className="field-input" placeholder="Search Company" />
-                </span>
+                  <input
+                    className="field-input-mgmt"
+                    placeholder={t('searchCompany')}
+                  />
+                </div>
               </>
             )}
             {!isMapView ? (
               <span className="map-view-button" onClick={showMapView}>
-                <GrMap className="map-icon" /> Map View
+                <GrMap className="map-icon" /> {t('mapView')}
               </span>
             ) : (
               <span className="map-view-button" onClick={showListView}>
-                <FormatListBulletedIcon className="map-icon" /> List View
+                <FormatListBulletedIcon className="map-icon" /> {t('listView')}
               </span>
             )}
           </div>
           {!isMapView ? (
             <>
-              <div className="field-update-header">
+              <div className="mgmt-field-update-header">
                 {/* <span className="field-updates-header-checkInput">
                   <input type="checkbox" />
                 </span> */}
-                <span className="field-updates-header-taskItem">Task Item</span>
+                <span className="field-updates-header-taskItem">
+                  {t('taskItem')}
+                </span>
                 <span className="field-updates-header-fieldLogs">
-                  Field Logs
+                  {t('fieldLogs')}
                 </span>
                 <span className="field-updates-header-activityReport">
-                  Activity report
+                  {t('activityreport')}
                 </span>
                 <span className="field-updates-header-changeRequest">
-                  Change request
+                  {t('changerequest')}
                 </span>
                 <span className="field-updates-header-milestoneApproval">
-                  Milestone approval
+                  {t('milestoneapproval')}
                 </span>
-                <span className="field-updates-header-status">Status</span>
+                <span className="field-updates-header-status">
+                  {t('status')}
+                </span>
                 <span className="field-updates-header-controlActivity">
-                  Control Activity
+                  {t('controlActivity')}
                 </span>
-                <span className="field-updates-header-actions">Actions</span>
+                <span className="field-updates-header-actions">
+                  {t('actions')}
+                </span>
               </div>
               {/* eslint-disable */}
-              <div>
+              <>
                 {isAllActivitiesLoading ? (
                   <LoadingSpinner />
                 ) : allActivities && allActivities.length === 0 ? (
                   <div className="no-data-found">
-                    <p>No Data Found!</p>
+                    <p>{t('noDataFound')}</p>
                   </div>
                 ) : (
                   <Pagination
@@ -114,7 +128,7 @@ const ManagementOfFieldActivities = () => {
                     itemsPerPage={10}
                   />
                 )}
-              </div>
+              </>
               {/* eslint-enable */}
             </>
           ) : (

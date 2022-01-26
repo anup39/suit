@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Drawer from '@mui/material/Drawer';
 import Modal from '@mui/material/Modal';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { BiLinkExternal } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -46,6 +47,7 @@ const AssignWorkActivities = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const dispatch = useDispatch();
   const [checkBox, setCheckbox] = React.useState(false);
+  const { t } = useTranslation();
 
   const workListData = useSelector(getAllWorkListData);
   const userAuthToken = useSelector(getUserAuthToken);
@@ -114,13 +116,13 @@ const AssignWorkActivities = () => {
       </Modal>
       <BaseTemplate>
         <div className="header-wrapper">
-          <h2 className="header">Assign Work Activities</h2>
+          <h2 className="header">{t('assingWorkActivities')}</h2>
           {/* <span className="assign-project-button" >
           </span> */}
 
           <button onClick={handelOpenDrawer} type="button">
             <AddIcon />
-            Assign Project
+            {t('assignProject')}
           </button>
         </div>
 
@@ -128,11 +130,11 @@ const AssignWorkActivities = () => {
           <div className="assign-work-activity-search-div">
             <div className="assign-work-activity-container">
               <SearchIcon className="assign-work-activity-search-icon" />
-              <input placeholder="Project Name" />
+              <input placeholder={t('projectName')} />
             </div>
             <div className="assign-work-activity-container">
               <SearchIcon className="assign-work-activity-search-icon" />
-              <input placeholder="Task Name" />
+              <input placeholder={t('taskName')} />
             </div>
             {selectedTasks.length !== 0 && (
               <button
@@ -141,7 +143,7 @@ const AssignWorkActivities = () => {
                 type="button"
               >
                 <BiLinkExternal className="work-activity-assign-logo" />
-                Assign Task
+                {t('assignTask')}
               </button>
             )}
           </div>
@@ -155,22 +157,30 @@ const AssignWorkActivities = () => {
                 />
               </span>
               <span className="assign-work-activities-project-name">
-                Project Name
+                {t('projectName')}
               </span>
-              <span className="assign-work-activities-company">Company</span>
-              <span className="assign-work-activities-taskId">Task Id</span>
+              <span className="assign-work-activities-company">
+                {t('company')}
+              </span>
+              <span className="assign-work-activities-taskId">
+                {t('taskId')}
+              </span>
               <span className="assign-work-activities-task-name">
-                Task Name
+                {t('taskName')}
               </span>
               <span className="assign-work-activities-task-description">
-                Task Description
+                {t('taskDescription')}
               </span>
               <span className="assign-work-activities-isMilestone">
-                Ismilestone
+                {t('isMilestone')}
               </span>
-              <span className="assign-work-activities-type">Type </span>
-              <span className="assign-work-activities-status">Status</span>
-              <span className="assign-work-activities-actions">Actions</span>
+              <span className="assign-work-activities-type">{t('type')} </span>
+              <span className="assign-work-activities-status">
+                {t('status')}
+              </span>
+              <span className="assign-work-activities-actions">
+                {t('actions')}
+              </span>
             </div>
             {/*eslint-disable */}
             {isWorklistLoading ? (
@@ -191,7 +201,7 @@ const AssignWorkActivities = () => {
                     paddingBottom: '15%',
                   }}
                 >
-                  No Data Found!
+                  {t('noDataFound')}
                 </p>{' '}
               </div>
             )}

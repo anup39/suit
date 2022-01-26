@@ -1,5 +1,5 @@
 .work-list-base {
-  margin-top: 16px;
+  // margin-top: 16px;
   border: 1px solid #d4deea;
   border-radius: 3px;
   width: 100%;
@@ -158,7 +158,7 @@
     display: block;
   }
 
-  > div:nth-child(even) {
+  >div:nth-child(even) {
     background: #d4deea;
 
     .grid_3_1 {

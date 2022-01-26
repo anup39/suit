@@ -1,66 +1,79 @@
 import './ChangeRequest.scss';
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
 
 const ChangeRequest = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="change-request-base">
-      <EditModalHeaders headerName="Change Request" />
+      <EditModalHeaders headerName={t('changerequest')} />
       <div className="change-request-body-div">
-        <div className="change-request-body-header">
-          <p>Task 1 Change</p>
-        </div>
-        <div className="change-request-body">
-          <div className="change-body-request-details">
-            <span>
-              <p>Company Name</p>
-              <div className="change-request-details">Microhard </div>
-            </span>
-
-            <span>
-              <p>Project name</p>
-              <div className="change-request-details">
-                React Native Mobile App{' '}
-              </div>
-            </span>
-
-            <span>
-              <p>Requets Date</p>
-              <div className="change-request-details">10/12/21</div>
-            </span>
-
-            <span>
-              <p>Request nr</p>
-              <div className="change-request-details">123445645 </div>
-            </span>
+        <div>
+          <div className="change-request-body-header">
+            <p>Task 1 Change</p>
           </div>
+          <div className="change-request-body">
+            <div className="change-body-request-details">
+              <span>
+                <p>{t('companyName')}</p>
+                <div className="change-request-details">Microhard </div>
+              </span>
 
-          <div>
-            <p>Change Request</p>
-            <div className="change-request-description-details">
-              Change Request Details
+              <span>
+                <p>{t('projectName')}</p>
+                <div className="change-request-details">
+                  React Native Mobile App{' '}
+                </div>
+              </span>
+
+              <span>
+                <p>{t('requetsDate')}</p>
+                <div className="change-request-details">10/12/21</div>
+              </span>
+
+              <span>
+                <p>{t('requestnr')}</p>
+                <div className="change-request-details">123445645 </div>
+              </span>
             </div>
-          </div>
 
-          <div className="filename-base-div">
-            <p>List of File Names</p>
-            <div className="change-request-details-files"> File Div </div>
-          </div>
+            <div>
+              <p>{t('changerequest')}</p>
+              <div className="change-request-description-details">
+                Change Request Details
+              </div>
+            </div>
 
-          <div className="change-request-buttons-div">
-            <span className="change-request-button-reject">Reject</span>
-            <span className="change-request-button-accept">Accept</span>
-          </div>
+            <div className="filename-base-div">
+              <p>{t('listofFileNames')}</p>
+              <div className="change-request-details-files"> File Div </div>
+            </div>
 
-          <span>
-            <p>Reason of Rejection</p>
-            <textarea className="reason-of-rejection-details-text-area" />
-          </span>
+            <div className="change-request-buttons-div">
+              <span className="change-request-button-reject">
+                {t('reject')}
+              </span>
+              <span className="change-request-button-accept">
+                {t('accept')}
+              </span>
+            </div>
+
+            <span>
+              <p>{t('reasonofRejection')}</p>
+              <textarea className="reason-of-rejection-details-text-area" />
+            </span>
+          </div>
         </div>
       </div>
-      <span className="close-button">Close</span>
+      <div className="text-right">
+        <button className="close-button" type="button">
+          {t('close')}
+        </button>
+      </div>
     </div>
   );
 };

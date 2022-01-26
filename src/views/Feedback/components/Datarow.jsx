@@ -3,12 +3,15 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteFeedback } from '../../../redux/feedback-redux/feedback.actions';
 import { getUserAuthToken } from '../../../redux/user-redux/user.selectors';
 
 const Datarow = ({ data }) => {
+  const { t } = useTranslation();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const dispatch = useDispatch();
@@ -29,7 +32,7 @@ const Datarow = ({ data }) => {
   };
 
   return (
-    <tr style={{ borderBottom: '1px solid black' }}>
+    <tr style={{ borderBottom: '1px solid #d4deea' }}>
       <td>{data.userName}</td>
       <td> {data.createdDate} </td>
       <td style={{ width: '25%' }}>{data.address}</td>
@@ -55,7 +58,7 @@ const Datarow = ({ data }) => {
           onClose={handleClose}
           open={open}
         >
-          <MenuItem onClick={handleDelete}>Delete</MenuItem>
+          <MenuItem onClick={handleDelete}>{t('delete')}</MenuItem>
         </Menu>
       </td>
     </tr>

@@ -2,6 +2,7 @@ import './MilestoneApproval.scss';
 
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
@@ -27,6 +28,7 @@ import MobileDataRow from './mobile.data.row';
 
 const MilestoneApproval = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const authToken = useSelector(getUserAuthToken);
   const milestoneData = useSelector(getAllMilestone);
@@ -83,7 +85,7 @@ const MilestoneApproval = () => {
   }, [milestoneData, companyText, projectText]);
   return (
     <AuthenticatedRoute isAuthenticated={isAuthenticated}>
-      <BaseTemplate title="Milestone Approval">
+      <BaseTemplate title={t('milestoneapproval')}>
         <DatagridBase>
           {milestoneData && milestoneData.length === 0 ? (
             ''
@@ -94,7 +96,7 @@ const MilestoneApproval = () => {
                 <input
                   className="milestone-search-input"
                   onChange={(e) => handleProjectTextChange(e)}
-                  placeholder="Search Project"
+                  placeholder={t('searchProject')}
                   value={projectText}
                 />
               </div>
@@ -104,7 +106,7 @@ const MilestoneApproval = () => {
                 <input
                   className="milestone-search-input"
                   onChange={(e) => handleCompanyTextChange(e)}
-                  placeholder="Search Company"
+                  placeholder={t('searchCompany')}
                   value={companyText}
                 />
               </div>
@@ -112,7 +114,7 @@ const MilestoneApproval = () => {
           )}
           <div className="milestone-table-tbody">
             {milestoneData && milestoneData.length === 0 ? (
-              <p className="no-data-to-display">No Data To Display!</p>
+              <p className="no-data-to-display">{t('noDataFound')}</p>
             ) : (
               <>
                 <div className="milestone-table">
@@ -126,32 +128,32 @@ const MilestoneApproval = () => {
                     </span>
 
                     <span className="milestone-approval-company">
-                      <p> Company </p>
+                      <p> {t('company')} </p>
                     </span>
 
                     <span className="milestone-approval-projectName">
                       {' '}
-                      <p>Project Name</p>
+                      <p>{t('projectName')}</p>
                     </span>
 
                     <span className="milestone-approval-date">
-                      <p>Date</p>
+                      <p>{t('date')}</p>
                     </span>
 
                     <span className="milestone-approval-milestoneNr">
-                      <p>Milestone Nr</p>
+                      <p>{t('milestonenr')}</p>
                     </span>
 
                     <span className="milestone-approval-description">
-                      <p>Description</p>
+                      <p>{t('description')}</p>
                     </span>
 
                     <span className="milestone-approval-status">
-                      <p>Status</p>
+                      <p>{t('status')}</p>
                     </span>
 
                     <span className="milestone-approval-action">
-                      <p>Action </p>
+                      <p>{t('actions')} </p>
                     </span>
                   </div>
                 </div>
