@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import './WorklistManagementCard.scss';
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -187,7 +188,7 @@ const WorkListManagementCard = ({
               {t('edit')}
             </MenuItem>
             <MenuItem itmeId={workId} onClick={handleEditStatusDrawerOpen}>
-              ('changeTaskStatus')}
+              {t('changeTaskStatus')}
             </MenuItem>
             <MenuItem ieId={workId} onClick={() => hadelDeleteTask()}>
               {t('delete')}
@@ -207,6 +208,7 @@ WorkListManagementCard.propTypes = {
   isMilestone: PropTypes.number,
   workId: PropTypes.string,
   type: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   allData: PropTypes.object,
   taskStatus: PropTypes.string,
 };

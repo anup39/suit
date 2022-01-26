@@ -42,7 +42,7 @@
         "peerDependencies": false
       }
     ],
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": ["warn", "windows"],
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/no-static-element-interactions": "off",
@@ -84,6 +84,7 @@
         "namedComponents": "arrow-function"
       }
     ],
+    "prettier/prettier": "off",
     "react/require-optimization": "off",
     "simple-import-sort/imports": "error",
     "sort-imports": "off",
