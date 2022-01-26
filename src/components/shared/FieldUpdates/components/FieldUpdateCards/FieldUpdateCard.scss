@@ -1,19 +1,24 @@
 @import '../../../../../theme/ThemeColors';
 
 .field-update-card-base {
-  width: 100%;
-  height: 50px;
-  border-bottom: 1px solid black;
-  padding: 15px 20px;
   display: table;
+  width: 100%;
+  border-bottom: 1px solid #D4DEEA;
 }
 
 .field-update-card-base span {
+  word-break: break-all;
   display: table-cell;
   table-layout: fixed;
+  padding: 10px;
+  font-size: 14px;
   vertical-align: middle;
-  font-size: $table-header-font-size;
-  color: $table-data-color-2;
+  color: #364A63;
+  margin-left: 10px;
+
+  svg {
+    font-size: 18px;
+  }
 }
 
 .field-updates-body-checkInput {
@@ -37,7 +42,7 @@
 }
 
 .field-updates-body-milestoneApproval {
-  width: 20%;
+  width: 15%;
 }
 
 .field-updates-body-status {
@@ -49,7 +54,7 @@
 }
 
 .field-updates-body-actions {
-  width: 4%;
+  width: 10%;
 }
 
 .milestone-accepted-icon {
