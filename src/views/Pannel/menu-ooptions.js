@@ -27,7 +27,7 @@ const MenuOptions = [
     path: ROUTES.ACTIVITIES_MANAGEMENT,
   },
   {
-    name: 'milesotneApproval',
+    name: 'milestoneApproval',
     path: ROUTES.MILESTONE_APPROVAl,
   },
   {

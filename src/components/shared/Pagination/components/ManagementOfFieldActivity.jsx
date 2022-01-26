@@ -5,7 +5,7 @@ import FieldUpdateCard from '../../../../views/ManagementOfFieldActivities/compo
 
 const ManagementOfFieldActivity = ({ currentItems }) => {
   return (
-    <div className="assign-work-activity-table-body">
+    <div className="mgmt-table-body">
       {currentItems &&
         currentItems.map((data) => (
           <FieldUpdateCard key={data.taskId} activityData={data} />

@@ -1,19 +1,38 @@
 @import '../../../../../theme/ThemeColors';
 
+.field-updates-table-body {
+  height: calc(100vh - 428px);
+  overflow: auto;
+
+  @media (max-width: 1024px) {
+    height: calc(100vh - 358px);
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+}
+
 .field-update-card-base {
-  width: 100%;
-  height: 50px;
-  border-bottom: 1px solid black;
-  padding: 15px 20px;
   display: table;
+  width: 100%;
+  border-bottom: 1px solid #D4DEEA;
 }
 
 .field-update-card-base span {
+  word-break: break-all;
   display: table-cell;
   table-layout: fixed;
+  padding: 10px 5px;
+  font-size: 14px;
   vertical-align: middle;
-  font-size: $table-header-font-size;
-  color: $table-data-color-2;
+  color: #364A63;
+  margin-left: 10px;
+
+  svg {
+    font-size: 18px;
+  }
 }
 
 .field-updates-body-checkInput {
@@ -37,7 +56,7 @@
 }
 
 .field-updates-body-milestoneApproval {
-  width: 20%;
+  width: 15%;
 }
 
 .field-updates-body-status {
@@ -49,7 +68,7 @@
 }
 
 .field-updates-body-actions {
-  width: 4%;
+  width: 10%;
 }
 
 .milestone-accepted-icon {
@@ -65,12 +84,13 @@
 }
 
 .field-update-status-select {
-  width: 80%;
-  height: 30px;
+  color: #364A63;
+
   background-color: transparent;
   border: none;
-  font-size: 16px;
+  font-size: 14px;
 }
+
 
 .control-activity-icons {
   color: $icon-color;

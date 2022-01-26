@@ -14,43 +14,50 @@ const ActivityReport = () => {
       <EditModalHeaders headerName={t('activityreport')} />
       <div>
         <div className="activity-report-content">
-          <div className="activity-report-content-header">
-            <span>Activity Report 1</span>
-            <span className="activity-download-button">
-              <FileDownloadOutlinedIcon className="activity-download-icon" />{' '}
-              {t('download')}
-            </span>
-          </div>
-          <div className="activity-report-content-body">
-            <div className="activity-report-inputs-div">
-              <span>
-                <p>{t('company')}</p>
-                <input className="activity-report-inputs" />
-              </span>
+          <div>
+            <div className="activity-report-content-header">
+              <span>Activity Report 1</span>
+              <button className="activity-download-button" type="button">
+                <FileDownloadOutlinedIcon className="activity-download-icon" />{' '}
+                {t('download')}
+              </button>
+            </div>
+            <div className="activity-report-content-body">
+              <div className="activity-report-inputs-div">
+                <span>
+                  <p>{t('company')}</p>
+                  <input />
+                </span>
+
+                <span>
+                  <p>{t('projectName')}</p>
+                  <input />
+                </span>
+
+                <span>
+                  <p>{t('date')}</p>
+                  <input />
+                </span>
+
+                <span>
+                  <p>{t('reportnr')}</p>
+                  <input />
+                </span>
+              </div>
 
               <span>
-                <p>{t('projectName')}</p>
-                <input className="activity-report-inputs" />
-              </span>
-
-              <span>
-                <p>{t('date')}</p>
-                <input className="activity-report-inputs" />
-              </span>
-
-              <span>
-                <p>{t('reportnr')}</p>
-                <input className="activity-report-inputs" />
+                <p>{t('activity')}</p>
+                <textarea rows="5" />
               </span>
             </div>
-
-            <span>
-              <p>{t('activity')}</p>
-              <textarea className="activity-report-textarea" cols={6} />
-            </span>
           </div>
         </div>
-        <span className="activity-close-button"> {t('close')}</span>
+        <div className="text-right">
+          <button className="activity-close-button" type="button">
+            {' '}
+            {t('close')}
+          </button>
+        </div>{' '}
       </div>
     </div>
   );
