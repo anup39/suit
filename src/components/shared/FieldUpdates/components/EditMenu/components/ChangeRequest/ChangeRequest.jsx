@@ -11,7 +11,6 @@ const ChangeRequest = () => {
   return (
     <div className="change-request-base">
       <EditModalHeaders headerName={t('changerequest')} />
-
       <div className="change-request-body-div">
         <div className="change-request-body-header">
           <p>Task 1 Change</p>
@@ -64,7 +63,11 @@ const ChangeRequest = () => {
           </span>
         </div>
       </div>
-      <span className="close-button">{t('close')}</span>
+      <div className="text-right">
+        <button className="close-button" type="button">
+          {t('close')}
+        </button>
+      </div>{' '}
     </div>
   );
 };

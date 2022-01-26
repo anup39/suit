@@ -23,7 +23,7 @@ const German = {
   worklistManagement: 'Arbeitslistenverwaltung',
   assingWorkActivities: 'Arbeitsaktivitäten zuweisen',
   managementOfFieldActivities: 'Management von Feldaktivitäten',
-  milesotneApproval: 'Milesotne-Zulassung',
+  milestoneApproval: 'Meilenstein-Zulassung',
   webGisServices: 'Web-GIS-Dienste',
   webEx: 'WebEx',
   feedback: 'Feedback',

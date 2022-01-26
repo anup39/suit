@@ -23,7 +23,7 @@ const English = {
   worklistManagement: 'Worklist Management',
   assingWorkActivities: 'Assign Work Activities',
   managementOfFieldActivities: 'Management of Field Activities',
-  milesotneApproval: 'Milesotne Approval',
+  milestoneApproval: 'Milestone Approval',
   webGisServices: 'Web GIS Services',
   webEx: 'WebEx',
   feedback: 'Feedback',
