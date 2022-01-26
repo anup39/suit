@@ -25,28 +25,28 @@ const ActivityReport = () => {
             <div className="activity-report-inputs-div">
               <span>
                 <p>{t('company')}</p>
-                <input className="activity-report-inputs" />
+                <input />
               </span>
 
               <span>
                 <p>{t('projectName')}</p>
-                <input className="activity-report-inputs" />
+                <input />
               </span>
 
               <span>
                 <p>{t('date')}</p>
-                <input className="activity-report-inputs" />
+                <input />
               </span>
 
               <span>
                 <p>{t('reportnr')}</p>
-                <input className="activity-report-inputs" />
+                <input />
               </span>
             </div>
 
             <span>
               <p>{t('activity')}</p>
-              <textarea className="activity-report-textarea" cols={6} />
+              <textarea rows="5" />
             </span>
           </div>
         </div>

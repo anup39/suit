@@ -12,45 +12,50 @@ const ActivityReport = () => {
   return (
     <div className="activity-report-base">
       <EditModalHeaders headerName={t('activityreport')} />
-      <div>
-        <div className="activity-report-content">
+      <div className="activity-report-content">
+        <div>
           <div className="activity-report-content-header">
             <span>Activity Report 1</span>
-            <span className="activity-download-button">
+            <button className="activity-download-button" type="button">
               <FileDownloadOutlinedIcon className="activity-download-icon" />{' '}
               {t('download')}
-            </span>
+            </button>
           </div>
           <div className="activity-report-content-body">
             <div className="activity-report-inputs-div">
               <span>
                 <p>{t('company')}</p>
-                <input className="activity-report-inputs" />
+                <input />
               </span>
 
               <span>
                 <p>{t('projectName')}</p>
-                <input className="activity-report-inputs" />
+                <input />
               </span>
 
               <span>
                 <p>{t('date')}</p>
-                <input className="activity-report-inputs" />
+                <input />
               </span>
 
               <span>
                 <p>{t('reportnr')}</p>
-                <input className="activity-report-inputs" />
+                <input />
               </span>
             </div>
 
             <span>
               <p>{t('activity')}</p>
-              <textarea className="activity-report-textarea" cols={6} />
+              <textarea rows="5" />
             </span>
           </div>
         </div>
-        <span className="activity-close-button"> {t('close')}</span>
+      </div>
+      <div className="text-right">
+        <button className="activity-close-button" type="button">
+          {' '}
+          {t('close')}
+        </button>
       </div>
     </div>
   );
