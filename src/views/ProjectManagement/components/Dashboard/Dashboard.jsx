@@ -203,7 +203,8 @@ const Dashboard = () => {
           <h5>{t('projectStatus')}</h5>
 
           <select onChange={handleChange}>
-            <option>Select Project</option>
+            <option>{t('selectAProject')}</option>
+
             {allProjectList.map((val) => (
               <option key={val.id} value={val.id}>
                 {val.name}

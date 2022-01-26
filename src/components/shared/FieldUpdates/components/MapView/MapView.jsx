@@ -1,5 +1,5 @@
+/* eslint-disable */
 import './MapView.scss';
-
 import CancelIcon from '@mui/icons-material/Cancel';
 import ChatIcon from '@mui/icons-material/Chat';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -11,6 +11,7 @@ import { red, yellow } from '@mui/material/colors';
 // import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import {
   getAllProjects,
@@ -30,6 +31,7 @@ import MapWrapper from '../../../Openlayer/Openlayer';
 
 // eslint-disable-next-line react/prop-types
 const MapView = ({ page }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const [projectId, setprojectId] = React.useState(null);

@@ -5,6 +5,14 @@
   height: calc(600px + 10vh);
   display: flex;
   flex-direction: column;
+
+  .no-data-found {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .field-update-search-div {

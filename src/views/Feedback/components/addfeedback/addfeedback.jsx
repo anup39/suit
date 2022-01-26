@@ -8,6 +8,7 @@ import Drawer from '@mui/material/Drawer';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -29,6 +30,7 @@ import UploadDocumentsModal from './upload.documents.modal';
 
 const AddFeedback = ({ isOpen, isClose }) => {
   const [modalOpen, setModalOpen] = React.useState(false);
+  const { t } = useTranslation();
 
   // const [feedbackImage, setfeedbackImage] = React.useState('');
   const [rating, setRating] = React.useState('');
@@ -115,11 +117,11 @@ const AddFeedback = ({ isOpen, isClose }) => {
           role="presentation"
           sx={{ width: 400, padding: 3 }}
         >
-          <h3 className="side-head">Add Feedback</h3>
+          <h3 className="side-head">{t('addFeedback')}</h3>
           <form onSubmit={handleSubmit(onAddFeedbackSubmit)}>
             <div className="form_input_container">
               <label className="form_label" htmlFor="Address">
-                Address
+                {t('address')}
               </label>
               <input
                 className="form_inputs"
@@ -131,7 +133,7 @@ const AddFeedback = ({ isOpen, isClose }) => {
             </div>
             <div className="form_input_container">
               <label className="form_label" htmlFor="City">
-                City
+                {t('city')}
               </label>
               <input
                 className="form_inputs"
@@ -144,7 +146,7 @@ const AddFeedback = ({ isOpen, isClose }) => {
             </div>
             <div className="form_input_container">
               <label className="form_label" htmlFor="ZipCode">
-                Zip Code
+                {t('zipCode')}
               </label>
               <input
                 className="form_inputs"
@@ -156,7 +158,7 @@ const AddFeedback = ({ isOpen, isClose }) => {
             </div>
             <div className="form_input_container">
               <label className="form_label" htmlFor="Comment">
-                Comment
+                {t('comment')}
               </label>
               <textarea
                 className="form_textarea_input"
@@ -168,7 +170,7 @@ const AddFeedback = ({ isOpen, isClose }) => {
             </div>
             <div className="form_input_container">
               <label className="form_label" htmlFor="Satisfaction">
-                Satisfaction{' '}
+                {t('satisfaction')}
               </label>
               <div className="sat-con">
                 {ratingValues.map((val) => (
@@ -185,7 +187,7 @@ const AddFeedback = ({ isOpen, isClose }) => {
             </div>
             <div className="form_input_container">
               <label className="form_label" htmlFor="Upload">
-                Upload{' '}
+                {t('upload')}{' '}
               </label>
               <div
                 className="file_upload_inputs"
@@ -193,16 +195,15 @@ const AddFeedback = ({ isOpen, isClose }) => {
                 id="Upload"
                 onClick={handleModalOpen}
               >
-                {' '}
-                Select File To Upload{' '}
+                {t('selectFileToUpload')}
               </div>
             </div>
             <div className="btn-btm">
               <button className="transparent-btn" type="button">
-                Cancel
+                {t('cancel')}
               </button>
               <button className="orange-btn" type="submit">
-                Submit
+                {t('submit')}
               </button>
             </div>
           </form>
