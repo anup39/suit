@@ -38,6 +38,7 @@ const FieldUpdateCard = ({ activityData }) => {
   };
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {!editMenu ? (
         <div className="field-update-card-base">

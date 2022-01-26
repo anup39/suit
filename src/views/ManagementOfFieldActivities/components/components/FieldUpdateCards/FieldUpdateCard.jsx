@@ -93,6 +93,7 @@ const FieldUpdateCard = ({ activityData }) => {
   }, [isDeleteTaskLoading]);
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {!editMenu ? (
         <div className="mgmt-field-update-card-base">
