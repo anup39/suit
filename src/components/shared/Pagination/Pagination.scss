@@ -13,6 +13,14 @@ $border-color-pagination: rgb(209, 209, 209);
   }
 }
 
+.table-slider {
+  height: 60px;
+  border-top: 1px solid #d4deea;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
 .pagination {
   margin: 0;
 
