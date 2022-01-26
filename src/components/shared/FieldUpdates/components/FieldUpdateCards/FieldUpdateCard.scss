@@ -1,5 +1,19 @@
 @import '../../../../../theme/ThemeColors';
 
+.field-updates-table-body {
+  height: calc(100vh - 428px);
+  overflow: auto;
+
+  @media (max-width: 1024px) {
+    height: calc(100vh - 358px);
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+}
+
 .field-update-card-base {
   display: table;
   width: 100%;

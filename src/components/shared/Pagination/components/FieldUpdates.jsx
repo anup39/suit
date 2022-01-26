@@ -6,7 +6,7 @@ import FieldUpdateCard from '../../../../components/shared/FieldUpdates/componen
 
 const FieldUpdates = ({ currentItems }) => {
   return (
-    <div className="assign-work-activity-table-body">
+    <div className="field-updates-table-body">
       {currentItems &&
         currentItems.map((data) => (
           <FieldUpdateCard key={data.taskId} activityData={data} />

@@ -1,5 +1,19 @@
 @import '../../../../../theme/ThemeColors';
 
+
+.mgmt-table-body {
+  height: calc(100vh - 336px);
+  overflow: auto;
+
+  @media (max-width: 1024px) {
+    height: calc(100vh - 358px);
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
 .mgmt-field-update-card-base {
   display: table;
   width: 100%;
@@ -9,17 +23,17 @@
 
 .mgmt-field-update-card-base span {
   word-break: break-all;
- display: table-cell;
- table-layout: fixed;
- padding: 10px;
- font-size: 14px;
- vertical-align: middle;
- color: #364A63;
- margin-left: 10px;
+  display: table-cell;
+  table-layout: fixed;
+  padding: 10px;
+  font-size: 14px;
+  vertical-align: middle;
+  color: #364A63;
+  margin-left: 10px;
 
- svg {
-   font-size: 18px;
- }
+  svg {
+    font-size: 18px;
+  }
 }
 
 // .field-updates-body-checkInput {

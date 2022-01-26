@@ -104,7 +104,7 @@ const English = {
   fieldLogs: 'Field Logs',
   activityreport: 'Activity report',
   changerequest: 'Change request',
-  milestoneapproval: 'Milestone approval',
+  milestoneapproval: 'Milestone Approval',
   controlActivity: 'Control Activity',
   assignProject: 'Assign Project',
   documentPreview: 'Document Preview',
