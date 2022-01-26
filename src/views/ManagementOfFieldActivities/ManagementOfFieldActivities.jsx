@@ -114,7 +114,7 @@ const ManagementOfFieldActivities = () => {
                 </span>
               </div>
               {/* eslint-disable */}
-              <div>
+              <>
                 {isAllActivitiesLoading ? (
                   <LoadingSpinner />
                 ) : allActivities && allActivities.length === 0 ? (
@@ -128,7 +128,7 @@ const ManagementOfFieldActivities = () => {
                     itemsPerPage={10}
                   />
                 )}
-              </div>
+              </>
               {/* eslint-enable */}
             </>
           ) : (

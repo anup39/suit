@@ -1,16 +1,17 @@
 @import '../../../../../theme/ThemeColors';
+
 .edit-menu-base {
-  border-bottom: $border-size solid $border-colors;
+  background: #f8f9fc;
   width: 100%;
+  border: none;
   height: 180px;
   z-index: 2;
-  padding: 20px 30px;
+  padding: 15px 30px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
-  background-color: rgb(245, 245, 245);
+  border-bottom: 1px solid #d4deea;
+
 }
 
 .edit-div {
