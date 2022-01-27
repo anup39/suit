@@ -1,14 +1,16 @@
 import './EditMenu.scss';
 
+import AddIcon from '@mui/icons-material/Add';
 import AutorenewOutlinedIcon from '@mui/icons-material/AutorenewOutlined';
 import CommentIcon from '@mui/icons-material/Comment';
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
-import { Modal } from '@mui/material';
+import { Drawer, Modal } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
+import ControlActivityDrawer from '../../../ControlActivityDrawer/ControlActivityDrawer';
 import ActivityReport from './components/ActivityReport/ActivityReport';
 import ChangeRequest from './components/ChangeRequest/ChangeRequest';
 import FieldLogs from './components/FieldLogs/FieldLogs';
@@ -19,6 +21,8 @@ const EditMenu = ({ handleCancel }) => {
 
   const [open, setOpen] = React.useState(false);
   const [option, setOption] = React.useState(0);
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+
   const handleOpen = (e) => {
     setOption(e.target.id);
     setOpen(true);
@@ -39,8 +43,19 @@ const EditMenu = ({ handleCancel }) => {
     return components[value];
   };
 
+  const handleDrawerOpen = () => {
+    setIsDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setIsDrawerOpen(false);
+  };
   return (
     <>
+      <Drawer anchor="right" onClose={handleDrawerClose} open={isDrawerOpen}>
+        <ControlActivityDrawer />
+      </Drawer>
+
       <Modal onClose={handleClose} open={open}>
         {renderComponent(option)}
       </Modal>
@@ -90,6 +105,10 @@ const EditMenu = ({ handleCancel }) => {
               <UploadFileOutlinedIcon className="control-activity-icons" />
               <CommentIcon className="control-activity-icons" />
               <img alt="Webex Icon" className="webex-icon" src={WebExIcon} />
+              <AddIcon
+                className="control-activity-icons"
+                onClick={handleDrawerOpen}
+              />
             </span>
           </div>
         </span>

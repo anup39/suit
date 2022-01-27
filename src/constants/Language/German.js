@@ -176,6 +176,8 @@ const German = {
   selectFileToUpload: 'Wählen Sie Hochzuladende Datei aus',
   dragandDropFilesHere: 'Ziehen Sie Dateien hierher und legen Sie sie dort ab',
   browseFiles: 'Dateien durchsuchen',
+  reportDate: 'Berichtsdatum',
+  sendToCompany: 'An Unternehmen senden',
 };
 
 export default German;
