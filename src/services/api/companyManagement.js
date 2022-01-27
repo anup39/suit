@@ -53,3 +53,47 @@ export const DELETE_COMPANY_WITH_ID = async (data) => {
   });
   return deleteCompany.data;
 };
+
+export const GET_COMPANY_ALL_USERS = async (data) => {
+  const newToken = await REFERSH_TOKEN(data.payload.userAccessToken);
+
+  const userList = await axios(
+    `${COMPANY_MANAGEMENT.getCompanyUsers}${data.payload.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${newToken}`,
+      },
+    }
+  );
+
+  return userList.data;
+};
+
+export const COMPANY_ADD_USERS = async (data) => {
+  const newToken = await REFERSH_TOKEN(data.payload.authToken);
+  const userData = { 
+    idUser: data.payload.idUser,
+    companies_id : data.payload.companies_id,
+  }
+  const userListResponse = await  axios(COMPANY_MANAGEMENT.addCompanyUsers,{
+    headers: {
+      Authorization: `Bearer ${newToken}`,
+    },
+    data: userData,
+    method: 'PUT',
+  });
+
+  return userListResponse;
+};
+
+export const COMPANY_DELETE_USERS = async (data) => {
+  const newToken = await REFERSH_TOKEN(data.payload.authToken);
+  const userListResponse = await axios(`${COMPANY_MANAGEMENT.deleteCompanyUsers}${data.payload.userId}${data.payload.companyId}`,{
+    headers: {
+      Authorization: `Bearer ${newToken}`,
+    },
+    method: 'DELETE',
+  });
+
+  return userListResponse;
+};

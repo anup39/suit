@@ -30,3 +30,7 @@ export const getCompanyDeleteError = (state) => {
 export const getDeleteCompanyLoading = (state) => {
   return state.company.isUpdateCompanyLoading;
 };
+
+export const getComapnyUsersList = (state) => {
+  return state.company.allCompanyUsersData;
+};

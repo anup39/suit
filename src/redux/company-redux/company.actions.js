@@ -65,3 +65,42 @@ export const updateCompanyError = (data) => ({
   type: COMPANY_ACTION_TYPES.UPDATE_COMPANY_FAIL,
   payload: data,
 });
+
+export const addCompanyUsers = (data) => ({
+  type: COMPANY_ACTION_TYPES.COMPANY_ADD_USERS,
+  payload: data,
+});
+export const addCompanyUsersSuccess = (data) => ({
+  type: COMPANY_ACTION_TYPES.COMPANY_ADD_USERS_SUCCESS,
+  payload: data,
+});
+export const addCompanyUsersError = (data) => ({
+  type: COMPANY_ACTION_TYPES.COMPANY_ADD_USERS_FAIL,
+  payload: data,
+});
+
+export const deleteCompanyUsers = (data) => ({
+  type: COMPANY_ACTION_TYPES.COMPANY_DELETE_USERS,
+  payload: data,
+});
+export const deleteCompanyUsersSuccess = (data) => ({
+  type: COMPANY_ACTION_TYPES.COMPANY_DELETE_USERS_SUCCESS,
+  payload: data,
+});
+export const deleteCompanyUsersError = (data) => ({
+  type: COMPANY_ACTION_TYPES.COMPANY_DELETE_USERS_ERROR,
+  payload: data,
+});
+
+export const getCompanyUsers = (data) => ({
+  type: COMPANY_ACTION_TYPES.GET_ALL_COMPANY_USERS,
+  payload: data,
+});
+export const getCompanyUsersSuccess = (data) => ({
+  type: COMPANY_ACTION_TYPES.GET_ALL_COMPANY_USERS_SUCCESS,
+  payload: data,
+});
+export const getCompanyUsersError = (data) => ({
+  type: COMPANY_ACTION_TYPES.GET_ALL_COMPANY_USERS_ERROR,
+  payload: data,
+});
