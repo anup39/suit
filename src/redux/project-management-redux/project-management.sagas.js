@@ -10,6 +10,7 @@ import {
   GET_PROJECT_DETAILS,
   GET_PROJECT_DOCUMENTS,
   GET_PROJECT_LIST,
+  GET_SELECTED_PROJECT_LAYERS_LIST,
   IMPORT_PROJECT_DATA,
   UPDATE_PROJECT,
 } from '../../services/projectManagement';
@@ -27,6 +28,8 @@ import {
   getProjectDetailsSuccess,
   getProjectListError,
   getProjectListSuccess,
+  getSelectedProjectLayersListError,
+  getSelectedProjectLayersListSuccess,
   importProjectDataError,
   importProjectDataSuccess,
   projectDashbordError,
@@ -245,6 +248,22 @@ export function* onUpdateProject() {
   yield takeLatest(PROJECT_MANAGEMENT_TYPES.UPDATE_PROJECT, updateProject);
 }
 
+export function* getSelectedProjectLayersList({ payload }) {
+  try {
+    const projectData = yield call(GET_SELECTED_PROJECT_LAYERS_LIST, payload);
+    yield put(getSelectedProjectLayersListSuccess(projectData));
+  } catch (err) {
+    yield put(getSelectedProjectLayersListError(err.response.data));
+  }
+}
+
+export function* onGetSelectedProjectLayersList() {
+  yield takeLatest(
+    PROJECT_MANAGEMENT_TYPES.GET_SELECTED_PROJECT_LAYERS_LIST,
+    getSelectedProjectLayersList
+  );
+}
+
 export function* projectManagementSagas() {
   yield all([
     call(onCreateNewProjectStart),
@@ -257,5 +276,6 @@ export function* projectManagementSagas() {
     call(onImportProjectData),
     call(onDashbordByProjectId),
     call(onUpdateProject),
+    call(onGetSelectedProjectLayersList),
   ]);
 }

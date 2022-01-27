@@ -53,6 +53,7 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
 
   const handleWorkListChange = (e) => {
     e.preventDefault();
+    console.log(e.target.files)
     formData.append('workListFile', e.target.files);
   };
 
@@ -96,7 +97,7 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                   {t('workList ')}
                 </label>
                 <input
-                  accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4, .xml, .zip"
+                  accept=".csv, .xml"
                   className={classes.form_input}
                   multiple
                   onChange={handleWorkListChange}
