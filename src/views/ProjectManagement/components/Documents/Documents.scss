@@ -1,15 +1,19 @@
 .documents-base-div {
-  border: 1px solid black;
-  height: calc(600px + 10vh);
-  display: flex;
-  flex-direction: column;
+  border: 1px solid #d4deea;
+  border-radius: 3px;
+  width: 100%;
+  overflow: auto;
 
   .no-data-found {
     display: flex;
-    height: 100%;
+    height: calc(100vh - 320px);
     width: 100%;
     justify-content: center;
     align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 0;
   }
 }
 
@@ -42,12 +46,29 @@
 .document-header-table {
   display: table;
   width: 100%;
+  height: 40px;
+  font-size: 14px;
   border-bottom: 1px solid #d4deea;
-  padding: 10px 20px;
+  background: #f8f9fc;
+  font-weight: 600;
+  // padding: 0px 7px;
+  color: #8094ae;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 
   span {
+
     display: table-cell;
+    padding: 15px 10px;
+
     table-layout: fixed;
+    vertical-align: middle;
+
+    p {
+      margin: 0;
+    }
   }
 }
 
