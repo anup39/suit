@@ -11,8 +11,10 @@ import GlobalSpinner from '../../../components/shared/Spinners/GlobalSpinner';
 import {
   feedbackByUserId,
   resetDeleteFeedback,
+  resetNewFeedback,
 } from '../../../redux/feedback-redux/feedback.actions';
 import {
+  getAddFeedbackSuccess,
   getDeleteFeedbackError,
   getDeleteFeedbackSuccess,
   getFeebackByUserID,
@@ -38,6 +40,7 @@ const PublicUserFeedback = () => {
   const isDeleteFeedbackLoading = useSelector(getIsDeleteFeedbackLoading);
   const deleteFeedbackError = useSelector(getDeleteFeedbackError);
   const deleteFeedbackSuccess = useSelector(getDeleteFeedbackSuccess);
+  const feedBackSuccess = useSelector(getAddFeedbackSuccess);
   // const feedbackDataError = useSelector(getFeebackByUserIDError);
 
   React.useEffect(() => {
@@ -68,8 +71,12 @@ const PublicUserFeedback = () => {
         progress: undefined,
       });
       dispatch(resetDeleteFeedback());
+    } else if (feedBackSuccess) {
+      const data = { authToken, userId: userData.id };
+      dispatch(feedbackByUserId(data));
+      dispatch(resetNewFeedback());
     }
-  }, [deleteFeedbackError, deleteFeedbackSuccess]);
+  }, [deleteFeedbackError, deleteFeedbackSuccess, feedBackSuccess]);
 
   return (
     <div className="table-container">

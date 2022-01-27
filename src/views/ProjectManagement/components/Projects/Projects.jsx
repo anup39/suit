@@ -65,7 +65,7 @@ const Projects = () => {
         </span>
         <span className="project-last-update">
           <p className="project-data-label">{t('lastUpdate')}</p>
-          <p className="project-data">Helo</p>
+          <p className="project-data">-</p>
         </span>
         <span className="project-updated-by">
           <p className="project-data-label">{t('byUser')}</p>

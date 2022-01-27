@@ -47,16 +47,17 @@ const ImportDataGrid = () => {
             </tr>
           </thead>
           <tbody className={classes.table_body}>
-            {currentProjectDocuments && currentProjectDocuments.length === 0 ? (
-              <div className={classes.no_data_found}>
-                <p style={{ textAlign: 'center' }}>{t('noDataFound')}</p>
-              </div>
-            ) : (
-              currentProjectDocuments &&
-              currentProjectDocuments.map(() => <DatagridRow key="test" />)
-            )}
+            {currentProjectDocuments && currentProjectDocuments.length > 0
+              ? currentProjectDocuments.map(() => <DatagridRow key="test" />)
+              : ''}
           </tbody>
         </table>
+
+        {currentProjectDocuments && currentProjectDocuments.length === 0 && (
+          <div className={classes.no_data_found}>
+           {t('noDataFound')}
+          </div>
+        )}
       </div>
     </div>
   );

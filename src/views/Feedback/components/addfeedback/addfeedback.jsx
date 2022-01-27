@@ -151,7 +151,7 @@ const AddFeedback = ({ isOpen, isClose }) => {
               <input
                 className="form_inputs"
                 id="ZipCode"
-                type="text"
+                type="number"
                 {...register('zipCode')}
               />
               <span className="form_error"> {errors.zipCode?.message}</span>

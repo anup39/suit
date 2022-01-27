@@ -13,6 +13,7 @@ const PROJECT_MANAGEMENT_API = {
   PROJECT_STATUS_DASHBORD:
     'http://13.233.23.132:8080/api/ProjectDashboardStatus',
   GEOSERVER_LAYER_LIST: 'http://13.233.23.132:7080/geoserver/rest/workspaces',
+  GET_FIELD_LOGS: 'http://13.233.23.132:8080/api/fieldLogList/',
 };
 
 export default PROJECT_MANAGEMENT_API;

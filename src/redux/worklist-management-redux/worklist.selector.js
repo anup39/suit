@@ -57,3 +57,7 @@ export const getDeleteWorkListSuccess = (state) => {
 export const getIsDeleteWorkListLoading = (state) => {
   return state.workListManagement.isDeleteTaskByIDLoading;
 };
+
+export const getIsChngeStatusLoading = (state) => {
+  return state.workListManagement.isChangeTaskStatusLoading;
+};

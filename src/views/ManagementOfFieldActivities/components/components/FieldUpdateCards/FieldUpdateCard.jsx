@@ -115,7 +115,7 @@ const FieldUpdateCard = ({ activityData }) => {
           <span className="field-updates-body-milestoneApproval">
             {/* <CheckCircleOutlinedIcon className="milestone-accepted-icon" /> */}
             {/* <CancelOutlinedIcon className="milestone-rejected-icon" /> */}
-            {activityData.isMilestone === 0 ? 'Milestone' : 'Not a Milestone'}
+            {activityData.isMilestone === 0 ? 'Milestone' : '-'}
           </span>
           <span className="field-updates-body-status">
             <select
@@ -123,14 +123,18 @@ const FieldUpdateCard = ({ activityData }) => {
               onChange={(e) => handleTaskChange(e)}
               value={taskStatus}
             >
-              <option>{t('notassigned')}</option>
-              <option>{t('notStarted')}</option>
-              <option>{t('inprogressstarted')}</option>
-              <option>{t('waitingforfeedback')}</option>
-              <option>{t('approved')}</option>
-              <option>{t('canceled')}</option>
-              <option>{t('completed')}</option>
-              <option>{t('suspended')}</option>
+              <option value="Not assigned">{t('notassigned')}</option>
+              <option value="Not started">{t('notStarted')}</option>
+              <option value="In progress/started">
+                {t('inprogressstarted')}
+              </option>
+              <option value="Waiting for feedback">
+                {t('waitingforfeedback')}
+              </option>
+              <option value="Approved">{t('approved')}</option>
+              <option value="Canceled">{t('canceled')}</option>
+              <option value="Completed">{t('completed')}</option>
+              <option value="Suspended">{t('suspended')}</option>
             </select>
           </span>
           <span className="field-updates-body-controlActivity">

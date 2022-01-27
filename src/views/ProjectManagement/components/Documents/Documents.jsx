@@ -5,8 +5,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
+import LoadingSpinner from '../../../../components/shared/LoadingSpinner/LoadingSpinner';
 import Pagination from '../../../../components/shared/Pagination/Pagination';
 import {
+  getIsProjcectDocumentsLoading,
   getProjcectDocuments,
   getProjectData,
 } from '../../../../redux/project-management-redux/project.selector';
@@ -17,6 +19,8 @@ const Documents = () => {
   const currentProject = useSelector(getProjectData);
   const authToken = useSelector(getUserAuthToken);
   const currentProjectDocuments = useSelector(getProjcectDocuments);
+  const isProjectDocumentLoading = useSelector(getIsProjcectDocumentsLoading);
+
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -42,8 +46,10 @@ const Documents = () => {
         <span className="document-uploaded-on">{t('uploadedOn')}</span>
         <span className="document-actions">{t('actions')}</span>
       </div>
-
-      {currentProjectDocuments && currentProjectDocuments.length === 0 ? (
+      {isProjectDocumentLoading && <LoadingSpinner />}
+      {!isProjectDocumentLoading &&
+      currentProjectDocuments &&
+      currentProjectDocuments.length === 0 ? (
         <div className="no-data-found">
           <p>No Data Found!</p>
         </div>

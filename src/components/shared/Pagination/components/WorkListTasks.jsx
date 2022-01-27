@@ -5,7 +5,7 @@ import WorkListCards from '../../../../views/ProjectManagement/components/WorkLi
 
 const WorklistCards = ({ currentItems }) => {
   return (
-    <div className="work-list-table-tbody">
+    <div className="worklist-table-body">
       {currentItems &&
         currentItems.map((values) => (
           <WorkListCards key={values.taskId} taskInfo={values} />

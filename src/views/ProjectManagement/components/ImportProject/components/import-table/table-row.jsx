@@ -10,10 +10,13 @@ const DatagridRow = () => {
   const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -27,11 +30,17 @@ const DatagridRow = () => {
       <td className={classes.row_description}>
         <input className={classes.row_input} type="checkbox" />
       </td>
+
       <td className={classes.row_description}>Project 1</td>
+
       <td className={classes.row_description}>Worklist 1</td>
+
       <td className={classes.row_description}>File 1, file2</td>
+
       <td className={classes.row_description}>Document1, Document 2</td>
+
       <td className={classes.row_description}>06 Dec 2021</td>
+
       <td className={classes.row_description}>
         <MoreHorizIcon
           aria-controls="basic-menu"
@@ -40,6 +49,7 @@ const DatagridRow = () => {
           id="basic-button"
           onClick={handleClick}
         />
+
         <Menu
           anchorEl={anchorEl}
           id="basic-menu"
@@ -50,7 +60,9 @@ const DatagridRow = () => {
           open={open}
         >
           <MenuItem onClick={handleMenu}>{t('view')}</MenuItem>
+
           <MenuItem onClick={handleClose}>{t('edit')}</MenuItem>
+
           <MenuItem onClick={handleClose}>{t('delete')}</MenuItem>
         </Menu>
       </td>
