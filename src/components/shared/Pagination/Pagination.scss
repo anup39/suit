@@ -13,6 +13,14 @@ $border-color-pagination: rgb(209, 209, 209);
   }
 }
 
+.pagination {
+  margin: 0;
+
+  .page-link {
+    padding: 10px 15px;
+  }
+}
+
 .pagination-base ul {
   list-style-type: none;
   display: flex;

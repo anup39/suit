@@ -18,39 +18,35 @@ const MapView = () => {
         <h5 className="map-view-assign-project-header">{t('assignProject')}</h5>
         <div className="map-view-document-search-div">
           <label>{t('docuemntName')}</label>
-          <div>
-            <input />
+          <div className="map-view-wraper-con">
+            <input placeholder="Search Doc" />
             <SearchIcon className="searchIcon" />
           </div>
         </div>
         <div className="map-view-document-preview">{t('documentPreview')}</div>
         <div className="map-view-document-details-base">
-          <p>{t('documentDetails')}</p>
+          <h6>{t('documentDetails')}</h6>
           <div className="map-view-document-details">
-            <span>
+            <div>
               <p>DB Data 1</p>
+              <h6>DB Data 1</h6>
+            </div>
+            <div>
               <p>DB Data 1</p>
-            </span>
-
-            <span>
+              <h6>DB Data 1</h6>
+            </div>
+            <div>
               <p>DB Data 1</p>
+              <h6>DB Data 1</h6>
+            </div>
+            <div>
               <p>DB Data 1</p>
-            </span>
-
-            <span>
+              <h6>DB Data 1</h6>
+            </div>
+            <div>
               <p>DB Data 1</p>
-              <p>DB Data 1</p>
-            </span>
-
-            <span>
-              <p>DB Data 1</p>
-              <p>DB Data 1</p>
-            </span>
-
-            <span>
-              <p>DB Data 1</p>
-              <p>DB Data 1</p>
-            </span>
+              <h6>DB Data 1</h6>
+            </div>
           </div>
         </div>
       </div>

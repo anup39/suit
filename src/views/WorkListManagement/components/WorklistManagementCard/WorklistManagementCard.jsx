@@ -187,7 +187,7 @@ const WorkListManagementCard = ({
               {t('edit')}
             </MenuItem>
             <MenuItem itmeId={workId} onClick={handleEditStatusDrawerOpen}>
-              ('changeTaskStatus')}
+              {t('changeTaskStatus')}
             </MenuItem>
             <MenuItem ieId={workId} onClick={() => hadelDeleteTask()}>
               {t('delete')}

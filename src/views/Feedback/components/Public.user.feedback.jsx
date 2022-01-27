@@ -125,7 +125,7 @@ const PublicUserFeedback = () => {
         <MobileDataRow />
         <MobileDataRow />
       </div>
-      {/* <div className="table-container-btm " /> */}
+      <div className="table-container-btm " />
       {/* <div className="table-container-btm ">
         <div className="table_slider_container">
           <div className="table_slider">

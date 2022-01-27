@@ -52,24 +52,24 @@ const ManagementOfFieldActivities = () => {
   return (
     <AuthenticatedRoute isAuthenticated={isAuthenticated}>
       <BaseTemplate title={t('managementOfFieldActivities')}>
-        <div className="field-update-base-div">
-          <div className="field-update-search-div">
+        <div className="mgmt-field-update">
+          <div className="mgmt-field-update-search-div">
             {!isMapView && (
               <>
-                <span>
+                <div className="mgmt-field-container">
                   <SearchIcon className="field-search-icon" />
                   <input
-                    className="field-input"
+                    className="field-input-mgmt"
                     placeholder={t('searchTask')}
                   />
-                </span>
-                <span>
+                </div>
+                <div className="mgmt-field-container">
                   <SearchIcon className="field-search-icon" />
                   <input
-                    className="field-input"
+                    className="field-input-mgmt"
                     placeholder={t('searchCompany')}
                   />
-                </span>
+                </div>
               </>
             )}
             {!isMapView ? (
@@ -84,7 +84,7 @@ const ManagementOfFieldActivities = () => {
           </div>
           {!isMapView ? (
             <>
-              <div className="field-update-header">
+              <div className="mgmt-field-update-header">
                 {/* <span className="field-updates-header-checkInput">
                   <input type="checkbox" />
                 </span> */}
@@ -114,7 +114,7 @@ const ManagementOfFieldActivities = () => {
                 </span>
               </div>
               {/* eslint-disable */}
-              <div>
+              <>
                 {isAllActivitiesLoading ? (
                   <LoadingSpinner />
                 ) : allActivities && allActivities.length === 0 ? (
@@ -128,7 +128,7 @@ const ManagementOfFieldActivities = () => {
                     itemsPerPage={10}
                   />
                 )}
-              </div>
+              </>
               {/* eslint-enable */}
             </>
           ) : (
