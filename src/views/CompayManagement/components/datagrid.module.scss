@@ -30,7 +30,7 @@
 .datagrid_tables_containers {
   display: block;
   width: 100%;
-  height: calc(100vh - 303px);
+  height: calc(100vh - 304px);
   overflow: auto;
 
   @media (max-width: 1024px) {
@@ -63,7 +63,7 @@
     display: block;
   }
 
-  > div:nth-child(even) {
+  >div:nth-child(even) {
     background: #d4deea;
 
     .grid-3-1 {
