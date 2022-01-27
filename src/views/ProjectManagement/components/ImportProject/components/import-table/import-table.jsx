@@ -55,7 +55,7 @@ const ImportDataGrid = () => {
 
         {currentProjectDocuments && currentProjectDocuments.length === 0 && (
           <div className={classes.no_data_found}>
-            <p style={{ textAlign: 'center' }}>{t('noDataFound')}</p>
+           {t('noDataFound')}
           </div>
         )}
       </div>
