@@ -48,18 +48,29 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
   };
 
   const handleQgisChangeChange = (e) => {
-    formData.append('qgisFile', e.target.files);
+    const qgisFile = e.target.files;
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0 ; i < qgisFile.length ; i++) {
+      formData.append("qgisFile", qgisFile[i]);
+    }
   };
 
   const handleWorkListChange = (e) => {
     e.preventDefault();
-    console.log(e.target.files)
-    formData.append('workListFile', e.target.files);
+    const worklistfiles = e.target.files;
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0 ; i < worklistfiles.length ; i++) {
+      formData.append("workListFile", worklistfiles[i]);
+    }
   };
 
   const handleDocumntsChange = (e) => {
     e.preventDefault();
-    formData.append('documentsFile', e.target.files);
+    const documentsFile = e.target.files;
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0 ; i < documentsFile.length ; i++) {
+      formData.append("documentsFile", documentsFile[i]);
+    }
   };
 
   React.useEffect(() => {}, []);
