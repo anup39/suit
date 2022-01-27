@@ -1,0 +1,43 @@
+.control-activity-base-div {
+  width: 400px;
+  height: 100%;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.form-base-div {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin: 20px 0px;
+  }
+
+  select {
+    height: 35px;
+  }
+
+  input {
+    height: 35px;
+  }
+}
+
+.submit-div {
+  margin-top: 30px;
+  float: right;
+}
+
+.control-activity-cancel-button {
+  margin-right: 10px;
+  color: #8094ae;
+  cursor: pointer;
+}
+
+.control-activity-submit-button {
+  background: #e78201;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}

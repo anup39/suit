@@ -23,9 +23,9 @@
 }
 
 .activity-close-button {
-  border: 1px solid #0160E0;
+  border: 1px solid #0160e0;
   border-radius: 5px;
-  color: #0160E0;
+  color: #0160e0;
   cursor: pointer;
   font-weight: 600;
   height: 35px;
@@ -42,14 +42,13 @@
   flex: 1;
   overflow: auto;
 
-  >div {
-    border: 1px solid #D4DEEA;
-
+  > div {
+    border: 1px solid #d4deea;
   }
 }
 
 .activity-report-content-header {
-  border-bottom: 1px solid #D4DEEA;
+  border-bottom: 1px solid #d4deea;
   padding: 10px 20px;
   display: flex;
   align-items: center;
@@ -61,12 +60,12 @@
 .activity-report-content-header span {
   font-weight: 500;
   font-size: 14px;
-  color: #364A63;
+  color: #364a63;
 }
 
 .activity-download-button {
   padding: 5px 15px;
-  background-color: #0160E0;
+  background-color: #0160e0;
   border-radius: 5px;
   cursor: pointer;
   color: #fff;
@@ -90,13 +89,30 @@
   input,
   textarea {
     width: 100%;
-    border: 1px solid #D4DEEA;
+    border: 1px solid #d4deea;
     border-radius: 3px;
     padding: 12px 15px;
-    color: #364A63;
+    color: #364a63;
     font-size: 14px;
     resize: none;
   }
+
+  .activity-report-data {
+    width: 100%;
+    border: 1px solid #d4deea;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    padding-left: 4px;
+  }
+}
+
+.activity-report-select {
+  width: 50%;
+  height: 35px;
+  margin-bottom: 5px;
+  border: 1px solid #d4deea;
 }
 
 .activity-report-inputs-div {
@@ -114,7 +130,30 @@
     font-size: 14px;
     margin: 0 0 8px 0;
   }
+}
 
+.change-request-button-reject {
+  padding: 10px 40px;
+  border: 1px solid red;
+  border-radius: 5px;
+  margin-right: 10px;
+  color: red;
+  cursor: pointer;
 
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
+}
 
+.change-request-button-accept {
+  padding: 10px 40px;
+  background-color: rgb(54, 161, 161);
+  border-radius: 5px;
+  margin-right: 10px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 }

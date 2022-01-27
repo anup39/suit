@@ -16,6 +16,22 @@
     text-align: center;
     margin-top: 20px;
   }
+
+  @media (max-width: 768px) {
+    .table-slider {
+      display: none;
+    }
+  }
+}
+
+.mgmt-field-update-mobile {
+  height: calc(100vh - 230px);
+  overflow: auto;
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 }
 
 .mgmt-field-update-search-div {
@@ -91,11 +107,15 @@
     // white-space: nowrap;
     vertical-align: middle;
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 // .field-updates-header-checkInput {
-  //   width: 3%;
-  // }
+//   width: 3%;
+// }
 
 .field-updates-header-taskItem {
   width: 10%;

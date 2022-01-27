@@ -25,6 +25,16 @@ const COMPANY_INITIAL_STATE = {
   isUpdateCompanyLoading: false,
   updateCompanyData: '',
   updateCompanyError: '',
+
+  isAllCompanyUsersLoading: false,
+  allCompanyUsersData: '',
+  allCompanyUsersError: '',
+
+  companyAddUsersData: '',
+  companyAddUsersError: '',
+
+  companyDeleteUsersData: '',
+  companyDeleteUsersError: '',
 };
 
 // eslint-disable-next-line default-param-last
@@ -132,6 +142,64 @@ const companyReducer = (state = COMPANY_INITIAL_STATE, action) => {
         isUpdateCompanyLoading: false,
         updateCompanyData: '',
         updateCompanyError: action.payload,
+      };
+
+    case COMPANY_ACTION_TYPES.GET_ALL_COMPANY_USERS:
+      return {
+        ...state,
+        isAllCompanyUsersLoading: true,
+        allCompanyUsersData: '',
+        allCompanyUsersError: '',
+      };
+
+    case COMPANY_ACTION_TYPES.GET_ALL_COMPANY_USERS_SUCCESS:
+      return {
+        ...state,
+        isAllCompanyUsersLoading: false,
+        allCompanyUsersData: action.payload,
+        allCompanyUsersError: '',
+      };
+
+    case COMPANY_ACTION_TYPES.GET_ALL_COMPANY_USERS_ERROR:
+      return {
+        ...state,
+        isAllCompanyUsersLoading: false,
+        allCompanyUsersData: '',
+        allCompanyUsersError: action.payload,
+      };
+
+    case COMPANY_ACTION_TYPES.COMPANY_ADD_USERS:
+      return {
+        ...state,
+      };
+
+    case COMPANY_ACTION_TYPES.COMPANY_ADD_USERS_SUCCESS:
+      return {
+        ...state,
+        companyAddUsersData: action.payload,
+      };
+
+    case COMPANY_ACTION_TYPES.COMPANY_ADD_USERS_FAIL:
+      return {
+        ...state,
+        companyAddUsersError: action.payload,
+      };
+
+    case COMPANY_ACTION_TYPES.COMPANY_DELETE_USERS:
+      return {
+        ...state,
+      };
+
+    case COMPANY_ACTION_TYPES.COMPANY_DELETE_USERS_SUCCESS:
+      return {
+        ...state,
+        companyDeleteUsersData: action.payload,
+      };
+
+    case COMPANY_ACTION_TYPES.COMPANY_DELETE_USERS_ERROR:
+      return {
+        ...state,
+        companyDeleteUsersError: action.payload,
       };
 
     default:

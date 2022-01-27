@@ -176,6 +176,8 @@ const English = {
   selectFileToUpload: 'Select File To Upload',
   dragandDropFilesHere: 'Drag and Drop Files Here',
   browseFiles: 'Browse Files',
+  reportDate: 'Report Date',
+  sendToCompany: 'Send To Company',
 };
 
 export default English;

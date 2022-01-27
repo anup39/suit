@@ -2,18 +2,27 @@ import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 import { toast } from 'react-toastify';
 
 import {
+  COMPANY_ADD_USERS,
+  COMPANY_DELETE_USERS,
   CREATE_COMPANY,
   DELETE_COMPANY_WITH_ID,
   GET_ALL_COMPANY,
+  GET_COMPANY_ALL_USERS,
   UPDATE_COMPANY,
 } from '../../services/api/companyManagement';
 import COMPANY_ACTION_TYPES from './company.action-types';
 import {
+  addCompanyUsersError,
+  addCompanyUsersSuccess,
   deleteCompanyFail,
   deleteCompanySuccess,
+  deleteCompanyUsersError,
+  deleteCompanyUsersSuccess,
   failCreateCompany,
   getAllCompanyError,
   getAllCompanySuccess,
+  getCompanyUsersError,
+  getCompanyUsersSuccess,
   succeedCreateCompany,
   updateCompanyError,
   updateCompanySuccess,
@@ -139,11 +148,100 @@ export function* onUpdateCompany() {
   yield takeLatest(COMPANY_ACTION_TYPES.UPDATE_COMPANY, updateCompany);
 }
 
+// Company Users
+
+export function* addUsersCompany(payload) {
+  try {
+    const addUsers = yield call(COMPANY_ADD_USERS, payload);
+    yield put(addCompanyUsersSuccess(undefined));
+    yield toast.success(addUsers.data.message, {
+      position: 'top-center',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  } catch (error) {
+    yield toast.error(error.message, {
+      position: 'top-center',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    yield put(addCompanyUsersError(null));
+  }
+}
+
+export function* onCompanyAddUsers() {
+  yield takeLatest(COMPANY_ACTION_TYPES.COMPANY_ADD_USERS, addUsersCompany);
+}
+
+export function* deleteUsersCompany(payload) {
+  try {
+    const addUsers = yield call(COMPANY_DELETE_USERS, payload);
+    yield put(deleteCompanyUsersSuccess(undefined));
+    yield toast.success(addUsers.data.message, {
+      position: 'top-center',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  } catch (error) {
+    yield toast.error(error.message, {
+      position: 'top-center',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    yield put(deleteCompanyUsersError(null));
+  }
+}
+
+export function* onCompanyDeleteUsers() {
+  yield takeLatest(COMPANY_ACTION_TYPES.COMPANY_DELETE_USERS, deleteUsersCompany);
+}
+
+export function* allCompanyUsers(payload) {
+  try {
+    const getCompanyUsers = yield call(GET_COMPANY_ALL_USERS, payload);
+    yield put(getCompanyUsersSuccess(getCompanyUsers));
+  } catch (err) {
+    yield toast.error(err.message, {
+      position: 'top-center',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    yield put(getCompanyUsersError(err.response.data));
+  }
+}
+
+export function* onCompanyAllUsers() {
+  yield takeLatest(COMPANY_ACTION_TYPES.GET_ALL_COMPANY_USERS, allCompanyUsers);
+}
+
 export function* companySagas() {
   yield all([
     call(onDeleteCompanyStart),
     call(onCompanyCreateStart),
     call(onAllCompanyData),
     call(onUpdateCompany),
+    call(onCompanyAddUsers),
+    call(onCompanyAllUsers),
+    call(onCompanyDeleteUsers),
   ]);
 }

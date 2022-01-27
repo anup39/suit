@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import { getAllActivities } from '../../redux/Management-of-field-activities/management-field-activities.action';
 import {
   getActivitiesDetails,
@@ -19,14 +20,17 @@ import {
   getIfAuthenticated,
   getUserAuthToken,
 } from '../../redux/user-redux/user.selectors';
+import { getIsChngeStatusLoading } from '../../redux/worklist-management-redux/worklist.selector';
 import AuthenticatedRoute from '../../routes/AuthenticatedRoute';
 import MapView from './components/components/MapView/MapView';
+import MobileDataRow from './mobile.data.row';
 
 const ManagementOfFieldActivities = () => {
   const isAuthenticated = useSelector(getIfAuthenticated);
   const authToken = useSelector(getUserAuthToken);
   const allActivities = useSelector(getActivitiesDetails);
   const isAllActivitiesLoading = useSelector(getIsActivitiesLoading);
+  const isChangeStatusLoading = useSelector(getIsChngeStatusLoading);
 
   const [isMapView, setIsMapView] = React.useState(false);
 
@@ -51,6 +55,7 @@ const ManagementOfFieldActivities = () => {
 
   return (
     <AuthenticatedRoute isAuthenticated={isAuthenticated}>
+      <GlobalSpinner isOpen={isChangeStatusLoading} />
       <BaseTemplate title={t('managementOfFieldActivities')}>
         <div className="mgmt-field-update">
           <div className="mgmt-field-update-search-div">
@@ -129,8 +134,17 @@ const ManagementOfFieldActivities = () => {
                   />
                 )}
               </>
+              <div className="mgmt-field-update-mobile">
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+      </div>
               {/* eslint-enable */}
-            </>
+            </> 
           ) : (
             <MapView />
           )}

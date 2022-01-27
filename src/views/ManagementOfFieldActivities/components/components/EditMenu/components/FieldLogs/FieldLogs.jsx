@@ -1,6 +1,5 @@
 import './FieldLogs.scss';
 
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import { Box } from '@mui/material';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -9,8 +8,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
-import FileData from './FileData/FileData';
+// import FileData from './FileData/FileData';
 import FilePannel from './FilePannel/FilePannel';
+import ImageDocuments from './FilePannel/ImageDocuments/ImageDocuments';
+import OtherDocuments from './FilePannel/OtherDocuments/OtherDocuments';
 
 const FieldLogs = () => {
   const { t } = useTranslation();
@@ -25,39 +26,18 @@ const FieldLogs = () => {
     <div className="field-log-base">
       <EditModalHeaders headerName={t('fieldLogs')} />
       <div className="field-log-content-div">
-        <div>
-          <Box sx={{ width: '100%' }}>
-            <Tabs onChange={handleChange} value={value}>
-              <Tab label="File 1" />
-              <Tab label="File 2" />
-              <Tab label="File 3" />
-              <Tab label="File 4" />
-              <span className="file-logs-download-app-button">
-                <FileDownloadOutlinedIcon className="download-all-files-icon" />
-                {t('download')}
-              </span>
-            </Tabs>
-          </Box>
-          <FilePannel index={0} value={value}>
-            <FileData />
-          </FilePannel>
-          <FilePannel index={1} value={value}>
-            <FileData />
-          </FilePannel>
-          <FilePannel index={2} value={value}>
-            <FileData />
-          </FilePannel>
-          <FilePannel index={3} value={value}>
-            <FileData />
-          </FilePannel>
-        </div>
-        <button
-          className="field-log-close-button"
-          onClick={onclick}
-          type="button"
-        >
-          {t('close')}
-        </button>
+        <Box sx={{ width: '100%' }}>
+          <Tabs onChange={handleChange} value={value}>
+            <Tab label="Image" />
+            <Tab label="Documents" />
+          </Tabs>
+        </Box>
+        <FilePannel index={0} value={value}>
+          <ImageDocuments />
+        </FilePannel>
+        <FilePannel index={1} value={value}>
+          <OtherDocuments />
+        </FilePannel>
       </div>
     </div>
   );

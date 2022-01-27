@@ -1,0 +1,33 @@
+.grid-3-1 {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    gap: 1rem;
+    border-top: 1px solid #d4deea;
+    padding: 10px;
+
+    h3 {
+        color: #8094ae;
+        font-weight: 600;
+
+        font-size: 14px;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    svg {
+        fill: #929db0;
+    }
+
+    p {
+        margin: 0;
+        color: #364a63;
+        font-size: 14px;
+
+        &.blue-text {
+            color: #2586ff;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+    }
+}
