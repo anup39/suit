@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import './WorklistManagementCard.scss';
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -207,6 +208,7 @@ WorkListManagementCard.propTypes = {
   isMilestone: PropTypes.number,
   workId: PropTypes.string,
   type: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   allData: PropTypes.object,
   taskStatus: PropTypes.string,
 };

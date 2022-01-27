@@ -11,7 +11,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import Alert from '../../../../components/shared/Alerts/Alert';
 import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner';
 import {
   createCompany,
@@ -88,9 +87,8 @@ const CreateCompany = ({ isOpen, isClose, isEdit, prevData }) => {
     <Drawer anchor="right" onClose={closeDrawer} open={isOpen}>
       <GlobalSpinner isOpen={isLoading} />
       {errorValue ? toast.error(errorValue.message) : undefined}
-      {successValue ? (
-        <Alert message={successValue.message} title="error" type="success" />
-      ) : undefined}
+      {successValue ? 
+        toast.success(successValue.message) : undefined}
       <Box
         className="add-feedback"
         role="presentation"

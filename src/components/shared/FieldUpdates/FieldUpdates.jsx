@@ -42,14 +42,15 @@ const FieldUpdates = () => {
       <div className="field-update-search-div">
         {!isMapView && (
           <>
-            <span>
+            <div className="field-container">
               <SearchIcon className="field-search-icon" />
               <input className="field-input" placeholder={t('searchTask')} />
-            </span>
-            <span>
+            </div>
+            <div className="field-container">
+              {' '}
               <SearchIcon className="field-search-icon" />
               <input className="field-input" placeholder={t('searchCompany')} />
-            </span>
+            </div>
           </>
         )}
         {!isMapView ? (
@@ -89,19 +90,17 @@ const FieldUpdates = () => {
             </span>
             <span className="field-updates-header-actions">{t('actions')}</span>
           </div>
-          <div>
-            {worklistTasks && worklistTasks.length === 0 ? (
-              <div className="no-data-found">
-                <p>No Data Found!</p>
-              </div>
-            ) : (
-              <Pagination
-                componentNo={10}
-                itemData={worklistTasks}
-                itemsPerPage={10}
-              />
-            )}
-          </div>
+          {worklistTasks && worklistTasks.length === 0 ? (
+            <div className="no-data-found">
+              <p>No Data Found!</p>
+            </div>
+          ) : (
+            <Pagination
+              componentNo={10}
+              itemData={worklistTasks}
+              itemsPerPage={10}
+            />
+          )}
         </>
       ) : (
         <MapView />
