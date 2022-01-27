@@ -8,10 +8,17 @@ import Drawer from '@mui/material/Drawer';
 import TextField from '@mui/material/TextField';
 import { withStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
+import {
+  addCompanyUsers,
+  getAllCompany,
+  getCompanyUsers,
+} from '../../../../redux/company-redux/company.actions';
+import { getComapnyUsersList } from '../../../../redux/company-redux/company.selectors';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import { roleStart } from '../../../../redux/User-Role/role.actions';
 import { getListOfUsers } from '../../../../redux/User-Role/User-Role.selectors';
@@ -25,8 +32,10 @@ const StyledAutocompleteWrapper = withStyles({
   border: 'none',
 })(TextField);
 
-const CompanyUserAdd = ({ isOpen, handleClose }) => {
+const CompanyUserAdd = ({ isOpen, handleClose, prevData }) => {
   const userAccessToken = useSelector(getUserAuthToken);
+  const [userSelectedList, setUserSelectedList] = useState([]);
+
   const closeDrawer = () => {
     handleClose(false);
   };
@@ -34,11 +43,34 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
   useEffect(() => {
     dispatch(roleStart(userAccessToken));
   }, []);
-
+  useEffect(() => {
+    if (isOpen) dispatch(getCompanyUsers({ userAccessToken, id: prevData.id }));
+  }, [isOpen]);
+  const { handleSubmit } = useForm();
   const listOfUsers = useSelector(getListOfUsers);
+  const companyUsersList = useSelector(getComapnyUsersList);
   console.log(listOfUsers, 'right here');
+
   const { t } = useTranslation();
 
+  const handleUpdateSubmit = (data) => {
+    const dataToSend = {
+      authToken: userAccessToken,
+      updatedData: data,
+    };
+    const userIds = [];
+    userSelectedList.filter((list) => {
+      userIds.push(list.idUser);
+      return list;
+    });
+    dataToSend.idUser = userIds;
+    dataToSend.companies_id = prevData.id;
+    console.log(dataToSend);
+    dispatch(addCompanyUsers(dataToSend));
+    setTimeout(() => {
+      dispatch(getAllCompany(userAccessToken));
+    }, 2000);
+  };
   return (
     <Drawer anchor="right" onClose={closeDrawer} open={isOpen}>
       <Box
@@ -47,84 +79,95 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
         sx={{ width: 400, padding: 3 }}
       >
         {' '}
-        <div className={classes.add_container}>
-          <h2 className={classes.userlist_header_1}>{t('addUsers')}</h2>
-          <div className={classes.userlist_container}>
-            <h3 className={classes.userlist_header}>{t('search')}</h3>
-            <div className={classes.userlist_box}>
-              <Autocomplete
-                disableCloseOnSelect
-                getOptionLabel={(option) => option.username}
-                id="checkboxes-tags-demo"
-                multiple
-                options={listOfUsers}
-                renderInput={(params) => (
-                  <StyledAutocompleteWrapper
-                    {...params}
-                    label={t('users')}
-                    placeholder={t('search')}
-                    sx={{ border: 'none' }}
-                  />
-                )}
-                renderOption={(props, option, { selected }) => (
-                  <li {...props}>
-                    <Checkbox
-                      checked={selected}
-                      checkedIcon={checkedIcon}
-                      icon={icon}
-                      style={{ marginRight: 8 }}
+        <form
+          className={classes.form_container}
+          onSubmit={handleSubmit(handleUpdateSubmit)}
+        >
+          <div className={classes.add_container}>
+            <h2 className={classes.userlist_header_1}>{t('addUsers')}</h2>
+            <div className={classes.userlist_container}>
+              <h3 className={classes.userlist_header}>{t('search')}</h3>
+              <div className={classes.userlist_box}>
+                <Autocomplete
+                  disableCloseOnSelect
+                  getOptionLabel={(option) => option.username}
+                  id="checkboxes-tags-demo"
+                  multiple
+                  onChange={(_event, newValue) => {
+                    console.log(
+                      'Selected Value',
+                      JSON.stringify(newValue, null, ' ')
+                    );
+                    setUserSelectedList(newValue);
+                  }}
+                  options={listOfUsers}
+                  renderInput={(params) => (
+                    <StyledAutocompleteWrapper
+                      {...params}
+                      label={t('users')}
+                      placeholder={t('search')}
+                      sx={{ border: 'none' }}
                     />
-                    {option.username}
-                  </li>
-                )}
-                style={{ width: '100%' }}
-              />
+                  )}
+                  renderOption={(props, option, { selected }) => (
+                    <li {...props}>
+                      <Checkbox
+                        checked={selected}
+                        checkedIcon={checkedIcon}
+                        icon={icon}
+                        style={{ marginRight: 8 }}
+                      />
+                      {option.username}
+                    </li>
+                  )}
+                  style={{ width: '100%' }}
+                />
+              </div>
+            </div>
+            <div className={classes.add_list_container}>
+              <table className={classes.add_list_tables}>
+                <thead className={classes.table_head}>
+                  <tr className={classes.table_head_row}>
+                    <th className={classes.table_row_head}>{t('users')}</th>
+                    <th className={classes.table_row_head}>{t('roles')}</th>
+                  </tr>
+                </thead>
+                <tbody className={classes.table_body}>
+                  {isOpen && companyUsersList && companyUsersList.length > 0
+                    ? companyUsersList.map((user) => {
+                        if(user.companies.id === prevData.id){
+                          return <DatagridRow key ={user.id} companyId={prevData.id}  userData={user} />;
+                        }
+                        return '';
+                      })
+                    : ''}
+                </tbody>
+              </table>
+            </div>
+            <div className={classes.action_buttons_container}>
+              <span className={classes.cancel_button}>
+                <Button
+                  color="error"
+                  onClick={closeDrawer}
+                  sx={{ color: '#8094AE' }}
+                  variant="text"
+                >
+                  {t('cancel')}
+                </Button>
+              </span>
+              <Button
+                sx={{
+                  backgroundColor: '#e78201',
+                  '&:hover': { backgroundColor: '#e78201' },
+                }}
+                type="submit"
+                variant="contained"
+              >
+                {t('update')}
+              </Button>
             </div>
           </div>
-          <div className={classes.add_list_container}>
-            <table className={classes.add_list_tables}>
-              <thead className={classes.table_head}>
-                <tr className={classes.table_head_row}>
-                  <th className={classes.table_row_head}>
-                    <input
-                      className={classes.table_row_input}
-                      type="checkbox"
-                    />
-                  </th>
-                  <th className={classes.table_row_head}>{t('users')}</th>
-                  <th className={classes.table_row_head}>{t('roles')}</th>
-                </tr>
-              </thead>
-              <tbody className={classes.table_body}>
-                <DatagridRow />
-                <DatagridRow />
-                <DatagridRow />
-                <DatagridRow />
-              </tbody>
-            </table>
-          </div>
-          <div className={classes.action_buttons_container}>
-            <span className={classes.cancel_button}>
-              <Button
-                color="error"
-                onClick={closeDrawer}
-                sx={{ color: '#8094AE' }}
-                variant="text"
-              >
-                {t('cancel')}
-              </Button>
-            </span>
-            <Button
-              sx={{
-                backgroundColor: '#e78201',
-                '&:hover': { backgroundColor: '#e78201' },
-              }}
-              variant="contained"
-            >
-              {t('update')}
-            </Button>
-          </div>
-        </div>
+        </form>
       </Box>
     </Drawer>
   );
@@ -133,6 +176,7 @@ const CompanyUserAdd = ({ isOpen, handleClose }) => {
 CompanyUserAdd.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
+  prevData: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default CompanyUserAdd;

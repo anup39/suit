@@ -98,7 +98,7 @@ const DatagridRow = ({
         prevData={data}
       />
       <tr className={classes.row_container}>
-        <CompanyUserAdd handleClose={setMenu} isOpen={isMenu} />
+        <CompanyUserAdd handleClose={setMenu} isOpen={isMenu} prevData={data}/>
         <td className={classes.row_description}>
           <input
             checked={list?.checked}
@@ -111,7 +111,7 @@ const DatagridRow = ({
         <td className={classes.row_description}>{address}</td>
         <td className={classes.row_description}>{city}</td>
         <td className={classes.row_description}>{referenceContact}</td>
-        <td className={classes.row_description}>{lastUpdate}</td>
+        <td className={classes.row_description}>{`${lastUpdate[2]}/${lastUpdate[1]}/${lastUpdate[0]}`}</td>
         <td className={classes.row_description}>{userLastUpdate}</td>
         <td className={classes.row_description}>
           <MoreHorizIcon
@@ -131,11 +131,9 @@ const DatagridRow = ({
             open={open}
           >
             <MenuItem onClick={handleMenu}>{t('addUsers')}</MenuItem>
-            <MenuItem onClick={handleClose}>{t('editUsers')}</MenuItem>
+            {/* <MenuItem onClick={handleClose}>{t('editUsers')}</MenuItem> */}
 
-            <MenuItem onClick={handleEditCompanyDrawer}>
-              {t('editCompany')}
-            </MenuItem>
+            <MenuItem onClick={handleEditCompanyDrawer}>{t('editCompany')}</MenuItem>
             {/* <MenuItem onClick={handleClose}>{t('delete')}</MenuItem> */}
           </Menu>
         </td>
