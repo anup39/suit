@@ -55,3 +55,8 @@ body ::-webkit-scrollbar-thumb:window-inactive {
     width: 100vw !important;
   }
 }
+
+input,
+textarea {
+  outline: none;
+}
