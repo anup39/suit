@@ -23,6 +23,7 @@ import {
 import { getIsChngeStatusLoading } from '../../redux/worklist-management-redux/worklist.selector';
 import AuthenticatedRoute from '../../routes/AuthenticatedRoute';
 import MapView from './components/components/MapView/MapView';
+import MobileDataRow from './mobile.data.row';
 
 const ManagementOfFieldActivities = () => {
   const isAuthenticated = useSelector(getIfAuthenticated);
@@ -133,8 +134,17 @@ const ManagementOfFieldActivities = () => {
                   />
                 )}
               </>
+              <div className="mgmt-field-update-mobile">
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+        <MobileDataRow />
+      </div>
               {/* eslint-enable */}
-            </>
+            </> 
           ) : (
             <MapView />
           )}
