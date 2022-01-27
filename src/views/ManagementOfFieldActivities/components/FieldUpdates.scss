@@ -27,6 +27,11 @@
 .mgmt-field-update-mobile {
   height: calc(100vh - 230px);
   overflow: auto;
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 }
 
 .mgmt-field-update-search-div {
