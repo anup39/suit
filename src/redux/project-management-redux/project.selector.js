@@ -58,6 +58,9 @@ export const getProjcectDocuments = (state) => {
   return state.projectManagement.currentProjectDocuments;
 };
 
+export const getIsProjcectDocumentsLoading = (state) => {
+  return state.projectManagement.isCurrentProjectDocumentsLoading;
+};
 export const getSelectedProjectLayersListSuccess = (state) => {
   return state.projectManagement.selectedProjectLayerList;
 };

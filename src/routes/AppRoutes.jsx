@@ -66,6 +66,10 @@ const VerifyEmail = lazy(() => import('../views/VerifyEmail/VerifyEmail'));
 
 const NewPassword = lazy(() => import('../views/NewPassword/NewPassword'));
 
+const ProjectPannel = lazy(() =>
+  import('../views/ProjectManagement/components/ProjectPannel/ProjectPannel')
+);
+
 const appRoutes = [
   {
     path: ROUTES.ERROR,
@@ -104,7 +108,10 @@ const appRoutes = [
         element: <ProjectManagement />,
         path: ROUTES.PROJECT_MANAGEMENT,
       },
-
+      {
+        element: <ProjectPannel />,
+        path: ROUTES.VIEW_PROJECT,
+      },
       {
         element: <WorkListManagement />,
         path: ROUTES.WORKLIST_MANAGEMENT,

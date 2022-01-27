@@ -7,7 +7,7 @@
   height: 80vh;
   background-color: rgb(255, 255, 255);
   display: block;
-
+  overflow: scroll;
   @media (max-width: 768px) {
     width: 90%;
   }
@@ -20,10 +20,9 @@
 .field-log-content-div {
   padding: 15px 30px;
 
-  >div {
-    border: 1px solid #D4DEEA;
+  > div {
+    border: 1px solid #d4deea;
     border-radius: 3px;
-
   }
 }
 
@@ -49,13 +48,83 @@
 
 .field-log-close-button {
   padding: 5px 15p;
-  border: 1px solid #0160E0;
+  border: 1px solid #0160e0;
   border-radius: 5px;
-  color: #0160E0;
+  color: #0160e0;
   background: white;
   cursor: pointer;
   font-weight: 500;
   float: right;
   display: block;
   margin-top: 10px;
+}
+
+.field-log-data {
+  border: 1px soild black;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  padding: 20px;
+}
+
+.field-log-data p {
+  color: #526484;
+  font-size: 14px;
+  margin: 0 0 8px 0;
+}
+
+.field-log-data div {
+  border: 1px solid #d4deea;
+  width: 97%;
+  height: 35px;
+  padding-left: 4px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.field-log-data-projectId {
+  grid-column: 1;
+  grid-row: 1;
+}
+.field-log-data-taskName {
+  grid-column: 2;
+  grid-row: 1;
+}
+.field-log-data-time {
+  grid-column: 1;
+  grid-row: 2;
+}
+.field-log-data-date {
+  grid-column: 2;
+  grid-row: 2;
+}
+.field-log-data-note {
+  grid-column: 1;
+  grid-row: 3;
+  width: 100%;
+  div {
+    height: 100px;
+    width: 200%;
+    overflow: scroll;
+    display: block;
+    padding: 3px;
+  }
+}
+.field-log-data-logs {
+  grid-column: 1;
+  grid-row: 4;
+}
+.field-log-data-status {
+  grid-column: 2;
+  grid-row: 4;
+}
+.field-log-data-barcode {
+  grid-column: 1;
+  grid-row: 5;
+}
+.field-log-data-user {
+  grid-column: 2;
+  grid-row: 5;
 }

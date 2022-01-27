@@ -24,6 +24,7 @@ const ROUTES = {
   WEB_GIS_SERVICES: '/pannel/web-gis-services',
   WEBEX: '/pannel/webex',
   FEEDBACK_SERVICES: '/pannel/feedback-services',
+  VIEW_PROJECT: '/pannel/project-management/project/view',
   PANNEL: 'pannel',
   NOT_VERIFIED: 'forgotPassword',
   VERIFY_EMAIL: 'verifyEmail',
