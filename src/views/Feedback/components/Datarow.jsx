@@ -5,10 +5,9 @@ import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-// useDispatch,
-// import { deleteFeedback } from '../../../redux/feedback-redux/feedback.actions';
+import { deleteFeedback } from '../../../redux/feedback-redux/feedback.actions';
 import { getUserAuthToken } from '../../../redux/user-redux/user.selectors';
 import AreYouSure from './AreYouSure/AreYouSure';
 
@@ -18,7 +17,7 @@ const Datarow = ({ data }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [modalOpen, setModalOpen] = React.useState(false);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
 
   const open = Boolean(anchorEl);
@@ -29,15 +28,15 @@ const Datarow = ({ data }) => {
     setAnchorEl(null);
   };
 
-  const handleModalOpen = () => setModalOpen(true);
+  // const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
   const handleDelete = () => {
     handleClose();
     const dataToSend = { authToken, feedbackId: data.id };
     console.log(dataToSend);
-    handleModalOpen();
-    // dispatch(deleteFeedback(dataToSend));
+    // handleModalOpen();
+    dispatch(deleteFeedback(dataToSend));
   };
 
   return (
