@@ -59,7 +59,7 @@ const EditMenu = ({ handleCancel }) => {
         <span>
           <p>{t('fieldLogs')}</p>
           <div className="edit-div " id={0} onClick={handleOpen}>
-            File 1, File 2, + 2 More File(s)
+            Task Name Here
           </div>
         </span>
         <span>
@@ -75,12 +75,12 @@ const EditMenu = ({ handleCancel }) => {
           </div>
         </span>
 
-        <span index={4} onClick={handleOpen}>
+        {/* <span index={4} onClick={handleOpen}>
           <p>{t('milestone')}</p>
           <div className="edit-div" id={3} onClick={handleOpen}>
             Milestone 1
           </div>
-        </span>
+        </span> */}
         <span>
           <p>{t('status')}</p>
           <select className="change-status-div">

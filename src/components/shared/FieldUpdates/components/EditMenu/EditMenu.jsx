@@ -68,12 +68,12 @@ const EditMenu = ({ handleCancel }) => {
           </div>
         </span>
 
-        <span index={4} onClick={handleOpen}>
+        {/* <span index={4} onClick={handleOpen}>
           <p>{t('milestoneapproval')}</p>
           <div className="edit-div" id={3} onClick={handleOpen}>
             Milestone 1
           </div>
-        </span>
+        </span> */}
         <span>
           <p>{t('status')}</p>
           <select className="change-status-div">

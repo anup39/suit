@@ -170,3 +170,17 @@ export const GET_SELECTED_PROJECT_LAYERS_LIST = async (payload) => {
   );
   return selectedLayersList.data;
 };
+
+export const GET_TASK_FIELD_LOGS = async (payload) => {
+  const { authToken, projectId } = payload;
+
+  const newToken = await REFERSH_TOKEN(authToken);
+
+  const url = `${PROJECT_MANAGEMENT_API.GET_FIELD_LOGS}/${projectId}`;
+  const dashbord = await axios(url, {
+    headers: {
+      Authorization: `Bearer ${newToken}`,
+    },
+  });
+  return dashbord.data;
+};

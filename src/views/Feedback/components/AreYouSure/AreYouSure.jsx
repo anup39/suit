@@ -1,20 +1,18 @@
-import Modal from '@mui/material/Modal';
+import './AreYouSure.scss';
+
 import React from 'react';
 
 const AreYouSure = () => {
-  const [open, setOpen] = React.useState(false);
-  //   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   return (
-    <Modal
-      aria-describedby="modal-modal-description"
-      aria-labelledby="modal-modal-title"
-      onClose={handleClose}
-      open={open}
-    >
-      <div>Hello</div>
-    </Modal>
+    <div className="are-you-sure-base">
+      <div className="are-you-sure-modal-head">Are You Sure?</div>
+
+      <div className="are-you-sure-modal-body">
+        <h5>Are you sure to Delete the Feedback? </h5>
+        <span>No</span>
+        <span>Yes</span>
+      </div>
+    </div>
   );
 };
 
