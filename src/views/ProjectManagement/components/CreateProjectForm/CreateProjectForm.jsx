@@ -240,7 +240,7 @@ const CreateProjectForm = ({ handelClose, editForm }) => {
 /* eslint-disable */
 CreateProjectForm.propTypes = {
   handelClose: PropTypes.isRequired,
-  editForm: PropTypes.string.isRequired,
+  editForm: PropTypes.bool.isRequired,
 };
 
 export default CreateProjectForm;

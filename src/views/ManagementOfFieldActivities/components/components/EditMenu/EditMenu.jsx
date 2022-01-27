@@ -28,9 +28,16 @@ const EditMenu = ({ handleCancel }) => {
     setOption(0);
   };
 
+  // const handleViewFieldLoags = () => {
+  //   window.open(
+  //     'http://ecm.digital-twin-suite.com/VistaEcmWeb.aspx?LogonType=3&UserName=Administrator&Password=Asuite&AppName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&PROLECT_NAME=&OperationType=10&Query=~TASK_NAME%23%5BTASK05%5D',
+  //     '_blank'
+  //   );
+  // };
+
   const renderComponent = (value) => {
     const components = [
-      <FieldLogs key="helo" />,
+      <FieldLogs key="Field Logs" />,
       <ActivityReport key="Activity Report" />,
       <ChangeRequest key="Change Request" />,
       <Milestone key="Milestone" />,

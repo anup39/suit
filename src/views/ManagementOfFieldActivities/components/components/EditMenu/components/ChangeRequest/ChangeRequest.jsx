@@ -20,7 +20,7 @@ const ChangeRequest = () => {
             <div className="change-body-request-details">
               <span>
                 <p>{t('companyName')}</p>
-                <div className="change-request-details">Microhard </div>
+                <div className="change-request-details">Microsoft </div>
               </span>
 
               <span>
