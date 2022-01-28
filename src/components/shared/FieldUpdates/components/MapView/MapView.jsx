@@ -197,23 +197,23 @@ const MapView = ({ page }) => {
           <p style={{ color: 'white' }}>Document Details</p>
           <div className="map-view-document-details">
             <span>
-              <p>Geometry Type:</p>
+              <h6>Geometry Tyh6e:</h6>
               <p>Point</p>
             </span>
             <span>
-              <p>Project Name:</p>
+              <h6>Project Name:</h6>
               <p>{filteredTaskByTaskId?.projectsName}</p>
             </span>
             <span>
-              <p>Project Id:</p>
+              <h6>Project Id:</h6>
               <p>{filteredTaskByTaskId?.projectsId}</p>
             </span>
             <span>
-              <p>Task Id:</p>
+              <h6>Task Id:</h6>
               <p>{filteredTaskByTaskId?.taskId}</p>
             </span>
             <span>
-              <p>Type:</p>
+              <h6>Type:</h6>
               <p>{filteredTaskByTaskId?.type}</p>
             </span>
 
@@ -223,22 +223,22 @@ const MapView = ({ page }) => {
             </span>
 
             <span>
-              <p>Task Status:</p>
+              <h6>Task Status:</h6>
               <p>{getStatusIcons(filteredTaskByTaskId?.taskStatus)}</p>
               {/* <p>{filteredTaskByTaskId?.taskStatus}</p> */}
             </span>
 
             <span>
-              <p>Task Description:</p>
+              <h6>Task Description:</h6>
               <p>{filteredTaskByTaskId?.taskDescription}</p>
             </span>
 
             <span>
-              <p>Start Date:</p>
+              <h6>Start Date:</h6>
               <p>{filteredTaskByTaskId?.start}</p>
             </span>
             <span>
-              <p>End Date:</p>
+              <h6>End Date:</h6>
               <p>{filteredTaskByTaskId?.end}</p>
             </span>
           </div>

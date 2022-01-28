@@ -7,7 +7,8 @@
   height: 80vh;
   background-color: rgb(255, 255, 255);
   display: block;
-  overflow: scroll;
+  overflow: auto;
+
   @media (max-width: 768px) {
     width: 90%;
   }
@@ -20,9 +21,13 @@
 .field-log-content-div {
   padding: 15px 30px;
 
-  > div {
+  >div {
     border: 1px solid #d4deea;
     border-radius: 3px;
+  }
+
+  .MuiBox-root {
+    padding: 0;
   }
 }
 
@@ -60,12 +65,16 @@
 }
 
 .field-log-data {
-  border: 1px soild black;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   grid-auto-rows: minmax(100px, auto);
   padding: 20px;
+  border-top: 1px solid #d4deea;
+  height: calc(100vh - 342px);
+  overflow: auto;
+  overflow: auto;
+
 }
 
 .field-log-data p {
@@ -88,42 +97,51 @@
   grid-column: 1;
   grid-row: 1;
 }
+
 .field-log-data-taskName {
   grid-column: 2;
   grid-row: 1;
 }
+
 .field-log-data-time {
   grid-column: 1;
   grid-row: 2;
 }
+
 .field-log-data-date {
   grid-column: 2;
   grid-row: 2;
 }
+
 .field-log-data-note {
   grid-column: 1;
   grid-row: 3;
   width: 100%;
+
   div {
     height: 100px;
     width: 200%;
-    overflow: scroll;
+    overflow: auto;
     display: block;
     padding: 3px;
   }
 }
+
 .field-log-data-logs {
   grid-column: 1;
   grid-row: 4;
 }
+
 .field-log-data-status {
   grid-column: 2;
   grid-row: 4;
 }
+
 .field-log-data-barcode {
   grid-column: 1;
   grid-row: 5;
 }
+
 .field-log-data-user {
   grid-column: 2;
   grid-row: 5;

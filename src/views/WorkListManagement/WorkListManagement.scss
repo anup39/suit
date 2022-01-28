@@ -2,7 +2,7 @@
 
 .work-list-table-tbody {
   height: calc(100vh - 347px);
-  overflow: scroll;
+  overflow: auto;
 
   @media (max-width: 1024px) {
     height: calc(100vh - 313px);
