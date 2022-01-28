@@ -9,8 +9,10 @@ const AreYouSure = () => {
 
       <div className="are-you-sure-modal-body">
         <h5>Are you sure to Delete the Feedback? </h5>
-        <span>No</span>
-        <span>Yes</span>
+        <div className="are-you-sure-control">
+          <span>No</span>
+          <span className="are-you-sure-control-yes">Yes</span>
+        </div>
       </div>
     </div>
   );

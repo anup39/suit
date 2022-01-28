@@ -7,7 +7,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { deleteFeedback } from '../../../redux/feedback-redux/feedback.actions';
+// import { deleteFeedback } from '../../../redux/feedback-redux/feedback.actions';
 import { getUserAuthToken } from '../../../redux/user-redux/user.selectors';
 import AreYouSure from './AreYouSure/AreYouSure';
 
@@ -20,6 +20,8 @@ const Datarow = ({ data }) => {
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
 
+  console.log(dispatch);
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,15 +30,15 @@ const Datarow = ({ data }) => {
     setAnchorEl(null);
   };
 
-  // const handleModalOpen = () => setModalOpen(true);
+  const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
   const handleDelete = () => {
     handleClose();
     const dataToSend = { authToken, feedbackId: data.id };
     console.log(dataToSend);
-    // handleModalOpen();
-    dispatch(deleteFeedback(dataToSend));
+    handleModalOpen();
+    // dispatch(deleteFeedback(dataToSend));
   };
 
   return (
