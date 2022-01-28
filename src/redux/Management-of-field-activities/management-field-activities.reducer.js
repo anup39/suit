@@ -4,6 +4,11 @@ const initialState = {
   iAllActivitiesLoading: false,
   allActivitiesData: '',
   allActivitiesError: '',
+
+  fieldlogSuccess: false,
+  fieldlogsData: [],
+  fieldlogsError: false,
+  fieldlogsisloading: false,
 };
 // eslint-disable-next-line
 const magagementOfFieldActivitiesReducer = (state = initialState, action) => {
@@ -37,6 +42,27 @@ const magagementOfFieldActivitiesReducer = (state = initialState, action) => {
         iAllActivitiesLoading: false,
         allActivitiesData: '',
         allActivitiesError: '',
+      };
+    case MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.GET_FIELD_LOGS_BY_TASK:
+      return {
+        ...state,
+        fieldlogSuccess: false,
+        fieldlogsData: [],
+        fieldlogsisloading: true,
+      };
+    case MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.GET_FIELD_LOGS_BY_TASK_SUCCESS:
+      return {
+        ...state,
+        fieldlogsisloading: false,
+        fieldlogsData: action.payload,
+        fieldlogSuccess: '',
+      };
+    case MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.GET_FIELD_LOGS_BY_TASK_ERROR:
+      return {
+        ...state,
+        fieldlogsisloading: false,
+        fieldlogsData: [],
+        fieldlogError: action.payload,
       };
     default:
       return state;

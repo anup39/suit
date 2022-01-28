@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 
 import FieldUpdates from '../../../../components/shared/FieldUpdates/FieldUpdates';
 import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner';
-import { getImportProjectDataLoading } from '../../../../redux/project-management-redux/project.selector';
+import { getImportProjectDataLoading,getProjectData  } from '../../../../redux/project-management-redux/project.selector';
 import Documents from '../Documents/Documents';
 import ImportDrawer from '../ImportProject/components/import-drawer/import-drawer';
 import ImportProject from '../ImportProject/import-project.view';
@@ -21,6 +21,7 @@ import TabPanel from './TabPanel';
 const ProjectPannel = () => {
   const [value, setValue] = React.useState(0);
   const { t } = useTranslation();
+  const projectData = useSelector(getProjectData);
 
   const [isAddProjectDataOpen, setIsAddProjectDatatisOpen] =
     React.useState(false);
@@ -55,7 +56,7 @@ const ProjectPannel = () => {
           </div>
         )}
         <div className="project-bread-crumbs">
-          <span>Project Management/Project1</span>
+          <span>Project Management/ {projectData.name}</span>
         </div>
 
         <div className="project-main-div">

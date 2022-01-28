@@ -8,10 +8,11 @@ import { deleteCompanyUsers } from '../../../../redux/company-redux/company.acti
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import classes from './row.styles.module.scss';
 
+const DatagridRow = ({ userData }) => {
+
 const dispatch = useDispatch();
 const { handleSubmit } = useForm();
 const userAccessToken = useSelector(getUserAuthToken);
-
 const handleDeleteSubmit = (data) => {
   const dataToSend = {
     authToken: userAccessToken,
@@ -25,7 +26,7 @@ const handleDeleteSubmit = (data) => {
 
 };
 
-const DatagridRow = ({ userData }) => {
+
   return (
     <form
     className={classes.form_container}

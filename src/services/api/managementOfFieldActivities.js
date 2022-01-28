@@ -20,6 +20,23 @@ export const ALL_ACTIVITIES = async (data) => {
   return allActivities.data;
 };
 
+export const GET_FIELD_LOGS_BY_TASK = async (data) => {
+  const { authToken } = data;
+
+  const newToken = await REFERSH_TOKEN(authToken);
+
+  const allfieldActivities = await axios(
+    MANAGEMENT_OF_FIELD_ACTIVITIES.getfieldActivities`${data}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${newToken}`,
+      },
+    }
+  );
+  return allfieldActivities.data;
+};
+
 export const TEST = async (data) => {
   const { authToken } = data;
 

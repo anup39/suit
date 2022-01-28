@@ -14,12 +14,13 @@ import classes from './import-drawer.styles.module.scss';
 
 const ImportDrawer = ({ isOpen, handleClose }) => {
   const [projectId, setprojectId] = React.useState('');
+
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
   const projectList = useSelector(getAllProjects);
   const formData = new FormData();
   const { t } = useTranslation();
-
+  const docType = 'Contractor';
   const closeDrawer = () => {
     handleClose(false);
   };
@@ -42,11 +43,13 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
         authToken,
         data: formData,
         projectId,
+        docType,
       };
       dispatch(importProjectData(dataToSend));
     }
   };
 
+ 
   const handleQgisChangeChange = (e) => {
     const qgisFile = e.target.files;
     // eslint-disable-next-line no-plusplus

@@ -5,3 +5,8 @@ export const getActivitiesDetails = (state) => {
 export const getIsActivitiesLoading = (state) => {
   return state.fieldActivities.iAllActivitiesLoading;
 };
+
+export const getfieldlogs = (state) => {
+  return state.fieldActivities.fieldlogsData;
+};
+

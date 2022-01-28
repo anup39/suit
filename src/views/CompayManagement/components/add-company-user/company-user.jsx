@@ -49,7 +49,6 @@ const CompanyUserAdd = ({ isOpen, handleClose, prevData }) => {
   const { handleSubmit } = useForm();
   const listOfUsers = useSelector(getListOfUsers);
   const companyUsersList = useSelector(getComapnyUsersList);
-  console.log(listOfUsers, 'right here');
 
   const { t } = useTranslation();
 

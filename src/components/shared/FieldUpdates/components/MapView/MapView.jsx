@@ -188,10 +188,7 @@ const MapView = ({ page }) => {
           <iframe
             height="100%"
             src={`http://ecm.digital-twinsuite.com/VistaEcmWeb.aspx?LogonType=3&UserName=Administrator&Password=Asuite&Ap
-            pName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~
-            TASK_NAME=${filteredTaskByTaskId?.taskName ?? ''} PROJ_NAME=${
-              filteredTaskByTaskId?.projectsName ?? ''
-            }`}
+            pName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~TASK_NAME#[${filteredTaskByTaskId?.taskName ?? ''}]^~PROJ_NAME#[${filteredTaskByTaskId?.projectsName ?? ''}]`}
             title="Pdf Title"
             width="100%"
           />

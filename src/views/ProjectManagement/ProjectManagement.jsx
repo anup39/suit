@@ -28,7 +28,7 @@ import CreateProjectForm from './components/CreateProjectForm/CreateProjectForm'
 import Dashboard from './components/Dashboard/Dashboard';
 import ProjectManagementTabPannel from './components/ProjectManagementTabPannel/ProjectManagementTabPannel';
 import ProjectPannel from './components/ProjectPannel/ProjectPannel';
-import MobileDataRow from './mobile.data.row';
+// import MobileDataRow from './mobile.data.row';
 
 const ProjectManagement = () => {
   const dispatch = useDispatch();
@@ -174,14 +174,14 @@ const ProjectManagement = () => {
                     itemData={serchText ? filteredData : projectList}
                     itemsPerPage={10}
                   />
-                  <div className="mobile_table_pm-project">
+                  { /* <div className="mobile_table_pm-project">
                     <MobileDataRow />
                     <MobileDataRow />
                     <MobileDataRow />
                     <MobileDataRow />
                     <MobileDataRow />
                     <MobileDataRow />
-                  </div>
+                    </div> */ }
                 </DataGridBase>
               </>
             </ProjectManagementTabPannel>

@@ -101,7 +101,7 @@ const FieldUpdateCard = ({ activityData }) => {
           </span>
         </div>
       ) : (
-        <EditMenu handleCancel={handleCancel} />
+        <EditMenu activityData={activityData} handleCancel={handleCancel} />
       )}
     </>
   );

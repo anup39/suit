@@ -6,22 +6,28 @@ import CommentIcon from '@mui/icons-material/Comment';
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import { Drawer, Modal } from '@mui/material';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
+import { getAllfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.action'
+import { getfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.selectors'
 import ControlActivityDrawer from '../../../ControlActivityDrawer/ControlActivityDrawer';
 import ActivityReport from './components/ActivityReport/ActivityReport';
 import ChangeRequest from './components/ChangeRequest/ChangeRequest';
 import FieldLogs from './components/FieldLogs/FieldLogs';
 import Milestone from './components/Milestone/Milestone';
 
-const EditMenu = ({ handleCancel }) => {
+const EditMenu = ({ activityData, handleCancel }) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const [open, setOpen] = React.useState(false);
   const [option, setOption] = React.useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+
+  const fieldlogs = useSelector(getfieldlogs);
 
   const handleOpen = (e) => {
     setOption(e.target.id);
@@ -32,9 +38,14 @@ const EditMenu = ({ handleCancel }) => {
     setOption(0);
   };
 
+  useEffect(() => {
+    dispatch(getAllfieldlogs(activityData.taskId));
+    
+  }, []);
+
   const renderComponent = (value) => {
     const components = [
-      <FieldLogs key="helo" />,
+      <FieldLogs key="Notes/Images"  />,
       <ActivityReport key="Activity Report" />,
       <ChangeRequest key="Change Request" />,
       <Milestone key="Milestone" />,
@@ -62,24 +73,24 @@ const EditMenu = ({ handleCancel }) => {
       <div className="edit-menu-base">
         <span>
           <p>{t('taskItem')}</p>
-          <div className="edit-div">Task 1</div>
+          <div className="edit-div">{activityData.taskName}</div>
         </span>
         <span>
           <p>{t('fieldLogs')}</p>
           <div className="edit-div " id={0} onClick={handleOpen}>
-            File 1, File 2, + 2 More File(s)
+           Notes/Image
           </div>
         </span>
         <span>
           <p>{t('activityreport')}</p>
           <div className="edit-div" id={1} onClick={handleOpen}>
-            Activity Report 1
+            Activity Report
           </div>
         </span>
         <span>
           <p>{t('changerequest')}</p>
           <div className="edit-div" id={2} onClick={handleOpen}>
-            Task 1 Change
+            Change Request
           </div>
         </span>
 
@@ -125,6 +136,7 @@ const EditMenu = ({ handleCancel }) => {
 
 EditMenu.propTypes = {
   handleCancel: PropTypes.func.isRequired,
+  activityData: PropTypes.func.isRequired,
 };
 
 export default EditMenu;

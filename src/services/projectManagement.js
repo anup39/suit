@@ -121,10 +121,10 @@ export const GET_PROJECT_DASHBORD = async (payload) => {
 };
 
 export const IMPORT_PROJECT_DATA = async (payload) => {
-  const { data, authToken, projectId } = payload;
+  const { data, authToken, projectId, docType } = payload;
   const newToken = await REFERSH_TOKEN(authToken);
 
-  const url = `${PROJECT_MANAGEMENT_API.IMPORT_PROJECT_DATA}${projectId}`;
+  const url = `${PROJECT_MANAGEMENT_API.IMPORT_PROJECT_DATA}${projectId}&docType=${docType}`;
   const importData = await axios(url, {
     method: 'PUT',
     headers: {

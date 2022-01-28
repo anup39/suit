@@ -1,10 +1,12 @@
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 import { toast } from 'react-toastify';
 
-import { ALL_ACTIVITIES } from '../../services/api/managementOfFieldActivities';
+import { ALL_ACTIVITIES,  GET_FIELD_LOGS_BY_TASK} from '../../services/api/managementOfFieldActivities';
 import {
   getAllActivitiesError,
   getAllActivitiesSuccess,
+  getAllfieldlogsError,
+  getAllfieldlogsSuccess,
 } from './management-field-activities.action';
 import MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES from './management-field-activities.action.types';
 
@@ -42,6 +44,24 @@ export function* onGetAllActivities() {
   );
 }
 
+export function* onGetFieldLogs(payload) {
+  try {
+    const getfieldlogs = yield call(GET_FIELD_LOGS_BY_TASK, payload);
+    yield put(getAllfieldlogsSuccess(getfieldlogs));
+  } catch (error) {
+    console.log(error);
+    yield put(getAllfieldlogsError(error.response.data));
+  }
+}
+
+// eslint-disable-next-line linebreak-style
+export function* onGetFieldLogsStart() {
+  yield takeLatest(
+    MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.GET_FIELD_LOGS_BY_TASK,
+    onGetFieldLogs
+  );
+}
 export function* managementOfFieldActivitiesSagas() {
-  yield all([call(onGetAllActivities)]);
+  yield all([call(onGetAllActivities),
+  call(onGetFieldLogsStart)]);
 }
