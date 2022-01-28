@@ -2,11 +2,17 @@ import './ActivityReport.scss';
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
+import { getfieldlogs } from '../../../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
 import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
 
 const ActivityReport = () => {
   const { t } = useTranslation();
+
+  const fieldLogData = useSelector(getfieldlogs);
+
+  const activityReportData = fieldLogData?.activityTask[0];
 
   return (
     <div className="activity-report-base">
@@ -21,37 +27,61 @@ const ActivityReport = () => {
               <div className="activity-report-inputs-div">
                 <span>
                   <p>{t('company')}</p>
-                  <div className="activity-report-data"> Test Company </div>
+                  <div className="activity-report-data">
+                    {' '}
+                    {!activityReportData?.companyName
+                      ? '-'
+                      : activityReportData?.companyName}{' '}
+                  </div>
                 </span>
 
                 <span>
                   <p>{t('projectName')}</p>
-                  <div className="activity-report-data"> Test Project </div>
+                  <div className="activity-report-data">
+                    {' '}
+                    {!activityReportData?.projectId
+                      ? '-'
+                      : activityReportData?.projectId}
+                  </div>
                 </span>
 
                 <span>
                   <p>{t('reportDate')}</p>
-                  <div className="activity-report-data"> 10 Nov 2020 </div>
+                  <div className="activity-report-data">
+                    {' '}
+                    {!activityReportData?.activityReportDate
+                      ? '-'
+                      : activityReportData?.activityReportDate}{' '}
+                  </div>
                 </span>
 
                 <span>
                   <p>{t('reportnr')}</p>
-                  <div className="activity-report-data"> 5643543 </div>
+                  <div className="activity-report-data">
+                    {' '}
+                    {!activityReportData?.activityReportnumber
+                      ? '-'
+                      : activityReportData?.activityReportnumber}{' '}
+                  </div>
                 </span>
               </div>
 
               <span>
                 <p>{t('sendToCompany')}</p>
-                <select className="activity-report-select">
+                <div className="activity-report-data">
+                  {activityReportData?.companyFlag}
+                </div>
+                {/* <select className="activity-report-select">
                   <option value="">Select An Option</option>
                   <option value={1}>Yes</option>
-                  <option value={0}>No</option>
-                </select>
+                  <option value={
+                    0}>No</option>
+                </select> */}
               </span>
 
               <span>
                 <p>{t('activity')}</p>
-                <textarea rows="5" />
+                <textarea disabled rows="5" />
               </span>
 
               <div className="change-request-buttons-div">

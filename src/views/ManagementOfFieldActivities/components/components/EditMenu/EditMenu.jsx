@@ -1,24 +1,34 @@
 import './EditMenu.scss';
 
+import AddIcon from '@mui/icons-material/Add';
 import AutorenewOutlinedIcon from '@mui/icons-material/AutorenewOutlined';
 import CommentIcon from '@mui/icons-material/Comment';
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
-import { Modal } from '@mui/material';
+import { Drawer, Modal } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
+import ControlActivityDrawer from '../../../../../components/shared/ControlActivityDrawer/ControlActivityDrawer';
+import { getAllfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
+import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
 import ActivityReport from './components/ActivityReport/ActivityReport';
 import ChangeRequest from './components/ChangeRequest/ChangeRequest';
 import FieldLogs from './components/FieldLogs/FieldLogs';
 import Milestone from './components/Milestone/Milestone';
 
-const EditMenu = ({ handleCancel }) => {
+const EditMenu = ({ taskId, handleCancel }) => {
   const { t } = useTranslation();
 
   const [open, setOpen] = React.useState(false);
   const [option, setOption] = React.useState(0);
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+
+  const authToken = useSelector(getUserAuthToken);
+  const dispatch = useDispatch();
+
   const handleOpen = (e) => {
     setOption(e.target.id);
     setOpen(true);
@@ -28,12 +38,13 @@ const EditMenu = ({ handleCancel }) => {
     setOption(0);
   };
 
-  // const handleViewFieldLoags = () => {
-  //   window.open(
-  //     'http://ecm.digital-twin-suite.com/VistaEcmWeb.aspx?LogonType=3&UserName=Administrator&Password=Asuite&AppName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&PROLECT_NAME=&OperationType=10&Query=~TASK_NAME%23%5BTASK05%5D',
-  //     '_blank'
-  //   );
-  // };
+  const handleDrawerOpen = () => {
+    setIsDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setIsDrawerOpen(false);
+  };
 
   const renderComponent = (value) => {
     const components = [
@@ -46,8 +57,17 @@ const EditMenu = ({ handleCancel }) => {
     return components[value];
   };
 
+  React.useEffect(() => {
+    const data = { authToken, taskId };
+    dispatch(getAllfieldlogs(data));
+  }, []);
+
   return (
     <>
+      <Drawer anchor="right" onClose={handleDrawerClose} open={isDrawerOpen}>
+        <ControlActivityDrawer handleClose={handleDrawerClose} />
+      </Drawer>
+
       <Modal onClose={handleClose} open={open}>
         {renderComponent(option)}
       </Modal>
@@ -97,6 +117,10 @@ const EditMenu = ({ handleCancel }) => {
               <UploadFileOutlinedIcon className="control-activity-icons" />
               <CommentIcon className="control-activity-icons" />
               <img alt="Webex Icon" className="webex-icon" src={WebExIcon} />
+              <AddIcon
+                className="control-activity-icons"
+                onClick={handleDrawerOpen}
+              />
             </span>
           </div>
         </span>
@@ -113,6 +137,7 @@ const EditMenu = ({ handleCancel }) => {
 
 EditMenu.propTypes = {
   handleCancel: PropTypes.func.isRequired,
+  taskId: PropTypes.isRequired,
 };
 
 export default EditMenu;

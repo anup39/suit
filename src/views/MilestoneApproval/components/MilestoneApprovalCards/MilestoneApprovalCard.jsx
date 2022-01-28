@@ -83,7 +83,6 @@ const MilestoneApprovalCard = ({
     const data = { id: projectDocumentsId, authToken };
     dispatch(deleteMilestoneById(data));
     handleClose();
-
     setTimeout(() => {
       dispatch(getAllMilestones(authToken));
     }, 2000);

@@ -11,8 +11,9 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
-import { getAllfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.action'
-import { getfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.selectors'
+import { getAllfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
+import { getfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
+import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
 import ControlActivityDrawer from '../../../ControlActivityDrawer/ControlActivityDrawer';
 import ActivityReport from './components/ActivityReport/ActivityReport';
 import ChangeRequest from './components/ChangeRequest/ChangeRequest';
@@ -28,6 +29,7 @@ const EditMenu = ({ activityData, handleCancel }) => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const fieldlogs = useSelector(getfieldlogs);
+  const authToken = useSelector(getUserAuthToken);
 
   const handleOpen = (e) => {
     setOption(e.target.id);
@@ -39,13 +41,13 @@ const EditMenu = ({ activityData, handleCancel }) => {
   };
 
   useEffect(() => {
-    dispatch(getAllfieldlogs(activityData.taskId));
-    
+    const data = { authToken, taskId: activityData.taskId };
+    dispatch(getAllfieldlogs(data));
   }, []);
 
   const renderComponent = (value) => {
     const components = [
-      <FieldLogs key="Notes/Images"  />,
+      <FieldLogs key="Notes/Images" />,
       <ActivityReport key="Activity Report" />,
       <ChangeRequest key="Change Request" />,
       <Milestone key="Milestone" />,
@@ -64,9 +66,9 @@ const EditMenu = ({ activityData, handleCancel }) => {
   return (
     <>
       <Drawer anchor="right" onClose={handleDrawerClose} open={isDrawerOpen}>
-        <ControlActivityDrawer />
+        <ControlActivityDrawer handleClose={handleDrawerClose} />
       </Drawer>
-
+      {console.log(fieldlogs)}
       <Modal onClose={handleClose} open={open}>
         {renderComponent(option)}
       </Modal>
@@ -78,7 +80,7 @@ const EditMenu = ({ activityData, handleCancel }) => {
         <span>
           <p>{t('fieldLogs')}</p>
           <div className="edit-div " id={0} onClick={handleOpen}>
-           Notes/Image
+            Notes/Image
           </div>
         </span>
         <span>

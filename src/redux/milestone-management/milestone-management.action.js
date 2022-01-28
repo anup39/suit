@@ -79,3 +79,8 @@ export const deselectMilestone = (id) => ({
   type: MILESTONE_MANAGEMENT_ACTION_TYPES.DESELECT_MILESTONE,
   payload: id,
 });
+
+export const resetUpdateMilestone = () => ({
+  type: MILESTONE_MANAGEMENT_ACTION_TYPES.RESET_UPDATE_MILESTONE,
+  payload: '',
+});

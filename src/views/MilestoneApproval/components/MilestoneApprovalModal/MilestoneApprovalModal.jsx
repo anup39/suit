@@ -6,7 +6,15 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updateMilestone } from '../../../../redux/milestone-management/milestone-management.action';
+import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner';
+import {
+  getUpdateMilestoneLoading,
+  getUpdatetMilestoneSuccess,
+} from '../../../../redux/milestone-management/milestone.selector';
+import {
+  resetUpdateMilestone,
+  updateMilestone,
+} from '../../../../redux/milestone-management/milestone-management.action';
 import {
   getUserAuthToken,
   getUserData,
@@ -16,6 +24,8 @@ const MilestoneApprovalModal = ({ handelClose, milestoneNr, milestoneId }) => {
   const [description, setDescription] = React.useState('');
   const authToken = useSelector(getUserAuthToken);
   const currentUser = useSelector(getUserData);
+  const isUpdateMilestoneLoading = useSelector(getUpdateMilestoneLoading);
+  const updateMilestoneSuccess = useSelector(getUpdatetMilestoneSuccess);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -31,8 +41,16 @@ const MilestoneApprovalModal = ({ handelClose, milestoneNr, milestoneId }) => {
     dispatch(updateMilestone(currentData));
   };
 
+  React.useEffect(() => {
+    if (updateMilestoneSuccess) {
+      handelClose();
+      dispatch(resetUpdateMilestone());
+    }
+  }, [isUpdateMilestoneLoading]);
+
   return (
     <div className="milestone-approval-modal-base">
+      <GlobalSpinner isOpen={isUpdateMilestoneLoading} />
       <div className="milestone-approval-modal-header">
         <span className="milestone-approval-left" />
         <h3 className="edit-modal-header-text">{t('reasonOfApproval')}</h3>

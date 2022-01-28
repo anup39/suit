@@ -1,7 +1,7 @@
 import './Milestone.scss';
 
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+// import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -30,7 +30,6 @@ const Milestone = ({ milestoneId, handleClose }) => {
   return (
     <div className="milestone-base">
       <EditModalHeaders headerName={t('milestone')} />
-      {console.log(milestoneData)}
       <div className="milestone-content">
         <div className="content-header">
           <p className="content-title">{}</p>
@@ -46,9 +45,9 @@ const Milestone = ({ milestoneId, handleClose }) => {
               {t('rejected')}
             </span>
           )}
-          <span className="milestone-download-button">
+          {/* <span className="milestone-download-button">
             <FileDownloadOutlinedIcon className="status-icon" /> {t('download')}
-          </span>
+          </span> */}
         </div>
         <div className="milestone-content-body">
           <div className="milestone-details">

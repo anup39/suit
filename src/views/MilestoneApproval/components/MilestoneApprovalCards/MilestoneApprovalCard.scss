@@ -3,7 +3,6 @@
 .milestone-approval-card {
   display: table;
   width: 100%;
-  border-bottom: 1px solid #D4DEEA;
 
   &:last-child {
     border: none;
@@ -16,8 +15,9 @@
   padding: 10px;
   font-size: 14px;
   vertical-align: middle;
-  color: #364A63;
+  color: #364a63;
   margin-left: 10px;
+  border-bottom: 1px solid #d4deea;
 
   p {
     margin: 0;

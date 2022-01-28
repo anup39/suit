@@ -19,3 +19,11 @@ export const getIsSelctAll = (state) => {
 export const getSelectedMilestone = (state) => {
   return state.milestoneManagment.selectedMilestone;
 };
+
+export const getUpdatetMilestoneSuccess = (state) => {
+  return state.milestoneManagment.updateMilesotneSuccess;
+};
+
+export const getUpdateMilestoneLoading = (state) => {
+  return state.milestoneManagment.isUpdateMilestoneLoading;
+};

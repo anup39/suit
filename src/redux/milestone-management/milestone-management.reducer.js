@@ -96,6 +96,14 @@ const milestoneManagmeentReducer = (state = initialState, action) => {
         updateMilesotneSuccess: '',
       };
 
+    case MILESTONE_MANAGEMENT_ACTION_TYPES.RESET_UPDATE_MILESTONE:
+      return {
+        ...state,
+        isUpdateMilestoneLoading: false,
+        updateMilesotneError: '',
+        updateMilesotneSuccess: '',
+      };
+
     case MILESTONE_MANAGEMENT_ACTION_TYPES.DELETE_MILESTONE:
       return {
         ...state,
