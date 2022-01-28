@@ -183,9 +183,9 @@ export function* onCompanyAddUsers() {
 
 export function* deleteUsersCompany(payload) {
   try {
-    const addUsers = yield call(COMPANY_DELETE_USERS, payload);
-    yield put(deleteCompanyUsersSuccess(undefined));
-    yield toast.success(addUsers.data.message, {
+    const deleteUsers = yield call(COMPANY_DELETE_USERS, payload);
+    yield put(deleteCompanyUsersSuccess(deleteUsers.data));
+    yield toast.success(deleteUsers.data.message, {
       position: 'top-center',
       autoClose: 4000,
       hideProgressBar: false,

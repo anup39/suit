@@ -18,7 +18,10 @@ import {
   getAllCompany,
   getCompanyUsers,
 } from '../../../../redux/company-redux/company.actions';
-import { getComapnyUsersList } from '../../../../redux/company-redux/company.selectors';
+import {
+  getComapnyDeletedUsersSuccess,
+  getComapnyUsersList,
+} from '../../../../redux/company-redux/company.selectors';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import { roleStart } from '../../../../redux/User-Role/role.actions';
 import { getListOfUsers } from '../../../../redux/User-Role/User-Role.selectors';
@@ -40,16 +43,18 @@ const CompanyUserAdd = ({ isOpen, handleClose, prevData }) => {
     handleClose(false);
   };
   const dispatch = useDispatch();
+
+  const { handleSubmit } = useForm();
+  const listOfUsers = useSelector(getListOfUsers);
+  const companyUsersList = useSelector(getComapnyUsersList);
+  const usersDeletedSuccess = useSelector(getComapnyDeletedUsersSuccess);
+  console.log(usersDeletedSuccess);
   useEffect(() => {
     dispatch(roleStart(userAccessToken));
   }, []);
   useEffect(() => {
     if (isOpen) dispatch(getCompanyUsers({ userAccessToken, id: prevData.id }));
-  }, [isOpen]);
-  const { handleSubmit } = useForm();
-  const listOfUsers = useSelector(getListOfUsers);
-  const companyUsersList = useSelector(getComapnyUsersList);
-
+  }, [isOpen, usersDeletedSuccess]);
   const { t } = useTranslation();
 
   const handleUpdateSubmit = (data) => {
@@ -123,26 +128,35 @@ const CompanyUserAdd = ({ isOpen, handleClose, prevData }) => {
                 />
               </div>
             </div>
-            <div className={classes.add_list_container}>
-              <table className={classes.add_list_tables}>
-                <thead className={classes.table_head}>
-                  <tr className={classes.table_head_row}>
-                    <th className={classes.table_row_head}>{t('users')}</th>
-                    <th className={classes.table_row_head}>{t('roles')}</th>
-                  </tr>
-                </thead>
-                <tbody className={classes.table_body}>
-                  {isOpen && companyUsersList && companyUsersList.length > 0
-                    ? companyUsersList.map((user) => {
-                        if(user.companies.id === prevData.id){
-                          return <DatagridRow key ={user.id} companyId={prevData.id}  userData={user} />;
-                        }
-                        return '';
-                      })
-                    : ''}
-                </tbody>
-              </table>
-            </div>
+            {isOpen && companyUsersList && companyUsersList.length > 0 ? (
+              <div className={classes.add_list_container}>
+                <table className={classes.add_list_tables}>
+                  <thead className={classes.table_head}>
+                    <tr className={classes.table_head_row}>
+                      <th className={classes.table_row_head}>{t('users')}</th>
+                      <th className={classes.table_row_head}>{t('roles')}</th>
+                      <th className={classes.table_row_head}>{t('actions')}</th>
+                    </tr>
+                  </thead>
+                  <tbody className={classes.table_body}>
+                    {companyUsersList.map((user) => {
+                      if (user.companies.id === prevData.id) {
+                        return (
+                          <DatagridRow
+                            key={user.idUser}
+                            companyId={prevData.id}
+                            userData={user}
+                          />
+                        );
+                      }
+                      return '';
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              ''
+            )}
             <div className={classes.action_buttons_container}>
               <span className={classes.cancel_button}>
                 <Button
