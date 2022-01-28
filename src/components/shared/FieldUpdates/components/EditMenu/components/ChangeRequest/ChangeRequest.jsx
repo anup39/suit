@@ -2,17 +2,66 @@ import './ChangeRequest.scss';
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
+import { changeFieldLogStatus } from '../../../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getfieldlogs } from '../../../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
+import { getUserAuthToken } from '../../../../../../../redux/user-redux/user.selectors';
 import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
 
 const ChangeRequest = () => {
   const { t } = useTranslation();
 
   const fieldLogData = useSelector(getfieldlogs);
+  const authToken = useSelector(getUserAuthToken);
 
   const chnageRequestData = fieldLogData.changeTask[0];
+
+  const [rejectionReason, setRejectionReason] = React.useState('');
+
+  const dispatch = useDispatch();
+
+  const handelReject = () => {
+    if (!rejectionReason) {
+      toast.warn('Please Add A Reason For Rejection!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      const data = {
+        authToken,
+        taskData: {
+          fieldlogId: chnageRequestData?.fieldlogId,
+          taskId: chnageRequestData?.taskId,
+          isApproved: false,
+          rejectionNote: '',
+        },
+      };
+
+      dispatch(changeFieldLogStatus(data));
+    }
+  };
+
+  const handelAccept = () => {
+    const data = {
+      authToken,
+      taskData: {
+        fieldlogId: chnageRequestData?.fieldlogId,
+        taskId: chnageRequestData?.taskId,
+        isApproved: true,
+        rejectionNote: '',
+      },
+    };
+
+    dispatch(changeFieldLogStatus(data));
+  };
+
   return (
     <div className="change-request-base">
       <EditModalHeaders headerName={t('changerequest')} />
@@ -76,17 +125,27 @@ const ChangeRequest = () => {
     </div> */}
 
             <div className="change-request-buttons-div">
-              <span className="change-request-button-reject">
+              <span
+                className="change-request-button-reject"
+                onClick={handelReject}
+              >
                 {t('reject')}
               </span>
-              <span className="change-request-button-accept">
+              <span
+                className="change-request-button-accept"
+                onClick={handelAccept}
+              >
                 {t('accept')}
               </span>
             </div>
 
             <span>
               <p>{t('reasonofRejection')}</p>
-              <textarea className="reason-of-rejection-details-text-area" />
+              <textarea
+                className="reason-of-rejection-details-text-area"
+                onChange={(e) => setRejectionReason(e.target.value)}
+                value={rejectionReason}
+              />
             </span>
           </div>
         </div>

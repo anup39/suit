@@ -2,17 +2,62 @@ import './ActivityReport.scss';
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
+import { changeFieldLogStatus } from '../../../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getfieldlogs } from '../../../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
+import { getUserAuthToken } from '../../../../../../../redux/user-redux/user.selectors';
 import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
 
 const ActivityReport = () => {
   const { t } = useTranslation();
+  const [rejectionReason, setRejectionReason] = React.useState('');
 
   const fieldLogData = useSelector(getfieldlogs);
-
+  const authToken = useSelector(getUserAuthToken);
   const activityReportData = fieldLogData?.activityTask[0];
+
+  const dispatch = useDispatch();
+
+  const handelReject = () => {
+    if (!rejectionReason) {
+      toast.warn('Please Add A Reason For Rejection!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      const data = {
+        authToken,
+        taskData: {
+          fieldlogId: activityReportData?.fieldlogId,
+          taskId: activityReportData?.taskId,
+          isApproved: false,
+          rejectionNote: '',
+        },
+      };
+
+      dispatch(changeFieldLogStatus(data));
+    }
+  };
+  const handelAccept = () => {
+    const data = {
+      authToken,
+      taskData: {
+        fieldlogId: activityReportData?.fieldlogId,
+        taskId: activityReportData?.taskId,
+        isApproved: true,
+        rejectionNote: '',
+      },
+    };
+
+    dispatch(changeFieldLogStatus(data));
+  };
 
   return (
     <div className="activity-report-base">
@@ -84,11 +129,27 @@ const ActivityReport = () => {
                 <textarea disabled rows="5" />
               </span>
 
+              <span className="activity-report-data-rejection-note">
+                {' '}
+                <p>Reason For Rejection</p>
+                <textarea
+                  cols={5}
+                  onChange={(e) => setRejectionReason(e.target.value)}
+                  value={rejectionReason}
+                />
+              </span>
+
               <div className="change-request-buttons-div">
-                <span className="change-request-button-reject">
+                <span
+                  className="change-request-button-reject"
+                  onClick={handelReject}
+                >
                   {t('reject')}
                 </span>
-                <span className="change-request-button-accept">
+                <span
+                  className="change-request-button-accept"
+                  onClick={handelAccept}
+                >
                   {t('accept')}
                 </span>
               </div>

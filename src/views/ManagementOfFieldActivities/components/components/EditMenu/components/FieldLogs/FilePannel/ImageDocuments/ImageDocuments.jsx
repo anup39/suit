@@ -3,33 +3,47 @@ import './ImageDocuments.scss';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { changeFieldLogStatus } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getfieldlogs } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
 import { getUserAuthToken } from '../../../../../../../../../redux/user-redux/user.selectors';
 
 const ImageDocuments = () => {
+  const [rejectionReason, setRejectionReason] = React.useState('');
+
   const { t } = useTranslation();
   const fieldLogs = useSelector(getfieldlogs);
   const authToken = useSelector(getUserAuthToken);
-  const [rejectionReason, setRejectionReason] = React.useState('');
 
   const dispatch = useDispatch();
 
   const imageData = fieldLogs.imageTask[0];
 
   const handelReject = () => {
-    const data = {
-      authToken,
-      taskData: {
-        fieldlogId: imageData?.fieldlogId,
-        taskId: imageData?.taskId,
-        isApproved: false,
-        rejectionNote: '',
-      },
-    };
+    if (!rejectionReason) {
+      toast.warn('Please Add A Reason For Rejection!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      const data = {
+        authToken,
+        taskData: {
+          fieldlogId: imageData?.fieldlogId,
+          taskId: imageData?.taskId,
+          isApproved: false,
+          rejectionNote: '',
+        },
+      };
 
-    dispatch(changeFieldLogStatus(data));
+      dispatch(changeFieldLogStatus(data));
+    }
   };
   const handelAccept = () => {
     const data = {

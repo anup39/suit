@@ -1,14 +1,61 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
+import { changeFieldLogStatus } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getfieldlogs } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
+import { getUserAuthToken } from '../../../../../../../../../redux/user-redux/user.selectors';
 
 const OtherDocuments = () => {
   const { t } = useTranslation();
   const fieldLogs = useSelector(getfieldlogs);
+  const [rejectionReason, setRejectionReason] = React.useState('');
+  const authToken = useSelector(getUserAuthToken);
+
+  const dispatch = useDispatch();
 
   const documentsData = fieldLogs.notesTask[0];
+
+  const handelReject = () => {
+    if (!rejectionReason) {
+      toast.warn('Please Add A Reason For Rejection!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      const data = {
+        authToken,
+        taskData: {
+          fieldlogId: documentsData?.fieldlogId,
+          taskId: documentsData?.taskId,
+          isApproved: false,
+          rejectionNote: '',
+        },
+      };
+
+      dispatch(changeFieldLogStatus(data));
+    }
+  };
+  const handelAccept = () => {
+    const data = {
+      authToken,
+      taskData: {
+        fieldlogId: documentsData?.fieldlogId,
+        taskId: documentsData?.taskId,
+        isApproved: true,
+        rejectionNote: '',
+      },
+    };
+
+    dispatch(changeFieldLogStatus(data));
+  };
+
   return (
     <div>
       <div className="field-log-data">
@@ -86,11 +133,25 @@ const OtherDocuments = () => {
               : documentsData?.taskNotification}
           </div>
         </span>
+
+        <span className="field-log-data-rejection-note">
+          {' '}
+          <p>Reason For Rejection</p>
+          <textarea
+            cols={5}
+            onChange={(e) => setRejectionReason(e.target.value)}
+            value={rejectionReason}
+          />
+        </span>
       </div>
 
       <div className="change-request-buttons-div">
-        <span className="change-request-button-reject">{t('reject')}</span>
-        <span className="change-request-button-accept">{t('accept')}</span>
+        <span className="change-request-button-reject" onClick={handelReject}>
+          {t('reject')}
+        </span>
+        <span className="change-request-button-accept" onClick={handelAccept}>
+          {t('accept')}
+        </span>
       </div>
     </div>
   );
