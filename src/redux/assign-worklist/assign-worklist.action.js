@@ -34,3 +34,8 @@ export const assingTaskError = (data) => ({
   type: WORKLIST_MANAGEMENT_TYPES.ASSIGN_TASK_ERROR,
   payload: data,
 });
+
+export const resetAssignTask = () => ({
+  type: WORKLIST_MANAGEMENT_TYPES.RESET_ASSIGN_TASK,
+  payload: '',
+});

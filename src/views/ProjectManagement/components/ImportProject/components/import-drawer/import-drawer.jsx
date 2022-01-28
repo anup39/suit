@@ -80,9 +80,13 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
 
   return (
     <Drawer anchor="right" onClose={closeDrawer} open={isOpen}>
-      <Box role="presentation" sx={{ width: 350, padding: 5, height: '100%' }}>
-        <div className={classes.import_container}>
+<Box
+          className="add-feedback"
+          role="presentation"
+          sx={{ width: 400, padding: 3 }}
+        >        <div className={classes.import_container}>
           <div className={classes.import_form_box}>
+
             <h3 className={classes.import_form_header}>
               {t('importProjectData')}
             </h3>
@@ -92,7 +96,7 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
             >
               <div className={classes.form_input_container}>
                 <label className={classes.form_label} htmlFor="name">
-                  {t('projectName ')}
+                  {t('projectName')}
                 </label>
                 <select
                   className={classes.form_input}
@@ -108,7 +112,7 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
               </div>
               <div className={classes.form_input_container}>
                 <label className={classes.form_label} htmlFor="name">
-                  {t('workList ')}
+                  {t('workList')}
                 </label>
                 <input
                   accept=".csv, .xml"
@@ -144,12 +148,10 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
               </div>
 
               <div className={classes.action_buttons_container}>
-                <span className={classes.form_button_1}>
-                  <Button color="error" onClick={closeDrawer}>
+                  <Button className='cancel-btn' onClick={closeDrawer} type="submit">
                     {t('cancel')}
                   </Button>
-                </span>
-                <Button type="submit" variant="contained">
+                <Button className='submit-button' type="submit" variant="contained">
                   {t('upload')}
                 </Button>
               </div>

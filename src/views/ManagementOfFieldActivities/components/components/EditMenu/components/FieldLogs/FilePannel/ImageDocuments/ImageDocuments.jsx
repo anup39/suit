@@ -2,15 +2,48 @@ import './ImageDocuments.scss';
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { changeFieldLogStatus } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getfieldlogs } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
+import { getUserAuthToken } from '../../../../../../../../../redux/user-redux/user.selectors';
 
 const ImageDocuments = () => {
   const { t } = useTranslation();
   const fieldLogs = useSelector(getfieldlogs);
+  const authToken = useSelector(getUserAuthToken);
+  const [rejectionReason, setRejectionReason] = React.useState('');
+
+  const dispatch = useDispatch();
 
   const imageData = fieldLogs.imageTask[0];
+
+  const handelReject = () => {
+    const data = {
+      authToken,
+      taskData: {
+        fieldlogId: imageData?.fieldlogId,
+        taskId: imageData?.taskId,
+        isApproved: false,
+        rejectionNote: '',
+      },
+    };
+
+    dispatch(changeFieldLogStatus(data));
+  };
+  const handelAccept = () => {
+    const data = {
+      authToken,
+      taskData: {
+        fieldlogId: imageData?.fieldlogId,
+        taskId: imageData?.taskId,
+        isApproved: true,
+        rejectionNote: '',
+      },
+    };
+
+    dispatch(changeFieldLogStatus(data));
+  };
 
   return (
     <div>
@@ -68,38 +101,54 @@ const ImageDocuments = () => {
           {' '}
           <p>Task Notification</p>
           <div>
-            {!imageData.taskNotification ? '-' : imageData.taskNotification}
+            {!imageData?.taskNotification ? '-' : imageData?.taskNotification}
           </div>
         </span>
 
         <span className="field-log-data-barcode-value">
           {' '}
           <p>Barcode Value</p>
-          <div>{!imageData.barCodeValues ? '-' : imageData.barCodeValues}</div>
+          <div>
+            {!imageData?.barCodeValues ? '-' : imageData?.barCodeValues}
+          </div>
         </span>
 
         <span className="field-log-data-lat">
           {' '}
           <p>Latitude</p>
-          <div>{!imageData.lat ? '-' : imageData.lat}</div>
+          <div>{!imageData?.lat ? '-' : imageData?.lat}</div>
         </span>
 
         <span className="field-log-data-long">
           {' '}
           <p>Longitude</p>
-          <div>{!imageData.lon ? '-' : imageData.lon}</div>
+          <div>{!imageData?.lon ? '-' : imageData?.lon}</div>
         </span>
 
         <span className="field-log-data-img-address">
           {' '}
           <p>Image Address</p>
-          <div>{!imageData.imageAddress ? '-' : imageData.imageAddress}</div>
+          <div>{!imageData?.imageAddress ? '-' : imageData?.imageAddress}</div>
+        </span>
+
+        <span className="field-log-data-rejection-note">
+          {' '}
+          <p>Reason For Rejection</p>
+          <textarea
+            cols={5}
+            onChange={(e) => setRejectionReason(e.target.value)}
+            value={rejectionReason}
+          />
         </span>
       </div>
 
       <div className="change-request-buttons-div">
-        <span className="change-request-button-reject">{t('reject')}</span>
-        <span className="change-request-button-accept">{t('accept')}</span>
+        <span className="change-request-button-reject" onClick={handelReject}>
+          {t('reject')}
+        </span>
+        <span className="change-request-button-accept" onClick={handelAccept}>
+          {t('accept')}
+        </span>
       </div>
     </div>
   );

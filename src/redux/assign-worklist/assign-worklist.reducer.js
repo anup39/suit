@@ -64,6 +64,14 @@ const assingWorklistReducer = (state = ASSING_WORK_INITIAL_STATE, action) => {
         assingTaskError: action.payload,
       };
 
+    case ASSIGN_WORK_ACTIVITY_TYPE.RESET_ASSIGN_TASK:
+      return {
+        ...state,
+        assignTaskLoading: false,
+        assingTaskData: '',
+        assingTaskError: '',
+      };
+
     default:
       return state;
   }

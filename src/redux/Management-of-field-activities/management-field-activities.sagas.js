@@ -3,9 +3,12 @@ import { toast } from 'react-toastify';
 
 import {
   ALL_ACTIVITIES,
+  CHANGE_LOG_STATUS,
   GET_FIELD_LOGS_BY_TASK,
 } from '../../services/api/managementOfFieldActivities';
 import {
+  changeFieldLogStatusError,
+  changeFieldLogStatusSuccess,
   getAllActivitiesError,
   getAllActivitiesSuccess,
   getAllfieldlogsError,
@@ -63,6 +66,45 @@ export function* onGetFieldLogsStart() {
     onGetFieldLogs
   );
 }
+
+export function* changeFieldLogData({ payload }) {
+  try {
+    const fieldLogs = yield call(CHANGE_LOG_STATUS, payload);
+    yield put(changeFieldLogStatusSuccess(fieldLogs));
+    yield toast.success('Status updated successfully!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  } catch (err) {
+    yield put(changeFieldLogStatusError(err.response.data));
+    yield toast.error('Failed To Update Status !', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+}
+
+export function* onChangeFieldLogData() {
+  yield takeLatest(
+    MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.CHANGE_FIELD_LOG_STATUS,
+    changeFieldLogData
+  );
+}
+
 export function* managementOfFieldActivitiesSagas() {
-  yield all([call(onGetAllActivities), call(onGetFieldLogsStart)]);
+  yield all([
+    call(onGetAllActivities),
+    call(onGetFieldLogsStart),
+    call(onChangeFieldLogData),
+  ]);
 }

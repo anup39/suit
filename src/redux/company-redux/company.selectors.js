@@ -34,3 +34,7 @@ export const getDeleteCompanyLoading = (state) => {
 export const getComapnyUsersList = (state) => {
   return state.company.allCompanyUsersData;
 };
+
+export const getComapnyDeletedUsersSuccess = (state) => {
+  return state.company.companyDeleteUsersData;
+};

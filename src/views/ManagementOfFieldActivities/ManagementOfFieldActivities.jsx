@@ -26,6 +26,9 @@ import MapView from './components/components/MapView/MapView';
 import MobileDataRow from './mobile.data.row';
 
 const ManagementOfFieldActivities = () => {
+  const [searchText, setSearchText] = React.useState('');
+  const [filteredData, setfilteredData] = React.useState('');
+
   const isAuthenticated = useSelector(getIfAuthenticated);
   const authToken = useSelector(getUserAuthToken);
   const allActivities = useSelector(getActivitiesDetails);
@@ -43,6 +46,15 @@ const ManagementOfFieldActivities = () => {
 
   const showListView = () => {
     setIsMapView(false);
+  };
+
+  const handleSearchTask = (e) => {
+    setSearchText(e.target.value);
+
+    const filteredList = allActivities.filter((item) =>
+      item?.taskName.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setfilteredData(filteredList);
   };
 
   React.useEffect(() => {
@@ -65,16 +77,18 @@ const ManagementOfFieldActivities = () => {
                   <SearchIcon className="field-search-icon" />
                   <input
                     className="field-input-mgmt"
+                    onChange={(e) => handleSearchTask(e)}
                     placeholder={t('searchTask')}
+                    value={searchText}
                   />
                 </div>
-                <div className="mgmt-field-container">
+                {/* <div className="mgmt-field-container">
                   <SearchIcon className="field-search-icon" />
                   <input
                     className="field-input-mgmt"
                     placeholder={t('searchCompany')}
                   />
-                </div>
+                </div> */}
               </>
             )}
             {!isMapView ? (
@@ -129,22 +143,22 @@ const ManagementOfFieldActivities = () => {
                 ) : (
                   <Pagination
                     componentNo={9}
-                    itemData={allActivities}
+                    itemData={searchText ? filteredData : allActivities}
                     itemsPerPage={10}
                   />
                 )}
               </>
               <div className="mgmt-field-update-mobile">
-        <MobileDataRow />
-        <MobileDataRow />
-        <MobileDataRow />
-        <MobileDataRow />
-        <MobileDataRow />
-        <MobileDataRow />
-        <MobileDataRow />
-      </div>
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+              </div>
               {/* eslint-enable */}
-            </> 
+            </>
           ) : (
             <MapView />
           )}

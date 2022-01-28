@@ -32,6 +32,9 @@ import schema from './work.list.schema';
 
 const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
   const dispatch = useDispatch();
+
+  const [startDate, setStartDate] = React.useState('');
+
   const currentTaskData = useSelector(getCurrentTaskData);
   const authToken = useSelector(getUserAuthToken);
   const projectList = useSelector(getAllProjects);
@@ -282,7 +285,13 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
             <label>
               {t('startDate')} <sup>*</sup>{' '}
             </label>
-            <input name="start" type="date" {...register('start')} />
+            <input
+              name="start"
+              type="date"
+              {...register('start')}
+              min={new Date().toISOString().split('T')[0]}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
             <span className="worklistform-error-text">
               {errors.start?.message}
             </span>
@@ -292,7 +301,14 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
             <label>
               {t('endDate')} <sup>*</sup>{' '}
             </label>
-            <input name="end" type="date" {...register('end')} />
+            <input
+              name="end"
+              type="date"
+              {...register('end')}
+              min={
+                !startDate ? new Date().toISOString().split('T')[0] : startDate
+              }
+            />
             <span className="worklistform-error-text">
               {errors.end?.message}
             </span>

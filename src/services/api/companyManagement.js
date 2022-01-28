@@ -88,7 +88,7 @@ export const COMPANY_ADD_USERS = async (data) => {
 
 export const COMPANY_DELETE_USERS = async (data) => {
   const newToken = await REFERSH_TOKEN(data.payload.authToken);
-  const userListResponse = await axios(`${COMPANY_MANAGEMENT.deleteCompanyUsers}${data.payload.userId}${data.payload.companyId}`,{
+  const userListResponse = await axios(`${COMPANY_MANAGEMENT.deleteCompanyUsers}${data.payload.user_id}/${data.payload.company_id}`,{
     headers: {
       Authorization: `Bearer ${newToken}`,
     },

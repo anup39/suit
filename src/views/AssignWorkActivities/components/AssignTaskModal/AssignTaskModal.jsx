@@ -7,18 +7,31 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import EditModalHeaders from '../../../../components/shared/FieldUpdates/components/EditMenu/components/EditModalHeaders/EditModalHeaders';
-import { getSelectedTaskList } from '../../../../redux/assign-worklist/assign-work-list.selector';
-import { assingTask } from '../../../../redux/assign-worklist/assign-worklist.action';
+import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner';
+import {
+  getIsAssignTaskLoading,
+  getIsAssignTaskSuccess,
+  getSelectedTaskList,
+} from '../../../../redux/assign-worklist/assign-work-list.selector';
+import {
+  assingTask,
+  resetAssignTask,
+} from '../../../../redux/assign-worklist/assign-worklist.action';
 import { getAllCompany } from '../../../../redux/company-redux/company.actions';
 import { getCompaniesList } from '../../../../redux/company-redux/company.selectors';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
+import { getWorkList } from '../../../../redux/worklist-management-redux/worklist.actions';
 
 const AssignTaskModal = ({ handleCancel }) => {
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
   const companiesList = useSelector(getCompaniesList);
   const selectedTask = useSelector(getSelectedTaskList);
+  const assingTaskSuccess = useSelector(getIsAssignTaskSuccess);
+  const isAssignTaskLoading = useSelector(getIsAssignTaskLoading);
+
   const [companyId, setCompanyId] = React.useState('');
+
   const { t } = useTranslation();
 
   const handleAssignTask = () => {
@@ -43,13 +56,19 @@ const AssignTaskModal = ({ handleCancel }) => {
   };
 
   React.useEffect(() => {
-    dispatch(getAllCompany(authToken));
-  }, []);
+    if (!companiesList) {
+      dispatch(getAllCompany(authToken));
+    } else if (assingTaskSuccess) {
+      handleCancel();
+      dispatch(getWorkList(authToken));
+      dispatch(resetAssignTask());
+    }
+  }, [isAssignTaskLoading]);
 
   return (
     <div className="assign-task-modal-base-div">
+      <GlobalSpinner isOpen={isAssignTaskLoading} />
       <EditModalHeaders headerName="Assign Task" />
-      {console.log(companiesList)}
       <div className="assign-form-base-div">
         <div>
           <label>{t('company')}</label>

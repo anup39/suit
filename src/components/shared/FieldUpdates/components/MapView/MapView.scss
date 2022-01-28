@@ -1,9 +1,10 @@
-body > iframe {
+body>iframe {
   display: none;
 }
+
 .map-view-base-div {
   width: 100%;
-  height: calc(100vh - 327px);
+  height: calc(100vh - 328px);
   display: flex;
   flex-direction: row;
   overflow: hidden;
@@ -33,13 +34,13 @@ body > iframe {
   width: 30%;
   display: flex;
   flex-direction: column;
-  border-left: 1px solid black;
-  padding: 10px;
-  background: #0160e0;
-  // label,
-  // p {
-  //   color: white;
-  // }
+  border-left: 1px solid #d4deea;
+  padding: 15px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    overflow: initial;
+  }
 }
 
 .map-view-assign-project-header {
@@ -104,6 +105,8 @@ body > iframe {
     color: #8094AE;
     font-size: 14px;
     margin: 0 0 6px 0;
+    position: relative;
+
   }
 
   h6 {

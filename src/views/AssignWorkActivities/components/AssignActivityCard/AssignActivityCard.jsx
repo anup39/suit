@@ -95,11 +95,15 @@ const AssignActivityCard = ({
         {projectName}
       </span>
 
-      <span className="assign-work-activities-card-company">{companyName}</span>
+      <span className="assign-work-activities-card-company">
+        {!companyName ? '-' : companyName}
+      </span>
       <span className="assign-work-activities-card-taskId">{taskId}</span>
-      <span className="assign-work-activities-card-task-name">{taskName}</span>
+      <span className="assign-work-activities-card-task-name">
+        {!taskName ? '-' : taskName}
+      </span>
       <span className="assign-work-activities-card-task-description">
-        {taskDescription}
+        {!taskDescription ? '-' : taskDescription}
       </span>
       <span className="assign-work-activities-card-isMilestone">
         {isMilestone === 0 ? 'Yes' : 'No'}

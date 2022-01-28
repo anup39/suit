@@ -8,7 +8,7 @@ import ControlActivityFields from './components/ControlActivityFields/ControlAct
 const ControlActivityDrawer = ({ handleClose }) => {
   return (
     <div className="control-activity-base-div">
-      <h5>Control Activity</h5>
+      <h2>Control Activity</h2>
 
       <form className="form-base-div">
         <label>Control Activity Type</label>

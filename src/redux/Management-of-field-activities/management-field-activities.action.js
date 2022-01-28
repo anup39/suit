@@ -34,3 +34,23 @@ export const getAllfieldlogsError = (data) => ({
   type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.GET_FIELD_LOGS_BY_TASK_ERROR,
   payload: data,
 });
+
+export const changeFieldLogStatus = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.CHANGE_FIELD_LOG_STATUS,
+  payload: data,
+});
+
+export const changeFieldLogStatusSuccess = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.CHANGE_FIELD_LOG_STATUS_SUCCESS,
+  payload: data,
+});
+
+export const changeFieldLogStatusError = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.CHANGE_FIELD_LOG_STATUS_ERROR,
+  payload: data,
+});
+
+export const resetFieldLogData = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.RESET_CHANGE_FIELD_LOG_STATUS,
+  payload: data,
+});

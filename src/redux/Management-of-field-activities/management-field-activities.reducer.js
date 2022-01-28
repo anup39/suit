@@ -8,6 +8,10 @@ const initialState = {
   fieldlogsData: '',
   fieldlogsError: false,
   fieldlogsisloading: false,
+
+  changeFieldlogsStatus: '',
+  changeFieldlogsStatusError: '',
+  isChangeFieldlogsStatusLoading: false,
 };
 
 // eslint-disable-next-line
@@ -63,6 +67,38 @@ const magagementOfFieldActivitiesReducer = (state = initialState, action) => {
         fieldlogsData: '',
         fieldlogsError: action.payload,
         fieldlogsisloading: false,
+      };
+
+    case MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.CHANGE_FIELD_LOG_STATUS:
+      return {
+        ...state,
+        changeFieldlogsStatus: '',
+        changeFieldlogsStatusError: '',
+        isChangeFieldlogsStatusLoading: true,
+      };
+
+    case MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.CHANGE_FIELD_LOG_STATUS_ERROR:
+      return {
+        ...state,
+        changeFieldlogsStatus: '',
+        changeFieldlogsStatusError: action.payload,
+        isChangeFieldlogsStatusLoading: false,
+      };
+
+    case MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.CHANGE_FIELD_LOG_STATUS_SUCCESS:
+      return {
+        ...state,
+        changeFieldlogsStatus: action.payload,
+        changeFieldlogsStatusError: '',
+        isChangeFieldlogsStatusLoading: false,
+      };
+
+    case MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.RESET_CHANGE_FIELD_LOG_STATUS:
+      return {
+        ...state,
+        changeFieldlogsStatus: '',
+        changeFieldlogsStatusError: '',
+        isChangeFieldlogsStatusLoading: false,
       };
     default:
       return state;
