@@ -45,6 +45,8 @@ import MobileDataRow from './components/mobile.data.row';
 const AssignWorkActivities = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [searchProjectItem, setSearchProjectItem] = React.useState('');
+  const [searchTaskItem, setSearchTaskItem] = React.useState('');
   const dispatch = useDispatch();
   const [checkBox, setCheckbox] = React.useState(false);
   const { t } = useTranslation();
@@ -57,6 +59,32 @@ const AssignWorkActivities = () => {
   const isAuthenticated = useSelector(getIfAuthenticated);
   const isDeleteWorklistLoading = useSelector(getIsDeleteWorkListLoading);
   const deleteWorklistSuccess = useSelector(getDeleteWorkListSuccess);
+
+  const filterLists = (list) => {
+    const projectItem = searchProjectItem.toLowerCase();
+    const taskItem = searchTaskItem.toLowerCase();
+    const filteredList = list.filter((item) => {
+      let listFilter = [];
+      if (projectItem && taskItem) {
+        listFilter =
+          item?.projectsName.toLowerCase().includes(projectItem) &&
+          item?.taskName.toLowerCase().includes(taskItem);
+      } else if (projectItem) {
+        listFilter = item?.projectsName.toLowerCase().includes(projectItem);
+      } else if (taskItem) {
+        listFilter = item?.taskName.toLowerCase().includes(taskItem);
+      }
+      return listFilter;
+    });
+    return filteredList;
+  };
+  const projectSearchItem = (e) => {
+    setSearchProjectItem(e.target.value);
+  };
+
+  const taskSearchItem = (e) => {
+    setSearchTaskItem(e.target.value);
+  };
 
   const handelCloseDrawer = () => {
     setIsDrawerOpen(false);
@@ -130,11 +158,14 @@ const AssignWorkActivities = () => {
           <div className="assign-work-activity-search-div">
             <div className="assign-work-activity-container">
               <SearchIcon className="assign-work-activity-search-icon" />
-              <input placeholder={t('projectName')} />
+              <input
+                onChange={projectSearchItem}
+                placeholder={t('projectName')}
+              />
             </div>
             <div className="assign-work-activity-container">
               <SearchIcon className="assign-work-activity-search-icon" />
-              <input placeholder={t('taskName')} />
+              <input onChange={taskSearchItem} placeholder={t('taskName')} />
             </div>
             {selectedTasks.length !== 0 && (
               <button
@@ -188,7 +219,7 @@ const AssignWorkActivities = () => {
             ) : workListData && workListData.length !== 0 ? (
               <Pagination
                 componentNo={2}
-                itemData={workListData}
+                itemData={filterLists(workListData)}
                 itemsPerPage={7}
               />
             ) : (
