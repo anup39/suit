@@ -28,7 +28,7 @@ const AssignProjectModal = ({ handleClose }) => {
   const { t } = useTranslation();
 
   const handleSubmit = () => {
-    if (!selectedCompany && !selectedProject) {
+    if (!selectedCompany || !selectedProject) {
       toast.warn('Please Select Both Fields!', {
         position: 'top-right',
         autoClose: 2000,
@@ -46,6 +46,9 @@ const AssignProjectModal = ({ handleClose }) => {
       };
 
       dispatch(assignProject(data));
+      setTimeout(() => {
+        handleClose()
+      }, 2000);
     }
   };
 

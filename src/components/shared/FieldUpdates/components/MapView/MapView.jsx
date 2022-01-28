@@ -75,7 +75,6 @@ const MapView = ({ page }) => {
   const filteredTaskByTaskId =
     taskDetailsByProject &&
     taskDetailsByProject?.find((task) => task.taskId === selectedTaskId);
-
   const getStatusIcons = (status) => {
     switch (status) {
       case 'Not assigned':
@@ -142,9 +141,7 @@ const MapView = ({ page }) => {
   };
   // eslint-disable-next-line no-console
   console.log(
-    `http://ecm.digital-twinsuite.com/VistaEcmWeb.aspx?LogonType=3&UserName=Administrator&Password=Asuite&Ap
-  pName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~
-  TASK_NAME=${filteredTaskByTaskId?.taskName} PROJ_NAME=${filteredTaskByTaskId?.projectsName}`,
+    `http://ecm.digital-twinsuite.com/VistaEcmWeb.aspx?LogonType=3&UserName=Administrator&Password=Asuite&AppName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~TASK_NAME=${filteredTaskByTaskId?.taskName}^~PROJ_NAME=${filteredTaskByTaskId?.projectsName}`,
     'url'
   );
   return (
@@ -186,9 +183,9 @@ const MapView = ({ page }) => {
         </div> */}
         <div className="map-view-document-preview">
           <iframe
+            key={filteredTaskByTaskId?.taskName}
             height="100%"
-            src={`http://ecm.digital-twinsuite.com/VistaEcmWeb.aspx?LogonType=3&UserName=Administrator&Password=Asuite&Ap
-            pName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~TASK_NAME#[${filteredTaskByTaskId?.taskName ?? ''}]^~PROJ_NAME#[${filteredTaskByTaskId?.projectsName ?? ''}]`}
+            src={`http://ecm.digital-twinsuite.com/VistaEcmWeb.aspx?LogonType=3&UserName=Administrator&Password=Asuite&AppName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~TASK_NAME#[${filteredTaskByTaskId?.taskName}]^~PROJ_NAME=[${filteredTaskByTaskId?.projectsName}]`}
             title="Pdf Title"
             width="100%"
           />
