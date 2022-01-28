@@ -46,13 +46,14 @@ const ProjectPannel = () => {
       <div className="project-pannel-base-div">
         {value === 4 && (
           <div>
-            <span
-              className="import-project-data-add-button"
+            <button
+            className="import-project-data-add-button"
               onClick={handleOpen}
+              type="button"
             >
               <AddIcon />
               {t('importData')}{' '}
-            </span>
+            </button>
           </div>
         )}
         <div className="project-bread-crumbs">

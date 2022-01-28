@@ -6,6 +6,7 @@ const ControlActivityDrawer = () => {
   return (
     <div className="control-activity-base-div">
       <h2>Control Activity</h2>
+      
 
       <form className="form-base-div">
         <label>Control Activity Type</label>
