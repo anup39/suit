@@ -6,6 +6,10 @@ export const getProjectData = (state) => {
   return state.projectManagement.getCurrentProductData;
 };
 
+export const isGetProjectLoading = (state) => {
+  return state.projectManagement.isProjectListLoading;
+};
+
 export const getAssignProjectLoading = (state) => {
   return state.projectManagement.isAssingProjectLoading;
 };

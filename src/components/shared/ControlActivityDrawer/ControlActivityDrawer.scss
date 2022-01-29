@@ -4,13 +4,12 @@
   height: 100%;
 
   @media (max-width: 768px) {
-
     width: 100vw !important;
   }
 
   h2 {
     font-size: 18px;
-    color: #364A63;
+    color: #364a63;
     font-weight: 500;
     margin: 0 0 30px 0;
   }
@@ -19,6 +18,7 @@
 .form-base-div {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
 
   label {
     color: #526484;
@@ -28,14 +28,13 @@
     display: block;
   }
 
-
   input,
   select {
-    border: 1px solid #D4DEEA;
+    border: 1px solid #d4deea;
     border-radius: 3px;
     width: 100%;
     padding: 8px;
-    color: #364A63;
+    color: #364a63;
     margin-bottom: 15px;
     outline: none;
     background-color: #f6f6f6;
@@ -58,17 +57,25 @@
   font-size: 14px;
   cursor: pointer;
   background: transparent;
-  color: #8094AE;
+  color: #8094ae;
 }
 
 .control-activity-submit-button {
   padding: 9px 18px;
   border-radius: 5px;
-  background: #E78201;
+  background: #e78201;
   color: white;
   outline: none;
   border: none;
   margin-left: 10px;
   font-size: 14px;
   cursor: pointer;
+}
+
+.add-activity-icon {
+  float: right;
+  margin-top: -50px;
+  cursor: pointer;
+  font-size: 30px;
+  color: #4e4e4e;
 }

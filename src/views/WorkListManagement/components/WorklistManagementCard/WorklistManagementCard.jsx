@@ -5,11 +5,13 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Drawer from '@mui/material/Drawer';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
+import AreYouSure from '../../../../components/shared/AreYouSure/AreYouSure';
 import { getAllProjects } from '../../../../redux/project-management-redux/project.selector';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import {
@@ -44,6 +46,8 @@ const WorkListManagementCard = ({
   const [isEditStatusDrawerOpen, setIsEditStatusDrawerOpen] =
     React.useState(false);
 
+  const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
+
   const authToken = useSelector(getUserAuthToken);
   const selectedWorkList = useSelector(getSelectedWorkList);
   const isAllSelected = useSelector(getIfAllWorkListSelected);
@@ -66,16 +70,6 @@ const WorkListManagementCard = ({
     setIsEditDrawerOpen(true);
   };
 
-  const hadelDeleteTask = () => {
-    const data = {
-      authToken,
-      taskId: workId,
-    };
-    dispatch(deleteTaskByID(data));
-
-    handelMenuClose();
-  };
-
   const handelCheckbox = (e) => {
     setCheckBox(e.target.checked);
 
@@ -96,6 +90,21 @@ const WorkListManagementCard = ({
   };
 
   const isMilestoneName = isMilestone !== 0 ? 'No' : 'Yes';
+
+  const handleDeleteModalOpen = () => {
+    handelMenuClose();
+    setDeleteModalOpen(true);
+  };
+  const handleDeleteModalClose = () => setDeleteModalOpen(false);
+
+  const hadelDeleteTask = () => {
+    const data = {
+      authToken,
+      taskId: workId,
+    };
+    dispatch(deleteTaskByID(data));
+    handleDeleteModalClose();
+  };
 
   React.useEffect(() => {
     if (projectList.length !== 0) {
@@ -155,6 +164,14 @@ const WorkListManagementCard = ({
         />
       </Drawer>
 
+      <Modal onClose={handleDeleteModalClose} open={deleteModalOpen}>
+        <AreYouSure
+          handleClose={handleDeleteModalClose}
+          handleDelete={hadelDeleteTask}
+          headline="Are you sure to Delete the Worklist?"
+        />
+      </Modal>
+
       <div className="worklist-card-table-body">
         <span className="worklist-card-management-check-input">
           <input checked={checkBox} onChange={handelCheckbox} type="checkbox" />
@@ -190,7 +207,7 @@ const WorkListManagementCard = ({
             <MenuItem itmeId={workId} onClick={handleEditStatusDrawerOpen}>
               {t('changeTaskStatus')}
             </MenuItem>
-            <MenuItem ieId={workId} onClick={() => hadelDeleteTask()}>
+            <MenuItem itmeId={workId} onClick={() => handleDeleteModalOpen()}>
               {t('delete')}
             </MenuItem>
           </Menu>

@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import {
   ALL_ACTIVITIES,
   CHANGE_LOG_STATUS,
+  GET_ALL_CONTROL_ACTIVITIES,
+  GET_CONTROL_ACTIVITIES_PARAMS_BY_ID,
   GET_FIELD_LOGS_BY_TASK,
 } from '../../services/api/managementOfFieldActivities';
 import {
@@ -11,8 +13,12 @@ import {
   changeFieldLogStatusSuccess,
   getAllActivitiesError,
   getAllActivitiesSuccess,
+  getAllControlActivityError,
+  getAllControlActivitySuccess,
   getAllfieldlogsError,
   getAllfieldlogsSuccess,
+  getControlActivityParamError,
+  getControlActivityParamSuccess,
 } from './management-field-activities.action';
 import MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES from './management-field-activities.action.types';
 
@@ -101,10 +107,65 @@ export function* onChangeFieldLogData() {
   );
 }
 
+export function* getAllControlActivity({ payload }) {
+  try {
+    const fieldLogs = yield call(GET_ALL_CONTROL_ACTIVITIES, payload);
+    yield put(getAllControlActivitySuccess(fieldLogs));
+  } catch (err) {
+    yield put(getAllControlActivityError(err.response.data));
+    yield toast.error('Failed to get All Control Activity!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+}
+
+export function* onGetAllControlActivity() {
+  yield takeLatest(
+    MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.GET_ALL_CONTROL_ACTIVITY,
+    getAllControlActivity
+  );
+}
+
+export function* getAllControlActivityParams({ payload }) {
+  try {
+    const controlActivityParams = yield call(
+      GET_CONTROL_ACTIVITIES_PARAMS_BY_ID,
+      payload
+    );
+    yield put(getControlActivityParamSuccess(controlActivityParams));
+  } catch (err) {
+    yield put(getControlActivityParamError(err.response.data));
+    yield toast.error('Failed to get Control Activity Params!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+}
+
+export function* onGetAllControlActivityParams() {
+  yield takeLatest(
+    MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.GET_CONTROL_ACTIVITY_PARAMS,
+    getAllControlActivityParams
+  );
+}
+
 export function* managementOfFieldActivitiesSagas() {
   yield all([
     call(onGetAllActivities),
     call(onGetFieldLogsStart),
     call(onChangeFieldLogData),
+    call(onGetAllControlActivity),
+    call(onGetAllControlActivityParams),
   ]);
 }

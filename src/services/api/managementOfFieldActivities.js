@@ -56,3 +56,37 @@ export const CHANGE_LOG_STATUS = async (payloadData) => {
   );
   return allActivities.data;
 };
+
+export const GET_ALL_CONTROL_ACTIVITIES = async (data) => {
+  const { authToken } = data;
+
+  const newToken = await REFERSH_TOKEN(authToken);
+
+  const controlActivityType = await axios(
+    MANAGEMENT_OF_FIELD_ACTIVITIES.getAllControlActivityType,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${newToken}`,
+      },
+    }
+  );
+  return controlActivityType.data;
+};
+
+export const GET_CONTROL_ACTIVITIES_PARAMS_BY_ID = async (data) => {
+  const { authToken, typeId } = data;
+
+  const newToken = await REFERSH_TOKEN(authToken);
+
+  const controlActivityParam = await axios(
+    `${MANAGEMENT_OF_FIELD_ACTIVITIES.getControlActivityParams}/${typeId}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${newToken}`,
+      },
+    }
+  );
+  return controlActivityParam.data;
+};

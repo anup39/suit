@@ -31,7 +31,6 @@ const EmailNotVerified = () => {
 
         try {
           const urlResponse = await axios.get(url);
-          console.log(urlResponse);
           if (urlResponse.data.result === 'invalid user') {
             toast.error('User Not Found!', {
               position: 'top-center',

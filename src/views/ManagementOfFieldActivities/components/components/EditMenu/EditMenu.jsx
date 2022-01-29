@@ -65,7 +65,10 @@ const EditMenu = ({ taskId, handleCancel }) => {
   return (
     <>
       <Drawer anchor="right" onClose={handleDrawerClose} open={isDrawerOpen}>
-        <ControlActivityDrawer handleClose={handleDrawerClose} />
+        <ControlActivityDrawer
+          handleClose={handleDrawerClose}
+          taskId={taskId}
+        />
       </Drawer>
 
       <Modal onClose={handleClose} open={open}>
@@ -79,19 +82,19 @@ const EditMenu = ({ taskId, handleCancel }) => {
         <span>
           <p>{t('fieldLogs')}</p>
           <div className="edit-div " id={0} onClick={handleOpen}>
-            Task Name Here
+            Notes/Image
           </div>
         </span>
         <span>
           <p>{t('activityreport')}</p>
           <div className="edit-div" id={1} onClick={handleOpen}>
-            Activity Report 1
+            Activity Report
           </div>
         </span>
         <span>
           <p>{t('changerequest')}</p>
           <div className="edit-div" id={2} onClick={handleOpen}>
-            Task 1 Change
+            Task Change
           </div>
         </span>
 
@@ -128,7 +131,9 @@ const EditMenu = ({ taskId, handleCancel }) => {
           <span className="cancel-button" onClick={() => handleCancel()}>
             {t('cancel')}
           </span>
-          <span className="update-button">{t('update')}</span>
+          <span className="update-button" onClick={() => handleCancel()}>
+            {t('update')}
+          </span>
         </span>
       </div>
     </>

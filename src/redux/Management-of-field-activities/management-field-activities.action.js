@@ -54,3 +54,43 @@ export const resetFieldLogData = (data) => ({
   type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.RESET_CHANGE_FIELD_LOG_STATUS,
   payload: data,
 });
+
+export const getAllControlActivity = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.GET_ALL_CONTROL_ACTIVITY,
+  payload: data,
+});
+
+export const getAllControlActivitySuccess = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.GET_ALL_CONTROL_ACTIVITY_SUCCESS,
+  payload: data,
+});
+
+export const getAllControlActivityError = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.GET_ALL_CONTROL_ACTIVITY_ERROR,
+  payload: data,
+});
+
+export const getControlActivityParam = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.GET_CONTROL_ACTIVITY_PARAMS,
+  payload: data,
+});
+
+export const getControlActivityParamSuccess = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.GET_CONTROL_ACTIVITY_PARAMS_SUCCESS,
+  payload: data,
+});
+
+export const getControlActivityParamError = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.GET_CONTROL_ACTIVITY_PARAMS_ERROR,
+  payload: data,
+});
+
+export const addControlActivityData = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.HANDLE_CONTROL_ACTIVITY_DATA_ADD,
+  payload: data,
+});
+
+export const editControlActivityData = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.HANDLE_CONTROL_ACTIVITY_DATA_EDIT,
+  payload: data,
+});

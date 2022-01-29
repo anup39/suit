@@ -1,6 +1,7 @@
 import './User.Roles.cards.scss';
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { Modal } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -22,6 +23,7 @@ import {
   // getDeleteUserData,
   // getDeleteUserError,
 } from '../../../redux/User-Role/User-Role.selectors';
+import AreYouSure from '../AreYouSure/AreYouSure';
 import UserRolesForms from '../UserRolesForms/UserRolesForms';
 import Status from './styles/User.Roles.Card';
 
@@ -41,6 +43,8 @@ const UserRoleCard = ({
   const [checkBox, setCheckBox] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentStatus, setCurrentStatus] = useState(status);
+  const [deleteModal, setDeleteModal] = useState(false);
+
   // const [isUserDeleted, setIsUserDeleted] = useState(false);
   const authToken = useSelector(getUserAuthToken);
   const selectedUsers = useSelector(getSelectedUsers);
@@ -86,15 +90,22 @@ const UserRoleCard = ({
     seteEditUser(false);
   };
 
-  const handleDeleteUser = () => {
+  const handleDeleteModalOpen = () => {
     handleClose();
+    setDeleteModal(true);
+  };
+  const handleDeleteModalClose = () => {
+    setDeleteModal(false);
+  };
 
+  const handleDeleteUser = () => {
     const data = {
       authToken,
       userId,
     };
     setCurrentStatus(0);
     dispatch(deleteUser(data));
+    handleDeleteModalClose();
   };
 
   React.useEffect(() => {
@@ -139,6 +150,14 @@ const UserRoleCard = ({
           />
         )}
       </Drawer>
+
+      <Modal onClose={handleDeleteModalClose} open={deleteModal}>
+        <AreYouSure
+          handleClose={handleDeleteModalClose}
+          handleDelete={handleDeleteUser}
+          headline="Are you sure you want to Delete the User?"
+        />
+      </Modal>
       <div className="user-role-base">
         <span className="user-roles-card-check-input">
           <input
@@ -176,7 +195,7 @@ const UserRoleCard = ({
             </MenuItem>
 
             <MenuItem onClick={handleEditDrawerOpen}>{t('edit')} </MenuItem>
-            <MenuItem onClick={handleDeleteUser}>{t('delete')}</MenuItem>
+            <MenuItem onClick={handleDeleteModalOpen}>{t('delete')}</MenuItem>
           </Menu>
         </span>
       </div>

@@ -3,11 +3,13 @@ import './AssignActivityCard.scss';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
+import AreYouSure from '../../../../components/shared/AreYouSure/AreYouSure';
 import {
   getIsSelectAll,
   getSelectedTaskList,
@@ -31,6 +33,7 @@ const AssignActivityCard = ({
 }) => {
   const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
   const [checkBox, setCheckBox] = React.useState(false);
+  const [modalOpen, setModalOpen] = React.useState(false);
   const isAllSelected = useSelector(getIsSelectAll);
   const selectedTaskList = useSelector(getSelectedTaskList);
   const authToken = useSelector(getUserAuthToken);
@@ -56,14 +59,19 @@ const AssignActivityCard = ({
     }
   };
 
-  const handleDelete = () => {
+  const handleModalOpen = () => {
     handleMenuClose();
+    setModalOpen(true);
+  };
+  const handleModalClose = () => setModalOpen(false);
 
+  const handleDelete = () => {
     const dataToSend = {
       authToken,
       taskId,
     };
     dispatch(deleteTaskByID(dataToSend));
+    handleModalClose();
   };
 
   React.useEffect(() => {
@@ -87,48 +95,63 @@ const AssignActivityCard = ({
   }, [isAllSelected]);
 
   return (
-    <div className="assign-work-activity-table-data">
-      <span className="assign-work-activities-card-check-input">
-        <input checked={checkBox} onChange={handelCheckbox} type="checkbox" />
-      </span>
-      <span className="assign-work-activities-card-project-name">
-        {projectName}
-      </span>
-
-      <span className="assign-work-activities-card-company">
-        {!companyName ? '-' : companyName}
-      </span>
-      <span className="assign-work-activities-card-taskId">{taskId}</span>
-      <span className="assign-work-activities-card-task-name">
-        {!taskName ? '-' : taskName}
-      </span>
-      <span className="assign-work-activities-card-task-description">
-        {!taskDescription ? '-' : taskDescription}
-      </span>
-      <span className="assign-work-activities-card-isMilestone">
-        {isMilestone === 0 ? 'Yes' : 'No'}
-      </span>
-      <span className="assign-work-activities-card-type">{type} </span>
-      <span className="assign-work-activities-card-status">{status}</span>
-      <span className="assign-work-activities-card-actions">
-        <MoreHorizIcon
-          className="assign-work-activities-card-menu-icon"
-          onClick={handleMenuClick}
+    <>
+      <Modal
+        aria-describedby="modal-modal-description"
+        aria-labelledby="modal-modal-title"
+        onClose={handleModalClose}
+        open={modalOpen}
+      >
+        <AreYouSure
+          handleClose={handleModalClose}
+          handleDelete={handleDelete}
+          headline="Are you sure to Delete the Worklist?"
         />
-        <Menu
-          anchorEl={menuAnchorEl}
-          id="basic-menu"
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
-          onClose={handleMenuClose}
-          open={open}
-        >
-          {/* <MenuItem onClick={handleMenuClose}>Edit</MenuItem> */}
-          <MenuItem onClick={handleDelete}>{t('delete')}</MenuItem>
-        </Menu>
-      </span>
-    </div>
+      </Modal>
+
+      <div className="assign-work-activity-table-data">
+        <span className="assign-work-activities-card-check-input">
+          <input checked={checkBox} onChange={handelCheckbox} type="checkbox" />
+        </span>
+        <span className="assign-work-activities-card-project-name">
+          {projectName}
+        </span>
+
+        <span className="assign-work-activities-card-company">
+          {!companyName ? '-' : companyName}
+        </span>
+        <span className="assign-work-activities-card-taskId">{taskId}</span>
+        <span className="assign-work-activities-card-task-name">
+          {!taskName ? '-' : taskName}
+        </span>
+        <span className="assign-work-activities-card-task-description">
+          {!taskDescription ? '-' : taskDescription}
+        </span>
+        <span className="assign-work-activities-card-isMilestone">
+          {isMilestone === 0 ? 'Yes' : 'No'}
+        </span>
+        <span className="assign-work-activities-card-type">{type} </span>
+        <span className="assign-work-activities-card-status">{status}</span>
+        <span className="assign-work-activities-card-actions">
+          <MoreHorizIcon
+            className="assign-work-activities-card-menu-icon"
+            onClick={handleMenuClick}
+          />
+          <Menu
+            anchorEl={menuAnchorEl}
+            id="basic-menu"
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+            onClose={handleMenuClose}
+            open={open}
+          >
+            {/* <MenuItem onClick={handleMenuClose}>Edit</MenuItem> */}
+            <MenuItem onClick={handleModalOpen}>{t('delete')}</MenuItem>
+          </Menu>
+        </span>
+      </div>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { Modal } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
@@ -6,6 +7,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
+import AreYouSure from '../../../../components/shared/AreYouSure/AreYouSure';
 import { deleteFeedback } from '../../../../redux/feedback-redux/feedback.actions';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import DataDetails from './datadetails';
@@ -15,11 +17,16 @@ const Datagrid = ({ feedBackDetails }) => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [viewFeedback, setViewFeedback] = React.useState(false);
+  const [modalOpen, setModalOpen] = React.useState(false);
 
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
 
   const open = Boolean(anchorEl);
+
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -31,6 +38,7 @@ const Datagrid = ({ feedBackDetails }) => {
     handleClose();
     setViewFeedback(true);
   };
+
   const handleDeleteFeedback = () => {
     handleClose();
     const data = {
@@ -39,9 +47,23 @@ const Datagrid = ({ feedBackDetails }) => {
     };
 
     dispatch(deleteFeedback(data));
+    handleModalClose();
   };
+
+  const handleDelete = () => {
+    handleClose();
+    handleModalOpen();
+  };
+
   return (
     <div className="table-head-grid">
+      <Modal onClose={handleModalClose} open={modalOpen}>
+        <AreYouSure
+          handleClose={handleModalClose}
+          handleDelete={handleDeleteFeedback}
+          headline="Are you sure to Delete the Feedback?"
+        />
+      </Modal>
       {!viewFeedback ? (
         <>
           {/* <div className="table-check"> 
@@ -75,13 +97,13 @@ const Datagrid = ({ feedBackDetails }) => {
               open={open}
             >
               <MenuItem onClick={handleViewFeedback}>{t('view')}</MenuItem>
-              <MenuItem onClick={handleDeleteFeedback}>{t('delete')}</MenuItem>
+              <MenuItem onClick={handleDelete}>{t('delete')}</MenuItem>
             </Menu>
           </div>
         </>
       ) : (
         <DataDetails
-          deleteFeedback={handleDeleteFeedback}
+          deleteFeedback={handleDelete}
           feedBackDetails={feedBackDetails}
         />
       )}

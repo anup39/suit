@@ -1,6 +1,7 @@
 import './WorkListCards.scss';
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { Modal } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
@@ -8,12 +9,15 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
+import AreYouSure from '../../../../../../components/shared/AreYouSure/AreYouSure';
 import { getUserAuthToken } from '../../../../../../redux/user-redux/user.selectors';
 import { deleteTaskByID } from '../../../../../../redux/worklist-management-redux/worklist.actions';
 import WorkListDetailsCard from '../WorkListDetailsCard/WorkListDetailsCard';
 
 const WorkListCards = ({ taskInfo }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [deleteModal, setDeleteModal] = React.useState(false);
+
   const [view, setView] = React.useState(false);
   const { t } = useTranslation();
 
@@ -37,6 +41,14 @@ const WorkListCards = ({ taskInfo }) => {
     setView(false);
   };
 
+  const handleDeleteModalClose = () => {
+    setDeleteModal(false);
+  };
+  const handleDeleteModalOpen = () => {
+    setDeleteModal(true);
+    handleClose();
+  };
+
   const handleDelete = () => {
     handleClose();
 
@@ -46,9 +58,18 @@ const WorkListCards = ({ taskInfo }) => {
     };
 
     dispatch(deleteTaskByID(data));
+    handleDeleteModalClose();
   };
+
   return (
     <div>
+      <Modal onClose={handleDeleteModalClose} open={deleteModal}>
+        <AreYouSure
+          handleClose={handleDeleteModalClose}
+          handleDelete={handleDelete}
+          headline="Are you sure you want to Delete the Task?"
+        />
+      </Modal>
       {!view ? (
         <div className="work-list-table-body">
           <span className="work-list-card-check-input">
@@ -86,7 +107,7 @@ const WorkListCards = ({ taskInfo }) => {
               open={open}
             >
               <MenuItem onClick={handleView}>{t('view')}</MenuItem>
-              <MenuItem onClick={handleDelete}>{t('delete')}</MenuItem>
+              <MenuItem onClick={handleDeleteModalOpen}>{t('delete')}</MenuItem>
             </Menu>
           </span>
         </div>

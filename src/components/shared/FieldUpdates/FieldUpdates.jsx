@@ -10,8 +10,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProjectData } from '../../../redux/project-management-redux/project.selector';
 import { getUserAuthToken } from '../../../redux/user-redux/user.selectors';
 import { taskByProject } from '../../../redux/worklist-management-redux/worklist.actions';
-import { getTasksByProject } from '../../../redux/worklist-management-redux/worklist.selector';
+import {
+  getIsTaskDataByIdLoading,
+  getTasksByProject,
+} from '../../../redux/worklist-management-redux/worklist.selector';
 import Pagination from '../Pagination/Pagination';
+import GlobalSpinner from '../Spinners/GlobalSpinner';
 import MapView from './components/MapView/MapView';
 
 const FieldUpdates = () => {
@@ -22,6 +26,7 @@ const FieldUpdates = () => {
   const project = useSelector(getProjectData);
   const worklistTasks = useSelector(getTasksByProject);
   const authToken = useSelector(getUserAuthToken);
+  const isGetTaskLoading = useSelector(getIsTaskDataByIdLoading);
 
   const showMapView = () => {
     setIsMapView(true);
@@ -39,6 +44,7 @@ const FieldUpdates = () => {
 
   return (
     <div className="field-update-base-div">
+      <GlobalSpinner isOpen={isGetTaskLoading} />
       <div className="field-update-search-div">
         {!isMapView && (
           <>

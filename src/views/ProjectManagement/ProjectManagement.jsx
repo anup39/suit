@@ -14,8 +14,13 @@ import { useNavigate } from 'react-router-dom';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DataGridBase from '../../components/shared/DatagridBase/DatagridBase';
+import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 import Pagination from '../../components/shared/Pagination/Pagination';
-import { getAllProjects } from '../../redux/project-management-redux/project.selector';
+// import MobileDataRow from './mobile.data.row';
+import {
+  getAllProjects,
+  isGetProjectLoading,
+} from '../../redux/project-management-redux/project.selector';
 import {
   getProjectDetails,
   getProjectList,
@@ -28,7 +33,6 @@ import CreateProjectForm from './components/CreateProjectForm/CreateProjectForm'
 import Dashboard from './components/Dashboard/Dashboard';
 import ProjectManagementTabPannel from './components/ProjectManagementTabPannel/ProjectManagementTabPannel';
 import ProjectPannel from './components/ProjectPannel/ProjectPannel';
-// import MobileDataRow from './mobile.data.row';
 
 const ProjectManagement = () => {
   const dispatch = useDispatch();
@@ -48,6 +52,7 @@ const ProjectManagement = () => {
   const projectList = useSelector(getAllProjects);
   const authToken = useSelector(getUserAuthToken);
   const isAuthenticated = useSelector(getIfAuthenticated);
+  const isProjectLoading = useSelector(isGetProjectLoading);
 
   const navigate = useNavigate();
 
@@ -167,21 +172,25 @@ const ProjectManagement = () => {
                       </span>
                     </div>
                   </div>
+                  {isProjectLoading ? (
+                    <LoadingSpinner />
+                  ) : (
+                    <Pagination
+                      componentNo={0}
+                      handleClose={handelShowProjectPannel}
+                      itemData={serchText ? filteredData : projectList}
+                      itemsPerPage={10}
+                    />
+                  )}
 
-                  <Pagination
-                    componentNo={0}
-                    handleClose={handelShowProjectPannel}
-                    itemData={serchText ? filteredData : projectList}
-                    itemsPerPage={10}
-                  />
-                  { /* <div className="mobile_table_pm-project">
+                  {/* <div className="mobile_table_pm-project">
                     <MobileDataRow />
                     <MobileDataRow />
                     <MobileDataRow />
                     <MobileDataRow />
                     <MobileDataRow />
                     <MobileDataRow />
-                    </div> */ }
+                    </div> */}
                 </DataGridBase>
               </>
             </ProjectManagementTabPannel>

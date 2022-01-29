@@ -7,12 +7,15 @@ import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+// import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import Modal from '@mui/material/Modal';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
+import AreYouSure from '../../../../../components/shared/AreYouSure/AreYouSure';
 import { getAllActivities } from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
 import {
@@ -24,7 +27,6 @@ import {
   getDeleteWorkListSuccess,
   getIsDeleteWorkListLoading,
 } from '../../../../../redux/worklist-management-redux/worklist.selector';
-// import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import EditMenu from '../EditMenu/EditMenu';
 
 const FieldUpdateCard = ({ activityData }) => {
@@ -33,7 +35,7 @@ const FieldUpdateCard = ({ activityData }) => {
   const [editMenu, setEditMenu] = React.useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const [deleteModal, setDeleteModal] = React.useState(false);
   const [taskStatus, setTaskStatus] = React.useState(activityData.taskStatus);
   const authToken = useSelector(getUserAuthToken);
   const isDeleteTaskLoading = useSelector(getIsDeleteWorkListLoading);
@@ -41,6 +43,7 @@ const FieldUpdateCard = ({ activityData }) => {
   const dispatch = useDispatch();
 
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -72,8 +75,14 @@ const FieldUpdateCard = ({ activityData }) => {
     dispatch(changeTaskStatus(dataToSend));
   };
 
-  const handleDeleteTask = () => {
+  const handleDeleteModalOpen = () => {
+    setDeleteModal(true);
     handleClose();
+  };
+  const handleDeleteModalClose = () => setDeleteModal(false);
+
+  const handleDeleteTask = () => {
+    handleDeleteModalClose();
     const data = {
       authToken,
       taskId: activityData?.taskId,
@@ -95,6 +104,14 @@ const FieldUpdateCard = ({ activityData }) => {
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
+      <Modal onClose={handleDeleteModalClose} open={deleteModal}>
+        <AreYouSure
+          handleClose={handleDeleteModalClose}
+          handleDelete={handleDeleteTask}
+          headline="Are you sure to Delete the Task?"
+        />
+      </Modal>
+
       {!editMenu ? (
         <div className="mgmt-field-update-card-base">
           {/* <span className="field-updates-body-checkInput">
@@ -158,7 +175,7 @@ const FieldUpdateCard = ({ activityData }) => {
               open={open}
             >
               <MenuItem onClick={handelViewOrEdit}>{t('viewEdit')}</MenuItem>
-              <MenuItem onClick={handleDeleteTask}>{t('delete')}</MenuItem>
+              <MenuItem onClick={handleDeleteModalOpen}>{t('delete')}</MenuItem>
             </Menu>
           </span>
         </div>

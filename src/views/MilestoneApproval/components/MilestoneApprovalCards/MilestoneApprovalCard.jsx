@@ -9,6 +9,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
+import AreYouSure from '../../../../components/shared/AreYouSure/AreYouSure';
 import MilestoneDetails from '../../../../components/shared/FieldUpdates/components/EditMenu/components/Milestone/Milestone';
 import {
   getIsSelctAll,
@@ -37,6 +38,7 @@ const MilestoneApprovalCard = ({
   const [modalOpen, setModalOpen] = React.useState(false);
   const [milestoneView, setMilestoneView] = React.useState(false);
   const [checkbox, setCheckBox] = React.useState(false);
+  const [deleteModal, setDeleteModal] = React.useState(false);
   const authToken = useSelector(getUserAuthToken);
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
@@ -67,6 +69,11 @@ const MilestoneApprovalCard = ({
     setModalOpen(false);
     setMilestoneView(false);
   };
+  const handleDeleteModalOpen = () => {
+    setDeleteModal(true);
+    handleClose();
+  };
+  const handleDeleteModalClose = () => setDeleteModal(false);
 
   const handelApprove = () => {
     handleClose();
@@ -79,13 +86,13 @@ const MilestoneApprovalCard = ({
     handleClose();
   };
 
-  const handelDelete = () => {
+  const handelDeleteMilestone = () => {
     const data = { id: projectDocumentsId, authToken };
     dispatch(deleteMilestoneById(data));
-    handleClose();
     setTimeout(() => {
       dispatch(getAllMilestones(authToken));
     }, 2000);
+    handleDeleteModalClose();
   };
 
   React.useEffect(() => {
@@ -125,6 +132,15 @@ const MilestoneApprovalCard = ({
           />
         )}
       </Modal>
+
+      <Modal onClose={handleDeleteModalClose} open={deleteModal}>
+        <AreYouSure
+          handleClose={handleDeleteModalClose}
+          handleDelete={handelDeleteMilestone}
+          headline="Are you sure to Delete the Milestone?"
+        />
+      </Modal>
+
       <div className="milestone-approval-card">
         <span className="milestone-approval-card-checkInput">
           <input checked={checkbox} onChange={handelCheckbox} type="checkbox" />
@@ -170,7 +186,7 @@ const MilestoneApprovalCard = ({
           >
             <MenuItem onClick={handelApprove}>{t('approved')}</MenuItem>
             <MenuItem onClick={handelView}>{t('view')}</MenuItem>
-            <MenuItem onClick={handelDelete}>{t('delete')}</MenuItem>
+            <MenuItem onClick={handleDeleteModalOpen}>{t('delete')}</MenuItem>
           </Menu>
         </span>
       </div>

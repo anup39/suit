@@ -1,6 +1,7 @@
 import './ProjectCard.scss';
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { Modal } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
@@ -8,6 +9,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
+import AreYouSure from '../../../../components/shared/AreYouSure/AreYouSure';
 import { deleteProjectData } from '../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 
@@ -23,6 +25,7 @@ const ProjectCard = ({
   projectId,
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [deleteModal, setDeleteModal] = React.useState(false);
   const open = Boolean(anchorEl);
   const { t } = useTranslation();
 
@@ -41,7 +44,15 @@ const ProjectCard = ({
     handelView(projectId);
   };
 
-  const handelProjecDelete = () => {
+  const handleDeleteModalClose = () => {
+    setDeleteModal(false);
+  };
+  const handleDeleteModalOpen = () => {
+    handleClose();
+    setDeleteModal(true);
+  };
+
+  const handelProjectDelete = () => {
     handleClose();
     const data = {
       authToken,
@@ -49,56 +60,67 @@ const ProjectCard = ({
     };
 
     dispatch(deleteProjectData(data));
+    handleDeleteModalClose();
   };
 
   return (
-    <div className="project-card-base-div">
-      {/* <span className="project-card-check-input">
+    <>
+      <Modal onClose={handleDeleteModalClose} open={deleteModal}>
+        <AreYouSure
+          handleClose={handleDeleteModalClose}
+          handleDelete={handelProjectDelete}
+          headline="Are you sure you want to Delete the Project?"
+        />
+      </Modal>
+
+      <div className="project-card-base-div">
+        {/* <span className="project-card-check-input">
         <input type="checkbox" />
       </span> */}
 
-      <span className="project-card-project-name">
-        <p>{projetName}</p>
-      </span>
+        <span className="project-card-project-name">
+          <p>{projetName}</p>
+        </span>
 
-      <span className="project-card-client">
-        <p>{client}</p>
-      </span>
+        <span className="project-card-client">
+          <p>{client}</p>
+        </span>
 
-      <span className="project-card-description">{desc}</span>
+        <span className="project-card-description">{desc}</span>
 
-      <span className="project-card-start-date">
-        <p>{startDate}</p>
-      </span>
+        <span className="project-card-start-date">
+          <p>{startDate}</p>
+        </span>
 
-      <span className="project-card-end-date">
-        <p>{compDate}</p>
-      </span>
+        <span className="project-card-end-date">
+          <p>{compDate}</p>
+        </span>
 
-      <span className="project-card-last-update">
-        <p>{lastUpdate}</p>
-      </span>
+        <span className="project-card-last-update">
+          <p>{lastUpdate}</p>
+        </span>
 
-      <span className="project-card-user-last-update">
-        <p>{userLastUpdate}</p>
-      </span>
+        <span className="project-card-user-last-update">
+          <p>{userLastUpdate}</p>
+        </span>
 
-      <span className="project-card-user-actions">
-        <MoreHorizIcon className="project-menu-icon" onClick={handleClick} />
-        <Menu
-          anchorEl={anchorEl}
-          id="basic-menu"
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
-          onClose={handleClose}
-          open={open}
-        >
-          <MenuItem onClick={handelProjectDataView}>{t('view')} </MenuItem>
-          <MenuItem onClick={handelProjecDelete}>{t('delete')}</MenuItem>
-        </Menu>
-      </span>
-    </div>
+        <span className="project-card-user-actions">
+          <MoreHorizIcon className="project-menu-icon" onClick={handleClick} />
+          <Menu
+            anchorEl={anchorEl}
+            id="basic-menu"
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+            onClose={handleClose}
+            open={open}
+          >
+            <MenuItem onClick={handelProjectDataView}>{t('view')} </MenuItem>
+            <MenuItem onClick={handleDeleteModalOpen}>{t('delete')}</MenuItem>
+          </Menu>
+        </span>
+      </div>
+    </>
   );
 };
 ProjectCard.propTypes = {

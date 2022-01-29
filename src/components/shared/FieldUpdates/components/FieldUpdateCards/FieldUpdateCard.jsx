@@ -96,7 +96,7 @@ const FieldUpdateCard = ({ activityData }) => {
               open={open}
             >
               <MenuItem onClick={handelViewOrEdit}>{t('view')}</MenuItem>
-              <MenuItem onClick={handleClose}>{t('delete')}</MenuItem>
+              {/* <MenuItem onClick={handleClose}>{t('delete')}</MenuItem> */}
             </Menu>
           </span>
         </div>

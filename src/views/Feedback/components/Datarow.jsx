@@ -7,9 +7,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-// import { deleteFeedback } from '../../../redux/feedback-redux/feedback.actions';
+import AreYouSure from '../../../components/shared/AreYouSure/AreYouSure';
+import { deleteFeedback } from '../../../redux/feedback-redux/feedback.actions';
 import { getUserAuthToken } from '../../../redux/user-redux/user.selectors';
-import AreYouSure from './AreYouSure/AreYouSure';
 
 const Datarow = ({ data }) => {
   const { t } = useTranslation();
@@ -35,10 +35,13 @@ const Datarow = ({ data }) => {
 
   const handleDelete = () => {
     handleClose();
-    const dataToSend = { authToken, feedbackId: data.id };
-    console.log(dataToSend);
     handleModalOpen();
-    // dispatch(deleteFeedback(dataToSend));
+  };
+
+  const handleFeedbackDelete = () => {
+    const dataToSend = { authToken, feedbackId: data.id };
+    dispatch(deleteFeedback(dataToSend));
+    handleModalClose();
   };
 
   return (
@@ -49,7 +52,11 @@ const Datarow = ({ data }) => {
         onClose={handleModalClose}
         open={modalOpen}
       >
-        <AreYouSure />
+        <AreYouSure
+          handleClose={handleModalClose}
+          handleDelete={handleFeedbackDelete}
+          headline="Are you sure to Delete the Feedback?"
+        />
       </Modal>
       <tr style={{ borderBottom: '1px solid #d4deea' }}>
         <td>{data.userName}</td>

@@ -17,3 +17,15 @@ export const getIsChangeFieldLogLoading = (state) => {
 export const getChangeFieldLogSuccess = (state) => {
   return state.fieldActivities.changeFieldlogsStatus;
 };
+
+export const allControlActivity = (state) => {
+  return state.fieldActivities.allControlActivity;
+};
+
+export const isControlActivityLoading = (state) => {
+  return state.fieldActivities.isAllControlActivityLoading;
+};
+
+export const getControlActivityParams = (state) => {
+  return state.fieldActivities.controlActivityPrams;
+};
