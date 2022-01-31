@@ -1,12 +1,12 @@
 const WORKLIST_MANAGEMENT_API = {
-  CREATE_WORKLIST: 'http://13.233.23.132:8080/api/createWorkList',
-  GET_ALL_WORKLIST: 'http://13.233.23.132:8080/api/listWorkList',
-  UPDATE_WORKLIST: 'http://13.233.23.132:8080/api/updateWorkList',
-  GET_TASK_BY_ID: 'http://13.233.23.132:8080/api/workListDetails',
-  DELETE_TASK_BY_ID: 'http://13.233.23.132:8080/api/deleteWorkListDetails',
+  CREATE_WORKLIST: `${process.env.REACT_APP_API_HOSTNAME}api/createWorkList`,
+  GET_ALL_WORKLIST: `${process.env.REACT_APP_API_HOSTNAME}api/listWorkList`,
+  UPDATE_WORKLIST: `${process.env.REACT_APP_API_HOSTNAME}api/updateWorkList`,
+  GET_TASK_BY_ID: `${process.env.REACT_APP_API_HOSTNAME}api/workListDetails`,
+  DELETE_TASK_BY_ID: `${process.env.REACT_APP_API_HOSTNAME}api/deleteWorkListDetails`,
   GET_TASKS_BY_PROJECT_ID:
-    'http://13.233.23.132:8080/api/listWorkList?projectId=',
-  CHANGE_TASK: 'http://13.233.23.132:8080/api/changeTask',
+  `${process.env.REACT_APP_API_HOSTNAME}api/listWorkList?projectId=`,
+  CHANGE_TASK: `${process.env.REACT_APP_API_HOSTNAME}api/changeTask`,
 };
 
 export default WORKLIST_MANAGEMENT_API;

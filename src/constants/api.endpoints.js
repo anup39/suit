@@ -1,13 +1,13 @@
 const API_END_POINTS = {
-  signup: 'http://13.233.23.132:8080/api/auth/signup',
-  signin: 'http://13.233.23.132:8080/api/auth/signin',
-  refreshToken: 'http://13.233.23.132:8080/api/auth/refreshtoken',
-  getUser: 'http://13.233.23.132:8080/api/ListUser',
-  getUserById: 'http://13.233.23.132:8080/api/Userdetails/',
-  getAllUserRoles: 'http://13.233.23.132:8080/api/allRoleList',
-  updateUserRole: 'http://13.233.23.132:8080/api/updateUseRole',
-  deleteUser: 'http://13.233.23.132:8080/api/deleteUserDetails',
-  deleteUserInList: 'http://13.233.23.132:8080/api/deleteUserList',
+  signup: `${process.env.REACT_APP_API_HOSTNAME}api/auth/signup`,
+  signin: `${process.env.REACT_APP_API_HOSTNAME}api/auth/signin`,
+  refreshToken: `${process.env.REACT_APP_API_HOSTNAME}api/auth/refreshtoken`,
+  getUser: `${process.env.REACT_APP_API_HOSTNAME}api/ListUser`,
+  getUserById: `${process.env.REACT_APP_API_HOSTNAME}api/Userdetails/`,
+  getAllUserRoles: `${process.env.REACT_APP_API_HOSTNAME}api/allRoleList`,
+  updateUserRole: `${process.env.REACT_APP_API_HOSTNAME}api/updateUseRole`,
+  deleteUser: `${process.env.REACT_APP_API_HOSTNAME}api/deleteUserDetails`,
+  deleteUserInList: `${process.env.REACT_APP_API_HOSTNAME}api/deleteUserList`,
 };
 
 export default API_END_POINTS;

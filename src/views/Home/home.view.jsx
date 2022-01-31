@@ -5,7 +5,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    navigate('/signin');
+    navigate('/asuiteweb/signin');
   }, []);
 
   return <div>Hello home</div>;

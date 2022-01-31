@@ -27,7 +27,7 @@ const EmailNotVerified = () => {
         email,
       })
       .then(async () => {
-        const url = `http://13.233.23.132:8080/api/auth/sentForgetNotification?username=${email}`;
+        const url = `${process.env.REACT_APP_API_HOSTNAME}api/auth/sentForgetNotification?username=${email}`;
 
         try {
           const urlResponse = await axios.get(url);

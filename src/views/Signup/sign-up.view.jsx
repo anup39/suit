@@ -65,7 +65,7 @@ const SignupPage = ({ isRedTheme }) => {
         progress: undefined,
       });
       dispatch(resetSignupError());
-      navigate('/signin');
+      navigate('/asuiteweb/signin');
     }
   }, [onLoading, signupError]);
 

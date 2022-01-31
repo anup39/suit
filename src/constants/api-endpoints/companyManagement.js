@@ -1,12 +1,12 @@
 const COMPANY_MANAGEMENT = {
-  create: 'http://13.233.23.132:8080/api/createCompany',
-  update: 'http://13.233.23.132:8080/api/updateCompany',
-  getCompany: 'http://13.233.23.132:8080/api/ListCompanies',
-  delete: 'http://13.233.23.132:8080/api/deleteCompanyDetails/',
+  create: `${process.env.REACT_APP_API_HOSTNAME}api/createCompany`,
+  update: `${process.env.REACT_APP_API_HOSTNAME}api/updateCompany`,
+  getCompany: `${process.env.REACT_APP_API_HOSTNAME}api/ListCompanies`,
+  delete: `${process.env.REACT_APP_API_HOSTNAME}api/deleteCompanyDetails/`,
 
-  getCompanyUsers: 'http://13.233.23.132:8080/api/getUserListByCompany/',
-  addCompanyUsers: 'http://13.233.23.132:8080/api/userCompany',
-  deleteCompanyUsers: 'http://13.233.23.132:8080//api/delete/userCompany/',
+  getCompanyUsers: `${process.env.REACT_APP_API_HOSTNAME}api/getUserListByCompany/`,
+  addCompanyUsers: `${process.env.REACT_APP_API_HOSTNAME}api/userCompany`,
+  deleteCompanyUsers: `${process.env.REACT_APP_API_HOSTNAME}api/delete/userCompany/`,
 };
 
 export default COMPANY_MANAGEMENT;
