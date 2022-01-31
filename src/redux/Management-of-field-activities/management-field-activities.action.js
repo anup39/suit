@@ -94,3 +94,23 @@ export const editControlActivityData = (data) => ({
   type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.HANDLE_CONTROL_ACTIVITY_DATA_EDIT,
   payload: data,
 });
+
+export const resetControlActivityData = () => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.RESET_CONTROL_ACTIVITY_DATA,
+  payload: '',
+});
+
+export const controlActivityDataAdd = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.ADD_CONTROL_ACTIVITY_DATA,
+  payload: data,
+});
+
+export const controlActivityDataSuccess = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.ADD_CONTROL_ACTIVITY_DATA_SUCCESS,
+  payload: data,
+});
+
+export const controlActivityDataError = (data) => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.ADD_CONTROL_ACTIVITY_DATA_ERROR,
+  payload: data,
+});

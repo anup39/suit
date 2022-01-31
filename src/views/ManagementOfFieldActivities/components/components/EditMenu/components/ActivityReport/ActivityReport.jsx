@@ -141,21 +141,24 @@ const ActivityReport = () => {
                       value={rejectionReason}
                     />
                   </span>
-
-                  <div className="change-request-buttons-div">
-                    <span
-                      className="change-request-button-reject"
-                      onClick={handelReject}
-                    >
-                      {t('reject')}
-                    </span>
-                    <span
-                      className="change-request-button-accept"
-                      onClick={handelAccept}
-                    >
-                      {t('accept')}
-                    </span>
-                  </div>
+                  {activityReportData.verifierCheck === null ? (
+                    <div className="change-request-buttons-div">
+                      <span
+                        className="change-request-button-reject"
+                        onClick={handelReject}
+                      >
+                        {t('reject')}
+                      </span>
+                      <span
+                        className="change-request-button-accept"
+                        onClick={handelAccept}
+                      >
+                        {t('accept')}
+                      </span>
+                    </div>
+                  ) : (
+                    ''
+                  )}
                 </div>
               </div>
             </div>

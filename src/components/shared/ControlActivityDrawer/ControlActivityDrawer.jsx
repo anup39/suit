@@ -4,12 +4,20 @@ import AddIcon from '@mui/icons-material/Add';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import {
+  controlActivityDataAdd,
   getAllControlActivity,
   getControlActivityParam,
+  resetControlActivityData,
 } from '../../../redux/Management-of-field-activities/management-field-activities.action';
-import { allControlActivity } from '../../../redux/Management-of-field-activities/management-field-activities.selectors';
+import {
+  allControlActivity,
+  getControlActivityData,
+  getControlActivityDataAddSuccessful,
+  getIfControlActivityDataAddLoading,
+} from '../../../redux/Management-of-field-activities/management-field-activities.selectors';
 import { getUserAuthToken } from '../../../redux/user-redux/user.selectors';
 import ControlActivityFields from './components/ControlActivityFields/ControlActivityFields';
 
@@ -18,6 +26,13 @@ const ControlActivityDrawer = ({ handleClose, taskId }) => {
   const [controlActivityType, setControlActivityType] = React.useState('');
   const authToken = useSelector(getUserAuthToken);
   const controlActivityList = useSelector(allControlActivity);
+  const controlActivityData = useSelector(getControlActivityData);
+  const isControlActivityDataAddLoading = useSelector(
+    getIfControlActivityDataAddLoading
+  );
+  const controlActivityDataAddSuccess = useSelector(
+    getControlActivityDataAddSuccessful
+  );
   const dispatch = useDispatch();
 
   const handleAddComponent = () => {
@@ -34,10 +49,51 @@ const ControlActivityDrawer = ({ handleClose, taskId }) => {
     dispatch(getControlActivityParam(data));
   };
 
+  const handleCancel = () => {
+    handleClose();
+    dispatch(resetControlActivityData());
+  };
+
+  const handleSubmit = () => {
+    const dataToSend = {
+      authToken,
+      controlActivityData: {
+        typeId: controlActivityType,
+        valueRequestList: controlActivityData,
+      },
+    };
+
+    let validData = true;
+
+    // eslint-disable-next-line
+    controlActivityData.map((val) => {
+      if (!val.paramName || !val.paramType || !val.value) {
+        validData = false;
+        return toast.warn('Please Select or Enter All Fields!', {
+          position: 'top-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    });
+    if (!validData) {
+      return;
+    }
+    dispatch(controlActivityDataAdd(dataToSend));
+  };
+
   React.useEffect(() => {
-    const data = { authToken };
-    dispatch(getAllControlActivity(data));
-  }, []);
+    if (!controlActivityList) {
+      const data = { authToken };
+      dispatch(getAllControlActivity(data));
+    } else if (controlActivityDataAddSuccess) {
+      handleClose();
+    }
+  }, [isControlActivityDataAddLoading]);
 
   return (
     <div className="control-activity-base-div">
@@ -74,10 +130,12 @@ const ControlActivityDrawer = ({ handleClose, taskId }) => {
         ))}
       </form>
       <div className="submit-div">
-        <span className="control-activity-cancel-button" onClick={handleClose}>
+        <span className="control-activity-cancel-button" onClick={handleCancel}>
           Cancel
         </span>
-        <span className="control-activity-submit-button">Submit</span>
+        <span className="control-activity-submit-button" onClick={handleSubmit}>
+          Submit
+        </span>
       </div>
     </div>
   );

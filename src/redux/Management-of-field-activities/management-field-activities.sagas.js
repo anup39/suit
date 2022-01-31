@@ -2,6 +2,7 @@ import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 import { toast } from 'react-toastify';
 
 import {
+  ADD_CONTROL_ACTIVITY_DATA,
   ALL_ACTIVITIES,
   CHANGE_LOG_STATUS,
   GET_ALL_CONTROL_ACTIVITIES,
@@ -11,6 +12,8 @@ import {
 import {
   changeFieldLogStatusError,
   changeFieldLogStatusSuccess,
+  controlActivityDataError,
+  controlActivityDataSuccess,
   getAllActivitiesError,
   getAllActivitiesSuccess,
   getAllControlActivityError,
@@ -160,6 +163,40 @@ export function* onGetAllControlActivityParams() {
   );
 }
 
+export function* addControlParamData({ payload }) {
+  try {
+    const controlActivity = yield call(ADD_CONTROL_ACTIVITY_DATA, payload);
+    yield put(controlActivityDataSuccess(controlActivity));
+    yield toast.success('Control Activity Params Added Successfully!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  } catch (err) {
+    yield put(controlActivityDataError(err.response.data));
+    yield toast.error('Failed to Add Control Activity Params!', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+}
+
+export function* onAddControlParamData() {
+  yield takeLatest(
+    MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.ADD_CONTROL_ACTIVITY_DATA,
+    addControlParamData
+  );
+}
+
 export function* managementOfFieldActivitiesSagas() {
   yield all([
     call(onGetAllActivities),
@@ -167,5 +204,6 @@ export function* managementOfFieldActivitiesSagas() {
     call(onChangeFieldLogData),
     call(onGetAllControlActivity),
     call(onGetAllControlActivityParams),
+    call(onAddControlParamData),
   ]);
 }

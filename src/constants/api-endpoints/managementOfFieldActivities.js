@@ -6,7 +6,7 @@ const managementOfFieldActivities = {
   `${process.env.REACT_APP_API_HOSTNAME}api/listControlActivityType`,
 
   getControlActivityParams:
-  `${process.env.REACT_APP_API_HOSTNAME}api/listControlTypeParam/`,
+  `${process.env.REACT_APP_API_HOSTNAME}api/listControlTypeParam/`
 };
 
 export default managementOfFieldActivities;
