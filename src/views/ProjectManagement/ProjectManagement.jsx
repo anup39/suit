@@ -82,7 +82,7 @@ const ProjectManagement = () => {
     if (isAuthenticated) {
       dispatch(getProjectList(authToken));
     } else {
-      navigate('/signin');
+      navigate('/asuiteweb/signin');
     }
   }, [isAuthenticated]);
 

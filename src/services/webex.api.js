@@ -13,7 +13,6 @@ const getQueryString = (data) => {
 };
 // eslint-disable-next-line import/prefer-default-export
 export const GET_WEBEX_ACCESSTOKEN_REQ = async (payload) => {
-  console.log(payload);
 
   const webexAccessToken = await axios(
     `${WEBEX_MANAGEMENT_API.GET_ACCESSTOKEN}`,
@@ -23,10 +22,10 @@ export const GET_WEBEX_ACCESSTOKEN_REQ = async (payload) => {
         code: `${payload}`,
         grant_type: 'authorization_code',
         client_id:
-          'Ce03f73ac5eb97bcdc2ea9dd2a417273c4683ebe66d966844c44f1842d5a58fba',
+          `${process.env.REACT_APP_CLIENT_ID}`,
         client_secret:
-          '42519dd669a0d935ee6e4e31ddb90529225fc8faa312bb6df0429b1681195bbc',
-        redirect_uri: 'http://localhost:3000',
+        `${process.env.REACT_APP_CLIENT_SECRET}`,
+        redirect_uri: `${process.env.REACT_APP_REDIRECT_URI}`,
       },
       headers: {},
       withCredentials: true,
@@ -39,11 +38,21 @@ export const GET_WEBEX_ACCESSTOKEN_REQ = async (payload) => {
 };
 
 export const GET_WEBEX_ROOMS = async () => {
-  const roomsout = await axios(`${WEBEX_MANAGEMENT_API.GET_ROOMS}`, {
-    headers: {
-      Authorization: `Bearer YmVkOTM5YmYtYTM2Yi00ODEwLWI4YmUtMjkzMmU4N2JmMGI3N2NiM2E2OTEtOGU5_P0A1_5854f144-ce4c-448d-a8d9-4c4002d8c122`,
-    },
-  });
+    const roomsout = await axios(`${WEBEX_MANAGEMENT_API.GET_ROOMS}`, {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_BOT_TOKEN}`,
+      },
+    });
+  
+    const finalrooms=[];
+    // eslint-disable-next-line no-plusplus
+    for (let i=0; i< roomsout.data.items.length;i++)
+    // eslint-disable-next-line no-empty
+    {
+      const object = {
+        value: roomsout.data.items[i].id,
+        label: roomsout.data.items[i].title
+      };
 
   const finalrooms = [];
   // eslint-disable-next-line no-plusplus

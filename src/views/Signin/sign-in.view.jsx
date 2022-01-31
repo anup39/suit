@@ -48,11 +48,11 @@ const SigninPage = () => {
   };
 
   const handelNavigateUser = () => {
-    navigate('/user/signup');
+    navigate('/asuiteweb/user/signup');
   };
 
   const handleForgotPassword = () => {
-    navigate('/forgotPassword');
+    navigate('/asuiteweb/forgotPassword');
   };
 
   useEffect(() => {
@@ -72,10 +72,10 @@ const SigninPage = () => {
     if (isAuthenticated) {
       if (userData.status) {
         setIsLoading(false);
-        navigate('/verify');
+        navigate('/asuiteweb/verify');
       } else {
         setIsLoading(false);
-        navigate('/pannel/user-roles');
+        navigate('/asuiteweb/pannel/user-roles');
         toast.success('Signin Success', {
           position: 'top-center',
           autoClose: 2000,

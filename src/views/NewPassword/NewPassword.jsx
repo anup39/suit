@@ -19,7 +19,7 @@ const NewPassword = () => {
     const verificationCode = new URLSearchParams(searchParams).get('code');
 
     if (password === confirmPassword) {
-      const url = `http://13.233.23.132:8080/api/auth/setForgetPassword?code=${verificationCode}&password=${password}&retypePassword=${confirmPassword}`;
+      const url = `${process.env.REACT_APP_API_HOSTNAME}api/auth/setForgetPassword?code=${verificationCode}&password=${password}&retypePassword=${confirmPassword}`;
 
       try {
         await axios.put(url);
@@ -32,7 +32,7 @@ const NewPassword = () => {
           draggable: true,
           progress: undefined,
         });
-        navigate('/signin');
+        navigate('/asuiteweb/signin');
       } catch (err) {
         toast.error('Failed To Set Password!', {
           position: 'top-center',

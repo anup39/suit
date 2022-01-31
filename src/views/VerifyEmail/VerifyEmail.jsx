@@ -14,7 +14,7 @@ const VerifyEmail = () => {
       'code'
     );
 
-    const url = `http://13.233.23.132:8080/api/auth/verifyEmail?code=${verificationCode}`;
+    const url = `${process.env.REACT_APP_API_HOSTNAME}api/auth/verifyEmail?code=${verificationCode}`;
 
     try {
       const res = await axios.get(url);
@@ -30,7 +30,7 @@ const VerifyEmail = () => {
           progress: undefined,
         });
         setTimeout(() => {
-          navigate('/signin');
+          navigate('/asuiteweb/signin');
         }, []);
       }
     } catch (err) {

@@ -185,8 +185,8 @@ function MapWrapper(props) {
           const tileLayer = new TileLayer({
             source: new TileWMS({
               // crossOrigin: 'anonymous',
-              // url:`http://13.233.23.132:7080/geoserver/`,
-              url: 'http://13.233.23.132:7080/geoserver/Anuptest3/wms',
+              // url:`http://192.168.100.242:8080/geoserver/`,
+              url: `${process.env.REACT_APP_GEOSERVER_HOSTNAME}Anuptest3/wms`,
               params: {
                 FORMAT: 'image/png',
                 VERSION: '1.1.1',

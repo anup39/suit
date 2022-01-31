@@ -118,7 +118,7 @@ const UserRoles = () => {
         }, 2000);
       }
     } else {
-      navigate('/signin');
+      navigate('/asuiteweb/signin');
     }
   }, [deleteUserErrorMessage, isAuthenticated, isUpdateUserLoading]);
 

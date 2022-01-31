@@ -1,9 +1,9 @@
 const FEEDBACK_MANAGEMENT = {
-  createFeedback: 'http://13.233.23.132:8080/api/createFeedBack',
-  viewAllFeedback: 'http://13.233.23.132:8080/api/listFeedBack',
-  viewFeedbackById: 'http://13.233.23.132:8080/api/feedBackDetails',
-  deleteFeedbackById: 'http://13.233.23.132:8080/api/deleteFeedBack',
-  getAllFeedBackByUserID: 'http://13.233.23.132:8080/api/listFeedBackByUser',
+  createFeedback: `${process.env.REACT_APP_API_HOSTNAME}api/createFeedBack`,
+  viewAllFeedback: `${process.env.REACT_APP_API_HOSTNAME}api/listFeedBack`,
+  viewFeedbackById: `${process.env.REACT_APP_API_HOSTNAME}api/feedBackDetails`,
+  deleteFeedbackById: `${process.env.REACT_APP_API_HOSTNAME}api/deleteFeedBack`,
+  getAllFeedBackByUserID: `${process.env.REACT_APP_API_HOSTNAME}api/listFeedBackByUser`,
 };
 
 export default FEEDBACK_MANAGEMENT;

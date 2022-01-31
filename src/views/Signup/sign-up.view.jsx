@@ -14,7 +14,10 @@ import {
   resetSignupError,
   userSignupStart,
 } from '../../redux/user-redux/user.actions';
-import { getSignedupError } from '../../redux/user-redux/user.selectors';
+import {
+  getLoadingStatus,
+  getSignedupError,
+} from '../../redux/user-redux/user.selectors';
 import schema from './sign-up.schema';
 import classes from './styles/sign-up.module.scss';
 import {
@@ -26,8 +29,9 @@ import {
 
 const SignupPage = ({ isRedTheme }) => {
   const dispatch = useDispatch();
+  const onLoading = useSelector(getLoadingStatus);
   const [alerts, setAlerts] = useState(undefined);
-  const [isSignupLoading, setIsSignupLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const signupError = useSelector(getSignedupError);
 
   const navigate = useNavigate();
@@ -44,11 +48,12 @@ const SignupPage = ({ isRedTheme }) => {
   const onSubmit = async (data) => {
     // eslint-disable-next-line no-param-reassign
     delete data.conPassword;
-    setIsSignupLoading(true);
     dispatch(userSignupStart(data));
   };
 
   useEffect(() => {
+    setIsLoading(onLoading);
+
     if (signupError) {
       toast.error('Email Already Exists! Please Login!', {
         position: 'top-center',
@@ -60,14 +65,13 @@ const SignupPage = ({ isRedTheme }) => {
         progress: undefined,
       });
       dispatch(resetSignupError());
-      setIsSignupLoading(false);
-      navigate('/signin');
+      navigate('/asuiteweb/signin');
     }
-  }, [signupError]);
+  }, [onLoading, signupError]);
 
   return (
     <div className={classes.signup_container}>
-      <GlobalSpinner isOpen={isSignupLoading} />
+      <GlobalSpinner isOpen={isLoading} />
       <div className={classes.signup_left}>
         <div>
           <h1 className={classes.left_header_blue}>
