@@ -1,3 +1,4 @@
+/* eslint-disable */
 import './FieldUpdateCard.scss';
 
 import AutorenewOutlinedIcon from '@mui/icons-material/AutorenewOutlined';
@@ -180,7 +181,11 @@ const FieldUpdateCard = ({ activityData }) => {
           </span>
         </div>
       ) : (
-        <EditMenu handleCancel={handleCancel} taskId={activityData?.taskId} />
+        <EditMenu
+          handleCancel={handleCancel}
+          roomId={activityData?.roomId}
+          taskId={activityData?.taskId}
+        />
       )}
     </>
   );
