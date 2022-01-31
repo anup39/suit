@@ -4,7 +4,6 @@ const managementOfFieldActivities = {
   acceptOrRejectTasks: `${process.env.REACT_APP_API_HOSTNAME}api/fieldLogReview`,
   getAllControlActivityType:
   `${process.env.REACT_APP_API_HOSTNAME}api/listControlActivityType`,
-
   getControlActivityParams:
   `${process.env.REACT_APP_API_HOSTNAME}api/listControlTypeParam/`
 };
