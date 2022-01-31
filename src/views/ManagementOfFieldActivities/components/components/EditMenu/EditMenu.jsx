@@ -1,3 +1,4 @@
+/* eslint-disable */
 import './EditMenu.scss';
 
 import AddIcon from '@mui/icons-material/Add';
@@ -12,6 +13,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
 import ControlActivityDrawer from '../../../../../components/shared/ControlActivityDrawer/ControlActivityDrawer';
+import WebexFiles from '../../../../../components/shared/Webex-components/webex-files/WebexFiles';
+import WebexMessages from '../../../../../components/shared/Webex-components/webex-message/WebexMessages';
 import { getAllfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
 import ActivityReport from './components/ActivityReport/ActivityReport';
@@ -19,12 +22,15 @@ import ChangeRequest from './components/ChangeRequest/ChangeRequest';
 import FieldLogs from './components/FieldLogs/FieldLogs';
 import Milestone from './components/Milestone/Milestone';
 
-const EditMenu = ({ taskId, handleCancel }) => {
+const EditMenu = ({ taskId, handleCancel, roomId }) => {
   const { t } = useTranslation();
 
   const [open, setOpen] = React.useState(false);
   const [option, setOption] = React.useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [isWebexMessageModalOpen, setIsWebexMessageModalOpen] =
+    React.useState(false);
+  const [isWebexFileModalOpen, setIsWebexFileModalOpen] = React.useState(false);
 
   const authToken = useSelector(getUserAuthToken);
   const dispatch = useDispatch();
@@ -44,6 +50,22 @@ const EditMenu = ({ taskId, handleCancel }) => {
 
   const handleDrawerClose = () => {
     setIsDrawerOpen(false);
+  };
+
+  const handleWebexMessageOpen = () => {
+    setIsWebexMessageModalOpen(true);
+  };
+
+  const handleWebexMessageModalClose = () => {
+    setIsWebexMessageModalOpen(false);
+  };
+
+  const handleWebexFileModalOpen = () => {
+    setIsWebexFileModalOpen(true);
+  };
+
+  const handleWebexFileModalClose = () => {
+    setIsWebexFileModalOpen(false);
   };
 
   const renderComponent = (value) => {
@@ -74,6 +96,21 @@ const EditMenu = ({ taskId, handleCancel }) => {
       <Modal onClose={handleClose} open={open}>
         {renderComponent(option)}
       </Modal>
+
+      <Modal
+        onClose={handleWebexMessageModalClose}
+        open={isWebexMessageModalOpen}
+      >
+        <WebexMessages
+          handleClose={handleWebexMessageModalClose}
+          roomId={roomId}
+        />
+      </Modal>
+
+      <Modal onClose={handleWebexFileModalClose} open={isWebexFileModalOpen}>
+        <WebexFiles handleClose={handleWebexFileModalClose} roomId={roomId} />
+      </Modal>
+
       <div className="edit-menu-base">
         <span>
           <p>{t('taskItem')}</p>
@@ -117,8 +154,14 @@ const EditMenu = ({ taskId, handleCancel }) => {
           <div>
             <span className="field-updates-body-controlActivity">
               <AutorenewOutlinedIcon className="control-activity-icons" />
-              <UploadFileOutlinedIcon className="control-activity-icons" />
-              <CommentIcon className="control-activity-icons" />
+              <UploadFileOutlinedIcon
+                className="control-activity-icons"
+                onClick={handleWebexFileModalOpen}
+              />
+              <CommentIcon
+                className="control-activity-icons"
+                onClick={handleWebexMessageOpen}
+              />
               <img alt="Webex Icon" className="webex-icon" src={WebExIcon} />
               <AddIcon
                 className="control-activity-icons"
@@ -143,6 +186,7 @@ const EditMenu = ({ taskId, handleCancel }) => {
 EditMenu.propTypes = {
   handleCancel: PropTypes.func.isRequired,
   taskId: PropTypes.isRequired,
+  roomId: PropTypes.isRequired,
 };
 
 export default EditMenu;

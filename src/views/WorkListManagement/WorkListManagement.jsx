@@ -355,7 +355,7 @@ const WorkListManagement = () => {
                       paddingBottom: '15%',
                     }}
                   >
-                   {t('noDataFound')}
+                    {t('noDataFound')}
                   </p>{' '}
                 </div>
               ) : (
