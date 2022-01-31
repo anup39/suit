@@ -6,7 +6,7 @@ const COMPANY_MANAGEMENT = {
 
   getCompanyUsers: 'http://13.233.23.132:8080/api/getUserListByCompany/',
   addCompanyUsers: 'http://13.233.23.132:8080/api/userCompany',
-  deleteCompanyUsers: 'http://13.233.23.132:8080//api/delete/userCompany/',
+  deleteCompanyUsers: 'http://13.233.23.132:8080/api/delete/userCompany/',
 };
 
 export default COMPANY_MANAGEMENT;

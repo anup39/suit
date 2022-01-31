@@ -22,6 +22,10 @@ const initialState = {
   isControlActivityPramsLoading: false,
 
   controlActivityData: [],
+
+  addControlActivityData: '',
+  isAddControlActivityDataLoading: false,
+  addControlActivityDataError: '',
 };
 
 // eslint-disable-next-line
@@ -173,6 +177,38 @@ const magagementOfFieldActivitiesReducer = (state = initialState, action) => {
           }
           return val;
         }),
+      };
+    case MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.RESET_CONTROL_ACTIVITY_DATA:
+      return {
+        ...state,
+        controlActivityData: '',
+      };
+
+    case MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.ADD_CONTROL_ACTIVITY_DATA:
+      return {
+        ...state,
+
+        addControlActivityData: '',
+        isAddControlActivityDataLoading: true,
+        addControlActivityDataError: '',
+      };
+
+    case MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.ADD_CONTROL_ACTIVITY_DATA_SUCCESS:
+      return {
+        ...state,
+
+        addControlActivityData: action.payload,
+        isAddControlActivityDataLoading: false,
+        addControlActivityDataError: '',
+      };
+
+    case MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.ADD_CONTROL_ACTIVITY_DATA_ERROR:
+      return {
+        ...state,
+
+        addControlActivityData: '',
+        isAddControlActivityDataLoading: false,
+        addControlActivityDataError: action.payload,
       };
     default:
       return state;

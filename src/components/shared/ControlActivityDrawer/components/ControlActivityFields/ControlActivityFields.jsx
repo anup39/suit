@@ -27,7 +27,7 @@ const ControlActivityFields = ({
       data: {
         paramName: selectedControlActivityType,
         paramType: e.target.value,
-        taskId: 'taskId ONE',
+        taskId,
         value: controlActivityValue,
       },
     };
@@ -41,7 +41,7 @@ const ControlActivityFields = ({
       data: {
         paramName: selectedControlActivityType,
         paramType: controlActivityParam,
-        taskId: 'taskId ONE',
+        taskId,
         value: e.target.value,
       },
     };
@@ -68,7 +68,7 @@ const ControlActivityFields = ({
       >
         {controlActivityParamList ? (
           <>
-            <option>Please Select A Value</option>
+            <option value="">Please Select A Value</option>
             {controlActivityParamList.map((vals) => (
               <option key={vals.id}> {vals.parameterName}</option>
             ))}

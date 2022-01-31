@@ -90,3 +90,21 @@ export const GET_CONTROL_ACTIVITIES_PARAMS_BY_ID = async (data) => {
   );
   return controlActivityParam.data;
 };
+
+export const ADD_CONTROL_ACTIVITY_DATA = async (data) => {
+  const { authToken, controlActivityData } = data;
+
+  const newToken = await REFERSH_TOKEN(authToken);
+
+  const controlActivityResponse = await axios(
+    MANAGEMENT_OF_FIELD_ACTIVITIES.addControlActivityData,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${newToken}`,
+      },
+      data: controlActivityData,
+    }
+  );
+  return controlActivityResponse.data;
+};

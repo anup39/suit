@@ -29,3 +29,15 @@ export const isControlActivityLoading = (state) => {
 export const getControlActivityParams = (state) => {
   return state.fieldActivities.controlActivityPrams;
 };
+
+export const getControlActivityData = (state) => {
+  return state.fieldActivities.controlActivityData;
+};
+
+export const getControlActivityDataAddSuccessful = (state) => {
+  return state.fieldActivities.addControlActivityData;
+};
+
+export const getIfControlActivityDataAddLoading = (state) => {
+  return state.fieldActivities.isAddControlActivityDataLoading;
+};

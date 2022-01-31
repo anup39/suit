@@ -7,6 +7,8 @@ const managementOfFieldActivities = {
 
   getControlActivityParams:
     'http://13.233.23.132:8080/api/listControlTypeParam/',
+
+  addControlActivityData: 'http://13.233.23.132:8080/api/controlActivityValues',
 };
 
 export default managementOfFieldActivities;
