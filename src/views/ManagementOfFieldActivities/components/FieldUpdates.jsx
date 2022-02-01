@@ -53,13 +53,7 @@ const FieldUpdates = () => {
               <input type="checkbox" />
             </span>
             <span className="field-updates-header-taskItem">Task Item</span>
-            <span className="field-updates-header-fieldLogs">Field Logs</span>
-            <span className="field-updates-header-activityReport">
-              Activity report
-            </span>
-            <span className="field-updates-header-changeRequest">
-              Change request
-            </span>
+          
             <span className="field-updates-header-milestoneApproval">
               Milestone approval
             </span>

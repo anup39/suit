@@ -1,5 +1,7 @@
 import './ChangeRequest.scss';
 
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,15 +12,19 @@ import { getfieldlogs } from '../../../../../../../redux/Management-of-field-act
 import { getUserAuthToken } from '../../../../../../../redux/user-redux/user.selectors';
 import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
 
+
 const ChangeRequest = () => {
   const { t } = useTranslation();
+
   const fieldLogData = useSelector(getfieldlogs);
   const authToken = useSelector(getUserAuthToken);
+
+  const chnageRequestData = fieldLogData.changeTask;
+
   const [rejectionReason, setRejectionReason] = React.useState('');
+  const [changeRequest, setChangeRequest] = React.useState(fieldLogData.changeTask[0]);
 
-  const chnageRequestData = fieldLogData.changeTask[0];
-
-  const dispatch = useDispatch();
+ const dispatch = useDispatch();
 
   const handelReject = () => {
     if (!rejectionReason) {
@@ -45,12 +51,17 @@ const ChangeRequest = () => {
       dispatch(changeFieldLogStatus(data));
     }
   };
+
+  const handleCrtabchange = (event, value) => {
+    setChangeRequest(chnageRequestData[value])
+
+  };
   const handelAccept = () => {
     const data = {
       authToken,
       taskData: {
-        fieldlogId: chnageRequestData?.fieldlogId,
-        taskId: chnageRequestData?.taskId,
+        fieldlogId: changeRequest?.fieldlogId,
+        taskId: changeRequest?.taskId,
         isApproved: true,
         rejectionNote: '',
       },
@@ -62,39 +73,49 @@ const ChangeRequest = () => {
   return (
     <div className="change-request-base">
       <EditModalHeaders headerName={t('changerequest')} />
-      {chnageRequestData ? (
-        <>
-          <div className="change-request-body-div">
+      <Tabs onChange={handleCrtabchange}>
+      {(chnageRequestData.length > 0) ? chnageRequestData.map ( p => (
+        <Tab key={p.fieldlogId} label={p.fieldlogId}> </Tab>
+      )):
+      (<div className="change-request-content-no-data-found">
+          <h5> No Data Found!</h5>
+        </div>
+      )}
+      </Tabs>
+         <div className="change-request-body-div">
+         {changeRequest && changeRequest !== null && changeRequest !== undefined ? (
             <div>
               <div className="change-request-body-header">
-                <p>Task 1 Change</p>
+                <p> {!changeRequest?.taskId
+                        ? '-'
+                        : changeRequest?.taskId}</p>
               </div>
               <div className="change-request-body">
                 <div className="change-body-request-details">
                   <span>
                     <p>{t('companyName')}</p>
                     <div className="change-request-details">
-                      {!chnageRequestData?.companyName
+                      {!changeRequest?.companyName
                         ? '-'
-                        : chnageRequestData?.companyName}
+                        : changeRequest?.companyName}
                     </div>
                   </span>
 
                   <span>
                     <p>{t('projectName')}</p>
                     <div className="change-request-details">
-                      {!chnageRequestData?.projectName
+                      {!changeRequest?.projectName
                         ? '-'
-                        : chnageRequestData?.projectName}
+                        : changeRequest?.projectName}
                     </div>
                   </span>
 
                   <span>
                     <p>{t('requetsDate')}</p>
                     <div className="change-request-details">
-                      {!chnageRequestData?.fieldDate
+                      {!changeRequest?.requestDate
                         ? '-'
-                        : chnageRequestData?.fieldDate}
+                        : changeRequest?.requestDate}
                     </div>
                   </span>
 
@@ -102,9 +123,9 @@ const ChangeRequest = () => {
                     <p>{t('requestnr')}</p>
                     <div className="change-request-details">
                       {' '}
-                      {!chnageRequestData?.documentId
+                      {!changeRequest?.taskNumber
                         ? '-'
-                        : chnageRequestData?.documentId}{' '}
+                        : changeRequest?.taskNumber}{' '}
                     </div>
                   </span>
                 </div>
@@ -112,18 +133,12 @@ const ChangeRequest = () => {
                 <div>
                   <p>{t('changerequest')}</p>
                   <div className="change-request-description-details">
-                    {!chnageRequestData?.taskNotification
+                    {!changeRequest?.fieldNote
                       ? '-'
-                      : chnageRequestData?.taskNotification}
+                      : changeRequest?.fieldNote}
                   </div>
                 </div>
-
-                {/* <div className="filename-base-div">
-              <p>{t('listofFileNames')}</p>
-              <div className="change-request-details-files"> File Div </div>
-            </div> */}
-
-                <div className="change-request-buttons-div">
+                {!changeRequest?.verifierCheck ? <div className="change-request-buttons-div">
                   <span
                     className="change-request-button-reject"
                     onClick={handelReject}
@@ -137,29 +152,35 @@ const ChangeRequest = () => {
                     {t('accept')}
                   </span>
                 </div>
-
+                : null}
+                {changeRequest?.rejectionNote ?
                 <span>
                   <p>{t('reasonofRejection')}</p>
                   <textarea
                     className="reason-of-rejection-details-text-area"
                     onChange={(e) => setRejectionReason(e.target.value)}
-                    value={rejectionReason}
+                    value={changeRequest.rejectionNote}
                   />
                 </span>
+                : 
+                <span>
+                <p>{t('reasonofRejection')}</p>
+                <textarea
+                  className="reason-of-rejection-details-text-area"
+                  onChange={(e) => setRejectionReason(e.target.value)}
+                  value={rejectionReason}
+                />
+              </span>
+                }
               </div>
             </div>
+            ) : null }
           </div>
           <div className="text-right">
             <button className="close-button" type="button">
               {t('close')}
             </button>
           </div>
-        </>
-      ) : (
-        <div className="change-request-content-no-data-found">
-          <h5> No Data Found!</h5>
-        </div>
-      )}
     </div>
   );
 };

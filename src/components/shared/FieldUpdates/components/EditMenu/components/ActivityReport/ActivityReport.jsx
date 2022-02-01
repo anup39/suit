@@ -1,5 +1,7 @@
 import './ActivityReport.scss';
 
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +19,7 @@ const ActivityReport = () => {
   const fieldLogData = useSelector(getfieldlogs);
   const authToken = useSelector(getUserAuthToken);
   const activityReportData = fieldLogData?.activityTask[0];
+  const [activityTask, setactivityTask] = React.useState(fieldLogData.activityTask[0]);
 
   const dispatch = useDispatch();
 
@@ -45,6 +48,11 @@ const ActivityReport = () => {
       dispatch(changeFieldLogStatus(data));
     }
   };
+
+  const handleCrtabchange = (event, value) => {
+    setactivityTask(activityReportData[value])
+
+  };
   const handelAccept = () => {
     const data = {
       authToken,
@@ -62,23 +70,29 @@ const ActivityReport = () => {
   return (
     <div className="activity-report-base">
       <EditModalHeaders headerName={t('activityreport')} />
-      {activityReportData ? (
+      <Tabs onChange={handleCrtabchange}>
+      {(activityReportData.length > 0) ? activityReportData.map ( p => (
+        <Tab key={p.fieldlogId} label={p.fieldlogId}> </Tab>
+      )):
+      (<div className="change-request-content-no-data-found">
+          <h5> No Data Found!</h5>
+        </div>
+      )}
+      </Tabs>
+      {activityTask && activityTask !== null && activityTask !== undefined ?  (
         <>
           <div>
             <div className="activity-report-content">
               <div>
-                <div className="activity-report-content-header">
-                  <span>Activity Report 1</span>
-                </div>
                 <div className="activity-report-content-body">
                   <div className="activity-report-inputs-div">
                     <span>
                       <p>{t('company')}</p>
                       <div className="activity-report-data">
                         {' '}
-                        {!activityReportData?.companyName
+                        {!activityTask?.companyName
                           ? '-'
-                          : activityReportData?.companyName}{' '}
+                          : activityTask?.companyName}{' '}
                       </div>
                     </span>
 
@@ -86,9 +100,9 @@ const ActivityReport = () => {
                       <p>{t('projectName')}</p>
                       <div className="activity-report-data">
                         {' '}
-                        {!activityReportData?.projectId
+                        {!activityTask?.projectId
                           ? '-'
-                          : activityReportData?.projectId}
+                          : activityTask?.projectId}
                       </div>
                     </span>
 
@@ -96,9 +110,9 @@ const ActivityReport = () => {
                       <p>{t('reportDate')}</p>
                       <div className="activity-report-data">
                         {' '}
-                        {!activityReportData?.activityReportDate
+                        {!activityTask?.activityReportDate
                           ? '-'
-                          : activityReportData?.activityReportDate}{' '}
+                          : activityTask?.activityReportDate}{' '}
                       </div>
                     </span>
 
@@ -106,9 +120,9 @@ const ActivityReport = () => {
                       <p>{t('reportnr')}</p>
                       <div className="activity-report-data">
                         {' '}
-                        {!activityReportData?.activityReportnumber
+                        {!activityTask?.activityReportnumber
                           ? '-'
-                          : activityReportData?.activityReportnumber}{' '}
+                          : activityTask?.activityReportnumber}{' '}
                       </div>
                     </span>
                   </div>
@@ -116,7 +130,7 @@ const ActivityReport = () => {
                   <span>
                     <p>{t('sendToCompany')}</p>
                     <div className="activity-report-data">
-                      {activityReportData?.companyFlag}
+                      {activityTask?.companyFlag}
                     </div>
                     {/* <select className="activity-report-select">
                 <option value="">Select An Option</option>
@@ -166,11 +180,7 @@ const ActivityReport = () => {
             </button>
           </div>
         </>
-      ) : (
-        <div className="activity-report-content-no-data-found">
-          <h5> No Data Found!</h5>
-        </div>
-      )}
+      ) : null }
     </div>
   );
 };

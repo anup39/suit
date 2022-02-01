@@ -1,5 +1,7 @@
 import './ImageDocuments.scss';
 
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +10,7 @@ import { toast } from 'react-toastify';
 import { changeFieldLogStatus } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getfieldlogs } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
 import { getUserAuthToken } from '../../../../../../../../../redux/user-redux/user.selectors';
+import EditModalHeaders from '../../../EditModalHeaders/EditModalHeaders';
 
 const ImageDocuments = () => {
   const [rejectionReason, setRejectionReason] = React.useState('');
@@ -18,7 +21,9 @@ const ImageDocuments = () => {
 
   const dispatch = useDispatch();
 
-  const imageData = fieldLogs.imageTask[0];
+  const imageData = fieldLogs.imageTask;
+  const [imageTask, setimageTask] = React.useState(fieldLogs.imageTask[0]);
+
 
   const handelReject = () => {
     if (!rejectionReason) {
@@ -45,6 +50,11 @@ const ImageDocuments = () => {
       dispatch(changeFieldLogStatus(data));
     }
   };
+
+  const handleCrtabchange = (event, value) => {
+    setimageTask(imageData[value])
+
+  };
   const handelAccept = () => {
     const data = {
       authToken,
@@ -61,71 +71,65 @@ const ImageDocuments = () => {
 
   return (
     <div>
-      {imageData ? (
+      <EditModalHeaders headerName={t('fieldlogimage')} />
+      <Tabs onChange={handleCrtabchange}>
+      {(imageData.length > 0) ? imageData.map ( p => (
+        <Tab key={p.fieldlogId} label={p.fieldlogId}> </Tab>
+      )):
+      (<div className="change-request-content-no-data-found">
+          <h5> No Data Found!</h5>
+        </div>
+      )}
+      </Tabs>
+      {imageTask && imageTask !== null && imageTask !== undefined ?  (
         <>
           <div className="field-log-data">
             <span className="field-log-data-projectId">
               <p>Project Id</p>
-              <div> {!imageData?.projectId ? '-' : imageData?.projectId} </div>
+              <div> {!imageTask?.projectId ? '-' : imageTask?.projectId} </div>
             </span>
             <span className="field-log-data-taskName">
               <p>Task Name</p>
               <div>
-                {!imageData?.projectName ? '-' : imageData?.projectName}
+                {!imageTask?.projectName ? '-' : imageTask?.projectName}
               </div>
             </span>
             <span className="field-log-data-time">
               <p>Time</p>
-              <div>{!imageData?.fieldTime ? '-' : imageData?.fieldTime}</div>
+              <div>{!imageTask?.fieldTime ? '-' : imageTask?.fieldTime}</div>
             </span>
 
             <span className="field-log-data-date">
               <p>Date</p>
-              <div>{!imageData?.fieldDate ? '-' : imageData?.fieldDate}</div>
+              <div>{!imageTask?.fieldDate ? '-' : imageTask?.fieldDate}</div>
             </span>
             <span className="field-log-data-note">
               <p>Note</p>
               <div>
-                {!imageData?.verifierNote ? '-' : imageData?.verifierNote}
+                {!imageTask?.verifierNote ? '-' : imageTask?.verifierNote}
               </div>
             </span>
-            <span className="field-log-data-logs">
-              <p>Field Log</p>
-              <div>{!imageData?.fieldlogId ? '-' : imageData?.fieldlogId}</div>
-            </span>
-            <span className="field-log-data-status">
+             <span className="field-log-data-status">
               <p>Status</p>
-              <div>---</div>
+              <div>
+                {!imageTask?.taskNotification
+                  ? '-'
+                  : imageTask?.taskNotification}
+              </div>
             </span>
             <span className="field-log-data-barcode">
               <p>Barcode Detection</p>
               <div>
-                {!imageData?.barCodeDetection
+                {!imageTask?.barCodeDetection
                   ? '-'
-                  : imageData?.barCodeDetection}
+                  : imageTask?.barCodeDetection}
               </div>
             </span>
-            <span className="field-log-data-user">
-              {' '}
-              <p>User</p>
-              <div>Test User 1</div>
-            </span>
-
             <span className="field-log-data-field-operator">
               {' '}
               <p>Field Operator Id</p>
               <div>
-                {!imageData?.fieldOperatorId ? '-' : imageData?.fieldOperatorId}
-              </div>
-            </span>
-
-            <span className="field-log-data-task-notification">
-              {' '}
-              <p>Task Notification</p>
-              <div>
-                {!imageData?.taskNotification
-                  ? '-'
-                  : imageData?.taskNotification}
+                {!imageTask?.fieldOperatorId ? '-' : imageTask?.fieldOperatorId}
               </div>
             </span>
 
@@ -133,27 +137,27 @@ const ImageDocuments = () => {
               {' '}
               <p>Barcode Value</p>
               <div>
-                {!imageData?.barCodeValues ? '-' : imageData?.barCodeValues}
+                {!imageTask?.barCodeValues ? '-' : imageTask?.barCodeValues}
               </div>
             </span>
 
             <span className="field-log-data-lat">
               {' '}
               <p>Latitude</p>
-              <div>{!imageData?.lat ? '-' : imageData?.lat}</div>
+              <div>{!imageTask?.lat ? '-' : imageTask?.lat}</div>
             </span>
 
             <span className="field-log-data-long">
               {' '}
               <p>Longitude</p>
-              <div>{!imageData?.lon ? '-' : imageData?.lon}</div>
+              <div>{!imageTask?.lon ? '-' : imageTask?.lon}</div>
             </span>
 
             <span className="field-log-data-img-address">
               {' '}
               <p>Image Address</p>
               <div>
-                {!imageData?.imageAddress ? '-' : imageData?.imageAddress}
+                {!imageTask?.imageAddress ? '-' : imageTask?.imageAddress}
               </div>
             </span>
 
@@ -183,11 +187,7 @@ const ImageDocuments = () => {
             </span>
           </div>
         </>
-      ) : (
-        <div className="image-document-content-no-data-found">
-          <h5> No Data Found!</h5>
-        </div>
-      )}
+      ) : null }
     </div>
   );
 };

@@ -121,15 +121,7 @@ const FieldUpdateCard = ({ activityData }) => {
           <span className="field-updates-body-taskItem">
             {activityData.taskName}
           </span>
-          <span className="field-updates-body-fieldLogs">
-            {/* File 1, File 2, +6 more */}-
-          </span>
-          <span className="field-updates-body-activityReport">
-            {/* Activity report 1 */}-
-          </span>
-          <span className="field-updates-body-changeRequest">
-            {/* Task 1 Change */}-
-          </span>
+         
           <span className="field-updates-body-milestoneApproval">
             {/* <CheckCircleOutlinedIcon className="milestone-accepted-icon" /> */}
             {/* <CancelOutlinedIcon className="milestone-rejected-icon" /> */}
