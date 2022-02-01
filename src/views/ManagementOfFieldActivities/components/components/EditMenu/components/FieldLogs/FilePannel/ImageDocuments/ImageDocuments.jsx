@@ -10,7 +10,6 @@ import { toast } from 'react-toastify';
 import { changeFieldLogStatus } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getfieldlogs } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
 import { getUserAuthToken } from '../../../../../../../../../redux/user-redux/user.selectors';
-import EditModalHeaders from '../../../EditModalHeaders/EditModalHeaders';
 
 const ImageDocuments = () => {
   const [rejectionReason, setRejectionReason] = React.useState('');
@@ -23,7 +22,6 @@ const ImageDocuments = () => {
 
   const imageData = fieldLogs.imageTask;
   const [imageTask, setimageTask] = React.useState(fieldLogs.imageTask[0]);
-
 
   const handelReject = () => {
     if (!rejectionReason) {
@@ -52,8 +50,7 @@ const ImageDocuments = () => {
   };
 
   const handleCrtabchange = (event, value) => {
-    setimageTask(imageData[value])
-
+    setimageTask(imageData[value]);
   };
   const handelAccept = () => {
     const data = {
@@ -71,17 +68,20 @@ const ImageDocuments = () => {
 
   return (
     <div>
-      <EditModalHeaders headerName={t('fieldlogimage')} />
       <Tabs onChange={handleCrtabchange}>
-      {(imageData.length > 0) ? imageData.map ( p => (
-        <Tab key={p.fieldlogId} label={p.fieldlogId}> </Tab>
-      )):
-      (<div className="change-request-content-no-data-found">
-          <h5> No Data Found!</h5>
-        </div>
-      )}
+        {imageData.length > 0 ? (
+          imageData.map((p) => (
+            <Tab key={p.fieldlogId} label={p.fieldlogId}>
+              {' '}
+            </Tab>
+          ))
+        ) : (
+          <div className="change-request-content-no-data-found">
+            <h5> No Data Found!</h5>
+          </div>
+        )}
       </Tabs>
-      {imageTask && imageTask !== null && imageTask !== undefined ?  (
+      {imageTask && imageTask !== null && imageTask !== undefined ? (
         <>
           <div className="field-log-data">
             <span className="field-log-data-projectId">
@@ -109,7 +109,7 @@ const ImageDocuments = () => {
                 {!imageTask?.verifierNote ? '-' : imageTask?.verifierNote}
               </div>
             </span>
-             <span className="field-log-data-status">
+            <span className="field-log-data-status">
               <p>Status</p>
               <div>
                 {!imageTask?.taskNotification
@@ -172,22 +172,26 @@ const ImageDocuments = () => {
             </span>
           </div>
 
-          <div className="change-request-buttons-div">
-            <span
-              className="change-request-button-reject"
-              onClick={handelReject}
-            >
-              {t('reject')}
-            </span>
-            <span
-              className="change-request-button-accept"
-              onClick={handelAccept}
-            >
-              {t('accept')}
-            </span>
-          </div>
+          {imageTask.verifierCheck === null ? (
+            <div className="change-request-buttons-div">
+              <span
+                className="change-request-button-reject"
+                onClick={handelReject}
+              >
+                {t('reject')}
+              </span>
+              <span
+                className="change-request-button-accept"
+                onClick={handelAccept}
+              >
+                {t('accept')}
+              </span>
+            </div>
+          ) : (
+            ''
+          )}
         </>
-      ) : null }
+      ) : null}
     </div>
   );
 };

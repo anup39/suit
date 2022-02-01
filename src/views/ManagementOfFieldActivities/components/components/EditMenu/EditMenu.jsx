@@ -1,4 +1,3 @@
-/* eslint-disable */
 import './EditMenu.scss';
 
 import AddIcon from '@mui/icons-material/Add';
@@ -17,16 +16,18 @@ import WebexFiles from '../../../../../components/shared/Webex-components/webex-
 import WebexMessages from '../../../../../components/shared/Webex-components/webex-message/WebexMessages';
 import { getAllfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
+import { changeTaskStatus } from '../../../../../redux/worklist-management-redux/worklist.actions';
 import ActivityReport from './components/ActivityReport/ActivityReport';
 import ChangeRequest from './components/ChangeRequest/ChangeRequest';
 import FieldLogs from './components/FieldLogs/FieldLogs';
 import Milestone from './components/Milestone/Milestone';
 
-const EditMenu = ({ taskId, handleCancel, roomId }) => {
+const EditMenu = ({ taskId, handleCancel, roomId, currentTaskStatus }) => {
   const { t } = useTranslation();
 
   const [open, setOpen] = React.useState(false);
   const [option, setOption] = React.useState(0);
+  const [taskStatus, setTaskStatus] = React.useState(currentTaskStatus);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const [isWebexMessageModalOpen, setIsWebexMessageModalOpen] =
     React.useState(false);
@@ -66,6 +67,20 @@ const EditMenu = ({ taskId, handleCancel, roomId }) => {
 
   const handleWebexFileModalClose = () => {
     setIsWebexFileModalOpen(false);
+  };
+
+  const handleTaskChange = (e) => {
+    setTaskStatus(e.target.value);
+
+    const dataToSend = {
+      authToken,
+      data: {
+        taskIdValue: taskId,
+        taskStatus,
+      },
+    };
+
+    dispatch(changeTaskStatus(dataToSend));
   };
 
   const renderComponent = (value) => {
@@ -143,10 +158,23 @@ const EditMenu = ({ taskId, handleCancel, roomId }) => {
         </span> */}
         <span>
           <p>{t('status')}</p>
-          <select className="change-status-div">
-            <option>{t('completed')}</option>
-            <option>{t('suspended')}</option>
-            <option>{t('notStarted')}</option>
+          <select
+            className="change-status-div"
+            onChange={handleTaskChange}
+            value={taskStatus}
+          >
+            <option value="Not assigned">{t('notassigned')}</option>
+            <option value="Not started">{t('notStarted')}</option>
+            <option value="In progress/started">
+              {t('inprogressstarted')}
+            </option>
+            <option value="Waiting for feedback">
+              {t('waitingforfeedback')}
+            </option>
+            <option value="Approved">{t('approved')}</option>
+            <option value="Canceled">{t('canceled')}</option>
+            <option value="Completed">{t('completed')}</option>
+            <option value="Suspended">{t('suspended')}</option>
           </select>
         </span>
         <span>
@@ -187,6 +215,7 @@ EditMenu.propTypes = {
   handleCancel: PropTypes.func.isRequired,
   taskId: PropTypes.isRequired,
   roomId: PropTypes.isRequired,
+  currentTaskStatus: PropTypes.isRequired,
 };
 
 export default EditMenu;

@@ -71,11 +71,11 @@ export const GET_COMPANY_ALL_USERS = async (data) => {
 
 export const COMPANY_ADD_USERS = async (data) => {
   const newToken = await REFERSH_TOKEN(data.payload.authToken);
-  const userData = { 
+  const userData = {
     idUser: data.payload.idUser,
-    companies_id : data.payload.companies_id,
-  }
-  const userListResponse = await  axios(COMPANY_MANAGEMENT.addCompanyUsers,{
+    companies_id: data.payload.companies_id,
+  };
+  const userListResponse = await axios(COMPANY_MANAGEMENT.addCompanyUsers, {
     headers: {
       Authorization: `Bearer ${newToken}`,
     },
@@ -88,12 +88,15 @@ export const COMPANY_ADD_USERS = async (data) => {
 
 export const COMPANY_DELETE_USERS = async (data) => {
   const newToken = await REFERSH_TOKEN(data.payload.authToken);
-  const userListResponse = await axios(`${COMPANY_MANAGEMENT.deleteCompanyUsers}${data.payload.user_id}/${data.payload.company_id}`,{
-    headers: {
-      Authorization: `Bearer ${newToken}`,
-    },
-    method: 'DELETE',
-  });
+  const userListResponse = await axios(
+    `${COMPANY_MANAGEMENT.deleteCompanyUsers}${data.payload.user_id}/${data.payload.company_id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${newToken}`,
+      },
+      method: 'DELETE',
+    }
+  );
 
   return userListResponse;
 };

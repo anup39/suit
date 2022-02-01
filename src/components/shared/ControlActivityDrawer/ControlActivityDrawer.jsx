@@ -19,6 +19,7 @@ import {
   getIfControlActivityDataAddLoading,
 } from '../../../redux/Management-of-field-activities/management-field-activities.selectors';
 import { getUserAuthToken } from '../../../redux/user-redux/user.selectors';
+import GlobalSpinner from '../Spinners/GlobalSpinner';
 import ControlActivityFields from './components/ControlActivityFields/ControlActivityFields';
 
 const ControlActivityDrawer = ({ handleClose, taskId }) => {
@@ -97,6 +98,7 @@ const ControlActivityDrawer = ({ handleClose, taskId }) => {
 
   return (
     <div className="control-activity-base-div">
+      <GlobalSpinner isOpen={isControlActivityDataAddLoading} />
       <h2>Control Activity</h2>
       <span>
         {' '}

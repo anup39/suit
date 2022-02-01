@@ -12,9 +12,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
 import { getAllfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
-import { getfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
+// import { getfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
 import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
 import ControlActivityDrawer from '../../../ControlActivityDrawer/ControlActivityDrawer';
+import WebexFiles from '../../../Webex-components/webex-files/WebexFiles';
+import WebexMessages from '../../../Webex-components/webex-message/WebexMessages';
 import ActivityReport from './components/ActivityReport/ActivityReport';
 import ChangeRequest from './components/ChangeRequest/ChangeRequest';
 import FieldLogs from './components/FieldLogs/FieldLogs';
@@ -27,8 +29,11 @@ const EditMenu = ({ activityData, handleCancel }) => {
   const [open, setOpen] = React.useState(false);
   const [option, setOption] = React.useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [isWebexMessageModalOpen, setIsWebexMessageModalOpen] =
+    React.useState(false);
+  const [isWebexFileModalOpen, setIsWebexFileModalOpen] = React.useState(false);
 
-  const fieldlogs = useSelector(getfieldlogs);
+  // const fieldlogs = useSelector(getfieldlogs);
   const authToken = useSelector(getUserAuthToken);
 
   const handleOpen = (e) => {
@@ -38,6 +43,22 @@ const EditMenu = ({ activityData, handleCancel }) => {
   const handleClose = () => {
     setOpen(false);
     setOption(0);
+  };
+
+  const handleWebexMessageOpen = () => {
+    setIsWebexMessageModalOpen(true);
+  };
+
+  const handleWebexMessageModalClose = () => {
+    setIsWebexMessageModalOpen(false);
+  };
+
+  const handleWebexFileModalOpen = () => {
+    setIsWebexFileModalOpen(true);
+  };
+
+  const handleWebexFileModalClose = () => {
+    setIsWebexFileModalOpen(false);
   };
 
   useEffect(() => {
@@ -66,12 +87,33 @@ const EditMenu = ({ activityData, handleCancel }) => {
   return (
     <>
       <Drawer anchor="right" onClose={handleDrawerClose} open={isDrawerOpen}>
-        <ControlActivityDrawer handleClose={handleDrawerClose} />
+        <ControlActivityDrawer
+          handleClose={handleDrawerClose}
+          taskId={activityData.taskId}
+        />
       </Drawer>
-      {console.log(fieldlogs)}
+
       <Modal onClose={handleClose} open={open}>
         {renderComponent(option)}
       </Modal>
+
+      <Modal
+        onClose={handleWebexMessageModalClose}
+        open={isWebexMessageModalOpen}
+      >
+        <WebexMessages
+          handleClose={handleWebexMessageModalClose}
+          roomId={activityData?.roomId}
+        />
+      </Modal>
+
+      <Modal onClose={handleWebexFileModalClose} open={isWebexFileModalOpen}>
+        <WebexFiles
+          handleClose={handleWebexFileModalClose}
+          roomId={activityData?.roomId}
+        />
+      </Modal>
+
       <div className="edit-menu-base">
         <span>
           <p>{t('taskItem')}</p>
@@ -115,8 +157,14 @@ const EditMenu = ({ activityData, handleCancel }) => {
           <div>
             <span className="field-updates-body-controlActivity">
               <AutorenewOutlinedIcon className="control-activity-icons" />
-              <UploadFileOutlinedIcon className="control-activity-icons" />
-              <CommentIcon className="control-activity-icons" />
+              <UploadFileOutlinedIcon
+                className="control-activity-icons"
+                onClick={handleWebexFileModalOpen}
+              />
+              <CommentIcon
+                className="control-activity-icons"
+                onClick={handleWebexMessageOpen}
+              />
               <img alt="Webex Icon" className="webex-icon" src={WebExIcon} />
               <AddIcon
                 className="control-activity-icons"

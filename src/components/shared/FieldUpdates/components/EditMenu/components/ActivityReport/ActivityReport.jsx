@@ -19,7 +19,9 @@ const ActivityReport = () => {
   const fieldLogData = useSelector(getfieldlogs);
   const authToken = useSelector(getUserAuthToken);
   const activityReportData = fieldLogData?.activityTask[0];
-  const [activityTask, setactivityTask] = React.useState(fieldLogData.activityTask[0]);
+  const [activityTask, setactivityTask] = React.useState(
+    fieldLogData.activityTask[0]
+  );
 
   const dispatch = useDispatch();
 
@@ -50,8 +52,7 @@ const ActivityReport = () => {
   };
 
   const handleCrtabchange = (event, value) => {
-    setactivityTask(activityReportData[value])
-
+    setactivityTask(activityReportData[value]);
   };
   const handelAccept = () => {
     const data = {
@@ -71,15 +72,19 @@ const ActivityReport = () => {
     <div className="activity-report-base">
       <EditModalHeaders headerName={t('activityreport')} />
       <Tabs onChange={handleCrtabchange}>
-      {(activityReportData.length > 0) ? activityReportData.map ( p => (
-        <Tab key={p.fieldlogId} label={p.fieldlogId}> </Tab>
-      )):
-      (<div className="change-request-content-no-data-found">
-          <h5> No Data Found!</h5>
-        </div>
-      )}
+        {activityReportData.length > 0 ? (
+          activityReportData.map((p) => (
+            <Tab key={p.fieldlogId} label={p.fieldlogId}>
+              {' '}
+            </Tab>
+          ))
+        ) : (
+          <div className="change-request-content-no-data-found">
+            <h5> No Data Found!</h5>
+          </div>
+        )}
       </Tabs>
-      {activityTask && activityTask !== null && activityTask !== undefined ?  (
+      {activityTask && activityTask !== null && activityTask !== undefined ? (
         <>
           <div>
             <div className="activity-report-content">
@@ -132,12 +137,6 @@ const ActivityReport = () => {
                     <div className="activity-report-data">
                       {activityTask?.companyFlag}
                     </div>
-                    {/* <select className="activity-report-select">
-                <option value="">Select An Option</option>
-                <option value={1}>Yes</option>
-                <option value={
-                  0}>No</option>
-              </select> */}
                   </span>
 
                   <span>
@@ -180,7 +179,7 @@ const ActivityReport = () => {
             </button>
           </div>
         </>
-      ) : null }
+      ) : null}
     </div>
   );
 };

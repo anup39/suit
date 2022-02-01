@@ -91,7 +91,6 @@ const AssignWorkActivities = () => {
   };
 
   const handelOpenDrawer = () => {
-    dispatch(getAllCompany(userAuthToken));
     setIsDrawerOpen(true);
   };
 
@@ -110,6 +109,7 @@ const AssignWorkActivities = () => {
   React.useEffect(() => {
     if (workListData.length === 0) {
       dispatch(getWorkList(userAuthToken));
+      dispatch(getAllCompany(userAuthToken));
     } else if (deleteWorklistSuccess) {
       setTimeout(() => {
         dispatch(getWorkList(userAuthToken));
