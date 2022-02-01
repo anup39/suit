@@ -13,7 +13,8 @@ import {
   addNewFileSuccess,
   addNewMessageError,
   addNewMessageSuccess,
-  getAccessToken,
+  getAccessTokenError,
+  getAccessTokenSuccess,
   getRoomsError,
   getRoomsSuccess,
 } from './webex.actions';
@@ -22,9 +23,9 @@ import WEBEX_ACTION_TYPES from './webex.types';
 export function* onGetAccessToken({ payload }) {
   try {
     const newpayload = yield call(GET_WEBEX_ACCESSTOKEN_REQ, payload);
-    yield put(getAccessToken(newpayload));
+    yield put(getAccessTokenSuccess(newpayload));
   } catch (error) {
-    console.log(error);
+    yield put(getAccessTokenError(error.response.data));
   }
 }
 

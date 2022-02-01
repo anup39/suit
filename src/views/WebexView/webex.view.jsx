@@ -92,12 +92,7 @@ const WebexView = () => {
   const onhandleChange = (e) => {
     setSelectedOption(e);
     setdestinationId(e.value);
-    console.log(`Destination :: ${e.value}`);
   };
-  const el = document.createElement('script');
-  el.onload = () => {};
-  el.src = 'https://code.s4d.io/widget-space/production/bundle.js';
-  document.getElementsByTagName('head')[0].append(el);
 
   useEffect(() => {
     dispatch(webexAuthSuccess(webexParamToken));
@@ -119,8 +114,6 @@ const WebexView = () => {
   useEffect(()=> {
     if(webexAccessToken && webexAccessToken !== null)
     {
-      localStorage.setItem('webexaccessToken');
-      localStorage.setItem('webexrefreshToken');
       dispatch(getRooms(webexAccessToken.access_token));
     }
   }, [webexAccessToken])

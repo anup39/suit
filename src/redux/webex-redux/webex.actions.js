@@ -19,6 +19,17 @@ export const getAccessToken = (data) => ({
   payload: data,
 });
 
+
+export const getAccessTokenSuccess = (data) => ({
+  type: WEBEX_ACTION_TYPES.GET_WEBEX_ACCESSTOKEN_SUCCESS,
+  payload: data,
+});
+
+export const getAccessTokenError = (data) => ({
+  type: WEBEX_ACTION_TYPES.GET_WEBEX_ACCESSTOKEN_ERROR,
+  payload: data,
+});
+
 export const getRooms = (data) => ({
   type: WEBEX_ACTION_TYPES.GET_WEBEX_ROOMS,
   payload: data,

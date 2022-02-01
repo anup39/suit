@@ -78,17 +78,8 @@ const FieldUpdates = () => {
             <span className="field-updates-header-taskItem">
               {t('taskItem')}
             </span>
-            <span className="field-updates-header-fieldLogs">
-              {t('fieldLogs')}
-            </span>
-            <span className="field-updates-header-activityReport">
-              {t('activityreport')}
-            </span>
-            <span className="field-updates-header-changeRequest">
-              {t('changerequest')}
-            </span>
             <span className="field-updates-header-milestoneApproval">
-              {t('milestoneapproval')}
+              {t('milestone')}
             </span>
             <span className="field-updates-header-status">{t('status')}</span>
             <span className="field-updates-header-controlActivity">

@@ -52,16 +52,16 @@ const FieldUpdates = () => {
             <span className="field-updates-header-checkInput">
               <input type="checkbox" />
             </span>
-            <span className="field-updates-header-taskItem">Task Item</span>
+            <span className="field-updates-header-taskItem">{t('taskItem')}</span>
 
             <span className="field-updates-header-milestoneApproval">
-              Milestone approval
+            {t('milestone')}
             </span>
-            <span className="field-updates-header-status">Status</span>
+            <span className="field-updates-header-status">{t('status')}</span>
             <span className="field-updates-header-controlActivity">
-              Control Activity
+            {t('controlActivity')}
             </span>
-            <span className="field-updates-header-actions">Actions</span>
+            <span className="field-updates-header-actions">{t('actions')}</span>
           </div>
           <div>
             <FieldUpdateCard />

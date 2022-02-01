@@ -3,6 +3,9 @@ import WEBEX_ACTION_TYPES from './webex.types';
 const INITIAL_STATE = {
   webex_access_token: null,
   access_token: null,
+  isaccess_tokenLoading: false,
+  access_tokenError: false,
+  access_tokenSuccess: false,
   rooms: [],
   isroomsLoading: false,
   roomsListError: false,
@@ -34,8 +37,24 @@ const webexReducer = (state = INITIAL_STATE, action) => {
     case WEBEX_ACTION_TYPES.GET_WEBEX_ACCESSTOKEN_REQ:
       return {
         ...state,
-        access_token: action.payload,
+        access_token: null,
+        isaccess_tokenLoading: true,
+        access_tokenSuccess: false,
       };
+
+    case WEBEX_ACTION_TYPES.GET_WEBEX_ACCESSTOKEN_SUCCESS:
+      return {
+          ...state,
+          access_token: action.payload,
+          isaccess_tokenLoading: false,
+          access_tokenSuccess: true,
+        };
+    case WEBEX_ACTION_TYPES.GET_WEBEX_ACCESSTOKEN_ERROR:
+          return {
+            ...state,
+            access_token: null,
+            isaccess_tokenLoading: false,
+            access_tokenError: action.payload,          };
     case WEBEX_ACTION_TYPES.GET_WEBEX_ROOMS:
       return {
         ...state,
@@ -112,14 +131,6 @@ const webexReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         addNewFile: action.payload,
-        isAddNewFileLoading: false,
-        addNewFileError: '',
-      };
-
-    case WEBEX_ACTION_TYPES.RESET_WEBEX_FILE:
-      return {
-        ...state,
-        addNewFile: '',
         isAddNewFileLoading: false,
         addNewFileError: '',
       };

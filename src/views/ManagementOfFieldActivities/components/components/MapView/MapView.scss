@@ -1,6 +1,10 @@
-.mgmt-map-view-base-div {
+body>iframe {
+  display: none;
+}
+
+.map-view-base-div {
   width: 100%;
-  height: calc(100vh - 235px);
+  height: calc(100vh - 328px);
   display: flex;
   flex-direction: row;
   overflow: hidden;
@@ -102,6 +106,7 @@
     font-size: 14px;
     margin: 0 0 6px 0;
     position: relative;
+
   }
 
   h6 {
@@ -113,6 +118,12 @@
 
 .map-view-document-details-base {
   margin-top: 25px;
+}
+
+.map-view-document-details-base span {
+  color: rgb(0, 0, 0);
+  margin: 10px;
+  text-align: center;
 }
 
 .map-view-document-details-base h6 {
