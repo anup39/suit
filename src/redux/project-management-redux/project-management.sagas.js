@@ -139,30 +139,30 @@ export function* assignProjectToCompany({ payload }) {
   try {
     const projectData = yield call(ASSIGN_PROJECT_TO_COMPANY, payload);
     yield put(assignProjectSuccess(projectData));
-    if(projectData.status === '200'){
-    yield toast.success(projectData.message, {
-      position: 'top-center',
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  }else{
-    yield toast.warn(projectData.message, {
-      position: 'top-center',
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  } 
+    if (projectData.status === '200') {
+      yield toast.success(projectData.message, {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      yield toast.error('Failed To Assign Project To Company!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   } catch (err) {
     yield put(assignProjectError(err.response.data));
-    yield toast.error('Failed To Assign Project!', {
+    yield toast.error('Failed To Assign Project To Company!', {
       position: 'top-center',
       autoClose: 2000,
       hideProgressBar: false,

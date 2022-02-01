@@ -42,7 +42,6 @@ const PROJECT_MANAGEMENT_INITIAL_STATE = {
   isImportProjectDataLoading: false,
   ImportProjectDataError: '',
 
-  
   selectedProjectLayerList: [],
   isSelectedProjectLayerListDataLoading: false,
 
@@ -238,6 +237,14 @@ const projectManagementReducer = (
         assingProjectError: '',
       };
 
+    case PROJECT_MANAGEMENT_TYPES.RESET_ASSIGN_PROJECT_TO_COMPANY:
+      return {
+        ...state,
+        assingProject: '',
+        isAssingProjectLoading: false,
+        assingProjectError: '',
+      };
+
     case PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DASHBORD:
       return {
         ...state,
@@ -311,39 +318,39 @@ const projectManagementReducer = (
       };
 
     case PROJECT_MANAGEMENT_TYPES.GET_SELECTED_PROJECT_LAYERS_LIST:
-        return {
-          ...state,
-          // isSelectedProjectListLoading: true,
-          // projectList: [],
-          // projectListSuccess: false,
-          isSelectedProjectLayerListDataLoading: true,
-          selectedProjectLayerList: [],
-        };
-  
+      return {
+        ...state,
+        // isSelectedProjectListLoading: true,
+        // projectList: [],
+        // projectListSuccess: false,
+        isSelectedProjectLayerListDataLoading: true,
+        selectedProjectLayerList: [],
+      };
+
     case PROJECT_MANAGEMENT_TYPES.GET_SELECTED_PROJECT_LAYERS_LIST_SUCCESS:
-        return {
-          ...state,
-          // isProjectListLoading: false,
-          // projectList: action.payload,
-          // projectListError: '',
-          isSelectedProjectLayerListDataLoading: false,
-          selectedProjectLayerList: action.payload,
-        };
-  
+      return {
+        ...state,
+        // isProjectListLoading: false,
+        // projectList: action.payload,
+        // projectListError: '',
+        isSelectedProjectLayerListDataLoading: false,
+        selectedProjectLayerList: action.payload,
+      };
+
     case PROJECT_MANAGEMENT_TYPES.GET_SELECTED_PROJECT_LAYERS_LIST_ERROR:
-        return {
-          ...state,
-          // isProjectListLoading: false,
-          // projectList: [],
-          // projectListError: action.payload,
-          isSelectedProjectLayerListDataLoading: false,
-          selectedProjectLayerList: [],
-        };
+      return {
+        ...state,
+        // isProjectListLoading: false,
+        // projectList: [],
+        // projectListError: action.payload,
+        isSelectedProjectLayerListDataLoading: false,
+        selectedProjectLayerList: [],
+      };
     case PROJECT_MANAGEMENT_TYPES.SELECT_TASK_ID:
-        return {
-          ...state,
-          selectedTaskId: action.payload,
-        };
+      return {
+        ...state,
+        selectedTaskId: action.payload,
+      };
     default:
       return state;
   }

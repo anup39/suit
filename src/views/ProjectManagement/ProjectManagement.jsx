@@ -56,6 +56,10 @@ const ProjectManagement = () => {
 
   const navigate = useNavigate();
 
+  const handleBack = () => {
+    setShowProjectPannel(false);
+  };
+
   const handelShowProjectPannel = (projectId) => {
     setShowProjectPannel(true);
     const data = {
@@ -197,7 +201,7 @@ const ProjectManagement = () => {
           </Box>
         </div>
       ) : (
-        <ProjectPannel />
+        <ProjectPannel handleBack={handleBack} />
       )}
     </BaseTemplate>
   );

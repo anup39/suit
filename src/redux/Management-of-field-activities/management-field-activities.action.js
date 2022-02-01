@@ -100,6 +100,11 @@ export const resetControlActivityData = () => ({
   payload: '',
 });
 
+export const resetAddControlActivityData = () => ({
+  type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.ADD_CONTROL_ACTIVITY_DATA_RESET,
+  payload: '',
+});
+
 export const controlActivityDataAdd = (data) => ({
   type: MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.ADD_CONTROL_ACTIVITY_DATA,
   payload: data,

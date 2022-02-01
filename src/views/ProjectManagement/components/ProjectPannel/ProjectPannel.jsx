@@ -4,13 +4,17 @@ import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import FieldUpdates from '../../../../components/shared/FieldUpdates/FieldUpdates';
 import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner';
-import { getImportProjectDataLoading,getProjectData  } from '../../../../redux/project-management-redux/project.selector';
+import {
+  getImportProjectDataLoading,
+  getProjectData,
+} from '../../../../redux/project-management-redux/project.selector';
 import Documents from '../Documents/Documents';
 import ImportDrawer from '../ImportProject/components/import-drawer/import-drawer';
 import ImportProject from '../ImportProject/import-project.view';
@@ -18,7 +22,7 @@ import Projects from '../Projects/Projects';
 import WorkList from '../WorkList/WorkList';
 import TabPanel from './TabPanel';
 
-const ProjectPannel = () => {
+const ProjectPannel = ({ handleBack }) => {
   const [value, setValue] = React.useState(0);
   const { t } = useTranslation();
   const projectData = useSelector(getProjectData);
@@ -47,7 +51,7 @@ const ProjectPannel = () => {
         {value === 4 && (
           <div>
             <button
-            className="import-project-data-add-button"
+              className="import-project-data-add-button"
               onClick={handleOpen}
               type="button"
             >
@@ -57,7 +61,12 @@ const ProjectPannel = () => {
           </div>
         )}
         <div className="project-bread-crumbs">
-          <span>Project Management/ {projectData.name}</span>
+          <span>
+            <span className="breadcrumbs-back" onClick={handleBack}>
+              Project Management/
+            </span>{' '}
+            {projectData.name}
+          </span>
         </div>
 
         <div className="project-main-div">
@@ -94,6 +103,10 @@ const ProjectPannel = () => {
       </div>
     </>
   );
+};
+
+ProjectPannel.propTypes = {
+  handleBack: PropTypes.isRequired,
 };
 
 export default ProjectPannel;

@@ -10,6 +10,7 @@ import {
   controlActivityDataAdd,
   getAllControlActivity,
   getControlActivityParam,
+  resetAddControlActivityData,
   resetControlActivityData,
 } from '../../../redux/Management-of-field-activities/management-field-activities.action';
 import {
@@ -93,6 +94,8 @@ const ControlActivityDrawer = ({ handleClose, taskId }) => {
       dispatch(getAllControlActivity(data));
     } else if (controlActivityDataAddSuccess) {
       handleClose();
+      dispatch(resetControlActivityData());
+      dispatch(resetAddControlActivityData());
     }
   }, [isControlActivityDataAddLoading]);
 

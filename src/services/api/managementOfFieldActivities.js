@@ -42,7 +42,7 @@ export const GET_FIELD_LOGS_BY_TASK = async (data) => {
 export const CHANGE_LOG_STATUS = async (payloadData) => {
   const { authToken, taskData } = payloadData;
 
-  console.log(payloadData)
+  console.log(payloadData);
   const newToken = await REFERSH_TOKEN(authToken);
 
   const allActivities = await axios(
