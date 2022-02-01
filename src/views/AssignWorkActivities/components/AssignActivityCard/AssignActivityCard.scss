@@ -3,13 +3,10 @@
 .assign-work-activity-table-data {
   display: table;
   width: 100%;
-  border-bottom: 1px solid #D4DEEA;
-
 
   &:last-child {
     border: none;
   }
-
 }
 
 .assign-work-activity-table-data span {
@@ -18,8 +15,9 @@
   padding: 10px;
   font-size: 14px;
   vertical-align: middle;
-  color: #364A63;
+  color: #364a63;
   margin-left: 10px;
+  border-bottom: 1px solid #d4deea;
 
   svg {
     font-size: 18px;
@@ -41,66 +39,49 @@
   width: 15%;
 
   display: inline-block;
-
 }
 
 .assign-work-activities-card-company {
-
   width: 10%;
   display: inline-block;
-
 }
 
 .assign-work-activities-card-company .assign-work-activities-card-taskId {
-
   width: 8%;
   display: inline-block;
-
 }
 
 .assign-work-activities-company {
-
   width: 10%;
   display: inline-block;
-
 }
 
 .assign-work-activities-card-taskId {
   width: 8%;
-
 }
 
 .assign-work-activities-card-task-name {
-
   width: 15%;
   display: inline-block;
-
 }
 
 .assign-work-activities-card-task-description {
-
   width: 17%;
   display: inline-block;
-
 }
 
 .assign-work-activities-card-isMilestone {
-
   width: 10%;
   display: inline-block;
-
 }
 
 .assign-work-activities-card-type {
-
   width: 10%;
 }
 
 .assign-work-activities-card-status {
-
   width: 10%;
   display: inline-block;
-
 }
 
 .assign-work-activities-card-actions {

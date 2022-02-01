@@ -18,6 +18,7 @@ import {
   deselectOneTask,
   selectOneTask,
 } from '../../../../redux/assign-worklist/assign-worklist.action';
+import { getCompaniesList } from '../../../../redux/company-redux/company.selectors';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import { deleteTaskByID } from '../../../../redux/worklist-management-redux/worklist.actions';
 
@@ -34,10 +35,12 @@ const AssignActivityCard = ({
   const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
   const [checkBox, setCheckBox] = React.useState(false);
   const [modalOpen, setModalOpen] = React.useState(false);
+  const [actualCompanyName, setActualCompanyName] = React.useState('');
   const isAllSelected = useSelector(getIsSelectAll);
   const selectedTaskList = useSelector(getSelectedTaskList);
   const authToken = useSelector(getUserAuthToken);
   const dispatch = useDispatch();
+  const companyList = useSelector(getCompaniesList);
   const { t } = useTranslation();
 
   const open = Boolean(menuAnchorEl);
@@ -75,6 +78,15 @@ const AssignActivityCard = ({
   };
 
   React.useEffect(() => {
+    if (companyList) {
+      // eslint-disable-next-line
+      companyList.map((vals) => {
+        if (vals.id === companyName) {
+          setActualCompanyName(vals.name);
+        }
+      });
+    }
+
     let alreadyInList = false;
     // eslint-disable-next-line
     selectedTaskList.map((task) => {
@@ -118,7 +130,7 @@ const AssignActivityCard = ({
         </span>
 
         <span className="assign-work-activities-card-company">
-          {!companyName ? '-' : companyName}
+          {!actualCompanyName ? '-' : actualCompanyName}
         </span>
         <span className="assign-work-activities-card-taskId">{taskId}</span>
         <span className="assign-work-activities-card-task-name">
@@ -167,5 +179,3 @@ AssignActivityCard.propTypes = {
   status: PropTypes.string,
 };
 export default AssignActivityCard;
-
-// TODO: Confirm Is Milestone.
