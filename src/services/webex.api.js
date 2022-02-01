@@ -34,10 +34,10 @@ export const GET_WEBEX_ACCESSTOKEN_REQ = async (payload) => {
   return webexAccessToken.data;
 };
 
-export const GET_WEBEX_ROOMS = async () => {
+export const GET_WEBEX_ROOMS = async (accesstoken) => {
   const roomsout = await axios(`${WEBEX_MANAGEMENT_API.GET_ROOMS}`, {
     headers: {
-      Authorization: `Bearer YmVkOTM5YmYtYTM2Yi00ODEwLWI4YmUtMjkzMmU4N2JmMGI3N2NiM2E2OTEtOGU5_P0A1_5854f144-ce4c-448d-a8d9-4c4002d8c122`,
+      Authorization: `Bearer ${accesstoken}`,
     },
   });
 

@@ -36,9 +36,9 @@ export function* onGetAccessTokenStart() {
   );
 }
 
-export function* onGetRooms() {
+export function* onGetRooms( {payload}) {
   try {
-    const getrooms = yield call(GET_WEBEX_ROOMS);
+    const getrooms = yield call(GET_WEBEX_ROOMS,payload);
     yield put(getRoomsSuccess(getrooms));
   } catch (error) {
     console.log(error);
