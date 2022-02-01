@@ -5,7 +5,7 @@ import DocumentsCard from '../../../../views/ProjectManagement/components/Docume
 
 const ProjectDocuments = ({ currentItems }) => {
   return (
-    <div>
+    <div className="document-table-tbody">
       {currentItems &&
         currentItems.map((values) => (
           <DocumentsCard key={values.id} documentsDetails={values} />

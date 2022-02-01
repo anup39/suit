@@ -217,7 +217,7 @@ const FieldUpdateCard = ({ activityData }) => {
               onClick={handleDrawerOpen}
             />
           </span>
-          <span className="field-updates-body-actiosn">
+          <span className="field-updates-body-actions">
             <MoreHorizRoundedIcon
               className="filed-update-menu-icon"
               onClick={handleClick}
