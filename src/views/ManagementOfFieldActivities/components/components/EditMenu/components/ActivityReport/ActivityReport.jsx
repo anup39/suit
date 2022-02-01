@@ -1,5 +1,6 @@
 import './ActivityReport.scss';
 
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +11,7 @@ import { getfieldlogs } from '../../../../../../../redux/Management-of-field-act
 import { getUserAuthToken } from '../../../../../../../redux/user-redux/user.selectors';
 import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
 
-const ActivityReport = () => {
+const ActivityReport = ({ handleCloseModal }) => {
   const { t } = useTranslation();
 
   const fieldLogData = useSelector(getfieldlogs);
@@ -164,8 +165,11 @@ const ActivityReport = () => {
             </div>
           </div>
           <div className="text-right">
-            <button className="activity-close-button" type="button">
-              {' '}
+            <button
+              className="activity-close-button"
+              onClick={handleCloseModal}
+              type="button"
+            >
               {t('close')}
             </button>
           </div>
@@ -177,6 +181,10 @@ const ActivityReport = () => {
       )}
     </div>
   );
+};
+
+ActivityReport.propTypes = {
+  handleCloseModal: PropTypes.isRequired,
 };
 
 export default ActivityReport;

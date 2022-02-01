@@ -86,8 +86,8 @@ const EditMenu = ({ taskId, handleCancel, roomId, currentTaskStatus }) => {
   const renderComponent = (value) => {
     const components = [
       <FieldLogs key="Field Logs" />,
-      <ActivityReport key="Activity Report" />,
-      <ChangeRequest key="Change Request" />,
+      <ActivityReport key="Activity Report" handleCloseModal={handleClose} />,
+      <ChangeRequest key="Change Request" handleCloseModal={handleClose} />,
       <Milestone key="Milestone" />,
     ];
 
