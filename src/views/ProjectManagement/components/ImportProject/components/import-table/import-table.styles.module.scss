@@ -15,6 +15,10 @@
   border-bottom: 1px solid #d4deea;
 }
 
+.datagrid_tables_containers{
+  height: calc(100vh - 343px);
+  overflow: auto;
+}
 .datagrid_tables {
   width: 100%;
   border-collapse: collapse;
@@ -100,7 +104,6 @@
 
 .table_body {
   border-bottom: 1px solid #ddd;
-  min-height: 500px;
 }
 
 .table_slider_container {

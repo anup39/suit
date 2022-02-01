@@ -148,7 +148,7 @@ const English = {
   approvedBy: 'Approved By',
   approveDate: 'Approve Date',
   addTask: 'Add Task',
-  exportWorklist: 'Arbeitsliste exportieren',
+  exportWorklist: 'Export Worklist',
   exportCSV: 'Export CSV',
   exportXML: 'Export XML',
   changeTaskStatus: 'Change Task Status',
@@ -179,8 +179,7 @@ const English = {
   reportDate: 'Report Date',
   sendToCompany: 'Send To Company',
   fieldlogimage: 'Field Log Image',
-  fieldlognotes: 'Field Log Notes'
-
+  fieldlognotes: 'Field Log Notes',
 };
 
 export default English;

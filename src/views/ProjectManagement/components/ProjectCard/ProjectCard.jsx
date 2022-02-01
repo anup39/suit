@@ -10,6 +10,8 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AreYouSure from '../../../../components/shared/AreYouSure/AreYouSure';
+import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner';
+import { getIsGetProjectDataLoading } from '../../../../redux/project-management-redux/project.selector';
 import { deleteProjectData } from '../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 
@@ -26,10 +28,12 @@ const ProjectCard = ({
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [deleteModal, setDeleteModal] = React.useState(false);
+
   const open = Boolean(anchorEl);
   const { t } = useTranslation();
 
   const authToken = useSelector(getUserAuthToken);
+  const isGetProjectDataLoading = useSelector(getIsGetProjectDataLoading);
   const dispatch = useDispatch();
 
   const handleClick = (event) => {
@@ -72,7 +76,7 @@ const ProjectCard = ({
           headline="Are you sure you want to Delete the Project?"
         />
       </Modal>
-
+      <GlobalSpinner isOpen={isGetProjectDataLoading} />
       <div className="project-card-base-div">
         {/* <span className="project-card-check-input">
         <input type="checkbox" />

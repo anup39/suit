@@ -210,6 +210,15 @@ const magagementOfFieldActivitiesReducer = (state = initialState, action) => {
         isAddControlActivityDataLoading: false,
         addControlActivityDataError: action.payload,
       };
+
+    case MANAGEMENT_OF_FIELD_ACTIVITIES_TYPES.ADD_CONTROL_ACTIVITY_DATA_RESET:
+      return {
+        ...state,
+
+        addControlActivityData: '',
+        isAddControlActivityDataLoading: false,
+        addControlActivityDataError: '',
+      };
     default:
       return state;
   }

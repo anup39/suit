@@ -1,13 +1,25 @@
+  .document-table-tbody{
+    height: calc(100vh - 368px);
+      overflow: auto;
+  }
 .project-document-card-base-div {
   display: table;
   width: 100%;
-  border-bottom: 1px solid #d4deea;
-  padding: 10px 20px;
+  border-bottom: 1px solid #D4DEEA;
 }
 
 .project-document-card-base-div span {
+  word-break: break-all;
   display: table-cell;
   table-layout: fixed;
+  padding: 10px 5px;
+  font-size: 14px;
+  vertical-align: middle;
+  color: #364A63;
+  margin-left: 10px;
+  svg{
+    font-size: 18px;
+  }
 }
 
 .document-menu-icon {

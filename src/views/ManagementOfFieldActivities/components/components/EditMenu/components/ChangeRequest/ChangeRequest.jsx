@@ -2,6 +2,7 @@ import './ChangeRequest.scss';
 
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +13,7 @@ import { getfieldlogs } from '../../../../../../../redux/Management-of-field-act
 import { getUserAuthToken } from '../../../../../../../redux/user-redux/user.selectors';
 import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
 
-const ChangeRequest = () => {
+const ChangeRequest = ({ handleCloseModal }) => {
   const { t } = useTranslation();
 
   const fieldLogData = useSelector(getfieldlogs);
@@ -180,12 +181,20 @@ const ChangeRequest = () => {
         ) : null}
       </div>
       <div className="text-right">
-        <button className="close-button" type="button">
+        <button
+          className="close-button"
+          onClick={handleCloseModal}
+          type="button"
+        >
           {t('close')}
         </button>
       </div>
     </div>
   );
+};
+
+ChangeRequest.propTypes = {
+  handleCloseModal: PropTypes.isRequired,
 };
 
 export default ChangeRequest;

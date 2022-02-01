@@ -130,6 +130,11 @@ export const assignProjectError = (data) => ({
   payload: data,
 });
 
+export const resetAssignProject = () => ({
+  type: PROJECT_MANAGEMENT_TYPES.RESET_ASSIGN_PROJECT_TO_COMPANY,
+  payload: '',
+});
+
 export const projectDashbord = (data) => ({
   type: PROJECT_MANAGEMENT_TYPES.GET_PROJECT_DASHBORD,
   payload: data,

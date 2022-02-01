@@ -180,7 +180,6 @@ const German = {
   sendToCompany: 'An Unternehmen senden',
   fieldlogimage: 'Bild des Feldprotokolls',
   fieldlognotes: 'Anmerkungen zum Feldprotokoll',
-
 };
 
 export default German;

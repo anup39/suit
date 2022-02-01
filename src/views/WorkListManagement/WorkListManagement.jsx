@@ -362,7 +362,9 @@ const WorkListManagement = () => {
                 <Pagination
                   componentNo={1}
                   itemData={
-                    filteredList.length === 0 ? workListData : filteredList
+                    companyName.length === 0 && projectName.length === 0
+                      ? workListData
+                      : filteredList
                   }
                   itemsPerPage={10}
                 />

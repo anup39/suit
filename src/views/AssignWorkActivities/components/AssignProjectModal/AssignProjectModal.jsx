@@ -1,18 +1,22 @@
 import './AssignProjectModal.scss';
 
-// import Box from '@mui/material/Box';
-// import CircularProgress from '@mui/material/CircularProgress';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
+import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner';
 import { getCompaniesList } from '../../../../redux/company-redux/company.selectors';
-import { getAllProjects } from '../../../../redux/project-management-redux/project.selector';
+import {
+  getAllProjects,
+  getAssignProjectLoading,
+  getAssignProjectSuccess,
+} from '../../../../redux/project-management-redux/project.selector';
 import {
   assignProject,
   getProjectList,
+  resetAssignProject,
 } from '../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 
@@ -21,7 +25,8 @@ const AssignProjectModal = ({ handleClose }) => {
   const companiesList = useSelector(getCompaniesList);
   const projectList = useSelector(getAllProjects);
   const authToken = useSelector(getUserAuthToken);
-  // const isAssignProjectLoading = useSelector(getAssignProjectLoading);
+  const isAssignProjectLoading = useSelector(getAssignProjectLoading);
+  const assignProjectSuccess = useSelector(getAssignProjectSuccess);
 
   const [selectedCompany, setSelectedCompany] = React.useState('');
   const [selectedProject, setSelectedProject] = React.useState('');
@@ -46,18 +51,21 @@ const AssignProjectModal = ({ handleClose }) => {
       };
 
       dispatch(assignProject(data));
-      setTimeout(() => {
-        handleClose()
-      }, 2000);
     }
   };
 
   React.useEffect(() => {
-    dispatch(getProjectList(authToken));
-  }, []);
+    if (projectList.length === 0) {
+      dispatch(getProjectList(authToken));
+    } else if (assignProjectSuccess.status === 200) {
+      handleClose();
+      dispatch(resetAssignProject());
+    }
+  }, [isAssignProjectLoading]);
 
   return (
     <div className="assign-project-modal-base">
+      <GlobalSpinner isOpen={isAssignProjectLoading} />
       <h2> {t('assignProject')}</h2>
       <form className="assign-project-form-base">
         <label>{t('projectName')}</label>

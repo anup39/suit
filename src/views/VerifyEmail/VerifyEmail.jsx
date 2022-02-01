@@ -45,7 +45,7 @@ const VerifyEmail = () => {
       });
 
       setTimeout(() => {
-        navigate('/user/signup');
+        navigate('/asuiteweb/user/signup');
       }, 2000);
     }
   });
