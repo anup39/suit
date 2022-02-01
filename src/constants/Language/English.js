@@ -178,6 +178,9 @@ const English = {
   browseFiles: 'Browse Files',
   reportDate: 'Report Date',
   sendToCompany: 'Send To Company',
+  fieldlogimage: 'Field Log Image',
+  fieldlognotes: 'Field Log Notes'
+
 };
 
 export default English;

@@ -1,6 +1,5 @@
 @import '../../../../../theme/ThemeColors';
 
-
 .mgmt-table-body {
   height: calc(100vh - 336px);
   overflow: auto;
@@ -17,8 +16,7 @@
 .mgmt-field-update-card-base {
   display: table;
   width: 100%;
-  border-bottom: 1px solid #D4DEEA;
-
+  border-bottom: 1px solid #d4deea;
 }
 
 .mgmt-field-update-card-base span {
@@ -28,7 +26,7 @@
   padding: 10px;
   font-size: 14px;
   vertical-align: middle;
-  color: #364A63;
+  color: #364a63;
   margin-left: 10px;
 
   svg {
@@ -36,36 +34,20 @@
   }
 }
 
-// .field-updates-body-checkInput {
-//   width: 3%;
-// }
-
 .field-updates-body-taskItem {
-  width: 10%;
-}
-
-.field-updates-body-fieldLogs {
-  width: 12%;
-}
-
-.field-updates-body-activityReport {
-  width: 13%;
-}
-
-.field-updates-body-changeRequest {
   width: 15%;
 }
 
 .field-updates-body-milestoneApproval {
-  width: 15%;
+  width: 29%;
 }
 
 .field-updates-body-status {
-  width: 13%;
+  width: 23%;
 }
 
 .field-updates-body-controlActivity {
-  width: 13%;
+  width: 23%;
 }
 
 .field-updates-body-actions {
@@ -85,7 +67,7 @@
 }
 
 .field-update-status-select {
-  color: #364A63;
+  color: #364a63;
   width: 70%;
   background-color: transparent;
   border: none;

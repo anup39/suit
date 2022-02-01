@@ -5,17 +5,21 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import { resetAddNewMessage } from '../../../../redux/webex-redux/webex.actions';
 import {
-  getAddMessageSuccess,
-  getIfAddMesssageLoading,
+  addNewFile,
+  resetWebexFile,
+} from '../../../../redux/webex-redux/webex.actions';
+import {
+  getAddFileSuccess,
+  getIfAddFileLoading,
 } from '../../../../redux/webex-redux/webex.selector';
 import GlobalSpinner from '../../Spinners/GlobalSpinner';
 
 const WebexFiles = ({ handleClose, roomId }) => {
   const [files, setFiles] = React.useState('');
-  const isAddMessageLoading = useSelector(getIfAddMesssageLoading);
-  const addMessageSuccess = useSelector(getAddMessageSuccess);
+  const [message, setMessage] = React.useState('');
+  const isAddFileLoading = useSelector(getIfAddFileLoading);
+  const addFileSuccess = useSelector(getAddFileSuccess);
 
   const dispatch = useDispatch();
 
@@ -34,7 +38,7 @@ const WebexFiles = ({ handleClose, roomId }) => {
     }
 
     if (!files) {
-      toast.warn('Message Cannot Be Empty!', {
+      toast.warn('Files Cannot Be Empty!', {
         position: 'top-center',
         autoClose: 2000,
         hideProgressBar: false,
@@ -45,26 +49,48 @@ const WebexFiles = ({ handleClose, roomId }) => {
       });
       return;
     }
-    const dataToSend = {
-      roomId,
-      imageUrl: files,
-    };
 
-    console.log(dataToSend);
+    // if (!message) {
+    //   toast.warn('Files Cannot Be Empty!', {
+    //     position: 'top-center',
+    //     autoClose: 2000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //   });
+    //   return;
+    // }
+
+    const formData = new FormData();
+
+    formData.append('roomId', roomId);
+    formData.append('text', message);
+    formData.append('files', files, files.name);
+
+    dispatch(addNewFile(formData));
   };
 
   React.useEffect(() => {
-    if (addMessageSuccess) {
+    if (addFileSuccess) {
       handleClose();
-      dispatch(resetAddNewMessage());
+      dispatch(resetWebexFile());
     }
-  }, [isAddMessageLoading]);
+  }, [isAddFileLoading]);
 
   return (
     <div className="webex-files-base">
-      <GlobalSpinner isOpen={isAddMessageLoading} />
+      <GlobalSpinner isOpen={isAddFileLoading} />
       <div className="webex-files-head">Add New Files</div>
       <div className="webex-files-base-body">
+        <label>Message</label>
+        <textarea
+          onChange={(e) => setMessage(e.target.value)}
+          type="text"
+          value={message}
+        />
+
         <label>New Files</label>
         <input onChange={(e) => setFiles(e.target.files[0])} type="file" />
 

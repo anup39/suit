@@ -115,6 +115,14 @@ const webexReducer = (state = INITIAL_STATE, action) => {
         isAddNewFileLoading: false,
         addNewFileError: '',
       };
+
+    case WEBEX_ACTION_TYPES.RESET_WEBEX_FILE:
+      return {
+        ...state,
+        addNewFile: '',
+        isAddNewFileLoading: false,
+        addNewFileError: '',
+      };
     default:
       return state;
   }

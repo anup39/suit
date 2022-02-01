@@ -79,14 +79,9 @@ export const ADD_NEW_MESSAGE = async (data) => {
 };
 
 export const ADD_NEW_FILE = async (data) => {
-  const { roomId, imageUrl } = data;
-
   const newMessage = await axios(`${WEBEX_MANAGEMENT_API.ADD_NEW_MESSAGE}`, {
     method: 'POST',
-    data: {
-      roomId,
-      files: imageUrl,
-    },
+    data,
     headers: {
       Authorization: `Bearer YmVkOTM5YmYtYTM2Yi00ODEwLWI4YmUtMjkzMmU4N2JmMGI3N2NiM2E2OTEtOGU5_P0A1_5854f144-ce4c-448d-a8d9-4c4002d8c122`,
     },

@@ -42,16 +42,17 @@ export const GET_FIELD_LOGS_BY_TASK = async (data) => {
 export const CHANGE_LOG_STATUS = async (payloadData) => {
   const { authToken, taskData } = payloadData;
 
+  console.log(payloadData)
   const newToken = await REFERSH_TOKEN(authToken);
 
   const allActivities = await axios(
     MANAGEMENT_OF_FIELD_ACTIVITIES.acceptOrRejectTasks,
     {
       method: 'POST',
+      data: taskData,
       headers: {
         Authorization: `Bearer ${newToken}`,
       },
-      taskData,
     }
   );
   return allActivities.data;
@@ -100,10 +101,10 @@ export const ADD_CONTROL_ACTIVITY_DATA = async (data) => {
     MANAGEMENT_OF_FIELD_ACTIVITIES.addControlActivityData,
     {
       method: 'POST',
+      data: controlActivityData,
       headers: {
         Authorization: `Bearer ${newToken}`,
       },
-      data: controlActivityData,
     }
   );
   return controlActivityResponse.data;

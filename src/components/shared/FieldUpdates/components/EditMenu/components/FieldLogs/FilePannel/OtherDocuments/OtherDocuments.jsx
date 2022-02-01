@@ -1,5 +1,7 @@
 import './OtherDocuments.scss';
 
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +10,7 @@ import { toast } from 'react-toastify';
 import { changeFieldLogStatus } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getfieldlogs } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
 import { getUserAuthToken } from '../../../../../../../../../redux/user-redux/user.selectors';
+import EditModalHeaders  from '../../../EditModalHeaders/EditModalHeaders'
 
 const OtherDocuments = () => {
   const { t } = useTranslation();
@@ -17,7 +20,9 @@ const OtherDocuments = () => {
 
   const dispatch = useDispatch();
 
-  const documentsData = fieldLogs.notesTask[0];
+  const documentsData = fieldLogs.notesTask;
+  const [notesTask, setnotesTask] = React.useState(fieldLogs.notesTask[0]);
+
 
   const handelReject = () => {
     if (!rejectionReason) {
@@ -44,6 +49,12 @@ const OtherDocuments = () => {
       dispatch(changeFieldLogStatus(data));
     }
   };
+
+
+  const handleCrtabchange = (event, value) => {
+    setnotesTask(documentsData[value])
+
+  };
   const handelAccept = () => {
     const data = {
       authToken,
@@ -60,89 +71,77 @@ const OtherDocuments = () => {
 
   return (
     <div>
-      {documentsData ? (
+      <EditModalHeaders headerName={t('changerequest')} />
+      <Tabs onChange={handleCrtabchange}>
+      {(documentsData.length > 0) ? documentsData.map ( p => (
+        <Tab key={p.fieldlogId} label={p.fieldlogId}> </Tab>
+      )):
+      (<div className="change-request-content-no-data-found">
+          <h5> No Data Found!</h5>
+        </div>
+      )}
+      </Tabs>
+      {notesTask && notesTask !== null && notesTask !== undefined ? (
         <>
           <div className="field-log-data">
             <span className="field-log-data-projectId">
               <p>Project Id</p>
               <div>
                 {' '}
-                {!documentsData?.projectId
+                {!notesTask?.projectId
                   ? '-'
-                  : documentsData?.projectId}{' '}
+                  : notesTask?.projectId}{' '}
               </div>
             </span>
             <span className="field-log-data-taskName">
               <p>Task Name</p>
               <div>
                 {' '}
-                {!documentsData?.taskName ? '-' : documentsData?.taskName}{' '}
+                {!notesTask?.taskName ? '-' : notesTask?.taskName}{' '}
               </div>
             </span>
             <span className="field-log-data-time">
               <p>Time</p>
               <div>
-                {!documentsData?.fieldTime ? '-' : documentsData?.fieldTime}
+                {!notesTask?.fieldTime ? '-' : notesTask?.fieldTime}
               </div>
             </span>
 
             <span className="field-log-data-date">
               <p>Date</p>
               <div>
-                {!documentsData?.fieldDate ? '-' : documentsData?.fieldDate}
+                {!notesTask?.fieldDate ? '-' : notesTask?.fieldDate}
               </div>
             </span>
             <span className="field-log-data-note">
               <p>Note</p>
               <div>
-                {!documentsData?.fieldNote ? '-' : documentsData?.fieldNote}
-              </div>
-            </span>
-            <span className="field-log-data-logs">
-              <p>Field Log</p>
-              <div>
-                {!documentsData?.fieldlogId ? '-' : documentsData?.fieldlogId}
+                {!notesTask?.fieldNote ? '-' : notesTask?.fieldNote}
               </div>
             </span>
             <span className="field-log-data-status">
               <p>Status</p>
-              <div>Pending</div>
+              <div>
+                {!notesTask?.taskNotification
+                  ? '-'
+                  : notesTask?.taskNotification}
+              </div>
             </span>
             <span className="field-log-data-barcode">
               <p>Barcode Detection</p>
               <div>-</div>
             </span>
-            <span className="field-log-data-user">
-              {' '}
-              <p>User</p>
-              <div>
-                {!documentsData?.verifierUser
-                  ? '-'
-                  : documentsData?.verifierUser}
-              </div>
-            </span>
-
             <span className="field-log-data-field-operator">
               {' '}
               <p>Field Operator Id</p>
               <div>
-                {!documentsData?.fieldOperatorId
+                {!notesTask?.fieldOperatorId
                   ? '-'
-                  : documentsData?.fieldOperatorId}
+                  : notesTask?.fieldOperatorId}
               </div>
             </span>
 
-            <span className="field-log-data-task-notification">
-              {' '}
-              <p>Task Notification</p>
-              <div>
-                {!documentsData?.taskNotification
-                  ? '-'
-                  : documentsData?.taskNotification}
-              </div>
-            </span>
-
-            <span className="field-log-data-rejection-note">
+             <span className="field-log-data-rejection-note">
               {' '}
               <p>Reason For Rejection</p>
               <textarea
@@ -168,11 +167,7 @@ const OtherDocuments = () => {
             </span>
           </div>
         </>
-      ) : (
-        <div className="other-documents-content-no-data-found">
-          <h5> No Data Found!</h5>
-        </div>
-      )}
+      ) : null }
     </div>
   );
 };

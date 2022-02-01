@@ -171,7 +171,7 @@ const ActivityReport = () => {
           </div>
         </>
       ) : (
-        <div className="activity-report-content-no-data-found">
+        <div className="change-request-content-no-data-found">
           <h5> No Data Found!</h5>
         </div>
       )}
