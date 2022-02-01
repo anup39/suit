@@ -59,11 +59,12 @@
   }
 
   span {
-
     display: table-cell;
-    padding: 15px 10px;
-
     table-layout: fixed;
+    padding: 10px 5px;
+    color: #8094ae;
+    font-weight: 600;
+    font-size: 14px;
     vertical-align: middle;
 
     p {
