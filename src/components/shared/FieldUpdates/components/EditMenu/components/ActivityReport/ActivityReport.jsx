@@ -18,7 +18,7 @@ const ActivityReport = () => {
 
   const fieldLogData = useSelector(getfieldlogs);
   const authToken = useSelector(getUserAuthToken);
-  const activityReportData = fieldLogData?.activityTask[0];
+  const activityReportData = fieldLogData?.activityTask;
   const [activityTask, setactivityTask] = React.useState(
     fieldLogData.activityTask[0]
   );
@@ -74,7 +74,7 @@ const ActivityReport = () => {
       <Tabs onChange={handleCrtabchange}>
         {activityReportData.length > 0 ? (
           activityReportData.map((p) => (
-            <Tab key={p.fieldlogId} label={p.fieldlogId}>
+            <Tab key={p?.fieldlogId} label={p?.fieldlogId}>
               {' '}
             </Tab>
           ))

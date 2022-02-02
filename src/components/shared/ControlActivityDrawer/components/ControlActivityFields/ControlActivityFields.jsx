@@ -8,7 +8,10 @@ import {
   addControlActivityData,
   editControlActivityData,
 } from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
-import { getControlActivityParams } from '../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
+import {
+  allControlActivity,
+  getControlActivityParams,
+} from '../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
 
 const ControlActivityFields = ({
   componentNo,
@@ -17,15 +20,18 @@ const ControlActivityFields = ({
 }) => {
   const [controlActivityParam, setControlActivityParam] = React.useState('');
   const [controlActivityValue, setControlActivityValue] = React.useState('');
+  const [controlActivityType, setControlActivityType] = React.useState('');
   const dispatch = useDispatch();
   const controlActivityParamList = useSelector(getControlActivityParams);
+  const controlActivityList = useSelector(allControlActivity);
 
   const handleParamChange = (e) => {
     setControlActivityParam(e.target.value);
+
     const data = {
       componentId: componentNo,
       data: {
-        paramName: selectedControlActivityType,
+        paramName: controlActivityType,
         paramType: e.target.value,
         taskId,
         value: controlActivityValue,
@@ -39,7 +45,7 @@ const ControlActivityFields = ({
     const data = {
       componentId: componentNo,
       data: {
-        paramName: selectedControlActivityType,
+        paramName: controlActivityType,
         paramType: controlActivityParam,
         taskId,
         value: e.target.value,
@@ -49,15 +55,27 @@ const ControlActivityFields = ({
   };
 
   React.useEffect(() => {
-    const data = {
-      paramName: selectedControlActivityType,
-      paramType: controlActivityParam,
-      taskId,
-      value: controlActivityValue,
-    };
+    if (controlActivityList) {
+      let controlActivityName;
+      // eslint-disable-next-line
+      controlActivityList.map((val) => {
+        // eslint-disable-next-line
+        if (val.id == selectedControlActivityType) {
+          controlActivityName = val.name;
+          setControlActivityType(val.name);
+        }
+      });
 
-    dispatch(addControlActivityData(data));
-  }, []);
+      const data = {
+        paramName: controlActivityName,
+        paramType: controlActivityParam,
+        taskId,
+        value: controlActivityValue,
+      };
+
+      dispatch(addControlActivityData(data));
+    }
+  }, [selectedControlActivityType]);
 
   return (
     <div className="control-activity-fields-base">

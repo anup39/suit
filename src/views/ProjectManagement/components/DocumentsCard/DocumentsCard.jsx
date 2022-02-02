@@ -46,8 +46,7 @@ const DocumentsCard = ({ documentsDetails }) => {
           onClose={handleMenuClose}
           open={open}
         >
-          <MenuItem onClick={handleMenuClose}>Download</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Delete</MenuItem>
+          <MenuItem onClick={handleMenuClose}>View</MenuItem>
         </Menu>
       </span>
     </div>

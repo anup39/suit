@@ -2,6 +2,7 @@ import './ChangeRequest.scss';
 
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +13,7 @@ import { getfieldlogs } from '../../../../../../../redux/Management-of-field-act
 import { getUserAuthToken } from '../../../../../../../redux/user-redux/user.selectors';
 import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
 
-const ChangeRequest = () => {
+const ChangeRequest = ({ handleClose }) => {
   const { t } = useTranslation();
 
   const fieldLogData = useSelector(getfieldlogs);
@@ -21,9 +22,11 @@ const ChangeRequest = () => {
   const chnageRequestData = fieldLogData.changeTask;
 
   const [rejectionReason, setRejectionReason] = React.useState('');
-  const [changeRequest, setChangeRequest] = React.useState(fieldLogData.changeTask[0]);
+  const [changeRequest, setChangeRequest] = React.useState(
+    fieldLogData.changeTask[0]
+  );
 
- const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handelReject = () => {
     if (!rejectionReason) {
@@ -52,8 +55,7 @@ const ChangeRequest = () => {
   };
 
   const handleCrtabchange = (event, value) => {
-    setChangeRequest(chnageRequestData[value])
-
+    setChangeRequest(chnageRequestData[value]);
   };
   const handelAccept = () => {
     const data = {
@@ -73,71 +75,74 @@ const ChangeRequest = () => {
     <div className="change-request-base">
       <EditModalHeaders headerName={t('changerequest')} />
       <Tabs onChange={handleCrtabchange}>
-      {(chnageRequestData.length > 0) ? chnageRequestData.map ( p => (
-        <Tab key={p.fieldlogId} label={p.fieldlogId}> </Tab>
-      )):
-      (<div className="change-request-content-no-data-found">
-          <h5> No Data Found!</h5>
-        </div>
-      )}
+        {chnageRequestData.length > 0 ? (
+          chnageRequestData.map((p) => (
+            <Tab key={p.fieldlogId} label={p.fieldlogId}>
+              {' '}
+            </Tab>
+          ))
+        ) : (
+          <div className="change-request-content-no-data-found">
+            <h5> No Data Found!</h5>
+          </div>
+        )}
       </Tabs>
-         <div className="change-request-body-div">
-         {changeRequest && changeRequest !== null && changeRequest !== undefined ? (
-            <div>
-              <div className="change-request-body-header">
-                <p> {!changeRequest?.taskId
-                        ? '-'
-                        : changeRequest?.taskId}</p>
-              </div>
-              <div className="change-request-body">
-                <div className="change-body-request-details">
-                  <span>
-                    <p>{t('companyName')}</p>
-                    <div className="change-request-details">
-                      {!changeRequest?.companyName
-                        ? '-'
-                        : changeRequest?.companyName}
-                    </div>
-                  </span>
-
-                  <span>
-                    <p>{t('projectName')}</p>
-                    <div className="change-request-details">
-                      {!changeRequest?.projectName
-                        ? '-'
-                        : changeRequest?.projectName}
-                    </div>
-                  </span>
-
-                  <span>
-                    <p>{t('requetsDate')}</p>
-                    <div className="change-request-details">
-                      {!changeRequest?.requestDate
-                        ? '-'
-                        : changeRequest?.requestDate}
-                    </div>
-                  </span>
-
-                  <span>
-                    <p>{t('requestnr')}</p>
-                    <div className="change-request-details">
-                      {' '}
-                      {!changeRequest?.taskNumber
-                        ? '-'
-                        : changeRequest?.taskNumber}{' '}
-                    </div>
-                  </span>
-                </div>
-
-                <div>
-                  <p>{t('changerequest')}</p>
-                  <div className="change-request-description-details">
-                    {!changeRequest?.fieldNote
+      <div className="change-request-body-div">
+        {changeRequest &&
+        changeRequest !== null &&
+        changeRequest !== undefined ? (
+          <div>
+            <div className="change-request-body-header">
+              <p> {!changeRequest?.taskId ? '-' : changeRequest?.taskId}</p>
+            </div>
+            <div className="change-request-body">
+              <div className="change-body-request-details">
+                <span>
+                  <p>{t('companyName')}</p>
+                  <div className="change-request-details">
+                    {!changeRequest?.companyName
                       ? '-'
-                      : changeRequest?.fieldNote}
+                      : changeRequest?.companyName}
                   </div>
+                </span>
+
+                <span>
+                  <p>{t('projectName')}</p>
+                  <div className="change-request-details">
+                    {!changeRequest?.projectName
+                      ? '-'
+                      : changeRequest?.projectName}
+                  </div>
+                </span>
+
+                <span>
+                  <p>{t('requetsDate')}</p>
+                  <div className="change-request-details">
+                    {!changeRequest?.requestDate
+                      ? '-'
+                      : changeRequest?.requestDate}
+                  </div>
+                </span>
+
+                <span>
+                  <p>{t('requestnr')}</p>
+                  <div className="change-request-details">
+                    {' '}
+                    {!changeRequest?.taskNumber
+                      ? '-'
+                      : changeRequest?.taskNumber}{' '}
+                  </div>
+                </span>
+              </div>
+
+              <div>
+                <p>{t('changerequest')}</p>
+                <div className="change-request-description-details">
+                  {!changeRequest?.fieldNote ? '-' : changeRequest?.fieldNote}
                 </div>
-                {!changeRequest?.verifierCheck ? <div className="change-request-buttons-div">
+              </div>
+              {!changeRequest?.verifierCheck ? (
+                <div className="change-request-buttons-div">
                   <span
                     className="change-request-button-reject"
                     onClick={handelReject}
@@ -151,8 +156,8 @@ const ChangeRequest = () => {
                     {t('accept')}
                   </span>
                 </div>
-                : null}
-                {changeRequest?.rejectionNote ?
+              ) : null}
+              {changeRequest?.rejectionNote ? (
                 <span>
                   <p>{t('reasonofRejection')}</p>
                   <textarea
@@ -161,27 +166,31 @@ const ChangeRequest = () => {
                     value={changeRequest.rejectionNote}
                   />
                 </span>
-                : 
+              ) : (
                 <span>
-                <p>{t('reasonofRejection')}</p>
-                <textarea
-                  className="reason-of-rejection-details-text-area"
-                  onChange={(e) => setRejectionReason(e.target.value)}
-                  value={rejectionReason}
-                />
-              </span>
-                }
-              </div>
+                  <p>{t('reasonofRejection')}</p>
+                  <textarea
+                    className="reason-of-rejection-details-text-area"
+                    onChange={(e) => setRejectionReason(e.target.value)}
+                    value={rejectionReason}
+                  />
+                </span>
+              )}
             </div>
-            ) : null }
           </div>
-          <div className="text-right">
-            <button className="close-button" type="button">
-              {t('close')}
-            </button>
-          </div>
+        ) : null}
+      </div>
+      <div className="text-right">
+        <button className="close-button" onClick={handleClose} type="button">
+          {t('close')}
+        </button>
+      </div>
     </div>
   );
+};
+
+ChangeRequest.propTypes = {
+  handleClose: PropTypes.isRequired,
 };
 
 export default ChangeRequest;

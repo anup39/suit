@@ -7,8 +7,15 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import { getAllProjects } from '../../../../../../redux/project-management-redux/project.selector';
-import { importProjectData } from '../../../../../../redux/project-management-redux/project-management.actions';
+import {
+  getAllProjects,
+  getImportProjectDataLoading,
+  getImportProjectDataSuccess,
+} from '../../../../../../redux/project-management-redux/project.selector';
+import {
+  importProjectData,
+  importProjectDataReset,
+} from '../../../../../../redux/project-management-redux/project-management.actions';
 import { getUserAuthToken } from '../../../../../../redux/user-redux/user.selectors';
 import classes from './import-drawer.styles.module.scss';
 
@@ -18,6 +25,10 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
   const projectList = useSelector(getAllProjects);
+
+  const isImportProjectDataLoading = useSelector(getImportProjectDataLoading);
+  const importProjectDataSuccess = useSelector(getImportProjectDataSuccess);
+
   const formData = new FormData();
   const { t } = useTranslation();
   const docType = 'Contractor';
@@ -49,12 +60,11 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
     }
   };
 
- 
   const handleQgisChangeChange = (e) => {
     const qgisFile = e.target.files;
     // eslint-disable-next-line no-plusplus
-    for (let i = 0 ; i < qgisFile.length ; i++) {
-      formData.append("qgisFile", qgisFile[i]);
+    for (let i = 0; i < qgisFile.length; i++) {
+      formData.append('qgisFile', qgisFile[i]);
     }
   };
 
@@ -62,8 +72,8 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
     e.preventDefault();
     const worklistfiles = e.target.files;
     // eslint-disable-next-line no-plusplus
-    for (let i = 0 ; i < worklistfiles.length ; i++) {
-      formData.append("workListFile", worklistfiles[i]);
+    for (let i = 0; i < worklistfiles.length; i++) {
+      formData.append('workListFile', worklistfiles[i]);
     }
   };
 
@@ -71,22 +81,28 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
     e.preventDefault();
     const documentsFile = e.target.files;
     // eslint-disable-next-line no-plusplus
-    for (let i = 0 ; i < documentsFile.length ; i++) {
-      formData.append("documentsFile", documentsFile[i]);
+    for (let i = 0; i < documentsFile.length; i++) {
+      formData.append('documentsFile', documentsFile[i]);
     }
   };
 
-  React.useEffect(() => {}, []);
+  React.useEffect(() => {
+    if (importProjectDataSuccess) {
+      handleClose();
+      dispatch(importProjectDataReset());
+    }
+  }, [isImportProjectDataLoading]);
 
   return (
     <Drawer anchor="right" onClose={closeDrawer} open={isOpen}>
-<Box
-          className="add-feedback"
-          role="presentation"
-          sx={{ width: 400, padding: 3 }}
-        >        <div className={classes.import_container}>
+      <Box
+        className="add-feedback"
+        role="presentation"
+        sx={{ width: 400, padding: 3 }}
+      >
+        {' '}
+        <div className={classes.import_container}>
           <div className={classes.import_form_box}>
-
             <h3 className={classes.import_form_header}>
               {t('importProjectData')}
             </h3>
@@ -148,10 +164,18 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
               </div>
 
               <div className={classes.action_buttons_container}>
-                  <Button className='cancel-btn' onClick={closeDrawer} type="submit">
-                    {t('cancel')}
-                  </Button>
-                <Button className='submit-button' type="submit" variant="contained">
+                <Button
+                  className="cancel-btn"
+                  onClick={closeDrawer}
+                  type="submit"
+                >
+                  {t('cancel')}
+                </Button>
+                <Button
+                  className="submit-button"
+                  type="submit"
+                  variant="contained"
+                >
                   {t('upload')}
                 </Button>
               </div>

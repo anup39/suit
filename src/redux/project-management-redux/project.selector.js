@@ -58,6 +58,10 @@ export const getImportProjectDataLoading = (state) => {
   return state.projectManagement.isImportProjectDataLoading;
 };
 
+export const getImportProjectDataSuccess = (state) => {
+  return state.projectManagement.ImportProjectData;
+};
+
 export const getUpdateProjectSuccess = (state) => {
   return state.projectManagement.updateProjectData;
 };

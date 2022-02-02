@@ -9,12 +9,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
 import ControlActivityDrawer from '../../../../../components/shared/ControlActivityDrawer/ControlActivityDrawer';
 import WebexFiles from '../../../../../components/shared/Webex-components/webex-files/WebexFiles';
 import WebexMessages from '../../../../../components/shared/Webex-components/webex-message/WebexMessages';
-import { getAllfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
+import {
+  getAllActivities,
+  getAllfieldlogs,
+} from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
 import { changeTaskStatus } from '../../../../../redux/worklist-management-redux/worklist.actions';
 import ActivityReport from './components/ActivityReport/ActivityReport';
@@ -35,6 +39,7 @@ const EditMenu = ({ taskId, handleCancel, roomId, currentTaskStatus }) => {
 
   const authToken = useSelector(getUserAuthToken);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOpen = (e) => {
     setOption(e.target.id);
@@ -81,6 +86,15 @@ const EditMenu = ({ taskId, handleCancel, roomId, currentTaskStatus }) => {
     };
 
     dispatch(changeTaskStatus(dataToSend));
+  };
+
+  const handleRefreshData = () => {
+    const data = { authToken };
+    dispatch(getAllActivities(data));
+  };
+
+  const handleWebEx = () => {
+    navigate('/asuiteweb/pannel/webex');
   };
 
   const renderComponent = (value) => {
@@ -181,7 +195,10 @@ const EditMenu = ({ taskId, handleCancel, roomId, currentTaskStatus }) => {
           <p>{t('controlActivity')}</p>
           <div>
             <span className="field-updates-body-controlActivity">
-              <AutorenewOutlinedIcon className="control-activity-icons" />
+              <AutorenewOutlinedIcon
+                className="control-activity-icons"
+                onClick={handleRefreshData}
+              />
               <UploadFileOutlinedIcon
                 className="control-activity-icons"
                 onClick={handleWebexFileModalOpen}
@@ -190,7 +207,12 @@ const EditMenu = ({ taskId, handleCancel, roomId, currentTaskStatus }) => {
                 className="control-activity-icons"
                 onClick={handleWebexMessageOpen}
               />
-              <img alt="Webex Icon" className="webex-icon" src={WebExIcon} />
+              <img
+                alt="Webex Icon"
+                className="webex-icon"
+                onClick={handleWebEx}
+                src={WebExIcon}
+              />
               <AddIcon
                 className="control-activity-icons"
                 onClick={handleDrawerOpen}

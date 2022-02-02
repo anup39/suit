@@ -9,11 +9,14 @@ import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
 import { getAllfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
+import { getProjectData } from '../../../../../redux/project-management-redux/project.selector';
 // import { getfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
 import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
+import { taskByProject } from '../../../../../redux/worklist-management-redux/worklist.actions';
 import ControlActivityDrawer from '../../../ControlActivityDrawer/ControlActivityDrawer';
 import WebexFiles from '../../../Webex-components/webex-files/WebexFiles';
 import WebexMessages from '../../../Webex-components/webex-message/WebexMessages';
@@ -32,9 +35,16 @@ const EditMenu = ({ activityData, handleCancel }) => {
   const [isWebexMessageModalOpen, setIsWebexMessageModalOpen] =
     React.useState(false);
   const [isWebexFileModalOpen, setIsWebexFileModalOpen] = React.useState(false);
+  const projectDetails = useSelector(getProjectData);
 
   // const fieldlogs = useSelector(getfieldlogs);
   const authToken = useSelector(getUserAuthToken);
+  const navigate = useNavigate();
+
+  const handleRefreshData = () => {
+    const data = { authToken, projectId: projectDetails.id };
+    dispatch(taskByProject(data));
+  };
 
   const handleOpen = (e) => {
     setOption(e.target.id);
@@ -61,6 +71,10 @@ const EditMenu = ({ activityData, handleCancel }) => {
     setIsWebexFileModalOpen(false);
   };
 
+  const handleWebEx = () => {
+    navigate('/asuiteweb/pannel/webex');
+  };
+
   useEffect(() => {
     const data = { authToken, taskId: activityData.taskId };
     dispatch(getAllfieldlogs(data));
@@ -70,7 +84,7 @@ const EditMenu = ({ activityData, handleCancel }) => {
     const components = [
       <FieldLogs key="Notes/Images" />,
       <ActivityReport key="Activity Report" />,
-      <ChangeRequest key="Change Request" />,
+      <ChangeRequest key="Change Request" handleClose={handleClose} />,
       <Milestone key="Milestone" />,
     ];
 
@@ -156,7 +170,10 @@ const EditMenu = ({ activityData, handleCancel }) => {
           <p>{t('controlActivity')}</p>
           <div>
             <span className="field-updates-body-controlActivity">
-              <AutorenewOutlinedIcon className="control-activity-icons" />
+              <AutorenewOutlinedIcon
+                className="control-activity-icons"
+                onClick={handleRefreshData}
+              />
               <UploadFileOutlinedIcon
                 className="control-activity-icons"
                 onClick={handleWebexFileModalOpen}
@@ -165,7 +182,12 @@ const EditMenu = ({ activityData, handleCancel }) => {
                 className="control-activity-icons"
                 onClick={handleWebexMessageOpen}
               />
-              <img alt="Webex Icon" className="webex-icon" src={WebExIcon} />
+              <img
+                alt="Webex Icon"
+                className="webex-icon"
+                onClick={handleWebEx}
+                src={WebExIcon}
+              />
               <AddIcon
                 className="control-activity-icons"
                 onClick={handleDrawerOpen}
@@ -177,7 +199,9 @@ const EditMenu = ({ activityData, handleCancel }) => {
           <span className="cancel-button" onClick={() => handleCancel()}>
             {t('cancel')}
           </span>
-          <span className="update-button">{t('update')}</span>
+          <span className="update-button" onClick={() => handleCancel()}>
+            {t('update')}
+          </span>
         </span>
       </div>
     </>

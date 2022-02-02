@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { changeFieldLogStatus } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getfieldlogs } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
 import { getUserAuthToken } from '../../../../../../../../../redux/user-redux/user.selectors';
-import EditModalHeaders  from '../../../EditModalHeaders/EditModalHeaders'
+// import EditModalHeaders  from '../../../EditModalHeaders/EditModalHeaders'
 
 const OtherDocuments = () => {
   const { t } = useTranslation();
@@ -22,7 +22,6 @@ const OtherDocuments = () => {
 
   const documentsData = fieldLogs.notesTask;
   const [notesTask, setnotesTask] = React.useState(fieldLogs.notesTask[0]);
-
 
   const handelReject = () => {
     if (!rejectionReason) {
@@ -50,10 +49,8 @@ const OtherDocuments = () => {
     }
   };
 
-
   const handleCrtabchange = (event, value) => {
-    setnotesTask(documentsData[value])
-
+    setnotesTask(documentsData[value]);
   };
   const handelAccept = () => {
     const data = {
@@ -71,53 +68,43 @@ const OtherDocuments = () => {
 
   return (
     <div>
-      <EditModalHeaders headerName={t('changerequest')} />
+      {/* <EditModalHeaders headerName={t('changerequest')} /> */}
       <Tabs onChange={handleCrtabchange}>
-      {(documentsData.length > 0) ? documentsData.map ( p => (
-        <Tab key={p.fieldlogId} label={p.fieldlogId}> </Tab>
-      )):
-      (<div className="change-request-content-no-data-found">
-          <h5> No Data Found!</h5>
-        </div>
-      )}
+        {documentsData.length > 0 ? (
+          documentsData.map((p) => (
+            <Tab key={p.fieldlogId} label={p.fieldlogId}>
+              {' '}
+            </Tab>
+          ))
+        ) : (
+          <div className="change-request-content-no-data-found">
+            <h5> No Data Found!</h5>
+          </div>
+        )}
       </Tabs>
       {notesTask && notesTask !== null && notesTask !== undefined ? (
         <>
           <div className="field-log-data">
             <span className="field-log-data-projectId">
               <p>Project Id</p>
-              <div>
-                {' '}
-                {!notesTask?.projectId
-                  ? '-'
-                  : notesTask?.projectId}{' '}
-              </div>
+              <div> {!notesTask?.projectId ? '-' : notesTask?.projectId} </div>
             </span>
             <span className="field-log-data-taskName">
               <p>Task Name</p>
-              <div>
-                {' '}
-                {!notesTask?.taskName ? '-' : notesTask?.taskName}{' '}
-              </div>
+              <div> {!notesTask?.taskName ? '-' : notesTask?.taskName} </div>
             </span>
             <span className="field-log-data-time">
               <p>Time</p>
-              <div>
-                {!notesTask?.fieldTime ? '-' : notesTask?.fieldTime}
-              </div>
+              <div>{!notesTask?.fieldTime ? '-' : notesTask?.fieldTime}</div>
             </span>
 
             <span className="field-log-data-date">
               <p>Date</p>
-              <div>
-                {!notesTask?.fieldDate ? '-' : notesTask?.fieldDate}
-              </div>
+              <div>{!notesTask?.fieldDate ? '-' : notesTask?.fieldDate}</div>
             </span>
             <span className="field-log-data-note">
               <p>Note</p>
-              <div>
-                {!notesTask?.fieldNote ? '-' : notesTask?.fieldNote}
-              </div>
+              <div>{!notesTask?.fieldNote ? '-' : notesTask?.fieldNote}</div>
             </span>
             <span className="field-log-data-status">
               <p>Status</p>
@@ -135,13 +122,11 @@ const OtherDocuments = () => {
               {' '}
               <p>Field Operator Id</p>
               <div>
-                {!notesTask?.fieldOperatorId
-                  ? '-'
-                  : notesTask?.fieldOperatorId}
+                {!notesTask?.fieldOperatorId ? '-' : notesTask?.fieldOperatorId}
               </div>
             </span>
 
-             <span className="field-log-data-rejection-note">
+            <span className="field-log-data-rejection-note">
               {' '}
               <p>Reason For Rejection</p>
               <textarea
@@ -167,7 +152,7 @@ const OtherDocuments = () => {
             </span>
           </div>
         </>
-      ) : null }
+      ) : null}
     </div>
   );
 };

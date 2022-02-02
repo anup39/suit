@@ -13,10 +13,15 @@ import PropType from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
+import { getProjectData } from '../../../../../redux/project-management-redux/project.selector';
 import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
-import { deleteTaskByID } from '../../../../../redux/worklist-management-redux/worklist.actions';
+import {
+  deleteTaskByID,
+  taskByProject,
+} from '../../../../../redux/worklist-management-redux/worklist.actions';
 import AreYouSure from '../../../AreYouSure/AreYouSure';
 import ControlActivityDrawer from '../../../ControlActivityDrawer/ControlActivityDrawer';
 import WebexFiles from '../../../Webex-components/webex-files/WebexFiles';
@@ -38,7 +43,10 @@ const FieldUpdateCard = ({ activityData }) => {
   const open = Boolean(anchorEl);
 
   const authToken = useSelector(getUserAuthToken);
+  const projectDetails = useSelector(getProjectData);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -94,6 +102,15 @@ const FieldUpdateCard = ({ activityData }) => {
     };
 
     dispatch(deleteTaskByID(data));
+  };
+
+  const handleRefreshData = () => {
+    const data = { authToken, projectId: projectDetails.id };
+    dispatch(taskByProject(data));
+  };
+
+  const handleWebEx = () => {
+    navigate('/asuiteweb/pannel/webex');
   };
 
   return (
@@ -155,7 +172,10 @@ const FieldUpdateCard = ({ activityData }) => {
             </select>
           </span>
           <span className="field-updates-body-controlActivity">
-            <AutorenewOutlinedIcon className="control-activity-icons" />
+            <AutorenewOutlinedIcon
+              className="control-activity-icons"
+              onClick={handleRefreshData}
+            />
             <UploadFileOutlinedIcon
               className="control-activity-icons"
               onClick={handleWebexFileModalOpen}
@@ -164,7 +184,12 @@ const FieldUpdateCard = ({ activityData }) => {
               className="control-activity-icons"
               onClick={handleWebexMessageOpen}
             />
-            <img alt="Webex Icon" className="webex-icon" src={WebExIcon} />
+            <img
+              alt="Webex Icon"
+              className="webex-icon"
+              onClick={handleWebEx}
+              src={WebExIcon}
+            />
             <AddIcon
               className="control-activity-icons"
               onClick={handleDrawerOpen}

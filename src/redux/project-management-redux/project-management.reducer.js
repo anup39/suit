@@ -293,6 +293,14 @@ const projectManagementReducer = (
         ImportProjectDataError: action.payload,
       };
 
+    case PROJECT_MANAGEMENT_TYPES.IMPORT_PROJECT_DATA_RESET:
+      return {
+        ...state,
+        ImportProjectData: '',
+        isImportProjectDataLoading: false,
+        ImportProjectDataError: '',
+      };
+
     case PROJECT_MANAGEMENT_TYPES.DASHBORD_BY_PROJECT_ID:
       return {
         ...state,

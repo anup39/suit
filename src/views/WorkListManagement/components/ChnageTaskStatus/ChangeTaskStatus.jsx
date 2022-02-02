@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import ProjectStatus from '../../../../constants/ProjectStatus';
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import { changeTaskStatus } from '../../../../redux/worklist-management-redux/worklist.actions';
 
@@ -39,14 +40,12 @@ const ChangeTaskStatus = ({ handleClose, taskName, taskId, taskStatus }) => {
         <div>
           <label>Status</label>
           <select onChange={(e) => setStatus(e.target.value)} value={status}>
-            <option>Not assigned</option>
-            <option>Not started</option>
-            <option>In progress/started</option>
-            <option>Waiting for feedback</option>
-            <option>Approved</option>
-            <option>Canceled</option>
-            <option>Completed</option>
-            <option>Suspended</option>
+            <option>{taskStatus}</option>
+            {ProjectStatus[taskStatus].map((val) => (
+              <option key={val} value={val}>
+                {val}
+              </option>
+            ))}
           </select>
         </div>
 

@@ -164,15 +164,28 @@ export function* changeTaskStatus(data) {
   try {
     const taskStatus = yield call(CHANGE_TASK_STATUS, data.payload);
     yield put(changeTaskStatusSuccess(taskStatus));
-    yield toast.success('Task Status Changed!', {
-      position: 'top-center',
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+
+    if (taskStatus.status === '400') {
+      yield toast.error('Failed To Change Task Status!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      yield toast.success('Task Status Changed!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   } catch (error) {
     yield put(changeTaskStatusError(error.response.data));
 

@@ -165,6 +165,11 @@ export const importProjectDataError = (data) => ({
   payload: data,
 });
 
+export const importProjectDataReset = () => ({
+  type: PROJECT_MANAGEMENT_TYPES.IMPORT_PROJECT_DATA_RESET,
+  payload: '',
+});
+
 export const dashbordByProjectId = (data) => ({
   type: PROJECT_MANAGEMENT_TYPES.DASHBORD_BY_PROJECT_ID,
   payload: data,

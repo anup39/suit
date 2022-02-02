@@ -93,6 +93,7 @@ export const GET_TASK_BY_PROJECT = async (payload) => {
 
 export const CHANGE_TASK_STATUS = async (payload) => {
   const { authToken, data } = payload;
+
   const newToken = await REFERSH_TOKEN(authToken);
 
   const url = WORKLIST_MANAGEMENT_API.CHANGE_TASK;
