@@ -33,6 +33,7 @@ const MapView = ({ page }) => {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const [projectId, setprojectId] = React.useState(null);
+  const [taskId, setTaskId] = React.useState(null);
   const projectList = useSelector(getAllProjects);
   const authToken = useSelector(getUserAuthToken);
   // eslint-disable-next-line no-unused-vars
@@ -40,6 +41,12 @@ const MapView = ({ page }) => {
   const selectedTaskId = useSelector(getSelectedTaskId);
   const selectedProjectData = useSelector(getProjectData);
 
+
+  React.useEffect(() => {
+    if(taskDetailsByProject?.length > 0) {
+      setTaskId(taskDetailsByProject?.[0]?.taskId);
+    }
+  }, [taskDetailsByProject]);
   React.useEffect(() => {
     dispatch(getProjectList(authToken));
   }, []);
@@ -144,10 +151,15 @@ const MapView = ({ page }) => {
     `${process.env.REACT_APP_ECM_HOSTNAME}VistaEcmWeb.aspx?LogonType=3&UserName=Administrator&Password=Asuite&AppName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~TASK_NAME=${filteredTaskByTaskId?.taskName}^~PROJ_NAME=${filteredTaskByTaskId?.projectsName}`,
     'url'
   );
+  // eslint-disable-next-line no-console
+  console.log(taskDetailsByProject);
+  // eslint-disable-next-line no-console
+  console.log(typeof taskDetailsByProject);
+
   return (
     <div className="map-view-base-div">
       <div className="map-view-map-div">
-        <MapWrapper />
+        <MapWrapper  selectedDropdownTaskId={taskId}/>
       </div>
       <div className="map-view-details-div">
         {/* <h5 className="map-view-assign-project-header">Assign Project</h5> */}
@@ -165,7 +177,7 @@ const MapView = ({ page }) => {
               onChange={(e) => setprojectId(e.target.value)}
               value={projectId}
             >
-              <option value=""> Select A Project</option>
+              <option value=""> Select A Layer</option>
               {projectList.map((vals) => (
                 <option key={vals.id} value={vals.id}>
                   {vals.name}
@@ -173,6 +185,34 @@ const MapView = ({ page }) => {
               ))}
             </select>
           )}
+          { taskDetailsByProject && (
+            <select
+              className={classes.form_input}
+              onChange={(e) => setTaskId(e.target.value)}
+              value={taskId}
+            >
+              <option value=""> Select A Layer</option>
+              {taskDetailsByProject?.map((vals) => (
+                <option key={vals.taskId} value={vals.taskId}>
+                  {vals.taskName}
+                </option>
+              ))}
+            </select>
+          )}
+          {/* {page === 'webgisservices' && taskDetailsByProject && taskDetailsByProject.length>0 (
+            <select
+              className={classes.form_input}
+              // onChange={(e) => setprojectId(e.target.value)}
+              // value={projectId}
+            >
+              <option > Select A Project</option>
+              {taskDetailsByProject && taskDetailsByProject.length>0 && taskDetailsByProject?.map((vals) => (
+                <option key={vals.taskId} value={vals.taskName}>
+                  {vals.taskName}
+                </option>
+              ))}
+            </select>
+          )} */}
         </div>
         {/* <div className="map-view-document-search-div">
           <label>Document Name</label>

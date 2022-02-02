@@ -56,6 +56,16 @@ function MapWrapper(props) {
             constrainResolution: true,
           });
         }
+        if (feat.values_.taskId === props.selectedDropdownTaskId) {
+          var ext = feat.getGeometry().getExtent();
+          // map.getView().fitExtent(ext,map.getSize());
+          map.getView().fit(ext, {
+            padding: [50, 50, 50, 50],
+            duration: 500,
+            maxZoom: 8,
+            constrainResolution: true,
+          });
+        }
       });
     }
   }, [map, props.taskDetailsByProject, vectorLayer]);
@@ -134,10 +144,12 @@ function MapWrapper(props) {
 
   useEffect(() => {
     if (map) {
-      if (props.taskDetailsByProject.length > 0) {
+      if (props.taskDetailsByProject.length > 0 && props.selectedDropdownTaskId) {
+        const filteredTask = props.taskDetailsByProject.filter((task)=>task.taskId === props.selectedDropdownTaskId);
+       
         const finalGeojson = {
           type: 'FeatureCollection',
-          features: props?.taskDetailsByProject.map((item) => ({
+          features: filteredTask.map((item) => ({
             type: 'Feature',
             properties: { ...item },
             geometry: {
@@ -176,8 +188,14 @@ function MapWrapper(props) {
         map.removeLayer(vectorLayer);
       }
     };
-  }, [props.taskDetailsByProject]);
-
+  }, [props.taskDetailsByProject,props.selectedDropdownTaskId]);
+useEffect (()=>{
+  return () => {
+    if (map && vectorLayer) {
+      map.removeLayer(vectorLayer);
+    }
+  };
+},[vectorLayer])
   useEffect(() => {
     if (map) {
       if (props.projectLayersList) {

@@ -22,7 +22,7 @@ const worklistInitialState = {
   DeleteTaskByIdError: '',
 
   isTaskByProjectLoading: false,
-  taskByProject: '',
+  taskByProject: undefined,
   taskByProjectError: '',
 
   selectedWorkList: [],
