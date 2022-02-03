@@ -133,7 +133,6 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                 <input
                   accept=".csv, .xml"
                   className={classes.form_input}
-                  multiple
                   onChange={handleWorkListChange}
                   type="file"
                 />
@@ -143,9 +142,8 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                   {t('QGISFiles')}
                 </label>
                 <input
-                  accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4, .xml, .zip"
+                  accept=".zip"
                   className={classes.form_input}
-                  multiple
                   onChange={handleQgisChangeChange}
                   type="file"
                 />
@@ -155,9 +153,8 @@ const ImportDrawer = ({ isOpen, handleClose }) => {
                   {t('documents')}
                 </label>
                 <input
-                  accept=".jpg, .jpeg, .png, .pdf, .docx, mpeg, mpeg4, .xml, .zip"
+                  accept=".jpg, .jpeg, .png, .pdf, .docx, .mpeg, .mpeg4, .xml, .mp4, .mov, .flv, .avi "
                   className={classes.form_input}
-                  multiple
                   onChange={handleDocumntsChange}
                   type="file"
                 />

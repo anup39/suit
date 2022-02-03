@@ -17,7 +17,7 @@ import {
 } from '../../../../redux/project-management-redux/project.selector';
 import Documents from '../Documents/Documents';
 import ImportDrawer from '../ImportProject/components/import-drawer/import-drawer';
-import ImportProject from '../ImportProject/import-project.view';
+// import ImportProject from '../ImportProject/import-project.view';
 import Projects from '../Projects/Projects';
 import WorkList from '../WorkList/WorkList';
 import TabPanel from './TabPanel';
@@ -48,18 +48,17 @@ const ProjectPannel = ({ handleBack }) => {
       <ImportDrawer handleClose={handleClose} isOpen={isAddProjectDataOpen} />
       <GlobalSpinner isOpen={isImportProejctDataLoading} />
       <div className="project-pannel-base-div">
-        {value === 4 && (
-          <div>
-            <button
-              className="import-project-data-add-button"
-              onClick={handleOpen}
-              type="button"
-            >
-              <AddIcon />
-              {t('importData')}{' '}
-            </button>
-          </div>
-        )}
+        <div>
+          <button
+            className="import-project-data-add-button"
+            onClick={handleOpen}
+            type="button"
+          >
+            <AddIcon />
+            {t('importData')}{' '}
+          </button>
+        </div>
+
         <div className="project-bread-crumbs">
           <span>
             <span className="breadcrumbs-back" onClick={handleBack}>
@@ -77,7 +76,7 @@ const ProjectPannel = ({ handleBack }) => {
                 <Tab label={t('documents')} />
                 <Tab label={t('fieldUpdates')} />
                 <Tab label={t('workList')} />
-                <Tab label={t('importProjectData')} />
+                {/* <Tab label={t('importProjectData')} /> */}
               </Tabs>
             </Box>
             <TabPanel index={0} value={value}>
@@ -95,9 +94,9 @@ const ProjectPannel = ({ handleBack }) => {
               <WorkList />
             </TabPanel>
 
-            <TabPanel index={4} value={value}>
+            {/* <TabPanel index={4} value={value}>
               <ImportProject />
-            </TabPanel>
+            </TabPanel> */}
           </Box>
         </div>
       </div>
