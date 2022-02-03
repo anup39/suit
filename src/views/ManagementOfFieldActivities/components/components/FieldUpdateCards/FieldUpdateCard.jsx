@@ -22,6 +22,7 @@ import AreYouSure from '../../../../../components/shared/AreYouSure/AreYouSure';
 import ControlActivityDrawer from '../../../../../components/shared/ControlActivityDrawer/ControlActivityDrawer';
 import WebexFiles from '../../../../../components/shared/Webex-components/webex-files/WebexFiles';
 import WebexMessages from '../../../../../components/shared/Webex-components/webex-message/WebexMessages';
+import ProjectStatus from '../../../../../constants/ProjectStatus';
 import { getAllActivities } from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
 import {
@@ -198,18 +199,10 @@ const FieldUpdateCard = ({ activityData }) => {
               onChange={(e) => handleTaskChange(e)}
               value={taskStatus}
             >
-              <option value="Not assigned">{t('notassigned')}</option>
-              <option value="Not Started">{t('notStarted')}</option>
-              <option value="In progress/started">
-                {t('inprogressstarted')}
-              </option>
-              <option value="Waiting for feedback">
-                {t('waitingforfeedback')}
-              </option>
-              <option value="Approved">{t('approved')}</option>
-              <option value="Canceled">{t('canceled')}</option>
-              <option value="Completed">{t('completed')}</option>
-              <option value="Suspended">{t('suspended')}</option>
+              <option> {activityData.taskStatus} </option>
+              {ProjectStatus[activityData.taskStatus].map((val) => (
+                <option key={val}>{val}</option>
+              ))}
             </select>
           </span>
           <span className="field-updates-body-controlActivity">
