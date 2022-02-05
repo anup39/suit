@@ -165,7 +165,7 @@ const MapView = ({ page }) => {
   console.log(typeof taskDetailsByProject);
 
   return (
-    <div className="map-view-base-div">
+    <div className={`map-view-base-div ${page==='webgisservices'? 'is-fullmap':''}`}>
       <div className="map-view-map-div">
         <MapWrapper projectId={projectId} selectedDropdownTaskId={taskId} />
       </div>
