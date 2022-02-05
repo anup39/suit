@@ -14,7 +14,7 @@ import { getTasksByProject } from '../../../redux/worklist-management-redux/work
 import MapWrapper from './OpenLayerWrapper';
 
 // eslint-disable-next-line react/prop-types
-const OpenLayer = ({selectedDropdownTaskId}) => {
+const OpenLayer = ({selectedDropdownTaskId,projectId}) => {
   const dispatch = useDispatch();
   // set intial state
   const [features, setFeatures] = useState([]);
@@ -58,6 +58,7 @@ const OpenLayer = ({selectedDropdownTaskId}) => {
     <div className="App">
       <MapWrapper
         features={features}
+        projectId={projectId}
         projectLayersList={selectedProjectLayersList}
         selectedDropdownTaskId={selectedDropdownTaskId}
         setWmsLayers={setWmsLayers}

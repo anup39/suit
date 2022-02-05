@@ -283,6 +283,8 @@ export function* getSelectedProjectLayersList({ payload }) {
     const projectData = yield call(GET_SELECTED_PROJECT_LAYERS_LIST, payload);
     yield put(getSelectedProjectLayersListSuccess(projectData));
   } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(err,'err');
     yield put(getSelectedProjectLayersListError(err.response.data));
   }
 }

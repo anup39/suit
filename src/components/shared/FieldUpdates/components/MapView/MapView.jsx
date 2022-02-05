@@ -41,12 +41,20 @@ const MapView = ({ page }) => {
   const selectedTaskId = useSelector(getSelectedTaskId);
   const selectedProjectData = useSelector(getProjectData);
 
-
+  // eslint-disable-next-line react-redux/useSelector-prefer-selectors
+  const selectedProjectLayersList = useSelector(
+    (state) => state.projectManagement.selectedProjectLayerList
+  )?.layers?.layer;
+  // React.useEffect(() => {
+  //   if(taskDetailsByProject?.length > 0) {
+  //     setTaskId(taskDetailsByProject?.[0]?.taskId);
+  //   }
+  // }, [taskDetailsByProject]);
   React.useEffect(() => {
-    if(taskDetailsByProject?.length > 0) {
-      setTaskId(taskDetailsByProject?.[0]?.taskId);
+    if(selectedProjectLayersList?.length > 0) {
+      setTaskId(selectedProjectLayersList?.[0]?.name);
     }
-  }, [taskDetailsByProject]);
+  }, [selectedProjectLayersList]);
   React.useEffect(() => {
     dispatch(getProjectList(authToken));
   }, []);
@@ -159,7 +167,7 @@ const MapView = ({ page }) => {
   return (
     <div className="map-view-base-div">
       <div className="map-view-map-div">
-        <MapWrapper  selectedDropdownTaskId={taskId}/>
+        <MapWrapper projectId={projectId} selectedDropdownTaskId={taskId} />
       </div>
       <div className="map-view-details-div">
         {/* <h5 className="map-view-assign-project-header">Assign Project</h5> */}
@@ -185,16 +193,16 @@ const MapView = ({ page }) => {
               ))}
             </select>
           )}
-          { taskDetailsByProject && (
+          { selectedProjectLayersList && (
             <select
               className={classes.form_input}
               onChange={(e) => setTaskId(e.target.value)}
               value={taskId}
             >
               <option value=""> Select A Layer</option>
-              {taskDetailsByProject?.map((vals) => (
-                <option key={vals.taskId} value={vals.taskId}>
-                  {vals.taskName}
+              {selectedProjectLayersList?.map((vals) => (
+                <option key={vals.name} value={vals.name}>
+                  {vals.name}
                 </option>
               ))}
             </select>

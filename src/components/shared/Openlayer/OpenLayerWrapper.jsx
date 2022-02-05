@@ -6,11 +6,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import GeoJSON from 'ol/format/GeoJSON';
 import Map from 'ol/Map';
 import View from 'ol/View';
+import Image from 'ol/layer/Image';
+import WMSCapabilities from 'ol/format/WMSCapabilities';
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import XYZ from 'ol/source/XYZ';
-import { transform } from 'ol/proj';
+import { transform,transformExtent } from 'ol/proj';
 import { toStringXY } from 'ol/coordinate';
 import { fromLonLat } from 'ol/proj';
 import TileWMS from 'ol/source/TileWMS';
@@ -21,6 +23,7 @@ import { selectTaskId } from '../../../redux/project-management-redux/project-ma
 // import Fill from 'ol/style/Fill';
 // import Circle from 'ol/geom/Circle';
 // import Stroke from 'ol/style/Stroke';
+import ol from 'ol';
 import { Circle, Fill, Stroke, Style } from 'ol/style';
 import {
   getAllProjects,
@@ -40,6 +43,11 @@ function MapWrapper(props) {
   const washingtonWebMercator = fromLonLat(washingtonLonLat);
   // const taskDetailsByProject = useSelector(getTasksByProject);
   const selectedTaskId = useSelector(getSelectedTaskId);
+  const projectList = useSelector(getAllProjects);
+
+  const filteredProjectBySelectedId =
+  projectList &&
+  projectList?.find((project) => +project.id === +props.projectId)?.name?.replaceAll(" ","");
 
   useEffect(() => {
     if (map && vectorLayer && props?.taskDetailsByProject) {
@@ -59,12 +67,12 @@ function MapWrapper(props) {
         if (feat.values_.taskId === props.selectedDropdownTaskId) {
           var ext = feat.getGeometry().getExtent();
           // map.getView().fitExtent(ext,map.getSize());
-          map.getView().fit(ext, {
-            padding: [50, 50, 50, 50],
-            duration: 500,
-            maxZoom: 8,
-            constrainResolution: true,
-          });
+          // map.getView().fit(ext, {
+          //   padding: [50, 50, 50, 50],
+          //   duration: 500,
+          //   maxZoom: 8,
+          //   constrainResolution: true,
+          // });
         }
       });
     }
@@ -144,12 +152,12 @@ function MapWrapper(props) {
 
   useEffect(() => {
     if (map) {
-      if (props.taskDetailsByProject.length > 0 && props.selectedDropdownTaskId) {
-        const filteredTask = props.taskDetailsByProject.filter((task)=>task.taskId === props.selectedDropdownTaskId);
+      if (props.taskDetailsByProject.length > 0) {
+        // const filteredTask = props.taskDetailsByProject.filter((task)=>task.taskId === props.selectedDropdownTaskId);
        
         const finalGeojson = {
           type: 'FeatureCollection',
-          features: filteredTask.map((item) => ({
+          features: props.taskDetailsByProject.map((item) => ({
             type: 'Feature',
             properties: { ...item },
             geometry: {
@@ -200,23 +208,48 @@ useEffect (()=>{
     if (map) {
       if (props.projectLayersList) {
         props.projectLayersList.forEach((layer, i) => {
+          if(layer.name == props.selectedDropdownTaskId){
           const tileLayer = new TileLayer({
             source: new TileWMS({
               // crossOrigin: 'anonymous',
               // url:`http://192.168.100.242:8080/geoserver/`,
-              url: `${process.env.REACT_APP_GEOSERVER_HOSTNAME}Anuptest3/wms`,
+              url: `${process.env.REACT_APP_GEOSERVER_HOSTNAME}${filteredProjectBySelectedId}/wms`,
               params: {
                 FORMAT: 'image/png',
                 VERSION: '1.1.1',
                 tiled: true,
                 STYLES: '',
-                LAYERS: `Anuptest3:${layer.name}`,
+                LAYERS: `${filteredProjectBySelectedId}:${layer.name}`,
               },
             }),
           });
           tileLayer.setZIndex(5 - i);
           props.setWmsLayers((prevState) => [...prevState, tileLayer]);
           map.addLayer(tileLayer);
+          const base_url = `${process.env.REACT_APP_GEOSERVER_HOSTNAME}/${filteredProjectBySelectedId}/wms?`
+          const parser = new WMSCapabilities();
+          fetch(base_url + 'SERVICE=WMS&VERSION=1.1.0&REQUEST=GetCapabilities').then(function(response) {
+            return response.text();
+        }).then(function(text) {
+                const result = parser.read(text);
+                const extent = result.Capability.Layer.Layer.find(l => l.Name === `${filteredProjectBySelectedId}:${layer.name}`).BoundingBox?.[0].extent;
+           
+                var extent_3857 = transformExtent(extent, 'EPSG:4326', 'EPSG:3857');
+              //   var layer2 = new Image({
+              //     title: 'zone',
+              //     visible: false,
+              //     source: wmsSource2,
+              //     extent: extent_3857
+              // });
+              map.getView().fit(extent_3857, {
+                padding: [50, 50, 50, 50],
+                duration: 2000,
+                maxZoom: 8,
+                constrainResolution: true,
+            });
+        });
+    
+        }
         });
       }
     }
@@ -225,7 +258,7 @@ useEffect (()=>{
         map.removeLayer(layer);
       });
     };
-  }, [map, props.projectLayersList]);
+  }, [map, props.projectLayersList,props.selectedDropdownTaskId]);
 
   useEffect(() => {
     return () => {
