@@ -159,10 +159,6 @@ const MapView = ({ page }) => {
     `${process.env.REACT_APP_ECM_HOSTNAME}VistaEcmWeb.aspx?LogonType=3&UserName=Administrator&Password=Asuite&AppName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~TASK_NAME=${filteredTaskByTaskId?.taskName}^~PROJ_NAME=${filteredTaskByTaskId?.projectsName}`,
     'url'
   );
-  // eslint-disable-next-line no-console
-  console.log(taskDetailsByProject);
-  // eslint-disable-next-line no-console
-  console.log(typeof taskDetailsByProject);
 
   return (
     <div className={`map-view-base-div ${page==='webgisservices'? 'is-fullmap':''}`}>

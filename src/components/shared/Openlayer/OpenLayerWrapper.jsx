@@ -240,7 +240,6 @@ useEffect (()=>{
             return response.text();
         }).then(function(text) {
                 const result = parser.read(text);
-                console.log(result,'result');
                 const extent = result.Capability.Layer.Layer.find(l => l.Name === `${filteredProjectBySelectedId}:${layer.name}`).BoundingBox?.[0].extent;
            
                 var extent_3857 = transformExtent(extent, 'EPSG:4326', 'EPSG:3857');
@@ -257,27 +256,27 @@ useEffect (()=>{
                 constrainResolution: true,
             });
         });
-          fetch(base_url + `SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=${filteredProjectBySelectedId}:${layer.name}`).then(function(response) {
-            return response.text();
-        }).then(function(text) {
-                const result = parser.read(text);
-                console.log(result,'result1');
-                // const extent = result.Capability.Layer.Layer.find(l => l.Name === `${filteredProjectBySelectedId}:${layer.name}`).BoundingBox?.[0].extent;
+        //   fetch(base_url + `SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=${filteredProjectBySelectedId}:${layer.name}`).then(function(response) {
+        //     return response.text();
+        // }).then(function(text) {
+        //         const result = parser.read(text);
+        //         console.log(result,'result1');
+        //         // const extent = result.Capability.Layer.Layer.find(l => l.Name === `${filteredProjectBySelectedId}:${layer.name}`).BoundingBox?.[0].extent;
            
-                // var extent_3857 = transformExtent(extent, 'EPSG:4326', 'EPSG:3857');
-              //   var layer2 = new Image({
-              //     title: 'zone',
-              //     visible: false,
-              //     source: wmsSource2,
-              //     extent: extent_3857
-              // });
-            //   map.getView().fit(extent_3857, {
-            //     padding: [50, 50, 50, 50],
-            //     duration: 2000,
-            //     maxZoom: 8,
-            //     constrainResolution: true,
-            // });
-        });
+        //         // var extent_3857 = transformExtent(extent, 'EPSG:4326', 'EPSG:3857');
+        //       //   var layer2 = new Image({
+        //       //     title: 'zone',
+        //       //     visible: false,
+        //       //     source: wmsSource2,
+        //       //     extent: extent_3857
+        //       // });
+        //     //   map.getView().fit(extent_3857, {
+        //     //     padding: [50, 50, 50, 50],
+        //     //     duration: 2000,
+        //     //     maxZoom: 8,
+        //     //     constrainResolution: true,
+        //     // });
+        // });
     
         }
         });
