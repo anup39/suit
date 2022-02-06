@@ -53,7 +53,6 @@ const OpenLayer = ({selectedDropdownTaskId,projectId}) => {
         setFeatures(parsedFeatures);
       });
   }, []);
-
   return (
     <div className="App">
       <MapWrapper

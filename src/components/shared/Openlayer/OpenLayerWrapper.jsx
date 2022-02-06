@@ -19,6 +19,7 @@ import TileWMS from 'ol/source/TileWMS';
 import { get } from 'ol/proj';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTaskId } from '../../../redux/project-management-redux/project-management.actions';
+import base64 from 'base-64';
 // import Style from 'ol/style/Style';
 // import Fill from 'ol/style/Fill';
 // import Circle from 'ol/geom/Circle';
@@ -55,14 +56,14 @@ function MapWrapper(props) {
       var features = source.getFeatures();
       features.forEach((feat) => {
         if (feat.values_.taskId === selectedTaskId) {
-          var ext = feat.getGeometry().getExtent();
-          // map.getView().fitExtent(ext,map.getSize());
-          map.getView().fit(ext, {
-            padding: [50, 50, 50, 50],
-            duration: 500,
-            maxZoom: 8,
-            constrainResolution: true,
-          });
+          // var ext = feat.getGeometry().getExtent();
+          // // map.getView().fitExtent(ext,map.getSize());
+          // map.getView().fit(ext, {
+          //   padding: [50, 50, 50, 50],
+          //   duration: 500,
+          //   maxZoom: 8,
+          //   constrainResolution: true,
+          // });
         }
         if (feat.values_.taskId === props.selectedDropdownTaskId) {
           var ext = feat.getGeometry().getExtent();
@@ -207,6 +208,8 @@ useEffect (()=>{
   useEffect(() => {
     if (map) {
       if (props.projectLayersList) {
+        console.log(props.projectLayersList,'props.projectlayerlist');
+        console.log('testing');
         props.projectLayersList.forEach((layer, i) => {
           if(layer.name == props.selectedDropdownTaskId){
           const tileLayer = new TileLayer({
@@ -226,58 +229,33 @@ useEffect (()=>{
           tileLayer.setZIndex(5 - i);
           props.setWmsLayers((prevState) => [...prevState, tileLayer]);
           map.addLayer(tileLayer);
-          const tileSource = tileLayer.getSource();
-          // const url = tileSource.getFeatureInfoUrl(
-          //   evt.coordinate,
-          //   viewResolution,
-          //   'EPSG:3857',
-          //   { INFO_FORMAT: 'application/json' },
-          //   // { INFO_FORMAT: 'text/html' },
-          // );
-          const base_url = `${process.env.REACT_APP_GEOSERVER_HOSTNAME}/${filteredProjectBySelectedId}/wms?`
-          const parser = new WMSCapabilities();
-          fetch(base_url + 'SERVICE=WMS&VERSION=1.1.0&REQUEST=GetCapabilities').then(function(response) {
-            return response.text();
-        }).then(function(text) {
-                const result = parser.read(text);
-                const extent = result.Capability.Layer.Layer.find(l => l.Name === `${filteredProjectBySelectedId}:${layer.name}`).BoundingBox?.[0].extent;
-           
+       
+          const username = 'admin';
+          const password = 'geoserver';
+          let headers = new Headers();
+          headers.set('Authorization', 'Basic ' + base64.encode(username + ":" + password));
+
+          fetch(layer.href,{method:'GET',headers:headers}).then(function(response) {
+            return response.json();
+        }).then(function(json) {
+          fetch(json.layer.resource.href,{method:'GET',headers:headers}).then(function(response) {
+            return response.json();
+        }).then(function(layerJson) {
+          const {minx, miny, maxx, maxy} = layerJson.featureType.latLonBoundingBox
+       
+            const extent = [minx, miny, maxx, maxy];
                 var extent_3857 = transformExtent(extent, 'EPSG:4326', 'EPSG:3857');
-              //   var layer2 = new Image({
-              //     title: 'zone',
-              //     visible: false,
-              //     source: wmsSource2,
-              //     extent: extent_3857
-              // });
               map.getView().fit(extent_3857, {
                 padding: [50, 50, 50, 50],
                 duration: 2000,
                 maxZoom: 8,
                 constrainResolution: true,
             });
+
         });
-        //   fetch(base_url + `SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=${filteredProjectBySelectedId}:${layer.name}`).then(function(response) {
-        //     return response.text();
-        // }).then(function(text) {
-        //         const result = parser.read(text);
-        //         console.log(result,'result1');
-        //         // const extent = result.Capability.Layer.Layer.find(l => l.Name === `${filteredProjectBySelectedId}:${layer.name}`).BoundingBox?.[0].extent;
-           
-        //         // var extent_3857 = transformExtent(extent, 'EPSG:4326', 'EPSG:3857');
-        //       //   var layer2 = new Image({
-        //       //     title: 'zone',
-        //       //     visible: false,
-        //       //     source: wmsSource2,
-        //       //     extent: extent_3857
-        //       // });
-        //     //   map.getView().fit(extent_3857, {
-        //     //     padding: [50, 50, 50, 50],
-        //     //     duration: 2000,
-        //     //     maxZoom: 8,
-        //     //     constrainResolution: true,
-        //     // });
-        // });
-    
+         
+        });
+       
         }
         });
       }
