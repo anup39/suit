@@ -3,14 +3,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60%;
-  height: 80vh;
+  width: 80%;
+  height: 100vh;
   background-color: rgb(255, 255, 255);
   display: block;
-  overflow: auto;
 
   @media (max-width: 768px) {
-    width: 90%;
+    width: 80%;
   }
 
   .MuiTabs-flexContainer {
@@ -20,6 +19,7 @@
 
 .field-log-content-div {
   padding: 15px 30px;
+  width: 100%;
 
   >div {
     border: 1px solid #d4deea;
@@ -52,13 +52,12 @@
 }
 
 .field-log-close-button {
-  padding: 5px 15p;
-  border: 1px solid #0160e0;
+  padding: 10px 30px;
+  border: 1px solid blue;
   border-radius: 5px;
-  color: #0160e0;
-  background: white;
+  color: blue;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   float: right;
   display: block;
   margin-top: 10px;
@@ -71,9 +70,7 @@
   grid-auto-rows: minmax(100px, auto);
   padding: 20px;
   border-top: 1px solid #d4deea;
-  height: calc(100vh - 342px);
-  overflow: auto;
-  overflow: auto;
+  height: calc(100vh - 340px);  overflow: auto;
 
 }
 
@@ -85,8 +82,8 @@
 
 .field-log-data div {
   border: 1px solid #d4deea;
-  width: 97%;
-  height: 35px;
+  width: 150%;
+  height: 50px;
   padding-left: 4px;
   display: flex;
   align-items: center;
@@ -145,4 +142,14 @@
 .field-log-data-user {
   grid-column: 2;
   grid-row: 5;
+}
+
+.field-log-data-field-operator {
+  grid-column: 1;
+  grid-row: 6;
+}
+
+.field-log-data-task-notification {
+  grid-column: 2;
+  grid-row: 6;
 }

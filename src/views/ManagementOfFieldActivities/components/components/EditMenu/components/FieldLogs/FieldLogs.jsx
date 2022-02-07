@@ -1,6 +1,6 @@
 import './FieldLogs.scss';
 
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 // import PropTypes from 'prop-types';
@@ -26,18 +26,21 @@ const FieldLogs = () => {
     <div className="field-log-base">
       <EditModalHeaders headerName={t('fieldLogs')} />
       <div className="field-log-content-div">
-        <Box sx={{ width: '100%' }}>
-          <Tabs onChange={handleChange} value={value}>
-            <Tab label="Image" />
-            <Tab label="Documents" />
-          </Tabs>
+      <Box sx={{ pt: 2 }}>
+      <div>
+            <Tabs onChange={handleChange} value={value}>
+              <Tab label="Image" />
+              <Tab label="Documents" />
+            </Tabs>
+        
+          <FilePannel index={0} value={value}>
+            <ImageDocuments />
+          </FilePannel>
+          <FilePannel index={1} value={value}>
+            <OtherDocuments />
+          </FilePannel>
+        </div>
         </Box>
-        <FilePannel index={0} value={value}>
-          <ImageDocuments />
-        </FilePannel>
-        <FilePannel index={1} value={value}>
-          <OtherDocuments />
-        </FilePannel>
       </div>
     </div>
   );

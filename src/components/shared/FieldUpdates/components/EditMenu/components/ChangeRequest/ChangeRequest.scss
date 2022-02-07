@@ -1,27 +1,35 @@
 .change-request-base {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 50%;
-  height: 80%;
-  background-color: rgb(255, 255, 255);
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 768px) {
-    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    display: block;
+  
+    @media (max-width: 768px) {
+      width: 80%;
+    }
+  
+    .MuiTabs-flexContainer {
+      overflow: auto;
+    }
   }
-
-  .text-right {
+  
+  .field-log-content-div {
     padding: 15px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    width: 100%;
+  
+    >div {
+      border: 1px solid #d4deea;
+      border-radius: 3px;
+    }
+  
+    .MuiBox-root {
+      padding: 0;
+    }
   }
-}
-
 .change-request-body-div {
   padding: 15px 30px;
   display: block;

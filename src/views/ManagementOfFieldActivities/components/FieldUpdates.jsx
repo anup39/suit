@@ -10,8 +10,10 @@ import FieldUpdateCard from './components/FieldUpdateCards/FieldUpdateCard';
 import MapView from './components/MapView/MapView';
 
 const FieldUpdates = () => {
+
   const [isMapView, setIsMapView] = React.useState(false);
   const { t } = useTranslation();
+  
 
   const showMapView = () => {
     setIsMapView(true);
@@ -20,6 +22,7 @@ const FieldUpdates = () => {
   const showListView = () => {
     setIsMapView(false);
   };
+
 
   return (
     <div className="field-update-base-div">
@@ -34,6 +37,8 @@ const FieldUpdates = () => {
               <SearchIcon className="field-search-icon" />
               <input className="field-input" placeholder={t('searchCompany')} />
             </span>
+
+        
           </>
         )}
         {!isMapView ? (

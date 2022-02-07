@@ -10,15 +10,13 @@
   margin-top: 10px;
 }
 
+table {
+  width: 100%;
+}
 .field-log-data {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
-  padding: 20px;
-  border-top: 1px solid #d4deea;
-  height: calc(100vh - 342px);
-  overflow: auto;
+  display: flex;
+  height: calc(100vh - 340px);
+  width: 1000px;
   overflow: auto;
 }
 
@@ -30,7 +28,7 @@
 
 .field-log-data div {
   border: 1px solid #d4deea;
-  width: 97%;
+  width: 200%;
   height: 35px;
   padding-left: 4px;
   display: flex;
@@ -75,13 +73,11 @@
 .field-log-data-logs {
   grid-column: 1;
   grid-row: 4;
-  margin-top: 20px;
 }
 
 .field-log-data-status {
   grid-column: 2;
   grid-row: 4;
-  margin-top: 20px;
 }
 
 .field-log-data-barcode {
@@ -122,19 +118,6 @@
 .field-log-data-long {
   grid-column: 2;
   grid-row: 8;
-}
-
-.field-log-data-rejection-note {
-  grid-column: 1;
-  grid-row: 9;
-
-  textarea {
-    width: 200%;
-    height: 100px;
-    resize: none;
-    border: 1px solid #d4deea;
-    padding: 3px;
-  }
 }
 
 .image-document-content-no-data-found {
