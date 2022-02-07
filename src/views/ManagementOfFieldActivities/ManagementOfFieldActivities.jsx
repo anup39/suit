@@ -2,7 +2,12 @@ import './components/FieldUpdates.scss';
 
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import SearchIcon from '@mui/icons-material/Search';
-import React from 'react';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Select from '@mui/material/Select';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GrMap } from 'react-icons/gr';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,14 +18,18 @@ import Pagination from '../../components/shared/Pagination/Pagination';
 import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import { getAllActivities } from '../../redux/Management-of-field-activities/management-field-activities.action';
 import {
-  getActivitiesDetails,
   getIsActivitiesLoading,
 } from '../../redux/Management-of-field-activities/management-field-activities.selectors';
+import { getAllProjects } from '../../redux/project-management-redux/project.selector';
+import { getProjectList } from '../../redux/project-management-redux/project-management.actions';
 import {
   getIfAuthenticated,
   getUserAuthToken,
 } from '../../redux/user-redux/user.selectors';
-import { getIsChngeStatusLoading } from '../../redux/worklist-management-redux/worklist.selector';
+import { taskByProject } from '../../redux/worklist-management-redux/worklist.actions';
+import {
+ getIsChngeStatusLoading,
+  getTasksByProject } from '../../redux/worklist-management-redux/worklist.selector';
 import AuthenticatedRoute from '../../routes/AuthenticatedRoute';
 import MapView from './components/components/MapView/MapView';
 import MobileDataRow from './mobile.data.row';
@@ -30,8 +39,9 @@ const ManagementOfFieldActivities = () => {
   const [filteredData, setfilteredData] = React.useState('');
 
   const isAuthenticated = useSelector(getIfAuthenticated);
+  const worklistTasks = useSelector(getTasksByProject);
+
   const authToken = useSelector(getUserAuthToken);
-  const allActivities = useSelector(getActivitiesDetails);
   const isAllActivitiesLoading = useSelector(getIsActivitiesLoading);
   const isChangeStatusLoading = useSelector(getIsChngeStatusLoading);
 
@@ -39,7 +49,42 @@ const ManagementOfFieldActivities = () => {
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const [projectName, setProjectName] = React.useState(null);
+  const projectList = useSelector(getAllProjects);
 
+  
+
+  useEffect(() => {
+    dispatch(getProjectList(authToken));
+  },[])
+  
+  React.useEffect(() => {
+    const data = { authToken, projectId: projectName };
+
+    if(projectName)
+    {
+      dispatch(taskByProject(data));
+    }
+  }, [projectName]);
+
+  const handleProjectChange = (event) => {
+    console.log(event)
+    const {
+      target: { value },
+    } = event;
+    setProjectName(typeof value === 'string' ? value.split(',') : value);
+  };
+
+  const ITEM_HEIGHT = 30;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
   const showMapView = () => {
     setIsMapView(true);
   };
@@ -51,7 +96,7 @@ const ManagementOfFieldActivities = () => {
   const handleSearchTask = (e) => {
     setSearchText(e.target.value);
 
-    const filteredList = allActivities.filter((item) =>
+    const filteredList = worklistTasks.filter((item) =>
       item?.taskName.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setfilteredData(filteredList);
@@ -63,6 +108,7 @@ const ManagementOfFieldActivities = () => {
     };
 
     dispatch(getAllActivities(data));
+
   }, []);
 
   return (
@@ -82,6 +128,31 @@ const ManagementOfFieldActivities = () => {
                     value={searchText}
                   />
                 </div>
+                <div>
+              <FormControl sx={{ m: 1, width: 200 }}>
+                <InputLabel id="demo-multiple-name-label">
+                  {t('projectName')}
+                </InputLabel>
+                <Select
+                  id="demo-multiple-name"
+                  input={<OutlinedInput label="Project Name" />}
+                  labelId="demo-multiple-name-label"
+                  MenuProps={MenuProps}
+                  onChange={handleProjectChange}
+                  value={projectName}
+                >
+                  {projectList &&
+                    projectList.map((val) => (
+                      <MenuItem
+                        key={val.id}
+                        value={val.id}
+                      >
+                        {val.name}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+            </div>
                 {/* <div className="mgmt-field-container">
                   <SearchIcon className="field-search-icon" />
                   <input
@@ -128,14 +199,14 @@ const ManagementOfFieldActivities = () => {
               <>
                 {isAllActivitiesLoading ? (
                   <LoadingSpinner />
-                ) : allActivities && allActivities.length === 0 ? (
+                ) : worklistTasks && worklistTasks.length === 0 ? (
                   <div className="no-data-found">
                     <p>{t('noDataFound')}</p>
                   </div>
                 ) : (
                   <Pagination
                     componentNo={9}
-                    itemData={searchText ? filteredData : allActivities}
+                    itemData={searchText ? filteredData : worklistTasks}
                     itemsPerPage={10}
                   />
                 )}

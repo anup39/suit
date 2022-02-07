@@ -1,199 +1,217 @@
+/* eslint-disable react/no-multi-comp */
+/* eslint-disable react/jsx-key */
 import './ImageDocuments.scss';
 
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-import React from 'react';
+import DoneIcon from '@mui/icons-material/Done';
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
+import { Modal } from '@mui/material';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { useTable } from "react-table";
 
-import { changeFieldLogStatus } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getfieldlogs } from '../../../../../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
-import { getUserAuthToken } from '../../../../../../../../../redux/user-redux/user.selectors';
+import VerifierMessage from '../../../verifier-message/VerifierMessage';
+// import EditModalHeaders from '../../../EditModalHeaders/EditModalHeaders';
 
 const ImageDocuments = () => {
-  const [rejectionReason, setRejectionReason] = React.useState('');
 
   const { t } = useTranslation();
   const fieldLogs = useSelector(getfieldlogs);
-  const authToken = useSelector(getUserAuthToken);
+  const [taskId, settaskId] = React.useState('');
+  const [fieldid, setfieldid] = React.useState('');
+  const [MessageModalOpen, setIsMessageModalOpen] = React.useState(false);
 
-  const dispatch = useDispatch();
 
   const imageData = fieldLogs.imageTask;
-  const [imageTask, setimageTask] = React.useState(fieldLogs.imageTask[0]);
 
-  const handelReject = () => {
-    if (!rejectionReason) {
-      toast.warn('Please Add A Reason For Rejection!', {
-        position: 'top-center',
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    } else {
-      const data = {
-        authToken,
-        taskData: {
-          fieldlogId: imageData?.fieldlogId,
-          taskId: imageData?.taskId,
-          isApproved: false,
-          rejectionNote: '',
-        },
-      };
+ 
 
-      dispatch(changeFieldLogStatus(data));
-    }
+  const handleMessageModalClose = () => {
+    setIsMessageModalOpen(false);
   };
 
-  const handleCrtabchange = (event, value) => {
-    setimageTask(imageData[value]);
-  };
-  const handelAccept = () => {
-    const data = {
-      authToken,
-      taskData: {
-        fieldlogId: imageData?.fieldlogId,
-        taskId: imageData?.taskId,
-        isApproved: true,
-        rejectionNote: '',
+  const handledata = ((fieldlogId, taskid) => {
+    console.log(fieldlogId)
+    settaskId(taskid);
+    setfieldid(fieldlogId);
+    setIsMessageModalOpen(true);
+
+
+  });
+
+  const columns = useMemo(
+    () => [
+      {
+        Header: t('FieldDate'),
+        accessor: "fieldDate",
+        minWidth: 30,
+        width: 30,
       },
-    };
+      {
+        Header: t('FieldNote'),
+        accessor: "fieldNote",
+        minWidth: 50,
+        width: 50,
+      },
+      {
+        Header: t('lat'),
+        accessor: "lat",
+        minWidth: 10,
+        width: 10,
+      },
+      {
+        Header: t('lon'),
+        accessor: "lon",
+        minWidth: 10,
+        width: 10,
+      },
+      {
+        Header: t('Status'),
+        accessor: "verifierCheck",
+        Cell: ( data ) => {
+          return data.value ? data.value : "Not Verified";
+        },
+        minWidth: 30,
+        width: 30,
+      },
+      {
+        Header: t('FieldOperator'),
+        accessor: "fieldUser",
+        minWidth: 30,
+        width: 30,
+      },
+      {
+        Header: t('Attachment'),
+        accessor: "docLink",
+        // eslint-disable-next-line react/no-unstable-nested-components
+        Cell: ( data ) => {
+          return (data.value ? (<a href={data.value} window="_blank">View Doc</a> ) : '')
+        },
+        minWidth: 30,
+        width: 30,
+      },
+      {
+        Header: t('VerifiedBy'),
+        accessor: "verifiedUser",
+        minWidth: 30,
+        width: 30,
+      },
+      {
+        Header: t('Verifier Note'),
+        accessor: "verifierNote",
+        minWidth: 30,
+        width: 30,
+      },
+      {
+        Header: t('Actions'),
+        accessor: "actions",
+        minWidth: 60,
+        width: 60,
+        // eslint-disable-next-line react/no-unstable-nested-components
+        Cell: ( data ) => {
+          const taskid = data.row.original.taskId;
+          const  rowidx = data.row.original.fieldlogId;
+          let disable=true;
+          if(data.row.original.verifierCheck && data.row.original.verifierCheck !== null)
+          {
+            disable=true;
+          }else
+          {
+            disable=false;
+          }
 
-    dispatch(changeFieldLogStatus(data));
-  };
+
+          return (
+            <div>
+              {disable ? <DoneIcon color="secondary" /> : 
+              <PendingActionsIcon color="secondary"  onClick={() => handledata(rowidx, taskid)}/>
+              }
+              
+              
+            </div>
+          );
+        },
+      },
+    ],
+    []
+  );
+
+
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({
+    columns,
+    data: imageData,
+  });
 
   return (
-    <div>
-      <Tabs onChange={handleCrtabchange}>
-        {imageData.length > 0 ? (
-          imageData.map((p) => (
-            <Tab key={p.fieldlogId} label={p.fieldlogId}>
-              {' '}
-            </Tab>
-          ))
-        ) : (
-          <div className="change-request-content-no-data-found">
-            <h5> No Data Found!</h5>
-          </div>
-        )}
-      </Tabs>
-      {imageTask && imageTask !== null && imageTask !== undefined ? (
-        <>
-          <div className="field-log-data">
-            <span className="field-log-data-projectId">
-              <p>Project Id</p>
-              <div> {!imageTask?.projectId ? '-' : imageTask?.projectId} </div>
-            </span>
-            <span className="field-log-data-taskName">
-              <p>Task Name</p>
-              <div>
-                {!imageTask?.projectName ? '-' : imageTask?.projectName}
-              </div>
-            </span>
-            <span className="field-log-data-time">
-              <p>Time</p>
-              <div>{!imageTask?.fieldTime ? '-' : imageTask?.fieldTime}</div>
-            </span>
 
-            <span className="field-log-data-date">
-              <p>Date</p>
-              <div>{!imageTask?.fieldDate ? '-' : imageTask?.fieldDate}</div>
-            </span>
-            <span className="field-log-data-note">
-              <p>Note</p>
-              <div>
-                {!imageTask?.verifierNote ? '-' : imageTask?.verifierNote}
-              </div>
-            </span>
-            <span className="field-log-data-status">
-              <p>Status</p>
-              <div>
-                {!imageTask?.taskNotification
-                  ? '-'
-                  : imageTask?.taskNotification}
-              </div>
-            </span>
-            <span className="field-log-data-barcode">
-              <p>Barcode Detection</p>
-              <div>
-                {!imageTask?.barCodeDetection
-                  ? '-'
-                  : imageTask?.barCodeDetection}
-              </div>
-            </span>
-            <span className="field-log-data-field-operator">
-              {' '}
-              <p>Field Operator Id</p>
-              <div>
-                {!imageTask?.fieldOperatorId ? '-' : imageTask?.fieldOperatorId}
-              </div>
-            </span>
+    
+    <><Modal
+      onClose={handleMessageModalClose}
+      open={MessageModalOpen}
+    >
+      <VerifierMessage
+        fieldLogId={fieldid}
+        handleClose={handleMessageModalClose}
+        taskid={taskId} />
+    </Modal>
+    
+    <div className="list row">
+        <div className="col-md-12 list">
+          <table
+            className="table table-striped"
+            {...getTableProps({ style: { textAlign: 'center', verticalAlign: 'middle' } })}
+          >
+            <thead>
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <th {...column.getHeaderProps({
+                      style: {
+                        minWidth: column.minWidth,
+                        width: column.width,
+                      },
+                    })}>
+                      {column.render("Header")}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {rows.map((row) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps({ style: { height: 60 } })}>
+                    {row.cells.map((cell) => {
+                      return (
+                        <td {...cell.getCellProps({
+                          style: {
+                            minWidth: cell.column.minWidth,
+                            width: cell.column.width,
+                          },
+                        })}>{cell.render("Cell")}</td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div></>
 
-            <span className="field-log-data-barcode-value">
-              {' '}
-              <p>Barcode Value</p>
-              <div>
-                {!imageTask?.barCodeValues ? '-' : imageTask?.barCodeValues}
-              </div>
-            </span>
+    
+    );
 
-            <span className="field-log-data-lat">
-              {' '}
-              <p>Latitude</p>
-              <div>{!imageTask?.lat ? '-' : imageTask?.lat}</div>
-            </span>
-
-            <span className="field-log-data-long">
-              {' '}
-              <p>Longitude</p>
-              <div>{!imageTask?.lon ? '-' : imageTask?.lon}</div>
-            </span>
-
-            <span className="field-log-data-img-address">
-              {' '}
-              <p>Image Address</p>
-              <div>
-                {!imageTask?.imageAddress ? '-' : imageTask?.imageAddress}
-              </div>
-            </span>
-
-            <span className="field-log-data-rejection-note">
-              {' '}
-              <p>Reason For Rejection</p>
-              <textarea
-                cols={5}
-                onChange={(e) => setRejectionReason(e.target.value)}
-                value={rejectionReason}
-              />
-            </span>
-          </div>
-
-          {imageTask.verifierCheck === null ? (
-            <div className="change-request-buttons-div">
-              <span
-                className="change-request-button-reject"
-                onClick={handelReject}
-              >
-                {t('reject')}
-              </span>
-              <span
-                className="change-request-button-accept"
-                onClick={handelAccept}
-              >
-                {t('accept')}
-              </span>
-            </div>
-          ) : (
-            ''
-          )}
-        </>
-      ) : null}
-    </div>
-  );
-};
+    
+  }
 
 export default ImageDocuments;

@@ -3,6 +3,7 @@ import './Openlayer.scss';
 // openlayers
 import GeoJSON from 'ol/format/GeoJSON';
 // react
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,7 +14,7 @@ import { getTasksByProject } from '../../../redux/worklist-management-redux/work
 // components
 import MapWrapper from './OpenLayerWrapper';
 
-const OpenLayer = () => {
+const OpenLayer = ({ selectedDropdownTaskId, projectId }) => {
   const dispatch = useDispatch();
   // set intial state
   const [features, setFeatures] = useState([]);
@@ -57,7 +58,9 @@ const OpenLayer = () => {
     <div className="App">
       <MapWrapper
         features={features}
+        projectId={projectId}
         projectLayersList={selectedProjectLayersList}
+        selectedDropdownTaskId={selectedDropdownTaskId}
         setWmsLayers={setWmsLayers}
         taskDetailsByProject={taskDetailsByProject}
         wmsLayers={wmsLayers}
@@ -66,4 +69,10 @@ const OpenLayer = () => {
   );
 };
 
+OpenLayer.propTypes = {
+  selectedDropdownTaskId : PropTypes.func.isRequired,
+  projectId  : PropTypes.func.isRequired
+
+
+};
 export default OpenLayer;

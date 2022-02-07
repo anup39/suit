@@ -33,6 +33,7 @@ const MapView = ({ page }) => {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const [projectId, setprojectId] = React.useState(null);
+  const [taskId, setTaskId] = React.useState(null);
   const projectList = useSelector(getAllProjects);
   const authToken = useSelector(getUserAuthToken);
   // eslint-disable-next-line no-unused-vars
@@ -40,9 +41,22 @@ const MapView = ({ page }) => {
   const selectedTaskId = useSelector(getSelectedTaskId);
   const selectedProjectData = useSelector(getProjectData);
 
+    // eslint-disable-next-line react-redux/useSelector-prefer-selectors
+  const selectedProjectLayersList = useSelector(
+      (state) => state.projectManagement.selectedProjectLayerList
+    )?.layers?.layer;
+
+
+  React.useEffect(() => {
+    if (selectedProjectLayersList?.length > 0) {
+      setTaskId(selectedProjectLayersList?.[0]?.name);
+    }
+  }, [selectedProjectLayersList]);
+
   React.useEffect(() => {
     dispatch(getProjectList(authToken));
   }, []);
+
   React.useEffect(() => {
     if (projectList.length > 0 && projectId) {
       const getProjectNameFromId = projectList?.find(
@@ -145,9 +159,12 @@ const MapView = ({ page }) => {
     'url'
   );
   return (
-    <div className="map-view-base-div">
-      <div className="map-view-map-div">
-        <MapWrapper />
+    <div
+    className={`map-view-base-div ${
+      page === 'webgisservices' ? 'is-fullmap' : ''
+    }`}
+  >      <div className="map-view-map-div">
+        <MapWrapper projectId={projectId} selectedDropdownTaskId={taskId} />
       </div>
       <div className="map-view-details-div">
         {/* <h5 className="map-view-assign-project-header">Assign Project</h5> */}
@@ -165,7 +182,7 @@ const MapView = ({ page }) => {
               onChange={(e) => setprojectId(e.target.value)}
               value={projectId}
             >
-              <option value=""> Select A Project</option>
+              <option value=""> Select A Layer</option>
               {projectList.map((vals) => (
                 <option key={vals.id} value={vals.id}>
                   {vals.name}
@@ -173,6 +190,34 @@ const MapView = ({ page }) => {
               ))}
             </select>
           )}
+          {selectedProjectLayersList && (
+            <select
+              className={classes.form_input}
+              onChange={(e) => setTaskId(e.target.value)}
+              value={taskId}
+            >
+              <option value=""> Select A Layer</option>
+              {selectedProjectLayersList?.map((vals) => (
+                <option key={vals.name} value={vals.name}>
+                  {vals.name}
+                </option>
+              ))}
+            </select>
+          )}
+          {/* {page === 'webgisservices' && taskDetailsByProject && taskDetailsByProject.length>0 (
+            <select
+              className={classes.form_input}
+              // onChange={(e) => setprojectId(e.target.value)}
+              // value={projectId}
+            >
+              <option > Select A Project</option>
+              {taskDetailsByProject && taskDetailsByProject.length>0 && taskDetailsByProject?.map((vals) => (
+                <option key={vals.taskId} value={vals.taskName}>
+                  {vals.taskName}
+                </option>
+              ))}
+            </select>
+          )} */}
         </div>
         {/* <div className="map-view-document-search-div">
           <label>Document Name</label>

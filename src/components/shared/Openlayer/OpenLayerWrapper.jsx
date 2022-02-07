@@ -10,17 +10,21 @@ import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import XYZ from 'ol/source/XYZ';
-import { transform } from 'ol/proj';
+import { transform, transformExtent } from 'ol/proj';
 import { toStringXY } from 'ol/coordinate';
 import { fromLonLat } from 'ol/proj';
 import TileWMS from 'ol/source/TileWMS';
 import { get } from 'ol/proj';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTaskId } from '../../../redux/project-management-redux/project-management.actions';
+import base64 from 'base-64';
 // import Style from 'ol/style/Style';
 // import Fill from 'ol/style/Fill';
 // import Circle from 'ol/geom/Circle';
 // import Stroke from 'ol/style/Stroke';
+import Image from 'ol/layer/Image';
+import WMSCapabilities from 'ol/format/WMSCapabilities';
+import ol from 'ol';
 import { Circle, Fill, Stroke, Style } from 'ol/style';
 import {
   getAllProjects,
@@ -41,12 +45,23 @@ function MapWrapper(props) {
   // const taskDetailsByProject = useSelector(getTasksByProject);
   const selectedTaskId = useSelector(getSelectedTaskId);
 
+  const projectList = useSelector(getAllProjects);
+
+  const filteredProjectBySelectedId =
+    projectList &&
+    projectList
+      ?.find((project) => +project.id === +props.projectId)
+      ?.name?.replaceAll(' ', '');
+
+
   useEffect(() => {
     if (map && vectorLayer && props?.taskDetailsByProject) {
       var source = vectorLayer.getSource();
       var features = source.getFeatures();
       features.forEach((feat) => {
         if (feat.values_.taskId === selectedTaskId) {
+         }
+        if (feat.values_.taskId === props.selectedDropdownTaskId) {
           var ext = feat.getGeometry().getExtent();
           // map.getView().fitExtent(ext,map.getSize());
           map.getView().fit(ext, {
@@ -134,10 +149,11 @@ function MapWrapper(props) {
 
   useEffect(() => {
     if (map) {
-      if (props.taskDetailsByProject.length > 0) {
-        const finalGeojson = {
+       if (props.taskDetailsByProject.length > 0) {
+          // const filteredTask = props.taskDetailsByProject.filter((task)=>task.taskId === props.selectedDropdownTaskId);
+          const finalGeojson = {
           type: 'FeatureCollection',
-          features: props?.taskDetailsByProject.map((item) => ({
+          features: props.taskDetailsByProject.map((item) => ({
             type: 'Feature',
             properties: { ...item },
             geometry: {
@@ -176,29 +192,77 @@ function MapWrapper(props) {
         map.removeLayer(vectorLayer);
       }
     };
-  }, [props.taskDetailsByProject]);
+  }, [props.taskDetailsByProject, props.selectedDropdownTaskId]);
+  useEffect(() => {
+    return () => {
+      if (map && vectorLayer) {
+        map.removeLayer(vectorLayer);
+      }
+    };
+  },[vectorLayer]);
 
   useEffect(() => {
     if (map) {
       if (props.projectLayersList) {
         props.projectLayersList.forEach((layer, i) => {
-          const tileLayer = new TileLayer({
-            source: new TileWMS({
-              // crossOrigin: 'anonymous',
-              // url:`http://192.168.100.242:8080/geoserver/`,
-              url: `${process.env.REACT_APP_GEOSERVER_HOSTNAME}Anuptest3/wms`,
-              params: {
-                FORMAT: 'image/png',
-                VERSION: '1.1.1',
-                tiled: true,
-                STYLES: '',
-                LAYERS: `Anuptest3:${layer.name}`,
-              },
-            }),
-          });
-          tileLayer.setZIndex(5 - i);
-          props.setWmsLayers((prevState) => [...prevState, tileLayer]);
-          map.addLayer(tileLayer);
+          if (layer.name == props.selectedDropdownTaskId) {
+            const tileLayer = new TileLayer({
+              source: new TileWMS({
+                // crossOrigin: 'anonymous',
+                // url:`http://192.168.100.242:8080/geoserver/`,
+                url: `${process.env.REACT_APP_GEOSERVER_HOSTNAME}${filteredProjectBySelectedId}/wms`,
+                params: {
+                  FORMAT: 'image/png',
+                  VERSION: '1.1.1',
+                  tiled: true,
+                  STYLES: '',
+                  LAYERS: `${filteredProjectBySelectedId}:${layer.name}`,
+                },
+              }),
+            });
+            tileLayer.setZIndex(5 - i);
+            props.setWmsLayers((prevState) => [...prevState, tileLayer]);
+            map.addLayer(tileLayer);
+            const username = 'admin';
+            const password = 'geoserver';
+            let headers = new Headers();
+            headers.set(
+              'Authorization',
+              'Basic ' + base64.encode(username + ':' + password)
+            );
+
+            fetch(layer.href, { method: 'GET', headers: headers })     
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function (json) {
+                fetch(json.layer.resource.href, {
+                  method: 'GET',
+                  headers: headers,
+                })
+                  .then(function (response) {
+                    return response.json();
+                  })
+                  .then(function (layerJson) {
+                    const { minx, miny, maxx, maxy } =
+                      layerJson.featureType.latLonBoundingBox;
+
+              });
+              const extent = [minx, miny, maxx, maxy];
+              var extent_3857 = transformExtent(
+                extent,
+                'EPSG:4326',
+                'EPSG:3857'
+              );
+              map.getView().fit(extent_3857, {
+                padding: [50, 50, 50, 50],
+                duration: 2000,
+                maxZoom: 8,
+                constrainResolution: true,
+              });
+            });
+          }
+
         });
       }
     }
@@ -207,7 +271,7 @@ function MapWrapper(props) {
         map.removeLayer(layer);
       });
     };
-  }, [map, props.projectLayersList]);
+  }, [map, props.projectLayersList, props.selectedDropdownTaskId]);
 
   useEffect(() => {
     return () => {

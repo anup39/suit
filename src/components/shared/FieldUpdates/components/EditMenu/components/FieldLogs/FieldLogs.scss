@@ -3,13 +3,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60%;
-  height: 80vh;
+  width: 200%;
+  height: 100vh;
   background-color: rgb(255, 255, 255);
   display: block;
 
   @media (max-width: 768px) {
-    width: 90%;
+    width: 200%;
   }
 
   .MuiTabs-flexContainer {
@@ -19,6 +19,7 @@
 
 .field-log-content-div {
   padding: 15px 30px;
+  width: 250%;
 
   >div {
     border: 1px solid #d4deea;
@@ -81,8 +82,8 @@
 
 .field-log-data div {
   border: 1px solid #d4deea;
-  width: 97%;
-  height: 35px;
+  width: 150%;
+  height: 50px;
   padding-left: 4px;
   display: flex;
   align-items: center;

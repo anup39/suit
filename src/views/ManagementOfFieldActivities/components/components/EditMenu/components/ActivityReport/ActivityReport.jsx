@@ -1,190 +1,222 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable react/no-multi-comp */
 import './ActivityReport.scss';
 
-import PropTypes from 'prop-types';
-import React from 'react';
+import DoneIcon from '@mui/icons-material/Done';
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
+import { Modal } from '@mui/material';
+import Box from '@mui/material/Box';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { useTable } from "react-table";
 
-import { changeFieldLogStatus } from '../../../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getfieldlogs } from '../../../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
-import { getUserAuthToken } from '../../../../../../../redux/user-redux/user.selectors';
-import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
+import EditModalHeaders from '../EditModalHeaders/EditModalHeaders'
+import VerifierMessage from '../verifier-message/VerifierMessage';
 
-const ActivityReport = ({ handleCloseModal }) => {
+
+
+const ActivityReport = () => {
   const { t } = useTranslation();
-
   const fieldLogData = useSelector(getfieldlogs);
-  const authToken = useSelector(getUserAuthToken);
-  const [rejectionReason, setRejectionReason] = React.useState('');
-
-  const activityReportData = fieldLogData?.activityTask[0];
-
-  const dispatch = useDispatch();
-
-  const handelReject = () => {
-    if (!rejectionReason) {
-      toast.warn('Please Add A Reason For Rejection!', {
-        position: 'top-center',
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    } else {
-      const data = {
-        authToken,
-        taskData: {
-          fieldlogId: activityReportData?.fieldlogId,
-          taskId: activityReportData?.taskId,
-          isApproved: false,
-          rejectionNote: '',
-        },
-      };
-
-      dispatch(changeFieldLogStatus(data));
-    }
+  const activityReportData = fieldLogData?.activityTask;
+ 
+  const [taskId, settaskId] = React.useState('');
+  const [fieldid, setfieldid] = React.useState('');
+  const [MessageModalOpen, setIsMessageModalOpen] = React.useState(false);
+  const handleMessageModalClose = () => {
+    setIsMessageModalOpen(false);
   };
-  const handelAccept = () => {
-    const data = {
-      authToken,
-      taskData: {
-        fieldlogId: activityReportData?.fieldlogId,
-        taskId: activityReportData?.taskId,
-        isApproved: true,
-        rejectionNote: '',
+
+  const handledata = ((fieldlogId, taskid) => {
+    console.log(fieldlogId)
+    settaskId(taskid);
+    setfieldid(fieldlogId);
+    setIsMessageModalOpen(true);
+
+
+  });
+
+  const columns = useMemo(
+    () => [
+      {
+        Header: t('FieldDate'),
+        accessor: "fieldDate",
+        minWidth: 30,
+        width: 30,
       },
-    };
+      {
+        Header: t('FieldNote'),
+        accessor: "fieldNote",
+        minWidth: 50,
+        width: 50,
+      },
+      {
+        Header: t('lat'),
+        accessor: "lat",
+        minWidth: 10,
+        width: 10,
+      },
+      {
+        Header: t('lon'),
+        accessor: "lon",
+        minWidth: 10,
+        width: 10,
+      },
+      {
+        Header: t('Status'),
+        accessor: "verifierCheck",
+        Cell: ( data ) => {
+          return data.value ? data.value : "Not Verified";
+        },
+        minWidth: 30,
+        width: 30,
+      },
+      {
+        Header: t('FieldOperator'),
+        accessor: "fieldUser",
+        minWidth: 30,
+        width: 30,
+      },
+      {
+        Header: t('Attachment'),
+        accessor: "docLink",
+        // eslint-disable-next-line react/no-unstable-nested-components
+        Cell: ( data ) => {
+          return (data.value ? (<a href={data.value} window="_blank">View Doc</a> ) : '')
+        },
+        minWidth: 30,
+        width: 30,
+      },
+      {
+        Header: t('VerifiedBy'),
+        accessor: "verifiedUser",
+        minWidth: 30,
+        width: 30,
+      },
+      {
+        Header: t('Verifier Note'),
+        accessor: "verifierNote",
+        minWidth: 30,
+        width: 30,
+      },
+      {
+        Header: t('Actions'),
+        accessor: "actions",
+        minWidth: 60,
+        width: 60,
+        // eslint-disable-next-line react/no-unstable-nested-components
+        Cell: ( data ) => {
+          const taskid = data.row.original.taskId;
+          const  rowidx = data.row.original.fieldlogId;
+          let disable=true;
+          if(data.row.original.verifierCheck && data.row.original.verifierCheck !== null)
+          {
+            disable=true;
+          }else
+          {
+            disable=false;
+          }
 
-    dispatch(changeFieldLogStatus(data));
-  };
+
+          return (
+            <div>
+              {disable ? <DoneIcon color="secondary" /> : 
+              <PendingActionsIcon color="secondary"  onClick={() => handledata(rowidx, taskid)}/>
+              }
+              
+            </div>
+          );
+        },
+      },
+    ],
+    []
+  );
+
+
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({
+    columns,
+    data: activityReportData,
+  });
 
   return (
-    <div className="activity-report-base">
-      <EditModalHeaders headerName={t('activityreport')} />
-      {activityReportData ? (
-        <>
-          <div>
-            <div className="activity-report-content">
-              <div>
-                <div className="activity-report-content-header">
-                  <span>Activity Report 1</span>
-                </div>
-                <div className="activity-report-content-body">
-                  <div className="activity-report-inputs-div">
-                    <span>
-                      <p>{t('company')}</p>
-                      <div className="activity-report-data">
-                        {' '}
-                        {!activityReportData?.companyName
-                          ? '-'
-                          : activityReportData?.companyName}{' '}
-                      </div>
-                    </span>
 
-                    <span>
-                      <p>{t('projectName')}</p>
-                      <div className="activity-report-data">
-                        {' '}
-                        {!activityReportData?.projectId
-                          ? '-'
-                          : activityReportData?.projectId}
-                      </div>
-                    </span>
+    
+    <><Modal
+      onClose={handleMessageModalClose}
+      open={MessageModalOpen}
+    >
+      <VerifierMessage
+        fieldLogId={fieldid}
+        handleClose={handleMessageModalClose}
+        taskid={taskId} />
+    </Modal>
+    <div className='activity-report-base'>
+    <EditModalHeaders headerName={t('fieldLogs')} />
 
-                    <span>
-                      <p>{t('reportDate')}</p>
-                      <div className="activity-report-data">
-                        {' '}
-                        {!activityReportData?.activityReportDate
-                          ? '-'
-                          : activityReportData?.activityReportDate}{' '}
-                      </div>
-                    </span>
-
-                    <span>
-                      <p>{t('reportnr')}</p>
-                      <div className="activity-report-data">
-                        {' '}
-                        {!activityReportData?.activityReportnumber
-                          ? '-'
-                          : activityReportData?.activityReportnumber}{' '}
-                      </div>
-                    </span>
-                  </div>
-
-                  <span>
-                    <p>{t('sendToCompany')}</p>
-                    <div className="activity-report-data">
-                      {activityReportData?.companyFlag}
-                    </div>
-                    {/* <select className="activity-report-select">
-                  <option value="">Select An Option</option>
-                  <option value={1}>Yes</option>
-                  <option value={
-                    0}>No</option>
-                </select> */}
-                  </span>
-
-                  <span>
-                    <p>{t('activity')}</p>
-                    <textarea disabled rows="5" />
-                  </span>
-
-                  <span className="activity-report-data-rejection-note">
-                    {' '}
-                    <p>Reason For Rejection</p>
-                    <textarea
-                      cols={5}
-                      onChange={(e) => setRejectionReason(e.target.value)}
-                      value={rejectionReason}
-                    />
-                  </span>
-                  {activityReportData.verifierCheck === null ? (
-                    <div className="change-request-buttons-div">
-                      <span
-                        className="change-request-button-reject"
-                        onClick={handelReject}
-                      >
-                        {t('reject')}
-                      </span>
-                      <span
-                        className="change-request-button-accept"
-                        onClick={handelAccept}
-                      >
-                        {t('accept')}
-                      </span>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="text-right">
-            <button
-              className="activity-close-button"
-              onClick={handleCloseModal}
-              type="button"
-            >
-              {t('close')}
-            </button>
-          </div>
-        </>
-      ) : (
-        <div className="change-request-content-no-data-found">
-          <h5> No Data Found!</h5>
+    <div className='field-log-content-div'>
+    <Box sx={{ pt: 2 }}>
+    <div className="list row">
+        <div className="col-md-12 list">
+          <table
+            className="table table-striped"
+            {...getTableProps({ style: { textAlign: 'center', verticalAlign: 'middle' } })}
+          >
+            <thead>
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <th {...column.getHeaderProps({
+                      style: {
+                        minWidth: column.minWidth,
+                        width: column.width,
+                      },
+                    })}>
+                      {column.render("Header")}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {rows.map((row) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps({ style: { height: 60 } })}>
+                    {row.cells.map((cell) => {
+                      return (
+                        <td {...cell.getCellProps({
+                          style: {
+                            minWidth: cell.column.minWidth,
+                            width: cell.column.width,
+                          },
+                        })}>{cell.render("Cell")}</td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
-      )}
-    </div>
-  );
-};
+      </div>
+      </Box>
+      </div>
+      </div>
+      </>
 
-ActivityReport.propTypes = {
-  handleCloseModal: PropTypes.isRequired,
+    
+    );
+
+    
 };
 
 export default ActivityReport;

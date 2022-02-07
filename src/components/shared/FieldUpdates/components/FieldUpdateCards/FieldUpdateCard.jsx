@@ -16,9 +16,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
+import ProjectStatus from '../../../../../constants/ProjectStatus';
 import { getProjectData } from '../../../../../redux/project-management-redux/project.selector';
 import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
 import {
+  changeTaskStatus,
   deleteTaskByID,
   taskByProject,
 } from '../../../../../redux/worklist-management-redux/worklist.actions';
@@ -33,6 +35,8 @@ const FieldUpdateCard = ({ activityData }) => {
   const [editMenu, setEditMenu] = React.useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const [deleteModal, setDeleteModal] = React.useState(false);
+  const [taskStatus, setTaskStatus] = React.useState(activityData.taskStatus);
+
 
   const [isWebexMessageModalOpen, setIsWebexMessageModalOpen] =
     React.useState(false);
@@ -62,6 +66,21 @@ const FieldUpdateCard = ({ activityData }) => {
 
   const handleCancel = () => {
     setEditMenu(false);
+  };
+
+  
+  const handleTaskChange = (e) => {
+    setTaskStatus(e.target.value);
+
+    const dataToSend = {
+      authToken,
+      data: {
+        taskIdValue: activityData?.taskId,
+        taskStatus,
+      },
+    };
+
+    dispatch(changeTaskStatus(dataToSend));
   };
 
   const handleDeleteModalOpen = () => {
@@ -160,15 +179,15 @@ const FieldUpdateCard = ({ activityData }) => {
             {activityData.isMilestone === 0 ? 'Milestone' : '-'}
           </span>
           <span className="field-updates-body-status">
-            <select className="field-update-status-select">
-              <option>{t('notassigned')}</option>
-              <option>{t('notStarted')}</option>
-              <option>{t('inprogressstarted')}</option>
-              <option>{t('waitingforfeedback')}</option>
-              <option>{t('approved')}</option>
-              <option>{t('canceled')}</option>
-              <option>{t('completed')}</option>
-              <option>{t('suspended')}</option>
+          <select
+              className="field-update-status-select"
+              onChange={(e) => handleTaskChange(e)}
+              value={taskStatus}
+            >
+              <option> {activityData.taskStatus} </option>
+              {ProjectStatus[activityData.taskStatus].map((val) => (
+                <option key={val}>{val}</option>
+              ))}
             </select>
           </span>
           <span className="field-updates-body-controlActivity">
