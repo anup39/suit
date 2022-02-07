@@ -29,6 +29,7 @@ const ROUTES = {
   NOT_VERIFIED: '/asuiteweb/forgotPassword',
   VERIFY_EMAIL: '/asuiteweb/verifyEmail',
   NEW_PASSWORD: '/asuiteweb/newPassword',
+  RESEND_LINK : "/asuiteweb/verify"
 };
 
 export default ROUTES;

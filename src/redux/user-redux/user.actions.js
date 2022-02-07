@@ -35,12 +35,32 @@ export const userSigninFailure = (data) => ({
   payload: data,
 });
 
-export const userSingout = () => ({
-  type: USER_ACTION_TYPES.USER_SIGNOUT,
-  payload: '',
-});
-
 export const resetSignupError = () => ({
   type: USER_ACTION_TYPES.RESET_SIGNUP_ERROR,
   payload: '',
+});
+
+export const resetUserSignup = () => ({
+  type: USER_ACTION_TYPES.RESET_USER_SIGNUP,
+  payload: '',
+});
+
+export const resetUserSignin = () => ({
+  type: USER_ACTION_TYPES.RESET_USER_SIGNIN,
+  payload: '',
+});
+
+export const userSignOut = (data) => ({
+  type: USER_ACTION_TYPES.USER_SIGNOUT,
+  payload: data,
+});
+
+export const userSignOutSuccess = (data) => ({
+  type: USER_ACTION_TYPES.USER_SIGNOUT_SUCCESS,
+  payload: data,
+});
+
+export const userSignOutError = (data) => ({
+  type: USER_ACTION_TYPES.USER_SIGNOUT_ERROR,
+  payload: data,
 });

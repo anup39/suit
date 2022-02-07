@@ -16,8 +16,13 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { userSingout } from '../../../../redux/user-redux/user.actions';
-import { getUserData } from '../../../../redux/user-redux/user.selectors';
+import { userSignOut } from '../../../../redux/user-redux/user.actions';
+import {
+  getIsSignOutLoading,
+  getUserAuthToken,
+  getUserData,
+} from '../../../../redux/user-redux/user.selectors';
+import GlobalSpinner from '../../Spinners/GlobalSpinner';
 import classes from './styles/admin.header.module.scss';
 import {
   AdminAccountIcon,
@@ -47,6 +52,8 @@ const AdminHeaderComponent = () => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isTranslateMenuOpen = Boolean(translateAnchorEl);
+  const authToken = useSelector(getUserAuthToken);
+  const isSignoutLoading = useSelector(getIsSignOutLoading);
 
   const { i18n } = useTranslation();
 
@@ -80,7 +87,8 @@ const AdminHeaderComponent = () => {
 
   const handleSignOut = () => {
     handleMenuClose();
-    dispatch(userSingout());
+    const data = { authToken };
+    dispatch(userSignOut(data));
   };
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -140,7 +148,7 @@ const AdminHeaderComponent = () => {
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem>
+      {/* <MenuItem>
         <IconButton
           aria-label="show 17 new notifications"
           color="inherit"
@@ -149,7 +157,7 @@ const AdminHeaderComponent = () => {
           <NotificationsIconOutlined />
         </IconButton>
         <p>Notifications</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-controls="primary-search-account-menu"
@@ -169,6 +177,7 @@ const AdminHeaderComponent = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <GlobalSpinner isOpen={isSignoutLoading} />
       <AppBarComponent position="static">
         <Toolbar>
           <IconButton
@@ -207,14 +216,14 @@ const AdminHeaderComponent = () => {
                 <KeyboardArrowDownOutlinedIcon />
               </AdminArrowDown>
             </AdminInfoContainer>
-            <IconButton
+            {/* <IconButton
               aria-label="show 17 new notifications"
               color="inherit"
               size="large"
-            >
-              <span className={classes.notify_dot} />
+            > */}
+            {/* <span className={classes.notify_dot} />
               <NotificationsIconOutlined />
-            </IconButton>
+            </IconButton> */}
             <span>
               <TranslateIcon
                 className={classes.translate_language_icon}

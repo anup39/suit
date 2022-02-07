@@ -70,6 +70,10 @@ const ProjectPannel = lazy(() =>
   import('../views/ProjectManagement/components/ProjectPannel/ProjectPannel')
 );
 
+const PleaseVerifyYourEmail = lazy(() =>
+  import('../views/PleaseVerifyYourEmail/PleaseVerifyYourEmail')
+);
+
 const appRoutes = [
   {
     path: ROUTES.ERROR,
@@ -171,6 +175,10 @@ const appRoutes = [
   {
     path: ROUTES.NEW_PASSWORD,
     element: <NewPassword />,
+  },
+  {
+    path: ROUTES.RESEND_LINK,
+    element: <PleaseVerifyYourEmail />,
   },
 ];
 

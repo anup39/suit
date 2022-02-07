@@ -17,6 +17,7 @@ import {
 import {
   getLoadingStatus,
   getSignedupError,
+  getSignedupSuccess,
 } from '../../redux/user-redux/user.selectors';
 import schema from './sign-up.schema';
 import classes from './styles/sign-up.module.scss';
@@ -33,6 +34,7 @@ const SignupPage = ({ isRedTheme }) => {
   const [alerts, setAlerts] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const signupError = useSelector(getSignedupError);
+  const signupSuccess = useSelector(getSignedupSuccess);
 
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -66,6 +68,10 @@ const SignupPage = ({ isRedTheme }) => {
       });
       dispatch(resetSignupError());
       navigate('/asuiteweb/signin');
+    }
+
+    if (signupSuccess) {
+      navigate('/asuiteweb/verify');
     }
   }, [onLoading, signupError]);
 
@@ -217,7 +223,7 @@ const SignupPage = ({ isRedTheme }) => {
           <div className={classes.already_user_container}>
             <span className={classes.already_user}>
               {t('alreadyUser')}
-              <LinkWrapper to="/signin"> {t('login')}</LinkWrapper>
+              <LinkWrapper to="/asuiteweb/signin"> {t('login')}</LinkWrapper>
             </span>
           </div>
         </div>

@@ -18,10 +18,22 @@ export const SIGNUP = async (userData) => {
 };
 
 export const SIGNIN = async (userData) => {
-  console.log('Signin Request');
   const signin = await axios.post(API_END_POINTS.signin, userData);
   console.log(signin.data);
   return signin.data;
+};
+
+export const LOG_OUT = async (data) => {
+  const { authToken } = data;
+  const newToken = await REFERSH_TOKEN(authToken);
+
+  const logOutUser = await axios(API_END_POINTS.signOut, {
+    headers: {
+      Authorization: `Bearer ${newToken}`,
+    },
+  });
+
+  return logOutUser.data;
 };
 
 export const CREATECOMPANY = async (companyData) => {

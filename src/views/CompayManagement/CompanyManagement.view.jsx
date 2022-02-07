@@ -4,7 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getAllCompany } from '../../redux/company-redux/company.actions';
-import { getUserAuthToken } from '../../redux/user-redux/user.selectors';
+import {
+  getIfAuthenticated,
+  getUserAuthToken,
+} from '../../redux/user-redux/user.selectors';
+import AuthenticatedRoute from '../../routes/AuthenticatedRoute';
 import CreateCompany from './components/create-company/companyCreate';
 import CompanyManagementDataGrid from './components/managmenet.datagrid';
 import classes from './styles/styles.managment.module.scss';
@@ -20,6 +24,8 @@ const CompanyManagementView = () => {
     setOpenCreateCompanyDrawer(false);
   };
 
+  const isAuthenticated = useSelector(getIfAuthenticated);
+
   const userAccessToken = useSelector(getUserAuthToken);
   const dispatch = useDispatch();
 
@@ -31,27 +37,29 @@ const CompanyManagementView = () => {
   const { t } = useTranslation();
 
   return (
-    <div className={classes.dfc}>
-      <div className={classes.company_container}>
-        <div className={classes.company_header}>
-          <CreateCompany
-            isClose={handleCloseCompanyDrawer}
-            isOpen={openCreateCompanyDrawer}
-          />
+    <AuthenticatedRoute isAuthenticated={isAuthenticated}>
+      <div className={classes.dfc}>
+        <div className={classes.company_container}>
+          <div className={classes.company_header}>
+            <CreateCompany
+              isClose={handleCloseCompanyDrawer}
+              isOpen={openCreateCompanyDrawer}
+            />
 
-          <h3>{t('companyManagement')}</h3>
-          <button
-            ButtonUnstyled
-            onClick={handleCreateCompanyDrawer}
-            type="button"
-          >
-            <AddIcon /> {t('createCompany')}
-          </button>
+            <h3>{t('companyManagement')}</h3>
+            <button
+              ButtonUnstyled
+              onClick={handleCreateCompanyDrawer}
+              type="button"
+            >
+              <AddIcon /> {t('createCompany')}
+            </button>
+          </div>
+          <CompanyManagementDataGrid />
         </div>
-        <CompanyManagementDataGrid />
+        <p className={classes.footer}>{t('poweredBy')} Negentis</p>
       </div>
-      <p className={classes.footer}>{t('poweredBy')} Negentis</p>
-    </div>
+    </AuthenticatedRoute>
   );
 };
 

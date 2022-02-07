@@ -1,6 +1,11 @@
 export const getSignedupError = (state) => {
   return state.user.error;
 };
+
+export const getSignedupSuccess = (state) => {
+  return state.user.signupStatus;
+};
+
 export const getLoadingStatus = (state) => {
   return state.user.isLoading;
 };
@@ -19,4 +24,8 @@ export const getUserAuthToken = (state) => {
 
 export const getIfAuthenticated = (state) => {
   return state.user.isAuthenticated;
+};
+
+export const getIsSignOutLoading = (state) => {
+  return state.user.isSignoutLoading;
 };

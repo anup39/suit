@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 // import FooterNegentis from '../../components/shared/Footer-negentis/footer.component';
 import AdminHeaderComponent from '../../components/shared/Headers/AdminHeader/admin-header';
@@ -10,6 +10,12 @@ import classes from './styles/user-roles.styles.module.scss';
 
 const Pannel = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    navigate('/asuiteweb/pannel/user-roles');
+  }, []);
+
   return (
     <div className={classes.roles_container}>
       <div className={classes.roles_menu}>

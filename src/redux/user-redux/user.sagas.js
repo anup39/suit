@@ -1,11 +1,12 @@
 import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 import { toast } from 'react-toastify';
 
-import { SIGNIN, SIGNUP } from '../../services/api';
+import { LOG_OUT, SIGNIN, SIGNUP } from '../../services/api';
 import USER_ACTION_TYPES from './user.action-types';
 import {
   userSigninFailure,
   userSigninSuccess,
+  userSignOutSuccess,
   userSignupFailure,
   userSignupSuccess,
 } from './user.actions';
@@ -44,6 +45,24 @@ export function* signInUser({ payload }) {
 export function* onUserSignInStart() {
   yield takeLatest(USER_ACTION_TYPES.USER_SIGNIN_START, signInUser);
 }
+
+export function* signOutUser({ payload }) {
+  try {
+    const signout = yield call(LOG_OUT, payload);
+    yield put(userSignOutSuccess(signout));
+  } catch (error) {
+    yield put(userSigninFailure(error.response.data));
+  }
+}
+
+export function* onSignOutUser() {
+  yield takeLatest(USER_ACTION_TYPES.USER_SIGNOUT, signOutUser);
+}
+
 export function* userSagas() {
-  yield all([call(onUserSignUpStart), call(onUserSignInStart)]);
+  yield all([
+    call(onUserSignUpStart),
+    call(onUserSignInStart),
+    call(onSignOutUser),
+  ]);
 }
