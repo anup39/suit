@@ -32,7 +32,7 @@ import {
 } from '../../redux/worklist-management-redux/worklist.selector';
 import AuthenticatedRoute from '../../routes/AuthenticatedRoute';
 import MapView from './components/components/MapView/MapView';
-import MobileDataRow from './mobile.data.row';
+// import MobileDataRow from './mobile.data.row';
 
 const PAGE_ACCESSABLE_BY = ['planA_admin', 'planA_Engg'];
 
@@ -110,7 +110,6 @@ const ManagementOfFieldActivities = () => {
 
   return (
     <RestrictedPages accessibleBy={PAGE_ACCESSABLE_BY}>
-      {console.log(filteredData)}
       <AuthenticatedRoute isAuthenticated={isAuthenticated}>
         <GlobalSpinner isOpen={isChangeStatusLoading} />
         <BaseTemplate title={t('managementOfFieldActivities')}>
@@ -128,8 +127,11 @@ const ManagementOfFieldActivities = () => {
                     />
                   </div>
                   <div>
-                    <FormControl sx={{ m: 1, width: 200 }}>
-                      <InputLabel id="demo-multiple-name-label">
+                    <FormControl sx={{ m: 1, width: 250 }}>
+                      <InputLabel
+                        id="demo-multiple-name-label"
+                        sx={{ marginTop: -1.1 }}
+                      >
                         {t('projectName')}
                       </InputLabel>
                       <Select
@@ -138,6 +140,7 @@ const ManagementOfFieldActivities = () => {
                         labelId="demo-multiple-name-label"
                         MenuProps={MenuProps}
                         onChange={handleProjectChange}
+                        sx={{ height: 30 }}
                         value={projectName}
                       >
                         {projectList &&
@@ -149,13 +152,6 @@ const ManagementOfFieldActivities = () => {
                       </Select>
                     </FormControl>
                   </div>
-                  {/* <div className="mgmt-field-container">
-                  <SearchIcon className="field-search-icon" />
-                  <input
-                    className="field-input-mgmt"
-                    placeholder={t('searchCompany')}
-                  />
-                </div> */}
                 </>
               )}
               {!isMapView ? (
@@ -193,31 +189,36 @@ const ManagementOfFieldActivities = () => {
                   </span>
                 </div>
                 {/* eslint-disable */}
-                <>
-                  {isAllActivitiesLoading ? (
+
+                <div className="management-of-field-activity-table-data">
+                  {!projectName ? (
+                    <div className="no-data-found">
+                      <p>Please Select A Project To Get Data!</p>
+                    </div>
+                  ) : isAllActivitiesLoading ? (
                     <LoadingSpinner />
                   ) : worklistTasks && worklistTasks.length === 0 ? (
                     <div className="no-data-found">
-                      <p>{t('noDataFound')}</p>
+                      <p>No data Found!</p>
                     </div>
                   ) : (
                     <Pagination
                       componentNo={9}
-                      // itemData={searchText ? filteredData : worklistTasks}
-                      itemData={worklistTasks}
+                      itemData={searchText ? filteredData : worklistTasks}
                       itemsPerPage={10}
                     />
                   )}
-                </>
-                <div className="mgmt-field-update-mobile">
-                  <MobileDataRow />
-                  <MobileDataRow />
-                  <MobileDataRow />
-                  <MobileDataRow />
-                  <MobileDataRow />
-                  <MobileDataRow />
-                  <MobileDataRow />
                 </div>
+
+                {/* <div className="mgmt-field-update-mobile">
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                </div> */}
                 {/* eslint-enable */}
               </>
             ) : (
