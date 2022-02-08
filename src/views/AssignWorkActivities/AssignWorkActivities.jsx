@@ -13,6 +13,7 @@ import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import RestrictedPages from '../../components/shared/RestrictedPages/RestrictedPages';
 import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import {
   getIsSelectAll,
@@ -41,6 +42,8 @@ import AuthenticatedRoute from '../../routes/AuthenticatedRoute';
 import AssignProjectModal from './components/AssignProjectModal/AssignProjectModal';
 import AssignTaskModal from './components/AssignTaskModal/AssignTaskModal';
 import MobileDataRow from './components/mobile.data.row';
+
+const PAGE_ACCESSABLE_BY = ['planA_admin'];
 
 const AssignWorkActivities = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -125,132 +128,136 @@ const AssignWorkActivities = () => {
   }, [isDeleteWorklistLoading]);
 
   return (
-    <AuthenticatedRoute isAuthenticated={isAuthenticated}>
-      <GlobalSpinner isOpen={isDeleteWorklistLoading} />
-      <Drawer
-        anchor="right"
-        onClose={() => handelCloseDrawer()}
-        open={isDrawerOpen}
-      >
-        <AssignProjectModal handleClose={handelCloseDrawer} />
-      </Drawer>
-      <Modal
-        aria-describedby="modal-modal-description"
-        aria-labelledby="modal-modal-title"
-        onClose={handleModalClose}
-        open={isModalOpen}
-      >
-        <AssignTaskModal handleCancel={handleModalClose} />
-      </Modal>
-      <BaseTemplate>
-        <div className="header-wrapper">
-          <h2 className="header">{t('assingWorkActivities')}</h2>
-          {/* <span className="assign-project-button" >
+    <RestrictedPages accessibleBy={PAGE_ACCESSABLE_BY}>
+      <AuthenticatedRoute isAuthenticated={isAuthenticated}>
+        <GlobalSpinner isOpen={isDeleteWorklistLoading} />
+        <Drawer
+          anchor="right"
+          onClose={() => handelCloseDrawer()}
+          open={isDrawerOpen}
+        >
+          <AssignProjectModal handleClose={handelCloseDrawer} />
+        </Drawer>
+        <Modal
+          aria-describedby="modal-modal-description"
+          aria-labelledby="modal-modal-title"
+          onClose={handleModalClose}
+          open={isModalOpen}
+        >
+          <AssignTaskModal handleCancel={handleModalClose} />
+        </Modal>
+        <BaseTemplate>
+          <div className="header-wrapper">
+            <h2 className="header">{t('assingWorkActivities')}</h2>
+            {/* <span className="assign-project-button" >
           </span> */}
 
-          <button onClick={handelOpenDrawer} type="button">
-            <AddIcon />
-            {t('assignProject')}
-          </button>
-        </div>
-
-        <DatagridBase>
-          <div className="assign-work-activity-search-div">
-            <div className="assign-work-activity-container">
-              <SearchIcon className="assign-work-activity-search-icon" />
-              <input
-                onChange={projectSearchItem}
-                placeholder={t('projectName')}
-              />
-            </div>
-            <div className="assign-work-activity-container">
-              <SearchIcon className="assign-work-activity-search-icon" />
-              <input onChange={taskSearchItem} placeholder={t('taskName')} />
-            </div>
-            {selectedTasks.length !== 0 && (
-              <button
-                className="work-activity-assign-task-button"
-                onClick={handleModalOpen}
-                type="button"
-              >
-                <BiLinkExternal className="work-activity-assign-logo" />
-                {t('assignTask')}
-              </button>
-            )}
+            <button onClick={handelOpenDrawer} type="button">
+              <AddIcon />
+              {t('assignProject')}
+            </button>
           </div>
-          <div className="assign-work-activity-table-tbody">
-            <div className="assign-work-activity-table-header">
-              <span className="assign-work-activities-check-input">
+
+          <DatagridBase>
+            <div className="assign-work-activity-search-div">
+              <div className="assign-work-activity-container">
+                <SearchIcon className="assign-work-activity-search-icon" />
                 <input
-                  checked={checkBox}
-                  onChange={handleCheckbox}
-                  type="checkbox"
+                  onChange={projectSearchItem}
+                  placeholder={t('projectName')}
                 />
-              </span>
-              <span className="assign-work-activities-project-name">
-                {t('projectName')}
-              </span>
-              <span className="assign-work-activities-company">
-                {t('company')}
-              </span>
-              <span className="assign-work-activities-taskId">
-                {t('taskId')}
-              </span>
-              <span className="assign-work-activities-task-name">
-                {t('taskName')}
-              </span>
-              <span className="assign-work-activities-task-description">
-                {t('taskDescription')}
-              </span>
-              <span className="assign-work-activities-isMilestone">
-                {t('isMilestone')}
-              </span>
-              <span className="assign-work-activities-type">{t('type')} </span>
-              <span className="assign-work-activities-status">
-                {t('status')}
-              </span>
-              <span className="assign-work-activities-actions">
-                {t('actions')}
-              </span>
-            </div>
-            {/*eslint-disable */}
-            {isWorklistLoading ? (
-              <LoadingSpinner />
-            ) : workListData && workListData.length !== 0 ? (
-              <Pagination
-                componentNo={2}
-                itemData={filterLists(workListData)}
-                itemsPerPage={7}
-              />
-            ) : (
-              <div>
-                {' '}
-                <p
-                  style={{
-                    textAlign: 'center',
-                    paddingTop: '20%',
-                    paddingBottom: '15%',
-                  }}
-                >
-                  {t('noDataFound')}
-                </p>{' '}
               </div>
-            )}
-            {/* eslint-enable */}
-
-            <div className="mobile_table_assignwork">
-              <MobileDataRow />
-              <MobileDataRow />
-              <MobileDataRow />
-              <MobileDataRow />
-              <MobileDataRow />
-
-              <MobileDataRow />
+              <div className="assign-work-activity-container">
+                <SearchIcon className="assign-work-activity-search-icon" />
+                <input onChange={taskSearchItem} placeholder={t('taskName')} />
+              </div>
+              {selectedTasks.length !== 0 && (
+                <button
+                  className="work-activity-assign-task-button"
+                  onClick={handleModalOpen}
+                  type="button"
+                >
+                  <BiLinkExternal className="work-activity-assign-logo" />
+                  {t('assignTask')}
+                </button>
+              )}
             </div>
-          </div>
-        </DatagridBase>
-      </BaseTemplate>
-    </AuthenticatedRoute>
+            <div className="assign-work-activity-table-tbody">
+              <div className="assign-work-activity-table-header">
+                <span className="assign-work-activities-check-input">
+                  <input
+                    checked={checkBox}
+                    onChange={handleCheckbox}
+                    type="checkbox"
+                  />
+                </span>
+                <span className="assign-work-activities-project-name">
+                  {t('projectName')}
+                </span>
+                <span className="assign-work-activities-company">
+                  {t('company')}
+                </span>
+                <span className="assign-work-activities-taskId">
+                  {t('taskId')}
+                </span>
+                <span className="assign-work-activities-task-name">
+                  {t('taskName')}
+                </span>
+                <span className="assign-work-activities-task-description">
+                  {t('taskDescription')}
+                </span>
+                <span className="assign-work-activities-isMilestone">
+                  {t('isMilestone')}
+                </span>
+                <span className="assign-work-activities-type">
+                  {t('type')}{' '}
+                </span>
+                <span className="assign-work-activities-status">
+                  {t('status')}
+                </span>
+                <span className="assign-work-activities-actions">
+                  {t('actions')}
+                </span>
+              </div>
+              {/*eslint-disable */}
+              {isWorklistLoading ? (
+                <LoadingSpinner />
+              ) : workListData && workListData.length !== 0 ? (
+                <Pagination
+                  componentNo={2}
+                  itemData={filterLists(workListData)}
+                  itemsPerPage={7}
+                />
+              ) : (
+                <div>
+                  {' '}
+                  <p
+                    style={{
+                      textAlign: 'center',
+                      paddingTop: '20%',
+                      paddingBottom: '15%',
+                    }}
+                  >
+                    {t('noDataFound')}
+                  </p>{' '}
+                </div>
+              )}
+              {/* eslint-enable */}
+
+              <div className="mobile_table_assignwork">
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+                <MobileDataRow />
+
+                <MobileDataRow />
+              </div>
+            </div>
+          </DatagridBase>
+        </BaseTemplate>
+      </AuthenticatedRoute>
+    </RestrictedPages>
   );
 };
 

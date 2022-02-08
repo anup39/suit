@@ -6,8 +6,14 @@ const schema = yup.object().shape({
   username: yup.string().email('invalid email format !').required('required'),
   password: yup
     .string()
-    .min(4, 'Password should be at least 4 characters long')
-    .max(15, 'Password can not be longer than 15 characters')
+    .min(8, 'Password should be at least 8 characters long')
+    .matches('[A-Z]', 'Password must contain atleast 1 capital letter')
+    .matches('[a-z]', 'Password must contain atleast 1 small letter')
+    .matches(
+      // eslint-disable-next-line
+      '[!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~]',
+      'Password must contain atleast 1 special character'
+    )
     .required('required'),
   conPassword: yup
     .string()

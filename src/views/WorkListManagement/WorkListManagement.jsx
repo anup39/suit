@@ -22,6 +22,7 @@ import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 // import WorkListColumns from './WorkListColumns';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import RestrictedPages from '../../components/shared/RestrictedPages/RestrictedPages';
 import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import { getAllCompany } from '../../redux/company-redux/company.actions';
 import { getCompaniesList } from '../../redux/company-redux/company.selectors';
@@ -48,6 +49,8 @@ import {
 import AuthenticatedRoute from '../../routes/AuthenticatedRoute';
 import WorklistForm from './components/WorklistForm/WorklistForm';
 import MobileDataRow from './mobile.data.row';
+
+const PAGE_ACCESSABLE_BY = ['planA_admin'];
 
 const WorkListManagement = () => {
   const dispatch = useDispatch();
@@ -196,29 +199,30 @@ const WorkListManagement = () => {
   }, [projectName, companyName, isDeleteWorkListLoading]);
 
   return (
-    <AuthenticatedRoute isAuthenticated={isAuthenticated}>
-      <GlobalSpinner isOpen={isDeleteWorkListLoading} />
-      <Drawer
-        anchor="right"
-        onClose={() => handelCloseDrawer()}
-        open={isDrawerOpen}
-      >
-        <WorklistForm handelClose={handelCloseDrawer} />
-      </Drawer>
+    <RestrictedPages accessibleBy={PAGE_ACCESSABLE_BY}>
+      <AuthenticatedRoute isAuthenticated={isAuthenticated}>
+        <GlobalSpinner isOpen={isDeleteWorkListLoading} />
+        <Drawer
+          anchor="right"
+          onClose={() => handelCloseDrawer()}
+          open={isDrawerOpen}
+        >
+          <WorklistForm handelClose={handelCloseDrawer} />
+        </Drawer>
 
-      <BaseTemplate>
-        <div className="header-wrapper">
-          <h2 className="header">{t('worklistManagement')}</h2>
+        <BaseTemplate>
+          <div className="header-wrapper">
+            <h2 className="header">{t('worklistManagement')}</h2>
 
-          <button onClick={handelOpenDrawer} type="button">
-            <AddIcon />
-            {t('addTask')}
-          </button>
-        </div>
+            <button onClick={handelOpenDrawer} type="button">
+              <AddIcon />
+              {t('addTask')}
+            </button>
+          </div>
 
-        <DatagridBase>
-          <div className="worklist-search-div">
-            {/* <div className="worklist-input-container">
+          <DatagridBase>
+            <div className="worklist-search-div">
+              {/* <div className="worklist-input-container">
               <SearchIcon className="search-icon" />
               <input placeholder="Project Name" />
             </div>
@@ -228,161 +232,162 @@ const WorkListManagement = () => {
               <input placeholder="Company Name" />
             </div> */}
 
-            <div>
-              <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-name-label">
-                  {t('companyName')}
-                </InputLabel>
-                <Select
-                  id="demo-multiple-name"
-                  input={<OutlinedInput label={t('companyName')} />}
-                  labelId="demo-multiple-name-label"
-                  MenuProps={MenuProps}
-                  multiple
-                  onChange={handleChange}
-                  value={companyName}
-                >
-                  {companyList &&
-                    companyList.map((vals) => (
-                      <MenuItem
-                        key={vals.id}
-                        style={getStyles(vals, companyName, theme)}
-                        value={vals.id}
-                      >
-                        {vals.name}
-                      </MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
-            </div>
-
-            <div>
-              <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-name-label">
-                  {t('projectName')}
-                </InputLabel>
-                <Select
-                  id="demo-multiple-name"
-                  input={<OutlinedInput label="Project Name" />}
-                  labelId="demo-multiple-name-label"
-                  MenuProps={MenuProps}
-                  multiple
-                  onChange={handleProjectChange}
-                  value={projectName}
-                >
-                  {projectList &&
-                    projectList.map((val) => (
-                      <MenuItem
-                        key={val.id}
-                        style={getStyles(val.id, projectName, theme)}
-                        value={val.id}
-                      >
-                        {val.name}
-                      </MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
-            </div>
-
-            {selectedWorklist.length !== 0 && (
-              <span className="worklist-export-button">
-                <span onClick={handelMenuOpen}>
-                  <FaRegShareSquare className="worklist-export-icon" />
-                  {t('exportWorklist')}
-                </span>
-                <Menu
-                  anchorEl={menuOpen}
-                  id="basic-menu"
-                  MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                  }}
-                  onClose={handleMenuClose}
-                  open={open}
-                >
-                  <MenuItem onClick={handleMenuClose}>
-                    <CsvDownload
-                      className="export-csv-button"
-                      data={selectedWorklist}
-                      filename="worklist.csv"
-                    >
-                      {t('exportCSV')}
-                    </CsvDownload>
-                  </MenuItem>
-                  <MenuItem onClick={handleExportAsXML}>
-                    {t('exportXML')}
-                  </MenuItem>
-                </Menu>
-              </span>
-            )}
-          </div>
-          <div>
-            <div className="worklist-table-header">
-              <span className="worklist-management-check-input">
-                <input
-                  checked={checkbox}
-                  onChange={handleCheckbox}
-                  type="checkbox"
-                />
-              </span>
-              <span className="worklist-management-project-name">
-                {t('projectName')}
-              </span>
-              <span className="worklist-management-task-name">
-                {t('taskName')}
-              </span>
-              <span className="worklist-management-task-description">
-                {t('taskDescription')}
-              </span>
-              <span className="worklist-management-isMilestone">
-                {t('isMilestone')}
-              </span>
-              <span className="worklist-management-type">{t('type')}</span>
-              <span className="worklist-management-actions">
-                {t('actions')}
-              </span>
-            </div>
-            <div>
-              {/* eslint-disable */}
-              {isWorklistLoading ? (
-                <LoadingSpinner />
-              ) : workListData && workListData.length === 0 ? (
-                <div>
-                  {' '}
-                  <p
-                    style={{
-                      textAlign: 'center',
-                      paddingTop: '20%',
-                      paddingBottom: '15%',
-                    }}
+              <div>
+                <FormControl sx={{ m: 1, width: 300 }}>
+                  <InputLabel id="demo-multiple-name-label">
+                    {t('companyName')}
+                  </InputLabel>
+                  <Select
+                    id="demo-multiple-name"
+                    input={<OutlinedInput label={t('companyName')} />}
+                    labelId="demo-multiple-name-label"
+                    MenuProps={MenuProps}
+                    multiple
+                    onChange={handleChange}
+                    value={companyName}
                   >
-                    {t('noDataFound')}
-                  </p>{' '}
-                </div>
-              ) : (
-                <Pagination
-                  componentNo={1}
-                  itemData={
-                    companyName.length === 0 && projectName.length === 0
-                      ? workListData
-                      : filteredList
-                  }
-                  itemsPerPage={10}
-                />
+                    {companyList &&
+                      companyList.map((vals) => (
+                        <MenuItem
+                          key={vals.id}
+                          style={getStyles(vals, companyName, theme)}
+                          value={vals.id}
+                        >
+                          {vals.name}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </FormControl>
+              </div>
+
+              <div>
+                <FormControl sx={{ m: 1, width: 300 }}>
+                  <InputLabel id="demo-multiple-name-label">
+                    {t('projectName')}
+                  </InputLabel>
+                  <Select
+                    id="demo-multiple-name"
+                    input={<OutlinedInput label="Project Name" />}
+                    labelId="demo-multiple-name-label"
+                    MenuProps={MenuProps}
+                    multiple
+                    onChange={handleProjectChange}
+                    value={projectName}
+                  >
+                    {projectList &&
+                      projectList.map((val) => (
+                        <MenuItem
+                          key={val.id}
+                          style={getStyles(val.id, projectName, theme)}
+                          value={val.id}
+                        >
+                          {val.name}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </FormControl>
+              </div>
+
+              {selectedWorklist.length !== 0 && (
+                <span className="worklist-export-button">
+                  <span onClick={handelMenuOpen}>
+                    <FaRegShareSquare className="worklist-export-icon" />
+                    {t('exportWorklist')}
+                  </span>
+                  <Menu
+                    anchorEl={menuOpen}
+                    id="basic-menu"
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                    onClose={handleMenuClose}
+                    open={open}
+                  >
+                    <MenuItem onClick={handleMenuClose}>
+                      <CsvDownload
+                        className="export-csv-button"
+                        data={selectedWorklist}
+                        filename="worklist.csv"
+                      >
+                        {t('exportCSV')}
+                      </CsvDownload>
+                    </MenuItem>
+                    <MenuItem onClick={handleExportAsXML}>
+                      {t('exportXML')}
+                    </MenuItem>
+                  </Menu>
+                </span>
               )}
-              {/* eslint-enable */}
-              <div className="mobile_table_worklist">
-                <MobileDataRow />
-                <MobileDataRow />
-                <MobileDataRow />
-                <MobileDataRow />
-                <MobileDataRow />
-                <MobileDataRow />
+            </div>
+            <div>
+              <div className="worklist-table-header">
+                <span className="worklist-management-check-input">
+                  <input
+                    checked={checkbox}
+                    onChange={handleCheckbox}
+                    type="checkbox"
+                  />
+                </span>
+                <span className="worklist-management-project-name">
+                  {t('projectName')}
+                </span>
+                <span className="worklist-management-task-name">
+                  {t('taskName')}
+                </span>
+                <span className="worklist-management-task-description">
+                  {t('taskDescription')}
+                </span>
+                <span className="worklist-management-isMilestone">
+                  {t('isMilestone')}
+                </span>
+                <span className="worklist-management-type">{t('type')}</span>
+                <span className="worklist-management-actions">
+                  {t('actions')}
+                </span>
+              </div>
+              <div>
+                {/* eslint-disable */}
+                {isWorklistLoading ? (
+                  <LoadingSpinner />
+                ) : workListData && workListData.length === 0 ? (
+                  <div>
+                    {' '}
+                    <p
+                      style={{
+                        textAlign: 'center',
+                        paddingTop: '20%',
+                        paddingBottom: '15%',
+                      }}
+                    >
+                      {t('noDataFound')}
+                    </p>{' '}
+                  </div>
+                ) : (
+                  <Pagination
+                    componentNo={1}
+                    itemData={
+                      companyName.length === 0 && projectName.length === 0
+                        ? workListData
+                        : filteredList
+                    }
+                    itemsPerPage={10}
+                  />
+                )}
+                {/* eslint-enable */}
+                <div className="mobile_table_worklist">
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                </div>
               </div>
             </div>
-          </div>
-        </DatagridBase>
-      </BaseTemplate>
-    </AuthenticatedRoute>
+          </DatagridBase>
+        </BaseTemplate>
+      </AuthenticatedRoute>
+    </RestrictedPages>
   );
 };
 

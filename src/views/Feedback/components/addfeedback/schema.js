@@ -4,9 +4,13 @@ const schema = yup.object().shape({
   idUser: yup.string(),
   address: yup
     .string()
-    .matches('^[a-zA-Z0-9]+$', 'Special Characters are not accepted')
-    .required('Field is Required'),
-  city: yup.string().strict().required('Field is Required'),
+    .required('Field is Required')
+    .matches('^[a-zA-Z0-9]+$', 'Special Characters are not accepted'),
+
+  city: yup
+    .string()
+    .required('Field is Required')
+    .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field '),
   zipCode: yup
     .number()
     .required('Field is Required')

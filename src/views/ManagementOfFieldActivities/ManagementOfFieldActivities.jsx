@@ -15,11 +15,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import RestrictedPages from '../../components/shared/RestrictedPages/RestrictedPages';
 import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import { getAllActivities } from '../../redux/Management-of-field-activities/management-field-activities.action';
-import {
-  getIsActivitiesLoading,
-} from '../../redux/Management-of-field-activities/management-field-activities.selectors';
+import { getIsActivitiesLoading } from '../../redux/Management-of-field-activities/management-field-activities.selectors';
 import { getAllProjects } from '../../redux/project-management-redux/project.selector';
 import { getProjectList } from '../../redux/project-management-redux/project-management.actions';
 import {
@@ -28,11 +27,14 @@ import {
 } from '../../redux/user-redux/user.selectors';
 import { taskByProject } from '../../redux/worklist-management-redux/worklist.actions';
 import {
- getIsChngeStatusLoading,
-  getTasksByProject } from '../../redux/worklist-management-redux/worklist.selector';
+  getIsChngeStatusLoading,
+  getTasksByProject,
+} from '../../redux/worklist-management-redux/worklist.selector';
 import AuthenticatedRoute from '../../routes/AuthenticatedRoute';
 import MapView from './components/components/MapView/MapView';
 import MobileDataRow from './mobile.data.row';
+
+const PAGE_ACCESSABLE_BY = ['planA_admin', 'planA_Engg'];
 
 const ManagementOfFieldActivities = () => {
   const [searchText, setSearchText] = React.useState('');
@@ -52,23 +54,19 @@ const ManagementOfFieldActivities = () => {
   const [projectName, setProjectName] = React.useState(null);
   const projectList = useSelector(getAllProjects);
 
-  
-
   useEffect(() => {
     dispatch(getProjectList(authToken));
-  },[])
-  
+  }, []);
+
   React.useEffect(() => {
     const data = { authToken, projectId: projectName };
 
-    if(projectName)
-    {
+    if (projectName) {
       dispatch(taskByProject(data));
     }
   }, [projectName]);
 
   const handleProjectChange = (event) => {
-    console.log(event)
     const {
       target: { value },
     } = event;
@@ -108,126 +106,127 @@ const ManagementOfFieldActivities = () => {
     };
 
     dispatch(getAllActivities(data));
-
   }, []);
 
   return (
-    <AuthenticatedRoute isAuthenticated={isAuthenticated}>
-      <GlobalSpinner isOpen={isChangeStatusLoading} />
-      <BaseTemplate title={t('managementOfFieldActivities')}>
-        <div className="mgmt-field-update">
-          <div className="mgmt-field-update-search-div">
-            {!isMapView && (
-              <>
-                <div className="mgmt-field-container">
-                  <SearchIcon className="field-search-icon" />
-                  <input
-                    className="field-input-mgmt"
-                    onChange={(e) => handleSearchTask(e)}
-                    placeholder={t('searchTask')}
-                    value={searchText}
-                  />
-                </div>
-                <div>
-              <FormControl sx={{ m: 1, width: 200 }}>
-                <InputLabel id="demo-multiple-name-label">
-                  {t('projectName')}
-                </InputLabel>
-                <Select
-                  id="demo-multiple-name"
-                  input={<OutlinedInput label="Project Name" />}
-                  labelId="demo-multiple-name-label"
-                  MenuProps={MenuProps}
-                  onChange={handleProjectChange}
-                  value={projectName}
-                >
-                  {projectList &&
-                    projectList.map((val) => (
-                      <MenuItem
-                        key={val.id}
-                        value={val.id}
+    <RestrictedPages accessibleBy={PAGE_ACCESSABLE_BY}>
+      {console.log(filteredData)}
+      <AuthenticatedRoute isAuthenticated={isAuthenticated}>
+        <GlobalSpinner isOpen={isChangeStatusLoading} />
+        <BaseTemplate title={t('managementOfFieldActivities')}>
+          <div className="mgmt-field-update">
+            <div className="mgmt-field-update-search-div">
+              {!isMapView && (
+                <>
+                  <div className="mgmt-field-container">
+                    <SearchIcon className="field-search-icon" />
+                    <input
+                      className="field-input-mgmt"
+                      onChange={(e) => handleSearchTask(e)}
+                      placeholder={t('searchTask')}
+                      value={searchText}
+                    />
+                  </div>
+                  <div>
+                    <FormControl sx={{ m: 1, width: 200 }}>
+                      <InputLabel id="demo-multiple-name-label">
+                        {t('projectName')}
+                      </InputLabel>
+                      <Select
+                        id="demo-multiple-name"
+                        input={<OutlinedInput label="Project Name" />}
+                        labelId="demo-multiple-name-label"
+                        MenuProps={MenuProps}
+                        onChange={handleProjectChange}
+                        value={projectName}
                       >
-                        {val.name}
-                      </MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
-            </div>
-                {/* <div className="mgmt-field-container">
+                        {projectList &&
+                          projectList.map((val) => (
+                            <MenuItem key={val.id} value={val.id}>
+                              {val.name}
+                            </MenuItem>
+                          ))}
+                      </Select>
+                    </FormControl>
+                  </div>
+                  {/* <div className="mgmt-field-container">
                   <SearchIcon className="field-search-icon" />
                   <input
                     className="field-input-mgmt"
                     placeholder={t('searchCompany')}
                   />
                 </div> */}
-              </>
-            )}
+                </>
+              )}
+              {!isMapView ? (
+                <span className="map-view-button" onClick={showMapView}>
+                  <GrMap className="map-icon" /> {t('mapView')}
+                </span>
+              ) : (
+                <span className="map-view-button" onClick={showListView}>
+                  <FormatListBulletedIcon className="map-icon" />{' '}
+                  {t('listView')}
+                </span>
+              )}
+            </div>
             {!isMapView ? (
-              <span className="map-view-button" onClick={showMapView}>
-                <GrMap className="map-icon" /> {t('mapView')}
-              </span>
-            ) : (
-              <span className="map-view-button" onClick={showListView}>
-                <FormatListBulletedIcon className="map-icon" /> {t('listView')}
-              </span>
-            )}
-          </div>
-          {!isMapView ? (
-            <>
-              <div className="mgmt-field-update-header">
-                {/* <span className="field-updates-header-checkInput">
+              <>
+                <div className="mgmt-field-update-header">
+                  {/* <span className="field-updates-header-checkInput">
                   <input type="checkbox" />
                 </span> */}
-                <span className="field-updates-header-taskItem">
-                  {t('taskItem')}
-                </span>
+                  <span className="field-updates-header-taskItem">
+                    {t('taskItem')}
+                  </span>
 
-                <span className="field-updates-header-milestoneApproval">
-                  {t('milestoneapproval')}
-                </span>
-                <span className="field-updates-header-status">
-                  {t('status')}
-                </span>
-                <span className="field-updates-header-controlActivity">
-                  {t('controlActivity')}
-                </span>
-                <span className="field-updates-header-actions">
-                  {t('actions')}
-                </span>
-              </div>
-              {/* eslint-disable */}
-              <>
-                {isAllActivitiesLoading ? (
-                  <LoadingSpinner />
-                ) : worklistTasks && worklistTasks.length === 0 ? (
-                  <div className="no-data-found">
-                    <p>{t('noDataFound')}</p>
-                  </div>
-                ) : (
-                  <Pagination
-                    componentNo={9}
-                    itemData={searchText ? filteredData : worklistTasks}
-                    itemsPerPage={10}
-                  />
-                )}
+                  <span className="field-updates-header-milestoneApproval">
+                    {t('milestoneapproval')}
+                  </span>
+                  <span className="field-updates-header-status">
+                    {t('status')}
+                  </span>
+                  <span className="field-updates-header-controlActivity">
+                    {t('controlActivity')}
+                  </span>
+                  <span className="field-updates-header-actions">
+                    {t('actions')}
+                  </span>
+                </div>
+                {/* eslint-disable */}
+                <>
+                  {isAllActivitiesLoading ? (
+                    <LoadingSpinner />
+                  ) : worklistTasks && worklistTasks.length === 0 ? (
+                    <div className="no-data-found">
+                      <p>{t('noDataFound')}</p>
+                    </div>
+                  ) : (
+                    <Pagination
+                      componentNo={9}
+                      // itemData={searchText ? filteredData : worklistTasks}
+                      itemData={worklistTasks}
+                      itemsPerPage={10}
+                    />
+                  )}
+                </>
+                <div className="mgmt-field-update-mobile">
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                </div>
+                {/* eslint-enable */}
               </>
-              <div className="mgmt-field-update-mobile">
-                <MobileDataRow />
-                <MobileDataRow />
-                <MobileDataRow />
-                <MobileDataRow />
-                <MobileDataRow />
-                <MobileDataRow />
-                <MobileDataRow />
-              </div>
-              {/* eslint-enable */}
-            </>
-          ) : (
-            <MapView />
-          )}
-        </div>
-      </BaseTemplate>
-    </AuthenticatedRoute>
+            ) : (
+              <MapView />
+            )}
+          </div>
+        </BaseTemplate>
+      </AuthenticatedRoute>
+    </RestrictedPages>
   );
 };
 
