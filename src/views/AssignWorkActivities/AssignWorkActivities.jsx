@@ -8,6 +8,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { BiLinkExternal } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
@@ -62,7 +63,7 @@ const AssignWorkActivities = () => {
   const isAuthenticated = useSelector(getIfAuthenticated);
   const isDeleteWorklistLoading = useSelector(getIsDeleteWorkListLoading);
   const deleteWorklistSuccess = useSelector(getDeleteWorkListSuccess);
-
+  const navigate = useNavigate();
   const filterLists = (list) => {
     const projectItem = searchProjectItem.toLowerCase();
     const taskItem = searchTaskItem.toLowerCase();
@@ -110,22 +111,26 @@ const AssignWorkActivities = () => {
   const handleModalClose = () => setIsModalOpen(false);
 
   React.useEffect(() => {
-    if (workListData.length === 0) {
-      dispatch(getWorkList(userAuthToken));
-      dispatch(getAllCompany(userAuthToken));
-    } else if (deleteWorklistSuccess) {
-      setTimeout(() => {
+    if (isAuthenticated) {
+      if (workListData.length === 0) {
         dispatch(getWorkList(userAuthToken));
-        dispatch(resetDeleteTask());
-      }, 1000);
-    }
+        dispatch(getAllCompany(userAuthToken));
+      } else if (deleteWorklistSuccess) {
+        setTimeout(() => {
+          dispatch(getWorkList(userAuthToken));
+          dispatch(resetDeleteTask());
+        }, 1000);
+      }
 
-    if (isAllSelected) {
-      setCheckbox(true);
+      if (isAllSelected) {
+        setCheckbox(true);
+      } else {
+        setCheckbox(false);
+      }
     } else {
-      setCheckbox(false);
+      navigate('/asuiteweb/signin');
     }
-  }, [isDeleteWorklistLoading]);
+  }, [isDeleteWorklistLoading, isAuthenticated]);
 
   return (
     <RestrictedPages accessibleBy={PAGE_ACCESSABLE_BY}>

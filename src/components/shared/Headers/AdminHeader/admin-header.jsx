@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { userSignOut } from '../../../../redux/user-redux/user.actions';
 import {
-  getIsSignOutLoading,
   getUserAuthToken,
   getUserData,
 } from '../../../../redux/user-redux/user.selectors';
@@ -48,12 +47,12 @@ const AdminHeaderComponent = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [translateAnchorEl, setTranslateAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [isSignOutLoading, setIsSignOutLoading] = React.useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isTranslateMenuOpen = Boolean(translateAnchorEl);
   const authToken = useSelector(getUserAuthToken);
-  const isSignoutLoading = useSelector(getIsSignOutLoading);
 
   const { i18n } = useTranslation();
 
@@ -86,6 +85,7 @@ const AdminHeaderComponent = () => {
   };
 
   const handleSignOut = () => {
+    setIsSignOutLoading(true);
     handleMenuClose();
     const data = { authToken };
     dispatch(userSignOut(data));
@@ -177,7 +177,7 @@ const AdminHeaderComponent = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <GlobalSpinner isOpen={isSignoutLoading} />
+      <GlobalSpinner isOpen={isSignOutLoading} />
       <AppBarComponent position="static">
         <Toolbar>
           <IconButton

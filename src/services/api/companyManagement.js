@@ -1,99 +1,64 @@
-import axios from 'axios';
-
 import COMPANY_MANAGEMENT from '../../constants/api-endpoints/companyManagement';
-import { REFERSH_TOKEN } from '../api';
+import axiosInstance from '../../utils/axiosInstance';
 
 export const CREATE_COMPANY = async (data) => {
-  const newToken = await REFERSH_TOKEN(data.payload[1].userAccessToken);
-  const createResponse = await axios.post(
+  const createResponse = await axiosInstance.post(
     COMPANY_MANAGEMENT.create,
-    data.payload[0],
-    {
-      headers: {
-        Authorization: `Bearer ${newToken}`,
-      },
-    }
+    data.payload[0]
   );
   return createResponse;
 };
 
 export const UPDATE_COMPANY = async (data) => {
-  const { authToken, updatedData } = data;
+  const { updatedData } = data;
 
-  const newToken = await REFERSH_TOKEN(authToken);
-  const updateResponse = await axios(COMPANY_MANAGEMENT.update, {
-    headers: {
-      Authorization: `Bearer ${newToken}`,
-    },
+  const updateResponse = await axiosInstance(COMPANY_MANAGEMENT.update, {
     data: updatedData,
     method: 'PUT',
   });
   return updateResponse;
 };
 
-export const GET_ALL_COMPANY = async (payload) => {
-  const newToken = await REFERSH_TOKEN(payload.payload);
-
-  const milestoneList = await axios(COMPANY_MANAGEMENT.getCompany, {
-    headers: {
-      Authorization: `Bearer ${newToken}`,
-    },
-  });
-
+export const GET_ALL_COMPANY = async () => {
+  const milestoneList = await axiosInstance(COMPANY_MANAGEMENT.getCompany);
   return milestoneList.data;
 };
 
 export const DELETE_COMPANY_WITH_ID = async (data) => {
-  const newToken = await REFERSH_TOKEN(data.accessToken);
-
-  const deleteCompany = await axios(`${COMPANY_MANAGEMENT.delete}${data.id}`, {
-    headers: {
-      Authorization: `Bearer ${newToken}`,
-    },
-  });
+  const deleteCompany = await axiosInstance(
+    `${COMPANY_MANAGEMENT.delete}${data.id}`
+  );
   return deleteCompany.data;
 };
 
 export const GET_COMPANY_ALL_USERS = async (data) => {
-  const newToken = await REFERSH_TOKEN(data.payload.userAccessToken);
-
-  const userList = await axios(
-    `${COMPANY_MANAGEMENT.getCompanyUsers}${data.payload.id}`,
-    {
-      headers: {
-        Authorization: `Bearer ${newToken}`,
-      },
-    }
+  const userList = await axiosInstance(
+    `${COMPANY_MANAGEMENT.getCompanyUsers}${data.payload.id}`
   );
-
   return userList.data;
 };
 
 export const COMPANY_ADD_USERS = async (data) => {
-  const newToken = await REFERSH_TOKEN(data.payload.authToken);
   const userData = {
     idUser: data.payload.idUser,
     companies_id: data.payload.companies_id,
   };
-  const userListResponse = await axios(COMPANY_MANAGEMENT.addCompanyUsers, {
-    headers: {
-      Authorization: `Bearer ${newToken}`,
-    },
-    data: userData,
-    method: 'PUT',
-  });
+
+  const userListResponse = await axiosInstance(
+    COMPANY_MANAGEMENT.addCompanyUsers,
+    {
+      data: userData,
+      method: 'PUT',
+    }
+  );
 
   return userListResponse;
 };
 
 export const COMPANY_DELETE_USERS = async (data) => {
-  const newToken = await REFERSH_TOKEN(data.payload.authToken);
-  const userListResponse = await axios(
+  const userListResponse = await axiosInstance(
     `${COMPANY_MANAGEMENT.deleteCompanyUsers}${data.payload.user_id}/${data.payload.company_id}`,
     {
-      headers: {
-        Authorization: `Bearer ${newToken}`,
-      },
       method: 'DELETE',
     }
   );

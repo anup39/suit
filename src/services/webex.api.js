@@ -30,7 +30,6 @@ export const GET_WEBEX_ACCESSTOKEN_REQ = async (payload) => {
     }
   );
 
-  console.log(webexAccessToken.data);
   return webexAccessToken.data;
 };
 
@@ -55,8 +54,6 @@ export const GET_WEBEX_ROOMS = async (accesstoken) => {
 
     finalrooms.push(object);
   }
-
-  console.log(finalrooms);
 
   return finalrooms;
 };

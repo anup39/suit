@@ -88,6 +88,8 @@ const MenuOptions = {
       path: ROUTES.FEEDBACK_SERVICES,
     },
   ],
+
+  notAuthenticated: [],
 };
 
 export default MenuOptions;

@@ -19,8 +19,10 @@ export const getUserData = (state) => {
 };
 
 export const getCurrentUserRole = (state) => {
-  return state.user.userData.roles[0];
-  // return 'planA_admin';
+  if (state.user.userData) {
+    return state.user.userData.roles[0];
+  }
+  return 'notAuthenticated';
 };
 
 export const getUserAuthToken = (state) => {

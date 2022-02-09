@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { FaRegShareSquare } from 'react-icons/fa';
 import CsvDownload from 'react-json-to-csv';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
@@ -75,6 +76,7 @@ const WorkListManagement = () => {
   const deleteWorkListSuccess = useSelector(getDeleteWorkListSuccess);
   const isDeleteWorkListLoading = useSelector(getIsDeleteWorkListLoading);
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const open = Boolean(menuOpen);
 
@@ -149,54 +151,58 @@ const WorkListManagement = () => {
   };
 
   useEffect(() => {
-    if (!projectList || workListData.length === 0) {
-      dispatch(getProjectList(authToken));
+    if (isAuthenticated) {
+      if (!projectList || workListData.length === 0) {
+        dispatch(getProjectList(authToken));
 
-      setTimeout(() => {
-        dispatch(getAllCompany(authToken));
-      }, 500);
-      setTimeout(() => {
+        setTimeout(() => {
+          dispatch(getAllCompany(authToken));
+        }, 500);
+        setTimeout(() => {
+          dispatch(getWorkList(authToken));
+        }, 500);
+      } else {
+        const filteredData = [];
+
+        if (companyName.length !== 0 && projectName.length !== 0) {
+          // eslint-disable-next-line
+          workListData.map((vals) => {
+            if (
+              projectName.includes(vals.projectsId) &&
+              companyName.includes(vals.companiesId)
+            ) {
+              filteredData.push(vals);
+            }
+          });
+        } else {
+          // eslint-disable-next-line
+          workListData.map((vals) => {
+            if (
+              projectName.includes(vals.projectsId) ||
+              companyName.includes(vals.companiesId)
+            ) {
+              filteredData.push(vals);
+            }
+          });
+        }
+
+        setFilteredList(filteredData);
+
+        if (ifAllSelected) {
+          setCheckbox(true);
+        } else {
+          setCheckbox(false);
+        }
+      }
+
+      if (deleteWorkListSuccess) {
         dispatch(getWorkList(authToken));
-      }, 500);
+        dispatch(resetDeleteTask());
+      }
     } else {
-      const filteredData = [];
-
-      if (companyName.length !== 0 && projectName.length !== 0) {
-        // eslint-disable-next-line
-        workListData.map((vals) => {
-          if (
-            projectName.includes(vals.projectsId) &&
-            companyName.includes(vals.companiesId)
-          ) {
-            filteredData.push(vals);
-          }
-        });
-      } else {
-        // eslint-disable-next-line
-        workListData.map((vals) => {
-          if (
-            projectName.includes(vals.projectsId) ||
-            companyName.includes(vals.companiesId)
-          ) {
-            filteredData.push(vals);
-          }
-        });
-      }
-
-      setFilteredList(filteredData);
-
-      if (ifAllSelected) {
-        setCheckbox(true);
-      } else {
-        setCheckbox(false);
-      }
+      navigate('/asuite/signin');
     }
-
-    if (deleteWorkListSuccess) {
-      dispatch(getWorkList(authToken));
-      dispatch(resetDeleteTask());
-    }
-  }, [projectName, companyName, isDeleteWorkListLoading]);
+  }, [projectName, companyName, isDeleteWorkListLoading, isAuthenticated]);
 
   return (
     <RestrictedPages accessibleBy={PAGE_ACCESSABLE_BY}>

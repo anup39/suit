@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import API_END_POINTS from '../constants/api.endpoints';
+import axiosInstance from '../utils/axiosInstance';
 
 export const REFERSH_TOKEN = async (refreshToken) => {
   console.log('Refreshing Token');
@@ -23,17 +24,9 @@ export const SIGNIN = async (userData) => {
   return signin.data;
 };
 
-export const LOG_OUT = async (data) => {
-  const { authToken } = data;
-  const newToken = await REFERSH_TOKEN(authToken);
-
-  const logOutUser = await axios(API_END_POINTS.signOut, {
-    headers: {
-      Authorization: `Bearer ${newToken}`,
-    },
-  });
-
-  return logOutUser.data;
+export const LOG_OUT = async () => {
+  const logOutUser = await axiosInstance(API_END_POINTS.signOut);
+  return logOutUser?.data;
 };
 
 export const CREATECOMPANY = async (companyData) => {
@@ -47,48 +40,29 @@ export const CREATECOMPANY = async (companyData) => {
   return createCompany.data;
 };
 
-export const GETUSERS = async (authToken) => {
-  const newToken = await REFERSH_TOKEN(authToken);
-  const users = await axios(API_END_POINTS.getUser, {
-    headers: {
-      Authorization: `Bearer ${newToken}`,
-    },
-  });
+export const GETUSERS = async () => {
+  const users = await axiosInstance(API_END_POINTS.getUser);
   return users.data;
 };
 
 export const GET_USER_BY_ID = async (data) => {
-  const newToken = await REFERSH_TOKEN(data.token);
-  const userDetails = await axios(
-    `${API_END_POINTS.getUserById}/${data.userId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${newToken}`,
-      },
-    }
+  const userDetails = await axiosInstance(
+    `${API_END_POINTS.getUserById}/${data.userId}`
   );
 
   return userDetails.data;
 };
 
-export const GET_ROLES = async (data) => {
-  const newToken = await REFERSH_TOKEN(data);
-  const allRoles = await axios.get(API_END_POINTS.getAllUserRoles, {
-    headers: {
-      Authorization: `Bearer ${newToken}`,
-    },
-  });
+export const GET_ROLES = async () => {
+  const allRoles = await axiosInstance.get(API_END_POINTS.getAllUserRoles);
 
   return allRoles.data;
 };
 
 export const UPDATE_ROLES = async (data) => {
-  const newToken = await REFERSH_TOKEN(data.authToken);
-  const updatedUserData = await axios(API_END_POINTS.updateUserRole, {
+  const updatedUserData = await axiosInstance(API_END_POINTS.updateUserRole, {
     method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${newToken}`,
-    },
+
     data: data.userData,
   });
 
@@ -96,14 +70,9 @@ export const UPDATE_ROLES = async (data) => {
 };
 
 export const DELETE_USER = async (data) => {
-  const newToken = await REFERSH_TOKEN(data.authToken);
-  console.log('Soft Delete User');
-  const deleteUser = await axios(
+  const deleteUser = await axiosInstance(
     `${API_END_POINTS.deleteUser}/${data.userId}`,
     {
-      headers: {
-        Authorization: `Bearer ${newToken}`,
-      },
       data: data.userData,
     }
   );
@@ -112,14 +81,8 @@ export const DELETE_USER = async (data) => {
 };
 
 export const DELETE_USER_IN_BULK = async (data) => {
-  console.log('Soft Delete User In Bulk');
-
-  const newToken = await REFERSH_TOKEN(data.authToken);
-  const deleteUser = await axios(API_END_POINTS.deleteUserInList, {
+  const deleteUser = await axiosInstance(API_END_POINTS.deleteUserInList, {
     method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${newToken}`,
-    },
     data: { idUser: data.userIdList },
   });
 

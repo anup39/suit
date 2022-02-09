@@ -11,6 +11,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GrMap } from 'react-icons/gr';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
@@ -54,17 +55,27 @@ const ManagementOfFieldActivities = () => {
   const [projectName, setProjectName] = React.useState(null);
   const projectList = useSelector(getAllProjects);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    dispatch(getProjectList(authToken));
-  }, []);
+    if (isAuthenticated) {
+      dispatch(getProjectList(authToken));
+    } else {
+      navigate('/asuiteweb/signin');
+    }
+  }, [isAuthenticated]);
 
   React.useEffect(() => {
-    const data = { authToken, projectId: projectName };
+    if (isAuthenticated) {
+      const data = { authToken, projectId: projectName };
 
-    if (projectName) {
-      dispatch(taskByProject(data));
+      if (projectName) {
+        dispatch(taskByProject(data));
+      }
+    } else {
+      navigate('/asuiteweb/signin');
     }
-  }, [projectName]);
+  }, [projectName, isAuthenticated]);
 
   const handleProjectChange = (event) => {
     const {

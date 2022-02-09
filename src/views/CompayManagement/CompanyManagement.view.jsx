@@ -2,6 +2,7 @@ import AddIcon from '@mui/icons-material/Add';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 import RestrictedPages from '../../components/shared/RestrictedPages/RestrictedPages';
 import { getAllCompany } from '../../redux/company-redux/company.actions';
@@ -29,16 +30,22 @@ const CompanyManagementView = () => {
     setOpenCreateCompanyDrawer(false);
   };
 
+  const navigate = useNavigate();
+
   const isAuthenticated = useSelector(getIfAuthenticated);
 
   const userAccessToken = useSelector(getUserAuthToken);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userAccessToken) {
-      dispatch(getAllCompany(userAccessToken));
+    if (isAuthenticated) {
+      if (userAccessToken) {
+        dispatch(getAllCompany(userAccessToken));
+      }
+    } else {
+      navigate('/asuiteweb/signin');
     }
-  }, []);
+  }, [isAuthenticated]);
   const { t } = useTranslation();
 
   return (

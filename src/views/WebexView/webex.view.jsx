@@ -5,12 +5,13 @@ import Drawer from '@mui/material/Drawer'; */
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
 
 // import { init as initWebex } from 'webex';
 import FooterNegentis from '../../components/shared/Footer-negentis/footer.component';
 import RestrictedPages from '../../components/shared/RestrictedPages/RestrictedPages';
+import { getIfAuthenticated } from '../../redux/user-redux/user.selectors';
 import {
   getAccessToken,
   getRooms,
@@ -39,6 +40,8 @@ const WebexView = () => {
   const webexAccessToken = useSelector(getWebexAccessToken);
   const rooms = useSelector(getWebexRooms);
   const [selectedOption, setSelectedOption] = useState(null);
+  const isAuthenticated = useSelector(getIfAuthenticated);
+  const navigate = useNavigate();
 
   // eslint-disable-next-line no-multi-assign
   /* const webex = (window.webex = initWebex({
@@ -98,25 +101,33 @@ const WebexView = () => {
   };
 
   useEffect(() => {
-    dispatch(webexAuthSuccess(webexParamToken));
-    if (webexParamToken) {
-      if (webexParamToken !== codeval) {
-        setCodeval(webexParamToken);
-        console.log(webexParamToken);
+    if (isAuthenticated) {
+      dispatch(webexAuthSuccess(webexParamToken));
+      if (webexParamToken) {
+        if (webexParamToken !== codeval) {
+          setCodeval(webexParamToken);
+          console.log(webexParamToken);
 
-        dispatch(getAccessToken(webexParamToken));
+          dispatch(getAccessToken(webexParamToken));
+        }
+        console.log(rooms);
       }
-      console.log(rooms);
+      if (!webexParamToken) {
+        window.location.href =
+          'https://webexapis.com/v1/authorize?client_id=Ce03f73ac5eb97bcdc2ea9dd2a417273c4683ebe66d966844c44f1842d5a58fba&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fasuiteweb%2Fpannel%2Fwebex&scope=meeting%3Aparticipants_read%20spark%3Apeople_read%20meeting%3Aadmin_participants_read%20spark%3Acalls_read%20spark%3Ateams_write%20spark-admin%3Apeople_write%20spark-admin%3Aroles_read%20spark-compliance%3Awebhooks_write%20spark%3Apeople_write%20spark%3Aorganizations_read%20spark%3Arooms_write%20spark%3Aall%20spark-compliance%3Arooms_read%20spark-compliance%3Awebhooks_read%20spark%3Akms%20spark%3Arooms_read%20spark-compliance%3Ateams_read%20meeting%3Aparticipants_write%20spark%3Ateams_read%20spark-compliance%3Arooms_write%20spark-admin%3Apeople_read&state=newstate';
+      }
+    } else {
+      navigate('/asuiteweb/signin');
     }
-    if (!webexParamToken) {
-      window.location.href =
-        'https://webexapis.com/v1/authorize?client_id=Ce03f73ac5eb97bcdc2ea9dd2a417273c4683ebe66d966844c44f1842d5a58fba&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fasuiteweb%2Fpannel%2Fwebex&scope=meeting%3Aparticipants_read%20spark%3Apeople_read%20meeting%3Aadmin_participants_read%20spark%3Acalls_read%20spark%3Ateams_write%20spark-admin%3Apeople_write%20spark-admin%3Aroles_read%20spark-compliance%3Awebhooks_write%20spark%3Apeople_write%20spark%3Aorganizations_read%20spark%3Arooms_write%20spark%3Aall%20spark-compliance%3Arooms_read%20spark-compliance%3Awebhooks_read%20spark%3Akms%20spark%3Arooms_read%20spark-compliance%3Ateams_read%20meeting%3Aparticipants_write%20spark%3Ateams_read%20spark-compliance%3Arooms_write%20spark-admin%3Apeople_read&state=newstate';
-    }
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
-    if (webexAccessToken && webexAccessToken !== null) {
-      dispatch(getRooms(webexAccessToken.access_token));
+    if (isAuthenticated) {
+      if (webexAccessToken && webexAccessToken !== null) {
+        dispatch(getRooms(webexAccessToken.access_token));
+      }
+    } else {
+      navigate('/asuiteweb/signin');
     }
   }, [webexAccessToken]);
   // const isAuthenticated = useSelector(getIfAuthenticated);

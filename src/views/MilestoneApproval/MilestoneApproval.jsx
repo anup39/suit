@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
@@ -39,6 +40,7 @@ const MilestoneApproval = () => {
   const [companyText, setCompanyText] = React.useState('');
   const [projectText, setProjectText] = React.useState('');
   const [checkbox, setCheckbox] = React.useState(false);
+  const navigate = useNavigate();
 
   const isSelectAll = useSelector(getIsSelctAll);
   const isAuthenticated = useSelector(getIfAuthenticated);
@@ -74,18 +76,22 @@ const MilestoneApproval = () => {
   };
 
   React.useEffect(() => {
-    if (!milestoneData) {
-      dispatch(getAllMilestones(authToken));
-    } else if (!companyText && !projectText) {
-      setResultsToShow(milestoneData);
-    }
+    if (isAuthenticated) {
+      if (!milestoneData) {
+        dispatch(getAllMilestones(authToken));
+      } else if (!companyText && !projectText) {
+        setResultsToShow(milestoneData);
+      }
 
-    if (isSelectAll) {
-      setCheckbox(true);
+      if (isSelectAll) {
+        setCheckbox(true);
+      } else {
+        setCheckbox(false);
+      }
     } else {
-      setCheckbox(false);
+      navigate('/asuiteweb/signin');
     }
-  }, [milestoneData, companyText, projectText]);
+  }, [milestoneData, companyText, projectText, isAuthenticated]);
   return (
     <RestrictedPages accessibleBy={PAGE_ACCESSABLE_BY}>
       <AuthenticatedRoute isAuthenticated={isAuthenticated}>

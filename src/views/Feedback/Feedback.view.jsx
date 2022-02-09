@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 import RestrictedPages from '../../components/shared/RestrictedPages/RestrictedPages';
 import {
@@ -28,6 +29,7 @@ const FeedbackView = () => {
   const [create, setCreate] = React.useState(false);
 
   const isAuthenticated = useSelector(getIfAuthenticated);
+  const navigate = useNavigate();
 
   // const handleChange = (event, newValue) => {
   //   setValue(newValue);
@@ -35,6 +37,12 @@ const FeedbackView = () => {
   const openCreate = () => {
     setCreate(true);
   };
+
+  React.useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/asuiteweb/signin');
+    }
+  }, [isAuthenticated]);
 
   return (
     <RestrictedPages accessibleBy={PAGE_ACCESSABLE_BY}>
