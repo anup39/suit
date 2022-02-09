@@ -16,6 +16,7 @@ import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DataGridBase from '../../components/shared/DatagridBase/DatagridBase';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import RestrictedPages from '../../components/shared/RestrictedPages/RestrictedPages';
 // import MobileDataRow from './mobile.data.row';
 import {
   getAllProjects,
@@ -26,6 +27,7 @@ import {
   getProjectList,
 } from '../../redux/project-management-redux/project-management.actions';
 import {
+  getCurrentUserRole,
   getIfAuthenticated,
   getUserAuthToken,
 } from '../../redux/user-redux/user.selectors';
@@ -33,6 +35,8 @@ import CreateProjectForm from './components/CreateProjectForm/CreateProjectForm'
 import Dashboard from './components/Dashboard/Dashboard';
 import ProjectManagementTabPannel from './components/ProjectManagementTabPannel/ProjectManagementTabPannel';
 import ProjectPannel from './components/ProjectPannel/ProjectPannel';
+
+const PAGE_ACCESSABLE_BY = ['planA_admin', 'ext_engg'];
 
 const ProjectManagement = () => {
   const dispatch = useDispatch();
@@ -55,6 +59,7 @@ const ProjectManagement = () => {
   const isProjectLoading = useSelector(isGetProjectLoading);
 
   const navigate = useNavigate();
+  const currentUserRole = useSelector(getCurrentUserRole);
 
   const handleBack = () => {
     setShowProjectPannel(false);
@@ -91,103 +96,101 @@ const ProjectManagement = () => {
   }, [isAuthenticated]);
 
   return (
-    <BaseTemplate>
-      <div className="header-wrapper">
-        <h2 className="header">{t('projectManagement')}</h2>
-        {value === 1 && (
-          <button onClick={() => setAddNewProject(true)} type="button">
-            <AddIcon />
-            {t('createProject')}
-          </button>
-        )}
-      </div>
+    <RestrictedPages accessibleBy={PAGE_ACCESSABLE_BY}>
+      <BaseTemplate>
+        <div className="header-wrapper">
+          <h2 className="header">{t('projectManagement')}</h2>
+          {value === 1 && (
+            <button onClick={() => setAddNewProject(true)} type="button">
+              <AddIcon />
+              {t('createProject')}
+            </button>
+          )}
+        </div>
 
-      {!showProjectPannel ? (
-        <div>
-          <Box sx={{ width: '100%' }}>
-            <Box>
-              <Tabs onChange={handleChange} value={value}>
-                <Tab label={t('dashbord')} />
-                <Tab label={t('projects')} />
-              </Tabs>
-            </Box>
-            <ProjectManagementTabPannel index={0} value={value}>
-              <Dashboard />
-            </ProjectManagementTabPannel>
-            <ProjectManagementTabPannel index={1} value={value}>
-              <>
-                <Drawer
-                  anchor="right"
-                  onClose={handelDrawerClose}
-                  open={addNewProject}
-                >
-                  <CreateProjectForm handelClose={handelDrawerClose} />
-                </Drawer>
+        {!showProjectPannel ? (
+          <div>
+            {currentUserRole === 'planA_admin' ? (
+              <Box sx={{ width: '100%' }}>
+                <Box>
+                  <Tabs onChange={handleChange} value={value}>
+                    <Tab label={t('dashbord')} />
+                    <Tab label={t('projects')} />
+                  </Tabs>
+                </Box>
+                <ProjectManagementTabPannel index={0} value={value}>
+                  <Dashboard />
+                </ProjectManagementTabPannel>
+                <ProjectManagementTabPannel index={1} value={value}>
+                  <>
+                    <Drawer
+                      anchor="right"
+                      onClose={handelDrawerClose}
+                      open={addNewProject}
+                    >
+                      <CreateProjectForm handelClose={handelDrawerClose} />
+                    </Drawer>
 
-                <DataGridBase>
-                  <div className="project-management--parent-search-div">
-                    <div className="project-management-search-div">
-                      <SearchIcon className="project-management-search-icon" />
-                      <input
-                        className="project-management-search-input"
-                        onChange={(e) => handelSearchTextChange(e)}
-                        placeholder={t('searchProject')}
-                        value={serchText}
-                      />
-                    </div>
-                  </div>
+                    <DataGridBase>
+                      <div className="project-management--parent-search-div">
+                        <div className="project-management-search-div">
+                          <SearchIcon className="project-management-search-icon" />
+                          <input
+                            className="project-management-search-input"
+                            onChange={(e) => handelSearchTextChange(e)}
+                            placeholder={t('searchProject')}
+                            value={serchText}
+                          />
+                        </div>
+                      </div>
 
-                  <div>
-                    <div className="project-management-table-header">
-                      {/* <span className="project-card-check-input">
-                        <input type="checkbox" />
-                      </span> */}
+                      <div>
+                        <div className="project-management-table-header">
+                          <span className="project-card-project-name">
+                            <p>{t('projectName')}</p>
+                          </span>
 
-                      <span className="project-card-project-name">
-                        <p>{t('projectName')}</p>
-                      </span>
+                          <span className="project-card-client">
+                            <p>{t('client')}</p>
+                          </span>
 
-                      <span className="project-card-client">
-                        <p>{t('client')}</p>
-                      </span>
+                          <span className="project-card-description">
+                            <p>{t('description')}</p>
+                          </span>
 
-                      <span className="project-card-description">
-                        <p>{t('description')}</p>
-                      </span>
+                          <span className="project-card-start-date">
+                            <p>{t('startDate')}</p>
+                          </span>
 
-                      <span className="project-card-start-date">
-                        <p>{t('startDate')}</p>
-                      </span>
+                          <span className="project-card-end-date">
+                            <p>{t('completionDate')}</p>
+                          </span>
 
-                      <span className="project-card-end-date">
-                        <p>{t('completionDate')}</p>
-                      </span>
+                          <span className="project-card-last-update">
+                            <p>{t('lastUpdate')}</p>
+                          </span>
 
-                      <span className="project-card-last-update">
-                        <p>{t('lastUpdate')}</p>
-                      </span>
+                          <span className="project-card-user-last-update">
+                            <p>{t('userlastUpdate')}</p>
+                          </span>
 
-                      <span className="project-card-user-last-update">
-                        <p>{t('userlastUpdate')}</p>
-                      </span>
+                          <span className="project-card-user-actions">
+                            {t('actions')}
+                          </span>
+                        </div>
+                      </div>
+                      {isProjectLoading ? (
+                        <LoadingSpinner />
+                      ) : (
+                        <Pagination
+                          componentNo={0}
+                          handleClose={handelShowProjectPannel}
+                          itemData={serchText ? filteredData : projectList}
+                          itemsPerPage={10}
+                        />
+                      )}
 
-                      <span className="project-card-user-actions">
-                        {t('actions')}
-                      </span>
-                    </div>
-                  </div>
-                  {isProjectLoading ? (
-                    <LoadingSpinner />
-                  ) : (
-                    <Pagination
-                      componentNo={0}
-                      handleClose={handelShowProjectPannel}
-                      itemData={serchText ? filteredData : projectList}
-                      itemsPerPage={10}
-                    />
-                  )}
-
-                  {/* <div className="mobile_table_pm-project">
+                      {/* <div className="mobile_table_pm-project">
                     <MobileDataRow />
                     <MobileDataRow />
                     <MobileDataRow />
@@ -195,15 +198,106 @@ const ProjectManagement = () => {
                     <MobileDataRow />
                     <MobileDataRow />
                     </div> */}
-                </DataGridBase>
-              </>
-            </ProjectManagementTabPannel>
-          </Box>
-        </div>
-      ) : (
-        <ProjectPannel handleBack={handleBack} />
-      )}
-    </BaseTemplate>
+                    </DataGridBase>
+                  </>
+                </ProjectManagementTabPannel>
+              </Box>
+            ) : (
+              <Box sx={{ width: '100%' }}>
+                <Box>
+                  <Tabs onChange={handleChange} value={value}>
+                    <Tab label={t('projects')} />
+                  </Tabs>
+                </Box>
+
+                <ProjectManagementTabPannel index={0} value={value}>
+                  <>
+                    <Drawer
+                      anchor="right"
+                      onClose={handelDrawerClose}
+                      open={addNewProject}
+                    >
+                      <CreateProjectForm handelClose={handelDrawerClose} />
+                    </Drawer>
+
+                    <DataGridBase>
+                      <div className="project-management--parent-search-div">
+                        <div className="project-management-search-div">
+                          <SearchIcon className="project-management-search-icon" />
+                          <input
+                            className="project-management-search-input"
+                            onChange={(e) => handelSearchTextChange(e)}
+                            placeholder={t('searchProject')}
+                            value={serchText}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <div className="project-management-table-header">
+                          <span className="project-card-project-name">
+                            <p>{t('projectName')}</p>
+                          </span>
+
+                          <span className="project-card-client">
+                            <p>{t('client')}</p>
+                          </span>
+
+                          <span className="project-card-description">
+                            <p>{t('description')}</p>
+                          </span>
+
+                          <span className="project-card-start-date">
+                            <p>{t('startDate')}</p>
+                          </span>
+
+                          <span className="project-card-end-date">
+                            <p>{t('completionDate')}</p>
+                          </span>
+
+                          <span className="project-card-last-update">
+                            <p>{t('lastUpdate')}</p>
+                          </span>
+
+                          <span className="project-card-user-last-update">
+                            <p>{t('userlastUpdate')}</p>
+                          </span>
+
+                          <span className="project-card-user-actions">
+                            {t('actions')}
+                          </span>
+                        </div>
+                      </div>
+                      {isProjectLoading ? (
+                        <LoadingSpinner />
+                      ) : (
+                        <Pagination
+                          componentNo={0}
+                          handleClose={handelShowProjectPannel}
+                          itemData={serchText ? filteredData : projectList}
+                          itemsPerPage={10}
+                        />
+                      )}
+
+                      {/* <div className="mobile_table_pm-project">
+                    <MobileDataRow />
+                    <MobileDataRow />
+                    <MobileDataRow />
+                    <MobileDataRow />
+                    <MobileDataRow />
+                    <MobileDataRow />
+                    </div> */}
+                    </DataGridBase>
+                  </>
+                </ProjectManagementTabPannel>
+              </Box>
+            )}
+          </div>
+        ) : (
+          <ProjectPannel handleBack={handleBack} />
+        )}
+      </BaseTemplate>
+    </RestrictedPages>
   );
 };
 

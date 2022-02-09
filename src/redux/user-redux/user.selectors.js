@@ -18,6 +18,11 @@ export const getUserData = (state) => {
   return state.user.userData;
 };
 
+export const getCurrentUserRole = (state) => {
+  return state.user.userData.roles[0];
+  // return 'planA_admin';
+};
+
 export const getUserAuthToken = (state) => {
   return state.user.userData.refreshToken;
 };

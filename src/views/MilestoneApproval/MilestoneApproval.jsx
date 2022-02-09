@@ -9,6 +9,7 @@ import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import RestrictedPages from '../../components/shared/RestrictedPages/RestrictedPages';
 import {
   getAllMilestone,
   getIsAllMilestoneLoading,
@@ -25,6 +26,8 @@ import {
 } from '../../redux/user-redux/user.selectors';
 import AuthenticatedRoute from '../../routes/AuthenticatedRoute';
 import MobileDataRow from './mobile.data.row';
+
+const PAGE_ACCESSABLE_BY = ['planA_admin'];
 
 const MilestoneApproval = () => {
   const dispatch = useDispatch();
@@ -84,103 +87,105 @@ const MilestoneApproval = () => {
     }
   }, [milestoneData, companyText, projectText]);
   return (
-    <AuthenticatedRoute isAuthenticated={isAuthenticated}>
-      <BaseTemplate title={t('milestoneapproval')}>
-        <DatagridBase>
-          {milestoneData && milestoneData.length === 0 ? (
-            ''
-          ) : (
-            <div className="milestone-search-bar">
-              <div className="milestone-search-div">
-                <SearchIcon className="milestone-search-icon" />
-                <input
-                  className="milestone-search-input"
-                  onChange={(e) => handleProjectTextChange(e)}
-                  placeholder={t('searchProject')}
-                  value={projectText}
-                />
-              </div>
-
-              <div className="milestone-search-div">
-                <SearchIcon className="milestone-search-icon" />
-                <input
-                  className="milestone-search-input"
-                  onChange={(e) => handleCompanyTextChange(e)}
-                  placeholder={t('searchCompany')}
-                  value={companyText}
-                />
-              </div>
-            </div>
-          )}
-          <div className="milestone-table-tbody">
+    <RestrictedPages accessibleBy={PAGE_ACCESSABLE_BY}>
+      <AuthenticatedRoute isAuthenticated={isAuthenticated}>
+        <BaseTemplate title={t('milestoneapproval')}>
+          <DatagridBase>
             {milestoneData && milestoneData.length === 0 ? (
-              <p className="no-data-to-display">{t('noDataFound')}</p>
+              ''
             ) : (
-              <>
-                <div className="milestone-table">
-                  <div className="milestone-header">
-                    <span className="milestone-approval-checkInput">
-                      <input
-                        checked={checkbox}
-                        onChange={(e) => handleCheckbox(e)}
-                        type="checkbox"
-                      />
-                    </span>
-
-                    <span className="milestone-approval-company">
-                      <p> {t('company')} </p>
-                    </span>
-
-                    <span className="milestone-approval-projectName">
-                      {' '}
-                      <p>{t('projectName')}</p>
-                    </span>
-
-                    <span className="milestone-approval-date">
-                      <p>{t('date')}</p>
-                    </span>
-
-                    <span className="milestone-approval-milestoneNr">
-                      <p>{t('milestonenr')}</p>
-                    </span>
-
-                    <span className="milestone-approval-description">
-                      <p>{t('description')}</p>
-                    </span>
-
-                    <span className="milestone-approval-status">
-                      <p>{t('status')}</p>
-                    </span>
-
-                    <span className="milestone-approval-action">
-                      <p>{t('actions')} </p>
-                    </span>
-                  </div>
-                </div>
-
-                {isAllMilestoneLoading ? (
-                  <LoadingSpinner />
-                ) : (
-                  <Pagination
-                    componentNo={3}
-                    itemData={!milestoneData ? '' : resultsToShow}
-                    itemsPerPage={10}
+              <div className="milestone-search-bar">
+                <div className="milestone-search-div">
+                  <SearchIcon className="milestone-search-icon" />
+                  <input
+                    className="milestone-search-input"
+                    onChange={(e) => handleProjectTextChange(e)}
+                    placeholder={t('searchProject')}
+                    value={projectText}
                   />
-                )}
-                <div className="mobile_table_milestone">
-                  <MobileDataRow />
-                  <MobileDataRow />
-                  <MobileDataRow />
-                  <MobileDataRow />
-                  <MobileDataRow />
-                  <MobileDataRow />
                 </div>
-              </>
+
+                <div className="milestone-search-div">
+                  <SearchIcon className="milestone-search-icon" />
+                  <input
+                    className="milestone-search-input"
+                    onChange={(e) => handleCompanyTextChange(e)}
+                    placeholder={t('searchCompany')}
+                    value={companyText}
+                  />
+                </div>
+              </div>
             )}
-          </div>
-        </DatagridBase>
-      </BaseTemplate>
-    </AuthenticatedRoute>
+            <div className="milestone-table-tbody">
+              {milestoneData && milestoneData.length === 0 ? (
+                <p className="no-data-to-display">{t('noDataFound')}</p>
+              ) : (
+                <>
+                  <div className="milestone-table">
+                    <div className="milestone-header">
+                      <span className="milestone-approval-checkInput">
+                        <input
+                          checked={checkbox}
+                          onChange={(e) => handleCheckbox(e)}
+                          type="checkbox"
+                        />
+                      </span>
+
+                      <span className="milestone-approval-company">
+                        <p> {t('company')} </p>
+                      </span>
+
+                      <span className="milestone-approval-projectName">
+                        {' '}
+                        <p>{t('projectName')}</p>
+                      </span>
+
+                      <span className="milestone-approval-date">
+                        <p>{t('date')}</p>
+                      </span>
+
+                      <span className="milestone-approval-milestoneNr">
+                        <p>{t('milestonenr')}</p>
+                      </span>
+
+                      <span className="milestone-approval-description">
+                        <p>{t('description')}</p>
+                      </span>
+
+                      <span className="milestone-approval-status">
+                        <p>{t('status')}</p>
+                      </span>
+
+                      <span className="milestone-approval-action">
+                        <p>{t('actions')} </p>
+                      </span>
+                    </div>
+                  </div>
+
+                  {isAllMilestoneLoading ? (
+                    <LoadingSpinner />
+                  ) : (
+                    <Pagination
+                      componentNo={3}
+                      itemData={!milestoneData ? '' : resultsToShow}
+                      itemsPerPage={10}
+                    />
+                  )}
+                  <div className="mobile_table_milestone">
+                    <MobileDataRow />
+                    <MobileDataRow />
+                    <MobileDataRow />
+                    <MobileDataRow />
+                    <MobileDataRow />
+                    <MobileDataRow />
+                  </div>
+                </>
+              )}
+            </div>
+          </DatagridBase>
+        </BaseTemplate>
+      </AuthenticatedRoute>
+    </RestrictedPages>
   );
 };
 

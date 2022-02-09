@@ -11,6 +11,7 @@ import BaseTemplate from '../../components/shared/BaseTemplate/BaseTemplate';
 import DatagridBase from '../../components/shared/DatagridBase/DatagridBase';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 import Pagination from '../../components/shared/Pagination/Pagination';
+import RestrictedPages from '../../components/shared/RestrictedPages/RestrictedPages';
 import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import {
   getIfAuthenticated,
@@ -36,6 +37,8 @@ import {
   getUserRoleList,
 } from '../../redux/User-Role/User-Role.selectors';
 import MobileDataRow from './mobile.data.row';
+
+const PAGE_ACCESSABLE_BY = ['planA_admin'];
 
 const UserRoles = () => {
   const dispatch = useDispatch();
@@ -123,69 +126,76 @@ const UserRoles = () => {
   }, [deleteUserErrorMessage, isAuthenticated, isUpdateUserLoading]);
 
   return (
-    <BaseTemplate title="userRoles">
-      <GlobalSpinner
-        isOpen={isDeleteUserInBulkLoading || isUpdateUserLoading}
-      />
-      <DatagridBase>
-        <div className="search-div">
-          <div className="input-container">
-            <input
-              className="search-input"
-              onChange={(e) => filterLists(e)}
-              placeholder={t('userSearch')}
-              value={searchTerm}
-            />
-            <SearchOutlinedIcon className="search-icon" />
+    <RestrictedPages accessibleBy={PAGE_ACCESSABLE_BY}>
+      <BaseTemplate title="userRoles">
+        <GlobalSpinner
+          isOpen={isDeleteUserInBulkLoading || isUpdateUserLoading}
+        />
+        <DatagridBase>
+          <div className="search-div">
+            <div className="input-container">
+              <input
+                className="search-input"
+                onChange={(e) => filterLists(e)}
+                placeholder={t('userSearch')}
+                value={searchTerm}
+              />
+              <SearchOutlinedIcon className="search-icon" />
+            </div>
+
+            {selectedUsers.length !== 0 && (
+              <span
+                className="delete-botton"
+                onClick={handleDeleteMultipleUsers}
+              >
+                {t('Delete')}
+              </span>
+            )}
           </div>
-
-          {selectedUsers.length !== 0 && (
-            <span className="delete-botton" onClick={handleDeleteMultipleUsers}>
-              {t('Delete')}
-            </span>
-          )}
-        </div>
-        <div>
-          <div className="user-header">
-            <div className="user-roles-table-base">
-              <div className="user-role-table-header">
-                <span className="user-roles-check-input">
-                  <input
-                    checked={checkbox}
-                    onChange={(e) => handleCheckbox(e)}
-                    type="checkbox"
+          <div>
+            <div className="user-header">
+              <div className="user-roles-table-base">
+                <div className="user-role-table-header">
+                  <span className="user-roles-check-input">
+                    <input
+                      checked={checkbox}
+                      onChange={(e) => handleCheckbox(e)}
+                      type="checkbox"
+                    />
+                  </span>
+                  <span className="user-roles-username ">{t('username')}</span>
+                  <span className="user-roles-company ">{t('company')}</span>
+                  <span className="user-roles-role ">{t('roles')}</span>
+                  <span className="user-roles-date">
+                    {t('registrationDate')}
+                  </span>
+                  <span className="user-roles-status ">{t('status')}</span>
+                  <span className="user-roles-action">{t('actions')}</span>
+                </div>
+                {isLoading ? (
+                  <LoadingSpinner />
+                ) : (
+                  <Pagination
+                    componentNo={4}
+                    itemData={searchTerm ? filteredData : userRoleData}
+                    itemsPerPage={10}
                   />
-                </span>
-                <span className="user-roles-username ">{t('username')}</span>
-                <span className="user-roles-company ">{t('company')}</span>
-                <span className="user-roles-role ">{t('roles')}</span>
-                <span className="user-roles-date">{t('registrationDate')}</span>
-                <span className="user-roles-status ">{t('status')}</span>
-                <span className="user-roles-action">{t('actions')}</span>
-              </div>
-              {isLoading ? (
-                <LoadingSpinner />
-              ) : (
-                <Pagination
-                  componentNo={4}
-                  itemData={searchTerm ? filteredData : userRoleData}
-                  itemsPerPage={10}
-                />
-              )}
-              <div className="mobile_table_userroles">
-                <MobileDataRow />
-                <MobileDataRow />
-                <MobileDataRow />
-                <MobileDataRow />
-                <MobileDataRow />
+                )}
+                <div className="mobile_table_userroles">
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
+                  <MobileDataRow />
 
-                <MobileDataRow />
+                  <MobileDataRow />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </DatagridBase>
-    </BaseTemplate>
+        </DatagridBase>
+      </BaseTemplate>
+    </RestrictedPages>
   );
 };
 

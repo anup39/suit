@@ -10,6 +10,7 @@ import Select from 'react-select';
 
 // import { init as initWebex } from 'webex';
 import FooterNegentis from '../../components/shared/Footer-negentis/footer.component';
+import RestrictedPages from '../../components/shared/RestrictedPages/RestrictedPages';
 import {
   getAccessToken,
   getRooms,
@@ -21,6 +22,8 @@ import {
 } from '../../redux/webex-redux/webex.selector';
 import SpaceWidgetComponent from './components/space-widget/space.component';
 import classes from './styles/webex.styles.module.scss';
+
+const PAGE_ACCESSABLE_BY = ['planA_Engg', 'planA_admin'];
 
 const WebexView = () => {
   // const [drawer, setDrawer] = useState(false);
@@ -100,7 +103,7 @@ const WebexView = () => {
       if (webexParamToken !== codeval) {
         setCodeval(webexParamToken);
         console.log(webexParamToken);
-      
+
         dispatch(getAccessToken(webexParamToken));
       }
       console.log(rooms);
@@ -111,17 +114,16 @@ const WebexView = () => {
     }
   }, []);
 
-  useEffect(()=> {
-    if(webexAccessToken && webexAccessToken !== null)
-    {
+  useEffect(() => {
+    if (webexAccessToken && webexAccessToken !== null) {
       dispatch(getRooms(webexAccessToken.access_token));
     }
-  }, [webexAccessToken])
+  }, [webexAccessToken]);
   // const isAuthenticated = useSelector(getIfAuthenticated);
   const { t } = useTranslation();
 
   return (
-    <>
+    <RestrictedPages accessibleBy={PAGE_ACCESSABLE_BY}>
       <div className={classes.webex_container}>
         <div className={classes.webex_header_container}>
           <h2 className={classes.webex_header}>{t('webEx')}</h2>
@@ -215,7 +217,7 @@ const WebexView = () => {
         </div>
       </div>
       <FooterNegentis />
-    </>
+    </RestrictedPages>
   );
 };
 

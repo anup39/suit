@@ -75,7 +75,19 @@ const SigninPage = () => {
         navigate('/asuiteweb/verify');
       } else {
         setIsLoading(false);
-        navigate('/asuiteweb/pannel/user-roles');
+
+        if (userData.roles[0] === 'planA_admin') {
+          navigate('/asuiteweb/pannel/user-roles');
+        } else if (userData.roles[0] === 'public') {
+          navigate('/asuiteweb/pannel/feedback-services');
+        } else if (userData.roles[0] === 'planA_Engg') {
+          navigate('/asuiteweb/pannel/web-gis-services');
+        } else if (userData.roles[0] === 'ext_engg') {
+          navigate('/asuiteweb/pannel/web-gis-services');
+        } else if (userData.roles[0] === 'ext_worker') {
+          navigate('/asuiteweb/pannel/web-gis-services');
+        }
+
         toast.success('Signin Success', {
           position: 'top-center',
           autoClose: 2000,
