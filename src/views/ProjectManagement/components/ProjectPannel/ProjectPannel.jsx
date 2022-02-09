@@ -71,6 +71,7 @@ const ProjectPannel = ({ handleBack }) => {
             {projectData.name}
           </span>
         </div>
+        {/* eslint-disable */}
         {currentUserRole === 'planA_admin' ? (
           <div className="project-main-div">
             <Box sx={{ width: '100%' }}>
@@ -96,6 +97,25 @@ const ProjectPannel = ({ handleBack }) => {
 
               <TabPanel index={3} value={value}>
                 <WorkList />
+              </TabPanel>
+            </Box>
+          </div>
+        ) : currentUserRole === 'planA_Engg' ? (
+          <div className="project-main-div">
+            <Box sx={{ width: '100%' }}>
+              <Box>
+                <Tabs onChange={handleChange} value={value}>
+                  <Tab label={t('documents')} />
+                  <Tab label={t('fieldUpdates')} />
+                </Tabs>
+              </Box>
+
+              <TabPanel index={0} value={value}>
+                <Documents />
+              </TabPanel>
+
+              <TabPanel index={1} value={value}>
+                <FieldUpdates />
               </TabPanel>
             </Box>
           </div>

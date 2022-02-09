@@ -51,6 +51,10 @@ const MenuOptions = {
       path: ROUTES.ACTIVITIES_MANAGEMENT,
     },
     {
+      name: 'projectManagement',
+      path: ROUTES.PROJECT_MANAGEMENT,
+    },
+    {
       name: 'webGisServices',
       path: ROUTES.WEB_GIS_SERVICES,
     },

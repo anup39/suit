@@ -36,7 +36,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import ProjectManagementTabPannel from './components/ProjectManagementTabPannel/ProjectManagementTabPannel';
 import ProjectPannel from './components/ProjectPannel/ProjectPannel';
 
-const PAGE_ACCESSABLE_BY = ['planA_admin', 'ext_engg'];
+const PAGE_ACCESSABLE_BY = ['planA_admin', 'ext_engg', 'planA_Engg'];
 
 const ProjectManagement = () => {
   const dispatch = useDispatch();
