@@ -107,7 +107,7 @@ const WebexView = () => {
     }
     if (!webexParamToken) {
       window.location.href =
-        'https://webexapis.com/v1/authorize?client_id=Ce03f73ac5eb97bcdc2ea9dd2a417273c4683ebe66d966844c44f1842d5a58fba&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fasuiteweb%2Fpannel%2Fwebex&scope=meeting%3Aparticipants_read%20spark%3Apeople_read%20meeting%3Aadmin_participants_read%20spark%3Acalls_read%20spark%3Ateams_write%20spark-admin%3Apeople_write%20spark-admin%3Aroles_read%20spark-compliance%3Awebhooks_write%20spark%3Apeople_write%20spark%3Aorganizations_read%20spark%3Arooms_write%20spark%3Aall%20spark-compliance%3Arooms_read%20spark-compliance%3Awebhooks_read%20spark%3Akms%20spark%3Arooms_read%20spark-compliance%3Ateams_read%20meeting%3Aparticipants_write%20spark%3Ateams_read%20spark-compliance%3Arooms_write%20spark-admin%3Apeople_read&state=newstate';
+        `https://webexapis.com/v1/authorize?client_id=Ce03f73ac5eb97bcdc2ea9dd2a417273c4683ebe66d966844c44f1842d5a58fba&response_type=code&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&scope=meeting%3Aparticipants_read%20spark%3Apeople_read%20meeting%3Aadmin_participants_read%20spark%3Acalls_read%20spark%3Ateams_write%20spark-admin%3Apeople_write%20spark-admin%3Aroles_read%20spark-compliance%3Awebhooks_write%20spark%3Apeople_write%20spark%3Aorganizations_read%20spark%3Arooms_write%20spark%3Aall%20spark-compliance%3Arooms_read%20spark-compliance%3Awebhooks_read%20spark%3Akms%20spark%3Arooms_read%20spark-compliance%3Ateams_read%20meeting%3Aparticipants_write%20spark%3Ateams_read%20spark-compliance%3Arooms_write%20spark-admin%3Apeople_read&state=newstate`;
     }
   }, []);
 

@@ -41,22 +41,17 @@ const MapView = ({ page }) => {
   const selectedTaskId = useSelector(getSelectedTaskId);
   const selectedProjectData = useSelector(getProjectData);
 
-  // eslint-disable-next-line react-redux/useSelector-prefer-selectors
+    // eslint-disable-next-line react-redux/useSelector-prefer-selectors
   const selectedProjectLayersList = useSelector(
-    (state) => state.projectManagement.selectedProjectLayerList
-  )?.layers?.layer;
+      (state) => state.projectManagement.selectedProjectLayerList
+    )?.layers?.layer;
+
 
   React.useEffect(() => {
     if (selectedProjectLayersList?.length > 0) {
       setTaskId(selectedProjectLayersList?.[0]?.name);
     }
   }, [selectedProjectLayersList]);
-
-  // React.useEffect(() => {
-  //   if (taskDetailsByProject?.length > 0) {
-  //     setTaskId(taskDetailsByProject?.[0]?.taskId);
-  //   }
-  // }, [taskDetailsByProject]);
 
   React.useEffect(() => {
     dispatch(getProjectList(authToken));
@@ -165,11 +160,10 @@ const MapView = ({ page }) => {
   );
   return (
     <div
-      className={`map-view-base-div ${
-        page === 'webgisservices' ? 'is-fullmap' : ''
-      }`}
-    >
-      <div className="map-view-map-div">
+    className={`map-view-base-div ${
+      page === 'webgisservices' ? 'is-fullmap' : ''
+    }`}
+  >      <div className="map-view-map-div">
         <MapWrapper projectId={projectId} selectedDropdownTaskId={taskId} />
       </div>
       <div className="map-view-details-div">
