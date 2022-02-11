@@ -35,7 +35,7 @@ export const GET_PROJECT_LIST = async () => {
   const projectList = await axiosInstance(
     PROJECT_MANAGEMENT_API.GET_PROJECT_LIST
   );
-  console.log(projectList)
+  console.log(projectList);
   return projectList.data;
 };
 
@@ -82,7 +82,6 @@ export const GET_PROJECT_DOCUMENTS = async (payload) => {
 export const GET_PROJECT_DASHBORD = async () => {
   const url = PROJECT_MANAGEMENT_API.DASHBORD;
   const dashbord = await axiosInstance(url);
-
   return dashbord.data;
 };
 

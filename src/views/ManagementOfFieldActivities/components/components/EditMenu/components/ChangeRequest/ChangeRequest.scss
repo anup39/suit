@@ -4,10 +4,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
-  height: 100vh;
+  height: 90vh;
   background-color: rgb(255, 255, 255);
   display: block;
-
+  overflow-y: scroll;
   @media (max-width: 768px) {
     width: 80%;
   }
@@ -21,7 +21,7 @@
   padding: 15px 30px;
   width: 100%;
 
-  >div {
+  > div {
     border: 1px solid #d4deea;
     border-radius: 3px;
   }
@@ -31,176 +31,176 @@
   }
 }
 .change-request-body-div {
-padding: 15px 30px;
-display: block;
-flex: 1 1;
-overflow: auto;
+  padding: 15px 30px;
+  display: block;
+  flex: 1 1;
+  overflow: auto;
 
-> div {
-  border: 1px solid #d4deea;
-}
+  > div {
+    border: 1px solid #d4deea;
+  }
 
-p {
-  color: #526484;
-  font-size: 14px;
-  margin: 0 0 8px 0;
-}
+  p {
+    color: #526484;
+    font-size: 14px;
+    margin: 0 0 8px 0;
+  }
 }
 
 .change-request-body-header {
-border-bottom: 1px solid #d4deea;
-padding: 10px 20px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-width: 100%;
-white-space: nowrap;
+  border-bottom: 1px solid #d4deea;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  white-space: nowrap;
 }
 
 .change-request-body-header p {
-font-weight: 500;
-font-size: 14px;
-color: #364a63;
-margin: 0;
+  font-weight: 500;
+  font-size: 14px;
+  color: #364a63;
+  margin: 0;
 }
 
 .change-request-body {
-width: 100%;
-max-height: calc(80vh - 194px);
-overflow: auto;
-padding: 10px 15px;
-
-input,
-textarea {
   width: 100%;
-  border: 1px solid #d4deea;
-  border-radius: 3px;
-  padding: 12px 15px;
-  color: #364a63;
-  font-size: 14px;
-  resize: none;
-}
+  max-height: calc(80vh - 194px);
+  overflow: auto;
+  padding: 10px 15px;
+
+  input,
+  textarea {
+    width: 100%;
+    border: 1px solid #d4deea;
+    border-radius: 3px;
+    padding: 12px 15px;
+    color: #364a63;
+    font-size: 14px;
+    resize: none;
+  }
 }
 
 .change-body-request-details {
-display: grid;
-grid-template-columns: repeat(2, 50%);
-gap: 10px;
-grid-auto-rows: minmax(100px, auto);
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
 
-@media (max-width: 768px) {
-  grid-template-columns: initial;
-  grid-auto-rows: initial;
-  margin-bottom: 10px;
-}
+  @media (max-width: 768px) {
+    grid-template-columns: initial;
+    grid-auto-rows: initial;
+    margin-bottom: 10px;
+  }
 }
 
 .change-request-details {
-height: 42px;
-padding: 12px 15px;
-width: 100%;
-border: 1px solid #d4deea;
-color: #364a63;
-font-size: 14px;
-border-radius: 3px;
-display: flex;
-align-items: center;
-overflow: hidden;
+  height: 42px;
+  padding: 12px 15px;
+  width: 100%;
+  border: 1px solid #d4deea;
+  color: #364a63;
+  font-size: 14px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 
 .change-request-details-files {
-display: block;
-width: 50%;
-border: 1px solid #d4deea;
-height: 50px;
-display: flex;
-align-items: center;
-border-radius: 3px;
-padding: 10px 20px;
-margin-top: 10px;
+  display: block;
+  width: 50%;
+  border: 1px solid #d4deea;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  padding: 10px 20px;
+  margin-top: 10px;
 
-@media (max-width: 768px) {
-  width: 100%;
-}
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 }
 
 .filename-base-div {
-margin-top: 10px;
+  margin-top: 10px;
 }
 
 .change-request-description-details {
-height: 150px;
-display: flex;
-border: 1px solid #d4deea;
-border-radius: 3px;
-padding: 10px 20px;
-margin-top: 10px;
-overflow: auto;
+  height: 150px;
+  display: flex;
+  border: 1px solid #d4deea;
+  border-radius: 3px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  overflow: auto;
 }
 
 .change-request-buttons-div {
-display: flex;
-align-items: center;
-justify-content: center;
-margin-top: 10px;
-margin-bottom: 10px;
-font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
 }
 
 .change-request-button-reject {
-padding: 10px 40px;
-border: 1px solid red;
-border-radius: 5px;
-margin-right: 10px;
-color: red;
-cursor: pointer;
+  padding: 10px 40px;
+  border: 1px solid red;
+  border-radius: 5px;
+  margin-right: 10px;
+  color: red;
+  cursor: pointer;
 
-@media (max-width: 768px) {
-  padding: 10px;
-}
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 }
 
 .change-request-button-accept {
-padding: 10px 40px;
-background-color: rgb(54, 161, 161);
-border-radius: 5px;
-margin-right: 10px;
-color: rgb(255, 255, 255);
-cursor: pointer;
+  padding: 10px 40px;
+  background-color: rgb(54, 161, 161);
+  border-radius: 5px;
+  margin-right: 10px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
 
-@media (max-width: 768px) {
-  padding: 10px;
-}
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 }
 
 .reason-of-rejection-details-text-area {
-width: 100%;
-height: 150px;
-border: 1px solid black;
-margin-top: 10px;
-border-radius: 4px;
-resize: none;
-padding: 10px;
+  width: 100%;
+  height: 150px;
+  border: 1px solid black;
+  margin-top: 10px;
+  border-radius: 4px;
+  resize: none;
+  padding: 10px;
 }
 
 .close-button {
-border: 1px solid #0160e0;
-border-radius: 5px;
-color: #0160e0;
-cursor: pointer;
-font-weight: 600;
-height: 35px;
-background: white;
-width: 80px;
-display: flex;
-align-items: center;
-justify-content: center;
+  border: 1px solid #0160e0;
+  border-radius: 5px;
+  color: #0160e0;
+  cursor: pointer;
+  font-weight: 600;
+  height: 35px;
+  background: white;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .change-request-content-no-data-found {
-width: 100%;
-height: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

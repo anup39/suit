@@ -199,9 +199,9 @@ const UserRolesForms = ({
 UserRolesForms.propTypes = {
   editUser: PropTypes.isRequired,
   handelCancel: PropTypes.isRequired,
-  userName: PropTypes.string.isRequired,
-  role: PropTypes.string.isRequired,
-  userCompanyId: PropTypes.number.isRequired,
+  userName: PropTypes.isRequired,
+  role: PropTypes.isRequired,
+  userCompanyId: PropTypes.isRequired,
 };
 
 export default UserRolesForms;

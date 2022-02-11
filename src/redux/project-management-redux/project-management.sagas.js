@@ -61,7 +61,6 @@ export function* getAllProjectList() {
     const projectList = yield call(GET_PROJECT_LIST);
     yield put(getProjectListSuccess(projectList));
   } catch (err) {
-    console.log(err)
     yield put(getProjectListError(err.response.data));
   }
 }
