@@ -89,7 +89,8 @@ const ProjectManagement = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(getProjectList(authToken));
+      console.log(authToken)
+      dispatch(getProjectList());
     } else {
       navigate('/asuiteweb/signin');
     }

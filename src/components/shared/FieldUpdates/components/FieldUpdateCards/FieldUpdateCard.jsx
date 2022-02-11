@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import WebExIcon from '../../../../../assets/webex-icon.png';
 import ProjectStatus from '../../../../../constants/ProjectStatus';
 import { getProjectData } from '../../../../../redux/project-management-redux/project.selector';
-import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
+import { getCurrentUserRole, getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
 import {
   changeTaskStatus,
   deleteTaskByID,
@@ -36,6 +36,7 @@ const FieldUpdateCard = ({ activityData }) => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const [deleteModal, setDeleteModal] = React.useState(false);
   const [taskStatus, setTaskStatus] = React.useState(activityData.taskStatus);
+  const currentUserRole = useSelector(getCurrentUserRole);
 
 
   const [isWebexMessageModalOpen, setIsWebexMessageModalOpen] =
@@ -190,7 +191,8 @@ const FieldUpdateCard = ({ activityData }) => {
               ))}
             </select>
           </span>
-          <span className="field-updates-body-controlActivity">
+          {(currentUserRole === 'planA_admin' || currentUserRole === 'planA_Engg')  ?
+          (<span className="field-updates-body-controlActivity">
             <AutorenewOutlinedIcon
               className="control-activity-icons"
               onClick={handleRefreshData}
@@ -213,7 +215,7 @@ const FieldUpdateCard = ({ activityData }) => {
               className="control-activity-icons"
               onClick={handleDrawerOpen}
             />
-          </span>
+          </span>):null}
           <span className="field-updates-body-actions">
             <MoreHorizRoundedIcon
               className="filed-update-menu-icon"

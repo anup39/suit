@@ -1,10 +1,16 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import MapView from '../../components/shared/FieldUpdates/components/MapView/MapView';
 import RestrictedPages from '../../components/shared/RestrictedPages/RestrictedPages';
-import { getIfAuthenticated } from '../../redux/user-redux/user.selectors';
+import {
+  getProjectList,
+} from '../../redux/project-management-redux/project-management.actions';
+import {
+  getIfAuthenticated,
+  getUserAuthToken,
+} from '../../redux/user-redux/user.selectors';
 
 const PAGE_ACCESSABLE_BY = [
   'planA_Engg',
@@ -13,12 +19,19 @@ const PAGE_ACCESSABLE_BY = [
   'ext_worker',
 ];
 
+
+
 const WebGisServices = () => {
+  const dispatch = useDispatch();
+  const authToken = useSelector(getUserAuthToken);
+
   const isAuthenticated = useSelector(getIfAuthenticated);
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    if (!isAuthenticated) {
+  React. useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(getProjectList(authToken));
+    } else {
       navigate('/asuiteweb/signin');
     }
   }, [isAuthenticated]);

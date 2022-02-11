@@ -90,6 +90,14 @@ const userReducer = (state = USER_INITIAL_STATE, action) => {
         signOutData: '',
       };
 
+      case USER_ACTION_TYPES.USER_SIGNOUT_EXP:
+      return {
+        ...state,
+        isSignoutLoading: true,
+        signOutError: '',
+        signOutData: '',
+      };
+
     case USER_ACTION_TYPES.USER_SIGNOUT_SUCCESS:
       return {
         ...state,

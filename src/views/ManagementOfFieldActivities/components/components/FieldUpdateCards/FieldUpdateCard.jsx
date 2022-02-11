@@ -24,7 +24,7 @@ import WebexFiles from '../../../../../components/shared/Webex-components/webex-
 import WebexMessages from '../../../../../components/shared/Webex-components/webex-message/WebexMessages';
 import ProjectStatus from '../../../../../constants/ProjectStatus';
 import { getAllActivities } from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
-import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
+import { getCurrentUserRole, getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
 import {
   changeTaskStatus,
   deleteTaskByID,
@@ -51,6 +51,8 @@ const FieldUpdateCard = ({ activityData }) => {
   const authToken = useSelector(getUserAuthToken);
   const isDeleteTaskLoading = useSelector(getIsDeleteWorkListLoading);
   const deleteTaskSuccess = useSelector(getDeleteWorkListSuccess);
+  const currentUserRole = useSelector(getCurrentUserRole);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -205,7 +207,8 @@ const FieldUpdateCard = ({ activityData }) => {
               ))}
             </select>
           </span>
-          <span className="field-updates-body-controlActivity">
+          {(currentUserRole === 'planA_admin' || currentUserRole === 'planA_Engg')  ?
+          (<span className="field-updates-body-controlActivity">
             <AutorenewOutlinedIcon
               className="control-activity-icons"
               onClick={handleRefreshData}
@@ -228,7 +231,7 @@ const FieldUpdateCard = ({ activityData }) => {
               className="control-activity-icons"
               onClick={handleDrawerOpen}
             />
-          </span>
+          </span>) : "" }
           <span className="field-updates-body-actions">
             <MoreHorizRoundedIcon
               className="filed-update-menu-icon"

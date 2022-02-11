@@ -51,10 +51,21 @@ export function* signOutUser({ payload }) {
     const signout = yield call(LOG_OUT, payload);
     yield put(userSignOutSuccess(signout));
   } catch (error) {
-    yield put(userSigninFailure(error.response?.data));
+    yield put(userSigninFailure("Login Failed / Expired"));
   }
 }
 
+export function* signOutUserexp() {
+  try {
+    yield put(userSignOutSuccess(""));
+  } catch (error) {
+    yield put(userSigninFailure("Login Failed / Expired"));
+  }
+}
+
+export function* onsignOutUserexp() {
+  yield takeLatest(USER_ACTION_TYPES.USER_SIGNOUT_EXP, signOutUserexp);
+}
 export function* onSignOutUser() {
   yield takeLatest(USER_ACTION_TYPES.USER_SIGNOUT, signOutUser);
 }
@@ -64,5 +75,7 @@ export function* userSagas() {
     call(onUserSignUpStart),
     call(onUserSignInStart),
     call(onSignOutUser),
+    call(onsignOutUserexp),
+
   ]);
 }

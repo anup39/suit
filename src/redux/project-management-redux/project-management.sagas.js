@@ -56,11 +56,12 @@ export function* onCreateNewProjectStart() {
   );
 }
 
-export function* getAllProjectList({ payload }) {
+export function* getAllProjectList() {
   try {
-    const projectList = yield call(GET_PROJECT_LIST, payload);
+    const projectList = yield call(GET_PROJECT_LIST);
     yield put(getProjectListSuccess(projectList));
   } catch (err) {
+    console.log(err)
     yield put(getProjectListError(err.response.data));
   }
 }

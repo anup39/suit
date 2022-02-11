@@ -6,7 +6,7 @@ const English = {
   broughtToYouBy: 'Brought to you by',
   poweredBy: 'Powered By',
   rememberMe: 'Remember Me',
-  fotgotCode: 'Forgot Code?',
+  fotgotCode: 'Forgot Password?',
   notAUser: 'Not a User?',
   createAccount: 'Create Account',
   username: 'Username',

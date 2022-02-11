@@ -35,6 +35,7 @@ export const GET_PROJECT_LIST = async () => {
   const projectList = await axiosInstance(
     PROJECT_MANAGEMENT_API.GET_PROJECT_LIST
   );
+  console.log(projectList)
   return projectList.data;
 };
 

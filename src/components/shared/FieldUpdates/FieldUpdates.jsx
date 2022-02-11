@@ -8,7 +8,7 @@ import { GrMap } from 'react-icons/gr';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getProjectData } from '../../../redux/project-management-redux/project.selector';
-import { getUserAuthToken } from '../../../redux/user-redux/user.selectors';
+import { getCurrentUserRole, getUserAuthToken } from '../../../redux/user-redux/user.selectors';
 import { taskByProject } from '../../../redux/worklist-management-redux/worklist.actions';
 import {
   getIsTaskDataByIdLoading,
@@ -27,6 +27,8 @@ const FieldUpdates = () => {
   const worklistTasks = useSelector(getTasksByProject);
   const authToken = useSelector(getUserAuthToken);
   const isGetTaskLoading = useSelector(getIsTaskDataByIdLoading);
+  const currentUserRole = useSelector(getCurrentUserRole);
+
 
   const showMapView = () => {
     setIsMapView(true);
@@ -83,9 +85,10 @@ const FieldUpdates = () => {
               {t('milestoneapproval')}
             </span>
             <span className="field-updates-header-status">{t('status')}</span>
-            <span className="field-updates-header-controlActivity">
+            {(currentUserRole === 'planA_admin' || currentUserRole === 'planA_Engg') ?
+            (<span className="field-updates-header-controlActivity">
               {t('controlActivity')}
-            </span>
+            </span>) : ""}
             <span className="field-updates-header-actions">{t('actions')}</span>
           </div>
           {worklistTasks && worklistTasks.length === 0 ? (

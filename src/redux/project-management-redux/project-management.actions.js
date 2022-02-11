@@ -40,9 +40,9 @@ export const resetUpdateProjectData = () => ({
   payload: '',
 });
 
-export const getProjectList = (data) => ({
+export const getProjectList = () => ({
   type: PROJECT_MANAGEMENT_TYPES.GET_PROJECT_LIST,
-  payload: data,
+  payload: '',
 });
 
 export const getProjectListSuccess = (data) => ({

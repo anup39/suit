@@ -55,6 +55,11 @@ export const userSignOut = (data) => ({
   payload: data,
 });
 
+export const userSignOutexp = (data) => ({
+  type: USER_ACTION_TYPES.USER_SIGNOUT_EXP,
+  payload: data,
+});
+
 export const userSignOutSuccess = (data) => ({
   type: USER_ACTION_TYPES.USER_SIGNOUT_SUCCESS,
   payload: data,

@@ -5,15 +5,19 @@ import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { GrMap } from 'react-icons/gr';
+import { useSelector } from 'react-redux';
 
+import { getCurrentUserRole } from '../../../redux/user-redux/user.selectors';
 import FieldUpdateCard from './components/FieldUpdateCards/FieldUpdateCard';
 import MapView from './components/MapView/MapView';
+
 
 const FieldUpdates = () => {
 
   const [isMapView, setIsMapView] = React.useState(false);
   const { t } = useTranslation();
   
+  const currentUserRole = useSelector(getCurrentUserRole);
 
   const showMapView = () => {
     setIsMapView(true);
@@ -63,9 +67,10 @@ const FieldUpdates = () => {
             {t('milestone')}
             </span>
             <span className="field-updates-header-status">{t('status')}</span>
-            <span className="field-updates-header-controlActivity">
+            {(currentUserRole === 'planA_admin' || currentUserRole === 'planA_Engg')  ?
+            (<span className="field-updates-header-controlActivity">
             {t('controlActivity')}
-            </span>
+            </span>): ""}
             <span className="field-updates-header-actions">{t('actions')}</span>
           </div>
           <div>

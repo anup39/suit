@@ -72,7 +72,7 @@ const ProjectPannel = ({ handleBack }) => {
           </span>
         </div>
         {/* eslint-disable */}
-        {currentUserRole === 'planA_admin' ? (
+        {(currentUserRole === 'planA_admin' || currentUserRole === 'planA_Engg')  ? (
           <div className="project-main-div">
             <Box sx={{ width: '100%' }}>
               <Box>
@@ -100,36 +100,26 @@ const ProjectPannel = ({ handleBack }) => {
               </TabPanel>
             </Box>
           </div>
-        ) : currentUserRole === 'planA_Engg' ? (
+        ) : (
           <div className="project-main-div">
             <Box sx={{ width: '100%' }}>
               <Box>
                 <Tabs onChange={handleChange} value={value}>
+                 <Tab label={t('projects')} />
                   <Tab label={t('documents')} />
                   <Tab label={t('fieldUpdates')} />
                 </Tabs>
               </Box>
 
               <TabPanel index={0} value={value}>
-                <Documents />
+                <Projects />
               </TabPanel>
-
               <TabPanel index={1} value={value}>
-                <FieldUpdates />
-              </TabPanel>
-            </Box>
-          </div>
-        ) : (
-          <div className="project-main-div">
-            <Box sx={{ width: '100%' }}>
-              <Box>
-                <Tabs onChange={handleChange} value={value}>
-                  <Tab label={t('documents')} />
-                </Tabs>
-              </Box>
-
-              <TabPanel index={0} value={value}>
                 <Documents />
+              </TabPanel>
+
+              <TabPanel index={2} value={value}>
+                <FieldUpdates />
               </TabPanel>
             </Box>
           </div>
