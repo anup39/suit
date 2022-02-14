@@ -199,7 +199,11 @@ const AddFeedback = ({ isOpen, isClose }) => {
               </div>
             </div>
             <div className="btn-btm">
-              <button className="transparent-btn" type="button">
+              <button
+                className="transparent-btn"
+                onClick={closeDrawer}
+                type="button"
+              >
                 {t('cancel')}
               </button>
               <button className="orange-btn" type="submit">

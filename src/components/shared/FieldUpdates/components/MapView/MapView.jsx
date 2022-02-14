@@ -178,7 +178,7 @@ const MapView = ({ page }) => {
           <label
             className={classes.form_label}
             htmlFor="name"
-            style={{ color: 'white' }}
+            style={{ color: 'black' }}
           >
             Project Name
           </label>
@@ -188,7 +188,7 @@ const MapView = ({ page }) => {
               onChange={(e) => setprojectId(e.target.value)}
               value={projectId}
             >
-              <option value=""> Select A Layer</option>
+              <option value=""> Select A Project</option>
               {projectList.map((vals) => (
                 <option key={vals.id} value={vals.id}>
                   {vals.name}
@@ -242,7 +242,7 @@ const MapView = ({ page }) => {
           />
         </div>
         <div className="map-view-document-details-base">
-          <p style={{ color: 'white' }}>Document Details</p>
+          <p style={{ color: 'black' }}>Document Details</p>
           <div className="map-view-document-details">
             <span>
               <h6>Geometry Tyh6e:</h6>
