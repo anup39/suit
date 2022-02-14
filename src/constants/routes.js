@@ -26,10 +26,10 @@ const ROUTES = {
   FEEDBACK_SERVICES: '/asuiteweb/pannel/feedback-services',
   VIEW_PROJECT: '/asuiteweb/pannel/project-management/project/view',
   PANNEL: '/asuiteweb/pannel',
-  NOT_VERIFIED: '/asuiteweb/forgotPassword',
+  FORGOT_PASSWORD: '/asuiteweb/forgotPassword',
   VERIFY_EMAIL: '/asuiteweb/verifyEmail',
   NEW_PASSWORD: '/asuiteweb/newPassword',
-  RESEND_LINK : "/asuiteweb/verify"
+  RESEND_LINK: '/asuiteweb/verify',
 };
 
 export default ROUTES;

@@ -11,7 +11,7 @@ import logo from '../../assets/logoPicture.png';
 import image from '../../assets/signin-info.png';
 import GlobalSpinner from '../../components/shared/Spinners/GlobalSpinner';
 import {
-  resetSignupError,
+  resetUserSignup,
   userSignupStart,
 } from '../../redux/user-redux/user.actions';
 import {
@@ -66,12 +66,13 @@ const SignupPage = ({ isRedTheme }) => {
         draggable: true,
         progress: undefined,
       });
-      dispatch(resetSignupError());
+      dispatch(resetUserSignup());
       navigate('/asuiteweb/signin');
     }
 
     if (signupSuccess) {
       navigate('/asuiteweb/verify');
+      dispatch(resetUserSignup());
     }
   }, [onLoading, signupError]);
 

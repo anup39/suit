@@ -48,7 +48,7 @@ const VerifyEmail = () => {
         navigate('/asuiteweb/user/signup');
       }, 2000);
     }
-  });
+  }, []);
 
   return <LoadingSpinner />;
 };

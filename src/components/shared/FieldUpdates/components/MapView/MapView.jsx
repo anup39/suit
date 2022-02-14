@@ -175,26 +175,35 @@ const MapView = ({ page }) => {
       <div className="map-view-details-div">
         {/* <h5 className="map-view-assign-project-header">Assign Project</h5> */}
         <div className={classes.form_input_container}>
-          <label
+          {/* <label
             className={classes.form_label}
             htmlFor="name"
             style={{ color: 'black' }}
           >
             Project Name
-          </label>
+          </label> */}
           {page === 'webgisservices' && (
-            <select
-              className={classes.form_input}
-              onChange={(e) => setprojectId(e.target.value)}
-              value={projectId}
-            >
-              <option value=""> Select A Project</option>
-              {projectList.map((vals) => (
-                <option key={vals.id} value={vals.id}>
-                  {vals.name}
-                </option>
-              ))}
-            </select>
+            <>
+              <label
+                className={classes.form_label}
+                htmlFor="name"
+                style={{ color: 'black' }}
+              >
+                Project Name
+              </label>
+              <select
+                className={classes.form_input}
+                onChange={(e) => setprojectId(e.target.value)}
+                value={projectId}
+              >
+                <option value=""> Select A Project</option>
+                {projectList.map((vals) => (
+                  <option key={vals.id} value={vals.id}>
+                    {vals.name}
+                  </option>
+                ))}
+              </select>
+            </>
           )}
           {selectedProjectLayersList && (
             <select
@@ -272,7 +281,14 @@ const MapView = ({ page }) => {
 
             <span>
               <h6>Task Status:</h6>
-              <p>{getStatusIcons(filteredTaskByTaskId?.taskStatus)}</p>
+              {page === 'webgisservices' ? (
+                <p>{getStatusIcons(filteredTaskByTaskId?.taskStatus)}</p>
+              ) : (
+                <div className="task-status-icon">
+                  <p>{getStatusIcons('Not assigned')}</p>
+                </div>
+              )}
+
               {/* <p>{filteredTaskByTaskId?.taskStatus}</p> */}
             </span>
 

@@ -13,9 +13,7 @@ if (userData) {
 let userAccessToken = localStorage.getItem('accessToken');
 
 if (userAccessToken) {
-  userAccessToken = !localStorage.getItem('accessToken')
-    ? userData?.userData?.accessToken
-    : JSON.parse(localStorage.getItem('accessToken'));
+  userAccessToken = localStorage.getItem('accessToken');
 } else {
   userAccessToken = userData?.userData?.accessToken;
 }

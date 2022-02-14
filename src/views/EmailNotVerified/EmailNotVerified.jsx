@@ -99,8 +99,8 @@ const EmailNotVerified = () => {
           <h1 className="left_header_blue">
             Welcome to <span className="left_header_orange">ASuite</span>
           </h1>
-          <h2 className="right_header"> Verify Email </h2>
-          <form className="right_form">
+          <h2 className="right_header"> Forgot Password </h2>
+          <form className="right_form" onSubmit={handleResend}>
             <div className="form_input_container">
               <label className="form_label">Email</label>
               <input
@@ -118,7 +118,7 @@ const EmailNotVerified = () => {
               onClick={handleResend}
               type="button"
             >
-              Resend
+              Reset
             </button>
           </form>
         </div>

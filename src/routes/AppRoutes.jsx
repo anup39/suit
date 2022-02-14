@@ -92,7 +92,7 @@ const appRoutes = [
     element: <CompanySignupPage />,
   },
   {
-    path: ROUTES.NOT_VERIFIED,
+    path: ROUTES.FORGOT_PASSWORD,
     element: <EmailNotVerified />,
   },
   {
