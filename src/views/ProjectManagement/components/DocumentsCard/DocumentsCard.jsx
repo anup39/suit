@@ -7,9 +7,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const DocumentsCard = ({ documentsDetails }) => {
-  const ECM_URL =
-    'http://asuite.arkivista.it/VistaEcmWeb.aspx?AppName=ASuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&LogonType=3&OperationType=10&DispayMode=0&UserName=Administrator&PwdHash=FE5925DF339948B95B605D595DF8861729F3EB3A&IdxId=21&DocId';
-
+  
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const open = Boolean(anchorEl);
@@ -24,8 +22,11 @@ const DocumentsCard = ({ documentsDetails }) => {
 
   const handleViewDocuments = () => {
     handleMenuClose();
-
-    const docUrl = `${ECM_URL}=${documentsDetails.id}`;
+    let docUrl=""
+    if(documentsDetails.link && documentsDetails.link !== null )
+    {
+       docUrl = `${documentsDetails.link}`;
+    }
     window.open(docUrl, '_blank');
   };
 

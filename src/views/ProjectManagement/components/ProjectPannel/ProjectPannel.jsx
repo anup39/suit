@@ -51,7 +51,7 @@ const ProjectPannel = ({ handleBack }) => {
       <GlobalSpinner isOpen={isImportProejctDataLoading} />
       <div className="project-pannel-base-div">
         <div>
-          {currentUserRole === 'planA_Admin' && (
+          {currentUserRole === 'planA_Admin' ? (
             <button
               className="import-project-data-add-button"
               onClick={handleOpen}
@@ -60,7 +60,7 @@ const ProjectPannel = ({ handleBack }) => {
               <AddIcon />
               {t('importData')}{' '}
             </button>
-          )}
+          ): ""}
         </div>
 
         <div className="project-bread-crumbs">
