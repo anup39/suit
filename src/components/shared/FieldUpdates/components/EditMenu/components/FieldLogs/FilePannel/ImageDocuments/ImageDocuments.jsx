@@ -164,7 +164,7 @@ const ImageDocuments = () => {
     </Modal>
     
     <div className="list row">
-        <div className="col-md-12 list">
+        <div className="col-md-12 list table-theme" >
           <table
             className="table table-striped"
             {...getTableProps({ style: { textAlign: 'center', verticalAlign: 'middle' } })}
@@ -189,7 +189,7 @@ const ImageDocuments = () => {
               {rows.map((row) => {
                 prepareRow(row);
                 return (
-                  <tr {...row.getRowProps({ style: { height: 60 } })}>
+                  <tr {...row.getRowProps()}>
                     {row.cells.map((cell) => {
                       return (
                         <td {...cell.getCellProps({

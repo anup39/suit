@@ -144,3 +144,43 @@
   justify-content: center;
   align-items: center;
 }
+
+
+.table-theme{
+  display: block;
+    width: 100%;
+    height: calc(100vh - 180px);
+
+    overflow-x: auto;
+    thead{
+      position: sticky;
+    top: 0;
+    background: #f8f9fc;
+    th{
+      padding: 10px;
+      font-weight: 600;
+      vertical-align: middle;
+      text-align: left;
+      background: #f8f9fc;
+      color: #8094ae;
+      font-size: 14px;
+    }
+    }
+    tbody{
+      border-top:none !important;
+      border-bottom: 1px solid #ddd !important;
+      height: 100%;
+
+      tr{
+        border-top: 1px solid #ddd;
+td{
+  padding: 10px;
+    word-break: break-all;
+    font-size: 14px;
+    vertical-align: middle;
+    color: #364a63 !important;
+    text-align: left;
+}
+      }
+    }
+}
