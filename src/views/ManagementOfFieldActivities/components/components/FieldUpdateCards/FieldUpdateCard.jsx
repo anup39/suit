@@ -24,7 +24,10 @@ import WebexFiles from '../../../../../components/shared/Webex-components/webex-
 import WebexMessages from '../../../../../components/shared/Webex-components/webex-message/WebexMessages';
 import ProjectStatus from '../../../../../constants/ProjectStatus';
 import { getAllActivities } from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
-import { getCurrentUserRole, getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
+import {
+  getCurrentUserRole,
+  getUserAuthToken,
+} from '../../../../../redux/user-redux/user.selectors';
 import {
   changeTaskStatus,
   deleteTaskByID,
@@ -207,31 +210,35 @@ const FieldUpdateCard = ({ activityData }) => {
               ))}
             </select>
           </span>
-          {(currentUserRole === 'planA_admin' || currentUserRole === 'planA_Engg')  ?
-          (<span className="field-updates-body-controlActivity">
-            <AutorenewOutlinedIcon
-              className="control-activity-icons"
-              onClick={handleRefreshData}
-            />
-            <UploadFileOutlinedIcon
-              className="control-activity-icons"
-              onClick={handleWebexFileModalOpen}
-            />
-            <CommentIcon
-              className="control-activity-icons"
-              onClick={handleWebexMessageOpen}
-            />
-            <img
-              alt="Webex Icon"
-              className="webex-icon"
-              onClick={handleWebEx}
-              src={WebExIcon}
-            />
-            <AddIcon
-              className="control-activity-icons"
-              onClick={handleDrawerOpen}
-            />
-          </span>) : "" }
+          {currentUserRole === 'planA_admin' ||
+          currentUserRole === 'planA_Engg' ? (
+            <span className="field-updates-body-controlActivity">
+              <AutorenewOutlinedIcon
+                className="control-activity-icons"
+                onClick={handleRefreshData}
+              />
+              <UploadFileOutlinedIcon
+                className="control-activity-icons"
+                onClick={handleWebexFileModalOpen}
+              />
+              <CommentIcon
+                className="control-activity-icons"
+                onClick={handleWebexMessageOpen}
+              />
+              <img
+                alt="Webex Icon"
+                className="webex-icon"
+                onClick={handleWebEx}
+                src={WebExIcon}
+              />
+              <AddIcon
+                className="control-activity-icons"
+                onClick={handleDrawerOpen}
+              />
+            </span>
+          ) : (
+            ''
+          )}
           <span className="field-updates-body-actions">
             <MoreHorizRoundedIcon
               className="filed-update-menu-icon"

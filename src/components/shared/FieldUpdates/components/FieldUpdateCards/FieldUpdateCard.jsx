@@ -18,7 +18,10 @@ import { useNavigate } from 'react-router-dom';
 import WebExIcon from '../../../../../assets/webex-icon.png';
 import ProjectStatus from '../../../../../constants/ProjectStatus';
 import { getProjectData } from '../../../../../redux/project-management-redux/project.selector';
-import { getCurrentUserRole, getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
+import {
+  getCurrentUserRole,
+  getUserAuthToken,
+} from '../../../../../redux/user-redux/user.selectors';
 import {
   changeTaskStatus,
   deleteTaskByID,
@@ -37,7 +40,6 @@ const FieldUpdateCard = ({ activityData }) => {
   const [deleteModal, setDeleteModal] = React.useState(false);
   const [taskStatus, setTaskStatus] = React.useState(activityData.taskStatus);
   const currentUserRole = useSelector(getCurrentUserRole);
-
 
   const [isWebexMessageModalOpen, setIsWebexMessageModalOpen] =
     React.useState(false);
@@ -69,7 +71,6 @@ const FieldUpdateCard = ({ activityData }) => {
     setEditMenu(false);
   };
 
-  
   const handleTaskChange = (e) => {
     setTaskStatus(e.target.value);
 
@@ -180,7 +181,7 @@ const FieldUpdateCard = ({ activityData }) => {
             {activityData.isMilestone === 0 ? 'Milestone' : '-'}
           </span>
           <span className="field-updates-body-status">
-          <select
+            <select
               className="field-update-status-select"
               onChange={(e) => handleTaskChange(e)}
               value={taskStatus}
@@ -191,31 +192,33 @@ const FieldUpdateCard = ({ activityData }) => {
               ))}
             </select>
           </span>
-          {(currentUserRole === 'planA_admin' || currentUserRole === 'planA_Engg')  ?
-          (<span className="field-updates-body-controlActivity">
-            <AutorenewOutlinedIcon
-              className="control-activity-icons"
-              onClick={handleRefreshData}
-            />
-            <UploadFileOutlinedIcon
-              className="control-activity-icons"
-              onClick={handleWebexFileModalOpen}
-            />
-            <CommentIcon
-              className="control-activity-icons"
-              onClick={handleWebexMessageOpen}
-            />
-            <img
-              alt="Webex Icon"
-              className="webex-icon"
-              onClick={handleWebEx}
-              src={WebExIcon}
-            />
-            <AddIcon
-              className="control-activity-icons"
-              onClick={handleDrawerOpen}
-            />
-          </span>):null}
+          {currentUserRole === 'planA_admin' ||
+          currentUserRole === 'planA_Engg' ? (
+            <span className="field-updates-body-controlActivity">
+              <AutorenewOutlinedIcon
+                className="control-activity-icons"
+                onClick={handleRefreshData}
+              />
+              <UploadFileOutlinedIcon
+                className="control-activity-icons"
+                onClick={handleWebexFileModalOpen}
+              />
+              <CommentIcon
+                className="control-activity-icons"
+                onClick={handleWebexMessageOpen}
+              />
+              <img
+                alt="Webex Icon"
+                className="webex-icon"
+                onClick={handleWebEx}
+                src={WebExIcon}
+              />
+              <AddIcon
+                className="control-activity-icons"
+                onClick={handleDrawerOpen}
+              />
+            </span>
+          ) : null}
           <span className="field-updates-body-actions">
             <MoreHorizRoundedIcon
               className="filed-update-menu-icon"

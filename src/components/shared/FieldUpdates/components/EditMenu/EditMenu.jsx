@@ -12,11 +12,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import WebExIcon from '../../../../../assets/webex-icon.png';
+import ProjectStatus from '../../../../../constants/ProjectStatus';
 import { getAllfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.action';
 import { getProjectData } from '../../../../../redux/project-management-redux/project.selector';
 // import { getfieldlogs } from '../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
 import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors';
-import { taskByProject } from '../../../../../redux/worklist-management-redux/worklist.actions';
+import {
+  changeTaskStatus,
+  taskByProject,
+} from '../../../../../redux/worklist-management-redux/worklist.actions';
 import ControlActivityDrawer from '../../../ControlActivityDrawer/ControlActivityDrawer';
 import WebexFiles from '../../../Webex-components/webex-files/WebexFiles';
 import WebexMessages from '../../../Webex-components/webex-message/WebexMessages';
@@ -28,6 +32,7 @@ import Milestone from './components/Milestone/Milestone';
 const EditMenu = ({ activityData, handleCancel }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [taskStatus, setTaskStatus] = React.useState(activityData.taskStatus);
 
   const [open, setOpen] = React.useState(false);
   const [option, setOption] = React.useState(0);
@@ -73,6 +78,20 @@ const EditMenu = ({ activityData, handleCancel }) => {
 
   const handleWebEx = () => {
     navigate('/asuiteweb/pannel/webex');
+  };
+
+  const handleTaskChange = (e) => {
+    setTaskStatus(e.target.value);
+
+    const dataToSend = {
+      authToken,
+      data: {
+        taskIdValue: activityData.taskId,
+        taskStatus,
+      },
+    };
+
+    dispatch(changeTaskStatus(dataToSend));
   };
 
   useEffect(() => {
@@ -160,10 +179,15 @@ const EditMenu = ({ activityData, handleCancel }) => {
         </span> */}
         <span>
           <p>{t('status')}</p>
-          <select className="change-status-div">
-            <option>{t('completed')}</option>
-            <option>{t('suspended')}</option>
-            <option>{t('notStarted')}</option>
+          <select
+            className="change-status-div"
+            onChange={(e) => handleTaskChange(e)}
+            value={taskStatus}
+          >
+            <option> {taskStatus} </option>
+            {ProjectStatus[activityData.taskStatus].map((val) => (
+              <option key={val}>{val}</option>
+            ))}
           </select>
         </span>
         <span>

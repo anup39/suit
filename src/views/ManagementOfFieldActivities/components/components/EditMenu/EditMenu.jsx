@@ -15,6 +15,7 @@ import WebExIcon from '../../../../../assets/webex-icon.png';
 import ControlActivityDrawer from '../../../../../components/shared/ControlActivityDrawer/ControlActivityDrawer';
 import WebexFiles from '../../../../../components/shared/Webex-components/webex-files/WebexFiles';
 import WebexMessages from '../../../../../components/shared/Webex-components/webex-message/WebexMessages';
+import ProjectStatus from '../../../../../constants/ProjectStatus';
 import {
   getAllActivities,
   getAllfieldlogs,
@@ -172,23 +173,16 @@ const EditMenu = ({ taskId, handleCancel, roomId, currentTaskStatus }) => {
         </span> */}
         <span>
           <p>{t('status')}</p>
+
           <select
             className="change-status-div"
-            onChange={handleTaskChange}
+            onChange={(e) => handleTaskChange(e)}
             value={taskStatus}
           >
-            <option value="Not assigned">{t('notassigned')}</option>
-            <option value="Not started">{t('notStarted')}</option>
-            <option value="In progress/started">
-              {t('inprogressstarted')}
-            </option>
-            <option value="Waiting for feedback">
-              {t('waitingforfeedback')}
-            </option>
-            <option value="Approved">{t('approved')}</option>
-            <option value="Canceled">{t('canceled')}</option>
-            <option value="Completed">{t('completed')}</option>
-            <option value="Suspended">{t('suspended')}</option>
+            <option> {taskStatus} </option>
+            {ProjectStatus[taskStatus].map((val) => (
+              <option key={val}>{val}</option>
+            ))}
           </select>
         </span>
         <span>

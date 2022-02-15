@@ -1,13 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 // import FooterNegentis from '../../components/shared/Footer-negentis/footer.component';
 import AdminHeaderComponent from '../../components/shared/Headers/AdminHeader/admin-header';
 import { getCurrentUserRole } from '../../redux/user-redux/user.selectors';
 import MenuOptions from './menu-ooptions';
-import { LinkWrapper } from './styles/user-roles.styles';
 import classes from './styles/user-roles.styles.module.scss';
 
 const Pannel = () => {
@@ -15,9 +14,7 @@ const Pannel = () => {
   // const navigate = useNavigate();
   const currentUserRole = useSelector(getCurrentUserRole);
 
-  // React.useEffect(() => {
-  //   navigate('/asuiteweb/pannel/user-roles');
-  // }, []);
+  const location = useLocation();
 
   return (
     <div className={classes.roles_container}>
@@ -26,7 +23,16 @@ const Pannel = () => {
         <ul className={classes.menu_options_container}>
           {MenuOptions[currentUserRole].map((item) => (
             <li key={item.name} className={classes.menu_option}>
-              <LinkWrapper to={item.path}>{t(item.name)}</LinkWrapper>
+              <NavLink
+                className={
+                  location.pathname !== item.path
+                    ? classes.nav_itmes
+                    : classes.nav_active
+                }
+                to={item.path}
+              >
+                {t(item.name)}
+              </NavLink>
             </li>
           ))}
         </ul>

@@ -62,6 +62,15 @@ const companyReducer = (state = COMPANY_INITIAL_STATE, action) => {
         createData: null,
       };
 
+    case COMPANY_ACTION_TYPES.RESET_CREACT_COMPANY:
+      return {
+        ...state,
+        isLoading: false,
+        createStatus: null,
+        error: null,
+        createData: null,
+      };
+
     case COMPANY_ACTION_TYPES.GET_ALL_COMPANY:
       return {
         ...state,

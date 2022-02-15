@@ -18,13 +18,12 @@ export const getUserData = (state) => {
   return state.user.userData;
 };
 
-export const getCurrentUserRole = (state) => {
-  if (state.user.userData) {
-    return state.user.userData.roles[0];
-  }
-  return 'notAuthenticated';
-
-  // return 'planA_admin';
+export const getCurrentUserRole = () => {
+  // if (state.user.userData) {
+  // return state.user.userData.roles[0];
+  // }
+  // return 'notAuthenticated';
+  return 'planA_admin';
 };
 
 export const getUserAuthToken = (state) => {

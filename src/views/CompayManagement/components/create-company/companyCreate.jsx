@@ -15,6 +15,7 @@ import GlobalSpinner from '../../../../components/shared/Spinners/GlobalSpinner'
 import {
   createCompany,
   getAllCompany,
+  // resetCreateCompany,
   updateCompany,
 } from '../../../../redux/company-redux/company.actions';
 import {
@@ -25,7 +26,6 @@ import {
 import { getUserAuthToken } from '../../../../redux/user-redux/user.selectors';
 import classes from './company.module.scss';
 import schema from './schema';
-
 // eslint-disable-next-line react/display-name
 const CreateCompany = ({ isOpen, isClose, isEdit, prevData }) => {
   const dispatch = useDispatch();
@@ -87,8 +87,7 @@ const CreateCompany = ({ isOpen, isClose, isEdit, prevData }) => {
     <Drawer anchor="right" onClose={closeDrawer} open={isOpen}>
       <GlobalSpinner isOpen={isLoading} />
       {errorValue ? toast.error(errorValue.message) : undefined}
-      {successValue ? 
-        toast.success(successValue.message) : undefined}
+      {successValue ? toast.success(successValue.message) : undefined}
       <Box
         className="add-feedback"
         role="presentation"

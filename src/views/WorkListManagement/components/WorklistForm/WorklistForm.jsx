@@ -280,40 +280,81 @@ const WorklistForm = ({ isEdit = false, handelClose, workId }) => {
           </span>
         </div>
 
-        <div className="worklist-management-gird">
-          <div>
-            <label>
-              {t('startDate')} <sup>*</sup>{' '}
-            </label>
-            <input
-              name="start"
-              type="date"
-              {...register('start')}
-              min={new Date().toISOString().split('T')[0]}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
-            <span className="worklistform-error-text">
-              {errors.start?.message}
-            </span>
-          </div>
+        {isEdit ? (
+          <div className="worklist-management-gird">
+            <div>
+              <label>
+                {t('startDate')} <sup>*</sup>{' '}
+              </label>
+              <input
+                name="start"
+                type="date"
+                {...register('start')}
+                // min={new Date().toISOString().split('T')[0]}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+              <span className="worklistform-error-text">
+                {errors.start?.message}
+              </span>
+            </div>
 
-          <div>
-            <label>
-              {t('endDate')} <sup>*</sup>{' '}
-            </label>
-            <input
-              name="end"
-              type="date"
-              {...register('end')}
-              min={
-                !startDate ? new Date().toISOString().split('T')[0] : startDate
-              }
-            />
-            <span className="worklistform-error-text">
-              {errors.end?.message}
-            </span>
+            <div>
+              <label>
+                {t('endDate')} <sup>*</sup>{' '}
+              </label>
+              <input
+                name="end"
+                type="date"
+                {...register('end')}
+                // min={
+                //   !startDate
+                //     ? new Date().toISOString().split('T')[0]
+                //     : startDate
+                // }
+              />
+              <span className="worklistform-error-text">
+                {errors.end?.message}
+              </span>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="worklist-management-gird">
+            <div>
+              <label>
+                {t('startDate')} <sup>*</sup>{' '}
+              </label>
+              <input
+                name="start"
+                type="date"
+                {...register('start')}
+                min={new Date().toISOString().split('T')[0]}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+              <span className="worklistform-error-text">
+                {errors.start?.message}
+              </span>
+            </div>
+
+            <div>
+              <label>
+                {t('endDate')} <sup>*</sup>{' '}
+              </label>
+              <input
+                name="end"
+                type="date"
+                {...register('end')}
+                min={
+                  !startDate
+                    ? new Date().toISOString().split('T')[0]
+                    : startDate
+                }
+              />
+              <span className="worklistform-error-text">
+                {errors.end?.message}
+              </span>
+            </div>
+          </div>
+        )}
 
         <div>
           <label>{t('street')}</label>

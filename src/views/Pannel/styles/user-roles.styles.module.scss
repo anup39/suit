@@ -74,3 +74,25 @@ $prime-font: 'Roboto';
     color: $primeColor;
   }
 }
+
+.nav_itmes {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  padding: 15px 25px;
+  font-family: 'Roboto';
+  box-sizing: border-box;
+}
+
+.nav_active {
+  background-color: $text-color;
+  color: $primeColor;
+
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  padding: 15px 25px;
+  font-family: 'Roboto';
+  box-sizing: border-box;
+}

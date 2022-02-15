@@ -161,58 +161,64 @@ const ActivityReport = () => {
         <div className="field-log-content-div">
           <Box sx={{ pt: 2 }}>
             <div className="list row">
-              <div className="col-md-12 list table-theme" >
-                <table
-                  className="table table-striped"
-                  {...getTableProps({
-                    style: { textAlign: 'center', verticalAlign: 'middle' },
-                  })}
-                >
-                  <thead>
-                    {headerGroups.map((headerGroup) => (
-                      <tr {...headerGroup.getHeaderGroupProps()}>
-                        {headerGroup.headers.map((column) => (
-                          <th
-                            {...column.getHeaderProps({
-                              style: {
-                                minWidth: column.minWidth,
-                                width: column.width,
-                              },
-                            })}
-                          >
-                            {column.render('Header')}
-                          </th>
-                        ))}
-                      </tr>
-                    ))}
-                  </thead>
-                  <tbody
-                    {...getTableBodyProps()}
-                    className="activity-report-table-body"
-                  >
-                    {rows.map((row) => {
-                      prepareRow(row);
-                      return (
-                        <tr {...row.getRowProps()}>
-                          {row.cells.map((cell) => {
-                            return (
-                              <td
-                                {...cell.getCellProps({
-                                  style: {
-                                    minWidth: cell.column.minWidth,
-                                    width: cell.column.width,
-                                  },
-                                })}
-                              >
-                                {cell.render('Cell')}
-                              </td>
-                            );
-                          })}
-                        </tr>
-                      );
+              <div className="col-md-12 list table-theme">
+                {activityReportData && activityReportData.lenght > 0 ? (
+                  <table
+                    className="table table-striped"
+                    {...getTableProps({
+                      style: { textAlign: 'center', verticalAlign: 'middle' },
                     })}
-                  </tbody>
-                </table>
+                  >
+                    <thead>
+                      {headerGroups.map((headerGroup) => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                          {headerGroup.headers.map((column) => (
+                            <th
+                              {...column.getHeaderProps({
+                                style: {
+                                  minWidth: column.minWidth,
+                                  width: column.width,
+                                },
+                              })}
+                            >
+                              {column.render('Header')}
+                            </th>
+                          ))}
+                        </tr>
+                      ))}
+                    </thead>
+                    <tbody
+                      {...getTableBodyProps()}
+                      className="activity-report-table-body"
+                    >
+                      {rows.map((row) => {
+                        prepareRow(row);
+                        return (
+                          <tr {...row.getRowProps()}>
+                            {row.cells.map((cell) => {
+                              return (
+                                <td
+                                  {...cell.getCellProps({
+                                    style: {
+                                      minWidth: cell.column.minWidth,
+                                      width: cell.column.width,
+                                    },
+                                  })}
+                                >
+                                  {cell.render('Cell')}
+                                </td>
+                              );
+                            })}
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                ) : (
+                  <div className="field-logs-no-data-found">
+                    <p>No Data Found!</p>
+                  </div>
+                )}
               </div>
             </div>
           </Box>

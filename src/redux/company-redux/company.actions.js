@@ -15,6 +15,11 @@ export const failCreateCompany = (error) => ({
   payload: error,
 });
 
+export const resetCreateCompany = () => ({
+  type: COMPANY_ACTION_TYPES.RESET_CREACT_COMPANY,
+  payload: '',
+});
+
 export const getAllCompany = (data) => ({
   type: COMPANY_ACTION_TYPES.GET_ALL_COMPANY,
   payload: data,
