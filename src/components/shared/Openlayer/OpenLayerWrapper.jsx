@@ -38,12 +38,15 @@ function MapWrapper(props) {
   const [map, setMap] = useState();
   const [featuresLayer, setFeaturesLayer] = useState();
   const [vectorLayer, setVectorLayer] = useState(null);
+  const [vectorLayerGeo, setvectorLayerGeo] = useState(null);
+
   const [selectedCoord, setSelectedCoord] = useState();
 
   const washingtonLonLat = [-77.036667, 38.895];
   const washingtonWebMercator = fromLonLat(washingtonLonLat);
   // const taskDetailsByProject = useSelector(getTasksByProject);
   const selectedTaskId = useSelector(getSelectedTaskId);
+  const esc = encodeURIComponent;
 
   const projectList = useSelector(getAllProjects);
 
@@ -162,6 +165,7 @@ function MapWrapper(props) {
             },
           })),
         };
+        console.log(finalGeojson)
         const projectTasks = new VectorLayer({
           source: new VectorSource({
             features: new GeoJSON().readFeatures(finalGeojson, {
@@ -184,6 +188,7 @@ function MapWrapper(props) {
           // style: style,
         });
         setVectorLayer(projectTasks);
+        console.log(projectTasks)
         map.addLayer(projectTasks);
       }
     }
@@ -202,28 +207,29 @@ function MapWrapper(props) {
   }, [vectorLayer]);
 
   useEffect(() => {
+    return () => {
+      if (map && vectorLayerGeo) {
+        map.removeLayer(vectorLayerGeo);
+      }
+    };
+  }, [vectorLayerGeo]);
+
+  useEffect(() => {
     if (map) {
       if (props.projectLayersList) {
         props.projectLayersList.forEach((layer, i) => {
           if (layer.name == props.selectedDropdownTaskId) {
-            const tileLayer = new TileLayer({
-              source: new TileWMS({
-                // crossOrigin: 'anonymous',
-                // url:`http://192.168.100.242:8080/geoserver/`,
-                url: `${process.env.REACT_APP_GEOSERVER_HOSTNAME}${filteredProjectBySelectedId}/wms`,
-                params: {
-                  FORMAT: 'image/png',
-                  VERSION: '1.1.1',
-                  tiled: true,
-                  STYLES: '',
-                  LAYERS: `${filteredProjectBySelectedId}:${layer.name}`,
-                },
-              }),
-            });
-            tileLayer.setZIndex(5 - i);
-            props.setWmsLayers((prevState) => [...prevState, tileLayer]);
-            map.addLayer(tileLayer);
 
+          const url = `${process.env.REACT_APP_GEOSERVER_HOSTNAME}${filteredProjectBySelectedId}/ows?`;
+
+          const params={
+                  service:'WFS',
+                  outputFormat: 'application/json',
+                  version: '1.1.1',
+                  request:'GetFeature',
+                  typeName: `${filteredProjectBySelectedId}:${layer.name}`,
+                }
+            const query = Object.keys(params).map(k => `${esc(k)}=${esc(params[k])}`).join('&')
             const username = 'admin';
             const password = 'geoserver';
             let headers = new Headers();
@@ -231,6 +237,39 @@ function MapWrapper(props) {
               'Authorization',
               'Basic ' + base64.encode(username + ':' + password)
             );
+            fetch(url+query, { method: 'GET', headers: headers })
+            .then(function (response) {
+              return response.json();
+            }).then(function (json) {
+              console.log(json);
+              const tileLayer = new VectorLayer({
+                source: new VectorSource({
+                  features: new GeoJSON().readFeatures(json, {
+                    featureProjection: get('EPSG:3857'),
+                  }),
+                }),
+                style: new Style({
+            image: new Circle({
+              radius: 5 * 2,
+              fill: new Fill({
+                color: 'yellow',
+              }),
+              stroke: new Stroke({
+                color: 'black',
+                width: 5 / 2,
+              }),
+            }),
+            zIndex: Infinity,
+          }),
+              });
+              
+              setvectorLayerGeo(tileLayer);
+              console.log(tileLayer);
+              map.addLayer(tileLayer);
+            })
+
+
+        
 
             fetch(layer.href, { method: 'GET', headers: headers })
               .then(function (response) {
@@ -267,10 +306,10 @@ function MapWrapper(props) {
       }
     }
     return () => {
-      props.wmsLayers.forEach((layer) => {
-        map.removeLayer(layer);
-      });
-    };
+        if (map && vectorLayerGeo) {
+          map.removeLayer(vectorLayerGeo);
+        }
+      };
   }, [map, props.projectLayersList, props.selectedDropdownTaskId]);
 
   useEffect(() => {

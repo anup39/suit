@@ -40,6 +40,8 @@ const MapView = ({ page }) => {
   const taskDetailsByProject = useSelector(getTasksByProject);
   const selectedTaskId = useSelector(getSelectedTaskId);
   const selectedProjectData = useSelector(getProjectData);
+  const [ecmpassword, setecmpassword] = React.useState(null);
+  const [username, setusername] = React.useState(null);
 
   // eslint-disable-next-line react-redux/useSelector-prefer-selectors
   const selectedProjectLayersList = useSelector(
@@ -59,6 +61,23 @@ const MapView = ({ page }) => {
   // }, [taskDetailsByProject]);
 
   React.useEffect(() => {
+    let userData = localStorage.getItem('persist:root');
+
+    if (userData) {
+      userData = JSON.parse(JSON.parse(userData)?.user);
+    }
+    if(userData?.userData?.ecmpassword && userData?.userData?.username)
+    {
+      setecmpassword(userData?.userData?.ecmpassword);
+      setusername(userData?.userData?.username);
+
+    }else
+    {
+      setecmpassword("Asuite");
+      setusername("Administrator");
+
+    }
+
     dispatch(getProjectList(authToken));
   }, []);
 
@@ -160,7 +179,7 @@ const MapView = ({ page }) => {
   };
   // eslint-disable-next-line no-console
   console.log(
-    `${process.env.REACT_APP_ECM_HOSTNAME}VistaEcmWeb.aspx?LogonType=3&UserName=Administrator&Password=Asuite&AppName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~TASK_NAME=${filteredTaskByTaskId?.taskName}^~PROJ_NAME=${filteredTaskByTaskId?.projectsName}`,
+    `${process.env.REACT_APP_ECM_HOSTNAME}VistaEcmWeb.aspx?LogonType=3&UserName=${username}&Password=${ecmpassword}&AppName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~TASK_NAME=${filteredTaskByTaskId?.taskName}^~PROJ_NAME=${filteredTaskByTaskId?.projectsName}`,
     'url'
   );
   return (
@@ -206,6 +225,14 @@ const MapView = ({ page }) => {
             </>
           )}
           {selectedProjectLayersList && (
+            <>
+            <label
+                className={classes.form_label}
+                htmlFor="name"
+                style={{ color: 'black' }}
+               >
+                 Layer Name
+               </label>
             <select
               className={classes.form_input}
               onChange={(e) => setTaskId(e.target.value)}
@@ -218,6 +245,7 @@ const MapView = ({ page }) => {
                 </option>
               ))}
             </select>
+            </>
           )}
           {/* {page === 'webgisservices' && taskDetailsByProject && taskDetailsByProject.length>0 (
             <select
@@ -245,7 +273,7 @@ const MapView = ({ page }) => {
           <iframe
             key={filteredTaskByTaskId?.taskName}
             height="100%"
-            src={`${process.env.REACT_APP_ECM_HOSTNAME}VistaEcmWeb.aspx?LogonType=3&UserName=Administrator&Password=Asuite&AppName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~TASK_NAME#[${filteredTaskByTaskId?.taskName}]^~PROJ_NAME=[${filteredTaskByTaskId?.projectsName}]`}
+            src={`${process.env.REACT_APP_ECM_HOSTNAME}VistaEcmWeb.aspx?LogonType=3&UserName=${username}&Password=${ecmpassword}&AppName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~TASK_NAME%23%5B${encodeURIComponent(filteredTaskByTaskId?.taskName)}%5D^~PROJ_NAME%23%5B${encodeURIComponent(filteredTaskByTaskId?.projectsName)}%5D`}
             title="Pdf Title"
             width="100%"
           />
