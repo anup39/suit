@@ -4,14 +4,16 @@
   background: #f8f9fc;
   width: 100%;
   border: none;
-  height: 180px;
+  height: 150px;
   z-index: 2;
   padding: 15px 30px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(5, 1fr);
+  // display: flex;
+  // align-items: flex-end;
+  // justify-content: space-between;
+  gap: 4px;
   border-bottom: 1px solid #d4deea;
-  overflow: scroll;
 
   .field-updates-body-controlActivity {
     display: flex;
@@ -26,22 +28,47 @@
   }
 }
 
-.edit-div {
+.edit-div-button {
   margin-top: 5px;
-  background-color: #fff;
-  height: 32px;
-  color: #364a63;
-  font-size: 14px;
+  background-color: #0160e0;
+  height: 40px;
   display: flex;
   align-items: center;
-  border-radius: 3px;
-  padding: 5px 10px;
-  border: 1px solid #d4deea;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 4px;
+  border: 1px solid rgb(163, 163, 163);
   cursor: pointer;
   white-space: wrap;
-  overflow: auto;
+  overflow: hidden;
+  color: #fff;
+  padding: 5px 30px;
 }
 
+.edit-div-task-name {
+  color: black;
+  margin-top: 10px;
+}
+
+.edit-div {
+  margin-top: 5px;
+  background-color: #ffffff;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 4px;
+  border: 1px solid rgb(163, 163, 163);
+  cursor: pointer;
+  white-space: wrap;
+  overflow: hidden;
+  padding: 0px 10px;
+}
+.project-management-decision-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .decision-div {
   display: flex;
   justify-content: flex-end;
@@ -65,7 +92,7 @@
 }
 
 .change-status-div {
-  width: 100%;
+  width: 75%;
   margin-top: 5px;
   height: 32px;
   border-radius: 3px;
@@ -73,4 +100,5 @@
   font-size: 14px;
   background-color: #fff;
   border: 1px solid #d4deea;
+  margin-left: 4px;
 }

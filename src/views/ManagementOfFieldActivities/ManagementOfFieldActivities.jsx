@@ -183,7 +183,7 @@ const ManagementOfFieldActivities = () => {
                   <input type="checkbox" />
                 </span> */}
                   <span className="field-updates-header-taskItem">
-                    {t('taskItem')}
+                    {t('taskName')}
                   </span>
 
                   <span className="field-updates-header-milestoneApproval">

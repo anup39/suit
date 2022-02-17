@@ -147,26 +147,39 @@ const EditMenu = ({ activityData, handleCancel }) => {
         />
       </Modal>
 
-      <div className="edit-menu-base">
-        <span>
-          <p>{t('taskItem')}</p>
-          <div className="edit-div">{activityData.taskName}</div>
+      <div className="project-management-edit-menu-base">
+        <span className="project-management-task-name">
+          <span>
+            {t('taskName')} : {activityData?.taskName}
+          </span>
         </span>
         <span>
-          <p>{t('fieldLogs')}</p>
-          <div className="edit-div " id={0} onClick={handleOpen}>
-            Notes/Image
+          {/* <p>{t('fieldLogs')}</p> */}
+          <div
+            className="project-management-edit-div-button "
+            id={0}
+            onClick={handleOpen}
+          >
+            Field Logs
           </div>
         </span>
         <span>
-          <p>{t('activityreport')}</p>
-          <div className="edit-div" id={1} onClick={handleOpen}>
+          {/* <p>{t('activityreport')}</p> */}
+          <div
+            className="project-management-edit-div-button"
+            id={1}
+            onClick={handleOpen}
+          >
             Activity Report
           </div>
         </span>
         <span>
-          <p>{t('changerequest')}</p>
-          <div className="edit-div" id={2} onClick={handleOpen}>
+          {/* <p>{t('changerequest')}</p> */}
+          <div
+            className="project-management-edit-div-button"
+            id={2}
+            onClick={handleOpen}
+          >
             Change Request
           </div>
         </span>
@@ -178,9 +191,9 @@ const EditMenu = ({ activityData, handleCancel }) => {
           </div>
         </span> */}
         <span>
-          <p>{t('status')}</p>
+          <span>{t('status')} :</span>
           <select
-            className="change-status-div"
+            className="project-management-change-status-div"
             onChange={(e) => handleTaskChange(e)}
             value={taskStatus}
           >

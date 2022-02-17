@@ -264,6 +264,7 @@ const FieldUpdateCard = ({ activityData }) => {
           handleCancel={handleCancel}
           roomId={activityData?.roomId}
           taskId={activityData?.taskId}
+          taskName={activityData?.taskName}
         />
       )}
     </>

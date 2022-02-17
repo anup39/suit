@@ -12,12 +12,14 @@ import { useSelector } from 'react-redux';
 import { useTable } from 'react-table';
 
 import { getfieldlogs } from '../../../../../../../redux/Management-of-field-activities/management-field-activities.selectors';
+import { getCurrentUserRole } from '../../../../../../../redux/user-redux/user.selectors';
 import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
 import VerifierMessage from '../verifier-message/VerifierMessage';
 
 const ActivityReport = () => {
   const { t } = useTranslation();
   const fieldLogData = useSelector(getfieldlogs);
+  const currentUserRole = useSelector(getCurrentUserRole);
   const activityReportData = fieldLogData?.activityTask;
 
   const [taskId, settaskId] = React.useState('');
@@ -34,111 +36,194 @@ const ActivityReport = () => {
     setIsMessageModalOpen(true);
   };
 
-  const columns = useMemo(
-    () => [
-      {
-        Header: t('FieldDate'),
-        accessor: 'fieldDate',
-        minWidth: 30,
-        width: 30,
-      },
-      {
-        Header: t('FieldNote'),
-        accessor: 'fieldNote',
-        minWidth: 50,
-        width: 50,
-      },
-      {
-        Header: t('lat'),
-        accessor: 'lat',
-        minWidth: 10,
-        width: 10,
-      },
-      {
-        Header: t('lon'),
-        accessor: 'lon',
-        minWidth: 10,
-        width: 10,
-      },
-      {
-        Header: t('Status'),
-        accessor: 'verifierCheck',
-        Cell: (data) => {
-          return data.value ? data.value : 'Not Verified';
-        },
-        minWidth: 30,
-        width: 30,
-      },
-      {
-        Header: t('FieldOperator'),
-        accessor: 'fieldUser',
-        minWidth: 30,
-        width: 30,
-      },
-      {
-        Header: t('Attachment'),
-        accessor: 'docLink',
-        // eslint-disable-next-line react/no-unstable-nested-components
-        Cell: (data) => {
-          return data.value ? (
-            <a href={data.value} window="_blank">
-              View Doc
-            </a>
-          ) : (
-            ''
-          );
-        },
-        minWidth: 30,
-        width: 30,
-      },
-      {
-        Header: t('VerifiedBy'),
-        accessor: 'verifiedUser',
-        minWidth: 30,
-        width: 30,
-      },
-      {
-        Header: t('Verifier Note'),
-        accessor: 'verifierNote',
-        minWidth: 30,
-        width: 30,
-      },
-      {
-        Header: t('Actions'),
-        accessor: 'actions',
-        minWidth: 60,
-        width: 60,
-        // eslint-disable-next-line react/no-unstable-nested-components
-        Cell: (data) => {
-          const taskid = data.row.original.taskId;
-          const rowidx = data.row.original.fieldlogId;
-          let disable = true;
-          if (
-            data.row.original.verifierCheck &&
-            data.row.original.verifierCheck !== null
-          ) {
-            disable = true;
-          } else {
-            disable = false;
-          }
+  let columns;
 
-          return (
-            <div>
-              {disable ? (
-                <DoneIcon color="secondary" />
-              ) : (
-                <PendingActionsIcon
-                  color="secondary"
-                  onClick={() => handledata(rowidx, taskid)}
-                />
-              )}
-            </div>
-          );
+  if (currentUserRole === 'planA_admin') {
+    columns = useMemo(
+      () => [
+        {
+          Header: t('FieldDate'),
+          accessor: 'fieldDate',
+          minWidth: 30,
+          width: 30,
         },
-      },
-    ],
-    []
-  );
+        {
+          Header: t('FieldNote'),
+          accessor: 'fieldNote',
+          minWidth: 50,
+          width: 50,
+        },
+        {
+          Header: t('lat'),
+          accessor: 'lat',
+          minWidth: 10,
+          width: 10,
+        },
+        {
+          Header: t('lon'),
+          accessor: 'lon',
+          minWidth: 10,
+          width: 10,
+        },
+        {
+          Header: t('Status'),
+          accessor: 'verifierCheck',
+          Cell: (data) => {
+            return data.value ? data.value : 'Not Verified';
+          },
+          minWidth: 30,
+          width: 30,
+        },
+        {
+          Header: t('FieldOperator'),
+          accessor: 'fieldUser',
+          minWidth: 30,
+          width: 30,
+        },
+        {
+          Header: t('Attachment'),
+          accessor: 'docLink',
+          // eslint-disable-next-line react/no-unstable-nested-components
+          Cell: (data) => {
+            return data.value ? (
+              <span
+                className="view-docs-in-ecm"
+                onClick={() => window.open(data.value, '_blank')}
+              >
+                View Doc
+              </span>
+            ) : (
+              ''
+            );
+          },
+          minWidth: 30,
+          width: 30,
+        },
+        {
+          Header: t('VerifiedBy'),
+          accessor: 'verifiedUser',
+          minWidth: 30,
+          width: 30,
+        },
+        {
+          Header: t('Verifier Note'),
+          accessor: 'verifierNote',
+          minWidth: 30,
+          width: 30,
+        },
+        {
+          Header: t('Actions'),
+          accessor: 'actions',
+          minWidth: 60,
+          width: 60,
+          // eslint-disable-next-line react/no-unstable-nested-components
+          Cell: (data) => {
+            const taskid = data.row.original.taskId;
+            const rowidx = data.row.original.fieldlogId;
+            let disable = true;
+            if (
+              data.row.original.verifierCheck &&
+              data.row.original.verifierCheck !== null
+            ) {
+              disable = true;
+            } else {
+              disable = false;
+            }
+
+            return (
+              <div>
+                {disable ? (
+                  <DoneIcon color="secondary" />
+                ) : (
+                  <PendingActionsIcon
+                    color="secondary"
+                    onClick={() => handledata(rowidx, taskid)}
+                  />
+                )}
+              </div>
+            );
+          },
+        },
+      ],
+      []
+    );
+  } else {
+    columns = useMemo(
+      () => [
+        {
+          Header: t('FieldDate'),
+          accessor: 'fieldDate',
+          minWidth: 30,
+          width: 30,
+        },
+        {
+          Header: t('FieldNote'),
+          accessor: 'fieldNote',
+          minWidth: 50,
+          width: 50,
+        },
+        {
+          Header: t('lat'),
+          accessor: 'lat',
+          minWidth: 10,
+          width: 10,
+        },
+        {
+          Header: t('lon'),
+          accessor: 'lon',
+          minWidth: 10,
+          width: 10,
+        },
+        {
+          Header: t('Status'),
+          accessor: 'verifierCheck',
+          Cell: (data) => {
+            return data.value ? data.value : 'Not Verified';
+          },
+          minWidth: 30,
+          width: 30,
+        },
+        {
+          Header: t('FieldOperator'),
+          accessor: 'fieldUser',
+          minWidth: 30,
+          width: 30,
+        },
+        {
+          Header: t('Attachment'),
+          accessor: 'docLink',
+          // eslint-disable-next-line react/no-unstable-nested-components
+          Cell: (data) => {
+            return data.value ? (
+              <span
+                className="view-docs-in-ecm"
+                onClick={() => window.open(data.value, '_blank')}
+              >
+                View Doc
+              </span>
+            ) : (
+              ''
+            );
+          },
+          minWidth: 30,
+          width: 30,
+        },
+        {
+          Header: t('VerifiedBy'),
+          accessor: 'verifiedUser',
+          minWidth: 30,
+          width: 30,
+        },
+        {
+          Header: t('Verifier Note'),
+          accessor: 'verifierNote',
+          minWidth: 30,
+          width: 30,
+        },
+      ],
+      []
+    );
+  }
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({
@@ -156,13 +241,14 @@ const ActivityReport = () => {
         />
       </Modal>
       <div className="activity-report-base">
-        <EditModalHeaders headerName={t('fieldLogs')} />
+        <EditModalHeaders headerName={t('activityreport')} />
 
         <div className="field-log-content-div">
           <Box sx={{ pt: 2 }}>
             <div className="list row">
+              {console.log(activityReportData)}
               <div className="col-md-12 list table-theme">
-                {activityReportData && activityReportData.lenght > 0 ? (
+                {activityReportData && activityReportData.length > 0 ? (
                   <table
                     className="table table-striped"
                     {...getTableProps({

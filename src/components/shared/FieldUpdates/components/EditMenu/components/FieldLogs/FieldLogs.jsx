@@ -10,7 +10,7 @@ import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
 // import FileData from './FileData/FileData';
 import FilePannel from './FilePannel/FilePannel';
 import ImageDocuments from './FilePannel/ImageDocuments/ImageDocuments';
-import OtherDocuments from './FilePannel/OtherDocuments/OtherDocuments';
+// import OtherDocuments from './FilePannel/OtherDocuments/OtherDocuments';
 
 const FieldLogs = () => {
   const [value, setValue] = React.useState(0);
@@ -25,16 +25,16 @@ const FieldLogs = () => {
       <EditModalHeaders headerName={t('fieldLogs')} />
       <div className="field-log-content-div">
         <div>
-            <Tabs onChange={handleChange} value={value}>
-              <Tab label="Image" />
-              <Tab label="Documents" />
-            </Tabs>
+          <Tabs onChange={handleChange} value={value}>
+            <Tab label="Image" />
+            {/* <Tab label="Documents" /> */}
+          </Tabs>
           <FilePannel index={0} value={value}>
             <ImageDocuments />
           </FilePannel>
-          <FilePannel index={1} value={value}>
+          {/* <FilePannel index={1} value={value}>
             <OtherDocuments />
-          </FilePannel>
+          </FilePannel> */}
         </div>
         {/* <button
           className="field-log-close-button"

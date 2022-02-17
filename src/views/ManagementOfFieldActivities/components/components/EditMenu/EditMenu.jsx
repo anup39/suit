@@ -27,7 +27,13 @@ import ChangeRequest from './components/ChangeRequest/ChangeRequest';
 import FieldLogs from './components/FieldLogs/FieldLogs';
 import Milestone from './components/Milestone/Milestone';
 
-const EditMenu = ({ taskId, handleCancel, roomId, currentTaskStatus }) => {
+const EditMenu = ({
+  taskId,
+  handleCancel,
+  roomId,
+  currentTaskStatus,
+  taskName,
+}) => {
   const { t } = useTranslation();
 
   const [open, setOpen] = React.useState(false);
@@ -142,37 +148,29 @@ const EditMenu = ({ taskId, handleCancel, roomId, currentTaskStatus }) => {
       </Modal>
 
       <div className="edit-menu-base">
-        <span>
-          <p>{t('taskItem')}</p>
-          <div className="edit-div">Task 1</div>
+        <span className="edit-div-task-name">
+          <span>
+            {t('taskName')} : {taskName}
+          </span>
         </span>
         <span>
-          <p>{t('fieldLogs')}</p>
-          <div className="edit-div " id={0} onClick={handleOpen}>
-            Notes/Image
+          <div className="edit-div-button " id={0} onClick={handleOpen}>
+            {t('fieldLogs')}
           </div>
         </span>
         <span>
-          <p>{t('activityreport')}</p>
-          <div className="edit-div" id={1} onClick={handleOpen}>
-            Activity Report
+          <div className="edit-div-button" id={1} onClick={handleOpen}>
+            {t('activityreport')}
           </div>
         </span>
         <span>
-          <p>{t('changerequest')}</p>
-          <div className="edit-div" id={2} onClick={handleOpen}>
-            Task Change
+          <div className="edit-div-button" id={2} onClick={handleOpen}>
+            {t('changerequest')}
           </div>
         </span>
 
-        {/* <span index={4} onClick={handleOpen}>
-          <p>{t('milestone')}</p>
-          <div className="edit-div" id={3} onClick={handleOpen}>
-            Milestone 1
-          </div>
-        </span> */}
         <span>
-          <p>{t('status')}</p>
+          <span>{t('status')} :</span>
 
           <select
             className="change-status-div"
@@ -232,6 +230,7 @@ EditMenu.propTypes = {
   taskId: PropTypes.isRequired,
   roomId: PropTypes.isRequired,
   currentTaskStatus: PropTypes.isRequired,
+  taskName: PropTypes.isRequired,
 };
 
 export default EditMenu;

@@ -1,21 +1,28 @@
 @import '../../../../../theme/ThemeColors';
 
-.edit-menu-base {
+.project-management-edit-menu-base {
   background: #f8f9fc;
   width: 100%;
   border: none;
-  height: 180px;
+  height: 160px;
   z-index: 2;
   padding: 15px 30px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
   border-bottom: 1px solid #d4deea;
+  overflow: hidden;
+
+  p {
+    color: #8094ae;
+    margin: 3px;
+    font-size: 14px;
+  }
 }
 
-.edit-div {
+.project-management-edit-div-button {
   margin-top: 5px;
-  background-color: #fff;
+  background-color: #0160e0;
   height: 40px;
   display: flex;
   align-items: center;
@@ -25,21 +32,62 @@
   cursor: pointer;
   white-space: wrap;
   overflow: hidden;
+  color: #fff;
+  padding: 2px 5px;
+  justify-content: center;
 }
 
-.decision-div {
+.project-management-edit-div {
+  margin-top: 5px;
+  background-color: #ffffff;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 4px;
+  border: 1px solid rgb(163, 163, 163);
+  cursor: pointer;
+  white-space: wrap;
+  overflow: hidden;
+  padding: 0px 10px;
+}
+
+.project-management-task-name {
+  margin-top: 5px;
+  cursor: pointer;
+  white-space: wrap;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.project-management-edit-div {
+  margin-top: 5px;
+  background-color: #ffffff;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 4px;
+  border: 1px solid rgb(163, 163, 163);
+  cursor: pointer;
+  white-space: wrap;
+  overflow: hidden;
+  padding: 0px 10px;
+}
+
+.project-management-decision-div {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.cancel-button {
+.project-management-cancel-button {
   margin-right: 20px;
   color: rgb(121, 121, 121);
   cursor: pointer;
 }
 
-.update-button {
+.project-management-update-button {
   margin-left: 10px;
   padding: 10px 30px;
   background: rgb(230, 151, 5);
@@ -49,8 +97,8 @@
   cursor: pointer;
 }
 
-.change-status-div {
-  width: 100%;
+.project-management-change-status-div {
+  width: 70%;
   height: 40px;
   margin-top: 6px;
   background-color: #fff;

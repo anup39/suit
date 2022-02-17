@@ -11,13 +11,12 @@
   @media (max-width: 768px) {
     display: none;
   }
-
 }
 
 .field-update-card-base {
   display: table;
   width: 100%;
-  border-bottom: 1px solid #D4DEEA;
+  border-bottom: 1px solid #d4deea;
 }
 
 .field-update-card-base span {
@@ -27,7 +26,7 @@
   padding: 10px 5px;
   font-size: 14px;
   vertical-align: middle;
-  color: #364A63;
+  color: #364a63;
   margin-left: 10px;
 
   svg {
@@ -84,13 +83,12 @@
 }
 
 .field-update-status-select {
-  color: #364A63;
+  color: #364a63;
 
   background-color: transparent;
   border: none;
   font-size: 14px;
 }
-
 
 .control-activity-icons {
   color: $icon-color;

@@ -11,7 +11,7 @@ import EditModalHeaders from '../EditModalHeaders/EditModalHeaders';
 // import FileData from './FileData/FileData';
 import FilePannel from './FilePannel/FilePannel';
 import ImageDocuments from './FilePannel/ImageDocuments/ImageDocuments';
-import OtherDocuments from './FilePannel/OtherDocuments/OtherDocuments';
+// import OtherDocuments from './FilePannel/OtherDocuments/OtherDocuments';
 
 const FieldLogs = () => {
   const { t } = useTranslation();
@@ -26,20 +26,20 @@ const FieldLogs = () => {
     <div className="field-log-base">
       <EditModalHeaders headerName={t('fieldLogs')} />
       <div className="field-log-content-div">
-      <Box sx={{ pt: 2 }}>
-      <div>
+        <Box sx={{ pt: 2 }}>
+          <div>
             <Tabs onChange={handleChange} value={value}>
               <Tab label="Image" />
-              <Tab label="Documents" />
+              {/* <Tab label="Documents" /> */}
             </Tabs>
-        
-          <FilePannel index={0} value={value}>
-            <ImageDocuments />
-          </FilePannel>
-          <FilePannel index={1} value={value}>
+
+            <FilePannel index={0} value={value}>
+              <ImageDocuments />
+            </FilePannel>
+            {/* <FilePannel index={1} value={value}>
             <OtherDocuments />
-          </FilePannel>
-        </div>
+          </FilePannel> */}
+          </div>
         </Box>
       </div>
     </div>
