@@ -80,7 +80,7 @@ const CompanyUserAdd = ({ isOpen, handleClose, prevData }) => {
       <Box
         className="add-feedback"
         role="presentation"
-        sx={{ width: 400, padding: 3 }}
+        sx={{ width: 500, padding: 3 }}
       >
         {' '}
         <form

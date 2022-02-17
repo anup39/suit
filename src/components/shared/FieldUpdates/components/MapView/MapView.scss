@@ -145,3 +145,10 @@ body > iframe {
   text-align: left;
   margin-left: 44px;
 }
+
+.map-view-feature-details {
+  width: 100%;
+  height: calc(100vh - 300px);
+  display: flex;
+  border: 1px solid #8094ae;
+}

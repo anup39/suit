@@ -17,7 +17,7 @@ table {
   display: flex;
   height: calc(100vh - 340px);
   width: 1000px;
-  overflow: auto;
+  overflow: scroll;
 }
 
 .field-log-data p {

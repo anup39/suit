@@ -26,8 +26,8 @@ import { getUserAuthToken } from '../../../../../redux/user-redux/user.selectors
 import { taskByProject } from '../../../../../redux/worklist-management-redux/worklist.actions';
 import { getTasksByProject } from '../../../../../redux/worklist-management-redux/worklist.selector';
 import classes from '../../../../../views/ProjectManagement/components/ImportProject/components/import-drawer/import-drawer.styles.module.scss';
+import FeatureCollectionTable from '../../../FeatureCollectionTable/FeatureCollectionTable';
 import MapWrapper from '../../../Openlayer/Openlayer';
-
 // eslint-disable-next-line react/prop-types
 const MapView = ({ page }) => {
   const dispatch = useDispatch();
@@ -42,6 +42,7 @@ const MapView = ({ page }) => {
   const selectedProjectData = useSelector(getProjectData);
   const [ecmpassword, setecmpassword] = React.useState(null);
   const [username, setusername] = React.useState(null);
+  const showDetails = false;
 
   // eslint-disable-next-line react-redux/useSelector-prefer-selectors
   const selectedProjectLayersList = useSelector(
@@ -66,16 +67,12 @@ const MapView = ({ page }) => {
     if (userData) {
       userData = JSON.parse(JSON.parse(userData)?.user);
     }
-    if(userData?.userData?.ecmpassword && userData?.userData?.username)
-    {
+    if (userData?.userData?.ecmpassword && userData?.userData?.username) {
       setecmpassword(userData?.userData?.ecmpassword);
       setusername(userData?.userData?.username);
-
-    }else
-    {
-      setecmpassword("Asuite");
-      setusername("Administrator");
-
+    } else {
+      setecmpassword('Asuite');
+      setusername('Administrator');
     }
 
     dispatch(getProjectList(authToken));
@@ -96,6 +93,7 @@ const MapView = ({ page }) => {
       dispatch(taskByProject(data));
     }
   }, [projectList, projectId]);
+
   React.useEffect(() => {
     if (!selectedProjectData && projectList.length > 0) {
       setprojectId(`${projectList?.[0]?.id}`);
@@ -113,6 +111,7 @@ const MapView = ({ page }) => {
   const filteredTaskByTaskId =
     taskDetailsByProject &&
     taskDetailsByProject?.find((task) => task.taskId === selectedTaskId);
+
   const getStatusIcons = (status) => {
     switch (status) {
       case 'Not assigned':
@@ -226,25 +225,25 @@ const MapView = ({ page }) => {
           )}
           {selectedProjectLayersList && (
             <>
-            <label
+              <label
                 className={classes.form_label}
                 htmlFor="name"
                 style={{ color: 'black' }}
-               >
-                 Layer Name
-               </label>
-            <select
-              className={classes.form_input}
-              onChange={(e) => setTaskId(e.target.value)}
-              value={taskId}
-            >
-              <option value=""> Select A Layer</option>
-              {selectedProjectLayersList?.map((vals) => (
-                <option key={vals.name} value={vals.name}>
-                  {vals.name}
-                </option>
-              ))}
-            </select>
+              >
+                Layer Name
+              </label>
+              <select
+                className={classes.form_input}
+                onChange={(e) => setTaskId(e.target.value)}
+                value={taskId}
+              >
+                <option value=""> Select A Layer</option>
+                {selectedProjectLayersList?.map((vals) => (
+                  <option key={vals.name} value={vals.name}>
+                    {vals.name}
+                  </option>
+                ))}
+              </select>
             </>
           )}
           {/* {page === 'webgisservices' && taskDetailsByProject && taskDetailsByProject.length>0 (
@@ -269,72 +268,88 @@ const MapView = ({ page }) => {
             <SearchIcon className="searchIcon" />
           </div>
         </div> */}
-        <div className="map-view-document-preview">
-          <iframe
+        {/* <div className="map-view-document-preview"> */}
+        {/* <iframe
             key={filteredTaskByTaskId?.taskName}
             height="100%"
-            src={`${process.env.REACT_APP_ECM_HOSTNAME}VistaEcmWeb.aspx?LogonType=3&UserName=${username}&Password=${ecmpassword}&AppName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~TASK_NAME%23%5B${encodeURIComponent(filteredTaskByTaskId?.taskName)}%5D^~PROJ_NAME%23%5B${encodeURIComponent(filteredTaskByTaskId?.projectsName)}%5D`}
+            src={`${
+              process.env.REACT_APP_ECM_HOSTNAME
+            }VistaEcmWeb.aspx?LogonType=3&UserName=${username}&Password=${ecmpassword}&AppName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~TASK_NAME%23%5B${encodeURIComponent(
+              filteredTaskByTaskId?.taskName
+            )}%5D^~PROJ_NAME%23%5B${encodeURIComponent(
+              filteredTaskByTaskId?.projectsName
+            )}%5D`}
             title="Pdf Title"
             width="100%"
-          />
-        </div>
-        <div className="map-view-document-details-base">
-          <p style={{ color: 'black' }}>Document Details</p>
-          <div className="map-view-document-details">
-            <span>
-              <h6>Geometry Tyh6e:</h6>
-              <p>Point</p>
-            </span>
-            <span>
-              <h6>Project Name:</h6>
-              <p>{filteredTaskByTaskId?.projectsName}</p>
-            </span>
-            <span>
-              <h6>Project Id:</h6>
-              <p>{filteredTaskByTaskId?.projectsId}</p>
-            </span>
-            <span>
-              <h6>Task Id:</h6>
-              <p>{filteredTaskByTaskId?.taskId}</p>
-            </span>
-            <span>
-              <h6>Type:</h6>
-              <p>{filteredTaskByTaskId?.type}</p>
-            </span>
+          /> */}
+        {/* </div> */}
 
-            <span>
-              <h6>Task Name:</h6>
-              <p>{filteredTaskByTaskId?.taskName}</p>
-            </span>
+        {showDetails ? (
+          <div className="map-view-document-details-base">
+            <p style={{ color: 'black' }}>Document Details</p>
+            <div className="map-view-document-details">
+              <span>
+                <h6>Geometry Tyh6e:</h6>
+                <p>Point</p>
+              </span>
+              <span>
+                <h6>Project Name:</h6>
+                <p>{filteredTaskByTaskId?.projectsName}</p>
+              </span>
+              <span>
+                <h6>Project Id:</h6>
+                <p>{filteredTaskByTaskId?.projectsId}</p>
+              </span>
+              <span>
+                <h6>Task Id:</h6>
+                <p>{filteredTaskByTaskId?.taskId}</p>
+              </span>
+              <span>
+                <h6>Type:</h6>
+                <p>{filteredTaskByTaskId?.type}</p>
+              </span>
 
-            <span>
-              <h6>Task Status:</h6>
-              {page === 'webgisservices' ? (
-                <p>{getStatusIcons(filteredTaskByTaskId?.taskStatus)}</p>
-              ) : (
-                <div className="task-status-icon">
-                  <p>{getStatusIcons('Not assigned')}</p>
-                </div>
-              )}
+              <span>
+                <h6>Task Name:</h6>
+                <p>{filteredTaskByTaskId?.taskName}</p>
+              </span>
 
-              {/* <p>{filteredTaskByTaskId?.taskStatus}</p> */}
-            </span>
+              <span>
+                <h6>Task Status:</h6>
+                {page === 'webgisservices' ? (
+                  <p>{getStatusIcons(filteredTaskByTaskId?.taskStatus)}</p>
+                ) : (
+                  <div className="task-status-icon">
+                    <p>{getStatusIcons('Not assigned')}</p>
+                  </div>
+                )}
 
-            <span>
-              <h6>Task Description:</h6>
-              <p>{filteredTaskByTaskId?.taskDescription}</p>
-            </span>
+                {/* <p>{filteredTaskByTaskId?.taskStatus}</p> */}
+              </span>
 
-            <span>
-              <h6>Start Date:</h6>
-              <p>{filteredTaskByTaskId?.start}</p>
-            </span>
-            <span>
-              <h6>End Date:</h6>
-              <p>{filteredTaskByTaskId?.end}</p>
-            </span>
+              <span>
+                <h6>Task Description:</h6>
+                <p>{filteredTaskByTaskId?.taskDescription}</p>
+              </span>
+
+              <span>
+                <h6>Start Date:</h6>
+                <p>{filteredTaskByTaskId?.start}</p>
+              </span>
+              <span>
+                <h6>End Date:</h6>
+                <p>{filteredTaskByTaskId?.end}</p>
+              </span>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="map-view-document-details-base">
+            <p style={{ color: 'black', fontWeight: 600 }}>Features</p>
+            <div className="map-view-feature-details">
+              <FeatureCollectionTable />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

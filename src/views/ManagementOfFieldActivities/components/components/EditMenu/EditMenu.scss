@@ -11,6 +11,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   border-bottom: 1px solid #d4deea;
+  overflow: scroll;
 
   .field-updates-body-controlActivity {
     display: flex;
@@ -19,7 +20,7 @@
   }
 
   p {
-    color: #8094AE;
+    color: #8094ae;
     margin: 0;
     font-size: 14px;
   }
@@ -29,13 +30,13 @@
   margin-top: 5px;
   background-color: #fff;
   height: 32px;
-  color: #364A63;
+  color: #364a63;
   font-size: 14px;
   display: flex;
   align-items: center;
   border-radius: 3px;
   padding: 5px 10px;
-  border: 1px solid #D4DEEA;
+  border: 1px solid #d4deea;
   cursor: pointer;
   white-space: wrap;
   overflow: auto;
@@ -71,6 +72,5 @@
   padding: 5px 10px;
   font-size: 14px;
   background-color: #fff;
-  border: 1px solid #D4DEEA;
-
+  border: 1px solid #d4deea;
 }

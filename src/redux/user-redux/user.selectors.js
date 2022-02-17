@@ -23,7 +23,7 @@ export const getCurrentUserRole = (state) => {
     return state.user.userData.roles[0];
   }
   return 'notAuthenticated';
-  // return 'planA_admin';
+  // return 'public';
 };
 
 export const getUserAuthToken = (state) => {

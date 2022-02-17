@@ -40,6 +40,14 @@ const MapView = ({ page }) => {
   const selectedTaskId = useSelector(getSelectedTaskId);
   const selectedProjectData = useSelector(getProjectData);
 
+  // const getLayerData = () => {
+
+  //   const urlToGetData = `http://37.159.138.227:8081/geoserver/TestProject/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=TestProject:14&maxFeatures=50&outputFormat=application/json`;
+
+  //     console.log(urlToGetData);
+
+  // }
+
   React.useEffect(() => {
     dispatch(getProjectList(authToken));
   }, []);

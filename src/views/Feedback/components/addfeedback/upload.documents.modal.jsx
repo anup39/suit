@@ -54,8 +54,8 @@ const UploadDocumentsModal = () => {
           <div className="upload-circle">
             <img alt="Download" src={Download} />
           </div>
-          <p className="para">{t('dragandDropFilesHere')}</p>
-          <p>Or</p>
+          {/* <p className="para">{t('dragandDropFilesHere')}</p>
+          <p>Or</p> */}
           <input
             ref={inputField}
             multiple

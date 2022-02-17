@@ -2,7 +2,7 @@
 
 .mgmt-table-body {
   height: calc(100vh - 336px);
-  overflow: auto;
+  overflow: scroll;
 
   @media (max-width: 1024px) {
     height: calc(100vh - 358px);
@@ -17,6 +17,7 @@
   display: table;
   width: 100%;
   border-bottom: 1px solid #d4deea;
+  overflow: scroll;
 }
 
 .mgmt-field-update-card-base span {

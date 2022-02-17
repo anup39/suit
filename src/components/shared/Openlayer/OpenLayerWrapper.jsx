@@ -18,6 +18,9 @@ import { get } from 'ol/proj';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTaskId } from '../../../redux/project-management-redux/project-management.actions';
 import base64 from 'base-64';
+import { addFeatureData } from '../../../redux/open-layer-redux/Open-Layer.actions';
+import Select from 'ol/interaction/Select';
+
 // import Style from 'ol/style/Style';
 // import Fill from 'ol/style/Fill';
 // import Circle from 'ol/geom/Circle';
@@ -31,6 +34,7 @@ import {
   getSelectedTaskId,
   // getTasksByProject,
 } from '../../../redux/project-management-redux/project.selector';
+import { add } from 'ol/coordinate';
 
 function MapWrapper(props) {
   const dispatch = useDispatch();
@@ -79,6 +83,32 @@ function MapWrapper(props) {
 
   // pull refs
   const mapElement = useRef();
+
+  // let select = null; // ref to currently selected interaction
+
+  // const selected = new Style({
+  //   image: new Circle({
+  //     radius: 5 * 2,
+  //     fill: new Fill({
+  //       color: 'green',
+  //     }),
+  //     stroke: new Stroke({
+  //       color: 'black',
+  //       width: 5 / 2,
+  //     }),
+  //   }),
+  //   zIndex: Infinity,
+  // });
+
+  // const selectStyle = (feature) => {
+  //   const color = feature.get('COLOR') || '#eeeeee';
+  //   selected.getFill().setColor(color);
+  //   return selected;
+  // };
+
+  // const selectSingleClick = new Select({ style: selectStyle });
+
+  // map.addInteraction(selectSingleClick);
 
   // create state ref that can be accessed in OpenLayers onclick callback function
   //  https://stackoverflow.com/a/60643670
@@ -165,7 +195,7 @@ function MapWrapper(props) {
             },
           })),
         };
-        console.log(finalGeojson)
+        console.log('FINALJSON', finalGeojson);
         const projectTasks = new VectorLayer({
           source: new VectorSource({
             features: new GeoJSON().readFeatures(finalGeojson, {
@@ -188,7 +218,7 @@ function MapWrapper(props) {
           // style: style,
         });
         setVectorLayer(projectTasks);
-        console.log(projectTasks)
+        console.log('::: PROJECT TASK::: ', projectTasks);
         map.addLayer(projectTasks);
       }
     }
@@ -198,6 +228,7 @@ function MapWrapper(props) {
       }
     };
   }, [props.taskDetailsByProject, props.selectedDropdownTaskId]);
+
   useEffect(() => {
     return () => {
       if (map && vectorLayer) {
@@ -214,22 +245,48 @@ function MapWrapper(props) {
     };
   }, [vectorLayerGeo]);
 
+  const drawPloygon = (geoJSONData) => {
+    const styles = [
+      new Style({
+        stroke: new Stroke({
+          color: 'blue',
+          width: 3,
+        }),
+        fill: new Fill({
+          color: 'rgba(0, 0, 255, 0.1)',
+        }),
+      }),
+    ];
+
+    const source = new VectorSource({
+      features: new GeoJSON().readFeatures(geoJSONData),
+    });
+
+    const polygonVectorLayer = new VectorLayer({
+      source: source,
+      style: styles,
+    });
+
+    map.addLayer(polygonVectorLayer);
+  };
+
   useEffect(() => {
     if (map) {
       if (props.projectLayersList) {
         props.projectLayersList.forEach((layer, i) => {
           if (layer.name == props.selectedDropdownTaskId) {
+            const url = `${process.env.REACT_APP_GEOSERVER_HOSTNAME}${filteredProjectBySelectedId}/ows?`;
 
-          const url = `${process.env.REACT_APP_GEOSERVER_HOSTNAME}${filteredProjectBySelectedId}/ows?`;
-
-          const params={
-                  service:'WFS',
-                  outputFormat: 'application/json',
-                  version: '1.1.1',
-                  request:'GetFeature',
-                  typeName: `${filteredProjectBySelectedId}:${layer.name}`,
-                }
-            const query = Object.keys(params).map(k => `${esc(k)}=${esc(params[k])}`).join('&')
+            const params = {
+              service: 'WFS',
+              outputFormat: 'application/json',
+              version: '1.1.1',
+              request: 'GetFeature',
+              typeName: `${filteredProjectBySelectedId}:${layer.name}`,
+            };
+            const query = Object.keys(params)
+              .map((k) => `${esc(k)}=${esc(params[k])}`)
+              .join('&');
             const username = 'admin';
             const password = 'geoserver';
             let headers = new Headers();
@@ -237,39 +294,39 @@ function MapWrapper(props) {
               'Authorization',
               'Basic ' + base64.encode(username + ':' + password)
             );
-            fetch(url+query, { method: 'GET', headers: headers })
-            .then(function (response) {
-              return response.json();
-            }).then(function (json) {
-              console.log(json);
-              const tileLayer = new VectorLayer({
-                source: new VectorSource({
-                  features: new GeoJSON().readFeatures(json, {
-                    featureProjection: get('EPSG:3857'),
+            fetch(url + query, { method: 'GET', headers: headers })
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function (json) {
+                console.log('::: JSON:::', json);
+
+                dispatch(addFeatureData(json.features));
+                const tileLayer = new VectorLayer({
+                  source: new VectorSource({
+                    features: new GeoJSON().readFeatures(json, {
+                      featureProjection: get('EPSG:3857'),
+                    }),
                   }),
-                }),
-                style: new Style({
-            image: new Circle({
-              radius: 5 * 2,
-              fill: new Fill({
-                color: 'yellow',
-              }),
-              stroke: new Stroke({
-                color: 'black',
-                width: 5 / 2,
-              }),
-            }),
-            zIndex: Infinity,
-          }),
+                  style: new Style({
+                    image: new Circle({
+                      radius: 5 * 2,
+                      fill: new Fill({
+                        color: 'blue',
+                      }),
+                      stroke: new Stroke({
+                        color: 'black',
+                        width: 5 / 2,
+                      }),
+                    }),
+                    zIndex: Infinity,
+                  }),
+                });
+
+                setvectorLayerGeo(tileLayer);
+                console.log('::: TITLE LAYER :::', tileLayer);
+                map.addLayer(tileLayer);
               });
-              
-              setvectorLayerGeo(tileLayer);
-              console.log(tileLayer);
-              map.addLayer(tileLayer);
-            })
-
-
-        
 
             fetch(layer.href, { method: 'GET', headers: headers })
               .then(function (response) {
@@ -306,11 +363,15 @@ function MapWrapper(props) {
       }
     }
     return () => {
-        if (map && vectorLayerGeo) {
-          map.removeLayer(vectorLayerGeo);
-        }
-      };
+      if (map && vectorLayerGeo) {
+        map.removeLayer(vectorLayerGeo);
+      }
+    };
   }, [map, props.projectLayersList, props.selectedDropdownTaskId]);
+
+  useEffect(() => {
+    console.log('::: FEATURES :::', props.features);
+  }, [props.projectLayersList]);
 
   useEffect(() => {
     return () => {

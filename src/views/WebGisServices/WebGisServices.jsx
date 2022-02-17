@@ -4,9 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import MapView from '../../components/shared/FieldUpdates/components/MapView/MapView';
 import RestrictedPages from '../../components/shared/RestrictedPages/RestrictedPages';
-import {
-  getProjectList,
-} from '../../redux/project-management-redux/project-management.actions';
+import { getProjectList } from '../../redux/project-management-redux/project-management.actions';
 import {
   getIfAuthenticated,
   getUserAuthToken,
@@ -19,8 +17,6 @@ const PAGE_ACCESSABLE_BY = [
   'ext_worker',
 ];
 
-
-
 const WebGisServices = () => {
   const dispatch = useDispatch();
   const authToken = useSelector(getUserAuthToken);
@@ -28,7 +24,7 @@ const WebGisServices = () => {
   const isAuthenticated = useSelector(getIfAuthenticated);
   const navigate = useNavigate();
 
-  React. useEffect(() => {
+  React.useEffect(() => {
     if (isAuthenticated) {
       dispatch(getProjectList(authToken));
     } else {

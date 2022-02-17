@@ -7,6 +7,7 @@ import companyReducer from './company-redux/company.reducer';
 import feedbackReducer from './feedback-redux/feedback.reducer';
 import magagementOfFieldActivitiesReducer from './Management-of-field-activities/management-field-activities.reducer';
 import milestoneManagmeentReducer from './milestone-management/milestone-management.reducer';
+import OpenLayerReducer from './open-layer-redux/Open-Layer.reducer';
 import projectManagementReducer from './project-management-redux/project-management.reducer';
 import userReducer from './user-redux/user.reducer';
 import roleReducer from './User-Role/role.reducer';
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   feedback: feedbackReducer,
   fieldActivities: magagementOfFieldActivitiesReducer,
   webex: webexReducer,
+  openLayer: OpenLayerReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

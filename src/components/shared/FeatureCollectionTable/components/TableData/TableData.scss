@@ -1,0 +1,40 @@
+.table-data-base-div {
+  border-bottom: 1px solid #8094ae;
+  display: flex;
+}
+
+.table-data-header {
+  width: 30%;
+  height: 100%;
+  font-weight: 800;
+  text-align: left;
+}
+
+.table-data-body {
+  width: 68%;
+  height: 100%;
+  text-align: left;
+}
+
+.table-data-more-arrow {
+  width: 2%;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-data-more-arrow-closed {
+  width: 2%;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+}
