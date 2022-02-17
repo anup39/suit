@@ -70,9 +70,7 @@ const OpenLayer = ({ selectedDropdownTaskId, projectId }) => {
 };
 
 OpenLayer.propTypes = {
-  selectedDropdownTaskId : PropTypes.func.isRequired,
-  projectId  : PropTypes.func.isRequired
-
-
+  selectedDropdownTaskId: PropTypes.func.isRequired,
+  projectId: PropTypes.func.isRequired,
 };
 export default OpenLayer;

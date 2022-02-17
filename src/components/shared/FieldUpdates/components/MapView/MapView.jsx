@@ -181,6 +181,7 @@ const MapView = ({ page }) => {
     `${process.env.REACT_APP_ECM_HOSTNAME}VistaEcmWeb.aspx?LogonType=3&UserName=${username}&Password=${ecmpassword}&AppName=Asuite&FolderCode=ASUITE&DocTypeCode=PROJECT_DOCS&OperationType=10&Query=~TASK_NAME=${filteredTaskByTaskId?.taskName}^~PROJ_NAME=${filteredTaskByTaskId?.projectsName}`,
     'url'
   );
+
   return (
     <div
       className={`map-view-base-div ${
